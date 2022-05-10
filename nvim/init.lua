@@ -15,4 +15,5 @@ require('feline').setup()
 --
 vim.g['fern#renderer'] = 'nerdfont'
 vim.o.encoding = 'UTF-8'
+vim.cmd[[autocmd BufWritePost plugins.lua PackerCompile]]
 
