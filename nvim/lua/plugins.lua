@@ -7,12 +7,21 @@ return require('packer').startup(function()
   use 'lambdalisue/fern.vim'
   use 'feline-nvim/feline.nvim'
   -- use 'mortepau/codicons.nvim'
-  -- use {
-  --  'yamatsum/nvim-nonicons',
-  --  requires = {'kyazdani42/nvim-web-devicons'}
-  -- }
+  use {
+   'yamatsum/nvim-nonicons',
+   requires = {'kyazdani42/nvim-web-devicons'}
+  }
+  use 'lambdalisue/nerdfont.vim'
+  use 'lambdalisue/fern-renderer-nerdfont.vim'
   -- use {
   --  'nvim-lualine/lualine.nvim',
   --  requires = { 'yamatsum/nvim-nonicons', opt = true }
   -- }
+  use 'lambdalisue/fern-git-status.vim'
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
+  use 'ryanoasis/vim-devicons'
 end)
+
