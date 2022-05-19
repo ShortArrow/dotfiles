@@ -18,10 +18,13 @@ return require('packer').startup(function()
   --  requires = { 'yamatsum/nvim-nonicons', opt = true }
   -- }
   use 'lambdalisue/fern-git-status.vim'
-  use {
-    'nvim-telescope/telescope.nvim',
-    requires = { {'nvim-lua/plenary.nvim'} }
-  }
   use 'ryanoasis/vim-devicons'
+  -- ################################################
+  -- # need nvim 0.7 after here
+  -- ################################################
+  -- use {
+  --   'nvim-telescope/telescope.nvim',
+  --   requires = { {'nvim-lua/plenary.nvim'} }
+  --- }
 end)
 
