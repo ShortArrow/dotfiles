@@ -35,3 +35,7 @@ https://github.com/wbthomason/packer.nvim/blob/master/README.md#quickstart
 
 run ExCommand`:PackerInstall` on nvim command mode.
 
+## Install Nerd fonts
+
+Install from [here](https://www.nerdfonts.com/).
+
