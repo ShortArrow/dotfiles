@@ -8,11 +8,25 @@ neovim configration of @ShortArrow
 2. clone packer
 3. run packerinstall command
 
-## Make Junction
+## Usage
+
+### Windows
+
+Make Junction.
 
 ```powershell
 rm ./nvim/ -recuse -force
 New-Item -Type Junction -Name ./nvim/ -Value C:\Users\who\AppData\Local\nvim\
+```
+
+### Linux
+
+Make 
+
+```bash
+# If you need backup, run `cp ~/.config/nvim ~/.config/nvim.backup`
+rm -rf ~/.config/nvim
+ln -s /home/who/Documents/GitHub/my-nvim-config/nvim/   ~/.config/nvim
 ```
 
 ## Install Packer
