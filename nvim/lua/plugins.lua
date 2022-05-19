@@ -5,6 +5,7 @@ return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
   -- load on start up
   use 'lambdalisue/fern.vim'
+  use 'antoinemadec/FixCursorHold.nvim'
   use 'feline-nvim/feline.nvim'
   -- use 'mortepau/codicons.nvim'
   use {
