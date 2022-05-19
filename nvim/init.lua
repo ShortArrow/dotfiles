@@ -7,10 +7,10 @@ require'plugins'
 
 
 -- require('lualine').setup()
-require('feline').setup()
--- require('feline').setup({
---     preset = 'noicon'
--- })
+-- require('feline').setup()
+require('feline').setup({
+    preset = 'noicon'
+})
 -- vim.cmd('Fern . -reveal=% -drawer')
 --
 vim.g['fern#renderer'] = 'nerdfont'
