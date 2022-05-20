@@ -26,7 +26,7 @@ Make
 ```bash
 # If you need backup, run `cp ~/.config/nvim ~/.config/nvim.backup`
 rm -rf ~/.config/nvim
-ln -s /home/who/Documents/GitHub/my-nvim-config/nvim/   ~/.config/nvim
+ln -s /home/who/Documents/GitHub/my-nvim-config/nvim ~/.config/nvim # caution! Don't needs slash at last.
 ```
 
 ## Install Packer
