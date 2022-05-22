@@ -44,8 +44,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/verde/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/home/verde/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/home/verde/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/home/verde/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/verde/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
+local package_path_str = "C:\\Users\\who\\AppData\\Local\\Temp\\nvim\\packer_hererocks\\2.1.0-beta3\\share\\lua\\5.1\\?.lua;C:\\Users\\who\\AppData\\Local\\Temp\\nvim\\packer_hererocks\\2.1.0-beta3\\share\\lua\\5.1\\?\\init.lua;C:\\Users\\who\\AppData\\Local\\Temp\\nvim\\packer_hererocks\\2.1.0-beta3\\lib\\luarocks\\rocks-5.1\\?.lua;C:\\Users\\who\\AppData\\Local\\Temp\\nvim\\packer_hererocks\\2.1.0-beta3\\lib\\luarocks\\rocks-5.1\\?\\init.lua"
+local install_cpath_pattern = "C:\\Users\\who\\AppData\\Local\\Temp\\nvim\\packer_hererocks\\2.1.0-beta3\\lib\\lua\\5.1\\?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -71,52 +71,77 @@ time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   ["FixCursorHold.nvim"] = {
     loaded = true,
-    path = "/home/verde/.local/share/nvim/site/pack/packer/start/FixCursorHold.nvim",
+    path = "C:\\Users\\who\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\FixCursorHold.nvim",
     url = "https://github.com/antoinemadec/FixCursorHold.nvim"
   },
   ["feline.nvim"] = {
     loaded = true,
-    path = "/home/verde/.local/share/nvim/site/pack/packer/start/feline.nvim",
+    path = "C:\\Users\\who\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\feline.nvim",
     url = "https://github.com/feline-nvim/feline.nvim"
   },
   ["fern-git-status.vim"] = {
     loaded = true,
-    path = "/home/verde/.local/share/nvim/site/pack/packer/start/fern-git-status.vim",
+    path = "C:\\Users\\who\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\fern-git-status.vim",
     url = "https://github.com/lambdalisue/fern-git-status.vim"
   },
   ["fern-renderer-nerdfont.vim"] = {
     loaded = true,
-    path = "/home/verde/.local/share/nvim/site/pack/packer/start/fern-renderer-nerdfont.vim",
+    path = "C:\\Users\\who\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\fern-renderer-nerdfont.vim",
     url = "https://github.com/lambdalisue/fern-renderer-nerdfont.vim"
   },
   ["fern.vim"] = {
     loaded = true,
-    path = "/home/verde/.local/share/nvim/site/pack/packer/start/fern.vim",
+    path = "C:\\Users\\who\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\fern.vim",
     url = "https://github.com/lambdalisue/fern.vim"
+  },
+  ["flutter-tools.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\who\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\flutter-tools.nvim",
+    url = "https://github.com/akinsho/flutter-tools.nvim"
   },
   ["nerdfont.vim"] = {
     loaded = true,
-    path = "/home/verde/.local/share/nvim/site/pack/packer/start/nerdfont.vim",
+    path = "C:\\Users\\who\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nerdfont.vim",
     url = "https://github.com/lambdalisue/nerdfont.vim"
+  },
+  ["nvim-dap"] = {
+    loaded = true,
+    path = "C:\\Users\\who\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-dap",
+    url = "https://github.com/mfussenegger/nvim-dap"
+  },
+  ["nvim-lspconfig"] = {
+    loaded = true,
+    path = "C:\\Users\\who\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-lspconfig",
+    url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-nonicons"] = {
     loaded = true,
-    path = "/home/verde/.local/share/nvim/site/pack/packer/start/nvim-nonicons",
+    path = "C:\\Users\\who\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-nonicons",
     url = "https://github.com/yamatsum/nvim-nonicons"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
-    path = "/home/verde/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
+    path = "C:\\Users\\who\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-web-devicons",
     url = "https://github.com/kyazdani42/nvim-web-devicons"
   },
   ["packer.nvim"] = {
     loaded = true,
-    path = "/home/verde/.local/share/nvim/site/pack/packer/start/packer.nvim",
+    path = "C:\\Users\\who\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
+  },
+  ["plenary.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\who\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\plenary.nvim",
+    url = "https://github.com/nvim-lua/plenary.nvim"
+  },
+  ["telescope.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\who\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\telescope.nvim",
+    url = "https://github.com/nvim-telescope/telescope.nvim"
   },
   ["vim-devicons"] = {
     loaded = true,
-    path = "/home/verde/.local/share/nvim/site/pack/packer/start/vim-devicons",
+    path = "C:\\Users\\who\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-devicons",
     url = "https://github.com/ryanoasis/vim-devicons"
   }
 }

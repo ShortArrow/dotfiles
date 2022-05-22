@@ -14,18 +14,21 @@ return require('packer').startup(function()
   }
   use 'lambdalisue/nerdfont.vim'
   use 'lambdalisue/fern-renderer-nerdfont.vim'
-  -- use {
-  --  'nvim-lualine/lualine.nvim',
-  --  requires = { 'yamatsum/nvim-nonicons', opt = true }
-  -- }
   use 'lambdalisue/fern-git-status.vim'
   use 'ryanoasis/vim-devicons'
   -- ################################################
   -- # need nvim 0.7 after here
   -- ################################################
-  -- use {
-  --   'nvim-telescope/telescope.nvim',
-  --   requires = { {'nvim-lua/plenary.nvim'} }
-  --- }
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = {'nvim-lua/plenary.nvim'}
+  }
+  -- ################################################
+  -- # Flutter
+  -- ################################################
+  use 'neovim/nvim-lspconfig' -- Collection of configurations for the built-in LSP client
+  use {'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim'}
+  -- with packer
+  use 'mfussenegger/nvim-dap'
 end)
 
