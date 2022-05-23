@@ -3,21 +3,37 @@ vim.cmd[[packadd packer.nvim]]
 return require('packer').startup(function()
   -- self manage
   use 'wbthomason/packer.nvim'
-  -- load on start up
-  use 'lambdalisue/fern.vim'
+  -- patch
   use 'antoinemadec/FixCursorHold.nvim'
-  use 'feline-nvim/feline.nvim'
-  -- use 'mortepau/codicons.nvim'
+  -- ################################################
+  -- # Fonts
+  -- ################################################
   use {
    'yamatsum/nvim-nonicons',
    requires = {'kyazdani42/nvim-web-devicons'}
   }
   use 'lambdalisue/nerdfont.vim'
-  use 'lambdalisue/fern-renderer-nerdfont.vim'
-  use 'lambdalisue/fern-git-status.vim'
+  -- use 'mortepau/codicons.nvim'
   use 'ryanoasis/vim-devicons'
   -- ################################################
-  -- # need nvim 0.7 after here
+  -- # Fonts
+  -- ################################################
+  use 'lambdalisue/fern.vim'
+  use 'lambdalisue/fern-renderer-nerdfont.vim'
+  use 'lambdalisue/fern-git-status.vim'
+  -- ################################################
+  -- # Status line
+  -- ################################################
+  use 'feline-nvim/feline.nvim'
+  use 'b0o/incline.nvim'
+  use {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup()
+    end
+  }
+  -- ################################################
+  -- # UI
   -- ################################################
   use {
     'nvim-telescope/telescope.nvim',
