@@ -12,6 +12,7 @@ require('feline').setup({
 -- vim.cmd('Fern . -reveal=% -drawer')
 --
 vim.g['fern#renderer'] = 'nerdfont'
+vim.g['fern#default_hidden'] = '1'
 require("flutter-tools").setup{
   lsp = {
     color = {
