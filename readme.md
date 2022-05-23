@@ -15,6 +15,7 @@ neovim configration of @ShortArrow
 Make Junction.
 
 ```powershell
+# If you need backup, run `cp ~/.config/nvim ~/.config/nvim.backup`
 rm ./nvim/ -recuse -force
 New-Item -Type Junction -Name ./nvim/ -Value C:\Users\who\AppData\Local\nvim\
 ```
