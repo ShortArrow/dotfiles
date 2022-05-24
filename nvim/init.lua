@@ -7,7 +7,6 @@ vim.o.encoding = 'UTF-8'
 require'plugins'
 
 require('feline').setup({
-    preset = 'noicon'
 })
 -- vim.cmd('Fern . -reveal=% -drawer')
 --
