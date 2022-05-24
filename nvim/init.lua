@@ -6,10 +6,7 @@ vim.o.guifont = 'RobotoJ, \'cascadia code\', \'Fira Code\', \'Source Code Pro\',
 vim.o.encoding = 'UTF-8'
 require'plugins'
 
-require('feline').setup({
-})
--- vim.cmd('Fern . -reveal=% -drawer')
---
+require('feline').setup()
 vim.g['fern#renderer'] = 'nerdfont'
 vim.g['fern#default_hidden'] = '1'
 require("flutter-tools").setup{
