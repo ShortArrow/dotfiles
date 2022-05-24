@@ -3,7 +3,11 @@
 "     Copyrigh (c) 2022 TANGUCHI Masaya.
 "          All Rights Reserved.
 "=============================================
-
+{ \
+    echo '文字列1'; \
+    echo '文字列2'; \
+    echo '文字列3'; \
+} > /tmp/test1
 let g:jetpack#optimization =
   \ get(g:, 'jetpack#optimization', 1)
 
