@@ -21,7 +21,7 @@ return require('packer').startup(function()
   use 'lambdalisue/fern.vim'
   use 'lambdalisue/fern-renderer-nerdfont.vim'
   use 'lambdalisue/fern-git-status.vim'
-  use 'lambdalisue/fern-hijack.vim'
+  use 'lambdalisue/fern-comparator-lexical.vim'
   -- ################################################
   -- # Status line
   -- ################################################
