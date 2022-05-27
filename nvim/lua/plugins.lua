@@ -47,5 +47,12 @@ return require('packer').startup(function()
   use {
   'lewis6991/gitsigns.nvim',
   }
+  -- ################################################
+  -- # Trouble
+  -- ################################################
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+  }
 end)
 
