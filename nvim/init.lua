@@ -12,6 +12,7 @@ require'plugins'
 require('feline').setup()
 vim.g['fern#renderer'] = 'nerdfont'
 vim.g['fern#default_hidden'] = '1'
+vim.g['fern#comparator'] = "lexical"
 require('gitsigns').setup()
 
 -- #############################
