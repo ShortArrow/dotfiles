@@ -16,11 +16,12 @@ return require('packer').startup(function()
   -- use 'mortepau/codicons.nvim'
   use 'ryanoasis/vim-devicons'
   -- ################################################
-  -- # Fonts
+  -- # Explorer
   -- ################################################
   use 'lambdalisue/fern.vim'
   use 'lambdalisue/fern-renderer-nerdfont.vim'
   use 'lambdalisue/fern-git-status.vim'
+  use 'lambdalisue/fern-hijack.vim'
   -- ################################################
   -- # Status line
   -- ################################################
