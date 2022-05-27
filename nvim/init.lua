@@ -6,9 +6,17 @@ vim.o.guifont = 'RobotoJ, \'cascadia code\', \'Fira Code\', \'Source Code Pro\',
 vim.o.encoding = 'UTF-8'
 require'plugins'
 
+-- #############################
+-- # UI
+-- #############################
 require('feline').setup()
 vim.g['fern#renderer'] = 'nerdfont'
 vim.g['fern#default_hidden'] = '1'
+require('gitsigns').setup()
+
+-- #############################
+-- # Flutter
+-- #############################
 require("flutter-tools").setup{
   lsp = {
     color = {

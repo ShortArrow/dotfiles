@@ -26,12 +26,6 @@ return require('packer').startup(function()
   -- ################################################
   use 'feline-nvim/feline.nvim'
   use 'b0o/incline.nvim'
-  use {
-    'lewis6991/gitsigns.nvim',
-    config = function()
-      require('gitsigns').setup()
-    end
-  }
   -- ################################################
   -- # UI
   -- ################################################
@@ -46,5 +40,11 @@ return require('packer').startup(function()
   use {'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim'}
   -- with packer
   use 'mfussenegger/nvim-dap'
+  -- ################################################
+  -- # Git
+  -- ################################################
+  use {
+  'lewis6991/gitsigns.nvim',
+  }
 end)
 
