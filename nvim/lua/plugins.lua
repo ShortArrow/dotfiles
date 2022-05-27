@@ -18,10 +18,37 @@ return require('packer').startup(function()
   -- ################################################
   -- # Explorer
   -- ################################################
-  use 'lambdalisue/fern.vim'
-  use 'lambdalisue/fern-renderer-nerdfont.vim'
-  use 'lambdalisue/fern-git-status.vim'
-  use 'lambdalisue/fern-comparator-lexical.vim'
+  use {
+    'lambdalisue/fern.vim',
+    setup = function()
+      vim.g['fern#default_hidden'] = '1'
+    end,
+  }
+  use {
+    'lambdalisue/fern-renderer-nerdfont.vim',
+    requires = {
+      'lambdalisue/fern.vim',
+      'lambdalisue/nerdfont.vim'
+    },
+    setup = function()
+      vim.g['fern#renderer'] = 'nerdfont'
+    end,
+  }
+  use {
+    'lambdalisue/fern-git-status.vim',
+    requires = {
+      'lambdalisue/fern.vim',
+    },
+  }
+  use {
+    'lambdalisue/fern-comparator-lexical.vim',
+    requires = {
+      'lambdalisue/fern.vim',
+    },
+    setup = function()
+      vim.g['fern#comparator '] = 'lexical'
+    end,
+  }
   -- ################################################
   -- # Status line
   -- ################################################
@@ -45,7 +72,10 @@ return require('packer').startup(function()
   -- # Git
   -- ################################################
   use {
-  'lewis6991/gitsigns.nvim',
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup()
+    end
   }
   -- ################################################
   -- # Trouble
@@ -54,5 +84,22 @@ return require('packer').startup(function()
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
   }
+  -- ################################################
+  -- # Auto Complete
+  -- ################################################
+  use {
+        "hrsh7th/nvim-cmp",
+        requires = {
+            "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp",
+            'quangnguyen30192/cmp-nvim-ultisnips', 'hrsh7th/cmp-nvim-lua',
+            'octaltree/cmp-look', 'hrsh7th/cmp-path', 'hrsh7th/cmp-calc',
+            'f3fora/cmp-spell', 'hrsh7th/cmp-emoji'
+        }
+    }
+    use {
+        'tzachar/cmp-tabnine',
+        run = './install.sh',
+        requires = 'hrsh7th/nvim-cmp'
+    }
 end)
 
