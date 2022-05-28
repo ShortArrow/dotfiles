@@ -40,3 +40,11 @@ run ExCommand`:PackerInstall` on nvim command mode.
 
 Install from [here](https://www.nerdfonts.com/).
 
+## Install Neovim
+
+### Debian
+
+```bash
+wget -O /tmp/nvim.deb https://github.com/neovim/neovim/releases/download/v0.7.0/nvim-linux64.deb
+sudo apt install /tmp/nvim.deb
+```
