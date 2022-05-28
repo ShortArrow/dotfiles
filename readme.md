@@ -42,7 +42,7 @@ run ExCommand`:PackerInstall` on nvim command mode.
 
 ## Install Nerd fonts
 
-Install from [here](https://www.nerdfonts.com/).
+Install from [nerdfonts.com](https://www.nerdfonts.com/).
 
 ```bash
 mkdir /usr/share/fonts/nerd/
