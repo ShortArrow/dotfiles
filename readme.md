@@ -22,7 +22,7 @@ New-Item -Type Junction -Name ./nvim/ -Value $env:USERPROFILE\AppData\Local\nvim
 
 ### Linux
 
-Make 
+Make SymbolicLink
 
 ```bash
 mkdir $HOME/Documents/GitHub/
@@ -43,6 +43,14 @@ run ExCommand`:PackerInstall` on nvim command mode.
 ## Install Nerd fonts
 
 Install from [here](https://www.nerdfonts.com/).
+
+```bash
+mkdir /usr/share/fonts/nerd/
+sudo curl -fLo "/usr/share/fonts/nerd/Blex Mono Nerd Font Complete.otf" \
+    https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/IBMPlexMono/Mono/complete/Blex%20Mono%20Nerd%20Font%20Complete.ttf
+fc-cache
+fc-list | grep nerd # check
+```
 
 ## Install Neovim
 
