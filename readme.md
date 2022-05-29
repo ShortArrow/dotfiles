@@ -52,6 +52,9 @@ fc-cache
 fc-list | grep nerd # check
 ```
 
+> **Note**
+> If you using WSL, check config of Windows Terminal.
+
 ## Install Neovim
 
 ### Debian
@@ -59,4 +62,19 @@ fc-list | grep nerd # check
 ```bash
 wget -O /tmp/nvim.deb https://github.com/neovim/neovim/releases/download/v0.7.0/nvim-linux64.deb
 sudo apt install /tmp/nvim.deb
+```
+
+## git-foresta
+
+Install
+
+```bash
+sudo curl -L https://github.com/takaaki-kasai/git-foresta/raw/master/git-foresta \
+  -o /bin/git-foresta && sudo chmod +x /bin/git-foresta
+```
+
+Usage
+
+```bash
+git-foresta --all --style=15  | less -RSX
 ```
