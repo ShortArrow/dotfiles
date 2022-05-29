@@ -69,7 +69,8 @@ sudo apt install /tmp/nvim.deb
 Install
 
 ```bash
-sudo curl -L https://github.com/takaaki-kasai/git-foresta/raw/master/git-foresta -o /bin/git-foresta && sudo chmod +x /bin/git-foresta
+sudo curl -L https://github.com/takaaki-kasai/git-foresta/raw/master/git-foresta \
+  -o /bin/git-foresta && sudo chmod +x /bin/git-foresta
 ```
 
 Usage
