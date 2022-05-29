@@ -52,6 +52,9 @@ fc-cache
 fc-list | grep nerd # check
 ```
 
+> **Note**
+> If you using WSL, check config of Windows Terminal.
+
 ## Install Neovim
 
 ### Debian
