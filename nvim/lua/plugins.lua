@@ -2,7 +2,10 @@ vim.cmd[[packadd packer.nvim]]
 
 return require('packer').startup(function()
   -- self manage
-  use 'wbthomason/packer.nvim'
+  use {
+    'wbthomason/packer.nvim',
+    opt = true
+  }
   -- patch
   use 'antoinemadec/FixCursorHold.nvim'
   -- ################################################
@@ -23,6 +26,7 @@ return require('packer').startup(function()
     setup = function()
       vim.g['fern#default_hidden'] = '1'
     end,
+    opt = true
   }
   use {
     'lambdalisue/fern-renderer-nerdfont.vim',
@@ -33,12 +37,14 @@ return require('packer').startup(function()
     setup = function()
       vim.g['fern#renderer'] = 'nerdfont'
     end,
+    opt = true
   }
   use {
     'lambdalisue/fern-git-status.vim',
     requires = {
       'lambdalisue/fern.vim',
     },
+    opt = true
   }
   use {
     'lambdalisue/fern-comparator-lexical.vim',
@@ -48,6 +54,7 @@ return require('packer').startup(function()
     setup = function()
       vim.g['fern#comparator '] = 'lexical'
     end,
+    opt = true
   }
   -- ################################################
   -- # Status line
