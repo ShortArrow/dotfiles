@@ -23,10 +23,9 @@ return require('packer').startup(function()
   -- ################################################
   use {
     'lambdalisue/fern.vim',
-    setup = function()
+    config = function()
       vim.g['fern#default_hidden'] = '1'
     end,
-    opt = true
   }
   use {
     'lambdalisue/fern-renderer-nerdfont.vim',
@@ -34,45 +33,134 @@ return require('packer').startup(function()
       'lambdalisue/fern.vim',
       'lambdalisue/nerdfont.vim'
     },
-    setup = function()
+    config = function()
       vim.g['fern#renderer'] = 'nerdfont'
     end,
-    opt = true
   }
   use {
     'lambdalisue/fern-git-status.vim',
     requires = {
       'lambdalisue/fern.vim',
     },
-    opt = true
   }
   use {
     'lambdalisue/fern-comparator-lexical.vim',
     requires = {
       'lambdalisue/fern.vim',
     },
-    setup = function()
+    config = function()
       vim.g['fern#comparator '] = 'lexical'
     end,
-    opt = true
   }
   -- ################################################
   -- # Status line
   -- ################################################
-  use 'feline-nvim/feline.nvim'
+  use {
+    'feline-nvim/feline.nvim',
+    config = function()
+      require('feline').setup()
+    end,
+
+  }
   use 'b0o/incline.nvim'
   -- ################################################
   -- # UI
   -- ################################################
   use {
     'nvim-telescope/telescope.nvim',
-    requires = {'nvim-lua/plenary.nvim'}
+    requires = {'nvim-lua/plenary.nvim', 'akinsho/flutter-tools.nvim'},
+    config = function()
+      local telescope = require('telescope')
+      local actions = require('telescope.actions')
+      local actions_set = require('telescope.actions.set')
+      local themes = require('telescope.themes')
+      
+      telescope.setup{
+        defaults = {
+          layout = 'horizontal',
+          winblend = 20,
+          prompt_prefix = 'ﱢ ',
+          selection_caret = ' ',
+          entry_prefix = '  ',
+          initial_mode = 'insert',
+          border = false,
+          sorting_strategy = 'ascending',
+          path_display = { 'truncate' },
+          mappings = {
+            i = {
+              ['<esc>'] = actions.close,
+              ['<C-h>'] = 'which_key',
+              ['<C-Down>'] = actions.cycle_history_next,
+              ['<C-Up>'] = actions.cycle_history_prev,
+              ['<C-j>'] = actions.cycle_history_next,
+              ['<C-k>'] = actions.cycle_history_prev,
+      	['<C-t>'] = trouble.open_with_trouble
+            },
+            n = { ["<c-t>"] = trouble.open_with_trouble },
+          },
+          layout_config = {
+            horizontal = {
+              height = 0.7,
+              preview_cutoff = 120,
+              preview_width = 50,
+              prompt_position = 'top',
+              width = 0.7,
+            },
+            cursor = {
+              height = 0.2,
+              preview_cutoff = 40,
+              width = 0.6
+            }
+          }
+        },
+        pickers = {
+          registers = {
+            theme = 'cursor'
+          },
+          lsp_code_actions = {
+            theme = 'cursor'
+          }
+        },
+        extensions = {}
+      }
+      telescope.load_extension "flutter"
+    end,
   }
   -- ################################################
   -- # Flutter
   -- ################################################
   use 'neovim/nvim-lspconfig' -- Collection of configurations for the built-in LSP client
-  use {'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim'}
+  use {'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim',
+    config = function()
+      require("flutter-tools").setup{
+        lsp = {
+          color = {
+            enabled = true,
+            background = true, 
+            foreground = true,
+            virtual_text = true,
+            virtual_text_str = "■",
+          },
+          on_attach = function(client, bufnr)
+            vim.cmd [[hi FlutterWidgetGuides ctermfg=237 guifg=#33374c]]
+            vim.cmd [[hi ClosingTags ctermfg=244 guifg=#8389a3]]
+            on_attach(client, bufnr)
+          end,
+          capabilities = capabilities,
+          widget_guides = {
+            enabled = true,
+          },
+          debugger = {
+          enabled = true,
+            register_configurations = function(_)
+              require("dap").configurations.dart = {}
+              require("dap.ext.vscode").load_launchjs()
+            end,
+          },
+        }
+      }
+    end,
+  }
   -- with packer
   use 'mfussenegger/nvim-dap'
   -- ################################################
@@ -90,6 +178,11 @@ return require('packer').startup(function()
   use {
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require('gitsigns').setup()
+      local trouble=require("trouble")
+      trouble.setup()
+    end
   }
   -- ################################################
   -- # Auto Complete
