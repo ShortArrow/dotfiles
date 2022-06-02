@@ -1,8 +1,9 @@
 -- telescope
-local telescope = {}
+local telescope = require('telescope')
 local actions = require('telescope.actions')
 local actions_set = require('telescope.actions.set')
 local themes = require('telescope.themes')
+local trouble = require('trouble.providers.telescope')
 
 telescope.setup{
   defaults = {
@@ -23,8 +24,11 @@ telescope.setup{
         ['<C-Up>'] = actions.cycle_history_prev,
         ['<C-j>'] = actions.cycle_history_next,
         ['<C-k>'] = actions.cycle_history_prev,
+        ['<C-t>'] = trouble.open_with_trouble,
       },
-      n = {  },
+      n = {
+        ["<C-t>"] = trouble.open_with_trouble,
+      },
     },
     layout_config = {
       horizontal = {
