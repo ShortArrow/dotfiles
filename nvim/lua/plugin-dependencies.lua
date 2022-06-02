@@ -25,13 +25,13 @@ return require('packer').startup(function()
     'obaland/vfiler.vim',
     requires = {'obaland/vfiler-column-devicons', 'kyazdani42/nvim-web-devicons', 'ryanoasis/vim-devicons'},
     config = function()
-      require('config.vfiler')
+      require('config._vfiler')
     end,
   }
   use {
     'lambdalisue/fern.vim',
     config = function()
-      require('config.fern')
+      require('config._fern')
     end,
   }
   use {
@@ -41,7 +41,7 @@ return require('packer').startup(function()
       'lambdalisue/nerdfont.vim'
     },
     config = function()
-      require('config.fern-renderer-nerdfont')
+      require('config._fern-renderer-nerdfont')
     end,
   }
   use {
@@ -56,7 +56,7 @@ return require('packer').startup(function()
       'lambdalisue/fern.vim',
     },
     config = function()
-      require('config.fern-comparator-lexical')
+      require('config._fern-comparator-lexical')
     end,
   }
   -- ################################################
@@ -76,7 +76,7 @@ return require('packer').startup(function()
     'nvim-telescope/telescope.nvim',
     requires = {'nvim-lua/plenary.nvim', 'akinsho/flutter-tools.nvim'},
     config = function()
-      require('config.telescope').setup()
+      require('config._telescope')
     end,
   }
   -- ################################################
@@ -87,7 +87,7 @@ return require('packer').startup(function()
     'akinsho/flutter-tools.nvim',
     requires = {'nvim-lua/plenary.nvim'},
     config = function()
-      require('config.flutter-tools').setup()
+      require('config._flutter-tools')
     end,
   }
   use 'mfussenegger/nvim-dap'
@@ -107,7 +107,7 @@ return require('packer').startup(function()
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
     config = function()
-      require('config.trouble')
+      require('config._trouble')
     end,
   }
   -- ################################################
