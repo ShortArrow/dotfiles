@@ -8,6 +8,7 @@ return require('packer').startup(function()
   }
   -- patch
   use 'antoinemadec/FixCursorHold.nvim'
+
   -- ################################################
   -- # Fonts
   -- ################################################
@@ -18,6 +19,7 @@ return require('packer').startup(function()
   use 'lambdalisue/nerdfont.vim'
   -- use 'mortepau/codicons.nvim'
   use 'ryanoasis/vim-devicons'
+
   -- ################################################
   -- # Explorer
   -- ################################################
@@ -59,6 +61,7 @@ return require('packer').startup(function()
       require('config._fern-comparator-lexical')
     end,
   }
+  
   -- ################################################
   -- # Status line
   -- ################################################
@@ -69,6 +72,7 @@ return require('packer').startup(function()
     end,
   }
   use 'b0o/incline.nvim'
+  
   -- ################################################
   -- # UI
   -- ################################################
@@ -79,6 +83,7 @@ return require('packer').startup(function()
       require('config._telescope')
     end,
   }
+  
   -- ################################################
   -- # Flutter
   -- ################################################
@@ -91,6 +96,7 @@ return require('packer').startup(function()
     end,
   }
   use 'mfussenegger/nvim-dap'
+  
   -- ################################################
   -- # Git
   -- ################################################
@@ -100,6 +106,7 @@ return require('packer').startup(function()
       require('gitsigns').setup()
     end
   }
+  
   -- ################################################
   -- # Trouble
   -- ################################################
@@ -110,6 +117,7 @@ return require('packer').startup(function()
       require('config._trouble')
     end,
   }
+  
   -- ################################################
   -- # Auto Complete
   -- ################################################
