@@ -15,7 +15,7 @@ fern-renderer-nerdfont.config = function()
         vim.cmd [[hi ClosingTags ctermfg=244 guifg=#8389a3]]
         on_attach(client, bufnr)
       end,
-      capabilities = capabilities,
+      cadependenciespabilities = capabilities,
       widget_guides = {
         enabled = true,
       },
