@@ -8,7 +8,7 @@ local configs = {
     keep = true,
     layout = 'left',
     width = 30,
-    columns = 'indent,devicons,name',
+    columns = 'indent,devicons,name,git',
     preview = {
       layout = 'right',
     },
