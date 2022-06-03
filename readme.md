@@ -45,7 +45,7 @@ run ExCommand`:PackerInstall` on nvim command mode.
 Install from [nerdfonts.com](https://www.nerdfonts.com/).
 
 ```bash
-mkdir /usr/share/fonts/nerd/
+sudo mkdir /usr/share/fonts/nerd/
 sudo curl -fLo "/usr/share/fonts/nerd/Blex Mono Nerd Font Complete.otf" \
     https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/IBMPlexMono/Mono/complete/Blex%20Mono%20Nerd%20Font%20Complete.ttf
 fc-cache
