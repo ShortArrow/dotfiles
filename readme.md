@@ -1,12 +1,18 @@
-# NVIM CONFIG
+# CONFIG
 
-neovim configration of @ShortArrow
+configration of @ShortArrow
 
 ## overview
 
-1. make junction
-2. clone packer
-3. run packerinstall command
+1. install neovim
+1. git clone this repository
+1. make symboliclink of neovim dotfile
+1. install packer
+1. run packerinstall command
+1. install nerd font
+1. install git-foresta
+1. install tmux
+1. make symboliclink of tmux dotfile
 
 ## Usage
 
@@ -78,3 +84,19 @@ Usage
 ```bash
 git-foresta --all --style=15  | less -RSX
 ```
+
+## Tmux Config
+
+# Installation pattern 3
+
+1. Create `.tmux` folder in your home directory: `mkdir ~/.tmux`
+
+2. To download, run the following command:
+
+```bash
+wget -O $HOME/.tmux/iceberg_minimal_with_win_index.tmux.conf \
+https://raw.githubusercontent.com/ShortArrow/iceberg-dark/master/.tmux/iceberg_minimal_with_win_index.tmux.conf
+```
+
+3. Add `source-file ~/.tmux/iceberg_minimal_with_win_index.tmux.conf` to your `~/.tmux.conf`
+
