@@ -9,7 +9,6 @@ local configs = {
     layout = 'left',
     width = 30,
     columns = 'indent,devicons,name,git',
-    show_hidden_files = true,
     preview = {
       layout = 'right',
     },
