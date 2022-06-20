@@ -8,11 +8,16 @@ vim.o.expandtab = true
 vim.o.smartindent = true
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
+vim.g.mapleader = " "
+      vim.api.nvim_set_keymap('n', '<Leader>a',':echo \"HelloLeader\"<CR>'
+      , { noremap = true, silent = true })
 require'plugin-dependencies'
 vim.cmd[[autocmd BufWritePost plugin-dependencies.lua PackerCompile]]
 require "paq" {
     "savq/paq-nvim";                  -- Let Paq manage itself
+    "jiangmiao/auto-pairs";
     "neovim/nvim-lspconfig";          -- Mind the semi-colons
     "hrsh7th/nvim-cmp";
     {"lervag/vimtex", opt=true};      -- Use braces when passing options
-}
+ }
+

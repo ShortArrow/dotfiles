@@ -99,6 +99,11 @@ return require('packer').startup(function()
     requires = {'nvim-lua/plenary.nvim'},
     config = function()
       require('config._flutter-tools')
+      vim.api.nvim_set_keymap('n', '<Leader>fr',':FlutterRun -d web-server<CR>'
+      , { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<Leader>fc',
+      [[<Cmd>lua require('telescope').extensions.flutter.commands()<CR>]],
+      { noremap = true, silent = true })
     end,
   }
   use 'mfussenegger/nvim-dap'
