@@ -10,4 +10,9 @@ vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 require'plugin-dependencies'
 vim.cmd[[autocmd BufWritePost plugin-dependencies.lua PackerCompile]]
-
+require "paq" {
+    "savq/paq-nvim";                  -- Let Paq manage itself
+    "neovim/nvim-lspconfig";          -- Mind the semi-colons
+    "hrsh7th/nvim-cmp";
+    {"lervag/vimtex", opt=true};      -- Use braces when passing options
+}

@@ -83,7 +83,13 @@ return require('packer').startup(function()
       require('config._telescope')
     end,
   }
-  
+  -- ################################################
+  -- # LSP
+  -- ################################################
+  use {
+    "williamboman/nvim-lsp-installer",
+    "neovim/nvim-lspconfig",
+  }
   -- ################################################
   -- # Flutter
   -- ################################################
@@ -96,7 +102,12 @@ return require('packer').startup(function()
     end,
   }
   use 'mfussenegger/nvim-dap'
-  
+  -- ################################################
+  -- # Dart
+  -- ################################################
+  use 'dart-lang/dart-vim-plugin'
+  use 'natebosch/vim-lsc'
+  use 'natebosch/vim-lsc-dart'
   -- ################################################
   -- # Git
   -- ################################################
@@ -129,10 +140,10 @@ return require('packer').startup(function()
             'octaltree/cmp-look', 'hrsh7th/cmp-path', 'hrsh7th/cmp-calc',
             'f3fora/cmp-spell', 'hrsh7th/cmp-emoji'
         }
-    }
+    } --completion
     use {
         'tzachar/cmp-tabnine',
-        run = './install.sh',
+        run = '$HOME/.local/share/nvim/site/pack/packer/start/cmp-tabnine/install.sh',
         requires = 'hrsh7th/nvim-cmp'
     }
 end)
