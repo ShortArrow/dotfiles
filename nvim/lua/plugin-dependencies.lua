@@ -113,6 +113,8 @@ return require('packer').startup(function()
   use 'dart-lang/dart-vim-plugin'
   use 'natebosch/vim-lsc'
   use 'natebosch/vim-lsc-dart'
+  use 'jiangmiao/auto-pairs'
+  use  {'lervag/vimtex', opt = true}      -- Use braces when passing options
   -- ################################################
   -- # Git
   -- ################################################
