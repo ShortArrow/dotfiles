@@ -1,3 +1,5 @@
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true;
 -- flutter-tools
 require("flutter-tools").setup{
   lsp = {
