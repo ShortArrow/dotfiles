@@ -87,8 +87,8 @@ return require('packer').startup(function()
   -- # LSP
   -- ################################################
   use {
-    "williamboman/nvim-lsp-installer",
-    "neovim/nvim-lspconfig",
+    'williamboman/nvim-lsp-installer',
+    requires = {'neovim/nvim-lspconfig'},
   }
   -- ################################################
   -- # Flutter
@@ -140,18 +140,53 @@ return require('packer').startup(function()
   -- # Auto Complete
   -- ################################################
   use {
-        "hrsh7th/nvim-cmp",
-        requires = {
-            "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp",
-            'quangnguyen30192/cmp-nvim-ultisnips', 'hrsh7th/cmp-nvim-lua',
-            'octaltree/cmp-look', 'hrsh7th/cmp-path', 'hrsh7th/cmp-calc',
-            'f3fora/cmp-spell', 'hrsh7th/cmp-emoji'
-        }
-    } --completion
-    use {
-        'tzachar/cmp-tabnine',
-        run = '$HOME/.local/share/nvim/site/pack/packer/start/cmp-tabnine/install.sh',
-        requires = 'hrsh7th/nvim-cmp'
-    }
+    "hrsh7th/nvim-cmp",
+    requires = {
+      'neovim/nvim-lspconfig',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer', 
+      'hrsh7th/cmp-path', 
+      'hrsh7th/cmp-nvim-lua',
+      'octaltree/cmp-look',
+      'hrsh7th/cmp-calc',
+      'f3fora/cmp-spell',
+      'hrsh7th/cmp-emoji',
+      'quangnguyen30192/cmp-nvim-ultisnips', 
+    },
+    config = function()
+      require('config._cmp')
+    end,
+  } 
+use 'neovim/nvim-lspconfig'
+use 'hrsh7th/cmp-nvim-lsp'
+use 'hrsh7th/cmp-buffer'
+use 'hrsh7th/cmp-path'
+use 'hrsh7th/cmp-cmdline'
+use 'hrsh7th/nvim-cmp'
+
+-- For vsnip users.
+use 'hrsh7th/cmp-vsnip'
+use 'hrsh7th/vim-vsnip'
+
+-- For luasnip users.
+-- use 'L3MON4D3/LuaSnip'
+-- use 'saadparwaiz1/cmp_luasnip'
+
+-- For ultisnips users.
+-- use 'SirVer/ultisnips'
+-- use 'quangnguyen30192/cmp-nvim-ultisnips'
+
+-- For snippy users.
+-- use 'dcampos/nvim-snippy'
+-- use 'dcampos/cmp-snippy'
+
+
+  -- use {
+  --    'tzachar/cmp-tabnine',
+  --    run = '$HOME/.local/share/nvim/site/pack/packer/start/cmp-tabnine/install.sh',
+  --    requires = 'hrsh7th/nvim-cmp'
+  -- }
+  use 'hrsh7th/vim-vsnip'
+  use 'hrsh7th/vim-vsnip-integ'
 end)
 
