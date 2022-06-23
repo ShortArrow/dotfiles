@@ -186,7 +186,6 @@ use 'hrsh7th/vim-vsnip'
   --    run = '$HOME/.local/share/nvim/site/pack/packer/start/cmp-tabnine/install.sh',
   --    requires = 'hrsh7th/nvim-cmp'
   -- }
-  use 'hrsh7th/vim-vsnip'
   use 'hrsh7th/vim-vsnip-integ'
 end)
 
