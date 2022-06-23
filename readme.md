@@ -108,3 +108,11 @@ set-option -ga terminal-overrides ',xterm-256color:Tc'
 source-file ~/.tmux/iceberg_minimal_with_win_index.tmux.conf
 ```
 
+## Neovim colorscheme
+
+```bash
+mkdir ~/.config/nvim/colors/
+curl https://raw.githubusercontent.com/cocopon/iceberg.vim/master/src/iceberg.vim -o ~/.config/nvim/colors/iceberg.vim
+```
+
+

@@ -8,7 +8,12 @@ return require('packer').startup(function()
   }
   -- patch
   use 'antoinemadec/FixCursorHold.nvim'
-
+  use {
+    'folke/tokyonight.nvim'
+    config = function()
+      vim.cmd[[colorscheme tokyonight]]
+    end,
+  }
   -- ################################################
   -- # Fonts
   -- ################################################
