@@ -84,3 +84,6 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protoco
 require('lspconfig')['dartls'].setup {
   capabilities = capabilities
 }
+require('lspconfig')['dockerls'].setup {
+  capabilities = capabilities
+}
