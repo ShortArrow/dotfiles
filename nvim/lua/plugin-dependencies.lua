@@ -74,7 +74,11 @@ return require('packer').startup(function()
       require('config._fern-comparator-lexical')
     end,
   }
-  
+  use {
+    'ibhagwan/fzf-lua',
+    -- optional for icon support
+    requires = { 'kyazdani42/nvim-web-devicons' }
+  } 
   -- ################################################
   -- # Status line
   -- ################################################
