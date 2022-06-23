@@ -93,7 +93,6 @@ return require('packer').startup(function()
   -- ################################################
   -- # Flutter
   -- ################################################
-  use 'neovim/nvim-lspconfig' -- Collection of configurations for the built-in LSP client
   use {
     'akinsho/flutter-tools.nvim',
     requires = {'nvim-lua/plenary.nvim'},
@@ -162,7 +161,6 @@ use 'hrsh7th/cmp-nvim-lsp'
 use 'hrsh7th/cmp-buffer'
 use 'hrsh7th/cmp-path'
 use 'hrsh7th/cmp-cmdline'
-use 'hrsh7th/nvim-cmp'
 
 -- For vsnip users.
 use 'hrsh7th/cmp-vsnip'
