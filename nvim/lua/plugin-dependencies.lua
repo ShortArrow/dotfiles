@@ -1,32 +1,8 @@
--- check if packer is installed (~/local/share/nvim/site/pack)
-local packer_exists = pcall(vim.cmd, [[packadd packer.nvim]])
-
-if not packer_exists then
-	if vim.fn.input("Hent packer.nvim? (y for yada)") ~= "y" then
-		return
-	end
-
-	local directory = string.format(
-	'%s/site/pack/packer/opt/',
-	vim.fn.stdpath('data')
-	)
-
-	vim.fn.mkdir(directory, 'p')
-
-	local git_clone_cmd = vim.fn.system(string.format(
-	'git clone %s %s',
-	'https://github.com/wbthomason/packer.nvim',
-	directory .. '/packer.nvim'
-	))
-
-	print(git_clone_cmd)
-	print("Henter packer.nvim...")
-
-	return
-end
+vim.cmd[[packadd packer.nvim]]
 
 return require('packer').startup(function()
   -- self manage
+  local use = require('packer').use
   use {
     'wbthomason/packer.nvim',
     opt = true
@@ -38,36 +14,29 @@ return require('packer').startup(function()
   -- ################################################
   use {
     'folke/tokyonight.nvim',
-    config = function()
-      require('config._tokyonight')
-   end,
+    config = require('config._tokyonight').setup
   }
   -- ################################################
   -- # Fonts
   -- ################################################
   use {
-   'yamatsum/nvim-nonicons',
-   requires = {'kyazdani42/nvim-web-devicons'}
+    'yamatsum/nvim-nonicons',
+    requires = {'kyazdani42/nvim-web-devicons'}
   }
-  use 'lambdalisue/nerdfont.vim'
+  -- use 'lambdalisue/nerdfont.vim'
   -- use 'mortepau/codicons.nvim'
-  use 'ryanoasis/vim-devicons'
-
+  -- use 'ryanoasis/vim-devicons'
   -- ################################################
   -- # Explorer
   -- ################################################
   use {
     'obaland/vfiler.vim',
     requires = {'obaland/vfiler-column-devicons', 'kyazdani42/nvim-web-devicons', 'ryanoasis/vim-devicons'},
-    config = function()
-      require('config._vfiler')
-    end,
+    config = require('config._vfiler').setup
   }
   use {
     'lambdalisue/fern.vim',
-    config = function()
-      require('config._fern')
-    end,
+    config = require('config._fern').setup
   }
   use {
     'lambdalisue/fern-renderer-nerdfont.vim',
@@ -75,9 +44,7 @@ return require('packer').startup(function()
       'lambdalisue/fern.vim',
       'lambdalisue/nerdfont.vim'
     },
-    config = function()
-      require('config._fern-renderer-nerdfont')
-    end,
+    config = require('config._fern-renderer-nerdfont').setup
   }
   use {
     'lambdalisue/fern-git-status.vim',
@@ -90,35 +57,36 @@ return require('packer').startup(function()
     requires = {
       'lambdalisue/fern.vim',
     },
-    config = function()
-      require('config._fern-comparator-lexical')
-    end,
+    config = require('config._fern-comparator-lexical').setup
   }
   use {
     'ibhagwan/fzf-lua',
     -- optional for icon support
     requires = { 'kyazdani42/nvim-web-devicons' }
-  } 
+  }
   -- ################################################
   -- # Status line
   -- ################################################
   use {
     'feline-nvim/feline.nvim',
-    config = function()
-      require('feline').setup()
-    end,
+    config = require('config._feline').setup
   }
   use 'b0o/incline.nvim'
-  
+  -- ################################################
+  -- # Trouble
+  -- ################################################
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = require('config._trouble').setup
+  }
   -- ################################################
   -- # UI
   -- ################################################
   use {
     'nvim-telescope/telescope.nvim',
-    requires = {'nvim-lua/plenary.nvim', 'akinsho/flutter-tools.nvim'},
-    config = function()
-      require('config._telescope')
-    end,
+    requires = {'folke/trouble.nvim', 'nvim-lua/plenary.nvim', 'akinsho/flutter-tools.nvim'},
+    config = require('config._telescope').setup
   }
   -- ################################################
   -- # LSP
@@ -133,14 +101,7 @@ return require('packer').startup(function()
   use {
     'akinsho/flutter-tools.nvim',
     requires = {'nvim-lua/plenary.nvim'},
-    config = function()
-      require('config._flutter-tools')
-      vim.api.nvim_set_keymap('n', '<Leader>fr',':FlutterRun -d web-server<CR>'
-      , { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<Leader>fc',
-      [[<Cmd>lua require('telescope').extensions.flutter.commands()<CR>]],
-      { noremap = true, silent = true })
-    end,
+    config = require('config._flutter').setup
   }
   use 'mfussenegger/nvim-dap'
   -- ################################################
@@ -152,26 +113,28 @@ return require('packer').startup(function()
   use 'jiangmiao/auto-pairs'
   use  {'lervag/vimtex', opt = true}      -- Use braces when passing options
   -- ################################################
+  -- # Lua
+  -- ################################################
+  -- Install this plugin.
+  use 'tjdevries/nlua.nvim'
+  -- (OPTIONAL): This is recommended to get better auto-completion UX experience for builtin LSP.
+  use 'nvim-lua/completion-nvim'
+  -- (OPTIONAL): This is a suggested plugin to get better Lua syntax highlighting
+  --   but it's not currently required
+  use 'euclidianAce/BetterLua.vim'
+  -- (OPTIONAL): If you wish to have fancy lua folds, you can check this out.
+  use 'tjdevries/manillua.nvim'
+  -- ################################################
   -- # Git
   -- ################################################
   use {
     'lewis6991/gitsigns.nvim',
-    config = function()
-      require('gitsigns').setup()
-    end
+    config = require('config._gitsigns').setup
   }
-  
-  -- ################################################
-  -- # Trouble
-  -- ################################################
   use {
-    "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
-    config = function()
-      require('config._trouble')
-    end,
+    'tpope/vim-fugitive',
+    config = require('config._fugitive').setup
   }
-  
   -- ################################################
   -- # Auto Complete
   -- ################################################
@@ -180,40 +143,34 @@ return require('packer').startup(function()
     requires = {
       'neovim/nvim-lspconfig',
       'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-buffer', 
-      'hrsh7th/cmp-path', 
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
       'hrsh7th/cmp-nvim-lua',
       'octaltree/cmp-look',
       'hrsh7th/cmp-calc',
       'f3fora/cmp-spell',
       'hrsh7th/cmp-emoji',
-      'quangnguyen30192/cmp-nvim-ultisnips', 
+      'quangnguyen30192/cmp-nvim-ultisnips',
     },
-    config = function()
-      require('config._cmp')
-    end,
-  } 
-use 'neovim/nvim-lspconfig'
-use 'hrsh7th/cmp-nvim-lsp'
-use 'hrsh7th/cmp-buffer'
-use 'hrsh7th/cmp-path'
-use 'hrsh7th/cmp-cmdline'
-
--- For vsnip users.
-use 'hrsh7th/cmp-vsnip'
-use 'hrsh7th/vim-vsnip'
-
--- For luasnip users.
--- use 'L3MON4D3/LuaSnip'
--- use 'saadparwaiz1/cmp_luasnip'
-
--- For ultisnips users.
--- use 'SirVer/ultisnips'
--- use 'quangnguyen30192/cmp-nvim-ultisnips'
-
--- For snippy users.
--- use 'dcampos/nvim-snippy'
--- use 'dcampos/cmp-snippy'
+    config = require('config._cmp').setup
+  }
+  use 'neovim/nvim-lspconfig'
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-cmdline'
+  -- For vsnip users.
+  use 'hrsh7th/cmp-vsnip'
+  use 'hrsh7th/vim-vsnip'
+  -- For luasnip users.
+  -- use 'L3MON4D3/LuaSnip'
+  -- use 'saadparwaiz1/cmp_luasnip'
+  -- For ultisnips users.
+  -- use 'SirVer/ultisnips'
+  -- use 'quangnguyen30192/cmp-nvim-ultisnips'
+  -- For snippy users.
+  -- use 'dcampos/nvim-snippy'
+  -- use 'dcampos/cmp-snippy'
 
 
   -- use {

@@ -1,2 +1,7 @@
--- fern-comparator-lexical
-vim.g['fern#comparator'] = 'lexical'
+local M = {}
+
+function M.setup()
+  vim.g['fern#comparator'] = 'lexical'
+end
+
+return M

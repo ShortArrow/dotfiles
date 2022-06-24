@@ -1,7 +1,7 @@
 local M = {}
 
 M.setup = function()
-  vim.g['fern#default_hidden'] = '1'
+  require('feline').setup()
 end
 
 return M
