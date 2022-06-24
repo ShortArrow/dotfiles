@@ -1,24 +1,28 @@
--- vfiler-config
-local action = require'vfiler/action'
-local configs = {
-  options = {
-    name = 'myfiler',
-    auto_cd = true,
-    auto_resize = true,
-    keep = true,
-    layout = 'left',
-    width = 30,
-    columns = 'indent,devicons,name,git',
-    preview = {
-      layout = 'right',
+local M = {}
+
+function M.setup()
+  local _vfiler = require('vfiler')
+  local _vfiler_action = require('vfiler/action')
+  local _vfiler_config = require('vfiler/config')
+  _vfiler_config.setup {
+    options = {
+      name = 'myfiler',
+      auto_cd = true,
+      auto_resize = true,
+      keep = true,
+      layout = 'left',
+      width = 30,
+      columns = 'indent,devicons,name,git',
+      preview = {
+        layout = 'right',
+      },
     },
-  },
-  mappings = {
-    ['<C-l>'] = action.open_tree,
-    ['<C-h>'] = action.close_tree_or_cd,
-  },
-}
+    mappings = {},
+  }
+  _vfiler_action.setup {
+    hook = {},
+  }
+  _vfiler.start()
+end
 
-require'vfiler'.start(dirpath, configs)
--- require('vfiler').start()
-
+return M
