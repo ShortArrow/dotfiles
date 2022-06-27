@@ -25,4 +25,8 @@ function M.setup()
   _vfiler.start()
 end
 
+require'vfiler/columns/indent'.setup {
+  icon = '',
+}
+
 return M

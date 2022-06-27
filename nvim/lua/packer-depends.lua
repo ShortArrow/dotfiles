@@ -118,7 +118,7 @@ return require('packer').startup(function()
   -- Install this plugin.
   use 'tjdevries/nlua.nvim'
   -- (OPTIONAL): This is recommended to get better auto-completion UX experience for builtin LSP.
-  use 'nvim-lua/completion-nvim'
+  -- use 'nvim-lua/completion-nvim'
   -- (OPTIONAL): This is a suggested plugin to get better Lua syntax highlighting
   --   but it's not currently required
   use 'euclidianAce/BetterLua.vim'
