@@ -51,15 +51,15 @@ local function _VFiler()
 end
 
 M.setup = function(depends_arg)
-    -- like switch case
-    local switchCase = {}
-    switchCase[depends.fugitive] = _Fugitive
-    switchCase[depends.flutter] = _Flutter
-    switchCase[depends.trouble] = _Trouble
-    switchCase[depends.fzflua] = _FzfLua
-    switchCase[depends.packer] = _Packer
-    switchCase[depends.vfiler] = _VFiler
-    switchCase[depends_arg]()
+  -- like switch case
+  local switchCase = {}
+  switchCase[depends.fugitive] = _Fugitive
+  switchCase[depends.flutter] = _Flutter
+  switchCase[depends.trouble] = _Trouble
+  switchCase[depends.fzflua] = _FzfLua
+  switchCase[depends.packer] = _Packer
+  switchCase[depends.vfiler] = _VFiler
+  switchCase[depends_arg]()
 end
 
 return M
