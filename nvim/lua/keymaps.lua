@@ -45,6 +45,11 @@ local function _Packer()
   print("setuped packer keymap")
 end
 
+local function _VFiler()
+  vim.api.nvim_set_keymap('n', '<Leader>vf',':VFiler<CR>', { noremap = true, silent = false })
+  print("setuped vfiler keymap")
+end
+
 M.setup = function(depends_arg)
     -- like switch case
     local switchCase = {}
@@ -53,6 +58,7 @@ M.setup = function(depends_arg)
     switchCase[depends.trouble] = _Trouble
     switchCase[depends.fzflua] = _FzfLua
     switchCase[depends.packer] = _Packer
+    switchCase[depends.vfiler] = _VFiler
     switchCase[depends_arg]()
 end
 
