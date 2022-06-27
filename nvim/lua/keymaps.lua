@@ -4,7 +4,7 @@ local M = {}
 
 local function _Fugitive()
   vim.api.nvim_set_keymap('n', '<Leader>ga',':Git add .<CR>', { noremap = true, silent = false })
-  -- vim.api.nvim_set_keymap('n', '<Leader>gb',':Git blame<CR>', { noremap = true, silent = false })
+  vim.api.nvim_set_keymap('n', '<Leader>gb',':Git blame<CR>', { noremap = true, silent = false })
   vim.api.nvim_set_keymap('n', '<Leader>gc',':Git commit -m ', { noremap = true, silent = false })
   vim.api.nvim_set_keymap('n', '<Leader>gd',':Gvdiffsplit<CR>', { noremap = true, silent = false })
   vim.api.nvim_set_keymap('n', '<Leader>gll',':Gllog<CR>', { noremap = true, silent = false })
