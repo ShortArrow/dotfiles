@@ -11,6 +11,13 @@ vim.o.shiftwidth = 2
 vim.g.mapleader = " "
       vim.api.nvim_set_keymap('n', '<Leader>a',':echo \"HelloLeader\"<CR>'
       , { noremap = true, silent = true })
-require'plugin-dependencies'
-vim.cmd[[autocmd BufWritePost plugin-dependencies.lua PackerCompile]]
+require'packer-depends'
+vim.cmd[[autocmd BufWritePost packer-depends.lua PackerCompile]]
 
+local depends = require('depends')
+local keymaps = require('keymaps')
+
+keymaps.setup(depends.trouble)
+keymaps.setup(depends.flutter)
+keymaps.setup(depends.fugitive)
+keymaps.setup(depends.fzflua)
