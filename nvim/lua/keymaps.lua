@@ -10,7 +10,7 @@ local function _Fugitive()
   vim.api.nvim_set_keymap('n', '<Leader>gll',':Gllog<CR>', { noremap = true, silent = false })
   vim.api.nvim_set_keymap('n', '<Leader>glc',':Gclog<CR>', { noremap = true, silent = false })
   vim.api.nvim_set_keymap('n', '<Leader>gp',':Git push<CR>', { noremap = true, silent = false })
-  vim.api.nvim_set_keymap('n', '<Leader>gs',':Git<CR>', { noremap = true, silent = false })
+  vim.api.nvim_set_keymap('n', '<Leader>gs',':Git status<CR>', { noremap = true, silent = false })
   -- nnoremap <leader>ga :Git add %:p<CR><CR>
   -- nnoremap <leader>gc :Gcommit<CR><CR>
   -- nnoremap <leader>gs :Gstatus<CR>
