@@ -87,7 +87,7 @@ function M.setup()
   require('lspconfig')['yamlls'].setup {
     capabilities = capabilities
   }
-  require('lspconfig')['ltex'].setup {
+  require('lspconfig')['marksman'].setup {
     capabilities = capabilities
     -- ltex (latex)
     -- marksman (markdown)
