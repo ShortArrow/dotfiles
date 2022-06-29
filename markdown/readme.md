@@ -11,4 +11,5 @@ sudo curl https://github.com/artempyanykh/marksman/releases/download/2022-06-23/
 sudo ln -s /usr/share/marksman/marksman-linux /usr/bin/marksman
 which marksman # check which file is marksman
 file /usr/bin/marksman # check symboliclink
+sudo chmod +x /usr/share/marksman/marksman-linux
 ```
