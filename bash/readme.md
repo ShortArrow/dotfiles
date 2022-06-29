@@ -2,7 +2,7 @@
 
 ## Usage
 
-Clone repository.
+Clone repository and make symboliclink.
 
 ```bash
 mkdir $HOME/Documents/GitHub/
@@ -19,7 +19,7 @@ Write this at the end of `~/.bashrc`.
 source .bash_myplug
 ```
 
-Reopen bash, or run command as bellow in current bash terminal.
+For load the settings. Reopen bash, or run command as bellow in current bash terminal.
 
 ```bash
 source ~/.bashrc
