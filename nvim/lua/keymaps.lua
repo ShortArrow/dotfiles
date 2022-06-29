@@ -31,12 +31,12 @@ local function _Flutter()
 end
 
 local function _Trouble()
-  vim.api.nvim_set_keymap('n', '<Leader>tg',':TroubleToggle<CR>', { noremap = true, silent = false })
+  vim.api.nvim_set_keymap('n', '<Leader>tt',':TroubleToggle<CR>', { noremap = true, silent = false })
   print("setuped trouble keymap")
 end
 
 local function _FzfLua()
-  vim.api.nvim_set_keymap('n', '<Leader>zf',':FzfLua<CR>', { noremap = true, silent = false })
+  vim.api.nvim_set_keymap('n', '<Leader>zf',':FzfLua files<CR>', { noremap = true, silent = false })
   print("setuped fzflua keymap")
 end
 
