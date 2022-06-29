@@ -25,3 +25,7 @@ For load the settings. Reopen bash, or run command as bellow in current bash ter
 source ~/.bashrc
 ```
 
+## Dependencies
+
+- [starship](starship.rs)
+- [dotnet](https://docs.microsoft.com/ja-jp/dotnet/core/install/)
