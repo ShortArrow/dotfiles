@@ -98,6 +98,9 @@ function M.setup()
   require('lspconfig')['dartls'].setup {
     capabilities = capabilities
   }
+  require('lspconfig')['rust_analyzer'].setup {
+    capabilities = capabilities
+  }
   require('lspconfig')['dockerls'].setup {
     capabilities = capabilities
   }
