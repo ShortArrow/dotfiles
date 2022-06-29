@@ -16,7 +16,7 @@ file ~/.bash_myplug # check link
 Write this at the end of `~/.bashrc`.
 
 ```bash
-source .bash_myplug
+source ~/.bash_myplug
 ```
 
 For load the settings. Reopen bash, or run command as bellow in current bash terminal.
