@@ -11,7 +11,7 @@ vim.o.shiftwidth = 2
 vim.g.mapleader = " "
       vim.api.nvim_set_keymap('n', '<Leader>a',':echo \"HelloLeader\"<CR>'
       , { noremap = true, silent = true })
-require'packer-depends'
+require('packer-depends')
 vim.cmd[[autocmd BufWritePost packer-depends.lua PackerCompile]]
 
 local depends = require('depends')
