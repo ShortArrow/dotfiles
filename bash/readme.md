@@ -6,6 +6,7 @@ Clone repository.
 
 ```
 git clone [git URL of this repo]
+cd [this repo]
 ```
 
 Write this at the end of `~/.bashrc`.
