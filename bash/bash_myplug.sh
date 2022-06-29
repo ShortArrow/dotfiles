@@ -7,6 +7,7 @@ alias luamake=/home/verde/Documents/GitHub/lua-language-server/3rd/luamake/luama
 
 # rust
 . "$HOME/.cargo/env"
+export PATH=$PATH:$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer
 
 # vimmer terminal
 set -o vi
