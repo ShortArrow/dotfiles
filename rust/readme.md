@@ -1,8 +1,10 @@
 # my rust settings
 
-## LSP
+## Version Control
 
-Install https://rustup.rs/
+Install [rustup](https://rustup.rs/)
+
+## LSP
 
 ```bash
 rustup +nightly component add rust-analyzer-preview
