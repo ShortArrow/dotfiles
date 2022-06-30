@@ -25,3 +25,8 @@ configration of @ShortArrow
   - Git
 1. Placement Method
   - Git & Symboliclink
+
+## Important Infomation Source
+
+[Docs of nvim lsp](https://nvim-lsp.github.io/)
+
