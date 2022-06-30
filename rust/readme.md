@@ -1,5 +1,7 @@
 # my rust settings
 
+## LSP
+
 Install https://rustup.rs/
 
 ```bash
