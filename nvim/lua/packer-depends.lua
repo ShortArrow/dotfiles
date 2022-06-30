@@ -8,7 +8,7 @@ return require('packer').startup(function()
     opt = true
   }
   -- patch
-  -- use 'antoinemadec/FixCursorHold.nvim'
+  use 'antoinemadec/FixCursorHold.nvim'
   -- ################################################
   -- # Color
   -- ################################################
@@ -102,6 +102,10 @@ return require('packer').startup(function()
   use {
     'https://github.com/onsails/lspkind.nvim',
     config = require('config._lsp_kind').setup
+  }
+  use {
+    'weilbith/nvim-code-action-menu',
+    cmd = 'CodeActionMenu',
   }
   -- ################################################
   -- # Flutter
