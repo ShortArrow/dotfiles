@@ -95,6 +95,10 @@ return require('packer').startup(function()
     'williamboman/nvim-lsp-installer',
     requires = {'neovim/nvim-lspconfig'},
   }
+  use {
+    "ray-x/lsp_signature.nvim",
+    config = require('config._lsp_sig').setup
+  }
   -- ################################################
   -- # Flutter
   -- ################################################
