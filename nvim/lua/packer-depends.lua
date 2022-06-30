@@ -8,7 +8,7 @@ return require('packer').startup(function()
     opt = true
   }
   -- patch
-  use 'antoinemadec/FixCursorHold.nvim'
+  -- use 'antoinemadec/FixCursorHold.nvim'
   -- ################################################
   -- # Color
   -- ################################################
@@ -98,6 +98,10 @@ return require('packer').startup(function()
   use {
     "ray-x/lsp_signature.nvim",
     config = require('config._lsp_sig').setup
+  }
+  use {
+    'https://github.com/onsails/lspkind.nvim',
+    config = require('config._lsp_kind').setup
   }
   -- ################################################
   -- # Flutter
