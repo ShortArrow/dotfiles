@@ -1,6 +1,6 @@
 # my markdown settings
 
-## Linux
+## LSP
 
 Installation of marksman.
 
