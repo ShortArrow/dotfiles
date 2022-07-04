@@ -1,6 +1,6 @@
 local M = {}
 
-function M.setup()
+M.setup = function()
   local _vfiler = require('vfiler')
   local _vfiler_action = require('vfiler/action')
   local _vfiler_config = require('vfiler/config')
@@ -22,11 +22,11 @@ function M.setup()
   _vfiler_action.setup {
     hook = {},
   }
-  _vfiler.start()
+  _vfiler.start('./')
 end
 
-require'vfiler/columns/indent'.setup {
-  icon = '',
+require('vfiler/columns/indent').setup {
+  icon = ''
 }
 
 return M
