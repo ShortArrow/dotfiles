@@ -1,13 +1,12 @@
-local cmp = require('cmp')
-local lspkind = require('lspkind')
-local cmp_nvim_lsp = require('cmp_nvim_lsp')
-local lsp_sig = require('config._lsp_sig')
-
 local M = {}
 
 M.setup = function()
   vim.o.completeopt = 'menu,menuone,noselect'
   -- Setup nvim-cmp.
+  local cmp_nvim_lsp = require('cmp_nvim_lsp')
+  local lsp_sig = require('config._lsp_sig')
+  local lspkind = require('lspkind')
+  local cmp = require('cmp')
   cmp.setup({
     snippet = {
       -- REQUIRED - you must specify a snippet engine
