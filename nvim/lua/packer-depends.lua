@@ -8,7 +8,7 @@ return require('packer').startup(function()
     opt = true
   }
   -- patch
-  use 'antoinemadec/FixCursorHold.nvim'
+  -- use 'antoinemadec/FixCursorHold.nvim'
   -- ################################################
   -- # Color
   -- ################################################

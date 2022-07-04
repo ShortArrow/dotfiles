@@ -1,11 +1,13 @@
+local cmp = require('cmp')
+local lspkind = require('lspkind')
+local cmp_nvim_lsp = require('cmp_nvim_lsp')
+local lsp_sig = require('config._lsp_sig')
+
 local M = {}
 
 M.setup = function()
-  local lspkind = require('lspkind')
   vim.o.completeopt = 'menu,menuone,noselect'
   -- Setup nvim-cmp.
-  local cmp = require('cmp')
-
   cmp.setup({
     snippet = {
       -- REQUIRED - you must specify a snippet engine
@@ -16,10 +18,10 @@ M.setup = function()
         -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
       end,
     },
-    window = {
+    -- window = {
       -- completion = cmp.config.window.bordered(),
       -- documentation = cmp.config.window.bordered(),
-    },
+    -- },
     mapping = cmp.mapping.preset.insert({
       ['<C-b>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -53,17 +55,17 @@ M.setup = function()
     }, {
       { name = 'buffer' },
     }),
---    formatting = {
---      format = lspkind.cmp_format({
---        mode = 'symbol', -- show only symbol annotations
---        maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
---        -- The function below will be called before any actual modifications from lspkind
---        -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
---        before = function (entry, vim_item)
---          return vim_item
---        end
---      })
---    }
+    formatting = {
+      format = lspkind.cmp_format({
+        mode = 'symbol', -- show only symbol annotations
+        maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+        -- The function below will be called before any actual modifications from lspkind
+        -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+        before = function (entry, vim_item)
+          return vim_item
+        end
+      })
+    }
   })
 
   -- Set configuration for specific filetype.
@@ -94,12 +96,12 @@ M.setup = function()
   })
 
   -- Setup lspconfig.
-  local on_attach = require('config._lsp_sig').on_attach
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
   -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
   require('lspconfig')['yamlls'].setup {
     capabilities = capabilities,
-    on_attach = on_attach
+    on_attach = lsp_sig.on_attach
   }
   require('lspconfig')['marksman'].setup {
     capabilities = capabilities
@@ -114,14 +116,13 @@ M.setup = function()
   }
   require('lspconfig')['rust_analyzer'].setup {
     capabilities = capabilities,
-    on_attach = on_attach
+    on_attach = lsp_sig.on_attach
   }
   require('lspconfig')['dockerls'].setup {
     capabilities = capabilities
   }
   require('lspconfig')['sumneko_lua'].setup {
     capabilities = capabilities,
-    on_attach = on_attach,
   --  vim.o.LanguageClient_serverCommands = {
   	  -- 'lua': ['lua-lsp'],
   	-- }
@@ -134,6 +135,7 @@ M.setup = function()
         },
       },
     },
+    on_attach = lsp_sig.on_attach
   }
 end
 

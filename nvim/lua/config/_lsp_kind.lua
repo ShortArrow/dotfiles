@@ -1,6 +1,7 @@
 local M = {}
 
 M.setup = function()
+
   require('lspkind').init({
     -- DEPRECATED (use mode instead): enables text annotations
     --
