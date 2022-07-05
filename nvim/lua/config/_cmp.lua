@@ -120,7 +120,11 @@ M.setup = function()
   require('lspconfig')['dockerls'].setup {
     capabilities = capabilities
   }
+--  local sumneko_root_path = os.getenv("HOME") ..
+--                              "/Documents/GitHub/lua-language-server/bin"
+ -- local sumneko_binary = sumneko_root_path .. "/bin/Linux/lua-language-server"
   require('lspconfig')['sumneko_lua'].setup {
+  --  cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
     capabilities = capabilities,
   --  vim.o.LanguageClient_serverCommands = {
   	  -- 'lua': ['lua-lsp'],
@@ -128,19 +132,29 @@ M.setup = function()
     -- vim.o.LanguageClient_autoStart = 1
     settings = {
       Lua = {
+   --     runtime = {version = 'LuaJIT', path = vim.split(package.path, ';')},
+    --        completion = {enable = true, callSnippet = "Both"},
+            workspace = {
+                library = {
+                    [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                    [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+                    [vim.fn.expand('/usr/share/awesome/lib')] = true
+                },
+                -- adjust these two values if your performance is not optimal
+                maxPreload = 2000,
+                preloadFileSize = 1000
+            },
         diagnostics = {
           -- Get the language server to recognize the `vim` global
           globals = {'vim'},
         },
-      },
-      format = {
-        enable = true,
-        -- Put format options here
-        -- NOTE: the value should be STRING!!
-        defaultConfig = {
-          indent_style = "space",
-          indent_size = "2", 
-        }
+        format = {
+          enable = true,
+          defaultConfig = {
+            indent_style = "space",
+            indent_size = "2",
+          },
+        },
       },
     },
     on_attach = lsp_sig.on_attach
