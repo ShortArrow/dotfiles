@@ -4,6 +4,7 @@ export LC_CTYPE='en_US.UTF8'
 
 # lua
 alias luamake=$HOME/Documents/GitHub/lua-language-server/3rd/luamake/luamake
+export PATH=$PATH:$HOME/Documents/GitHub/lua-language-server/bin
 
 # rust
 . "$HOME/.cargo/env"
