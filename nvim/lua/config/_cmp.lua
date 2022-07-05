@@ -133,6 +133,15 @@ M.setup = function()
           globals = {'vim'},
         },
       },
+      format = {
+        enable = true,
+        -- Put format options here
+        -- NOTE: the value should be STRING!!
+        defaultConfig = {
+          indent_style = "space",
+          indent_size = "2", 
+        }
+      },
     },
     on_attach = lsp_sig.on_attach
   }
