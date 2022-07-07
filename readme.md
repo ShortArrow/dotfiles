@@ -25,6 +25,28 @@ configration of @ShortArrow
   - Git
 1. Placement Method
   - Git & Symboliclink
+## No Them No Life
+
+- neovim
+- vscode
+  - gitgraph
+  - GitHub
+- ChromeExtensions
+  - Vimium
+  - DarkReader
+  - uBlock Origin
+  - uBlacklist
+  - Google Translate
+  - DeepL
+  - LeechBlock
+  - Wikiwand 
+  - Language Reacter
+  - Google検索キーボードショートカット
+- Bash
+  - nmap
+  - naabu
+- Powershell
+- GitHub
 
 ## Important Infomation Source
 
