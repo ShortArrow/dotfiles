@@ -37,7 +37,6 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           routeBasePath: '/',
-          // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/${gh_username}/${gh_reponame}/tree/main/packages/create-docusaurus/templates/shared/',
         },
@@ -63,7 +62,7 @@ const config = {
             type: 'doc',
             docId: 'intro',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Docs',
           },
           {
             href: 'https://github.com/ShortArrow/dotfiles',
