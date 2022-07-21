@@ -19,9 +19,11 @@ unset LESSEDIT
 # starship
 eval "$(starship init bash)"
 
-# npm, node
+# npm, node, yarn
 # export PATH=~/.npm-global/bin:$PATH
 export PATH="$PATH:$HOME/.yarn/bin"
+export PATH="$PATH:$HOME/.npm-global/bin"
+# `npm doctor` `npm root -g` `npm bin -g`
 
 # flutter
 export PATH="$PATH:$HOME/Documents/GitHub/flutter/bin"
