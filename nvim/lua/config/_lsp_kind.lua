@@ -48,7 +48,7 @@ M.setup = function()
       Struct = "פּ",
       Event = "",
       Operator = "",
-      TypeParameter = ""
+      TypeParameter = "龍"
     },
   })
 end
