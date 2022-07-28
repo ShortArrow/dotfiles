@@ -1,4 +1,5 @@
 local depends = require('depends')
+local debugger = require('debugger')
 
 local M = {}
 
@@ -18,7 +19,7 @@ local function _Fugitive()
   -- nnoremap <leader>gd :Gdiff<CR>
   -- nnoremap <leader>gl :Glog<CR>
   -- nnoremap <leader>gb :Gblame<CR>
-  print("setuped fugitive keymap")
+  debugger.print("setuped fugitive keymap")
 end
 
 local function _Flutter()
@@ -27,27 +28,27 @@ local function _Flutter()
   vim.api.nvim_set_keymap('n', '<Leader>fc',
         [[<Cmd>lua require('telescope').extensions.flutter.commands()<CR>]],
         { noremap = true, silent = false })
-  print("setuped flutter keymap")
+  debugger.print("setuped flutter keymap")
 end
 
 local function _Trouble()
   vim.api.nvim_set_keymap('n', '<Leader>tt',':TroubleToggle<CR>', { noremap = true, silent = false })
-  print("setuped trouble keymap")
+  debugger.print("setuped trouble keymap")
 end
 
 local function _FzfLua()
   vim.api.nvim_set_keymap('n', '<Leader>zf',':FzfLua files<CR>', { noremap = true, silent = false })
-  print("setuped fzflua keymap")
+  debugger.print("setuped fzflua keymap")
 end
 
 local function _Packer()
   vim.api.nvim_set_keymap('n', '<Leader>ps',':PackerSync<CR>', { noremap = true, silent = false })
-  print("setuped packer keymap")
+  debugger.print("setuped packer keymap")
 end
 
 local function _VFiler()
   vim.api.nvim_set_keymap('n', '<Leader>vf',':VFiler<CR>', { noremap = true, silent = false })
-  print("setuped vfiler keymap")
+  debugger.print("setuped vfiler keymap")
 end
 
 M.setup = function(depends_arg)
