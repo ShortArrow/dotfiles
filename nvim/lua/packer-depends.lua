@@ -34,31 +34,31 @@ return require('packer').startup(function()
     requires = {'obaland/vfiler-column-devicons', 'kyazdani42/nvim-web-devicons', 'ryanoasis/vim-devicons'},
     config = require('config._vfiler').setup
   }
-  use {
-    'lambdalisue/fern.vim',
-    config = require('config._fern').setup
-  }
-  use {
-    'lambdalisue/fern-renderer-nerdfont.vim',
-    requires = {
-      'lambdalisue/fern.vim',
-      'lambdalisue/nerdfont.vim'
-    },
-    config = require('config._fern-renderer-nerdfont').setup
-  }
-  use {
-    'lambdalisue/fern-git-status.vim',
-    requires = {
-      'lambdalisue/fern.vim',
-    },
-  }
-  use {
-    'lambdalisue/fern-comparator-lexical.vim',
-    requires = {
-      'lambdalisue/fern.vim',
-    },
-    config = require('config._fern-comparator-lexical').setup
-  }
+--  use {
+--    'lambdalisue/fern.vim',
+--    config = require('config._fern').setup
+--  }
+--  use {
+--    'lambdalisue/fern-renderer-nerdfont.vim',
+--    requires = {
+--      'lambdalisue/fern.vim',
+--      'lambdalisue/nerdfont.vim'
+--    },
+--    config = require('config._fern-renderer-nerdfont').setup
+--  }
+--  use {
+--    'lambdalisue/fern-git-status.vim',
+--    requires = {
+--      'lambdalisue/fern.vim',
+--    },
+--  }
+--  use {
+--    'lambdalisue/fern-comparator-lexical.vim',
+--    requires = {
+--      'lambdalisue/fern.vim',
+--    },
+--    config = require('config._fern-comparator-lexical').setup
+--  }
   use {
     'ibhagwan/fzf-lua',
     -- optional for icon support
