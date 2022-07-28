@@ -29,3 +29,9 @@ source ~/.bashrc
 
 - [starship](starship.rs)
 - [dotnet](https://docs.microsoft.com/ja-jp/dotnet/core/install/)
+
+## LSP
+
+```
+npm i -g bash-language-server
+```
