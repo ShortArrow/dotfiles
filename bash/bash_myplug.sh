@@ -12,8 +12,8 @@ export PATH=$PATH:$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/
 
 # vimmer terminal
 set -o vi
-export VISUAL=nvim
-export EDITOR=nvim
+export VISUAL=vi
+export EDITOR=vi
 unset LESSEDIT
 
 # starship
