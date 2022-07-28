@@ -6,10 +6,10 @@ Clone repository and make symboliclink.
 
 ```bash
 mkdir $HOME/Documents/GitHub/
-git clone https://github.com/ShortArrow/my-nvim-config.git $HOME/Documents/GitHub/my-nvim-config
-cd $HOME/Documents/GitHub/my-nvim-config
+git clone https://github.com/ShortArrow/dotfiles.git $HOME/Documents/GitHub/dotfiles
+cd $HOME/Documents/GitHub/dotfiles
 rm -rf ~/.bash_myplug
-ln -s $HOME/Documents/GitHub/my-nvim-config/bash/bash_myplug.sh ~/.bash_myplug # caution! Don't needs slash at last.
+ln -s $HOME/Documents/GitHub/dotfiles/bash/bash_myplug.sh ~/.bash_myplug # caution! Don't needs slash at last.
 file ~/.bash_myplug # check link
 ```
 
