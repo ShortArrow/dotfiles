@@ -81,6 +81,10 @@ const config = {
                 label: 'Tutorial',
                 to: '/docs/intro',
               },
+              {
+                label: 'bash',
+                to: '/docs/bash/readme',
+              },
             ],
           },
           {
