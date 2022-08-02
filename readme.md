@@ -14,7 +14,7 @@ configration of @ShortArrow
 1. install tmux
 1. make symboliclink of tmux dotfile
 
-## Design overview
+## Design Policy
 
 1. Architecture
   - Install
