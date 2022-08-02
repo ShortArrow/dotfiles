@@ -2,24 +2,21 @@
 
 ## Usage
 
-Clone repository and make symboliclink.
+1. Make symboliclink.
 
 ```bash
-mkdir $HOME/Documents/GitHub/
-git clone https://github.com/ShortArrow/dotfiles.git $HOME/Documents/GitHub/dotfiles
-cd $HOME/Documents/GitHub/dotfiles
 rm -rf ~/.bash_myplug
 ln -s $HOME/Documents/GitHub/dotfiles/bash/bash_myplug.sh ~/.bash_myplug # caution! Don't needs slash at last.
 file ~/.bash_myplug # check link
 ```
 
-Write this at the end of `~/.bashrc`.
+1. Write this at the end of `~/.bashrc`.
 
 ```bash
 source ~/.bash_myplug
 ```
 
-For load the settings. Reopen bash, or run command as bellow in current bash terminal.
+1. For load the settings. Reopen bash, or run command as bellow in current bash terminal.
 
 ```bash
 source ~/.bashrc
