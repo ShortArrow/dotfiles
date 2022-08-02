@@ -1,5 +1,5 @@
 # for mac zsh
-cd $HOME/Documents/Github
+attach -c $HOME/Documents/Github
 set-option -g default-shell "${SHELL}"
 set -g default-command "${SHELL}"
 
