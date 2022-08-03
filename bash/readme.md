@@ -1,10 +1,3 @@
----
-id: bash_readme
-title: Bash
-sidebar_label: Bash
-sidebar_position: 2
----
-
 # my bash settings
 
 ## Usage
@@ -31,7 +24,7 @@ sidebar_position: 2
   
 ## Dependencies
 
-- [starship](starship.rs)
+- [starship](https://starship.rs)
 - [dotnet](https://docs.microsoft.com/ja-jp/dotnet/core/install/)
 
 ## LSP
