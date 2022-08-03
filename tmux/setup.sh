@@ -11,5 +11,8 @@ ln -s $HOME/Documents/GitHub/dotfiles/tmux/tmux_myplug.sh ~/.tmux_myplug # cauti
 file ~/.tmux_myplug # check link
 
 # display guides after run this script
-echo "Write this at the end of ~/.tmux.conf"
-echo "source ~/.tmux_myplug"
+BACKQUOTE="\`"
+echo "###########################################"
+echo "Write this at the end of ${BACKQUOTE}~/.tmux.conf${BACKQUOTE}"
+echo "${BACKQUOTE}source ~/.tmux_myplug${BACKQUOTE}"
+echo "###########################################"
