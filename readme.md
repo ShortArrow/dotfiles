@@ -56,3 +56,6 @@ configration of @ShortArrow
 
 [Docs of nvim lsp](https://nvim-lsp.github.io/)
 
+# Road Map
+
+- Add [mason.nvim](https://github.com/williamboman/mason-lspconfig.nvim)
