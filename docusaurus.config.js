@@ -112,6 +112,20 @@ const config = {
         darkTheme: darkCodeTheme,
       },
     }),
+  plugins: [
+    function(context, options) {
+      return {
+        name: "custom-docusaurus-plugin",
+        configureWebpack(config, isServer, utils) {
+          return {
+            resolve: {
+              symlinks: false
+            }
+          };
+        }
+      };
+    }
+  ],
 };
 
 module.exports = config;
