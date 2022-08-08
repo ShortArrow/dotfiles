@@ -1,3 +1,8 @@
+# ls
+alias l.='ls -d .* --color=tty'
+alias ll='ls -l --color=tty'
+alias ls='ls --color=tty'
+
 # mosh
 export LANG='en_US.UTF8'
 export LC_CTYPE='en_US.UTF8'
