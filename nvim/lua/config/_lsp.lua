@@ -1,18 +1,20 @@
-local _cmp = require('_cmp')
+local _cmp_nvim_lsp = require('cmp_nvim_lsp')
+local __lsp_sig = require('config._lsp_sig')
+local _lsp_config = require('lspconfig')
 
 local M = {}
 
 M.setup = function()
   -- Setup lspconfig.
-  local capabilities = _cmp.cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local capabilities = _cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
   -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-  require('lspconfig')['bashls'].setup{}
-  require('lspconfig')['yamlls'].setup {
+  _lsp_config['bashls'].setup{}
+  _lsp_config['yamlls'].setup {
     capabilities = capabilities,
-    on_attach = _cmp.lsp_sig.on_attach
+    on_attach = __lsp_sig.on_attach
   }
-  require('lspconfig')['marksman'].setup {
+  _lsp_config['marksman'].setup {
     capabilities = capabilities
     -- ltex (latex)
     -- marksman (markdown)
@@ -20,17 +22,17 @@ M.setup = function()
     -- remark_ls (markdown)
     -- zk (markdown)
   }
-  require('lspconfig')['dartls'].setup {
+  _lsp_config['dartls'].setup {
     capabilities = capabilities
   }
-  require('lspconfig')['rust_analyzer'].setup {
+  _lsp_config['rust_analyzer'].setup {
     capabilities = capabilities,
-    on_attach = _cmp.lsp_sig.on_attach
+    on_attach = __lsp_sig.on_attach
   }
-  require('lspconfig')['dockerls'].setup {
+  _lsp_config['dockerls'].setup {
     capabilities = capabilities
   }
-  require('lspconfig')['sumneko_lua'].setup {
+  _lsp_config['sumneko_lua'].setup {
     capabilities = capabilities,
     settings = {
       Lua = {
@@ -57,7 +59,7 @@ M.setup = function()
         },
       },
     },
-    on_attach = _cmp.lsp_sig.on_attach
+    on_attach = __lsp_sig.on_attach
   }
 end
 

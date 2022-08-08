@@ -7,8 +7,6 @@ return require('packer').startup(function()
     'wbthomason/packer.nvim',
     opt = true
   }
-  -- patch
-  -- use 'antoinemadec/FixCursorHold.nvim'
   -- ################################################
   -- # Color
   -- ################################################
@@ -23,9 +21,6 @@ return require('packer').startup(function()
     'yamatsum/nvim-nonicons',
     requires = {'kyazdani42/nvim-web-devicons'}
   }
-  -- use 'lambdalisue/nerdfont.vim'
-  -- use 'mortepau/codicons.nvim'
-  -- use 'ryanoasis/vim-devicons'
   -- ################################################
   -- # Explorer
   -- ################################################
@@ -34,31 +29,6 @@ return require('packer').startup(function()
     requires = {'obaland/vfiler-column-devicons', 'kyazdani42/nvim-web-devicons', 'ryanoasis/vim-devicons'},
     config = require('config._vfiler').setup
   }
---  use {
---    'lambdalisue/fern.vim',
---    config = require('config._fern').setup
---  }
---  use {
---    'lambdalisue/fern-renderer-nerdfont.vim',
---    requires = {
---      'lambdalisue/fern.vim',
---      'lambdalisue/nerdfont.vim'
---    },
---    config = require('config._fern-renderer-nerdfont').setup
---  }
---  use {
---    'lambdalisue/fern-git-status.vim',
---    requires = {
---      'lambdalisue/fern.vim',
---    },
---  }
---  use {
---    'lambdalisue/fern-comparator-lexical.vim',
---    requires = {
---      'lambdalisue/fern.vim',
---    },
---    config = require('config._fern-comparator-lexical').setup
---  }
   use {
     'ibhagwan/fzf-lua',
     -- optional for icon support
@@ -87,25 +57,6 @@ return require('packer').startup(function()
     'nvim-telescope/telescope.nvim',
     requires = {'folke/trouble.nvim', 'nvim-lua/plenary.nvim', 'akinsho/flutter-tools.nvim'},
     config = require('config._telescope').setup
-  }
-  -- ################################################
-  -- # LSP
-  -- ################################################
-  use {
-    'williamboman/nvim-lsp-installer',
-    requires = {'neovim/nvim-lspconfig'},
-  }
-  use {
-    "ray-x/lsp_signature.nvim",
-    config = require('config._lsp_sig').setup
-  }
-  use {
-    'https://github.com/onsails/lspkind.nvim',
-    config = require('config._lsp_kind').setup
-  }
-  use {
-    'weilbith/nvim-code-action-menu',
-    cmd = 'CodeActionMenu',
   }
   -- ################################################
   -- # Flutter
@@ -148,6 +99,28 @@ return require('packer').startup(function()
     config = require('config._fugitive').setup
   }
   -- ################################################
+  -- # LSP
+  -- ################################################
+  use {
+    'williamboman/nvim-lsp-installer',
+    requires = {
+      'neovim/nvim-lspconfig',
+      'onsails/lspkind.nvim',
+    },
+  }
+  use {
+    "ray-x/lsp_signature.nvim",
+    config = require('config._lsp_sig').setup
+  }
+  use {
+    'onsails/lspkind.nvim',
+    config = require('config._lsp_kind').setup
+  }
+  use {
+    'weilbith/nvim-code-action-menu',
+    cmd = 'CodeActionMenu',
+  }
+  -- ################################################
   -- # Auto Complete
   -- ################################################
   use {
@@ -166,7 +139,11 @@ return require('packer').startup(function()
     },
     config = require('config._cmp').setup
   }
-  use 'neovim/nvim-lspconfig'
+  use {
+    'neovim/nvim-lspconfig',
+    requires = {'ray-x/lsp_signature.nvim',},
+    config = require('config._lsp').setup
+  }
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
