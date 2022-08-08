@@ -1,7 +1,9 @@
 # ls
 alias l.='ls -d .* --color=tty'
 alias ll='ls -l --color=tty'
+alias ll.='ls -al --color=tty'
 alias ls='ls --color=tty'
+alias ls.='ls -a --color=tty'
 
 # mosh
 export LANG='en_US.UTF8'
