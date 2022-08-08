@@ -29,3 +29,5 @@ export PATH="$PATH:$HOME/.npm-global/bin"
 export PATH="$PATH:$HOME/Documents/GitHub/flutter/bin"
 export CHROME_EXECUTABLE="/usr/bin/chromium"
 
+# crontab
+alias crontab='crontab -i'
