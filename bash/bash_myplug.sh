@@ -38,3 +38,6 @@ export CHROME_EXECUTABLE="/usr/bin/chromium"
 
 # crontab
 alias crontab='crontab -i'
+
+# crontab
+alias foresta='git-foresta | less -RSX'
