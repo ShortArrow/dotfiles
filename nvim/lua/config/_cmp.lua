@@ -1,7 +1,5 @@
 local M = {}
 
-M.cmp_nvim_lsp = require('cmp_nvim_lsp')
-M.lsp_sig = require('config._lsp_sig')
 M.setup = function()
   vim.o.completeopt = 'menu,menuone,noselect'
   -- Setup nvim-cmp.

@@ -24,3 +24,6 @@ keymaps.setup(depends.fugitive)
 keymaps.setup(depends.fzflua)
 keymaps.setup(depends.packer)
 keymaps.setup(depends.vfiler)
+
+-- local log_path = vim.fn.stdpath('cache') .. '/packer.nvim.log'
+-- print log_path
