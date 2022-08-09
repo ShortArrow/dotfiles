@@ -1,5 +1,6 @@
 local M = {}
 
+M.on_attach = require('lsp_signature').on_attach
 M.setup = function()
 --  require('lsp_signature').setup()
   require('lsp_signature').setup({
@@ -8,9 +9,6 @@ M.setup = function()
       border = "rounded"
     }
   })
-end
-M.on_attach = function(client, bufnr)
-  require('lsp_signature').on_attach()
 end
 
 return M

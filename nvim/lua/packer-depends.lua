@@ -141,8 +141,12 @@ return require('packer').startup(function()
   }
   use {
     'neovim/nvim-lspconfig',
-    requires = {'ray-x/lsp_signature.nvim',},
-    config = require('config._lsp').setup
+    requires = {
+      'ray-x/lsp_signature.nvim',
+      'hrsh7th/cmp-nvim-lsp',
+      'onsails/lspkind.nvim',
+    },
+--    config = require('config._lsp').setup
   }
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
