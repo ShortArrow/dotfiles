@@ -102,11 +102,15 @@ return require('packer').startup(function()
   -- # LSP
   -- ################################################
   use {
-    'williamboman/nvim-lsp-installer',
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
     requires = {
-      'neovim/nvim-lspconfig',
+      'ray-x/lsp_signature.nvim',
+      'hrsh7th/cmp-nvim-lsp',
       'onsails/lspkind.nvim',
     },
+    config = require('config._mason').setup
   }
   use {
     "ray-x/lsp_signature.nvim",
@@ -138,15 +142,6 @@ return require('packer').startup(function()
       'quangnguyen30192/cmp-nvim-ultisnips',
     },
     config = require('config._cmp').setup
-  }
-  use {
-    'neovim/nvim-lspconfig',
-    requires = {
-      'ray-x/lsp_signature.nvim',
-      'hrsh7th/cmp-nvim-lsp',
-      'onsails/lspkind.nvim',
-    },
-    config = require('config._lsp').setup
   }
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
