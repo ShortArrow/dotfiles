@@ -67,6 +67,14 @@ local function _Common()
   keymap('n', '<Leader>ln', ':lua vim.lsp.buf.rename()<CR>', default_config)
   -- code_action
   keymap('n', '<Leader>la', ':lua vim.lsp.buf.code_action()<CR>', default_config)
+  -- right
+  keymap('n', '<Leader>wl', '<C-w>l', default_config)
+  -- left
+  keymap('n', '<Leader>wh', '<C-w>h', default_config)
+  -- down
+  keymap('n', '<Leader>wj', '<C-w>j', default_config)
+  -- up
+  keymap('n', '<Leader>wk', '<C-w>k', default_config)
   debugger.print("setuped common keymap")
 end
 
