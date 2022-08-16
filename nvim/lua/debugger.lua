@@ -1,4 +1,4 @@
-local is_debug = false
+local is_debug = true
 
 local M = {
   print = function (message)
