@@ -146,7 +146,7 @@ return require('packer').startup(function()
       'hrsh7th/cmp-nvim-lsp',
       'onsails/lspkind.nvim',
     },
---    config = require('config._lsp').setup
+    config = require('config._lsp').setup
   }
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
