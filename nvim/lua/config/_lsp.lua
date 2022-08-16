@@ -39,35 +39,35 @@ M.setup = function()
     capabilities = capabilities,
     on_attach = __lsp_sig.on_attach,
   }
---  _lsp_config['sumneko_lua'].setup {
---    capabilities = capabilities,
---    on_attach = __lsp_sig.on_attach,
---    settings = {
---      Lua = {
---        workspace = {
---          library = {
---            [vim.fn.expand('$VIMRUNTIME/lua')] = true,
---            [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
---            [vim.fn.expand('/usr/share/awesome/lib')] = true
---          },
---          -- adjust these two values if your performance is not optimal
---          maxPreload = 2000,
---          preloadFileSize = 1000
---        },
---        diagnostics = {
---          -- Get the language server to recognize the `vim` global
---          globals = {'vim'},
---        },
---        format = {
---          enable = true,
---          defaultConfig = {
---            indent_style = "space",
---            indent_size = "2",
---          },
---        },
---      },
---    },
---  }
+  _lsp_config['sumneko_lua'].setup {
+    capabilities = capabilities,
+    on_attach = __lsp_sig.on_attach,
+    settings = {
+      Lua = {
+        workspace = {
+          library = {
+            [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+            [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+            [vim.fn.expand('/usr/share/awesome/lib')] = true
+          },
+          -- adjust these two values if your performance is not optimal
+          maxPreload = 2000,
+          preloadFileSize = 1000
+        },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = {'vim'},
+        },
+        format = {
+          enable = true,
+          defaultConfig = {
+            indent_style = "space",
+            indent_size = "2",
+          },
+        },
+      },
+    },
+  }
   print('info', 'middle', '_lsp.setup')
   print('info', 'finish', '_lsp.setup')
 end
