@@ -105,6 +105,13 @@ return _packer.startup(function()
     config = get_config('_fugitive').setup
   }
   -- ################################################
+  -- # Indent and Bracket
+  -- ################################################
+  use {
+    "lukas-reineke/indent-blankline.nvim",
+    config = get_config('_indent').setup
+  }
+  -- ################################################
   -- # LSP
   -- ################################################
   use {
