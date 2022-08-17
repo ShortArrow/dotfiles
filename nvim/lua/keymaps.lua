@@ -55,6 +55,10 @@ local function _VFiler()
 end
 
 local function _Common()
+
+  -- ##########
+  -- lsp keymaps
+  -- ##########
   -- show variables infomation
   keymap('n', '<Leader>lk', ':lua vim.lsp.buf.hover()<CR>', default_config)
   -- jump to definition
@@ -68,8 +72,9 @@ local function _Common()
   -- code_action
   keymap('n', '<Leader>la', ':lua vim.lsp.buf.code_action()<CR>', default_config)
 
+  -- ##########
   -- window keymaps
-
+  -- ##########
   -- go to previous window
   keymap('n', '<Leader>wp', '<C-w>p', default_config)
   -- right
@@ -80,6 +85,12 @@ local function _Common()
   keymap('n', '<Leader>wj', '<C-w>j', default_config)
   -- up
   keymap('n', '<Leader>wk', '<C-w>k', default_config)
+
+  -- ##########
+  -- help keymaps
+  -- ##########
+  -- quickref
+  keymap('n', '<Leader>?', ':h quickref<CR>', default_config)
   debugger.print("setuped common keymap")
 end
 
