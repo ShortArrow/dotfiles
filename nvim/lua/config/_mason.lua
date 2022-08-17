@@ -1,13 +1,6 @@
 local M = {}
-
-
-M.setup = function()
+M.start = function()
   local _mason = require('mason')
-  local _nvim_lsp = require('lspconfig')
-  local _mason_lspconfig = require('mason-lspconfig')
-  local _cmp_nvim_lsp = require('cmp_nvim_lsp')
-  local capabilities = _cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
-
   _mason.setup{
     ui = {
       icons = {
@@ -17,6 +10,13 @@ M.setup = function()
       }
     }
   }
+end
+M.setup = function()
+  local _mason = require('mason')
+  local _nvim_lsp = require('lspconfig')
+  local _mason_lspconfig = require('mason-lspconfig')
+  local _cmp_nvim_lsp = require('cmp_nvim_lsp')
+  local capabilities = _cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
   _mason_lspconfig.setup_handlers({
     function(server_name)
