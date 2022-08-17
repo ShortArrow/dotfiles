@@ -1,7 +1,7 @@
 local M = {}
 M.start = function()
   local _mason = require('mason')
-  _mason.setup{
+  _mason.setup {
     ui = {
       icons = {
         package_installed = "✓",
@@ -53,4 +53,4 @@ M.setup = function()
   })
 end
 
- return M
+return M
