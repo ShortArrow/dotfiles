@@ -4,7 +4,7 @@ local _packer = require('packer')
 local use = _packer.use
 
 local function get_config(name)
-	return string.format('require("config/%s")', name)
+	return require(string.format('config/%s', name))
 end
 
 return _packer.startup(function()
