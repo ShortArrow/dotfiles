@@ -1,8 +1,14 @@
 vim.cmd[[packadd packer.nvim]]
 
-return require('packer').startup(function()
+local _packer = require('packer')
+local use = _packer.use
+
+local function get_config(name)
+	return string.format('require("config/%s")', name)
+end
+
+return _packer.startup(function()
   -- self manage
-  local use = require('packer').use
   use {
     'wbthomason/packer.nvim',
     opt = true
