@@ -17,8 +17,19 @@ M.setup = function()
         layout = 'right',
       },
     },
-    mappings = {},
+    mappings = {
+      ['<S-Space><S-Space>'] = function(vfiler, context, view)
+        action.toggle_select(vfiler, context, view)
+        action.move_cursor_up(vfiler, context, view)
+      end,
+      ['<Space><Space>'] = function(vfiler, context, view)
+        action.toggle_select(vfiler, context, view)
+        action.move_cursor_down(vfiler, context, view)
+      end,
+    },
   }
+  _vfiler_config.unmap('<Space>')
+  _vfiler_config.unmap('<S-Space>')
   _vfiler_action.setup {
     hook = {},
   }
