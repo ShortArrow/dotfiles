@@ -14,6 +14,7 @@ end
 M.setup = function()
   local _nvim_lsp = require('lspconfig')
   local _mason_lspconfig = require('mason-lspconfig')
+  local _lsp_sig = require('lsp_signature')
   local _cmp_nvim_lsp = require('cmp_nvim_lsp')
   local capabilities = _cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
@@ -28,7 +29,7 @@ M.setup = function()
         _opts.capabilities = capabilities
         _opts.on_attach = function(signature_setup, bufnr)
           local _bufopts = { silent = true, buffer = bufnr }
-          require("lsp_signature").on_attach(signature_setup, bufnr)
+          _lsp_sig.on_attach(signature_setup, bufnr)
           vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, _bufopts)
           vim.keymap.set('n', 'gtD', vim.lsp.buf.type_definition, _bufopts)
           vim.keymap.set('n', 'grf', vim.lsp.buf.references, _bufopts)
