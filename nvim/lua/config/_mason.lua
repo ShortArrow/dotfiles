@@ -30,10 +30,10 @@ M.setup = function()
         _opts.on_attach = function(signature_setup, bufnr)
           local _bufopts = { silent = true, buffer = bufnr }
           _lsp_sig.on_attach(signature_setup, bufnr)
-          vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, _bufopts)
-          vim.keymap.set('n', 'gtD', vim.lsp.buf.type_definition, _bufopts)
-          vim.keymap.set('n', 'grf', vim.lsp.buf.references, _bufopts)
-          vim.keymap.set('n', '<space>p', vim.lsp.buf.format, _bufopts)
+          -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, _bufopts)
+          -- vim.keymap.set('n', 'gtD', vim.lsp.buf.type_definition, _bufopts)
+          -- vim.keymap.set('n', 'grf', vim.lsp.buf.references, _bufopts)
+          -- vim.keymap.set('n', '<space>p', vim.lsp.buf.format, _bufopts)
         end
         _opts.settings = {
           Lua = {
