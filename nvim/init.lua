@@ -11,9 +11,22 @@ vim.o.shiftwidth = 2
 vim.g.mapleader = " "
 vim.api.nvim_set_keymap('n', '<Leader>a', ':echo \"HelloLeader\"<CR>'
   , { noremap = true, silent = true })
-require('packer-depends')
-vim.cmd [[autocmd BufWritePost packer-depends.lua PackerCompile]]
 
+-- packer from here
+function P(...)
+    local args = { n = select("#", ...), ... }
+    for i = 1, args.n do
+        args[i] = vim.inspect(args[i])
+    end
+    print(unpack(args))
+end
+
+if not pcall(require, "impatient") then
+    print "Failed to load impatient."
+end
+
+require('packer-depends')
+-- packer end here
 local depends = require('depends')
 local keymaps = require('keymaps')
 
