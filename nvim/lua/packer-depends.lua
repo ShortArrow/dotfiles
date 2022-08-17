@@ -1,18 +1,18 @@
 local install_path = ("%s/site/pack/packer-lib/opt/packer.nvim"):format(vim.fn.stdpath "data")
 
 local function install_packer()
-    vim.fn.termopen(("git clone https://github.com/wbthomason/packer.nvim %q"):format(install_path))
+  vim.fn.termopen(("git clone https://github.com/wbthomason/packer.nvim %q"):format(install_path))
 end
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    install_packer()
+  install_packer()
 end
 
 vim.cmd [[packadd packer.nvim]]
 
 function _G.packer_upgrade()
-    vim.fn.delete(install_path, "rf")
-    install_packer()
+  vim.fn.delete(install_path, "rf")
+  install_packer()
 end
 
 vim.cmd [[command! PackerUpgrade :call v:lua.packer_upgrade()]]
@@ -20,7 +20,7 @@ vim.cmd [[command! PackerUpgrade :call v:lua.packer_upgrade()]]
 local _packer = require('packer')
 
 local function get_config(name)
-	return require(string.format('config/%s', name))
+  return require(string.format('config/%s', name))
 end
 
 local function spec(use)
@@ -34,7 +34,7 @@ local function spec(use)
   -- ################################################
   use {
     'folke/tokyonight.nvim',
-    before = {'obaland/vfiler.vim'},
+    before = { 'obaland/vfiler.vim' },
     config = get_config('_tokyonight').setup
   }
   -- ################################################
@@ -42,14 +42,14 @@ local function spec(use)
   -- ################################################
   use {
     'yamatsum/nvim-nonicons',
-    requires = {'kyazdani42/nvim-web-devicons'}
+    requires = { 'kyazdani42/nvim-web-devicons' }
   }
   -- ################################################
   -- # Explorer
   -- ################################################
   use {
     'obaland/vfiler.vim',
-    requires = {'obaland/vfiler-column-devicons', 'kyazdani42/nvim-web-devicons', 'ryanoasis/vim-devicons'},
+    requires = { 'obaland/vfiler-column-devicons', 'kyazdani42/nvim-web-devicons', 'ryanoasis/vim-devicons' },
     config = get_config('_vfiler').setup
   }
   use {
@@ -78,7 +78,7 @@ local function spec(use)
   -- ################################################
   use {
     'nvim-telescope/telescope.nvim',
-    requires = {'folke/trouble.nvim', 'nvim-lua/plenary.nvim', 'akinsho/flutter-tools.nvim'},
+    requires = { 'folke/trouble.nvim', 'nvim-lua/plenary.nvim', 'akinsho/flutter-tools.nvim' },
     config = get_config('_telescope').setup
   }
   -- ################################################
@@ -86,7 +86,7 @@ local function spec(use)
   -- ################################################
   use {
     'akinsho/flutter-tools.nvim',
-    requires = {'nvim-lua/plenary.nvim'},
+    requires = { 'nvim-lua/plenary.nvim' },
     config = get_config('_flutter').setup
   }
   use 'mfussenegger/nvim-dap'
@@ -97,7 +97,7 @@ local function spec(use)
   use 'natebosch/vim-lsc'
   use 'natebosch/vim-lsc-dart'
   use 'jiangmiao/auto-pairs'
-  use  {'lervag/vimtex', opt = true}      -- Use braces when passing options
+  use { 'lervag/vimtex', opt = true } -- Use braces when passing options
   -- ################################################
   -- # Lua
   -- ################################################
@@ -199,11 +199,11 @@ local function spec(use)
 end
 
 _packer.startup {
-    spec,
-    config = {
-        display = {
-            open_fn = require("packer.util").float,
-        },
-        max_jobs = vim.fn.has "win32" == 1 and 5 or nil,
+  spec,
+  config = {
+    display = {
+      open_fn = require("packer.util").float,
     },
+    max_jobs = vim.fn.has "win32" == 1 and 5 or nil,
+  },
 }
