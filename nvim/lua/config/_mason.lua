@@ -1,5 +1,6 @@
 local M = {}
 
+
 M.setup = function()
   local _mason = require('mason')
   local _nvim_lsp = require('lspconfig')
