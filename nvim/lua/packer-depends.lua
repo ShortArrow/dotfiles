@@ -1,8 +1,14 @@
 vim.cmd[[packadd packer.nvim]]
 
-return require('packer').startup(function()
+local _packer = require('packer')
+local use = _packer.use
+
+local function get_config(name)
+	return require(string.format('config/%s', name))
+end
+
+return _packer.startup(function()
   -- self manage
-  local use = require('packer').use
   use {
     'wbthomason/packer.nvim',
     opt = true
@@ -12,7 +18,7 @@ return require('packer').startup(function()
   -- ################################################
   use {
     'folke/tokyonight.nvim',
-    config = require('config._tokyonight').setup
+    config = get_config('_tokyonight').setup
   }
   -- ################################################
   -- # Fonts
@@ -27,7 +33,7 @@ return require('packer').startup(function()
   use {
     'obaland/vfiler.vim',
     requires = {'obaland/vfiler-column-devicons', 'kyazdani42/nvim-web-devicons', 'ryanoasis/vim-devicons'},
-    config = require('config._vfiler').setup
+    config = get_config('_vfiler').setup
   }
   use {
     'ibhagwan/fzf-lua',
@@ -39,7 +45,7 @@ return require('packer').startup(function()
   -- ################################################
   use {
     'feline-nvim/feline.nvim',
-    config = require('config._feline').setup
+    config = get_config('_feline').setup
   }
   use 'b0o/incline.nvim'
   -- ################################################
@@ -48,7 +54,7 @@ return require('packer').startup(function()
   use {
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
-    config = require('config._trouble').setup
+    config = get_config('_trouble').setup
   }
   -- ################################################
   -- # UI
@@ -56,7 +62,7 @@ return require('packer').startup(function()
   use {
     'nvim-telescope/telescope.nvim',
     requires = {'folke/trouble.nvim', 'nvim-lua/plenary.nvim', 'akinsho/flutter-tools.nvim'},
-    config = require('config._telescope').setup
+    config = get_config('_telescope').setup
   }
   -- ################################################
   -- # Flutter
@@ -64,7 +70,7 @@ return require('packer').startup(function()
   use {
     'akinsho/flutter-tools.nvim',
     requires = {'nvim-lua/plenary.nvim'},
-    config = require('config._flutter').setup
+    config = get_config('_flutter').setup
   }
   use 'mfussenegger/nvim-dap'
   -- ################################################
@@ -92,29 +98,33 @@ return require('packer').startup(function()
   -- ################################################
   use {
     'lewis6991/gitsigns.nvim',
-    config = require('config._gitsigns').setup
+    config = get_config('_gitsigns').setup
   }
   use {
     'tpope/vim-fugitive',
-    config = require('config._fugitive').setup
+    config = get_config('_fugitive').setup
   }
   -- ################################################
   -- # LSP
   -- ################################################
   use {
-    'williamboman/nvim-lsp-installer',
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
     requires = {
-      'neovim/nvim-lspconfig',
+      'ray-x/lsp_signature.nvim',
+      'hrsh7th/cmp-nvim-lsp',
       'onsails/lspkind.nvim',
     },
+    config = get_config('_mason').setup
   }
   use {
     "ray-x/lsp_signature.nvim",
-    config = require('config._lsp_sig').setup
+    config = get_config('_lsp_sig').setup
   }
   use {
     'onsails/lspkind.nvim',
-    config = require('config._lsp_kind').setup
+    config = get_config('_lsp_kind').setup
   }
   use {
     'weilbith/nvim-code-action-menu',
@@ -126,7 +136,6 @@ return require('packer').startup(function()
   use {
     "hrsh7th/nvim-cmp",
     requires = {
-      'neovim/nvim-lspconfig',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
@@ -137,16 +146,7 @@ return require('packer').startup(function()
       'hrsh7th/cmp-emoji',
       'quangnguyen30192/cmp-nvim-ultisnips',
     },
-    config = require('config._cmp').setup
-  }
-  use {
-    'neovim/nvim-lspconfig',
-    requires = {
-      'ray-x/lsp_signature.nvim',
-      'hrsh7th/cmp-nvim-lsp',
-      'onsails/lspkind.nvim',
-    },
---    config = require('config._lsp').setup
+    config = get_config('_cmp').setup
   }
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'

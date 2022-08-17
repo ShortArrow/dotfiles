@@ -1,44 +1,43 @@
-local _cmp_nvim_lsp = require('cmp_nvim_lsp')
-local __lsp_sig = require('config._lsp_sig')
-local _lsp_config = require('lspconfig')
-local capabilities = _cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
-
 local M = {}
 
 M.setup = function()
+  local _cmp_nvim_lsp = require('cmp_nvim_lsp')
+  local __lsp_sig = require('config._lsp_sig')
+  local _lsp_config = require('lspconfig')
+  local capabilities = _cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
   print('info', 'start', '_lsp.setup')
   -- Setup lspconfig.
 
   -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-  _lsp_config['bashls'].setup {
-    capabilities = capabilities,
-    on_attach = __lsp_sig.on_attach,
-  }
-  _lsp_config['yamlls'].setup {
-    capabilities = capabilities,
-    on_attach = __lsp_sig.on_attach,
-  }
-  _lsp_config['marksman'].setup {
-    capabilities = capabilities,
-    on_attach = __lsp_sig.on_attach,
-    -- ltex (latex)
-    -- marksman (markdown)
-    -- prosemd_lsp (markdown)
-    -- remark_ls (markdown)
-    -- zk (markdown)
-  }
-  _lsp_config['dartls'].setup {
-    capabilities = capabilities,
-    on_attach = __lsp_sig.on_attach,
-  }
-  _lsp_config['rust_analyzer'].setup {
-    capabilities = capabilities,
-    on_attach = __lsp_sig.on_attach,
-  }
-  _lsp_config['dockerls'].setup {
-    capabilities = capabilities,
-    on_attach = __lsp_sig.on_attach,
-  }
+--  _lsp_config['bashls'].setup {
+--    capabilities = capabilities,
+--    on_attach = __lsp_sig.on_attach,
+--  }
+--  _lsp_config['yamlls'].setup {
+--    capabilities = capabilities,
+--    on_attach = __lsp_sig.on_attach,
+--  }
+--  _lsp_config['marksman'].setup {
+--    capabilities = capabilities,
+--    on_attach = __lsp_sig.on_attach,
+--    -- ltex (latex)
+--    -- marksman (markdown)
+--    -- prosemd_lsp (markdown)
+--    -- remark_ls (markdown)
+--    -- zk (markdown)
+--  }
+--  _lsp_config['dartls'].setup {
+--    capabilities = capabilities,
+--    on_attach = __lsp_sig.on_attach,
+--  }
+--  _lsp_config['rust_analyzer'].setup {
+--    capabilities = capabilities,
+--    on_attach = __lsp_sig.on_attach,
+--  }
+--  _lsp_config['dockerls'].setup {
+--    capabilities = capabilities,
+--    on_attach = __lsp_sig.on_attach,
+--  }
 --  _lsp_config['sumneko_lua'].setup {
 --    capabilities = capabilities,
 --    on_attach = __lsp_sig.on_attach,
