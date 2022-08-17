@@ -1,7 +1,7 @@
 local is_debug = true
 
 local M = {
-  print = function (message)
+  print = function(message)
     if is_debug then
       print(message)
     end
