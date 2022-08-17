@@ -4,6 +4,8 @@ M.setup = function()
   local _mason = require('mason')
   local _nvim_lsp = require('lspconfig')
   local _mason_lspconfig = require('mason-lspconfig')
+  local _cmp_nvim_lsp = require('cmp_nvim_lsp')
+  local capabilities = _cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
   _mason.setup{
     ui = {
@@ -31,6 +33,7 @@ M.setup = function()
       local _opts = {}
 
       if server_name == "sumneko_lua" then
+        _opts.capabilities = capabilities
         _opts.settings = {
           Lua = {
             diagnostics = { globals = { 'vim' } },
