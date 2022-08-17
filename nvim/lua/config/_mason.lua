@@ -17,17 +17,6 @@ M.setup = function()
       }
     }
   }
-  _mason_lspconfig.setup_handlers({ function(server_name)
-    local _opts = {}
-    _opts.on_attach = function(_, bufnr)
-      local _bufopts = { silent = true, buffer = bufnr }
-      vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, _bufopts)
-      vim.keymap.set('n', 'gtD', vim.lsp.buf.type_definition, _bufopts)
-      vim.keymap.set('n', 'grf', vim.lsp.buf.references, _bufopts)
-      vim.keymap.set('n', '<space>p', vim.lsp.buf.format, _bufopts)
-    end
-    _nvim_lsp[server_name].setup(_opts)
-  end })
 
   _mason_lspconfig.setup_handlers({
     function(server_name)
@@ -38,7 +27,14 @@ M.setup = function()
         -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
         local path = { "?.lua", "?/init.lua" }
         _opts.capabilities = capabilities
-        _opts.on_attach = require("lsp_signature").on_attach(signature_setup, bufnr)
+        _opts.on_attach = function(_, bufnr)
+          local _bufopts = { silent = true, buffer = bufnr }
+          require("lsp_signature").on_attach(signature_setup, bufnr)
+          vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, _bufopts)
+          vim.keymap.set('n', 'gtD', vim.lsp.buf.type_definition, _bufopts)
+          vim.keymap.set('n', 'grf', vim.lsp.buf.references, _bufopts)
+          vim.keymap.set('n', '<space>p', vim.lsp.buf.format, _bufopts)
+        end
         _opts.settings = {
           Lua = {
             diagnostics = { globals = { 'vim' } },
