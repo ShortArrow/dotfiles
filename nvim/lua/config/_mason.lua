@@ -34,14 +34,24 @@ M.setup = function()
       local _opts = {}
 
       if server_name == "sumneko_lua" then
+        -- https://github.com/folke/lua-dev.nvim/blob/main/lua/lua-dev/sumneko.lua
+        -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
+        local path = { "?.lua", "?/init.lua" }
         _opts.capabilities = capabilities
+        _opts.on_attach = require("lsp_signature").on_attach(signature_setup, bufnr)
         _opts.settings = {
           Lua = {
             diagnostics = { globals = { 'vim' } },
+            completion = { callSnippet = "Replace" },
+            workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+            telemetry = { enable = false },
+            runtime = {
+              version = "LuaJIT",
+              path = path,
+            },
           }
         }
       end
-
       _nvim_lsp[server_name].setup(_opts)
     end
   })
