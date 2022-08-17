@@ -12,7 +12,6 @@ M.start = function()
   }
 end
 M.setup = function()
-  local _mason = require('mason')
   local _nvim_lsp = require('lspconfig')
   local _mason_lspconfig = require('mason-lspconfig')
   local _cmp_nvim_lsp = require('cmp_nvim_lsp')
@@ -27,7 +26,7 @@ M.setup = function()
         -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
         local path = { "?.lua", "?/init.lua" }
         _opts.capabilities = capabilities
-        _opts.on_attach = function(_, bufnr)
+        _opts.on_attach = function(signature_setup, bufnr)
           local _bufopts = { silent = true, buffer = bufnr }
           require("lsp_signature").on_attach(signature_setup, bufnr)
           vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, _bufopts)

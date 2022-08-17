@@ -26,5 +26,6 @@ keymaps.setup(depends.packer)
 keymaps.setup(depends.vfiler)
 
 require('config._mason').start()
+require('config._mason').setup()
 -- local log_path = vim.fn.stdpath('cache') .. '/packer.nvim.log'
 -- print log_path
