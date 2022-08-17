@@ -45,7 +45,7 @@ local function _FzfLua()
 end
 
 local function _Packer()
-  keymap('n', '<Leader>ps', ':PackerSync<CR>', default_config)
+  keymap('n', '<Leader>ps', ":lua require('packer').sync()<CR>", default_config)
   debugger.print("setuped packer keymap")
 end
 
@@ -67,6 +67,11 @@ local function _Common()
   keymap('n', '<Leader>ln', ':lua vim.lsp.buf.rename()<CR>', default_config)
   -- code_action
   keymap('n', '<Leader>la', ':lua vim.lsp.buf.code_action()<CR>', default_config)
+
+  -- window keymaps
+
+  -- go to previous window
+  keymap('n', '<Leader>wp', '<C-w>p', default_config)
   -- right
   keymap('n', '<Leader>wl', '<C-w>l', default_config)
   -- left
