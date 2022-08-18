@@ -13,6 +13,7 @@ vim.o.smartindent = true
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.g.mapleader = " "
+vim.o.pumblend=30
 vim.api.nvim_set_keymap('n', '<Leader>a', ':echo \"HelloLeader\"<CR>'
   , { noremap = true, silent = true })
 
