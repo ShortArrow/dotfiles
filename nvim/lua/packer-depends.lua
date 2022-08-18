@@ -79,6 +79,7 @@ local function spec(use)
     requires = { 'folke/trouble.nvim', 'nvim-lua/plenary.nvim', 'akinsho/flutter-tools.nvim' },
     config = get_config('_telescope').setup
   }
+  use 'voldikss/vim-floaterm'
   -- ################################################
   -- # Flutter
   -- ################################################
