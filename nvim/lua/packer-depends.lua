@@ -63,6 +63,14 @@ local function spec(use)
     config = get_config('_feline').setup
   }
   use 'b0o/incline.nvim'
+  use {
+    'akinsho/bufferline.nvim',
+    tag = "v2.*",
+    requires = {
+      'kyazdani42/nvim-web-devicons'
+    },
+    config = get_config('_buffer_line').setup
+  }
   -- ################################################
   -- # Trouble
   -- ################################################
