@@ -156,13 +156,7 @@ local function spec(use)
   use({
     "glepnir/lspsaga.nvim",
     branch = "main",
-    config = function()
-      local saga = require("lspsaga")
-
-      saga.init_lsp_saga({
-        -- your configuration
-      })
-    end,
+    config = get_config('_lsp_saga').setup,
   })
   -- ################################################
   -- # Auto Complete
