@@ -25,10 +25,7 @@ end
 
 local function spec(use)
   -- self manage
-  use {
-    'wbthomason/packer.nvim',
-    opt = true
-  }
+  use 'wbthomason/packer.nvim'
   use 'lewis6991/impatient.nvim'
   -- ################################################
   -- # Color
@@ -50,7 +47,7 @@ local function spec(use)
   -- ################################################
   use {
     'obaland/vfiler.vim',
-    requires = { 'obaland/vfiler-column-devicons', 'kyazdani42/nvim-web-devicons', 'ryanoasis/vim-devicons' },
+    requires = { 'obaland/vfiler-column-devicons', 'kyazdani42/nvim-web-devicons' },
     config = get_config('_vfiler').setup
   }
   use {
