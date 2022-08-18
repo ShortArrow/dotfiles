@@ -1,5 +1,4 @@
-local depends = require('depends')
-local keymaps = require('keymaps')
+local ignition = require('ignition')
 local fonts = require('fonts')
 
 vim.o.number = true
@@ -13,9 +12,7 @@ vim.o.smartindent = true
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.g.mapleader = " "
-vim.o.pumblend=30
-vim.api.nvim_set_keymap('n', '<Leader>a', ':echo \"HelloLeader\"<CR>'
-  , { noremap = true, silent = true })
+vim.o.pumblend = 5
 
 -- packer from here
 function P(...)
@@ -33,15 +30,8 @@ end
 require('packer-depends')
 -- packer end here
 
-keymaps.setup(depends.common)
-keymaps.setup(depends.trouble)
-keymaps.setup(depends.flutter)
-keymaps.setup(depends.fugitive)
-keymaps.setup(depends.fzflua)
-keymaps.setup(depends.packer)
-keymaps.setup(depends.vfiler)
-
 require('config._mason').start()
 require('config._mason').setup()
 -- local log_path = vim.fn.stdpath('cache') .. '/packer.nvim.log'
 -- print log_path
+ignition.start()

@@ -1,0 +1,13 @@
+local depends = require('depends')
+
+local M = {}
+
+M.setup = function ()
+  for value in pairs(depends) do
+    if value.enable then
+      value.keymaps()
+    end
+  end
+end
+
+return M

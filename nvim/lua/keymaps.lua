@@ -1,4 +1,3 @@
-local depends = require('depends')
 local debugger = require('debugger')
 
 local keymap = vim.api.nvim_set_keymap
@@ -6,7 +5,7 @@ local default_config = { noremap = true, silent = false }
 
 local M = {}
 
-local function _Fugitive()
+M.Fugitive = function()
   keymap('n', '<Leader>ga', ':Git add .<CR>', default_config)
   keymap('n', '<Leader>gb', ':Git blame<CR>', default_config)
   keymap('n', '<Leader>gc', ':Git commit -m ', default_config)
@@ -25,7 +24,7 @@ local function _Fugitive()
   debugger.print("setuped fugitive keymap")
 end
 
-local function _Flutter()
+M.Flutter = function()
   keymap('n', '<Leader>fr', ':FlutterRun -d web-server<CR>',
     default_config)
   keymap('n', '<Leader>fc',
@@ -34,27 +33,27 @@ local function _Flutter()
   debugger.print("setuped flutter keymap")
 end
 
-local function _Trouble()
+M.Trouble = function()
   keymap('n', '<Leader>tt', ':TroubleToggle<CR>', default_config)
   debugger.print("setuped trouble keymap")
 end
 
-local function _FzfLua()
+M.FzfLua = function()
   keymap('n', '<Leader>zf', ':FzfLua files<CR>', default_config)
   debugger.print("setuped fzflua keymap")
 end
 
-local function _Packer()
+M.Packer = function()
   keymap('n', '<Leader>ps', ":lua require('packer').sync()<CR>", default_config)
   debugger.print("setuped packer keymap")
 end
 
-local function _VFiler()
+M.VFiler = function()
   keymap('n', '<Leader>vf', ':VFiler<CR>', default_config)
   debugger.print("setuped vfiler keymap")
 end
 
-local function _Common()
+M.Common = function()
 
   -- ##########
   -- lsp keymaps
@@ -94,17 +93,9 @@ local function _Common()
   debugger.print("setuped common keymap")
 end
 
-M.setup = function(depends_arg)
-  -- like switch case
-  local switchCase = {}
-  switchCase[depends.common] = _Common
-  switchCase[depends.fugitive] = _Fugitive
-  switchCase[depends.flutter] = _Flutter
-  switchCase[depends.trouble] = _Trouble
-  switchCase[depends.fzflua] = _FzfLua
-  switchCase[depends.packer] = _Packer
-  switchCase[depends.vfiler] = _VFiler
-  switchCase[depends_arg]()
+M.Floaterm = function()
+  keymap('n', '<Leader>ff', ':FloatermNew<CR>', default_config)
+  debugger.print("setuped floaterm keymap")
 end
 
 return M
