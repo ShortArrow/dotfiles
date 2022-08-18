@@ -1,3 +1,7 @@
+-- ########################################
+-- keymap docs template
+-- name (Origin of this acronym)
+-- ########################################
 local debugger = require('debugger')
 
 local keymap = vim.api.nvim_set_keymap
@@ -55,46 +59,43 @@ end
 
 M.Common = function()
 
-  -- ##########
-  -- lsp keymaps
-  -- ##########
+  -- # lsp keymaps
   -- show variables infomation
   keymap('n', '<Leader>lk', ':lua vim.lsp.buf.hover()<CR>', default_config)
-  -- jump to definition
+  -- jump to definition (Lsp Definition)
   keymap('n', '<Leader>ld', ':lua vim.lsp.buf.definition()<CR>', default_config)
-  -- auto formatting
+  -- auto formatting (Lsp Formatting)
   keymap('n', '<Leader>lf', ':lua vim.lsp.buf.formatting()<CR>', default_config)
-  -- show references
+  -- show references (Lsp References)
   keymap('n', '<Leader>lr', ':lua vim.lsp.buf.references()<CR>', default_config)
-  -- rename
+  -- rename (Lsp Name)
   keymap('n', '<Leader>ln', ':lua vim.lsp.buf.rename()<CR>', default_config)
-  -- code_action
+  -- code_action (Lsp Action)
   keymap('n', '<Leader>la', ':lua vim.lsp.buf.code_action()<CR>', default_config)
 
-  -- ##########
-  -- window keymaps
-  -- ##########
-  -- go to previous window
+  -- # window keymaps
+  -- go to previous window (Window Previous)
   keymap('n', '<Leader>wp', '<C-w>p', default_config)
-  -- right
+  -- right (Window L)
   keymap('n', '<Leader>wl', '<C-w>l', default_config)
-  -- left
+  -- left (Window H)
   keymap('n', '<Leader>wh', '<C-w>h', default_config)
-  -- down
+  -- down (Window J)
   keymap('n', '<Leader>wj', '<C-w>j', default_config)
-  -- up
+  -- up (Window K)
   keymap('n', '<Leader>wk', '<C-w>k', default_config)
 
-  -- ##########
-  -- help keymaps
-  -- ##########
-  -- quickref
+  -- # help keymaps
+  -- quickref (?)
   keymap('n', '<Leader>?', ':h quickref<CR>', default_config)
   debugger.print("setuped common keymap")
 end
 
 M.Floaterm = function()
-  keymap('n', '<Leader>ff', ':FloatermNew<CR>', default_config)
+  -- normal (Floaterm Normal)
+  keymap('n', '<Leader>fn', ':FloatermNew<CR>', default_config)
+  -- lazygit (Floaterm Git)
+  keymap('n', '<Leader>fg', ':FloatermNew lazygit<CR>', default_config)
   debugger.print("setuped floaterm keymap")
 end
 
