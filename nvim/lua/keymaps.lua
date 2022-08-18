@@ -99,4 +99,12 @@ M.Floaterm = function()
   debugger.print("setuped floaterm keymap")
 end
 
+M.LspSaga = function()
+  debugger.print("setuped lspsaga keymap")
+end
+
+if debugger.is_debug then
+  debugger.print('check duplication')
+end
+
 return M

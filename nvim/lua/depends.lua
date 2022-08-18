@@ -9,6 +9,7 @@ local M = {
   packer   = { enable = true, name = 'packer', keymaps = keymaps.Packer },
   vfiler   = { enable = true, name = 'vfiler', keymaps = keymaps.VFiler },
   floaterm = { enable = true, name = 'floaterm', keymaps = keymaps.Floaterm },
+  lspsaga  = { enable = true, name = 'lspsaga', keymaps = keymaps.LspSaga },
 }
 
 return M
