@@ -153,6 +153,17 @@ local function spec(use)
     'weilbith/nvim-code-action-menu',
     cmd = 'CodeActionMenu',
   }
+  use({
+    "glepnir/lspsaga.nvim",
+    branch = "main",
+    config = function()
+      local saga = require("lspsaga")
+
+      saga.init_lsp_saga({
+        -- your configuration
+      })
+    end,
+  })
   -- ################################################
   -- # Auto Complete
   -- ################################################
