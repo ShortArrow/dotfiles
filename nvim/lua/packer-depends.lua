@@ -29,6 +29,7 @@ local function spec(use)
     'wbthomason/packer.nvim',
     opt = true
   }
+  use 'lewis6991/impatient.nvim'
   -- ################################################
   -- # Color
   -- ################################################
