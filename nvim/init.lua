@@ -15,6 +15,7 @@ vim.g.mapleader = " "
 vim.o.pumblend = 5
 
 -- packer from here
+-- https://github.com/wbthomason/dotfiles/tree/linux/neovim/.config/nvim
 function P(...)
   local args = { n = select("#", ...), ... }
   for i = 1, args.n do
