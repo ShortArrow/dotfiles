@@ -41,3 +41,7 @@ alias crontab='crontab -i'
 
 # crontab
 alias foresta='git-foresta --all | less -RSX'
+
+# lazydocker
+alias lzd='$HOME/.local/bin/lazydocker'
+
