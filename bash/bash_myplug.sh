@@ -45,3 +45,6 @@ alias foresta='git-foresta --all | less -RSX'
 # lazydocker
 alias lzd='$HOME/.local/bin/lazydocker'
 
+# lazygit
+alias lg='$HOME/Documents/GitHub/lazygit/main'
+
