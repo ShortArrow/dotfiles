@@ -39,7 +39,7 @@ export CHROME_EXECUTABLE="/usr/bin/chromium"
 # crontab
 alias crontab='crontab -i'
 
-# crontab
+# git-foresta
 alias foresta='git-foresta --all | less -RSX'
 
 # lazydocker

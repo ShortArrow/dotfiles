@@ -60,9 +60,9 @@ M.maps = {
       -- normal (Floaterm Normal)
       { map = '<Leader>fn', cmd = ':FloatermNew<CR>', },
       -- lazygit (Floaterm Git)
-      { map = '<Leader>flg', cmd = ':FloatermNew lazygit<CR>', },
+      { map = '<Leader>flg', cmd = ':FloatermNew lg<CR>', },
       -- lazydocker (Floaterm Docker)
-      { map = '<Leader>flzd', cmd = ':FloatermNew lazydocker<CR>', },
+      { map = '<Leader>flzd', cmd = ':FloatermNew lzd<CR>', },
     },
   },
   lspsaga = {
