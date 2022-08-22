@@ -161,11 +161,16 @@ local function spec(use)
     'weilbith/nvim-code-action-menu',
     cmd = 'CodeActionMenu',
   }
-  use({
+  use{
     "glepnir/lspsaga.nvim",
     branch = "main",
     config = get_config('_lsp_saga').setup,
-  })
+  }
+  use{
+    "jose-elias-alvarez/null-ls.nvim",
+    requires = {'nvim-lua/plenary.nvim'},
+    config = get_config('_null_ls').setup,
+  }
   -- ################################################
   -- # Auto Complete
   -- ################################################
