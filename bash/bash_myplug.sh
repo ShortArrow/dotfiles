@@ -5,6 +5,9 @@ alias ll.='ls -al --color=tty'
 alias ls='ls --color=tty'
 alias ls.='ls -a --color=tty'
 
+# ignore case on completion
+bind 'set completion-ignore-case on'
+
 # mosh
 export LANG='en_US.UTF8'
 export LC_CTYPE='en_US.UTF8'
