@@ -70,6 +70,8 @@ M.maps = {
     maps = {
       -- rename (Lsp Name)
       { map = '<Leader>ln', cmd = ':Lspsaga rename<CR>', },
+      -- code_action (Lsp Action)
+      { map = '<Leader>la', cmd = ':Lspsaga code_action<CR>', },
     },
   },
   common = {
@@ -87,7 +89,7 @@ M.maps = {
       -- rename (Lsp Name)
       -- { map = '<Leader>ln', cmd = ':lua vim.lsp.buf.rename()<CR>', },
       -- code_action (Lsp Action)
-      { map = '<Leader>la', cmd = ':lua vim.lsp.buf.code_action()<CR>', },
+      -- { map = '<Leader>la', cmd = ':lua vim.lsp.buf.code_action()<CR>', },
 
       -- # window keymaps
       -- go to previous window (Window Previous)
