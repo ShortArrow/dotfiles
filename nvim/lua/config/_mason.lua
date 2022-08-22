@@ -67,6 +67,16 @@ M.setup = function()
         _opts.on_attach = function(signature_setup, bufnr)
           _lsp_sig.on_attach(signature_setup, bufnr)
         end
+      elseif server_name == "dockerls" then
+        _opts.capabilities = capabilities
+        _opts.on_attach = function(signature_setup, bufnr)
+          _lsp_sig.on_attach(signature_setup, bufnr)
+        end
+      elseif server_name == "dockerls" then
+        _opts.capabilities = capabilities
+        _opts.on_attach = function(signature_setup, bufnr)
+          _lsp_sig.on_attach(signature_setup, bufnr)
+        end
       end
       _nvim_lsp[server_name].setup(_opts)
     end
