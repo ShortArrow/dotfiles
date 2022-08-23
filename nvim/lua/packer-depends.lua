@@ -166,11 +166,11 @@ local function spec(use)
     branch = "main",
     config = get_config('_lsp_saga').setup,
   }
-  use{
-    "jose-elias-alvarez/null-ls.nvim",
-    requires = {'nvim-lua/plenary.nvim'},
-    config = get_config('_null_ls').setup,
-  }
+  -- use{
+  --   "jose-elias-alvarez/null-ls.nvim",
+  --   requires = {'nvim-lua/plenary.nvim'},
+  --   config = get_config('_null_ls').setup,
+  -- }
   -- ################################################
   -- # Auto Complete
   -- ################################################
