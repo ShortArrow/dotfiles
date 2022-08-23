@@ -5,6 +5,9 @@ alias ll.='ls -al --color=tty'
 alias ls='ls --color=tty'
 alias ls.='ls -a --color=tty'
 
+# sudo refresher
+alias sudo='sudo -v; sudo'
+
 # ignore case on completion
 bind 'set completion-ignore-case on'
 
