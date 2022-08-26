@@ -56,3 +56,7 @@ alias lazydocker='$HOME/.local/bin/lazydocker'
 alias lg='$HOME/Documents/GitHub/lazygit/main'
 alias lazygit='$HOME/Documents/GitHub/lazygit/main'
 
+# japanese
+export GTK_IM_MODULE=ibus
+export T_IM_MODULE=ibus
+export MODIFIERS=@im=ibus
