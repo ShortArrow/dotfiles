@@ -9,6 +9,8 @@ Make Junction.
 ```powershell
 Remove-Item ./nvim/ -Recurse -Force
 New-Item -Type SymbolicLink -Path "$env:LOCALAPPDATA" -Name "nvim" -Value "$env:USERPROFILE/Documents/GitHub/dotfiles/nvim"
+Get-ChildItem -Path $env:LOCALAPPDATA -Force -ErrorAction 'silentlycontinue' |
+Where-Object { $_.Attributes -match "ReparsePoint" -and $_.Name -match "nvim"}
 ```
 
 ### Linux
