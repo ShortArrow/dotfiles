@@ -55,7 +55,8 @@ configration of @ShortArrow
 ## Important Infomation Source
 
 [Docs of nvim lsp](https://nvim-lsp.github.io/)
+[color](https://www.pandanoir.info/entry/2019/11/02/202146)
 
-# Road Map
+## Road Map
 
 - Add [mason.nvim](https://github.com/williamboman/mason-lspconfig.nvim)
