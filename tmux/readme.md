@@ -35,6 +35,14 @@ For load the settings, restart tmux session, or run command as bellow in current
 source ~/.tmux.conf
 ```
 
+## Reload config
+
+Way reload `tmux_myplug.sh` on keep tmux is alive.
+
+```
+source ~/.tmux.conf
+```
+
 ## Dependencies
 
 - [iceberg fork by ShortArrow](https://github.com/ShortArrow/iceberg-dark)
