@@ -1,94 +1,183 @@
-local depends = require('depends')
+-- ########################################
+-- keymap docs template
+-- name (Origin of this acronym)
+-- ########################################
 local debugger = require('debugger')
 
 local keymap = vim.api.nvim_set_keymap
-local default_config = { noremap = true, silent = false }
 
 local M = {}
 
-local function _Fugitive()
-  keymap('n', '<Leader>ga', ':Git add .<CR>', default_config)
-  keymap('n', '<Leader>gb', ':Git blame<CR>', default_config)
-  keymap('n', '<Leader>gc', ':Git commit -m ', default_config)
-  keymap('n', '<Leader>gd', ':Gvdiffsplit<CR>', default_config)
-  keymap('n', '<Leader>gll', ':Gllog<CR>', default_config)
-  keymap('n', '<Leader>glc', ':Gclog<CR>', default_config)
-  keymap('n', '<Leader>gp', ':Git push<CR>', default_config)
-  keymap('n', '<Leader>gs', ':Git status<CR>', default_config)
-  -- nnoremap <leader>ga :Git add %:p<CR><CR>
-  -- nnoremap <leader>gc :Gcommit<CR><CR>
-  -- nnoremap <leader>gs :Gstatus<CR>
-  -- nnoremap <leader>gp :Gpush<CR>
-  -- nnoremap <leader>gd :Gdiff<CR>
-  -- nnoremap <leader>gl :Glog<CR>
-  -- nnoremap <leader>gb :Gblame<CR>
-  debugger.print("setuped fugitive keymap")
+M.maps = {
+  fugitive = {
+    name = 'fugitive',
+    maps = {
+      { map = '<Leader>ga', cmd = 'keymap', },
+      { map = '<Leader>ga', cmd = ':Git add .<CR>', },
+      { map = '<Leader>gb', cmd = ':Git blame<CR>', },
+      { map = '<Leader>gc', cmd = ':Git commit -m ', },
+      { map = '<Leader>gd', cmd = ':Gvdiffsplit<CR>', },
+      { map = '<Leader>gll', cmd = ':Gllog<CR>', },
+      { map = '<Leader>glc', cmd = ':Gclog<CR>', },
+      { map = '<Leader>gp', cmd = ':Git push<CR>', },
+      { map = '<Leader>gs', cmd = ':Git status<CR>', },
+    },
+  },
+  flutter = {
+    name = 'flutter',
+    maps = {
+      { map = '<Leader>fr', cmd = ':FlutterRun -d web-server<CR>', },
+      { map = '<Leader>fc', cmd = ':lua require("telescope").extensions.flutter.commands()<CR>', },
+    },
+  },
+  trouble = {
+    name = 'trouble',
+    maps = {
+      { map = '<Leader>tt', cmd = ':TroubleToggle<CR>', },
+    },
+  },
+  fzflua = {
+    name = 'fzflua',
+    maps = {
+      { map = '<Leader>zf', cmd = ':FzfLua files<CR>', },
+    },
+  },
+  packer = {
+    name = 'packer',
+    maps = {
+      { map = '<Leader>ps', cmd = ':lua require("packer").sync()<CR>', },
+    },
+  },
+  vfiler = {
+    name = 'vfiler',
+    maps = {
+      { map = '<Leader>vf', cmd = ':VFiler<CR>', },
+    },
+  },
+  floaterm = {
+    name = 'floaterm',
+    maps = {
+      -- normal (Floaterm Normal)
+      { map = '<Leader>fn', cmd = ':FloatermNew<CR>', },
+      -- lazygit (Floaterm Git)
+      { map = '<Leader>flg', cmd = ':FloatermNew lg<CR>', },
+      -- lazydocker (Floaterm Docker)
+      { map = '<Leader>flzd', cmd = ':FloatermNew lzd<CR>', },
+    },
+  },
+  lspsaga = {
+    name = 'lspsaga',
+    maps = {
+      -- rename (Lsp Name)
+      { map = '<Leader>ln', cmd = ':Lspsaga rename<CR>', },
+      -- code_action (Lsp Action)
+      { map = '<Leader>la', cmd = ':Lspsaga code_action<CR>', },
+    },
+  },
+  common = {
+    name = 'common',
+    maps = {
+      -- # lsp keymaps
+      -- show variables infomation
+      { map = '<Leader>lk', cmd = ':lua vim.lsp.buf.hover()<CR>', },
+      -- jump to definition (Lsp Definition)
+      { map = '<Leader>ld', cmd = ':lua vim.lsp.buf.definition()<CR>', },
+      -- auto formatting (Lsp Formatting)
+      { map = '<Leader>lf', cmd = ':lua vim.lsp.buf.formatting()<CR>', },
+      -- show references (Lsp References)
+      { map = '<Leader>lr', cmd = ':lua vim.lsp.buf.references()<CR>', },
+      -- rename (Lsp Name)
+      -- { map = '<Leader>ln', cmd = ':lua vim.lsp.buf.rename()<CR>', },
+      -- code_action (Lsp Action)
+      -- { map = '<Leader>la', cmd = ':lua vim.lsp.buf.code_action()<CR>', },
+
+      -- # window keymaps
+      -- go to previous window (Window Previous)
+      { map = '<Leader>wp', cmd = '<C-w>p', },
+      -- right (Window L)
+      { map = '<Leader>wl', cmd = '<C-w>l', },
+      -- left (Window H)
+      { map = '<Leader>wh', cmd = '<C-w>h', },
+      -- down (Window J)
+      { map = '<Leader>wj', cmd = '<C-w>j', },
+      -- up (Window K)
+      { map = '<Leader>wk', cmd = '<C-w>k', },
+
+      -- # help keymaps
+      -- quickref (?)
+      { map = '<Leader>?', cmd = ':h quickref<CR>', },
+    },
+  },
+}
+
+local merge_default = function(map)
+  local default_config = { noremap = true, silent = false }
+  -- if not has opt specified, map has no remap and no silent.
+  map.opt = map.opt or default_config
+  -- if not has mode specified, map has define for nomal mode.
+  map.mode = map.mode or 'n'
+  return map
 end
 
-local function _Flutter()
-  keymap('n', '<Leader>fr', ':FlutterRun -d web-server<CR>',
-    default_config)
-  keymap('n', '<Leader>fc',
-    [[<Cmd>lua require('telescope').extensions.flutter.commands()<CR>]],
-    default_config)
-  debugger.print("setuped flutter keymap")
+local set_map = function(map)
+  map = merge_default(map)
+  keymap(
+    tostring(map.mode),
+    tostring(map.map),
+    tostring(map.cmd),
+    map.opt
+  )
 end
 
-local function _Trouble()
-  keymap('n', '<Leader>tt', ':TroubleToggle<CR>', default_config)
-  debugger.print("setuped trouble keymap")
+local set_maps = function(maps)
+  for _, map in pairs(maps) do
+    set_map(map)
+  end
 end
 
-local function _FzfLua()
-  keymap('n', '<Leader>zf', ':FzfLua files<CR>', default_config)
-  debugger.print("setuped fzflua keymap")
+local common = function(pack)
+  set_maps(pack.maps)
+  debugger.print("load keymaps of " .. pack.name)
 end
 
-local function _Packer()
-  keymap('n', '<Leader>ps', ':PackerSync<CR>', default_config)
-  debugger.print("setuped packer keymap")
+M.Fugitive = function()
+  common(M.maps.fugitive)
 end
 
-local function _VFiler()
-  keymap('n', '<Leader>vf', ':VFiler<CR>', default_config)
-  debugger.print("setuped vfiler keymap")
+M.Flutter = function()
+  common(M.maps.flutter)
 end
 
-local function _Common()
-  -- show variables infomation
-  keymap('n', '<Leader>lk', ':lua vim.lsp.buf.hover()<CR>', default_config)
-  -- jump to definition
-  keymap('n', '<Leader>ld', ':lua vim.lsp.buf.definition()<CR>', default_config)
-  -- auto formatting
-  keymap('n', '<Leader>lf', ':lua vim.lsp.buf.formatting()<CR>', default_config)
-  -- show references
-  keymap('n', '<Leader>lr', ':lua vim.lsp.buf.references()<CR>', default_config)
-  -- rename
-  keymap('n', '<Leader>ln', ':lua vim.lsp.buf.rename()<CR>', default_config)
-  -- code_action
-  keymap('n', '<Leader>la', ':lua vim.lsp.buf.code_action()<CR>', default_config)
-  -- right
-  keymap('n', '<Leader>wl', '<C-w>l', default_config)
-  -- left
-  keymap('n', '<Leader>wh', '<C-w>h', default_config)
-  -- down
-  keymap('n', '<Leader>wj', '<C-w>j', default_config)
-  -- up
-  keymap('n', '<Leader>wk', '<C-w>k', default_config)
-  debugger.print("setuped common keymap")
+M.Trouble = function()
+  common(M.maps.trouble)
 end
 
-M.setup = function(depends_arg)
-  -- like switch case
-  local switchCase = {}
-  switchCase[depends.common] = _Common
-  switchCase[depends.fugitive] = _Fugitive
-  switchCase[depends.flutter] = _Flutter
-  switchCase[depends.trouble] = _Trouble
-  switchCase[depends.fzflua] = _FzfLua
-  switchCase[depends.packer] = _Packer
-  switchCase[depends.vfiler] = _VFiler
-  switchCase[depends_arg]()
+M.FzfLua = function()
+  common(M.maps.fzflua)
+end
+
+M.Packer = function()
+  common(M.maps.packer)
+end
+
+M.VFiler = function()
+  common(M.maps.vfiler)
+end
+
+M.Common = function()
+  common(M.maps.common)
+end
+
+M.Floaterm = function()
+  common(M.maps.floaterm)
+end
+
+M.LspSaga = function()
+  common(M.maps.lspsaga)
+end
+
+if debugger.is_debug then
+  debugger.print('check duplication')
 end
 
 return M

@@ -6,7 +6,7 @@ M.setup = function()
   local _vfiler_config = require('vfiler/config')
   _vfiler_config.setup {
     options = {
-      name = 'myfiler',
+      name = 'vfiler',
       auto_cd = true,
       auto_resize = true,
       keep = true,
@@ -33,11 +33,9 @@ M.setup = function()
   _vfiler_action.setup {
     hook = {},
   }
-  _vfiler.start('./')
+  require('vfiler/columns/indent').setup {
+    icon = ''
+  }
 end
-
-require('vfiler/columns/indent').setup {
-  icon = ''
-}
 
 return M

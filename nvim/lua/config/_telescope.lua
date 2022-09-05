@@ -3,10 +3,10 @@ local M = {}
 M.setup = function()
   local telescope = require('telescope')
   local actions = require('telescope.actions')
-  local actions_set = require('telescope.actions.set')
-  local themes = require('telescope.themes')
+  -- local actions_set = require('telescope.actions.set')
+  -- local themes = require('telescope.themes')
   -- local trouble = require('trouble.providers.telescope')
-  telescope.setup{
+  telescope.setup {
     defaults = {
       layout = 'horizontal',
       winblend = 20,
@@ -28,7 +28,7 @@ M.setup = function()
           -- ['<C-t>'] = trouble.open_with_trouble,
         },
         n = {
-        --  ["<C-t>"] = trouble.open_with_trouble,
+          --  ["<C-t>"] = trouble.open_with_trouble,
         },
       },
       layout_config = {
