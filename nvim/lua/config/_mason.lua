@@ -1,7 +1,7 @@
 local M = {}
 M.start = function()
   local _mason = require('mason')
-  _mason.setup{
+  _mason.setup {
     ui = {
       icons = {
         package_installed = "✓",
@@ -47,10 +47,50 @@ M.setup = function()
             },
           }
         }
+      elseif server_name == "bashls" then
+        _opts.capabilities = capabilities
+        _opts.on_attach = function(signature_setup, bufnr)
+          _lsp_sig.on_attach(signature_setup, bufnr)
+        end
+      elseif server_name == "marksman" then
+        _opts.capabilities = capabilities
+        _opts.on_attach = function(signature_setup, bufnr)
+          _lsp_sig.on_attach(signature_setup, bufnr)
+          -- ltex (latex)
+          -- marksman (markdown)
+          -- prosemd_lsp (markdown)
+          -- remark_ls (markdown)
+          -- zk (markdown)
+        end
+      elseif server_name == "yamlls" then
+        _opts.capabilities = capabilities
+        _opts.on_attach = function(signature_setup, bufnr)
+          _lsp_sig.on_attach(signature_setup, bufnr)
+        end
+      elseif server_name == "dockerls" then
+        _opts.capabilities = capabilities
+        _opts.on_attach = function(signature_setup, bufnr)
+          _lsp_sig.on_attach(signature_setup, bufnr)
+        end
+      elseif server_name == "dockerls" then
+        _opts.capabilities = capabilities
+        _opts.on_attach = function(signature_setup, bufnr)
+          _lsp_sig.on_attach(signature_setup, bufnr)
+        end
+      elseif server_name == "jsonls" then
+        _opts.capabilities = capabilities
+        _opts.on_attach = function(signature_setup, bufnr)
+          _lsp_sig.on_attach(signature_setup, bufnr)
+        end
+      elseif server_name == "tsserver" then
+        _opts.capabilities = capabilities
+        _opts.on_attach = function(signature_setup, bufnr)
+          _lsp_sig.on_attach(signature_setup, bufnr)
+        end
       end
       _nvim_lsp[server_name].setup(_opts)
     end
   })
 end
 
- return M
+return M

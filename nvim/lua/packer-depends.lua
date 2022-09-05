@@ -1,23 +1,38 @@
-vim.cmd[[packadd packer.nvim]]
+local install_path = ("%s/site/pack/packer-lib/opt/packer.nvim"):format(vim.fn.stdpath "data")
 
-local _packer = require('packer')
-local use = _packer.use
-
-local function get_config(name)
-	return require(string.format('config/%s', name))
+local function install_packer()
+  vim.fn.termopen(("git clone https://github.com/wbthomason/packer.nvim %q"):format(install_path))
 end
 
-return _packer.startup(function()
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+  install_packer()
+end
+
+vim.cmd [[packadd packer.nvim]]
+
+function _G.packer_upgrade()
+  vim.fn.delete(install_path, "rf")
+  install_packer()
+end
+
+vim.cmd [[command! PackerUpgrade :call v:lua.packer_upgrade()]]
+
+local _packer = require('packer')
+
+local function get_config(name)
+  return require(string.format('config/%s', name))
+end
+
+local function spec(use)
   -- self manage
-  use {
-    'wbthomason/packer.nvim',
-    opt = true
-  }
+  use 'wbthomason/packer.nvim'
+  use 'lewis6991/impatient.nvim'
   -- ################################################
   -- # Color
   -- ################################################
   use {
     'folke/tokyonight.nvim',
+    before = { 'obaland/vfiler.vim' },
     config = get_config('_tokyonight').setup
   }
   -- ################################################
@@ -25,14 +40,14 @@ return _packer.startup(function()
   -- ################################################
   use {
     'yamatsum/nvim-nonicons',
-    requires = {'kyazdani42/nvim-web-devicons'}
+    requires = { 'kyazdani42/nvim-web-devicons' }
   }
   -- ################################################
   -- # Explorer
   -- ################################################
   use {
     'obaland/vfiler.vim',
-    requires = {'obaland/vfiler-column-devicons', 'kyazdani42/nvim-web-devicons', 'ryanoasis/vim-devicons'},
+    requires = { 'obaland/vfiler-column-devicons', 'kyazdani42/nvim-web-devicons' },
     config = get_config('_vfiler').setup
   }
   use {
@@ -48,6 +63,14 @@ return _packer.startup(function()
     config = get_config('_feline').setup
   }
   use 'b0o/incline.nvim'
+  use {
+    'akinsho/bufferline.nvim',
+    tag = "v2.*",
+    requires = {
+      'kyazdani42/nvim-web-devicons'
+    },
+    config = get_config('_buffer_line').setup
+  }
   -- ################################################
   -- # Trouble
   -- ################################################
@@ -61,15 +84,16 @@ return _packer.startup(function()
   -- ################################################
   use {
     'nvim-telescope/telescope.nvim',
-    requires = {'folke/trouble.nvim', 'nvim-lua/plenary.nvim', 'akinsho/flutter-tools.nvim'},
+    requires = { 'folke/trouble.nvim', 'nvim-lua/plenary.nvim', 'akinsho/flutter-tools.nvim' },
     config = get_config('_telescope').setup
   }
+  use 'voldikss/vim-floaterm'
   -- ################################################
   -- # Flutter
   -- ################################################
   use {
     'akinsho/flutter-tools.nvim',
-    requires = {'nvim-lua/plenary.nvim'},
+    requires = { 'nvim-lua/plenary.nvim' },
     config = get_config('_flutter').setup
   }
   use 'mfussenegger/nvim-dap'
@@ -80,7 +104,7 @@ return _packer.startup(function()
   use 'natebosch/vim-lsc'
   use 'natebosch/vim-lsc-dart'
   use 'jiangmiao/auto-pairs'
-  use  {'lervag/vimtex', opt = true}      -- Use braces when passing options
+  use { 'lervag/vimtex', opt = true } -- Use braces when passing options
   -- ################################################
   -- # Lua
   -- ################################################
@@ -137,6 +161,16 @@ return _packer.startup(function()
     'weilbith/nvim-code-action-menu',
     cmd = 'CodeActionMenu',
   }
+  use{
+    "glepnir/lspsaga.nvim",
+    branch = "main",
+    config = get_config('_lsp_saga').setup,
+  }
+  -- use{
+  --   "jose-elias-alvarez/null-ls.nvim",
+  --   requires = {'nvim-lua/plenary.nvim'},
+  --   config = get_config('_null_ls').setup,
+  -- }
   -- ################################################
   -- # Auto Complete
   -- ################################################
@@ -179,5 +213,14 @@ return _packer.startup(function()
   --    requires = 'hrsh7th/nvim-cmp'
   -- }
   use 'hrsh7th/vim-vsnip-integ'
-end)
+end
 
+_packer.startup {
+  spec,
+  config = {
+    display = {
+      open_fn = require("packer.util").float,
+    },
+    max_jobs = vim.fn.has "win32" == 1 and 5 or nil,
+  },
+}

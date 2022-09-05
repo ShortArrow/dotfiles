@@ -7,9 +7,10 @@
 Make Junction.
 
 ```powershell
-# If you need backup, run `cp $env:USERPROFILE/.config/nvim $env:USERPROFILE/.config/nvim.backup`
-rm ./nvim/ -recuse -force
-New-Item -Type Junction -Name ./nvim/ -Value $env:USERPROFILE\AppData\Local\nvim\
+Remove-Item ./nvim/ -Recurse -Force
+New-Item -Type SymbolicLink -Path "$env:LOCALAPPDATA" -Name "nvim" -Value "$env:USERPROFILE/Documents/GitHub/dotfiles/nvim"
+Get-ChildItem -Path $env:LOCALAPPDATA -Force -ErrorAction 'silentlycontinue' |
+Where-Object { $_.Attributes -match "ReparsePoint" -and $_.Name -match "nvim"}
 ```
 
 ### Linux
@@ -17,10 +18,6 @@ New-Item -Type Junction -Name ./nvim/ -Value $env:USERPROFILE\AppData\Local\nvim
 Make SymbolicLink
 
 ```bash
-mkdir $HOME/Documents/GitHub/
-git clone https://github.com/ShortArrow/dotfiles.git $HOME/Documents/GitHub/dotfiles
-cd $HOME/Documents/GitHub/dotfiles
-# If you need backup, run `cp ~/.config/nvim ~/.config/nvim.backup`
 rm -rf ~/.config/nvim
 ln -s $HOME/Documents/GitHub/dotfiles/nvim ~/.config/nvim # caution! Don't needs slash at last.
 ls ~/.config/nvim # check link
@@ -30,7 +27,18 @@ ls ~/.config/nvim # check link
 
 https://github.com/wbthomason/packer.nvim/blob/master/README.md#quickstart
 
-run ExCommand`:PackerInstall` on nvim command mode.
+### win
+
+```
+git clone https://github.com/wbthomason/packer.nvim "$env:LOCALAPPDATA\nvim-data\site\pack\packer\start\packer.nvim"
+```
+
+### Linux
+
+```
+git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+```
 
 ## Install Nerd fonts
 

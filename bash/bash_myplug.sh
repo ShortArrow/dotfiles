@@ -5,6 +5,12 @@ alias ll.='ls -al --color=tty'
 alias ls='ls --color=tty'
 alias ls.='ls -a --color=tty'
 
+# sudo refresher
+alias sudo='sudo -v; sudo'
+
+# ignore case on completion
+bind 'set completion-ignore-case on'
+
 # mosh
 export LANG='en_US.UTF8'
 export LC_CTYPE='en_US.UTF8'
@@ -39,5 +45,18 @@ export CHROME_EXECUTABLE="/usr/bin/chromium"
 # crontab
 alias crontab='crontab -i'
 
-# crontab
+# git-foresta
 alias foresta='git-foresta --all | less -RSX'
+
+# lazydocker
+alias lzd='$HOME/.local/bin/lazydocker'
+alias lazydocker='$HOME/.local/bin/lazydocker'
+
+# lazygit
+alias lg='$HOME/Documents/GitHub/lazygit/main'
+alias lazygit='$HOME/Documents/GitHub/lazygit/main'
+
+# japanese
+export GTK_IM_MODULE=ibus
+export T_IM_MODULE=ibus
+export MODIFIERS=@im=ibus
