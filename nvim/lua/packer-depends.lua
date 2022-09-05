@@ -38,10 +38,10 @@ local function spec(use)
   -- ################################################
   -- # Fonts
   -- ################################################
-  use {
-    'yamatsum/nvim-nonicons',
-    requires = { 'kyazdani42/nvim-web-devicons' }
-  }
+  -- use {
+  --  'yamatsum/nvim-nonicons',
+  --  requires = { 'kyazdani42/nvim-web-devicons' }
+  --}
   -- ################################################
   -- # Explorer
   -- ################################################
