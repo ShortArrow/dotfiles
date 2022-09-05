@@ -1,5 +1,12 @@
 # my tmux config 
 
+<!--toc:start-->
+- [my tmux config](#my-tmux-config)
+  - [Usage](#usage)
+  - [Reload config](#reload-config)
+  - [Dependencies](#dependencies)
+<!--toc:end-->
+
 ## Usage
 
 1. Clone this repository.
