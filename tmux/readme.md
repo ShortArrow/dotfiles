@@ -1,5 +1,12 @@
 # my tmux config 
 
+<!--toc:start-->
+- [my tmux config](#my-tmux-config)
+  - [Usage](#usage)
+  - [Reload config](#reload-config)
+  - [Dependencies](#dependencies)
+<!--toc:end-->
+
 ## Usage
 
 1. Clone this repository.
@@ -32,6 +39,14 @@ source ~/.tmux_myplug
 For load the settings, restart tmux session, or run command as bellow in current tmux session after `<C-b>:`.
 
 ```bash
+source ~/.tmux.conf
+```
+
+## Reload config
+
+Way reload `tmux_myplug.sh` on keep tmux is alive.
+
+```
 source ~/.tmux.conf
 ```
 
