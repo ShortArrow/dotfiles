@@ -12,3 +12,9 @@ set-window-option -g mode-keys vi
 
 set-option -sg escape-time 10
 set-option -g focus-events on
+
+# key bind of window switching
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R

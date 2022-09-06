@@ -103,6 +103,12 @@ M.maps = {
       -- up (Window K)
       { map = '<Leader>wk', cmd = '<C-w>k', },
 
+      -- # buffer keymaps
+      -- go to previous buffer (Buffer Previous)
+      { map = '<Leader>bp', cmd = ':bprevious<CR>', },
+      -- go to next buffer (Buffer Next)
+      { map = '<Leader>bn', cmd = ':bnext<CR>', },
+
       -- # help keymaps
       -- quickref (?)
       { map = '<Leader>?', cmd = ':h quickref<CR>', },
