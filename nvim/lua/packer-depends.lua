@@ -38,10 +38,10 @@ local function spec(use)
   -- ################################################
   -- # Fonts
   -- ################################################
-  use {
-    'yamatsum/nvim-nonicons',
-    requires = { 'kyazdani42/nvim-web-devicons' }
-  }
+  -- use {
+  --  'yamatsum/nvim-nonicons',
+  --  requires = { 'kyazdani42/nvim-web-devicons' }
+  --}
   -- ################################################
   -- # Explorer
   -- ################################################
@@ -53,7 +53,8 @@ local function spec(use)
   use {
     'ibhagwan/fzf-lua',
     -- optional for icon support
-    requires = { 'kyazdani42/nvim-web-devicons' }
+    requires = { 'kyazdani42/nvim-web-devicons' },
+    config = get_config('_fzflua').setup
   }
   -- ################################################
   -- # Status line
