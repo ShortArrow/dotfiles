@@ -1,12 +1,11 @@
-local is_debug = true
+local M = {}
 
-local M = {
-  print = function(message)
-    if is_debug then
-      print(message)
-    end
-  end,
-  is_debug = is_debug,
-}
+M.is_debug = true
+
+M.print = function(message)
+  if M.is_debug then
+    print(message)
+  end
+end
 
 return M
