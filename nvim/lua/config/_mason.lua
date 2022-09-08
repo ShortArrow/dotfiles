@@ -25,11 +25,10 @@ M.setup = function()
       if server_name == "sumneko_lua" then
         -- https://github.com/folke/lua-dev.nvim/blob/main/lua/lua-dev/sumneko.lua
         -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
-        local path = { "?.lua", "?/init.lua" }
         _opts.capabilities = capabilities
         _opts.on_attach = function(signature_setup, bufnr)
-          local _bufopts = { silent = true, buffer = bufnr }
           _lsp_sig.on_attach(signature_setup, bufnr)
+          -- local _bufopts = { silent = true, buffer = bufnr }
           -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, _bufopts)
           -- vim.keymap.set('n', 'gtD', vim.lsp.buf.type_definition, _bufopts)
           -- vim.keymap.set('n', 'grf', vim.lsp.buf.references, _bufopts)
@@ -43,7 +42,7 @@ M.setup = function()
             telemetry = { enable = false },
             runtime = {
               version = "LuaJIT",
-              path = path,
+              path = { "?.lua", "?/init.lua" },
             },
           }
         }
@@ -52,6 +51,23 @@ M.setup = function()
         _opts.on_attach = function(signature_setup, bufnr)
           _lsp_sig.on_attach(signature_setup, bufnr)
         end
+      elseif server_name == "intelephense" then
+        _opts.capabilities = capabilities
+        _opts.on_attach = function(signature_setup, bufnr)
+          _lsp_sig.on_attach(signature_setup, bufnr)
+        end
+        _opts.settings = {
+          intelephense = {
+            files = {
+              maxSize = 1000000,
+            },
+            environment = {
+              includePaths = {
+                "./",
+              }
+            }
+          }
+        }
       elseif server_name == "marksman" then
         _opts.capabilities = capabilities
         _opts.on_attach = function(signature_setup, bufnr)
