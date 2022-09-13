@@ -1,4 +1,4 @@
-local debugger = require('debugger')
+local debugger = require('my/debugger')
 
 local M = {}
 
