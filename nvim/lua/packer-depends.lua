@@ -1,4 +1,4 @@
-local api = require('myapi')
+local api = require('my/api')
 local install_path = ("%s/site/pack/packer-lib/opt/packer.nvim"):format(vim.fn.stdpath "data")
 
 local function install_packer()

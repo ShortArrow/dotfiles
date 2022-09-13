@@ -1,5 +1,6 @@
 local ok, null_ls = pcall(require, "null-ls")
-local debugger = require('debugger')
+local api = require('my/api')
+local debugger = api.debugger
 if not ok then
   debugger.print('null-ls is null')
   return
