@@ -32,7 +32,6 @@ local function spec(use)
   -- ################################################
   use {
     'folke/tokyonight.nvim',
-    before = { 'obaland/vfiler.vim' },
     config = get_config('_tokyonight').setup
   }
   -- ################################################
@@ -54,7 +53,14 @@ local function spec(use)
     'ibhagwan/fzf-lua',
     -- optional for icon support
     requires = { 'kyazdani42/nvim-web-devicons' },
-    config = get_config('_fzflua').setup
+    config = get_config('_fzflua').setup,
+    disable = function()
+      if vim.loop.os_uname().sysname == "Windows_NT" then 
+        return false
+      else
+        return true
+      end
+    end,
   }
   -- ################################################
   -- # Status line
