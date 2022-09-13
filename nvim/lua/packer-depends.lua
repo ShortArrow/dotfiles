@@ -1,3 +1,4 @@
+local api = require('myapi')
 local install_path = ("%s/site/pack/packer-lib/opt/packer.nvim"):format(vim.fn.stdpath "data")
 
 local function install_packer()
@@ -55,7 +56,7 @@ local function spec(use)
     -- optional for icon support
     requires = { 'kyazdani42/nvim-web-devicons' },
     config = get_config('_fzflua').setup,
-    disable = vim.loop.os_uname().sysname == "Windows_NT"
+    disable = api.env.is_win_os(),
   }
   use {
     'amirrezaask/fuzzy.nvim',
