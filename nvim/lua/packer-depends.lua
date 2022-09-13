@@ -27,6 +27,7 @@ local function spec(use)
   -- self manage
   use 'wbthomason/packer.nvim'
   use 'lewis6991/impatient.nvim'
+  use 'nvim-lua/plenary.nvim'
   -- ################################################
   -- # Color
   -- ################################################
@@ -54,19 +55,20 @@ local function spec(use)
     -- optional for icon support
     requires = { 'kyazdani42/nvim-web-devicons' },
     config = get_config('_fzflua').setup,
-    disable = function()
-      if vim.loop.os_uname().sysname == "Windows_NT" then 
-        return false
-      else
-        return true
-      end
-    end,
+    disable = vim.loop.os_uname().sysname == "Windows_NT"
+  }
+  use {
+    'amirrezaask/fuzzy.nvim',
+    requires={'nvim-lua/plenary.nvim'},
+    config = get_config('_fuzzy').setup,
+    disable = true,
   }
   -- ################################################
   -- # Status line
   -- ################################################
   use {
     'feline-nvim/feline.nvim',
+    require = {'nvim-lua/plenary.nvim','lewis6991/gitsigns.nvim'},
     config = get_config('_feline').setup
   }
   use 'b0o/incline.nvim'
@@ -199,7 +201,10 @@ local function spec(use)
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-cmdline'
+  use {
+    'hrsh7th/cmp-cmdline',
+    config = get_config('_cmp_cli').setup,
+  }
   -- For vsnip users.
   use 'hrsh7th/cmp-vsnip'
   use 'hrsh7th/vim-vsnip'
