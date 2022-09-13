@@ -2,9 +2,9 @@
 
 ## Usage
 
-### Windows
+Make SymbolicLink.
 
-Make Junction.
+### Windows
 
 ```powershell
 Remove-Item ./nvim/ -Recurse -Force
@@ -14,8 +14,6 @@ Where-Object { $_.Attributes -match "ReparsePoint" -and $_.Name -match "nvim"}
 ```
 
 ### Linux
-
-Make SymbolicLink
 
 ```bash
 rm -rf ~/.config/nvim

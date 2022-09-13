@@ -2,7 +2,7 @@ local M = {}
 
 M.setup = function()
   local telescope = require('telescope')
-  local actions = require('telescope.actions')
+  local actions = require("telescope.actions")
   -- local actions_set = require('telescope.actions.set')
   -- local themes = require('telescope.themes')
   -- local trouble = require('trouble.providers.telescope')
