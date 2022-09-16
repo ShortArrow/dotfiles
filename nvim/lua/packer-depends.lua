@@ -60,7 +60,7 @@ local function spec(use)
   }
   use {
     'amirrezaask/fuzzy.nvim',
-    requires={'nvim-lua/plenary.nvim'},
+    requires = { 'nvim-lua/plenary.nvim' },
     config = get_config('_fuzzy').setup,
     disable = true,
   }
@@ -69,7 +69,7 @@ local function spec(use)
   -- ################################################
   use {
     'feline-nvim/feline.nvim',
-    require = {'nvim-lua/plenary.nvim','lewis6991/gitsigns.nvim'},
+    require = { 'nvim-lua/plenary.nvim', 'lewis6991/gitsigns.nvim' },
     config = get_config('_feline').setup
   }
   use 'b0o/incline.nvim'
@@ -98,6 +98,11 @@ local function spec(use)
     config = get_config('_telescope').setup
   }
   use 'voldikss/vim-floaterm'
+  use {
+    'kevinhwang91/nvim-ufo',
+    requires = 'kevinhwang91/promise-async',
+    config = get_config('_ufo').setup
+  }
   -- ################################################
   -- # Flutter
   -- ################################################
@@ -156,6 +161,7 @@ local function spec(use)
       'ray-x/lsp_signature.nvim',
       'hrsh7th/cmp-nvim-lsp',
       'onsails/lspkind.nvim',
+      'kevinhwang91/nvim-ufo',
     },
     config = get_config('_mason').setup
   }
@@ -171,7 +177,7 @@ local function spec(use)
     'weilbith/nvim-code-action-menu',
     cmd = 'CodeActionMenu',
   }
-  use{
+  use {
     "glepnir/lspsaga.nvim",
     branch = "main",
     config = get_config('_lsp_saga').setup,
