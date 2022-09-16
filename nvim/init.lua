@@ -14,7 +14,12 @@ vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.g.mapleader = " "
 vim.o.pumblend = 5
-vim.o.foldmethod='indent'
+vim.o.foldmethod = 'indent'
+vim.o.foldcolumn = '1'
+vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+
 -- packer from here
 -- https://github.com/wbthomason/dotfiles/tree/linux/neovim/.config/nvim
 function P(...)
@@ -37,3 +42,6 @@ require('config._mason').setup()
 -- local log_path = vim.fn.stdpath('cache') .. '/packer.nvim.log'
 -- print log_path
 ignition.start()
+-- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
+vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
