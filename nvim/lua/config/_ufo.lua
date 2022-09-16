@@ -1,7 +1,8 @@
 local M = {}
 
-function M.setup()
+M.setup = function()
   require('ufo').setup()
 end
 
 return M
+
