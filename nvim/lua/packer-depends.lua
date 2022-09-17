@@ -229,8 +229,8 @@ local function spec(use)
   use 'hrsh7th/vim-vsnip-integ'
   use {
     'jose-elias-alvarez/null-ls.nvim',
---    requires = {'nvim-lua/plenary.nvim'},
---    config = get_config('_null_ls').setup,
+    requires = {'nvim-lua/plenary.nvim'},
+    config = get_config('_null_ls').setup,
   }
 end
 
