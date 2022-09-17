@@ -17,6 +17,10 @@ M.setup = function()
   local _lsp_sig = require('lsp_signature')
   local _cmp_nvim_lsp = require('cmp_nvim_lsp')
   local capabilities = _cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+  }
   local server_list = {
     "sumneko_lua",
     "intelephense",
