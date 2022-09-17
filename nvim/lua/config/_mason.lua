@@ -43,6 +43,8 @@ M.setup = function()
         _opts.settings = require('lang.lua')
       elseif server_name == "intelephense" then
         _opts.settings = require('lang.php')
+      elseif server_name == "pyright" then
+        _opts.settings = require('lang.python')
       end
       _nvim_lsp[server_name].setup(_opts)
     end
