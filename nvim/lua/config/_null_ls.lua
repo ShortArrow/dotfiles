@@ -11,14 +11,14 @@ local M = {}
 
 M.setup = function()
   null_ls.setup({
-    debounce = 150,  
-    save_after_format = false,  
-    sources = {  
-      null_ls.builtins.diagnostics.pylint,  
+    debounce = 150,
+    save_after_format = false,
+    sources = {
+      null_ls.builtins.diagnostics.pylint,
       null_ls.builtins.formatting.stylua,
       null_ls.builtins.diagnostics.eslint,
       null_ls.builtins.completion.spell,
-    },  
+    },
   })
 --  local editorconfig_checker = null_ls.builtins.diagnostics.editorconfig_checker
 --  editorconfig_checker._opts.command = "editorconfig-checker"
