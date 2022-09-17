@@ -1,12 +1,11 @@
--- local ok, null_ls = pcall(require, 'null-ls')
-local null_ls = require('null-ls')
+local ok, null_ls = pcall(require, 'null-ls')
 local api = require('my/api')
 local debugger = api.debugger
--- if not ok then
---   debugger.print('null-ls is null')
---   debugger.print(null_ls)
---   return
--- end
+if not ok then
+  debugger.print('null-ls is null')
+  debugger.print(null_ls)
+  return
+end
 local M = {}
 
 M.setup = function()
