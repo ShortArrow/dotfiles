@@ -176,11 +176,6 @@ local function spec(use)
     branch = "main",
     config = get_config('_lsp_saga').setup,
   }
-  -- use{
-  --   "jose-elias-alvarez/null-ls.nvim",
-  --   requires = {'nvim-lua/plenary.nvim'},
-  --   config = get_config('_null_ls').setup,
-  -- }
   -- ################################################
   -- # Auto Complete
   -- ################################################
@@ -226,6 +221,11 @@ local function spec(use)
   --    requires = 'hrsh7th/nvim-cmp'
   -- }
   use 'hrsh7th/vim-vsnip-integ'
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+--    requires = {'nvim-lua/plenary.nvim'},
+--    config = get_config('_null_ls').setup,
+  }
 end
 
 _packer.startup {
