@@ -2,6 +2,20 @@ local debugger = require('my/debugger')
 
 local M = {}
 
+local concatinate_fontnames = function (list)
+  local line
+  for key, value in pairs(list) do
+    if string.find(value, ' ') then
+      value = '\'' .. value .. '\''
+    end
+    if key == 1 then
+      line = value
+    else
+      line = line .. ',' .. value
+    end
+  end
+  return line
+end
 
 M.get_fonts = function()
   local list = {
@@ -15,18 +29,7 @@ M.get_fonts = function()
     'Courier New',
     'monospace',
   }
-  local line
-  for key, value in pairs(list) do
-    if string.find(value, ' ') then
-      value = '\'' .. value .. '\''
-    end
-    if key == 1 then
-      line = value
-    else
-      line = line .. ',' .. value
-    end
-  end
-  return line
+  return concatinate_fontnames(list)
 end
 
 debugger.print('fonts: "' .. M.get_fonts() .. '"')
