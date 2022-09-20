@@ -2,7 +2,7 @@ local api = require('my.api')
 M = {}
 
 M.pyright = {
-  cmd = { "py" },
+  cmd = { "python" },
   settings = {
     python = {
       analysis = {
