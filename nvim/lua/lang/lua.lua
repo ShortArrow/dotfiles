@@ -1,4 +1,6 @@
-return {
+local M = {}
+
+M.sumneko_lua = {
   Lua = {
     diagnostics = { globals = { 'vim' } },
     completion = { callSnippet = "Replace" },
@@ -10,3 +12,5 @@ return {
     },
   }
 }
+
+return M

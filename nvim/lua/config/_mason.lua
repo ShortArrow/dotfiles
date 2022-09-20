@@ -44,9 +44,9 @@ M.setup = function()
         end
       end
       if server_name == "sumneko_lua" then
-        _opts.settings = require('lang.lua')
+        _opts.settings = require('lang.lua').sumneko_lua
       elseif server_name == "intelephense" then
-        _opts.settings = require('lang.php')
+        _opts.settings = require('lang.php').intelephense
       elseif server_name == "pyright" then
         _opts.settings = require('lang.python').pyright
       end
