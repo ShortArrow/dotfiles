@@ -3,5 +3,5 @@ version: '3'
 services:
   nvim:
     build:
-      context: ./docker/linux
+      context: ./playground/linux
     tty: true
