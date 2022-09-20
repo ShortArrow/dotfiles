@@ -17,6 +17,11 @@ M.pyright = {
   },
 }
 
+M.pyls = {
+  cmd = {"pyls"},
+  cmd_env = {VIRTUAL_ENV = "./.venv/"},
+}
+
 M.env = function()
   -- python path https://imokuri123.com/blog/2017/07/neovim-python-virtualenv/
   if api.env.is_win_os() then
