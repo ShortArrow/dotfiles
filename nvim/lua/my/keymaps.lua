@@ -2,7 +2,7 @@
 -- keymap docs template
 -- name (Origin of this acronym)
 -- ########################################
-local api = require('my/api')
+local api = require('my.api')
 local debugger = api.debugger
 
 local keymap = vim.api.nvim_set_keymap
