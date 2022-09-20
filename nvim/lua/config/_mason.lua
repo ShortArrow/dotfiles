@@ -17,76 +17,38 @@ M.setup = function()
   local _lsp_sig = require('lsp_signature')
   local _cmp_nvim_lsp = require('cmp_nvim_lsp')
   local capabilities = _cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
-
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+  }
+  local server_list = {
+    "sumneko_lua",
+    "intelephense",
+    "bashls",
+    "marksman",
+    "yamlls",
+    "dockerls",
+    "dockerls",
+    "jsonls",
+    "tsserver",
+  }
   _mason_lspconfig.setup_handlers({
     function(server_name)
       local _opts = {}
-
+      for _, value in ipairs(server_list) do
+        if value == server_name then
+          _opts.capabilities = capabilities
+          _opts.on_attach = function(signature_setup, bufnr)
+            _lsp_sig.on_attach(signature_setup, bufnr)
+          end
+        end
+      end
       if server_name == "sumneko_lua" then
-        -- https://github.com/folke/lua-dev.nvim/blob/main/lua/lua-dev/sumneko.lua
-        -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
-        local path = { "?.lua", "?/init.lua" }
-        _opts.capabilities = capabilities
-        _opts.on_attach = function(signature_setup, bufnr)
-          local _bufopts = { silent = true, buffer = bufnr }
-          _lsp_sig.on_attach(signature_setup, bufnr)
-          -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, _bufopts)
-          -- vim.keymap.set('n', 'gtD', vim.lsp.buf.type_definition, _bufopts)
-          -- vim.keymap.set('n', 'grf', vim.lsp.buf.references, _bufopts)
-          -- vim.keymap.set('n', '<space>p', vim.lsp.buf.format, _bufopts)
-        end
-        _opts.settings = {
-          Lua = {
-            diagnostics = { globals = { 'vim' } },
-            completion = { callSnippet = "Replace" },
-            workspace = { library = vim.api.nvim_get_runtime_file("", true) },
-            telemetry = { enable = false },
-            runtime = {
-              version = "LuaJIT",
-              path = path,
-            },
-          }
-        }
-      elseif server_name == "bashls" then
-        _opts.capabilities = capabilities
-        _opts.on_attach = function(signature_setup, bufnr)
-          _lsp_sig.on_attach(signature_setup, bufnr)
-        end
-      elseif server_name == "marksman" then
-        _opts.capabilities = capabilities
-        _opts.on_attach = function(signature_setup, bufnr)
-          _lsp_sig.on_attach(signature_setup, bufnr)
-          -- ltex (latex)
-          -- marksman (markdown)
-          -- prosemd_lsp (markdown)
-          -- remark_ls (markdown)
-          -- zk (markdown)
-        end
-      elseif server_name == "yamlls" then
-        _opts.capabilities = capabilities
-        _opts.on_attach = function(signature_setup, bufnr)
-          _lsp_sig.on_attach(signature_setup, bufnr)
-        end
-      elseif server_name == "dockerls" then
-        _opts.capabilities = capabilities
-        _opts.on_attach = function(signature_setup, bufnr)
-          _lsp_sig.on_attach(signature_setup, bufnr)
-        end
-      elseif server_name == "dockerls" then
-        _opts.capabilities = capabilities
-        _opts.on_attach = function(signature_setup, bufnr)
-          _lsp_sig.on_attach(signature_setup, bufnr)
-        end
-      elseif server_name == "jsonls" then
-        _opts.capabilities = capabilities
-        _opts.on_attach = function(signature_setup, bufnr)
-          _lsp_sig.on_attach(signature_setup, bufnr)
-        end
-      elseif server_name == "tsserver" then
-        _opts.capabilities = capabilities
-        _opts.on_attach = function(signature_setup, bufnr)
-          _lsp_sig.on_attach(signature_setup, bufnr)
-        end
+        _opts.settings = require('lang.lua').sumneko_lua
+      elseif server_name == "intelephense" then
+        _opts.settings = require('lang.php').intelephense
+      elseif server_name == "pyright" then
+        _opts.settings = require('lang.python').pyright
       end
       _nvim_lsp[server_name].setup(_opts)
     end

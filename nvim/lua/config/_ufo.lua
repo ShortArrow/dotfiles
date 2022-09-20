@@ -1,7 +1,8 @@
 local M = {}
 
 M.setup = function()
-  require('feline').setup()
+  require('ufo').setup()
 end
 
 return M
+
