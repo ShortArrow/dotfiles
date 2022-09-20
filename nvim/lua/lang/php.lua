@@ -1,4 +1,7 @@
-return {
+local M = {}
+
+M.intelephense = {
+
   intelephense = {
     files = {
       maxSize = 1000000,
@@ -10,3 +13,5 @@ return {
     }
   }
 }
+
+return M
