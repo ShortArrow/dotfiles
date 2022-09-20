@@ -20,9 +20,6 @@ vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decr
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
--- python path https://imokuri123.com/blog/2017/07/neovim-python-virtualenv/
-vim.g.python3_host_prog = './.venv/Script/python'
-vim.g.python3_host_prog = './.venv/bin/python'
 -- packer from here
 -- https://github.com/wbthomason/dotfiles/tree/linux/neovim/.config/nvim
 function P(...)
