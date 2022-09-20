@@ -1,4 +1,5 @@
-local debugger = require('debugger')
+local api = require('my.api')
+local debugger = api.debugger
 
 local M = {}
 

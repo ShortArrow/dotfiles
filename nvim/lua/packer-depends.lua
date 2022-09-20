@@ -1,3 +1,4 @@
+local api = require('my.api')
 local install_path = ("%s/site/pack/packer-lib/opt/packer.nvim"):format(vim.fn.stdpath "data")
 
 local function install_packer()
@@ -27,12 +28,12 @@ local function spec(use)
   -- self manage
   use 'wbthomason/packer.nvim'
   use 'lewis6991/impatient.nvim'
+  use 'nvim-lua/plenary.nvim'
   -- ################################################
   -- # Color
   -- ################################################
   use {
     'folke/tokyonight.nvim',
-    before = { 'obaland/vfiler.vim' },
     config = get_config('_tokyonight').setup
   }
   -- ################################################
@@ -54,13 +55,21 @@ local function spec(use)
     'ibhagwan/fzf-lua',
     -- optional for icon support
     requires = { 'kyazdani42/nvim-web-devicons' },
-    config = get_config('_fzflua').setup
+    config = get_config('_fzflua').setup,
+    disable = api.env.is_win_os(),
+  }
+  use {
+    'amirrezaask/fuzzy.nvim',
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = get_config('_fuzzy').setup,
+    disable = true,
   }
   -- ################################################
   -- # Status line
   -- ################################################
   use {
     'feline-nvim/feline.nvim',
+    require = { 'nvim-lua/plenary.nvim', 'lewis6991/gitsigns.nvim' },
     config = get_config('_feline').setup
   }
   use 'b0o/incline.nvim'
@@ -89,6 +98,11 @@ local function spec(use)
     config = get_config('_telescope').setup
   }
   use 'voldikss/vim-floaterm'
+  use {
+    'kevinhwang91/nvim-ufo',
+    requires = 'kevinhwang91/promise-async',
+    config = get_config('_ufo').setup
+  }
   -- ################################################
   -- # Flutter
   -- ################################################
@@ -147,6 +161,7 @@ local function spec(use)
       'ray-x/lsp_signature.nvim',
       'hrsh7th/cmp-nvim-lsp',
       'onsails/lspkind.nvim',
+      'kevinhwang91/nvim-ufo',
     },
     config = get_config('_mason').setup
   }
@@ -162,16 +177,11 @@ local function spec(use)
     'weilbith/nvim-code-action-menu',
     cmd = 'CodeActionMenu',
   }
-  use{
+  use {
     "glepnir/lspsaga.nvim",
     branch = "main",
     config = get_config('_lsp_saga').setup,
   }
-  -- use{
-  --   "jose-elias-alvarez/null-ls.nvim",
-  --   requires = {'nvim-lua/plenary.nvim'},
-  --   config = get_config('_null_ls').setup,
-  -- }
   -- ################################################
   -- # Auto Complete
   -- ################################################
@@ -193,7 +203,10 @@ local function spec(use)
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-cmdline'
+  use {
+    'hrsh7th/cmp-cmdline',
+    config = get_config('_cmp_cli').setup,
+  }
   -- For vsnip users.
   use 'hrsh7th/cmp-vsnip'
   use 'hrsh7th/vim-vsnip'
@@ -214,6 +227,11 @@ local function spec(use)
   --    requires = 'hrsh7th/nvim-cmp'
   -- }
   use 'hrsh7th/vim-vsnip-integ'
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    requires = {'nvim-lua/plenary.nvim'},
+    config = get_config('_null_ls').setup,
+  }
 end
 
 _packer.startup {
