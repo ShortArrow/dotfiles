@@ -27,3 +27,19 @@ pip install -g neovim
 ```
 
 ## Install LSP
+
+by `:Mason`
+
+## virtual envy
+
+Linux
+
+```
+source ./.venv/bin/activate
+```
+
+Windows
+
+```
+./.venv/Scripts/activate.ps1
+```
