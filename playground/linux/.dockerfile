@@ -13,8 +13,6 @@ RUN mkdir -p ./Documents/GitHub
 
 WORKDIR /home/$USERNAME/Documents/GitHub
 RUN git clone https://github.com/ShortArrow/dotfiles.git
-RUN git fetch
-RUN git pull
 
 WORKDIR /home/$USERNAME/Documents/GitHub/dotfiles
 
