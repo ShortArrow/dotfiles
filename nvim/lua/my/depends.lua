@@ -2,16 +2,16 @@ local keymaps = require('my/keymaps')
 local api = require('my/api')
 
 local M = {
-  common   = { enable = true, name = 'common', keymaps = keymaps.Common },
-  fugitive = { enable = true, name = 'fugitive', keymaps = keymaps.Fugitive },
-  flutter  = { enable = true, name = 'flutter', keymaps = keymaps.Flutter },
-  trouble  = { enable = true, name = 'trouble', keymaps = keymaps.Trouble },
-  fzflua   = { enable = not api.env.is_win_os(),
+  common   = { name = 'common', keymaps = keymaps.Common },
+  fugitive = { name = 'fugitive', keymaps = keymaps.Fugitive },
+  flutter  = { name = 'flutter', keymaps = keymaps.Flutter },
+  trouble  = { name = 'trouble', keymaps = keymaps.Trouble },
+  fzflua   = { disable = api.env.is_win_os(),
     name = 'fzflua', keymaps = keymaps.FzfLua },
-  packer   = { enable = true, name = 'packer', keymaps = keymaps.Packer },
-  vfiler   = { enable = true, name = 'vfiler', keymaps = keymaps.VFiler },
-  floaterm = { enable = true, name = 'floaterm', keymaps = keymaps.Floaterm },
-  lspsaga  = { enable = true, name = 'lspsaga', keymaps = keymaps.LspSaga },
+  packer   = { name = 'packer', keymaps = keymaps.Packer },
+  vfiler   = { name = 'vfiler', keymaps = keymaps.VFiler },
+  floaterm = { name = 'floaterm', keymaps = keymaps.Floaterm },
+  lspsaga  = { name = 'lspsaga', keymaps = keymaps.LspSaga },
 }
 
 return M
