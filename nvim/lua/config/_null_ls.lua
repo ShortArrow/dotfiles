@@ -1,5 +1,8 @@
 local M = {}
 
+-- null-ls builtin config guides
+-- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/1533257895fa953c004f88c1d9476af50b721c7d/doc/BUILTINS.md
+
 M.setup = function()
   local null_ls = require('null-ls')
   null_ls.setup({
