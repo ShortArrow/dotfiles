@@ -28,7 +28,7 @@ M.setup = function()
     "marksman",
     "yamlls",
     "dockerls",
-    "dockerls",
+    "docker-langserver",
     "jsonls",
     "tsserver",
   }
