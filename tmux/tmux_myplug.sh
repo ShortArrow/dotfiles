@@ -4,7 +4,7 @@ set -g default-command "${SHELL}"
 
 # color theme
 source-file ~/.tmux/iceberg_minimal_with_win_index.tmux.conf
-set-option -g default-terminal "screen-256color"
+set-option -g default-terminal "tmux-256color"
 set-option -ga terminal-overrides ',xterm-256color:Tc'
 
 # copymode
