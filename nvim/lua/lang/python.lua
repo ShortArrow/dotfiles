@@ -5,6 +5,7 @@ M.pyright = {
   cmd = { "python" },
   settings = {
     python = {
+      venvPath = "./venv/Scripts/python.exe",
       analysis = {
         typeCheckingMode = "basic",
         diagnosticMode = "workspace",
