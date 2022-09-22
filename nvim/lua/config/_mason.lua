@@ -29,6 +29,10 @@ M.setup = function()
     "yamlls",
     "dockerls",
     "docker-langserver",
+    "pyright",
+    "pylsp",
+    "black",
+    "pydocstyle",
     "jsonls",
     "tsserver",
   }
