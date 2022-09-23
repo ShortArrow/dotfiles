@@ -1,6 +1,5 @@
 local api = require('my.api')
 local keymaps = require('my.keymaps')
-local python = require('lang.python')
 
 local M = {
   common   = { name = 'common', keymaps = keymaps.Common },
@@ -13,7 +12,7 @@ local M = {
   vfiler   = { name = 'vfiler', keymaps = keymaps.VFiler },
   floaterm = { name = 'floaterm', keymaps = keymaps.Floaterm },
   lspsaga  = { name = 'lspsaga', keymaps = keymaps.LspSaga },
-  python   = { name = 'python', env = python.env },
+  python   = { name = 'python', env = api.lang.python.env },
 }
 
 return M

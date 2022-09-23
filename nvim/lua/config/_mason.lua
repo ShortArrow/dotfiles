@@ -1,4 +1,3 @@
-local api = require('my/api')
 local M = {}
 M.start = function()
   local _mason = require('mason')
@@ -40,6 +39,7 @@ M.setup = function()
   }
   _mason_lspconfig.setup_handlers({
     function(server_name)
+      local api = require('my/api')
       local _opts = {}
       for _, value in ipairs(server_list) do
         if value == server_name then

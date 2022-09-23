@@ -1,4 +1,3 @@
-local api = require('my.api')
 M = {}
 
 M.pyright = {
@@ -40,9 +39,10 @@ M.pylsp = {
 }
 
 M.env = function()
+  local _env = require('my.env')
   -- python path https://imokuri123.com/blog/2017/07/neovim-python-virtualenv/
   vim.g.loaded_python_provider = 0
-  if api.env.is_win_os() then
+  if _env.is_win_os() then
     vim.g.python_dir = ".\\.venv\\Scripts\\"
     vim.g.python3_dir = ".\\.venv\\Scripts\\"
     vim.g.python_host_prog = vim.g.python_dir .. 'python.exe'

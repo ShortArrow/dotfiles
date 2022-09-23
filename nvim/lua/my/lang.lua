@@ -1,7 +1,7 @@
-M = {}
+local M = {}
 
-M.lua = require('lang/lua')
-M.php = require('lang/php')
-M.python = require('lang/python')
+M.python = require('lang.python')
+M.php = require('lang.php')
+M.lua = require('lang.lua')
 
 return M
