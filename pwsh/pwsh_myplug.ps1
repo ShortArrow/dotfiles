@@ -22,6 +22,7 @@ Set-PSReadLineOption -WordDelimiters ";:,.[]{}()/\|^&*-=+'`" !?@#$%&_<>「」（
 
 
 # prompt setting
+# choco install starship
 Invoke-Expression (&starship init powershell)
 
 # Reload PROFILE
@@ -30,3 +31,7 @@ Set-PSReadLineKeyHandler -Key "alt+r" -BriefDescription "reloadPROFILE" -LongDes
     [Microsoft.PowerShell.PSConsoleReadLine]::Insert('<#SKIPHISTORY#> . $PROFILE')
     [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
 }
+
+# gsudo
+# choco install gsudo
+Import-Module 'C:\tools\gsudo\Current\gsudoModule.psd1'
