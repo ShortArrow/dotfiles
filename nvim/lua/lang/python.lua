@@ -5,7 +5,7 @@ M.pyright = {
   cmd = { "python" },
   settings = {
     python = {
-      venvPath = "./venv/Scripts/python.exe",
+      venvPath = "./venv/",
       analysis = {
         typeCheckingMode = "basic",
         diagnosticMode = "workspace",
@@ -18,9 +18,25 @@ M.pyright = {
   },
 }
 
-M.pyls = {
-  cmd = {"pyls"},
-  cmd_env = {VIRTUAL_ENV = "./.venv/"},
+M.pylsp = {
+  pyls = {
+    plugins = {
+      jedi_completion = { enabled = true },
+      jedi_hover = { enabled = true },
+      jedi_references = { enabled = true },
+      jedi_signature_help = { enabled = true },
+      jedi_symbols = { enabled = true, all_scopes = true },
+      pycodestyle = { enabled = false },
+      mypy = { enabled = false },
+      isort = { enabled = false },
+      yapf = { enabled = false },
+      pylint = { enabled = false },
+      pydocstyle = { enabled = true },
+      mccabe = { enabled = false },
+      preload = { enabled = false },
+      rope_completion = { enabled = true}
+    }
+  }
 }
 
 M.env = function()
