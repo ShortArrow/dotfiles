@@ -1,3 +1,4 @@
+local api = require('my/api')
 local M = {}
 M.start = function()
   local _mason = require('mason')
@@ -31,6 +32,7 @@ M.setup = function()
     "docker-langserver",
     "pyright",
     "pylsp",
+    "pyls",
     "black",
     "pydocstyle",
     "jsonls",
@@ -48,11 +50,13 @@ M.setup = function()
         end
       end
       if server_name == "sumneko_lua" then
-        _opts.settings = require('lang.lua').sumneko_lua
+        _opts.settings = api.lang.lua.sumneko_lua
       elseif server_name == "intelephense" then
-        _opts.settings = require('lang.php').intelephense
+        _opts.settings = api.lang.php.intelephense
       elseif server_name == "pyright" then
-        _opts.settings = require('lang.python').pyright
+        _opts.settings = api.lang.python.pyright
+      elseif server_name == "pyls" then
+        _opts.settings = api.lang.python.pylsp
       end
       _nvim_lsp[server_name].setup(_opts)
     end
