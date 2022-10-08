@@ -1,3 +1,6 @@
+# Reload Env
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+
 # New-Item -Type File -Path $PROFILE -Force
 
 Set-PSReadLineOption -PredictionSource History

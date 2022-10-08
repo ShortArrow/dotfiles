@@ -9,7 +9,7 @@ M.setup = function()
     debounce = 150,
     save_after_format = false,
     sources = {
-      null_ls.builtins.formatting.black,
+      -- null_ls.builtins.formatting.black,
       -- null_ls.builtins.diagnostics.pylint,
       -- null_ls.builtins.formatting.stylua,
       -- null_ls.builtins.diagnostics.eslint,
