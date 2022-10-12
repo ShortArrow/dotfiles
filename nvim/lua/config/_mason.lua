@@ -21,33 +21,13 @@ M.setup = function()
     dynamicRegistration = false,
     lineFoldingOnly = true
   }
-  local server_list = {
-    "sumneko_lua",
-    "intelephense",
-    "bashls",
-    "marksman",
-    "yamlls",
-    "dockerls",
-    "docker-langserver",
-    "pyright",
-    "pylsp",
-    "pyls",
-    "black",
-    "pydocstyle",
-    "jsonls",
-    "tsserver",
-  }
   _mason_lspconfig.setup_handlers({
     function(server_name)
       local api = require('my/api')
       local _opts = {}
-      for _, value in ipairs(server_list) do
-        if value == server_name then
-          _opts.capabilities = capabilities
-          _opts.on_attach = function(signature_setup, bufnr)
-            _lsp_sig.on_attach(signature_setup, bufnr)
-          end
-        end
+      _opts.capabilities = capabilities
+      _opts.on_attach = function(signature_setup, bufnr)
+        _lsp_sig.on_attach(signature_setup, bufnr)
       end
       if server_name == "sumneko_lua" then
         _opts.settings = api.lang.lua.sumneko_lua
