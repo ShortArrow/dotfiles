@@ -73,3 +73,5 @@ alias tmux="tmux -2"
 # https://github.com/rcmdnk/sshrc
 # alias ssh="sshrc"
 
+# arduino-cli
+alias acli='$HOME/bin/arduino-cli'
