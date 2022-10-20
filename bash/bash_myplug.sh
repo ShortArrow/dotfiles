@@ -75,3 +75,8 @@ alias tmux="tmux -2"
 
 # arduino-cli
 alias acli='$HOME/bin/arduino-cli'
+
+# fnm
+export PATH=/home/who/.fnm:$PATH
+eval "`fnm env`"
+
