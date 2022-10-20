@@ -2,9 +2,17 @@
 
 ## Version Management
 
+Use [fnm](https://github.com/Schniz/fnm) for node.js version management
+
+
+## Library version management in Project
+
+check npm doctor and enable yarn.
+
 ```
-sudo apt install npm
-sudo apt install yarn
+fnm use 16
+npm doctor
+corepack enable
 ```
 
 ## Install LSP
