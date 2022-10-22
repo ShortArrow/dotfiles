@@ -38,3 +38,7 @@ Set-PSReadLineKeyHandler -Key "alt+r" -BriefDescription "reloadPROFILE" -LongDes
 # gsudo
 # choco install gsudo
 Import-Module 'C:\tools\gsudo\Current\gsudoModule.psd1'
+
+# lazygit
+# choco install lazygit
+New-Alias -Name lg -Value lazygit
