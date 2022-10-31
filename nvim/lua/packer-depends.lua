@@ -114,6 +114,11 @@ local function spec(use)
   }
   use 'voldikss/vim-floaterm'
   use {
+    'akinsho/toggleterm.nvim',
+    tag = '*',
+    config = get_config('_toggleterm').setup
+  }
+  use {
     'kevinhwang91/nvim-ufo',
     requires = 'kevinhwang91/promise-async',
     config = get_config('_ufo').setup

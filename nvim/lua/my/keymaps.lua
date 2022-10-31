@@ -66,6 +66,13 @@ M.maps = {
       { map = '<Leader>flzd', cmd = ':FloatermNew lzd<CR>', },
     },
   },
+  toggleterm = {
+    name = 'toggleterm',
+    maps = {
+      -- normal (ToggleTerm Normal)
+      { map = '<Leader>spt', cmd = ':ToggleTerm', },
+    },
+  },
   lspsaga = {
     name = 'lspsaga',
     maps = {
@@ -177,6 +184,10 @@ end
 
 M.Floaterm = function()
   common(M.maps.floaterm)
+end
+
+M.ToggleTerm = function()
+  common(M.maps.toggleterm)
 end
 
 M.LspSaga = function()
