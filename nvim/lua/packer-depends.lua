@@ -123,10 +123,10 @@ local function spec(use)
     requires = 'kevinhwang91/promise-async',
     config = get_config('_ufo').setup
   }
-  use {
-    'edluffy/specs.nvim',
-    config = get_config('_specs').setup
-  }
+  --use {
+  --  'edluffy/specs.nvim',
+  --  config = get_config('_specs').setup
+  --}
   use {
     'folke/noice.nvim',
     config = get_config('_noice').setup,
@@ -139,10 +139,10 @@ local function spec(use)
       'rcarriga/nvim-notify',
     }
   }
-  use {
-    'yamatsum/nvim-cursorline',
-    config = get_config('_cursorline').setup
-  }
+  --use {
+  --  'yamatsum/nvim-cursorline',
+  --  config = get_config('_cursorline').setup
+  --}
   -- ################################################
   -- # Flutter
   -- ################################################
