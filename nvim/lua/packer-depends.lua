@@ -103,6 +103,18 @@ local function spec(use)
     requires = 'kevinhwang91/promise-async',
     config = get_config('_ufo').setup
   }
+  use {
+    'folke/noice.nvim',
+    config = get_config('_noice').setup,
+    requires = {
+      -- if you lazy-load any plugin below, make sure to add proper `module='...'` entries
+      'MunifTanjim/nui.nvim',
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      'rcarriga/nvim-notify',
+    }
+  }
   -- ################################################
   -- # Flutter
   -- ################################################
@@ -229,7 +241,7 @@ local function spec(use)
   use 'hrsh7th/vim-vsnip-integ'
   use {
     'jose-elias-alvarez/null-ls.nvim',
-    requires = {'nvim-lua/plenary.nvim'},
+    requires = { 'nvim-lua/plenary.nvim' },
     config = get_config('_null_ls').setup,
   }
 end
