@@ -48,6 +48,9 @@ alias crontab='crontab -i'
 # git-foresta
 alias foresta='git-foresta --all | less -RSX'
 
+# git-graph
+alias gg='git-graph --color always | less -RSX'
+
 # lazydocker
 alias lzd='$HOME/.local/bin/lazydocker'
 alias lazydocker='$HOME/.local/bin/lazydocker'
