@@ -115,6 +115,10 @@ local function spec(use)
       'rcarriga/nvim-notify',
     }
   }
+  use {
+    'yamatsum/nvim-cursorline',
+    config = get_config('_cursorline').setup
+  }
   -- ################################################
   -- # Flutter
   -- ################################################
