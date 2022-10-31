@@ -43,6 +43,9 @@ local function spec(use)
   --  'yamatsum/nvim-nonicons',
   --  requires = { 'kyazdani42/nvim-web-devicons' }
   --}
+  use {
+    'uga-rosa/jam.nvim'
+  }
   -- ################################################
   -- # Explorer
   -- ################################################
