@@ -217,6 +217,16 @@ local function spec(use)
   -- # Auto Complete
   -- ################################################
   use {
+    'nvim-treesitter/nvim-treesitter',
+    run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+    config = get_config('_treesitter').setup
+  }
+  use {
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    requires = {'nvim-treesitter/nvim-treesitter' },
+    config = get_config('_comment').setup,
+  }
+  use {
     "hrsh7th/nvim-cmp",
     requires = {
       'hrsh7th/cmp-nvim-lsp',
