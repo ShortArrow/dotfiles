@@ -104,6 +104,10 @@ local function spec(use)
     config = get_config('_ufo').setup
   }
   use {
+    'edluffy/specs.nvim',
+    config = get_config('_specs').setup
+  }
+  use {
     'folke/noice.nvim',
     config = get_config('_noice').setup,
     requires = {
