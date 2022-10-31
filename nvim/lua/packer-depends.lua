@@ -159,6 +159,17 @@ local function spec(use)
     'tpope/vim-fugitive',
     config = get_config('_fugitive').setup
   }
+  -- use {
+  --   'pwntester/octo.nvim',
+  --   requires = {
+  --     'nvim-lua/plenary.nvim',
+  --     'nvim-telescope/telescope.nvim',
+  --     'kyazdani42/nvim-web-devicons',
+  --   },
+  --   config = function()
+  --     require "octo".setup()
+  --   end
+  -- }
   -- ################################################
   -- # Indent and Bracket
   -- ################################################
