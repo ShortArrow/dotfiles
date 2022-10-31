@@ -288,6 +288,9 @@ local function spec(use)
     requires = { 'nvim-lua/plenary.nvim' },
     config = get_config('_null_ls').setup,
   }
+  use {
+    'alec-gibson/nvim-tetris'
+  }
 end
 
 _packer.startup {
