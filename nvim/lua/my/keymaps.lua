@@ -91,7 +91,7 @@ M.maps = {
       -- jump to definition (Lsp Definition)
       { map = '<Leader>ld', cmd = ':lua vim.lsp.buf.definition()<CR>', },
       -- auto formatting (Lsp Formatting)
-      { map = '<Leader>lf', cmd = ':lua vim.lsp.buf.formatting()<CR>', },
+      { map = '<Leader>lf', cmd = ':lua vim.lsp.buf.format()<CR>', },
       -- show references (Lsp References)
       { map = '<Leader>lr', cmd = ':lua vim.lsp.buf.references()<CR>', },
       -- rename (Lsp Name)
