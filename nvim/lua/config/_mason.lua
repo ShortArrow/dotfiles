@@ -1,4 +1,10 @@
 local M = {}
+M.lsp_sig_config = {
+  bind = true, -- This is mandatory, otherwise border config won't get registered.
+  handler_opts = {
+    border = "rounded"
+  }
+}
 M.start = function()
   local _mason = require('mason')
   _mason.setup {
@@ -26,8 +32,8 @@ M.setup = function()
       local api = require('my/api')
       local _opts = {}
       _opts.capabilities = capabilities
-      _opts.on_attach = function(signature_setup, bufnr)
-        _lsp_sig.on_attach(signature_setup, bufnr)
+      _opts.on_attach = function(_, bufnr)
+        _lsp_sig.on_attach(M.lsp_sig_config, bufnr)
       end
       if server_name == "sumneko_lua" then
         _opts.settings = api.lang.lua.sumneko_lua
