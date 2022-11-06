@@ -29,20 +29,20 @@ M.setup = function()
   }
   _mason_lspconfig.setup_handlers({
     function(server_name)
-      local api = require('my/api')
+      local _api = require('my/api')
       local _opts = {}
       _opts.capabilities = capabilities
       _opts.on_attach = function(_, bufnr)
         _lsp_sig.on_attach(M.lsp_sig_config, bufnr)
       end
       if server_name == "sumneko_lua" then
-        _opts.settings = api.lang.lua.sumneko_lua
+        _opts.settings = _api.lang.lua.sumneko_lua
       elseif server_name == "intelephense" then
-        _opts.settings = api.lang.php.intelephense
+        _opts.settings = _api.lang.php.intelephense
       elseif server_name == "pyright" then
-        _opts.settings = api.lang.python.pyright
+        _opts.settings = _api.lang.python.pyright
       elseif server_name == "pyls" then
-        _opts.settings = api.lang.python.pylsp
+        _opts.settings = _api.lang.python.pylsp
       end
       _nvim_lsp[server_name].setup(_opts)
     end
