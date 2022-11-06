@@ -120,7 +120,10 @@ local function spec(use)
   }
   use {
     'kevinhwang91/nvim-ufo',
-    requires = 'kevinhwang91/promise-async',
+    requires = {
+      'kevinhwang91/promise-async',
+      'nvim-treesitter/nvim-treesitter'
+    },
     config = get_config('_ufo').setup
   }
   --use {
