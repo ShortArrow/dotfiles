@@ -8,7 +8,7 @@ M.config = {
 }
 
 M.setup = function()
-  require('lsp_signature').setup(M.config)
+--  require('lsp_signature').setup(M.config)
 end
 
 return M
