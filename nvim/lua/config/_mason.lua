@@ -43,6 +43,9 @@ M.setup = function()
         _opts.settings = _api.lang.python.pyright
       elseif server_name == "pyls" then
         _opts.settings = _api.lang.python.pylsp
+      elseif server_name == "powershell_es" then
+        print('load mason config of pwsh')
+        _opts.settings = _api.lang.pwsh.powershell_es
       end
       _nvim_lsp[server_name].setup(_opts)
     end
