@@ -1,5 +1,7 @@
 local M = {}
 
+M.temp_path = vim.fn.stdpath('cache')
+
 M.bundle_path = vim.fn.resolve(vim.fn.stdpath("data") ..
   "/mason/packages/powershell-editor-services")
 
@@ -7,30 +9,27 @@ M.launcher_path = vim.fn.resolve(vim.fn.stdpath('data') ..
   '/mason/packages/powershell-editor-services/PowerShellEditorServices/Start-EditorServices.ps1')
 
 M.powershell_es = {
-  --  powershell = {
-  --    cwd = './',
-  --    developer = {
-  --      bundledModulesPath = M.bundle_path,
-  --    },
-  --    integratedConsole = {
-  --      showOnStartup = true,
-  --    },
-  --    powerShellExePath = 'pwsh',
-  --  },
+  powershell = {
+    cwd = './',
+    developer = {
+      bundledModulesPath = M.bundle_path,
+    },
+    powerShellExePath = 'pwsh',
+  },
   filetypes = { 'powershell', 'ps1' },
   cmd = { 'pwsh', '-NoLogo', '-NoProfile',
     '-Command', M.launcher_path,
     "-BundledModulesPath", M.bundle_path,
-    "-LogPath", "./logs.log",
-    "-SessionDetailsPath", "./session.json",
+    "-LogPath",  M.temp_path .. "/logs.log",
+    "-SessionDetailsPath", M.temp_path .. "/session.json",
     "-FeatureFlags", "@()",
     "-AdditionalModules", "@()",
     "-HostName", "nvim",
     "-HostProfileId", "0",
     "-HostVersion", "1.0.0", "-Stdio", "-LogLevel", "Normal" },
-  --  bundle_path = M.bundle_path,
-  --  shell = 'pwsh',
-  --  root_dir = './',
+  bundle_path = M.bundle_path,
+  shell = 'pwsh',
+  root_dir = './',
 }
 
 return M
