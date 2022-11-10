@@ -1,3 +1,14 @@
+function ExistsCommand {
+  param (
+      [string]$targetCommand
+  )
+    if (gcm $targetCommand -ea SilentlyContinue) {
+        Write-Output 'Success!'
+    } else {
+        Write-Error 'Error!'
+    }
+}
+
 # Reload Env
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 
@@ -42,3 +53,4 @@ Import-Module 'C:\tools\gsudo\Current\gsudoModule.psd1'
 # lazygit
 # choco install lazygit
 New-Alias -Name lg -Value lazygit
+
