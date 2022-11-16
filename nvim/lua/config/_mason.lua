@@ -18,6 +18,7 @@ M.start = function()
   }
 end
 M.setup = function()
+  local _api = require('my/api')
   local _nvim_lsp = require('lspconfig')
   local _mason_lspconfig = require('mason-lspconfig')
   local _lsp_sig = require('lsp_signature')
@@ -29,7 +30,6 @@ M.setup = function()
   }
   _mason_lspconfig.setup_handlers({
     function(server_name)
-      local _api = require('my/api')
       local _opts = {}
       _opts.capabilities = capabilities
       _opts.on_attach = function(_, bufnr)
@@ -44,8 +44,8 @@ M.setup = function()
       elseif server_name == "pyls" then
         _opts.settings = _api.lang.python.pylsp
       elseif server_name == "powershell_es" then
-        print('load mason config of pwsh')
         _opts.settings = _api.lang.pwsh.powershell_es
+        print(_opts.settings)
       end
       _nvim_lsp[server_name].setup(_opts)
     end
