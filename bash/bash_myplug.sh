@@ -83,3 +83,10 @@ alias acli='$HOME/bin/arduino-cli'
 export PATH=/home/who/.fnm:$PATH
 eval "`fnm env`"
 
+# dvm
+. "$HOME/.cargo/env"
+export DVM_DIR="/home/who/.dvm"
+export PATH="$DVM_DIR/bin:$PATH"
+export DVM_DIR="/home/who/.dvm"
+export PATH="$DVM_DIR/bin:$PATH"
+
