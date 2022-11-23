@@ -20,9 +20,7 @@ return M
 -- → deno.config                                                     default: null
 -- → deno.enable                                                     default: false
 -- → deno.enablePaths                                                default: []
--- ↓ deno.importMap                                                  default: null
---   No description available.
---   type string
+-- → deno.importMap                                                  default: null
 -- → deno.inlayHints.enumMemberValues.enabled                        default: false
 -- → deno.inlayHints.functionLikeReturnTypes.enabled                 default: false
 -- → deno.inlayHints.parameterNames.enabled                          default: "none"
