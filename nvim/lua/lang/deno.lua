@@ -6,6 +6,7 @@ M.denols = {
     lint = true,
     unstable = true,
     importMap = "./import_map.json",
+    config = "./deno.json"
   }
 }
 
