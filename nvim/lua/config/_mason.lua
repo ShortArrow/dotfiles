@@ -55,19 +55,20 @@ M.setup = function()
         end
 
         _opts.root_dir = _nvim_lsp.util.root_pattern("deno.json", "deno.jsonc", "deps.ts", "import_map.json")
-        _opts.init_options = {
-          lint = true,
-          unstable = true,
-          suggest = {
-            imports = {
-              hosts = {
-                ["https://deno.land"] = true,
-                ["https://cdn.nest.land"] = true,
-                ["https://crux.land"] = true
-              }
-            }
-          }
-        }
+        _opts.settings = _api.lang.deno.denols
+        -- _opts.init_options = {
+        --   lint = true,
+        --   unstable = true,
+        --   suggest = {
+        --     imports = {
+        --       hosts = {
+        --         ["https://deno.land"] = true,
+        --         ["https://cdn.nest.land"] = true,
+        --         ["https://crux.land"] = true
+        --       }
+        --     }
+        --   }
+        -- }
       elseif server_name == "intelephense" then
         _opts.settings = _api.lang.php.intelephense
       elseif server_name == "pyright" then
