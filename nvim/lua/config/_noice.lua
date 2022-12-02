@@ -6,9 +6,9 @@ M.setup = function()
       signature = {
         enabled = false
       }
-    }
+    },
+    background_colour = "#000000",
   })
-  require("notify").setup({ background_colour = "#000000", })
 end
 
 return M
