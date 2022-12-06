@@ -23,14 +23,6 @@ vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 vim.o.mousemodel = 'extend'
 -- packer from here
 -- https://github.com/wbthomason/dotfiles/tree/linux/neovim/.config/nvim
-function P(...)
-  local args = { n = select("#", ...), ... }
-  for i = 1, args.n do
-    args[i] = vim.inspect(args[i])
-  end
-  print(unpack(args))
-end
-
 if not pcall(require, "impatient") then
   print "Failed to load impatient."
 end
