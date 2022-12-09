@@ -21,15 +21,11 @@ vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 vim.o.mousemodel = 'extend'
--- packer from here
--- https://github.com/wbthomason/dotfiles/tree/linux/neovim/.config/nvim
+
 if not pcall(require, "impatient") then
   print "Failed to load impatient."
 end
-
 require('packer-depends')
--- packer end here
-
 require('config._mason').start()
 require('config._mason').setup()
 -- local log_path = vim.fn.stdpath('cache') .. '/packer.nvim.log'
