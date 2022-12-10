@@ -8,9 +8,8 @@ M.sumneko_lua = {
     telemetry = { enable = false },
     runtime = {
       version = "LuaJIT",
-      path = { "?.lua", "?/init.lua" },
+      path = { "init.lua" },
     },
   }
 }
-
 return M
