@@ -1,4 +1,4 @@
-M = {}
+local M = {}
 
 M.is_function = function(stuff)
   return type(stuff) == 'function'

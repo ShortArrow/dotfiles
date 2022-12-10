@@ -1,9 +1,10 @@
 local M = {}
 
-M.python = require('lang.python')
-M.php = require('lang.php')
-M.lua = require('lang.lua')
-M.pwsh = require('lang.pwsh')
-M.deno = require('lang.deno')
+M.python = require('my.lang.python')
+M.php = require('my.lang.php')
+M.lua = require('my.lang.lua')
+M.pwsh = require('my.lang.pwsh')
+M.deno = require('my.lang.deno')
+M.ts = require('my.lang.ts')
 
 return M

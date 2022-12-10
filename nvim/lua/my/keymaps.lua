@@ -2,14 +2,24 @@
 -- keymap docs template
 -- name (Origin of this acronym)
 -- ########################################
-local api = require('my.api')
-local debugger = api.debugger
+local _api = require('my.api')
+local _debugger = _api.debugger
 
-local keymap = vim.api.nvim_set_keymap
+local _keymap = vim.api.nvim_set_keymap
+local _set_lua_keymap = function(mode, keymap, luacmd)
+  vim.keymap.set(mode, keymap, luacmd)
+end
 
 local M = {}
 
 M.maps = {
+  ufo = {
+    name = 'ufo',
+    maps = {
+      { mode = 'n', map = 'zR', lua = require('ufo').openAllFolds, },
+      { mode = 'n', map = 'zM', lua = require('ufo').closeAllFolds, },
+    },
+  },
   fugitive = {
     name = 'fugitive',
     maps = {
@@ -135,7 +145,7 @@ end
 
 local set_map = function(map)
   map = merge_default(map)
-  keymap(
+  _keymap(
     tostring(map.mode),
     tostring(map.map),
     tostring(map.cmd),
@@ -151,7 +161,7 @@ end
 
 local common = function(pack)
   set_maps(pack.maps)
-  debugger.print("load keymaps of " .. pack.name)
+  _debugger.print("load keymaps of " .. pack.name)
 end
 
 M.Fugitive = function()
@@ -194,8 +204,8 @@ M.LspSaga = function()
   common(M.maps.lspsaga)
 end
 
-if debugger.is_debug then
-  debugger.print('check duplication')
+if _debugger.is_debug then
+  _debugger.print('check duplication')
 end
 
 return M
