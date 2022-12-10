@@ -1,5 +1,5 @@
-local ignition = require('my/ignition')
-local fonts = require('my/fonts')
+local ignition = require('my.ignition')
+local fonts = require('my.fonts')
 
 vim.o.number = true
 vim.o.relativenumber = true

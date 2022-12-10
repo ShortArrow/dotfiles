@@ -20,7 +20,7 @@ M.powershell_es = {
   cmd = { 'pwsh', '-NoLogo', '-NoProfile',
     '-Command', M.launcher_path,
     "-BundledModulesPath", M.bundle_path,
-    "-LogPath",  M.temp_path .. "/logs.log",
+    "-LogPath", M.temp_path .. "/logs.log",
     "-SessionDetailsPath", M.temp_path .. "/session.json",
     "-FeatureFlags", "@()",
     "-AdditionalModules", "@()",
