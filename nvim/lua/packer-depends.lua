@@ -1,4 +1,4 @@
-local api = require('my/api')
+local api = require('my.api')
 local install_path = ("%s/site/pack/packer-lib/opt/packer.nvim"):format(vim.fn.stdpath "data")
 
 local function install_packer()
@@ -243,6 +243,10 @@ local function spec(use)
     'nvim-treesitter/nvim-treesitter',
     run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
     config = get_config('_treesitter').setup
+  }
+  use {
+    'nvim-treesitter/nvim-treesitter-refactor',
+    requires = { 'nvim-treesitter/nvim-treesitter' },
   }
   use {
     'JoosepAlviste/nvim-ts-context-commentstring',

@@ -1,5 +1,5 @@
-local api = require('my/api')
-local keymaps = require('my/keymaps')
+local api = require('my.api')
+local keymaps = require('my.keymaps')
 
 local M = {
   common     = { name = 'common', keymaps = keymaps.Common },
