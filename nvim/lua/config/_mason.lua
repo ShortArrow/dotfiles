@@ -39,6 +39,7 @@ M.setup = function()
         _opts.settings = _api.lang.lua.sumneko_lua
       elseif server_name == "tsserver" then
         _opts.root_dir = _nvim_lsp.util.root_pattern("package.json")
+        _opts.settings = _api.lang.ts
       elseif server_name == "eslint" then
         _opts.root_dir = _nvim_lsp.util.root_pattern("package.json")
       elseif server_name == "denols" then
