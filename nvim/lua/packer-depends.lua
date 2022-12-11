@@ -34,7 +34,7 @@ local function spec(use)
   -- ################################################
   use {
     'folke/tokyonight.nvim',
-    config = get_config('_tokyonight').setup
+    config = get_config('_tokyonight').setup,
   }
   -- ################################################
   -- # Fonts
@@ -52,7 +52,7 @@ local function spec(use)
   use {
     'obaland/vfiler.vim',
     requires = { 'obaland/vfiler-column-devicons', 'kyazdani42/nvim-web-devicons' },
-    config = get_config('_vfiler').setup
+    config = get_config('_vfiler').setup,
   }
   use {
     'ibhagwan/fzf-lua',
@@ -73,7 +73,7 @@ local function spec(use)
   use {
     'feline-nvim/feline.nvim',
     require = { 'nvim-lua/plenary.nvim', 'lewis6991/gitsigns.nvim' },
-    config = get_config('_feline').setup
+    config = get_config('_feline').setup,
   }
   use 'b0o/incline.nvim'
   use {
@@ -82,7 +82,7 @@ local function spec(use)
     requires = {
       'kyazdani42/nvim-web-devicons'
     },
-    config = get_config('_buffer_line').setup
+    config = get_config('_buffer_line').setup,
   }
   -- ################################################
   -- # Trouble
@@ -90,7 +90,7 @@ local function spec(use)
   use {
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
-    config = get_config('_trouble').setup
+    config = get_config('_trouble').setup,
   }
   use {
     "nvim-neotest/neotest",
@@ -102,7 +102,7 @@ local function spec(use)
       'nvim-neotest/neotest-plenary',
       'nvim-neotest/neotest-vim-test'
     },
-    config = get_config('_neotest').setup
+    config = get_config('_neotest').setup,
   }
   -- ################################################
   -- # UI
@@ -110,13 +110,13 @@ local function spec(use)
   use {
     'nvim-telescope/telescope.nvim',
     requires = { 'folke/trouble.nvim', 'nvim-lua/plenary.nvim', 'akinsho/flutter-tools.nvim' },
-    config = get_config('_telescope').setup
+    config = get_config('_telescope').setup,
   }
   use 'voldikss/vim-floaterm'
   use {
     'akinsho/toggleterm.nvim',
     tag = '*',
-    config = get_config('_toggleterm').setup
+    config = get_config('_toggleterm').setup,
   }
   use {
     'kevinhwang91/nvim-ufo',
@@ -124,11 +124,11 @@ local function spec(use)
       'kevinhwang91/promise-async',
       'nvim-treesitter/nvim-treesitter'
     },
-    config = get_config('_ufo').setup
+    config = get_config('_ufo').setup,
   }
   --use {
   --  'edluffy/specs.nvim',
-  --  config = get_config('_specs').setup
+  --  config = get_config('_specs').setup,
   --}
   use {
     'folke/noice.nvim',
@@ -144,7 +144,7 @@ local function spec(use)
   }
   --use {
   --  'yamatsum/nvim-cursorline',
-  --  config = get_config('_cursorline').setup
+  --  config = get_config('_cursorline').setup,
   --}
   -- ################################################
   -- # Flutter
@@ -152,7 +152,7 @@ local function spec(use)
   use {
     'akinsho/flutter-tools.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
-    config = get_config('_flutter').setup
+    config = get_config('_flutter').setup,
   }
   use 'mfussenegger/nvim-dap'
   -- ################################################
@@ -180,11 +180,11 @@ local function spec(use)
   -- ################################################
   use {
     'lewis6991/gitsigns.nvim',
-    config = get_config('_gitsigns').setup
+    config = get_config('_gitsigns').setup,
   }
   use {
     'tpope/vim-fugitive',
-    config = get_config('_fugitive').setup
+    config = get_config('_fugitive').setup,
   }
   -- use {
   --   'pwntester/octo.nvim',
@@ -202,7 +202,7 @@ local function spec(use)
   -- ################################################
   use {
     "lukas-reineke/indent-blankline.nvim",
-    config = get_config('_indent').setup
+    config = get_config('_indent').setup,
   }
   -- ################################################
   -- # LSP
@@ -217,15 +217,15 @@ local function spec(use)
       'onsails/lspkind.nvim',
       'kevinhwang91/nvim-ufo',
     },
-    config = get_config('_mason').setup
+    config = get_config('_mason').setup,
   }
   use {
     "ray-x/lsp_signature.nvim",
-    config = get_config('_lsp_sig').setup
+    config = get_config('_lsp_sig').setup,
   }
   use {
     'onsails/lspkind.nvim',
-    config = get_config('_lsp_kind').setup
+    config = get_config('_lsp_kind').setup,
   }
   use {
     'weilbith/nvim-code-action-menu',
@@ -242,7 +242,7 @@ local function spec(use)
   use {
     'nvim-treesitter/nvim-treesitter',
     run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
-    config = get_config('_treesitter').setup
+    config = get_config('_treesitter').setup,
   }
   use {
     'nvim-treesitter/nvim-treesitter-refactor',
@@ -266,7 +266,7 @@ local function spec(use)
       'hrsh7th/cmp-emoji',
       'quangnguyen30192/cmp-nvim-ultisnips',
     },
-    config = get_config('_cmp').setup
+    config = get_config('_cmp').setup,
   }
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
