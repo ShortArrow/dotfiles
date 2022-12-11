@@ -1,6 +1,6 @@
 local M = {}
 
-M.is_debug = true
+M.is_debug = false
 
 M.print = function(message)
   if M.is_debug then
