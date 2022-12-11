@@ -21,7 +21,7 @@ vim.cmd [[command! PackerUpgrade :call v:lua.packer_upgrade()]]
 local _packer = require('packer')
 
 local function get_config(name)
-  return require(string.format('config/%s', name))
+  return require(string.format('config.%s', name))
 end
 
 local function spec(use)
