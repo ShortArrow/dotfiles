@@ -8,7 +8,13 @@ M.sumneko_lua = {
       disable = { "lowercase-global" },
     },
     completion = { callSnippet = "Replace" },
-    workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+    workspace = {
+      library = {
+        vim.api.nvim_get_runtime_file("", true),
+        "${3rd}/luassert/library",
+      },
+      checkThirdParty = false,
+    },
     telemetry = { enable = false },
     runtime = {
       version = "Lua 5.1",
