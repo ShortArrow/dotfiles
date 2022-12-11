@@ -18,7 +18,7 @@ M.start = function()
   }
 end
 M.setup = function()
-  local _api = require('my/api')
+  local _api = require('my.api')
   local _nvim_lsp = require('lspconfig')
   local _mason_lspconfig = require('mason-lspconfig')
   local _lsp_sig = require('lsp_signature')
