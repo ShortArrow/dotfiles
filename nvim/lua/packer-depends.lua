@@ -241,12 +241,13 @@ local function spec(use)
   -- ################################################
   use {
     'nvim-treesitter/nvim-treesitter',
+    requires = {
+      'nvim-treesitter/nvim-treesitter-refactor',
+      'windwp/nvim-ts-autotag',
+      'p00f/nvim-ts-rainbow',
+    },
     run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
     config = get_config('_treesitter').setup,
-  }
-  use {
-    'nvim-treesitter/nvim-treesitter-refactor',
-    requires = { 'nvim-treesitter/nvim-treesitter' },
   }
   use {
     'JoosepAlviste/nvim-ts-context-commentstring',
