@@ -100,7 +100,14 @@ local function spec(use)
       "antoinemadec/FixCursorHold.nvim",
       'nvim-neotest/neotest-python',
       'nvim-neotest/neotest-plenary',
-      'nvim-neotest/neotest-vim-test'
+      'nvim-neotest/neotest-vim-test',
+      'marilari88/neotest-vitest',
+      'haydenmeade/neotest-jest',
+      'sidlatau/neotest-dart',
+      'nvim-neotest/neotest-go',
+      'rouge8/neotest-rust',
+      'Issafalcon/neotest-dotnet',
+      'MarkEmmons/neotest-deno',
     },
     config = get_config('_neotest').setup,
   }
