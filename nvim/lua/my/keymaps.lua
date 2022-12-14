@@ -155,16 +155,16 @@ local merge_default = function(map)
 end
 
 local set_map = function(map)
-  if map.lua then
-   _set_lua_keymap(map.mode, map.map, map.lua)
-   else
-  map = merge_default(map)
-  _keymap(
-    tostring(map.mode),
-    tostring(map.map),
-    tostring(map.cmd),
-    map.opt
-  )
+  if map.lua ~= nil then
+    _set_lua_keymap(map.mode, map.map, map.lua)
+  else
+    map = merge_default(map)
+    _keymap(
+      tostring(map.mode),
+      tostring(map.map),
+      tostring(map.cmd),
+      map.opt
+    )
   end
 end
 
