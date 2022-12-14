@@ -13,6 +13,17 @@ end
 local M = {}
 
 M.maps = {
+  neotest = {
+    name = 'neotest',
+    maps = {
+      -- Neo Test Run (nearest run)
+      -- { mode = 'n', map = 'ntr', lua = require('neotest').run.run(), },
+      -- Neo Test Run (current run)
+      --{ mode = 'n', map = 'ntc', lua = require("neotest").run.run(vim.fn.expand("%")), },
+      -- Neo Test Run (dup run)
+      --{ mode = 'n', map = 'ntc', lua = require("neotest").run.run({strategy = "dap"}), },
+    },
+  },
   ufo = {
     name = 'ufo',
     maps = {
@@ -144,6 +155,9 @@ local merge_default = function(map)
 end
 
 local set_map = function(map)
+  if map.lua then
+   _set_lua_keymap(map.mode, map.map, map.lua)
+   else
   map = merge_default(map)
   _keymap(
     tostring(map.mode),
@@ -151,6 +165,7 @@ local set_map = function(map)
     tostring(map.cmd),
     map.opt
   )
+  end
 end
 
 local set_maps = function(maps)
