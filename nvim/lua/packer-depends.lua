@@ -119,6 +119,10 @@ local function spec(use)
     requires = { 'folke/trouble.nvim', 'nvim-lua/plenary.nvim', 'akinsho/flutter-tools.nvim' },
     config = get_config('_telescope').setup,
   }
+  use {
+    'folke/which-key.nvim',
+    config = get_config('_whichkey').setup,
+  }
   use 'voldikss/vim-floaterm'
   use {
     'akinsho/toggleterm.nvim',
