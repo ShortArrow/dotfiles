@@ -55,7 +55,7 @@ M.maps = {
   trouble = {
     name = 'trouble',
     maps = {
-      { map = '<Leader>tt', cmd = ':TroubleToggle<CR>', },
+      { map = '<Leader>tr', cmd = ':TroubleToggle<CR>', },
     },
   },
   fzflua = {
@@ -91,7 +91,7 @@ M.maps = {
     name = 'toggleterm',
     maps = {
       -- normal (ToggleTerm Normal)
-      { map = '<Leader>spt', cmd = ':ToggleTerm', },
+      { map = '<Leader>tt', cmd = ':ToggleTerm<CR>', },
     },
   },
   lspsaga = {
