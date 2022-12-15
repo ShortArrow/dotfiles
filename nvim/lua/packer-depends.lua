@@ -208,6 +208,10 @@ local function spec(use)
     'tpope/vim-fugitive',
     config = get_config('_fugitive').setup,
   }
+  use {
+    'TimUntersberger/neogit',
+    requires = 'nvim-lua/plenary.nvim',
+  }
   -- use {
   --   'pwntester/octo.nvim',
   --   requires = {

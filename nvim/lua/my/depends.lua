@@ -18,6 +18,7 @@ local M = {
   ufo   = { name = 'ufo', keymaps = keymaps.Ufo },
   diffview   = { name = 'diffview', keymaps = keymaps.DiffView },
   hop   = { name = 'hop', keymaps = keymaps.Hop },
+  neogit   = { name = 'neogit', keymaps = keymaps.Neogit },
 }
 
 return M
