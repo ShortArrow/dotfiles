@@ -68,23 +68,6 @@ local function spec(use)
     disable = true,
   }
   -- ################################################
-  -- # Status line
-  -- ################################################
-  use {
-    'feline-nvim/feline.nvim',
-    require = { 'nvim-lua/plenary.nvim', 'lewis6991/gitsigns.nvim' },
-    config = get_config('_feline').setup,
-  }
-  use 'b0o/incline.nvim'
-  use {
-    'akinsho/bufferline.nvim',
-    tag = "v2.*",
-    requires = {
-      'kyazdani42/nvim-web-devicons'
-    },
-    config = get_config('_buffer_line').setup,
-  }
-  -- ################################################
   -- # Trouble
   -- ################################################
   use {
@@ -114,6 +97,23 @@ local function spec(use)
   -- ################################################
   -- # UI
   -- ################################################
+  use {
+    'feline-nvim/feline.nvim',
+    require = { 'nvim-lua/plenary.nvim', 'lewis6991/gitsigns.nvim' },
+    config = get_config('_feline').setup,
+  }
+  use {
+    'akinsho/bufferline.nvim',
+    tag = "v2.*",
+    requires = {
+      'kyazdani42/nvim-web-devicons'
+    },
+    config = get_config('_buffer_line').setup,
+  }
+  use {
+    'b0o/incline.nvim',
+    config = get_config('_incline').setup,
+  }
   use {
     'nvim-telescope/telescope.nvim',
     requires = { 'folke/trouble.nvim', 'nvim-lua/plenary.nvim', 'akinsho/flutter-tools.nvim' },
