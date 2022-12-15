@@ -115,6 +115,10 @@ local function spec(use)
     config = get_config('_incline').setup,
   }
   use {
+    'sindrets/diffview.nvim',
+    requires = 'nvim-lua/plenary.nvim',
+  }
+  use {
     'nvim-telescope/telescope.nvim',
     requires = { 'folke/trouble.nvim', 'nvim-lua/plenary.nvim', 'akinsho/flutter-tools.nvim' },
     config = get_config('_telescope').setup,
