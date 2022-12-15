@@ -24,10 +24,16 @@ M.maps = {
       --{ mode = 'n', map = 'ntc', lua = require("neotest").run.run({strategy = "dap"}), },
     },
   },
+  neogit = {
+    name = 'neogit',
+    maps = {
+      { mode = 'n', map = '<Leader>ng', lua = require('neogit').open, },
+    },
+  },
   ufo = {
     name = 'ufo',
     maps = {
-      { mode = 'n', map = 'zR', lua = require('ufo').openAllFolds, },
+      { mode = 'n', map = 'ng', lua = require('ufo').openAllFolds, },
       { mode = 'n', map = 'zM', lua = require('ufo').closeAllFolds, },
     },
   },
@@ -245,6 +251,7 @@ M.Ufo = function() common(M.maps.ufo) end
 M.NeoTest = function() common(M.maps.neotest) end
 M.DiffView = function() common(M.maps.diffview) end
 M.Hop = function() common(M.maps.hop) end
+M.Neogit = function() common(M.maps.neogit) end
 
 if _debugger.is_debug then
   _debugger.print('check duplication')
