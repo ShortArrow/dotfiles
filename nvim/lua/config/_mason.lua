@@ -66,7 +66,6 @@ M.setup = function()
         _opts.settings = _api.lang.python.pylsp
       elseif server_name == "powershell_es" then
         _opts.settings = _api.lang.pwsh.powershell_es
-        print(_opts.settings)
       end
       _nvim_lsp[server_name].setup(_opts)
     end
