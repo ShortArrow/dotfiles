@@ -5,3 +5,7 @@ services:
     build:
       context: ./playground/linux
     tty: true
+  docs:
+    build:
+      context: ./docsourus
+    tty: true
