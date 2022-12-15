@@ -220,6 +220,17 @@ local function spec(use)
     config = get_config('_indent').setup,
   }
   -- ################################################
+  -- # Comment
+  -- ################################################
+  use {
+    'numToStr/Comment.nvim',
+    config = get_config('_comment').setup,
+  }
+  -- use {
+  --   'JoosepAlviste/nvim-ts-context-commentstring',
+  --   requires = { 'nvim-treesitter/nvim-treesitter' },
+  -- }
+  -- ################################################
   -- # LSP
   -- ################################################
   use {
@@ -263,11 +274,6 @@ local function spec(use)
     },
     run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
     config = get_config('_treesitter').setup,
-  }
-  use {
-    'JoosepAlviste/nvim-ts-context-commentstring',
-    requires = { 'nvim-treesitter/nvim-treesitter' },
-    config = get_config('_comment').setup,
   }
   use {
     "hrsh7th/nvim-cmp",
