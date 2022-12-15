@@ -17,6 +17,7 @@ local M = {
   whichkey   = { name = 'whichkey', keymaps = keymaps.WhichKey },
   ufo   = { name = 'ufo', keymaps = keymaps.Ufo },
   diffview   = { name = 'diffview', keymaps = keymaps.DiffView },
+  hop   = { name = 'hop', keymaps = keymaps.Hop },
 }
 
 return M
