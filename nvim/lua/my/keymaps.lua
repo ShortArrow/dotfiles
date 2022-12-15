@@ -31,6 +31,40 @@ M.maps = {
       { mode = 'n', map = 'zM', lua = require('ufo').closeAllFolds, },
     },
   },
+  hop = {
+    name = 'hop',
+    maps = {
+      -- { mode = 'n', map = 'f',
+      --   lua = require('hop').hint_char1({
+      --     direction = require('hop.hint').HintDirection.AFTER_CURSOR,
+      --     current_line_only = true,
+      --   }),
+      -- },
+      -- { mode = 'n', map = 'F',
+      --   lua = require('hop').hint_char1({
+      --     direction = require('hop.hint').HintDirection.BEFORE_CURSOR,
+      --     current_line_only = true,
+      --   }),
+      -- },
+      -- { mode = 'n', map = 't',
+      --   lua = require('hop').hint_char1({
+      --     direction = require('hop.hint').HintDirection.AFTER_CURSOR,
+      --     current_line_only = true,
+      --     hint_offset = -1,
+      --   }),
+      -- },
+      -- { mode = 'n', map = 'T',
+      --   lua = require('hop').hint_char1({
+      --     direction = require('hop.hint').HintDirection.BEFORE_CURSOR,
+      --     current_line_only = true,
+      --     hint_offset = -1,
+      --   }),
+      -- },
+      { map = '<Leader>hw', cmd = ':HopWord<CR>', },
+      { map = '<Leader>hl', cmd = ':HopLine<CR>', },
+      { map = '<Leader>hp', cmd = ':HopPattern<CR>', },
+    },
+  },
   fugitive = {
     name = 'fugitive',
     maps = {
@@ -210,6 +244,7 @@ M.WhichKey = function() common(M.maps.whichkey) end
 M.Ufo = function() common(M.maps.ufo) end
 M.NeoTest = function() common(M.maps.neotest) end
 M.DiffView = function() common(M.maps.diffview) end
+M.Hop = function() common(M.maps.hop) end
 
 if _debugger.is_debug then
   _debugger.print('check duplication')
