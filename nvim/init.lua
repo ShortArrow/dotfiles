@@ -31,6 +31,3 @@ require('config._mason').setup()
 -- local log_path = vim.fn.stdpath('cache') .. '/packer.nvim.log'
 -- print log_path
 ignition.start()
--- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
-vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
