@@ -45,6 +45,12 @@ M.maps = {
       { map = '<Leader>gs', cmd = ':Git status<CR>', },
     },
   },
+  whichkey = {
+    name = 'whichkey',
+    maps = {
+      { map = '<Leader>wk', cmd = ':WhichKey<CR>', },
+    },
+  },
   flutter = {
     name = 'flutter',
     maps = {
@@ -219,6 +225,16 @@ M.LspSaga = function()
   common(M.maps.lspsaga)
 end
 
+M.WhichKey = function()
+  common(M.maps.whichkey)
+end
+
+M.Ufo = function()
+  common(M.maps.ufo)
+end
+M.NeoTest = function()
+  common(M.maps.neotest)
+end
 if _debugger.is_debug then
   _debugger.print('check duplication')
 end
