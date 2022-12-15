@@ -16,6 +16,7 @@ local M = {
   python     = { name = 'python', env = api.lang.python.env },
   whichkey   = { name = 'whichkey', keymaps = keymaps.WhichKey },
   ufo   = { name = 'ufo', keymaps = keymaps.Ufo },
+  diffview   = { name = 'diffview', keymaps = keymaps.DiffView },
 }
 
 return M

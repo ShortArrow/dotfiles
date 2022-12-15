@@ -45,6 +45,17 @@ M.maps = {
       { map = '<Leader>gs', cmd = ':Git status<CR>', },
     },
   },
+  diffview = {
+    name = 'diffview',
+    maps = {
+      { map = '<Leader>dvh', cmd = ':DiffviewFileHistory<CR>', },
+      { map = '<Leader>dvc', cmd = ':DiffviewClose<CR>', },
+      { map = '<Leader>dvt', cmd = ':DiffviewToggleFiles<CR>', },
+      { map = '<Leader>dvf', cmd = ':DiffviewFocusFiles<CR>', },
+      { map = '<Leader>dvr', cmd = ':DiffviewRefresh<CR>', },
+      { map = '<Leader>dvo', cmd = ':DiffviewOpen<CR>', },
+    },
+  },
   whichkey = {
     name = 'whichkey',
     maps = {
@@ -185,56 +196,21 @@ local common = function(pack)
   _debugger.print("load keymaps of " .. pack.name)
 end
 
-M.Fugitive = function()
-  common(M.maps.fugitive)
-end
+M.Fugitive = function() common(M.maps.fugitive) end
+M.Flutter = function() common(M.maps.flutter) end
+M.Trouble = function() common(M.maps.trouble) end
+M.FzfLua = function() common(M.maps.fzflua) end
+M.Packer = function() common(M.maps.packer) end
+M.VFiler = function() common(M.maps.vfiler) end
+M.Common = function() common(M.maps.common) end
+M.Floaterm = function() common(M.maps.floaterm) end
+M.ToggleTerm = function() common(M.maps.toggleterm) end
+M.LspSaga = function() common(M.maps.lspsaga) end
+M.WhichKey = function() common(M.maps.whichkey) end
+M.Ufo = function() common(M.maps.ufo) end
+M.NeoTest = function() common(M.maps.neotest) end
+M.DiffView = function() common(M.maps.diffview) end
 
-M.Flutter = function()
-  common(M.maps.flutter)
-end
-
-M.Trouble = function()
-  common(M.maps.trouble)
-end
-
-M.FzfLua = function()
-  common(M.maps.fzflua)
-end
-
-M.Packer = function()
-  common(M.maps.packer)
-end
-
-M.VFiler = function()
-  common(M.maps.vfiler)
-end
-
-M.Common = function()
-  common(M.maps.common)
-end
-
-M.Floaterm = function()
-  common(M.maps.floaterm)
-end
-
-M.ToggleTerm = function()
-  common(M.maps.toggleterm)
-end
-
-M.LspSaga = function()
-  common(M.maps.lspsaga)
-end
-
-M.WhichKey = function()
-  common(M.maps.whichkey)
-end
-
-M.Ufo = function()
-  common(M.maps.ufo)
-end
-M.NeoTest = function()
-  common(M.maps.neotest)
-end
 if _debugger.is_debug then
   _debugger.print('check duplication')
 end
