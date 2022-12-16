@@ -258,10 +258,6 @@ local function spec(use)
     'numToStr/Comment.nvim',
     config = get_config('_comment').setup,
   }
-  -- use {
-  --   'JoosepAlviste/nvim-ts-context-commentstring',
-  --   requires = { 'nvim-treesitter/nvim-treesitter' },
-  -- }
   -- ################################################
   -- # LSP
   -- ################################################
@@ -304,7 +300,10 @@ local function spec(use)
   use {
     'nvim-treesitter/nvim-treesitter',
     requires = {
+      'JoosepAlviste/nvim-ts-context-commentstring',
+      'windwp/nvim-ts-autotag',
       'nvim-treesitter/nvim-treesitter-refactor',
+      'nvim-treesitter/nvim-treesitter-context',
       'windwp/nvim-ts-autotag',
       'p00f/nvim-ts-rainbow',
     },
