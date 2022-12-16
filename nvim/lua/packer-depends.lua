@@ -36,6 +36,7 @@ local function spec(use)
     'folke/tokyonight.nvim',
     config = get_config('_tokyonight').setup,
   }
+  use { 'RRethy/vim-illuminate' }
   -- ################################################
   -- # Fonts
   -- ################################################
@@ -293,7 +294,7 @@ local function spec(use)
     after = "nvim-cmp",
     config = get_config('_tabnine').setup,
   }
-  use{
+  use {
     'KadoBOT/cmp-plugins',
     config = get_config('_cmp_plugins').setup,
   }
@@ -312,7 +313,7 @@ local function spec(use)
       'hrsh7th/cmp-calc',
       'hrsh7th/cmp-emoji',
       'jc-doyle/cmp-pandoc-references',
-      'KadoBOT/cmp-plugin',
+      'KadoBOT/cmp-plugins',
       'octaltree/cmp-look',
       'quangnguyen30192/cmp-nvim-ultisnips',
       'ray-x/cmp-treesitter',
