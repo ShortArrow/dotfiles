@@ -37,6 +37,10 @@ local function spec(use)
     config = get_config('_tokyonight').setup,
   }
   use { 'RRethy/vim-illuminate' }
+  use {
+    "folke/twilight.nvim",
+    config = get_config('_twilight').setup,
+  }
   -- ################################################
   -- # Fonts
   -- ################################################
