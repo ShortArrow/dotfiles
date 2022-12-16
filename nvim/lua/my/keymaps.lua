@@ -99,7 +99,7 @@ M.maps = {
   whichkey = {
     name = 'whichkey',
     maps = {
-      { map = '<Leader>wk', cmd = ':WhichKey<CR>', },
+      { map = '<Leader>k', cmd = ':WhichKey<CR>', },
     },
   },
   flutter = {
