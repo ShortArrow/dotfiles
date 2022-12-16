@@ -106,6 +106,10 @@ local function spec(use)
   -- # UI
   -- ################################################
   use {
+    'simrat39/symbols-outline.nvim',
+    config = get_config('_symbols_outline').setup,
+  }
+  use {
     'feline-nvim/feline.nvim',
     require = { 'nvim-lua/plenary.nvim', 'lewis6991/gitsigns.nvim' },
     config = get_config('_feline').setup,
@@ -313,7 +317,6 @@ local function spec(use)
       'jc-doyle/cmp-pandoc-references',
       'KadoBOT/cmp-plugins',
       'octaltree/cmp-look',
-      'quangnguyen30192/cmp-nvim-ultisnips',
       'ray-x/cmp-treesitter',
       'tzachar/cmp-tabnine',
     },
@@ -326,25 +329,8 @@ local function spec(use)
     'hrsh7th/cmp-cmdline',
     config = get_config('_cmp_cli').setup,
   }
-  -- For vsnip users.
   use 'hrsh7th/cmp-vsnip'
   use 'hrsh7th/vim-vsnip'
-  -- For luasnip users.
-  -- use 'L3MON4D3/LuaSnip'
-  -- use 'saadparwaiz1/cmp_luasnip'
-  -- For ultisnips users.
-  -- use 'SirVer/ultisnips'
-  -- use 'quangnguyen30192/cmp-nvim-ultisnips'
-  -- For snippy users.
-  -- use 'dcampos/nvim-snippy'
-  -- use 'dcampos/cmp-snippy'
-
-
-  -- use {
-  --    'tzachar/cmp-tabnine',
-  --    run = '$HOME/.local/share/nvim/site/pack/packer/start/cmp-tabnine/install.sh',
-  --    requires = 'hrsh7th/nvim-cmp'
-  -- }
   use 'hrsh7th/vim-vsnip-integ'
   use {
     'jose-elias-alvarez/null-ls.nvim',

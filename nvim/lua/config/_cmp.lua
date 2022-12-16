@@ -18,7 +18,6 @@ M.setup = function()
     vsnip = "[VSnip]",
     path = "[Path]",
   }
-  local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
   local cmp = require('cmp')
   if cmp ~= nil then
     cmp.setup({
@@ -40,7 +39,6 @@ M.setup = function()
         -- REQUIRED - you must specify a snippet engine
         expand = function(args)
           vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-          vim.fn["UltiSnips#Anon"](args.body)
           -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
           -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
           -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
@@ -59,32 +57,20 @@ M.setup = function()
           behavior = cmp.ConfirmBehavior.Replace,
           select = true -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         }),
-        -- ['<Tab>'] = function(fallback)
-        --   if cmp.visible() then
-        --     cmp.select_next_item()
-        --   else
-        --     fallback()
-        --   end
-        -- end,
-        -- ['<S-Tab>'] = function(fallback)
-        --   if cmp.visivle() then
-        --     cmp.select_prev_item()
-        --   else
-        --     fallback()
-        --   end
-        -- end,
-        ["<Tab>"] = cmp.mapping(
-          function(fallback)
-            cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
-          end,
-          { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
-        ),
-        ["<S-Tab>"] = cmp.mapping(
-          function(fallback)
-            cmp_ultisnips_mappings.jump_backwards(fallback)
-          end,
-          { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
-        ),
+        ['<Tab>'] = function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          else
+            fallback()
+          end
+        end,
+        ['<S-Tab>'] = function(fallback)
+          if cmp.visivle() then
+            cmp.select_prev_item()
+          else
+            fallback()
+          end
+        end,
       }),
       sources = cmp.config.sources({
         { name = 'calc' },
@@ -109,7 +95,7 @@ M.setup = function()
         },
         { name = 'vsnip' }, -- For vsnip users.
         -- { name = 'luasnip' }, -- For luasnip users.
-        { name = 'ultisnips' }, -- For ultisnips users.
+        -- { name = 'ultisnips' }, -- For ultisnips users.
         -- { name = 'snippy' }, -- For snippy users.
       }, {
         { name = 'buffer' },
