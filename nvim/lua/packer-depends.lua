@@ -293,9 +293,14 @@ local function spec(use)
     after = "nvim-cmp",
     config = get_config('_tabnine').setup,
   }
+  use{
+    'KadoBOT/cmp-plugins',
+    config = get_config('_cmp_plugins').setup,
+  }
   use {
     "hrsh7th/nvim-cmp",
     requires = {
+      'andersevenrud/cmp-tmux',
       'chrisgrieser/cmp-nerdfont',
       'f3fora/cmp-spell',
       'hrsh7th/cmp-nvim-lua',
@@ -307,6 +312,7 @@ local function spec(use)
       'hrsh7th/cmp-calc',
       'hrsh7th/cmp-emoji',
       'jc-doyle/cmp-pandoc-references',
+      'KadoBOT/cmp-plugin',
       'octaltree/cmp-look',
       'quangnguyen30192/cmp-nvim-ultisnips',
       'ray-x/cmp-treesitter',
