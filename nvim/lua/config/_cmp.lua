@@ -20,6 +20,19 @@ M.setup = function()
   local cmp = require('cmp')
   if cmp ~= nil then
     cmp.setup({
+      sorting = {
+        priority_weight = 2,
+        comparators = {
+          compare.offset,
+          compare.exact,
+          compare.score,
+          compare.recently_used,
+          compare.kind,
+          compare.sort_text,
+          compare.length,
+          compare.order,
+        },
+      },
       snippet = {
         -- REQUIRED - you must specify a snippet engine
         expand = function(args)
