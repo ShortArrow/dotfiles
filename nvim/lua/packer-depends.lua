@@ -287,16 +287,28 @@ local function spec(use)
     config = get_config('_treesitter').setup,
   }
   use {
+    'tzachar/cmp-tabnine',
+    requires = 'hrsh7th/nvim-cmp',
+    run = api.env.is_win_os() and 'powershell ./install.ps1' or './install.sh',
+    after = "nvim-cmp",
+    config = get_config('_tabnine').setup,
+  }
+  use {
     "hrsh7th/nvim-cmp",
     requires = {
+      'chrisgrieser/cmp-nerdfont',
+      'ray-x/cmp-treesitter',
+      'jc-doyle/cmp-pandoc-references',
+      'f3fora/cmp-spell',
+      'hrsh7th/cmp-nvim-lua',
       'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-nvim-lsp-signature-help',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-nvim-lua',
-      'octaltree/cmp-look',
       'hrsh7th/cmp-calc',
-      'f3fora/cmp-spell',
       'hrsh7th/cmp-emoji',
+      'octaltree/cmp-look',
       'quangnguyen30192/cmp-nvim-ultisnips',
     },
     config = get_config('_cmp').setup,

@@ -19,10 +19,10 @@ M.setup = function()
           -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
         end,
       },
-      -- window = {
-      -- completion = cmp.config.window.bordered(),
-      -- documentation = cmp.config.window.bordered(),
-      -- },
+      window = {
+        -- completion = cmp.config.window.bordered(),
+        -- documentation = cmp.config.window.bordered(),
+      },
       mapping = cmp.mapping.preset.insert({
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -49,6 +49,23 @@ M.setup = function()
       }),
       sources = cmp.config.sources({
         { name = 'nvim_lsp' },
+        { name = 'nvim_lsp_signature_help' },
+        { name = 'nerdfont' },
+        { name = 'calc' },
+        { name = 'nvim_lua' },
+        { name = 'emoji' },
+        { name = 'treesitter' },
+        { name = 'pandac_reference' },
+        { name = 'cmp_tabnin' },
+        {
+          name = 'look',
+          keyword_length = 2,
+          option = {
+            convert_case = true,
+            loud = true
+            --dict = '/usr/share/dict/words'
+          }
+        },
         { name = 'vsnip' }, -- For vsnip users.
         -- { name = 'luasnip' }, -- For luasnip users.
         -- { name = 'ultisnips' }, -- For ultisnips users.

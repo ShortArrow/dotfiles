@@ -1,7 +1,8 @@
 local M = {}
 
 function M.setup()
-  require('tokyonight')
+  local tn = require('tokyonight')
+  tn.setup()
   vim.g.tokyonight_style = "night"
   vim.g.tokyonight_italic_functions = true
   vim.g.tokyonight_dark_sidebar = true
