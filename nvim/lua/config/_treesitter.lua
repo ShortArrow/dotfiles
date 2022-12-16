@@ -7,6 +7,9 @@ M.setup = function()
       enable = true
     },
     auto_install = true,
+    autotag = {
+      enable = true,
+    },
     highlight = {
       -- `false` will disable the whole extension
       enable = true,
