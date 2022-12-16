@@ -54,6 +54,11 @@ local function spec(use)
     'phaazon/hop.nvim',
     config = get_config('_hop').setup,
   }
+  use {
+    "kylechui/nvim-surround",
+    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    config = get_config('_surround').setup
+  }
   -- ################################################
   -- # Explorer
   -- ################################################
