@@ -213,17 +213,15 @@ local function spec(use)
     'TimUntersberger/neogit',
     requires = 'nvim-lua/plenary.nvim',
   }
-  -- use {
-  --   'pwntester/octo.nvim',
-  --   requires = {
-  --     'nvim-lua/plenary.nvim',
-  --     'nvim-telescope/telescope.nvim',
-  --     'kyazdani42/nvim-web-devicons',
-  --   },
-  --   config = function()
-  --     require "octo".setup()
-  --   end
-  -- }
+  use {
+    'pwntester/octo.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+      'kyazdani42/nvim-web-devicons',
+    },
+    config = get_config('_octo').setup,
+  }
   -- ################################################
   -- # Indent and Bracket
   -- ################################################
