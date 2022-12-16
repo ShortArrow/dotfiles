@@ -13,6 +13,9 @@ M.setup = function()
     nvim_lsp = "[LSP]",
     nvim_lua = "[Lua]",
     cmp_tabnine = "[TN]",
+    treesitter = "[TS]",
+    plugins = "[Plugins]",
+    vsnip = "[VSnip]",
     path = "[Path]",
   }
   local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
