@@ -13,6 +13,12 @@ end
 local M = {}
 
 M.maps = {
+  lazygit = {
+    name = 'lazygit',
+    maps = {
+      { map = '<Leader>lg', cmd = ':LazyGit<CR>', },
+    },
+  },
   neotest = {
     name = 'neotest',
     maps = {
@@ -252,6 +258,7 @@ M.NeoTest = function() common(M.maps.neotest) end
 M.DiffView = function() common(M.maps.diffview) end
 M.Hop = function() common(M.maps.hop) end
 M.Neogit = function() common(M.maps.neogit) end
+M.LazyGit = function() common(M.maps.lazygit) end
 
 if _debugger.is_debug then
   _debugger.print('check duplication')

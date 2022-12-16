@@ -239,6 +239,7 @@ local function spec(use)
     },
     config = get_config('_octo').setup,
   }
+  use { 'kdheepak/lazygit.nvim' }
   -- ################################################
   -- # Indent and Bracket
   -- ################################################
