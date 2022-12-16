@@ -297,8 +297,6 @@ local function spec(use)
     "hrsh7th/nvim-cmp",
     requires = {
       'chrisgrieser/cmp-nerdfont',
-      'ray-x/cmp-treesitter',
-      'jc-doyle/cmp-pandoc-references',
       'f3fora/cmp-spell',
       'hrsh7th/cmp-nvim-lua',
       'hrsh7th/cmp-nvim-lsp',
@@ -308,8 +306,11 @@ local function spec(use)
       'hrsh7th/cmp-nvim-lua',
       'hrsh7th/cmp-calc',
       'hrsh7th/cmp-emoji',
+      'jc-doyle/cmp-pandoc-references',
       'octaltree/cmp-look',
       'quangnguyen30192/cmp-nvim-ultisnips',
+      'ray-x/cmp-treesitter',
+      'tzachar/cmp-tabnine',
     },
     config = get_config('_cmp').setup,
   }
