@@ -266,6 +266,10 @@ local function spec(use)
   -- # LSP
   -- ################################################
   use {
+    'mfussenegger/nvim-lint',
+    config = get_config('_lint').setup,
+  }
+  use {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
