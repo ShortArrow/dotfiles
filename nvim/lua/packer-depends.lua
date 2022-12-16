@@ -59,6 +59,10 @@ local function spec(use)
     tag = "*", -- Use for stability; omit to use `main` branch for the latest features
     config = get_config('_surround').setup
   }
+  use {
+    'stevearc/aerial.nvim',
+    config = get_config('_aerial').setup
+  }
   -- ################################################
   -- # Explorer
   -- ################################################
