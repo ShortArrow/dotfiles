@@ -19,6 +19,7 @@ local M = {
   diffview   = { name = 'diffview', keymaps = keymaps.DiffView },
   hop   = { name = 'hop', keymaps = keymaps.Hop },
   neogit   = { name = 'neogit', keymaps = keymaps.Neogit },
+  lazygit   = { name = 'lazygit', keymaps = keymaps.LazyGit },
 }
 
 return M
