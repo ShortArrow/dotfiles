@@ -67,6 +67,10 @@ local function spec(use)
     'stevearc/aerial.nvim',
     config = get_config('_aerial').setup
   }
+  use {
+    "tversteeg/registers.nvim",
+    config = get_config('_registers').setup,
+  }
   -- ################################################
   -- # Explorer
   -- ################################################
