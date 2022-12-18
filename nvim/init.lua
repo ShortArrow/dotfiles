@@ -22,6 +22,7 @@ vim.opt.foldenable = true
 vim.opt.mousemodel = 'extend'
 vim.opt.visualbell = true
 vim.opt.helplang = 'ja' --, 'en'
+vim.opt.inccommand = 'split'
 vim.opt.fillchars = {
   vert = "│",
   fold = "f",
