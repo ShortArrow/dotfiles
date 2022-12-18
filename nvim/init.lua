@@ -43,7 +43,8 @@ vim.opt.listchars = {
 if not pcall(require, "impatient") then
   print "Failed to load impatient."
 end
-require('packer-depends')
+
+ignition.load_plugins()
 require('config._mason').start()
 require('config._mason').setup()
 -- local log_path = vim.fn.stdpath('cache') .. '/packer.nvim.log'

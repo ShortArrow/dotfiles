@@ -71,6 +71,10 @@ local function spec(use)
     "tversteeg/registers.nvim",
     config = get_config('_registers').setup,
   }
+  use {
+    'jpalardy/vim-slime',
+    config = get_config('_slime').setup,
+  }
   -- ################################################
   -- # Explorer
   -- ################################################

@@ -1,5 +1,5 @@
 local utils = require('my.api').utils
-
+local debugger = require('my.debugger')
 local M = {}
 
 M.start = function()
@@ -13,6 +13,15 @@ M.start = function()
         depend.env()
       end
     end
+  end
+end
+
+M.load_plugins = function()
+  if debugger.is_debug then
+    require('packer-depends')
+  else
+    require('packer-depends')
+    --require('plugin.packer_compiled')
   end
 end
 
