@@ -33,14 +33,14 @@ M.maps = {
   neogit = {
     name = 'neogit',
     maps = {
-      { mode = 'n', map = '<Leader>ng', lua = require('neogit').open, },
+      { map = '<Leader>ng', lua = require('neogit').open, },
     },
   },
   ufo = {
     name = 'ufo',
     maps = {
-      { mode = 'n', map = 'ng', lua = require('ufo').openAllFolds, },
-      { mode = 'n', map = 'zM', lua = require('ufo').closeAllFolds, },
+      { map = 'ng', lua = require('ufo').openAllFolds, },
+      { map = 'zM', lua = require('ufo').closeAllFolds, },
     },
   },
   hop = {
@@ -112,7 +112,7 @@ M.maps = {
     name = 'flutter',
     maps = {
       { map = '<Leader>fr', cmd = ':FlutterRun -d web-server<CR>', },
-      { map = '<Leader>fc', cmd = ':lua require("telescope").extensions.flutter.commands()<CR>', },
+      { map = '<Leader>fc', lua = require("telescope").extensions.flutter.commands, },
     },
   },
   trouble = {
@@ -130,7 +130,7 @@ M.maps = {
   packer = {
     name = 'packer',
     maps = {
-      { map = '<Leader>ps', cmd = ':lua require("packer").sync()<CR>', },
+      { mode = 'n', map = '<Leader>ps', lua = require("packer").sync, },
     },
   },
   vfiler = {
@@ -154,7 +154,17 @@ M.maps = {
     name = 'toggleterm',
     maps = {
       -- normal (ToggleTerm Normal)
-      { map = '<Leader>tt', cmd = ':ToggleTerm<CR>', },
+      { map = '<Leader>tt', lua = require('config/_toggleterm').toggle_repl_term, },
+      { map = '<Leader>flzd', cmd = ':FloatermNew lzd<CR>', },
+      { mode = 'n', map = '<C-k>', '<C-w><C-w>W', },
+      { mode = 'i', map = '<C-k>', cmd = '<Esc><C-w>W', },
+      { mode = 't', map = '<C-k>', cmd = '<C-Bslash><C-n><C-w>W', },
+      { mode = 'n', map = '', cmd = ':', },
+      { mode = 'i', map = '', cmd = '<Esc><C-o>:', },
+      { mode = 't', map = '', cmd = '<C-Bslash><C-n><C-w>:', },
+      { mode = 'n', map = '', cmd = '/', },
+      { mode = 'i', map = '', cmd = '<Esc><C-o>/', },
+      { mode = 't', map = '', cmd = '<C-Bslash><C-n>/', },
     },
   },
   lspsaga = {
@@ -171,13 +181,13 @@ M.maps = {
     maps = {
       -- # lsp keymaps
       -- show variables infomation
-      { map = '<Leader>lk', cmd = ':lua vim.lsp.buf.hover()<CR>', },
+      { map = '<Leader>lk', lua = vim.lsp.buf.hover, },
       -- jump to definition (Lsp Definition)
-      { map = '<Leader>ld', cmd = ':lua vim.lsp.buf.definition()<CR>', },
+      { map = '<Leader>ld', lua = vim.lsp.buf.definition, },
       -- auto formatting (Lsp Formatting)
-      { map = '<Leader>lf', cmd = ':lua vim.lsp.buf.format()<CR>', },
+      { map = '<Leader>lf', lua = vim.lsp.buf.format, },
       -- show references (Lsp References)
-      { map = '<Leader>lr', cmd = ':lua vim.lsp.buf.references()<CR>', },
+      { map = '<Leader>lr', lua = vim.lsp.buf.references, },
       -- rename (Lsp Name)
       -- { map = '<Leader>ln', cmd = ':lua vim.lsp.buf.rename()<CR>', },
       -- code_action (Lsp Action)
@@ -219,6 +229,9 @@ end
 
 local set_map = function(map)
   if map.lua ~= nil then
+    if map.mode == nil then
+      map.mode = 'n'
+    end
     _set_lua_keymap(map.mode, map.map, map.lua)
   else
     map = merge_default(map)
