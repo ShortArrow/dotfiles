@@ -335,7 +335,6 @@ local function spec(use)
       'KadoBOT/cmp-plugins',
       'octaltree/cmp-look',
       'ray-x/cmp-treesitter',
-      'tzachar/cmp-tabnine',
     },
     config = get_config('_cmp').setup,
   }
