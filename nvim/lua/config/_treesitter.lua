@@ -2,6 +2,7 @@ local M = {}
 
 M.setup = function()
   require('nvim-ts-autotag').setup()
+  require('nvim-treesitter.install').compilers = { "zig" }
   require('nvim-treesitter.configs').setup {
     context_commentstring = {
       enable = true
