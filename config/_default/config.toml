@@ -1,0 +1,8 @@
+# config/_default/config.toml
+
+baseURL = "/"
+languageCode = "en"
+
+DefaultContentLanguage = "en"
+# defaultContetLanguageInSubdir = true
+hasCJKLanguage = true

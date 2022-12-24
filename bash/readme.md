@@ -1,3 +1,9 @@
+---
+title : 'Bash'
+description: "bash config is here"
+summary: "bash config"
+tags: ["docs"]
+---
 # my bash settings
 
 ## Usage
@@ -29,6 +35,6 @@
 
 ## LSP
 
-```
+```bash
 npm i -g bash-language-server
 ```

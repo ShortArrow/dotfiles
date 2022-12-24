@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # CONFIG
 
 configration of @ShortArrow
@@ -29,6 +25,7 @@ configration of @ShortArrow
   - Git
 1. Placement Method
   - Git & Symboliclink
+
 ## No Them No Life
 
 - neovim
@@ -51,6 +48,19 @@ configration of @ShortArrow
   - naabu
 - Powershell
 - GitHub
+
+## Add Docs
+
+```
+cd ./content/ja
+ln -s ../../bash ./bash
+```
+
+or
+
+```
+hugo new ./content/ja/newmd.md
+```
 
 ## Important Infomation Source
 
