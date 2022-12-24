@@ -1,3 +1,8 @@
+---
+title : 'Rust'
+summary: "rust config"
+tags: ["docs"]
+---
 # my rust settings
 
 ## Version Control

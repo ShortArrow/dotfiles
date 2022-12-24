@@ -1,3 +1,6 @@
+---
+url : '/lua'
+---
 # my lua settings
 
 Install [luarocks](https://luarocks.org/)

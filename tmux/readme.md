@@ -1,3 +1,9 @@
+---
+title : 'Tmux'
+summary: "tmux config"
+tags: ["docs"]
+---
+
 # my tmux config 
 
 <!--toc:start-->

@@ -1,0 +1,4 @@
+# config/_default/module.toml
+
+[[imports]]
+path = "github.com/jpanther/congo"

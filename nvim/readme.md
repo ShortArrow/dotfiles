@@ -1,3 +1,9 @@
+---
+title : 'Neovim'
+summary: "neovim config"
+tags: ["docs"]
+---
+
 # my nvim settings
 
 ## Usage
@@ -23,17 +29,17 @@ ls ~/.config/nvim # check link
 
 ## Install Packer
 
-https://github.com/wbthomason/packer.nvim/blob/master/README.md#quickstart
+<https://github.com/wbthomason/packer.nvim/blob/master/README.md#quickstart>
 
 ### win
 
-```
+```bash
 git clone https://github.com/wbthomason/packer.nvim "$env:LOCALAPPDATA\nvim-data\site\pack\packer\start\packer.nvim"
 ```
 
 ### Linux
 
-```
+```bash
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 ```

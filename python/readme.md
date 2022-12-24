@@ -1,3 +1,8 @@
+---
+title : 'Python'
+summary: "python config"
+tags: ["docs"]
+---
 # my python settings
 
 ## Install python
