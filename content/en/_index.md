@@ -1,3 +1,8 @@
 ## This is Dotfiles of me!
 
-( [ja-jp](/ja) | [en-us](/) )
+{{< button href="/ja" target="_self" >}}
+ja-jp
+{{< /button >}}
+{{< button href="/" target="_self" >}}
+en-us
+{{< /button >}}

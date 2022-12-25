@@ -6,11 +6,6 @@ url = "/"
 weight = -200
 
 [[main]]
-name = "Blog"
-url = "/posts/"
-weight = 10
-
-[[main]]
 name = "Docs"
 url = "/docs/"
 weight = 10
@@ -19,11 +14,6 @@ weight = 10
 name = "Intro"
 url = "/intro/"
 weight = 10
-
-[[main]]
-name = "Topics"
-url = "/topics/"
-weight = 20
 
 [[footer]]
 name = "p.p."

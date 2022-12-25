@@ -5,9 +5,6 @@ languageName = "English"
 title = "Dotfiles"
 languageCode = "en"
 
-# logo = "img/twitter_icon_light_back.png"
-# description = "My awesome website"
-# copyright = "Copy, _right?_ :thinking_face:"
 [author]
 name = "ShortArrow"
 image = "img/twitter_icon_light_back.png"
