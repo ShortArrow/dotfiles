@@ -6,11 +6,6 @@ pageRef = "/ja"
 weight = -200
 
 [[main]]
-name = "Blog"
-url = "/ja/posts/"
-weight = 10
-
-[[main]]
 name = "Docs"
 url = "/ja/docs/"
 weight = 10
@@ -19,11 +14,6 @@ weight = 10
 name = "Intro"
 url = "/intro/"
 weight = 10
-
-[[main]]
-name = "Topics"
-url = "/ja/topics/"
-weight = 20
 
 [[footer]]
 name = "p.p."

@@ -4,5 +4,5 @@ baseURL = "/"
 languageCode = "en"
 
 DefaultContentLanguage = "en"
-# defaultContetLanguageInSubdir = true
+defaultContetLanguageInSubdir = true
 hasCJKLanguage = true

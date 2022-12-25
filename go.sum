@@ -1,4 +1,2 @@
-github.com/jpanther/congo v1.6.4 h1:Pf84RN3jXMYVbeZIyPCb5krSDIjvuwbo7sv5fCGwbAE=
-github.com/jpanther/congo v1.6.4/go.mod h1:fFwW7KKbofyaZgwLJdh6h1L51UZrSyymQgk31rclcuQ=
-github.com/luizdepra/hugo-coder v0.0.0-20221216144924-57d7d5eb05d9 h1:dk8JyiAiLTXDYtlTlDSxe/DV6C79MZCobP6CV5fCEcw=
-github.com/luizdepra/hugo-coder v0.0.0-20221216144924-57d7d5eb05d9/go.mod h1:9EQBf2rU+NPjlohGuKcEgdqSeOc3tIQoOty4xPpuUQ4=
+github.com/jpanther/congo/v2 v2.4.2 h1:c+WSf/9Mr+a/bR4w3YteHwnsS5eTWgkU0QC2Mqx9pjc=
+github.com/jpanther/congo/v2 v2.4.2/go.mod h1:1S7DRoO1ZYS4YUdFd1LjTkdyjQwsjFWd8TqSfz3Jd+M=
