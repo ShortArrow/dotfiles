@@ -1,3 +1,9 @@
+---
+title : 'Git Foresta'
+description: "git foresta status"
+summary: "git foresta"
+tags: ["docs"]
+---
 # my git-foresta settings
 
 ## Install

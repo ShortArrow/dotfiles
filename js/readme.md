@@ -1,3 +1,9 @@
+---
+title : 'JavaScript'
+description: "my javascript setting"
+summary: "javascript settings"
+tags: ["docs"]
+---
 # my javascript settings
 
 ## Version Management
