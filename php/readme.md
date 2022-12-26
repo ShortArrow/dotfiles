@@ -1,3 +1,9 @@
+---
+title : 'PHP'
+description: "PHP settings"
+summary: "PHP settings"
+tags: ["docs"]
+---
 # my php config
 
 ## Install LSP
