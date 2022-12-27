@@ -5,7 +5,10 @@ services:
     build:
       context: ./playground/linux
     tty: true
-  docs:
-    build:
-      context: ./docsourus
-    tty: true
+  docsserver:
+    image: klakegg/hugo:0.107.0
+    command: server
+    volumes:
+      - .:/src
+    ports:
+      - 1313:1313
