@@ -3,7 +3,7 @@
   ],
   "replacementPatterns": [
     {
-      "pattern": "^/(.*).md$",
+      "pattern": "^/(.*)",
       "replacement": "file:///github/workspace/content/en/$1.md"
     }
   ],
