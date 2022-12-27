@@ -6,5 +6,5 @@
 
 # List
 
-- [bash](/bash/readme.md)
+- [bash](/docs/bash.md)
 
