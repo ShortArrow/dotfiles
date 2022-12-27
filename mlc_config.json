@@ -4,7 +4,7 @@
   "replacementPatterns": [
     {
       "pattern": "^/",
-      "replacement": "{{BASEURL}}/"
+      "replacement": "file://./content/"
     }
   ],
   "httpHeaders": [
