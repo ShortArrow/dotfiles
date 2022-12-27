@@ -77,3 +77,10 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - uses: gaurav-nelson/github-action-markdown-link-check@v1
+      with:
+        use-quiet-mode: no
+        use-verbose-mode: no
+        folder-path: content/
+        file-path: ./README.md, ./LICENSE
+        file-extension: .md
+        max-depth: -1
