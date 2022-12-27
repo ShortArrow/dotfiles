@@ -2,6 +2,15 @@
 
 configration of @ShortArrow
 
+## Quick Test on Docker
+
+```
+git clone https://github.com/ShortArrow/dotfiles.git
+cd dotfiles
+docker compose up -d --build
+docker compose exec nvim /bin/bash -c nvim
+```
+
 ## overview
 
 1. install neovim
@@ -13,18 +22,6 @@ configration of @ShortArrow
 1. install git-foresta
 1. install tmux
 1. make symboliclink of tmux dotfile
-
-## Design Policy
-
-1. Architecture
-  - Install
-  - Config
-  - Usage
-  - Source
-1. Version Manage
-  - Git
-1. Placement Method
-  - Git & Symboliclink
 
 ## No Them No Life
 
