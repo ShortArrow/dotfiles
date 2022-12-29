@@ -28,6 +28,7 @@ function M.setup()
       colors.error = "#ff0000"
     end
   }
+  vim.cmd[[colorscheme tokyonight]]
 end
 
 return M
