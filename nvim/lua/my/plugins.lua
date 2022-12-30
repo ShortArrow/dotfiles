@@ -6,11 +6,17 @@ local function get_config(name)
   return require(string.format('config.%s', name))
 end
 
+M.firenvim = {
+  {
+    'glacambre/firenvim',
+    run = function() vim.fn['firenvim#install'](0) end
+  },
+}
 M.ordinalnvim = {
   -- self manage
-  {"wbthomason/packer.nvim"},
-  {"lewis6991/impatient.nvim"},
-  {"nvim-lua/plenary.nvim"},
+  { "wbthomason/packer.nvim" },
+  { "lewis6991/impatient.nvim" },
+  { "nvim-lua/plenary.nvim" },
   -- ################################################
   -- # Color
   -- ################################################
@@ -142,7 +148,7 @@ M.ordinalnvim = {
     'folke/which-key.nvim',
     config = get_config('_whichkey').setup,
   },
-  {"voldikss/vim-floaterm"},
+  { "voldikss/vim-floaterm" },
   {
     'akinsho/toggleterm.nvim',
     tag = '*',
@@ -184,27 +190,27 @@ M.ordinalnvim = {
     requires = { 'nvim-lua/plenary.nvim' },
     config = get_config('_flutter').setup,
   },
-  {"mfussenegger/nvim-dap"},
+  { "mfussenegger/nvim-dap" },
   -- ################################################
   -- # Dart
   -- ################################################
-  {"dart-lang/dart-vim-plugin"},
-  {"natebosch/vim-lsc"},
-  {"natebosch/vim-lsc-dart"},
-  {"jiangmiao/auto-pairs"},
+  { "dart-lang/dart-vim-plugin" },
+  { "natebosch/vim-lsc" },
+  { "natebosch/vim-lsc-dart" },
+  { "jiangmiao/auto-pairs" },
   { 'lervag/vimtex', opt = true }, -- Use braces when passing options
   -- ################################################
   -- # Lua
   -- ################################################
   -- Install this plugin.
-  {"tjdevries/nlua.nvim"},
+  { "tjdevries/nlua.nvim" },
   -- (OPTIONAL): This is recommended to get better auto-completion UX experience for builtin LSP.
   -- {"nvim-lua/completion-nvim"},
   -- (OPTIONAL): This is a suggested plugin to get better Lua syntax highlighting
   --   but it's not currently required
-  {"euclidianAce/BetterLua.vim"},
+  { "euclidianAce/BetterLua.vim" },
   -- (OPTIONAL): If you wish to have fancy lua folds, you can check this out.
-  {"tjdevries/manillua.nvim"},
+  { "tjdevries/manillua.nvim" },
   -- ################################################
   -- # Git
   -- ################################################
@@ -320,16 +326,16 @@ M.ordinalnvim = {
     },
     config = get_config('_cmp').setup,
   },
-  {"hrsh7th/cmp-nvim-lsp"},
-  {"hrsh7th/cmp-buffer"},
-  {"hrsh7th/cmp-path"},
+  { "hrsh7th/cmp-nvim-lsp" },
+  { "hrsh7th/cmp-buffer" },
+  { "hrsh7th/cmp-path" },
   {
     'hrsh7th/cmp-cmdline',
     config = get_config('_cmp_cli').setup,
   },
-  {"hrsh7th/cmp-vsnip"},
-  {"hrsh7th/vim-vsnip"},
-  {"hrsh7th/vim-vsnip-integ"},
+  { "hrsh7th/cmp-vsnip" },
+  { "hrsh7th/vim-vsnip" },
+  { "hrsh7th/vim-vsnip-integ" },
   {
     'jose-elias-alvarez/null-ls.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
