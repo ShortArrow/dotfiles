@@ -1,5 +1,11 @@
 if vim.g.vscode then
   -- vscode extension
+elseif vim.g.started_by_firenvim then
+  -- firenvim extension
+  use {
+    'glacambre/firenvim',
+    run = function() vim.fn['firenvim#install'](0) end
+  }
 else
   -- ordinary neovim
   if not pcall(require, "impatient") then
