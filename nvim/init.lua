@@ -20,11 +20,13 @@ elseif vim.g.started_by_firenvim then
 
   local _packer = require('packer')
   local function spec(use)
-  local depends = plugins.firenvim
+    local plugins = require('my.plugins')
+    local depends = plugins.firenvim
     for _, depend in pairs(depends) do
       use(depend)
     end
   end
+
   _packer.startup {
     spec,
     config = {
