@@ -1,20 +1,17 @@
 local plugins = require('my.plugins')
-local install_path = ("%s/site/pack/packer-lib/opt/packer.nvim"):format(vim.fn.stdpath "data")
 
-local function install_packer()
-  vim.fn.termopen(("git clone https://github.com/wbthomason/packer.nvim %q"):format(install_path))
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
 end
 
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  install_packer()
-end
-
-vim.cmd [[packadd packer.nvim]]
-
-function _G.packer_upgrade()
-  vim.fn.delete(install_path, "rf")
-  install_packer()
-end
+local packer_bootstrap = ensure_packer()
 
 vim.cmd [[command! PackerUpgrade :call v:lua.packer_upgrade()]]
 
@@ -24,6 +21,9 @@ local function spec(use)
   local depends = plugins.ordinalnvim
   for _, depend in pairs(depends) do
     use(depend)
+  end
+  if packer_bootstrap then
+    require('packer').sync()
   end
 end
 
