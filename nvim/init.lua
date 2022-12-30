@@ -1,11 +1,42 @@
 if vim.g.vscode then
   -- vscode extension
 elseif vim.g.started_by_firenvim then
-  -- firenvim extension
-  use {
-    'glacambre/firenvim',
-    run = function() vim.fn['firenvim#install'](0) end
+  vim.g.firenvim_config = {
+    globalSettings = {
+      alt = 'all',
+    },
+    localSettings = {
+      [".*"] = {
+        cmdline = 'neovim',
+        content = 'text',
+        priority = 0,
+        selector = 'textarea',
+        takeover = 'always',
+      },
+    }
   }
+  local options = require('my.options')
+  options.activate()
+
+  local _packer = require('packer')
+  local function spec(use)
+  local depends = plugins.firenvim
+    for _, depend in pairs(depends) do
+      use(depend)
+    end
+  end
+  _packer.startup {
+    spec,
+    config = {
+      display = {
+        open_fn = require("packer.util").float,
+      },
+      max_jobs = vim.fn.has "win32" == 1 and 5 or nil,
+    },
+  }
+
+  local ignition = require('my.ignition')
+  ignition.start()
 else
   -- ordinary neovim
   if not pcall(require, "impatient") then
