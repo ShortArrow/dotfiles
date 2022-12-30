@@ -54,3 +54,5 @@ Import-Module 'C:\tools\gsudo\Current\gsudoModule.psd1'
 # choco install lazygit
 New-Alias -Name lg -Value lazygit
 
+## lunarvim
+New-Alias -Name lvim -Value "$env:USERPROFILE\.local\bin\lvim.ps1"
