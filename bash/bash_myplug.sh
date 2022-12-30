@@ -90,3 +90,5 @@ export PATH="$DVM_DIR/bin:$PATH"
 export DVM_DIR="/home/who/.dvm"
 export PATH="$DVM_DIR/bin:$PATH"
 
+# lunarvim
+export lvim="$HOME/.local/bin/lvim"
