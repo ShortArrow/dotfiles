@@ -30,9 +30,6 @@ elseif vim.g.started_by_firenvim then
   _packer.startup {
     spec,
     config = {
-      display = {
-        open_fn = require("packer.util").float,
-      },
       max_jobs = vim.fn.has "win32" == 1 and 5 or nil,
     },
   }

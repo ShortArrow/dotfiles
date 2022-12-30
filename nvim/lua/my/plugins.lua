@@ -17,6 +17,10 @@ M.ordinalnvim = {
   { "wbthomason/packer.nvim" },
   { "lewis6991/impatient.nvim" },
   { "nvim-lua/plenary.nvim" },
+  {
+    'glacambre/firenvim',
+    run = function() vim.fn['firenvim#install'](0) end
+  },
   -- ################################################
   -- # Color
   -- ################################################
