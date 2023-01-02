@@ -1,6 +1,5 @@
 local M = {}
 
-local test = require('cmp-plugins')
 M.setup = function()
   require("cmp-plugins").setup({
     -- files = { ".*\\.lua" } -- default
