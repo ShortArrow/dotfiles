@@ -9,8 +9,7 @@ function M.setup()
       vim.api.nvim_buf_set_keymap(bufnr, ...)
     end
 
-    -- LSPサーバーのフォーマット機能
-    client.resolved_capabilities.document_formatting = true
+    client.server_capabilities.documentFormattingProvider = true
 
     local opts = { noremap = true, silent = true }
     buf_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
