@@ -123,6 +123,9 @@ M.ordinalnvim = {
     config = get_config('_symbols_outline').setup,
   },
   {
+    "gennaro-tedesco/nvim-peekup",
+  },
+  {
     'feline-nvim/feline.nvim',
     require = { 'nvim-lua/plenary.nvim', 'lewis6991/gitsigns.nvim' },
     config = get_config('_feline').setup,
