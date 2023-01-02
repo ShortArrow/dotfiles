@@ -262,6 +262,17 @@ M.ordinalnvim = {
     config = get_config('_lint').setup,
   },
   {
+    "rafamadriz/friendly-snippets"
+  },
+  {
+    "L3MON4D3/LuaSnip",
+    config = get_config('_luasnip').setup,
+  },
+  {
+    "saadparwaiz1/cmp_luasnip",
+    requires = "L3MON4D3/LuaSnip",
+  },
+  {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
