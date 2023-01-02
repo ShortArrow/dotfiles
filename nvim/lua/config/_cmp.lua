@@ -43,8 +43,8 @@ M.setup = function()
         end,
       },
       window = {
-        -- completion = cmp.config.window.bordered(),
-        -- documentation = cmp.config.window.bordered(),
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
       },
       mapping = cmp.mapping.preset.insert({
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -81,15 +81,15 @@ M.setup = function()
         { name = 'plugins' },
         { name = 'treesitter' },
         { name = 'tmux' },
-        {
-          name = 'look',
-          keyword_length = 2,
-          option = {
-            convert_case = true,
-            loud = true
-            --dict = '/usr/share/dict/words'
-          }
-        },
+        -- {
+        --   name = 'look',
+        --   keyword_length = 2,
+        --   option = {
+        --     convert_case = true,
+        --     loud = true
+        --     --dict = '/usr/share/dict/words'
+        --   }
+        -- },
         { name = 'vsnip' }, -- For vsnip users.
         -- { name = 'luasnip' }, -- For luasnip users.
         -- { name = 'ultisnips' }, -- For ultisnips users.
