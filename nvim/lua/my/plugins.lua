@@ -261,6 +261,10 @@ M.ordinalnvim = {
   -- # LSP
   -- ################################################
   {
+    "vim-skk/skkeleton",
+    requires = { "vim-denops/denops.vim" },
+  },
+  {
     'mfussenegger/nvim-lint',
     config = get_config('_lint').setup,
   },
