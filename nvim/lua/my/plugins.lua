@@ -292,6 +292,10 @@ M.ordinalnvim = {
     config = get_config('_mason').setup,
   },
   {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    config = get_config("_mason_installer").setup,
+  },
+  {
     "ray-x/lsp_signature.nvim",
     config = get_config('_lsp_sig').setup,
   },
