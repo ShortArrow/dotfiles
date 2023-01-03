@@ -1,8 +1,14 @@
+if not pcall(require, "impatient") then
+  print "Failed to load impatient."
+end
+
 if vim.g.vscode then
   -- vscode extension
-elseif vim.g.started_by_firenvim then
+elseif 0 ~= vim.fn.exists('g:started_by_firenvim') then
+  -- general config for firenvim
+  print('firenvim')
   vim.g.firenvim_config = {
-    globalSettings = {
+    globalSettigs = {
       alt = 'all',
     },
     localSettings = {
@@ -11,10 +17,24 @@ elseif vim.g.started_by_firenvim then
         content = 'text',
         priority = 0,
         selector = 'textarea',
-        takeover = 'always',
+        takeover = 'never',
       },
     }
   }
+
+  local setup_firenvim = function()
+    vim.bo.filetype = 'markdown'
+    vim.wo.number = false
+    vim.go.laststatus = 0
+    vim.go.showtabline = 0
+  end
+
+  local firenvimGrp = vim.api.nvim_create_augroup("firenvim", { clear = true })
+  vim.api.nvim_create_autocmd({ "FileType" }, {
+    pattern = { "text" },
+    group = firenvimGrp,
+    callback = setup_firenvim,
+  })
   local options = require('my.options')
   options.activate()
 
@@ -38,10 +58,7 @@ elseif vim.g.started_by_firenvim then
   ignition.start()
 else
   -- ordinary neovim
-  if not pcall(require, "impatient") then
-    print "Failed to load impatient."
-  end
-
+  print('ordianry neovim')
   local options = require('my.options')
   options.activate()
 
@@ -52,5 +69,6 @@ else
   require('config._mason').setup()
   -- local log_path = vim.fn.stdpath('cache') .. '/packer.nvim.log'
   -- print log_path
+
   ignition.start()
 end
