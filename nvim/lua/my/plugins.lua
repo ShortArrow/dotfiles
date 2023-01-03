@@ -9,7 +9,9 @@ end
 M.firenvim = {
   {
     'glacambre/firenvim',
-    run = function() vim.fn['firenvim#install'](0) end
+    run = function() vim.fn['firenvim#install'](0) end,
+    opt = true,
+    setup = [[vim.cmd('packadd firenvim')]],
   },
 }
 M.ordinalnvim = {
@@ -19,7 +21,9 @@ M.ordinalnvim = {
   { "nvim-lua/plenary.nvim" },
   {
     'glacambre/firenvim',
-    run = function() vim.fn['firenvim#install'](0) end
+    run = function() vim.fn['firenvim#install'](0) end,
+    opt = true,
+    setup = [[vim.cmd('packadd firenvim')]],
   },
   -- ################################################
   -- # Color
@@ -129,7 +133,7 @@ M.ordinalnvim = {
     'feline-nvim/feline.nvim',
     require = { 'nvim-lua/plenary.nvim', 'lewis6991/gitsigns.nvim' },
     config = get_config('_feline').setup,
-    disable = api.env.is_firenvim,
+    disable = api.env.is_firenvim(),
   },
   {
     'akinsho/bufferline.nvim',
@@ -142,7 +146,7 @@ M.ordinalnvim = {
   {
     'b0o/incline.nvim',
     config = get_config('_incline').setup,
-    disable = api.env.is_firenvim,
+    disable = api.env.is_firenvim(),
   },
   {
     'sindrets/diffview.nvim',
@@ -162,6 +166,7 @@ M.ordinalnvim = {
     'akinsho/toggleterm.nvim',
     tag = '*',
     config = get_config('_toggleterm').setup,
+    module = "toggleterm.terminal",
   },
   {
     'kevinhwang91/nvim-ufo',

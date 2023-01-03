@@ -1,5 +1,6 @@
 local M = {}
 
+
 M.setup = function()
   require('specs').setup {
     show_jumps       = true,
