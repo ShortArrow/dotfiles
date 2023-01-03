@@ -166,7 +166,6 @@ M.ordinalnvim = {
     'akinsho/toggleterm.nvim',
     tag = '*',
     config = get_config('_toggleterm').setup,
-    module = "toggleterm.terminal",
   },
   {
     'kevinhwang91/nvim-ufo',
