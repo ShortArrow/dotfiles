@@ -2,9 +2,9 @@ local plugins = require('my.plugins')
 
 local ensure_packer = function()
   local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
   if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
     vim.cmd [[packadd packer.nvim]]
     return true
   end
@@ -31,7 +31,9 @@ _packer.startup {
   spec,
   config = {
     display = {
-      open_fn = require("packer.util").float,
+      open_fn = function()
+        return require('packer.util').float({ border = 'single' })
+      end
     },
     max_jobs = vim.fn.has "win32" == 1 and 5 or nil,
   },
