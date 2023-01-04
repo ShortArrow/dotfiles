@@ -1,4 +1,4 @@
-local api = require('my.api')
+local api = require('my')
 local keymaps = require('my.keymaps')
 
 local M = {
