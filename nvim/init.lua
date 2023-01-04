@@ -71,4 +71,5 @@ else
   -- print log_path
 
   ignition.start()
+  -- vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = "#FF0000" })
 end
