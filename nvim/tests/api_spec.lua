@@ -1,6 +1,6 @@
 describe('api test', function()
 
-  local utils = require('my.api').utils
+  local utils = require('my').utils
 
   before_each(function()
   end)
