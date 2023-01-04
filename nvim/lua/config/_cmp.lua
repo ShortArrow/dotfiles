@@ -78,6 +78,7 @@ M.setup = function()
         { name = 'nvim_lsp' },
         { name = 'nvim_lsp_signature_help' },
         { name = 'nvim_lua' },
+        { name = 'path' },
         { name = 'pandac_reference' },
         { name = 'plugins' },
         { name = 'treesitter' },
@@ -108,7 +109,7 @@ M.setup = function()
           -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
           before = function(entry, vim_item)
             vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = "symbol" })
-            vim_item.menu = source_mapping[entry.source.name]
+            vim_item.menu = (entry == nil and " " or source_mapping[entry.source.name])
             local maxwidth = 80
             vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
             return vim_item
