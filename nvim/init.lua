@@ -4,9 +4,10 @@ end
 
 if vim.g.vscode then
   -- vscode extension
+  print('load vscode extension config')
 elseif 0 ~= vim.fn.exists('g:started_by_firenvim') then
   -- general config for firenvim
-  print('firenvim')
+  print('load firenvim config')
   vim.g.firenvim_config = {
     globalSettigs = {
       alt = 'all',
@@ -58,7 +59,6 @@ elseif 0 ~= vim.fn.exists('g:started_by_firenvim') then
   ignition.start()
 else
   -- ordinary neovim
-  print('ordianry neovim')
   local options = require('my.options')
   options.activate()
 
