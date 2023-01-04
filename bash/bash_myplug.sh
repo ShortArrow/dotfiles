@@ -19,6 +19,9 @@ export LC_CTYPE="en_US.UTF8"
 alias luamake="$HOME/Documents/GitHub/lua-language-server/3rd/luamake/luamake"
 export PATH="$PATH:$HOME/Documents/GitHub/lua-language-server/bin"
 
+# go
+export PATH="$PATH:$HOME/go/bin"
+
 # rust
 . "$HOME/.cargo/env"
 export PATH="$PATH:$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer"
