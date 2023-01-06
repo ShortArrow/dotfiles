@@ -6,7 +6,9 @@ local M = {}
 M.setup = function()
   vim.o.completeopt = 'menu,menuone,noselect'
   -- Setup nvim-cmp.
-  local lspkind = require('lspkind')
+  local lspkind_ok, lspkind = pcall(require, 'lspkind')
+  local luasnip_ok, luasnip = pcall(require, "luasnip")
+  if not luasnip_ok then return end
   local compare = require('cmp.config.compare')
   local source_mapping = {
     buffer = "[Buffer]",
@@ -34,35 +36,42 @@ M.setup = function()
         },
       },
       snippet = {
-        -- REQUIRED - you must specify a snippet engine
-        expand = function(args)
-          -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-          require 'luasnip'.lsp_expand(args.body)
-          -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-          -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-          -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-        end,
+        expand = function(args) luasnip.lsp_expand(args.body) end,
       },
       window = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
       },
       mapping = cmp.mapping.preset.insert({
+        ["<Up>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select },
+        ["<Down>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select },
+        ["<C-p>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
+        ["<C-n>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
+        ["<C-k>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
+        ["<C-j>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
+        ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
+        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
+        ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+        ["<C-y>"] = cmp.config.disable,
+        ["<C-e>"] = cmp.mapping {
+          i = cmp.mapping.abort(),
+          c = cmp.mapping.close(),
+        },
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.abort(),
         ['<CR>'] = cmp.mapping.confirm({
           behavior = cmp.ConfirmBehavior.Replace,
           select = true -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         }),
-        ['<Tab>'] = function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-          else
-            fallback()
-          end
-        end,
+        ['<Tab>'] = cmp.mapping(
+          function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            else
+              fallback()
+            end
+          end,
+          { "i", "e" }
+        ),
         ['<S-Tab>'] = function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
