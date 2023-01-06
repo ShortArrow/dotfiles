@@ -147,36 +147,29 @@ M.setup = function()
       }),
       formatting = {
 
-        format = function(entry, vim_item)
-          if vim.tbl_contains({ 'path' }, entry.source.name) then
-            local icon, hl_group = require('nvim-web-devicons').get_icon(entry:get_completion_item().label)
-            if icon then
-              vim_item.kind = icon
-              vim_item.kind_hl_group = hl_group
-              return vim_item
+        format = lspkind.cmp_format({
+          mode = 'symbol_text', --  options: 'text', 'text_symbol', 'symbol_text', 'symbol'
+          with_text = false,
+          maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+          ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+          -- The function below will be called before any actual modifications from lspkind
+          -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+          before = function(entry, vim_item)
+            if vim.tbl_contains({ 'path' }, entry.source.name) then
+              local icon, hl_group = require('nvim-web-devicons').get_icon(entry:get_completion_item().label)
+              if icon then
+                vim_item.kind = icon
+                vim_item.kind_hl_group = hl_group
+                return vim_item
+              end
             end
+            -- vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = "symbol" })
+            vim_item.menu = (entry == nil and " " or source_mapping[entry.source.name])
+            local maxwidth = 80
+            vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
+            return vim_item
           end
-          return lspkind.cmp_format({
-            with_text = false,
-            maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-            ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-          })(entry, vim_item)
-          -- return lspkind.cmp_format({
-          --   mode = 'symbol', -- show only symbol annotations
-          --   maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-          --   ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-          --
-          --   -- The function below will be called before any actual modifications from lspkind
-          --   -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-          --   before = function(entry, vim_item)
-          --     vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = "symbol" })
-          --     vim_item.menu = (entry == nil and " " or source_mapping[entry.source.name])
-          --     local maxwidth = 80
-          --     vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
-          --     return vim_item
-          --   end
-          -- })
-        end
+        }),
       },
     })
     cmp.setup.filetype('gitcommit', {
