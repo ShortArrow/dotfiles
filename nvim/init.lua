@@ -67,6 +67,7 @@ else
 
   -- local log_path = vim.fn.stdpath('cache') .. '/packer.nvim.log'
   -- print log_path
+  require("config._mason").setup()
 
   ignition.start()
   -- vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = "#FF0000" })
