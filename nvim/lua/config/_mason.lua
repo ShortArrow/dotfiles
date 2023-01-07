@@ -10,6 +10,7 @@ M.setup = function()
   local _nvim_lsp = require('lspconfig')
   local _mason = require('mason')
   local _mason_lspconfig = require('mason-lspconfig')
+  local _mason_nullls = require('mason-null-ls')
   local _lsp_sig = require('lsp_signature')
   local _cmp_nvim_lsp = require('cmp_nvim_lsp')
   local capabilities = _cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -27,6 +28,14 @@ M.setup = function()
     }
   }
   _mason_lspconfig.setup()
+  require("mason-null-ls").setup({
+    ensure_installed = {
+      -- Opt to list sources here, when available in mason.
+    },
+    automatic_installation = false,
+    automatic_setup = true, -- Recommended, but optional
+  })
+  _mason_nullls.setup_handlers() -- If `automatic_setup` is true.
   _mason_lspconfig.setup_handlers({
     function(server_name)
       local packagejson_finder = _nvim_lsp.util.root_pattern("package.json")
