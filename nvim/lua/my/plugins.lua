@@ -9,9 +9,9 @@ end
 M.firenvim = {
   {
     'glacambre/firenvim',
-    run = function() vim.fn['firenvim#install'](0) end,
-    opt = true,
-    setup = [[vim.cmd('packadd firenvim')]],
+    init = function() vim.fn['firenvim#install'](0) end,
+    lazy = true,
+    config = function() vim.cmd('packadd firenvim') end,
   },
 }
 M.ordinalnvim = {
@@ -21,9 +21,10 @@ M.ordinalnvim = {
   { "nvim-lua/plenary.nvim" },
   {
     'glacambre/firenvim',
-    run = function() vim.fn['firenvim#install'](0) end,
-    opt = true,
-    setup = [[vim.cmd('packadd firenvim')]],
+    init = function() vim.fn['firenvim#install'](0) end,
+    lazy = true,
+    enabled = api.env.is_firenvim(),
+    config = function() vim.cmd('packadd firenvim') end,
   },
   -- ################################################
   -- # Color
@@ -42,7 +43,7 @@ M.ordinalnvim = {
   -- ################################################
   -- {
   --  'yamatsum/nvim-nonicons',
-  --  requires = { 'kyazdani42/nvim-web-devicons' },
+  --  dependencies = { 'kyazdani42/nvim-web-devicons' },
   --},
   {
     'uga-rosa/jam.nvim'
@@ -56,7 +57,7 @@ M.ordinalnvim = {
   },
   {
     "kylechui/nvim-surround",
-    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
     config = get_config('_surround').setup
   },
   {
@@ -76,33 +77,33 @@ M.ordinalnvim = {
   -- ################################################
   {
     'obaland/vfiler.vim',
-    requires = { 'obaland/vfiler-column-devicons', 'kyazdani42/nvim-web-devicons' },
+    dependencies = { 'obaland/vfiler-column-devicons', 'kyazdani42/nvim-web-devicons' },
     config = get_config('_vfiler').setup,
   },
   {
     'ibhagwan/fzf-lua',
     -- optional for icon support
-    requires = { 'kyazdani42/nvim-web-devicons' },
+    dependencies = { 'kyazdani42/nvim-web-devicons' },
     config = get_config('_fzflua').setup,
-    disable = api.env.is_win_os(),
+    enabled = not api.env.is_win_os(),
   },
   {
     'amirrezaask/fuzzy.nvim',
-    requires = { 'nvim-lua/plenary.nvim' },
+    dependencies = { 'nvim-lua/plenary.nvim' },
     config = get_config('_fuzzy').setup,
-    disable = true,
+    enabled = false,
   },
   -- ################################################
   -- # Trouble
   -- ################################################
   {
     "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
+    dependencies = "kyazdani42/nvim-web-devicons",
     config = get_config('_trouble').setup,
   },
   {
     "nvim-neotest/neotest",
-    requires = {
+    dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
       "antoinemadec/FixCursorHold.nvim",
@@ -133,12 +134,12 @@ M.ordinalnvim = {
     'feline-nvim/feline.nvim',
     require = { 'nvim-lua/plenary.nvim', 'lewis6991/gitsigns.nvim' },
     config = get_config('_feline').setup,
-    disable = api.env.is_firenvim(),
+    enabled = not api.env.is_firenvim(),
   },
   {
     'akinsho/bufferline.nvim',
-    tag = "v2.*",
-    requires = {
+    version = "v2.*",
+    dependencies = {
       'kyazdani42/nvim-web-devicons'
     },
     config = get_config('_buffer_line').setup,
@@ -146,15 +147,15 @@ M.ordinalnvim = {
   {
     'b0o/incline.nvim',
     config = get_config('_incline').setup,
-    disable = api.env.is_firenvim(),
+    enabled = not api.env.is_firenvim(),
   },
   {
     'sindrets/diffview.nvim',
-    requires = 'nvim-lua/plenary.nvim',
+    dependencies = 'nvim-lua/plenary.nvim',
   },
   {
     'nvim-telescope/telescope.nvim',
-    requires = { 'folke/trouble.nvim', 'nvim-lua/plenary.nvim', 'akinsho/flutter-tools.nvim' },
+    dependencies = { 'folke/trouble.nvim', 'nvim-lua/plenary.nvim', 'akinsho/flutter-tools.nvim' },
     config = get_config('_telescope').setup,
   },
   {
@@ -164,12 +165,12 @@ M.ordinalnvim = {
   { "voldikss/vim-floaterm" },
   {
     'akinsho/toggleterm.nvim',
-    tag = '*',
+    version = '*',
     config = get_config('_toggleterm').setup,
   },
   {
     'kevinhwang91/nvim-ufo',
-    requires = {
+    dependencies = {
       'kevinhwang91/promise-async',
       'nvim-treesitter/nvim-treesitter'
     },
@@ -182,7 +183,7 @@ M.ordinalnvim = {
   {
     'folke/noice.nvim',
     config = get_config('_noice').setup,
-    requires = {
+    dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module='...'` entries
       'MunifTanjim/nui.nvim',
       -- OPTIONAL:
@@ -200,7 +201,7 @@ M.ordinalnvim = {
   -- ################################################
   {
     'akinsho/flutter-tools.nvim',
-    requires = { 'nvim-lua/plenary.nvim' },
+    dependencies = { 'nvim-lua/plenary.nvim' },
     config = get_config('_flutter').setup,
   },
   { "mfussenegger/nvim-dap" },
@@ -211,7 +212,7 @@ M.ordinalnvim = {
   { "natebosch/vim-lsc" },
   { "natebosch/vim-lsc-dart" },
   { "jiangmiao/auto-pairs" },
-  { 'lervag/vimtex', opt = true }, -- Use braces when passing options
+  { 'lervag/vimtex', lazy = true }, -- Use braces when passing options
   -- ################################################
   -- # Lua
   -- ################################################
@@ -237,18 +238,18 @@ M.ordinalnvim = {
   },
   {
     'TimUntersberger/neogit',
-    requires = 'nvim-lua/plenary.nvim',
+    dependencies = 'nvim-lua/plenary.nvim',
   },
   {
     'pwntester/octo.nvim',
-    requires = {
+    dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-telescope/telescope.nvim',
       'kyazdani42/nvim-web-devicons',
     },
     config = get_config('_octo').setup,
   },
-  { 'kdheepak/lazygit.nvim' },
+  { 'kdheepak/lazygit.nvim', cmd = "LazyGit" },
   -- ################################################
   -- # Indent and Bracket
   -- ################################################
@@ -268,7 +269,7 @@ M.ordinalnvim = {
   -- ################################################
   {
     "vim-skk/skkeleton",
-    requires = { "vim-denops/denops.vim" },
+    dependencies = { "vim-denops/denops.vim" },
   },
   {
     'mfussenegger/nvim-lint',
@@ -283,13 +284,13 @@ M.ordinalnvim = {
   },
   {
     "saadparwaiz1/cmp_luasnip",
-    requires = "L3MON4D3/LuaSnip",
+    dependencies = "L3MON4D3/LuaSnip",
   },
   {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
-    requires = {
+    dependencies = {
       'ray-x/lsp_signature.nvim',
       'hrsh7th/cmp-nvim-lsp',
       'onsails/lspkind.nvim',
@@ -323,7 +324,7 @@ M.ordinalnvim = {
   -- ################################################
   {
     'nvim-treesitter/nvim-treesitter',
-    requires = {
+    dependencies = {
       'JoosepAlviste/nvim-ts-context-commentstring',
       'windwp/nvim-ts-autotag',
       'nvim-treesitter/nvim-treesitter-refactor',
@@ -331,7 +332,7 @@ M.ordinalnvim = {
       'windwp/nvim-ts-autotag',
       'p00f/nvim-ts-rainbow',
     },
-    run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+    init = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
     config = get_config('_treesitter').setup,
   },
   {
@@ -340,7 +341,7 @@ M.ordinalnvim = {
   },
   {
     "hrsh7th/nvim-cmp",
-    requires = {
+    dependencies = {
       'chrisgrieser/cmp-nerdfont',
       'f3fora/cmp-spell',
       'hrsh7th/cmp-buffer',
@@ -363,7 +364,7 @@ M.ordinalnvim = {
   },
   {
     'jose-elias-alvarez/null-ls.nvim',
-    requires = { 'nvim-lua/plenary.nvim' },
+    dependencies = { 'nvim-lua/plenary.nvim' },
     config = get_config('_null_ls').setup,
   },
   {

@@ -36,39 +36,39 @@ elseif 0 ~= vim.fn.exists('g:started_by_firenvim') then
     group = firenvimGrp,
     callback = setup_firenvim,
   })
+
   local options = require('my.options')
   options.activate()
 
-  local _packer = require('packer')
-  local function spec(use)
-    local plugins = require('my.plugins')
-    local depends = plugins.firenvim
-    for _, depend in pairs(depends) do
-      use(depend)
-    end
+  local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+  if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+      "git",
+      "clone",
+      "--filter=blob:none",
+      "https://github.com/folke/lazy.nvim.git",
+      "--branch=stable", -- latest stable release
+      lazypath,
+    })
   end
+  vim.opt.rtp:prepend(lazypath)
 
-  _packer.startup {
-    spec,
-    config = {
-      max_jobs = vim.fn.has "win32" == 1 and 5 or nil,
-    },
-  }
-
-  local ignition = require('my.ignition')
-  ignition.start()
+  local plugins = require("my.plugins").firenvim
+  local opts = {}
+  require("lazy").setup(plugins, opts)
 else
   -- ordinary neovim
+
   local options = require('my.options')
   options.activate()
 
-  local ignition = require('my.ignition')
-  ignition.load_plugins()
+  require("boot_lazy")
 
   -- local log_path = vim.fn.stdpath('cache') .. '/packer.nvim.log'
   -- print log_path
   require("config._mason").setup()
 
+  local ignition = require('my.ignition')
   ignition.start()
   -- vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = "#FF0000" })
 end
