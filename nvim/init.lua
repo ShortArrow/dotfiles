@@ -1,6 +1,10 @@
-if not pcall(require, "impatient") then
-  print "Failed to load impatient."
-end
+vim.defer_fn(function()
+  local impatient_ok, impatient
+  pcall(require, "impatient")
+  if not impatient_ok then
+    print("Failed to load impatient.", impatient)
+  end
+end, 0)
 
 if vim.g.vscode then
   -- vscode extension
