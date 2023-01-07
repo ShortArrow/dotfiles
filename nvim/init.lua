@@ -66,13 +66,13 @@ else
   local options = require('my.options')
   options.activate()
 
+  local api = require("my")
+  api.lang.python.env()
+  api.keymaps.commonmaps_activate()
   require("boot_lazy")
 
   -- local log_path = vim.fn.stdpath('cache') .. '/packer.nvim.log'
   -- print log_path
   require("config._mason").setup()
-
-  local ignition = require('my.ignition')
-  ignition.start()
   -- vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = "#FF0000" })
 end
