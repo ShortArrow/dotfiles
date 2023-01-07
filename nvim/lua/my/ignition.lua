@@ -16,13 +16,4 @@ M.start = function()
   end
 end
 
-M.load_plugins = function()
-  if debugger.is_debug then
-    require('packer-depends')
-  else
-    require('packer-depends')
-    --require('plugin.packer_compiled')
-  end
-end
-
 return M
