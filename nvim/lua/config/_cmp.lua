@@ -26,15 +26,15 @@ M.setup = function()
 
   local cmp = require('cmp')
   -- If you want insert `(` after select function or method item
-  local autopairs_ok, cmp_autopairs = pcall(require, 'nvim-autopairs.completion.cmp')
-  if autopairs_ok then
-    cmp.event:on(
-      'confirm_done',
-      cmp_autopairs.on_confirm_done()
-    )
-  else
-    print("can't require() nvim-autopairs", cmp_autopairs)
-  end
+  -- local autopairs_ok, cmp_autopairs = pcall(require, 'nvim-autopairs.completion.cmp')
+  -- if autopairs_ok then
+  --   cmp.event:on(
+  --     'confirm_done',
+  --     cmp_autopairs.on_confirm_done()
+  --   )
+  -- else
+  --   print("can't require() nvim-autopairs", cmp_autopairs)
+  -- end
   if cmp ~= nil then
     cmp.setup({
       enabled = function()
