@@ -11,12 +11,10 @@ M.firenvim = {
     'glacambre/firenvim',
     init = function() vim.fn['firenvim#install'](0) end,
     lazy = true,
-    config = function() vim.cmd('packadd firenvim') end,
   },
 }
 M.ordinalnvim = {
   -- self manage
-  { "wbthomason/packer.nvim" },
   { "lewis6991/impatient.nvim" },
   { "nvim-lua/plenary.nvim" },
   {
@@ -24,7 +22,6 @@ M.ordinalnvim = {
     init = function() vim.fn['firenvim#install'](0) end,
     lazy = true,
     enabled = api.env.is_firenvim(),
-    config = function() vim.cmd('packadd firenvim') end,
   },
   -- ################################################
   -- # Color
@@ -54,15 +51,17 @@ M.ordinalnvim = {
   {
     'phaazon/hop.nvim',
     config = get_config('_hop').setup,
+    keys = api.keymaps.maps.hop,
   },
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    config = get_config('_surround').setup
+    config = get_config('_surround').setup,
   },
   {
     'stevearc/aerial.nvim',
-    config = get_config('_aerial').setup
+    config = get_config('_aerial').setup,
+    keys = api.keymaps.maps.aerial,
   },
   {
     "tversteeg/registers.nvim",
@@ -79,6 +78,7 @@ M.ordinalnvim = {
     'obaland/vfiler.vim',
     dependencies = { 'obaland/vfiler-column-devicons', 'kyazdani42/nvim-web-devicons' },
     config = get_config('_vfiler').setup,
+    keys = api.keymaps.maps.vfiler,
   },
   {
     'ibhagwan/fzf-lua',
@@ -86,6 +86,7 @@ M.ordinalnvim = {
     dependencies = { 'kyazdani42/nvim-web-devicons' },
     config = get_config('_fzflua').setup,
     enabled = not api.env.is_win_os(),
+    keys = require("my.keymaps").maps.fzflua,
   },
   {
     'amirrezaask/fuzzy.nvim',
@@ -100,6 +101,7 @@ M.ordinalnvim = {
     "folke/trouble.nvim",
     dependencies = "kyazdani42/nvim-web-devicons",
     config = get_config('_trouble').setup,
+    keys = api.keymaps.maps.trouble,
   },
   {
     "nvim-neotest/neotest",
@@ -119,6 +121,7 @@ M.ordinalnvim = {
       'MarkEmmons/neotest-deno',
     },
     config = get_config('_neotest').setup,
+    keys = api.keymaps.maps.neotest,
   },
   -- ################################################
   -- # UI
@@ -152,6 +155,7 @@ M.ordinalnvim = {
   {
     'sindrets/diffview.nvim',
     dependencies = 'nvim-lua/plenary.nvim',
+    keys = api.keymaps.maps.diffview,
   },
   {
     'nvim-telescope/telescope.nvim',
@@ -161,12 +165,17 @@ M.ordinalnvim = {
   {
     'folke/which-key.nvim',
     config = get_config('_whichkey').setup,
+    keys = api.keymaps.maps.whichkey,
   },
-  { "voldikss/vim-floaterm" },
+  {
+    "voldikss/vim-floaterm",
+    keys = api.keymaps.maps.floaterm,
+  },
   {
     'akinsho/toggleterm.nvim',
     version = '*',
     config = get_config('_toggleterm').setup,
+    keys = api.keymaps.maps.toggleterm,
   },
   {
     'kevinhwang91/nvim-ufo',
@@ -175,6 +184,7 @@ M.ordinalnvim = {
       'nvim-treesitter/nvim-treesitter'
     },
     config = get_config('_ufo').setup,
+    keys = api.keymaps.maps.ufo,
   },
   --{
   --  'edluffy/specs.nvim',
@@ -203,6 +213,7 @@ M.ordinalnvim = {
     'akinsho/flutter-tools.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = get_config('_flutter').setup,
+    keys = api.keymaps.maps.flutter,
   },
   { "mfussenegger/nvim-dap" },
   -- ################################################
@@ -235,10 +246,12 @@ M.ordinalnvim = {
   {
     'tpope/vim-fugitive',
     config = get_config('_fugitive').setup,
+    keys = api.keymaps.maps.fugitive,
   },
   {
     'TimUntersberger/neogit',
     dependencies = 'nvim-lua/plenary.nvim',
+    keys = api.keymaps.maps.neogit,
   },
   {
     'pwntester/octo.nvim',
@@ -248,8 +261,13 @@ M.ordinalnvim = {
       'kyazdani42/nvim-web-devicons',
     },
     config = get_config('_octo').setup,
+    cmd = "Octo",
   },
-  { 'kdheepak/lazygit.nvim', cmd = "LazyGit" },
+  {
+    'kdheepak/lazygit.nvim',
+    keys = api.keymaps.maps.lazygit,
+    cmd = "LazyGit",
+  },
   -- ################################################
   -- # Indent and Bracket
   -- ################################################
@@ -318,6 +336,7 @@ M.ordinalnvim = {
     "glepnir/lspsaga.nvim",
     branch = "main",
     config = get_config('_lsp_saga').setup,
+    keys = api.keymaps.maps.lspsaga,
   },
   -- ################################################
   -- # Auto Complete
