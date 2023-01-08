@@ -310,10 +310,12 @@ M.ordinalnvim = {
   {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    "jose-elias-alvarez/null-ls.nvim",
-    "jayp0521/mason-null-ls.nvim",
     "neovim/nvim-lspconfig",
+      "jayp0521/mason-null-ls.nvim",
+      "jayp0521/mason-nvim-dap.nvim",
     dependencies = {
+      "jose-elias-alvarez/null-ls.nvim",
+      "mfussenegger/nvim-dap",
       'ray-x/lsp_signature.nvim',
       'hrsh7th/cmp-nvim-lsp',
       'onsails/lspkind.nvim',
