@@ -13,6 +13,7 @@ M.setup = function()
   local _mason_nullls = require('mason-null-ls')
   local _lsp_sig = require('lsp_signature')
   local _cmp_nvim_lsp = require('cmp_nvim_lsp')
+  local _mason_dap = require("mason-nvim-dap")
   local capabilities = _cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
   capabilities.textDocument.foldingRange = {
     dynamicRegistration = false,
@@ -28,7 +29,38 @@ M.setup = function()
     }
   }
   _mason_lspconfig.setup()
-  require("mason-null-ls").setup({
+  _mason_dap.setup({
+    automatic_setup = true,
+  })
+  _mason_dap.setup_handlers {
+    function(source_name)
+      -- all sources with no handler get passed here
+
+
+      -- Keep original functionality of `automatic_setup = true`
+      require('mason-nvim-dap.automatic_setup')(source_name)
+    end,
+    python = function(source_name)
+      _mason_nullls.adapters.python = {
+        type = "executable",
+        command = "/usr/bin/python3",
+        args = {
+          "-m",
+          "debugpy.adapter",
+        },
+      }
+
+      _mason_dap.configurations.python = {
+        {
+          type = "python",
+          request = "launch",
+          name = "Launch file",
+          program = "${file}", -- This configuration will launch the current file if used.
+        },
+      }
+    end,
+  }
+  _mason_nullls.setup({
     ensure_installed = {
       -- Opt to list sources here, when available in mason.
     },
