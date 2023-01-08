@@ -3,12 +3,16 @@ local M = {}
 M.commonmaps_activate = function()
   for _, map in pairs(M.maps.common) do
     if "string" == type(map[2]) then
-      vim.api.nvim_set_keymap( "n" , map[1],map[2],{})
+      vim.api.nvim_set_keymap("n", map[1], map[2], {})
     else
       vim.keymap.set("n", map[1], map[2])
     end
   end
 end
+
+M.neotest_run = function() require('neotest').run.run() end
+M.neotest_run_current = function() require('neotest').run.run(vim.fn.expand("%")) end
+M.neotest_run_dap = function() require('neotest').run.run({ strategy = "dap" }) end
 
 M.maps = {
   aerial = {
@@ -21,12 +25,9 @@ M.maps = {
     { '<Leader>lg', ':LazyGit<CR>', },
   },
   neotest = {
-    -- Neo Test Run (nearest run)
-    -- { mode = 'n',  'ntr',require('neotest').run.run(), },
-    -- Neo Test Run (current run)
-    --{ mode = 'n',  'ntc',require("neotest").run.run(vim.fn.expand("%")), },
-    -- Neo Test Run (dup run)
-    --{ mode = 'n',  'ntc',require("neotest").run.run({strategy = "dap"}), },
+    { 'ntr', M.neotest_run, desc = "Neo Test Run (nearest run)" },
+    { 'ntc', M.neotest_run_current, "Neo Test Run (current run)" },
+    { 'ntc', M.neotest_run_dap, "Neo Test Run (dup run)" },
   },
   neogit = {
     { '<Leader>ng', require('neogit').open, },
