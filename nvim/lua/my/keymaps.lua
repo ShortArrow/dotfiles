@@ -27,7 +27,7 @@ M.maps = {
   neotest = {
     { 'ntr', M.neotest_run, desc = "Neo Test Run (nearest run)" },
     { 'ntc', M.neotest_run_current, "Neo Test Run (current run)" },
-    { 'ntc', M.neotest_run_dap, "Neo Test Run (dup run)" },
+    { 'ntd', M.neotest_run_dap, "Neo Test Run (dup run)" },
   },
   neogit = {
     { '<Leader>ng', require('neogit').open, },
