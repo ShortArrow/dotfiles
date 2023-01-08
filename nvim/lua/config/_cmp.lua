@@ -18,6 +18,12 @@ M.setup = function()
     plugins = "[Plugins]",
     vsnip = "[VSnip]",
     path = "[Path]",
+    calc = "[Calc]",
+    emoji = "[Emoji]",
+    nerdfont = "[Nerd]",
+    nvim_lsp_signature_help = "[Signature]",
+    pandac_reference = "[Pandac]",
+    tmux = "[TMUX]",
   }
   local function has_words_before()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))

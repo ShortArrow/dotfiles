@@ -227,9 +227,9 @@ M.ordinalnvim = {
   -- ################################################
   -- # Lua
   -- ################################################
-  {
-    "folke/neodev.nvim",
-  },
+  -- {
+  --   "folke/neodev.nvim",
+  -- },
   -- Install this plugin.
   { "tjdevries/nlua.nvim" },
   -- (OPTIONAL): This is recommended to get better auto-completion UX experience for builtin LSP.
