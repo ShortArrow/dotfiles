@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # ls
 alias l.="ls -d .* --color=tty"
 alias ll="ls -l --color=tty"
@@ -14,10 +16,6 @@ bind "set completion-ignore-case on"
 # mosh
 export LANG="en_US.UTF8"
 export LC_CTYPE="en_US.UTF8"
-
-# lua
-alias luamake="$HOME/Documents/GitHub/lua-language-server/3rd/luamake/luamake"
-export PATH="$PATH:$HOME/Documents/GitHub/lua-language-server/bin"
 
 # go
 export PATH="$PATH:$HOME/go/bin"
@@ -55,12 +53,10 @@ alias foresta="git-foresta --all | less -RSX"
 alias gg="git-graph --color always | less -RSX"
 
 # lazydocker
-alias lzd="$HOME/.local/bin/lazydocker"
-alias lazydocker="$HOME/.local/bin/lazydocker"
+alias lzd=lazydocker
 
 # lazygit
-alias lg="$HOME/Documents/GitHub/lazygit/main"
-alias lazygit="$HOME/Documents/GitHub/lazygit/main"
+alias lg=lazygit
 
 # japanese
 export GTK_IM_MODULE=ibus
@@ -68,9 +64,10 @@ export T_IM_MODULE=ibus
 export MODIFIERS=@im=ibus
 
 # color check
-checkcolor(){
-  curl -s "https://gist.githubusercontent.com/lifepillar/09a44b8cf0f9397465614e622979107f/raw/24-bit-color.sh" | bash
+checkcolor() {
+	curl -s "https://gist.githubusercontent.com/lifepillar/09a44b8cf0f9397465614e622979107f/raw/24-bit-color.sh" | bash
 }
+echo "If you want to check color support, run \`checkcolor\`"
 
 # tmux color
 alias tmux="tmux -2"
@@ -80,18 +77,16 @@ alias tmux="tmux -2"
 # alias ssh="sshrc"
 
 # arduino-cli
-alias acli="$HOME/bin/arduino-cli"
+# https://github.com/cli/cli
+alias acli='${HOME}/bin/arduino-cli'
 
 # fnm
 export PATH="$HOME/.fnm:$PATH"
-eval "`fnm env`"
+eval "$(fnm env)"
 
 # dvm
-. "$HOME/.cargo/env"
 export DVM_DIR="/home/who/.dvm"
 export PATH="$DVM_DIR/bin:$PATH"
 export DVM_DIR="/home/who/.dvm"
 export PATH="$DVM_DIR/bin:$PATH"
 
-# lunarvim
-alias lvim="$HOME/.local/bin/lvim"
