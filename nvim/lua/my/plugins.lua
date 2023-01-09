@@ -227,9 +227,14 @@ M.ordinalnvim = {
   -- ################################################
   -- # Lua
   -- ################################################
-  -- {
-  --   "folke/neodev.nvim",
-  -- },
+  {
+    "folke/neodev.nvim",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+      "neovim/nvim-lspconfig",
+    },
+  },
   -- Install this plugin.
   { "tjdevries/nlua.nvim" },
   -- (OPTIONAL): This is recommended to get better auto-completion UX experience for builtin LSP.
@@ -311,8 +316,8 @@ M.ordinalnvim = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
-      "jayp0521/mason-null-ls.nvim",
-      "jayp0521/mason-nvim-dap.nvim",
+    "jayp0521/mason-null-ls.nvim",
+    "jayp0521/mason-nvim-dap.nvim",
     dependencies = {
       "jose-elias-alvarez/null-ls.nvim",
       "mfussenegger/nvim-dap",
