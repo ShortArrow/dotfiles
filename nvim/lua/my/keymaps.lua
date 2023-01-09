@@ -13,6 +13,12 @@ end
 M.neotest_run = function() require('neotest').run.run() end
 M.neotest_run_current = function() require('neotest').run.run(vim.fn.expand("%")) end
 M.neotest_run_dap = function() require('neotest').run.run({ strategy = "dap" }) end
+M.neogit_open = function() require('neogit').open() end
+M.ufo_open = function() require('ufo').openAllFolds() end 
+M.ufo_close = function() require('ufo').closeAllFolds() end
+M.flutter_open = function() require("telescope").extensions.flutter.commands() end
+M.packer_sync = function() require("packer").sync() end
+M.toggleterm_open = function()require('config/_toggleterm').toggle_repl_term()  end
 
 M.maps = {
   aerial = {
@@ -30,11 +36,11 @@ M.maps = {
     { 'ntd', M.neotest_run_dap, "Neo Test Run (dup run)" },
   },
   neogit = {
-    { '<Leader>ng', require('neogit').open, },
+    { '<Leader>ng', M.neogit_open, },
   },
   ufo = {
-    { 'ng', require('ufo').openAllFolds, },
-    { 'zM', require('ufo').closeAllFolds, },
+    { 'ng', M.ufo_open, },
+    { 'zM', M.ufo_close, },
   },
   hop = {
     -- { mode = 'n',  'f',
@@ -91,7 +97,7 @@ M.maps = {
   },
   flutter = {
     { '<Leader>fr', ':FlutterRun -d web-server<CR>', },
-    { '<Leader>fc', require("telescope").extensions.flutter.commands, },
+    { '<Leader>fc', M.flutter_open, },
   },
   trouble = {
     { '<Leader>tr', ':TroubleToggle<CR>', },
@@ -100,7 +106,7 @@ M.maps = {
     { '<Leader>zf', ':FzfLua files<CR>', },
   },
   packer = {
-    { mode = 'n', '<Leader>ps', require("packer").sync, },
+    { mode = 'n', '<Leader>ps', M.packer_sync, },
   },
   vfiler = {
     { '<Leader>vf', ':VFiler<CR>', },
@@ -115,7 +121,7 @@ M.maps = {
   },
   toggleterm = {
     -- normal (ToggleTerm Normal)
-    { '<Leader>tt', require('config/_toggleterm').toggle_repl_term, },
+    { '<Leader>tt', M.toggleterm_open, },
     { '<Leader>flzd', ':FloatermNew lzd<CR>', },
     { mode = 'n', '<C-k>', '<C-w><C-w>W', },
     { mode = 'i', '<C-k>', '<Esc><C-w>W', },
