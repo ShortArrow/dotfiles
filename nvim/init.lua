@@ -2,7 +2,7 @@ vim.defer_fn(function()
   local impatient_ok, impatient
   pcall(require, "impatient")
   if not impatient_ok then
-    print("Failed to load impatient.", impatient)
+    print("pcall missing load impatient.", impatient)
   end
 end, 0)
 
