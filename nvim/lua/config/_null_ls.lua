@@ -6,6 +6,7 @@ local M = {}
 M.setup = function()
   local null_ls = require('null-ls')
   null_ls.setup({
+    diagnostics_format = "#{m} (#{s}: #{c})",
     debounce = 150,
     save_after_format = false,
     sources = {
