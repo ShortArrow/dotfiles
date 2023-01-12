@@ -1,10 +1,10 @@
 local M = {}
-local function myMiniView(pattern, kind)
+local function myMiniView(pattern, kind, event)
   kind = kind or ""
   return {
     view = "mini",
     filter = {
-      event = "msg_show",
+      event = event and event or "msg_show",
       kind = kind,
       find = pattern,
     },
@@ -31,6 +31,8 @@ M.setup = function()
         opts = { skip = true },
       },
       myMiniView("pcall missing .*"),
+      myMiniView("INSERT", "", ""),
+      myMiniView("choose"),
       myMiniView("Already at .* change"),
       myMiniView("written"),
       myMiniView("yanked"),
@@ -62,7 +64,7 @@ M.setup = function()
       command_palette = true, -- position the cmdline and popupmenu together
       long_message_to_split = true, -- long messages will be sent to a split
       inc_rename = false, -- enables an input dialog for inc-rename.nvim
-      lsp_doc_border = false, -- add a border to hover docs and signature help
+      lsp_doc_border = true, -- add a border to hover docs and signature help
     },
   })
 end
