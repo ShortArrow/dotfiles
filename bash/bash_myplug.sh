@@ -18,6 +18,14 @@ command_exists() {
 	fi
 }
 
+is-arch() {
+	if [[ $(uname -r) =~ "arch" ]]; then
+		return 0 # This is Archlinux.
+	else
+		return 1 # This is not Archlinux.
+	fi
+}
+
 # ls
 if command_exists "lsd"; then
 	alias l.="lsd -d .* "
@@ -86,7 +94,11 @@ fi
 alias lzd=lazydocker
 
 # lazygit
-alias lg=lazygit
+if command_exists "lazygit"; then
+	alias lg=lazygit
+else
+	alias lg="echo command lazygit is not found.\nPlease run \`cargo install git-graph\` or \`go install github.com/jesseduffield/lazygit@latest\`, \`pkg install lazygit\`"
+fi
 
 # japanese
 export GTK_IM_MODULE=ibus
@@ -115,7 +127,5 @@ export PATH="$HOME/.fnm:$PATH"
 eval "$(fnm env)"
 
 # dvm
-export DVM_DIR="/home/who/.dvm"
-export PATH="$DVM_DIR/bin:$PATH"
 export DVM_DIR="/home/who/.dvm"
 export PATH="$DVM_DIR/bin:$PATH"
