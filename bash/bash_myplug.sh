@@ -76,7 +76,11 @@ alias crontab="crontab -i"
 alias foresta="git-foresta --all | less -RSX"
 
 # git-graph
-alias gg="git-graph --color always | less -RSX"
+if command_exists "git-graph"; then
+	alias gg="git-graph --style round --color always | less -RSX"
+else
+	alias gg="echo command git-graph is not found.\nPlease run \`cargo install git-graph\`"
+fi
 
 # lazydocker
 alias lzd=lazydocker
