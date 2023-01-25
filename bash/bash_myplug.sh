@@ -1,11 +1,37 @@
 #!/bin/bash
 
+# Function to check if a directory exists
+directory_exists() {
+	if [ -d "$1" ]; then
+		return 0 # Directory exists
+	else
+		return 1 # Directory does not exist
+	fi
+}
+
+# Function to check if a command exists
+command_exists() {
+	if which "$1" >/dev/null; then
+		return 0 # The command was found, return success
+	else
+		return 1 # The command was not found, return failure
+	fi
+}
+
 # ls
-alias l.="ls -d .* --color=tty"
-alias ll="ls -l --color=tty"
-alias ll.="ls -al --color=tty"
-alias ls="ls --color=tty"
-alias ls.="ls -a --color=tty"
+if command_exists "lsd"; then
+	alias l.="lsd -d .* "
+	alias ll="lsd -l "
+	alias ll.="lsd -al "
+	alias ls="lsd "
+	alias ls.="lsd -a "
+else
+	alias l.="ls -d .* --color=tty"
+	alias ll="ls -l --color=tty"
+	alias ll.="ls -al --color=tty"
+	alias ls="ls --color=tty"
+	alias ls.="ls -a --color=tty"
+fi
 
 # sudo refresher
 alias sudo="sudo -v; sudo"
@@ -89,4 +115,3 @@ export DVM_DIR="/home/who/.dvm"
 export PATH="$DVM_DIR/bin:$PATH"
 export DVM_DIR="/home/who/.dvm"
 export PATH="$DVM_DIR/bin:$PATH"
-
