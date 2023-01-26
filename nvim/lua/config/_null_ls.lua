@@ -10,6 +10,9 @@ M.setup = function()
     debounce = 150,
     save_after_format = false,
     sources = {
+      null_ls.builtins.diagnostics.luacheck.with {
+        extra_args = { "--globals", "vim", "--globals", "awesome" },
+      },
       -- null_ls.builtins.formatting.black,
       -- null_ls.builtins.diagnostics.pylint,
       -- null_ls.builtins.formatting.stylua,
