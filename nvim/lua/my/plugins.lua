@@ -234,6 +234,7 @@ M.ordinalnvim = {
       "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",
     },
+    config = get_config('_neodev').setup,
   },
   -- Install this plugin.
   { "tjdevries/nlua.nvim" },
