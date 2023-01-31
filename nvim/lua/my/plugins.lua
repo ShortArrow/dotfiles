@@ -127,6 +127,15 @@ M.ordinalnvim = {
   -- # UI
   -- ################################################
   {
+    "SmiteshP/nvim-gps",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = get_config("_gps").setup,
+  },
+  {
+    "lalitmee/browse.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+  },
+  {
     'simrat39/symbols-outline.nvim',
     config = get_config('_symbols_outline').setup,
   },
@@ -234,6 +243,7 @@ M.ordinalnvim = {
       "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",
     },
+    config = get_config('_neodev').setup,
   },
   -- Install this plugin.
   { "tjdevries/nlua.nvim" },
