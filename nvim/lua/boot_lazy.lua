@@ -12,6 +12,28 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = require("my.plugins").ordinalnvim
-local opts = {}
+local opts = {
+  ui = {
+
+    icons = {
+      cmd = "",
+      config = "",
+      event = "",
+      ft = "",
+      init = "",
+      import = "",
+      keys = "",
+      lazy = "鈴",
+      loaded = "●",
+      not_loaded = "○",
+      plugin = "",
+      runtime = "",
+      source = "",
+      start = "",
+      task = "✔",
+      list = { "●", "➜", "★", "‒", },
+    },
+  },
+}
 
 require("lazy").setup(plugins, opts)

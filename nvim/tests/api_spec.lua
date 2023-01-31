@@ -4,8 +4,6 @@ describe('api test', function()
 
   before_each(function()
   end)
-
-  it('function is true', function()
     local sample = function()
     end
     assert.equals(true, utils.is_function(sample))

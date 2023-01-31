@@ -127,6 +127,15 @@ M.ordinalnvim = {
   -- # UI
   -- ################################################
   {
+    "SmiteshP/nvim-gps",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = get_config("_gps").setup,
+  },
+  {
+    "lalitmee/browse.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+  },
+  {
     'simrat39/symbols-outline.nvim',
     config = get_config('_symbols_outline').setup,
   },
