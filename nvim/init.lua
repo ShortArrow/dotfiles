@@ -2,7 +2,7 @@ vim.defer_fn(function()
   local impatient_ok, impatient
   pcall(require, "impatient")
   if not impatient_ok then
-    print("Failed to load impatient.", impatient)
+    print("pcall missing load impatient.", impatient)
   end
 end, 0)
 
@@ -75,4 +75,5 @@ else
   -- print log_path
   require("config._mason").setup()
   -- vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = "#FF0000" })
+  require("my.diagnotics")
 end

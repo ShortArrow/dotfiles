@@ -1,8 +1,6 @@
 describe("some basics", function()
 
   local bello = function(boo)
-    return "bello " .. boo
-  end
 
   local bounter
 

@@ -14,12 +14,11 @@ M.neotest_run = function() require('neotest').run.run() end
 M.neotest_run_current = function() require('neotest').run.run(vim.fn.expand("%")) end
 M.neotest_run_dap = function() require('neotest').run.run({ strategy = "dap" }) end
 M.neogit_open = function() require('neogit').open() end
-M.ufo_open = function() require('ufo').openAllFolds() end 
+M.ufo_open = function() require('ufo').openAllFolds() end
 M.ufo_close = function() require('ufo').closeAllFolds() end
 M.flutter_open = function() require("telescope").extensions.flutter.commands() end
 M.packer_sync = function() require("packer").sync() end
-M.toggleterm_open = function()require('config/_toggleterm').toggle_repl_term()  end
-
+M.toggleterm_open = function() require('config/_toggleterm').toggle_repl_term() end
 M.maps = {
   aerial = {
     { '{', '<cmd>AerialPrev<CR>', },
@@ -32,8 +31,8 @@ M.maps = {
   },
   neotest = {
     { 'ntr', M.neotest_run, desc = "Neo Test Run (nearest run)" },
-    { 'ntc', M.neotest_run_current, "Neo Test Run (current run)" },
-    { 'ntd', M.neotest_run_dap, "Neo Test Run (dup run)" },
+    { 'ntc', M.neotest_run_current, desc = "Neo Test Run (current run)" },
+    { 'ntd', M.neotest_run_dap, desc = "Neo Test Run (dup run)" },
   },
   neogit = {
     { '<Leader>ng', M.neogit_open, },
@@ -112,18 +111,13 @@ M.maps = {
     { '<Leader>vf', ':VFiler<CR>', },
   },
   floaterm = {
-    -- normal (Floaterm Normal)
-    { '<Leader>fn', ':FloatermNew<CR>', },
-    -- lazygit (Floaterm Git)
-    { '<Leader>flg', ':FloatermNew lg<CR>', },
-    -- lazydocker (Floaterm Docker)
-    { '<Leader>flzd', ':FloatermNew lzd<CR>', },
+    { '<Leader>fn', ':FloatermNew<CR>', desc = "Floaterm normal" },
+    { '<Leader>flg', ':FloatermNew lg<CR>', desc = "Floaterm lazygit" },
+    { '<Leader>flzd', ':FloatermNew lzd<CR>', desc = "Floaterm lazydocker" },
   },
   toggleterm = {
-    -- normal (ToggleTerm Normal)
-    { '<Leader>tt', M.toggleterm_open, },
-    { '<Leader>flzd', ':FloatermNew lzd<CR>', },
-    { mode = 'n', '<C-k>', '<C-w><C-w>W', },
+    { '<Leader>tt', M.toggleterm_open, desc = "ToggleTerm normal" },
+    { mode = 'n', '<C-k>', '<C-w><C-w>W', desc = "back from ToggleTerm when Normal mode" },
     { mode = 'i', '<C-k>', '<Esc><C-w>W', },
     { mode = 't', '<C-k>', '<C-Bslash><C-n><C-w>W', },
     -- { mode = 'n',  '',  ':', },
@@ -141,39 +135,27 @@ M.maps = {
   },
   common = {
     -- # lsp keymaps
-    -- show variables infomation
-    { '<Leader>lk', vim.lsp.buf.hover, },
-    -- jump to definition (Lsp Definition)
-    { '<Leader>ld', vim.lsp.buf.definition, },
-    -- auto formatting (Lsp Formatting)
-    { '<Leader>lf', vim.lsp.buf.format, },
-    -- show references (Lsp References)
-    { '<Leader>lr', vim.lsp.buf.references, },
+    { '<Leader>lk', vim.lsp.buf.hover, desc = "show references (Lsp References)" },
+    { '<Leader>ld', vim.lsp.buf.definition, desc = "jump to definition (Lsp Definition)" },
+    { '<Leader>lf', vim.lsp.buf.format, desc = "auto formatting (Lsp Formatting)" },
+    { '<Leader>lr', vim.lsp.buf.references, desc = "show references (Lsp References)" },
     -- rename (Lsp Name)
     -- {  '<Leader>ln',  ':lua vim.lsp.buf.rename()<CR>', },
     -- code_action (Lsp Action)
     -- {  '<Leader>la',  ':lua vim.lsp.buf.code_action()<CR>', },
 
     -- # window keymaps
-    -- go to previous window (Window Previous)
-    { '<Leader>wp', '<C-w>p', },
-    -- right (Window L)
-    { '<Leader>wl', '<C-w>l', },
-    -- left (Window H)
-    { '<Leader>wh', '<C-w>h', },
-    -- down (Window J)
-    { '<Leader>wj', '<C-w>j', },
-    -- up (Window K)
-    { '<Leader>wk', '<C-w>k', },
+    { '<Leader>wp', '<C-w>p', desc = "go to previous window (Window Previous)" },
+    { '<Leader>wl', '<C-w>l', desc = "right (Window L)" },
+    { '<Leader>wh', '<C-w>h', desc = "left (Window H)" },
+    { '<Leader>wj', '<C-w>j', desc = "down (Window J)" },
+    { '<Leader>wk', '<C-w>k', desc = "up (Window K)" },
 
     -- # buffer keymaps
-    -- go to previous buffer (Buffer Previous)
-    { '<Leader>bp', ':bprevious<CR>', },
-    -- go to next buffer (Buffer Next)
-    { '<Leader>bn', ':bnext<CR>', },
+    { '<Leader>bp', ':bprevious<CR>', desc = "go to previous buffer (Buffer Previous)" },
+    { '<Leader>bn', ':bnext<CR>', desc = "go to next buffer (Buffer Next)" },
 
     -- # help keymaps
-    -- quickref (?)
     { '<Leader>?', ':h quickref<CR>', },
   },
 }
