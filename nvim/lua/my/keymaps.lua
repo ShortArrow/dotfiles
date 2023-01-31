@@ -10,6 +10,7 @@ M.commonmaps_activate = function()
   end
 end
 
+M.neotest_open = function() require('neotest').summary.open() end
 M.neotest_run = function() require('neotest').run.run() end
 M.neotest_run_current = function() require('neotest').run.run(vim.fn.expand("%")) end
 M.neotest_run_dap = function() require('neotest').run.run({ strategy = "dap" }) end
@@ -31,6 +32,7 @@ M.maps = {
   },
   neotest = {
     { 'ntr', M.neotest_run, desc = "Neo Test Run (nearest run)" },
+    { 'nto', M.neotest_open, desc = "Neo Test Summary Open (NeoTest Open)" },
     { 'ntc', M.neotest_run_current, desc = "Neo Test Run (current run)" },
     { 'ntd', M.neotest_run_dap, desc = "Neo Test Run (dup run)" },
   },
