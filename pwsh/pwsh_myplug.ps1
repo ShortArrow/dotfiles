@@ -1,12 +1,15 @@
-function ExistsCommand {
+function ExistsCommand
+{
   param (
-      [string]$targetCommand
+    [string]$targetCommand
   )
-    if (gcm $targetCommand -ea SilentlyContinue) {
-        Write-Output 'Success!'
-    } else {
-        Write-Error 'Error!'
-    }
+  if (Get-Command $targetCommand -ea SilentlyContinue)
+  {
+    Write-Output 'Success!'
+  } else
+  {
+    Write-Error 'Error!'
+  }
 }
 
 # Reload Env
@@ -14,21 +17,33 @@ $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";"
 
 # New-Item -Type File -Path $PROFILE -Force
 
+# Fish風のオートサジェスト機能を有効に
 Set-PSReadLineOption -PredictionSource History
 Set-PSReadlineOption -HistoryNoDuplicates
 Set-PSReadlineOption -BellStyle None
 Set-PSReadlineOption -EditMode "Vi"
+# -PredictionViewStyle パラメーターで表示形式を指定
+Set-PSReadLineOption -PredictionSource History -PredictionViewStyle ListView
+# (optional) Ctrl+f 入力で前方1単語進む : 補完の確定に使う用
+Set-PSReadLineKeyHandler -Key "Ctrl+f" -Function ForwardWord
 
 # criteria of when leave history, contains word "SKIPHISTORY", or only one charactor of alphabet, or finish terminal command.
 
 Set-PSReadlineOption -AddToHistoryHandler {
-    param ($command)
-    switch -regex ($command) {
-        "SKIPHISTORY" {return $false}
-        "^[a-z]$" {return $false}
-        "exit" {return $false}
+  param ($command)
+  switch -regex ($command)
+  {
+    "SKIPHISTORY"
+    {return $false
     }
-    return $true
+    "^[a-z]$"
+    {return $false
+    }
+    "exit"
+    {return $false
+    }
+  }
+  return $true
 }
 
 # Word delimiters on cursor navigation by ctrl + arrows
@@ -41,9 +56,9 @@ Invoke-Expression (&starship init powershell)
 
 # Reload PROFILE
 Set-PSReadLineKeyHandler -Key "alt+r" -BriefDescription "reloadPROFILE" -LongDescription "reloadPROFILE" -ScriptBlock {
-    [Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
-    [Microsoft.PowerShell.PSConsoleReadLine]::Insert('<#SKIPHISTORY#> . $PROFILE')
-    [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
+  [Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
+  [Microsoft.PowerShell.PSConsoleReadLine]::Insert('<#SKIPHISTORY#> . $PROFILE')
+  [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
 }
 
 # gsudo
