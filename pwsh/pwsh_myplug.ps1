@@ -58,6 +58,9 @@ Set-PSReadLineKeyHandler -Key "alt+r" -BriefDescription "reloadPROFILE" -LongDes
   [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
 }
 
+# PSFzf
+Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
+
 # gsudo
 # choco install gsudo
 Import-Module 'C:\tools\gsudo\Current\gsudoModule.psd1'
