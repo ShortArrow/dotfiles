@@ -22,14 +22,6 @@ M.setup = function()
       require("neotest-python")(api.lang.python.neotest),
       require("neotest-plenary"),
       require("neotest-vitest"),
-      require('neotest-jest')({
-        jestCommand = "npm test --",
-        jestConfigFile = "custom.jest.config.ts",
-        env = { CI = true },
-        cwd = function(path)
-          return vim.fn.getcwd()
-        end,
-      }),
       require("neotest-rust")(api.lang.rust.neotest),
       require('neotest-dart') {
         command = 'flutter', -- Command being used to run tests. Defaults to `flutter`
@@ -38,7 +30,9 @@ M.setup = function()
         use_lsp = true -- When set Flutter outline information is used when constructing test name.
       },
       require("neotest-vim-test")({
-        ignore_file_types = { "python", "vim", "lua" },
+        ignore_file_types = {
+          "python", "vim", "lua", "vitest", "darttest", "fluttertest", "jest", "cargotest", "cargonextest"
+        },
       }),
     },
   })
