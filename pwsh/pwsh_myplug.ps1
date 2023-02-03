@@ -17,15 +17,12 @@ $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";"
 
 # New-Item -Type File -Path $PROFILE -Force
 
-# Fish風のオートサジェスト機能を有効に
-Set-PSReadLineOption -PredictionSource History
+Set-PSReadLineOption -PredictionSource History -PredictionViewStyle ListView
 Set-PSReadlineOption -HistoryNoDuplicates
 Set-PSReadlineOption -BellStyle None
 Set-PSReadlineOption -EditMode "Vi"
-# -PredictionViewStyle パラメーターで表示形式を指定
-Set-PSReadLineOption -PredictionSource History -PredictionViewStyle ListView
-# (optional) Ctrl+f 入力で前方1単語進む : 補完の確定に使う用
-Set-PSReadLineKeyHandler -Key "Ctrl+f" -Function ForwardWord
+Set-PSReadLineKeyHandler -Chord "Ctrl+j" -Function HistorySearchForward
+Set-PSReadLineKeyHandler -Chord "Ctrl+k" -Function HistorySearchBackward
 
 # criteria of when leave history, contains word "SKIPHISTORY", or only one charactor of alphabet, or finish terminal command.
 
