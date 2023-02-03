@@ -127,10 +127,10 @@ alias tmux="tmux -2"
 # https://github.com/cli/cli
 alias acli='${HOME}/bin/arduino-cli'
 
-# fnm
+# fnm (Fast Node.js version Manager)
 export PATH="$HOME/.fnm:$PATH"
 eval "$(fnm env)"
 
-# dvm
+# dvm (deno version manager)
 export DVM_DIR="/home/who/.dvm"
 export PATH="$DVM_DIR/bin:$PATH"
