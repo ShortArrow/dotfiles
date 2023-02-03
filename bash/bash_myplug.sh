@@ -41,6 +41,11 @@ else
 	alias ls.="ls -a --color=tty"
 fi
 
+# bat
+if command_exists "bat"; then
+	alias cat="bat"
+fi
+
 # sudo refresher
 alias sudo="sudo -v; sudo"
 
