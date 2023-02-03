@@ -19,16 +19,11 @@ M.setup = function()
       unknown = "?"
     },
     adapters = {
-      require("neotest-python")(api.lang.python.neotest),
       require("neotest-plenary"),
+      require("neotest-python")(api.lang.python.neotest),
       require("neotest-vitest"),
       require("neotest-rust")(api.lang.rust.neotest),
-      require('neotest-dart') {
-        command = 'flutter', -- Command being used to run tests. Defaults to `flutter`
-        -- Change it to `fvm flutter` if using FVM
-        -- change it to `dart` for Dart only tests
-        use_lsp = true -- When set Flutter outline information is used when constructing test name.
-      },
+      require('neotest-dart')(api.lang.dart.neotest),
       require("neotest-vim-test")({
         ignore_file_types = {
           "python", "vim", "lua", "vitest", "darttest", "fluttertest", "jest", "cargotest", "cargonextest"

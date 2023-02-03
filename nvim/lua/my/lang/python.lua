@@ -1,7 +1,7 @@
 local M = {}
 
 M.is_test_of_python = function(stuff)
-  return nil ~= string.find(stuff, "test")
+  return nil ~= string.match(stuff, "tests?.*%.py")
 end
 M.neotest = {
   -- Extra arguments for nvim-dap configuration
