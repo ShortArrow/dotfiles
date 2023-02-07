@@ -157,6 +157,23 @@ M.maps = {
     { '<Leader>bp', ':bprevious<CR>', desc = "go to previous buffer (Buffer Previous)" },
     { '<Leader>bn', ':bnext<CR>', desc = "go to next buffer (Buffer Next)" },
 
+    -- # japanese keymaps
+    { mode = 'n', '<Down>', 'gj', desc = "IME safe of あ" },
+    { mode = 'n', '<Up>', 'gk', desc = "IME safe of あ" },
+    { mode = 'n', 'あ', 'a', desc = "IME safe of あ" },
+    { mode = 'n', 'い', 'i', desc = "IME safe of い" },
+    { mode = 'n', 'う', 'u', desc = "IME safe of う" },
+    { mode = 'n', 'お', 'o', desc = "IME safe of お" },
+    { mode = 'n', 'っd', 'dd', desc = "IME safe of dd" },
+    { mode = 'n', 'ｄｄ', 'dd', desc = "IME safe of dd" },
+    { mode = 'n', 'っy', 'yy', desc = "IME safe of yy" },
+    { mode = 'n', 'ｙｙ', 'yy', desc = "IME safe of yy" },
+    { mode = 'n', 'し"', 'ci"', desc = "IME safe of ci" },
+    { mode = 'n', 'し\'', 'ci\'', desc = "IME safe of ci" },
+    { mode = 'n', 'し”', 'ci"', desc = "IME safe of ci" },
+    { mode = 'n', 'し’', 'ci\'', desc = "IME safe of ci" },
+    { mode = 'n', '：ｗ', ':w', desc = "IME safe of :w" },
+
     -- # help keymaps
     { '<Leader>?', ':h quickref<CR>', },
   },
