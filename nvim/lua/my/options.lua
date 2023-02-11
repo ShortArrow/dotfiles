@@ -3,7 +3,7 @@ local g     = vim.g
 local opt   = vim.opt
 local fonts = require('my.fonts')
 
-M.activate = function()
+M.activate  = function()
   g.mapleader        = " "
   opt.number         = true
   opt.relativenumber = true
@@ -13,7 +13,8 @@ M.activate = function()
   opt.clipboard      = "unnamedplus"
   opt.cursorlineopt  = "number"
   opt.cursorline     = true
-  opt.guicursor      = 'n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175'
+  opt.guicursor      =
+  'n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175'
   opt.guifont        = fonts.get_fonts()
   opt.encoding       = 'UTF-8'
   opt.expandtab      = true
@@ -31,21 +32,21 @@ M.activate = function()
   opt.helplang       = 'ja' --, 'en'
   opt.inccommand     = 'split'
   opt.fillchars      = {
-    vert = "│",
-    fold = "f",
-    eob = "e", -- suppress ~ at EndOfBuffer
-    diff = "⣿", -- alternatives = ⣿ ░ ─ ╱
-    msgsep = "‾",
-    foldopen = "",
-    foldsep = "│",
-    foldclose = "",
+      vert = "│",
+      fold = "f",
+      eob = "e", -- suppress ~ at EndOfBuffer
+      diff = "⣿", -- alternatives = ⣿ ░ ─ ╱
+      msgsep = "‾",
+      foldopen = "",
+      foldsep = "│",
+      foldclose = "",
   }
   opt.listchars      = {
-    eol = '⤶',
-    space = '·',
-    trail = '-',
-    extends = '◀',
-    precedes = '▶',
+      eol = '⤶',
+      space = '·',
+      trail = '-',
+      extends = '◀',
+      precedes = '▶',
   }
 end
 
