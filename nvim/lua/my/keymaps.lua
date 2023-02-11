@@ -173,6 +173,10 @@ M.maps = {
     { mode = 'n', 'し”', 'ci"', desc = "IME safe of ci" },
     { mode = 'n', 'し’', 'ci\'', desc = "IME safe of ci" },
     { mode = 'n', '：ｗ', ':w', desc = "IME safe of :w" },
+    -- { mode = 'n', '<C-S-h>', '<Left>', desc = "IME safe of <Left>" },
+    -- { mode = 'n', '<C-S-j>', '<Down>', desc = "IME safe of <Down>" },
+    -- { mode = 'n', '<C-S-k>', '<Up>', desc = "IME safe of <Up>" },
+    -- { mode = 'n', '<C-S-l>', '<Right>', desc = "IME safe of <Right>" },
 
     -- # help keymaps
     { '<Leader>?', ':h quickref<CR>', },
