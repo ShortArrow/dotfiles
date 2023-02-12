@@ -240,6 +240,9 @@ M.ordinalnvim = {
         dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig', 'mfussenegger/nvim-dap' },
         config = get_config('_rust').setup,
     },
+    {
+      'alaviss/nim.nvim',
+    },
     -- ################################################
     -- # Lua
     -- ################################################
