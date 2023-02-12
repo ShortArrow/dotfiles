@@ -134,3 +134,6 @@ eval "$(fnm env)"
 # dvm (deno version manager)
 export DVM_DIR="/home/who/.dvm"
 export PATH="$DVM_DIR/bin:$PATH"
+
+# nim
+export PATH="$HOME/.nimble/bin:$PATH"
