@@ -30,38 +30,46 @@ function M.setup()
     buf_set_keymap("n", "<leader>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
     buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
   end
-  require("flutter-tools").setup {
-    lsp = {
-      color = {
-        enabled = true,
-        background = true,
-        foreground = false,
-        virtual_text = true,
-        virtual_text_str = "■",
-      },
-      on_attach = function(client, bufnr)
-        vim.cmd [[hi FlutterWidgetGuides ctermfg=237 guifg=#33374c]]
-        vim.cmd [[hi ClosingTags ctermfg=244 guifg=#8389a3]]
-        on_attach(client, bufnr)
-      end,
-      cadependenciespabilities = capabilities,
-      widget_guides = {
-        enabled = true,
-      },
-      debugger = {
-        enabled = true,
-        register_configurations = function(_)
-          require("dap").configurations.dart = {}
-          require("dap.ext.vscode").load_launchjs()
-        end,
-      },
-    }
+  local config = {
+      lsp = {
+          color = {
+              enabled = true,
+              background = true,
+              foreground = false,
+              virtual_text = true,
+              virtual_text_str = "■",
+          },
+          on_attach = function(client, bufnr)
+            vim.cmd [[hi FlutterWidgetGuides ctermfg=237 guifg=#33374c]]
+            vim.cmd [[hi ClosingTags ctermfg=244 guifg=#8389a3]]
+            on_attach(client, bufnr)
+          end,
+          capabilities = capabilities,
+          widget_guides = {
+              enabled = true,
+          },
+          settings = {
+              showTodos = true,
+              completeFunctionCalls = true,
+              -- analysisExcludedFolders = { "<path-to-flutter-sdk-packages>" },
+              renameFilesWithClasses = "prompt", -- "always"
+              enableSnippets = true,
+          },
+          debugger = {
+              enabled = false,
+              register_configurations = function(_)
+                require("dap").configurations.dart = {}
+                require("dap.ext.vscode").load_launchjs()
+              end,
+          },
+      }
   }
+  require("flutter-tools").setup(config)
   vim.api.nvim_set_keymap('n', '<Leader>fr', ':FlutterRun -d web-server<CR>'
-    , { noremap = true, silent = true })
+      , { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<Leader>fc',
-    [[<Cmd>lua require('telescope').extensions.flutter.commands()<CR>]],
-    { noremap = true, silent = true })
+      [[<Cmd>lua require('telescope').extensions.flutter.commands()<CR>]],
+      { noremap = true, silent = true })
 end
 
 return M

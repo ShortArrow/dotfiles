@@ -168,7 +168,7 @@ M.ordinalnvim = {
     },
     {
         'nvim-telescope/telescope.nvim',
-        dependencies = { 'folke/trouble.nvim', 'nvim-lua/plenary.nvim', 'akinsho/flutter-tools.nvim' },
+        dependencies = { 'folke/trouble.nvim', 'nvim-lua/plenary.nvim',--[[ 'akinsho/flutter-tools.nvim'  ]] },
         config = get_config('_telescope').setup,
     },
     {
