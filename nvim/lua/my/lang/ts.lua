@@ -8,6 +8,30 @@ M.tsserver = {
   },
 }
 
+M.has_package_json = function()
+  local output = vim.fn.systemlist('git rev-parse --show-toplevel') -- プロジェクトルートのパスを取得
+  if vim.v.shell_error ~= 0 or #output == 0 then
+    return false
+  end
+
+  local package_json_path = table.concat({ output[1], 'package.json' }, '/') -- パスを結合して package.json のパスを作成
+  return vim.fn.filereadable(package_json_path) ~= 0 -- package.json が存在する場合は真を返す
+end
+
+M.get_package_json_path = function()
+  local output = vim.fn.systemlist('git rev-parse --show-toplevel')
+  if vim.v.shell_error ~= 0 or #output == 0 then
+    return nil
+  end
+
+  local package_json_path = table.concat({ output[1], 'package.json' }, '/')
+  if vim.fn.filereadable(package_json_path) == 0 then
+    return nil
+  end
+
+  return package_json_path
+end
+
 return M
 -- javascript.autoClosingTags                                                     default: true
 -- javascript.format.enable                                                       default: true
