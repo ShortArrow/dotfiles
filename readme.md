@@ -23,6 +23,12 @@ docker compose exec nvim /bin/bash -c nvim
 1. install tmux
 1. make symboliclink of tmux dotfile
 
+## check startuptime
+
+```
+nvim --startuptime ./startup.log
+```
+
 ## No Them No Life
 
 - neovim
