@@ -10,6 +10,20 @@ M.denols = {
   }
 }
 
+M.get_deno_json_path = function()
+  local output = vim.fn.systemlist('git rev-parse --show-toplevel')
+  if vim.v.shell_error ~= 0 or #output == 0 then
+    return nil
+  end
+
+  local package_json_path = table.concat({ output[1], 'deno.json' }, '/')
+  if vim.fn.filereadable(package_json_path) == 0 then
+    return nil
+  end
+
+  return package_json_path
+end
+
 return M
 -- → deno.cache                                                      default: null
 -- → deno.certificateStores                                          default: null

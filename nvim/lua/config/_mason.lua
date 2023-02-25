@@ -5,6 +5,15 @@ M.lsp_sig_config = {
     border = "rounded"
   }
 }
+local function get_project_root()
+  local output = vim.fn.systemlist('git rev-parse --show-toplevel')
+  if vim.v.shell_error ~= 0 or #output == 0 then
+    return nil
+  end
+
+  return output[1]
+end
+
 M.setup = function()
   local _api = require('my')
   local _nvim_lsp = require('lspconfig')
@@ -70,27 +79,25 @@ M.setup = function()
   _mason_nullls.setup_handlers() -- If `automatic_setup` is true.
   _mason_lspconfig.setup_handlers({
     function(server_name)
-      local packagejson_finder = _nvim_lsp.util.root_pattern("package.json")
-      local is_nodejs = function()
-        return nil ~= packagejson_finder(vim.api.nvim_buf_get_name(0))
-      end
       local _opts = {}
       if server_name == "sumneko_lua" then
         _opts.settings = _api.lang.lua.sumneko_lua
       elseif server_name == "tsserver" then
-        print("ts", is_nodejs(), vim.api.nvim_buf_get_name(0))
-        if not is_nodejs() then return end
-        _opts.root_dir = _nvim_lsp.util.root_pattern("package.json")
-        _opts.settings = _api.lang.ts.tsserver
+        if not _api.lang.ts.has_package_json() then
+          return
+        else
+          _opts.root_dir = get_project_root
+          _opts.settings = _api.lang.ts.tsserver
+        end
       elseif server_name == "eslint" then
-        print("es", is_nodejs(), vim.api.nvim_buf_get_name(0))
-        if not is_nodejs() then return end
-        _opts.root_dir = _nvim_lsp.util.root_pattern("package.json")
+        _opts.root_dir = get_project_root
       elseif server_name == "denols" then
-        print("ds", not is_nodejs(), vim.api.nvim_buf_get_name(0))
-        if is_nodejs() then return end
-        _opts.root_dir = _nvim_lsp.util.root_pattern("deno.json")
-        _opts.settings = _api.lang.deno.denols
+        if not _api.lang.deno.has_deno_json() then
+          return
+        else
+          _opts.root_dir = get_project_root
+          _opts.settings = _api.lang.deno.denols
+        end
         -- _opts.init_options = {
         --   lint = true,
         --   unstable = true,
