@@ -81,6 +81,7 @@ export PATH="$PATH:$HOME/.npm-global/bin"
 # flutter
 export PATH="$PATH:$HOME/Documents/GitHub/flutter/bin"
 export CHROME_EXECUTABLE="/usr/bin/chromium"
+export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 # crontab
 alias crontab="crontab -i"
