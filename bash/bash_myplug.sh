@@ -43,6 +43,7 @@ fi
 
 # bat
 if command_exists "bat"; then
+	alias ncat="cat" # meaning normal cat
 	alias cat="bat"
 fi
 
