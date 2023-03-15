@@ -9,35 +9,39 @@ M.setup = function()
   telescope.setup {
     defaults = {
       layout = 'vertical',
-      winblend = 20,
+      layout_strategy = 'vertical',
+      winblend = 10,
       prompt_prefix = ' ',
       selection_caret = ' ',
       entry_prefix = '  ',
       initial_mode = 'insert',
-      border = false,
+      border = true,
       sorting_strategy = 'ascending',
       path_display = { 'truncate' },
-      mappings = {
-        i = {
-          ['<esc>'] = actions.close,
-          ['<C-h>'] = 'which_key',
-          ['<C-Down>'] = actions.cycle_history_next,
-          ['<C-Up>'] = actions.cycle_history_prev,
-          ['<C-j>'] = actions.cycle_history_next,
-          ['<C-k>'] = actions.cycle_history_prev,
-          -- ['<C-t>'] = trouble.open_with_trouble,
-        },
-        n = {
-          --  ["<C-t>"] = trouble.open_with_trouble,
-        },
-      },
+      -- mappings = {
+      --   i = {
+      --     ['<esc>'] = actions.close,
+      --     ['<C-h>'] = 'which_key',
+      --     ['<C-Down>'] = actions.cycle_history_next,
+      --     ['<C-Up>'] = actions.cycle_history_prev,
+      --     ['<C-j>'] = actions.cycle_history_next,
+      --     ['<C-k>'] = actions.cycle_history_prev,
+      --     -- ['<C-t>'] = trouble.open_with_trouble,
+      --   },
+      --   n = {
+      --     --  ["<C-t>"] = trouble.open_with_trouble,
+      --   },
+      -- },
       layout_config = {
-        horizontal = {
-          height = 0.7,
-          preview_cutoff = 120,
-          preview_width = 50,
-          prompt_position = 'top',
+        vertical = {
           width = 0.7,
+        },
+        horizontal = {
+          height = 0.8,
+          preview_cutoff = 120,
+          preview_width = 200,
+          prompt_position = 'top',
+          width = 0.8,
         },
         cursor = {
           height = 0.2,
