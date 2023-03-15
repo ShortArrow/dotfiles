@@ -1,15 +1,17 @@
-local api = require('my')
+local api = require("my")
 
 local M = {}
 
 local function get_config(name)
-  return require(string.format('config.%s', name))
+  return require(string.format("config.%s", name))
 end
 
 M.firenvim = {
   {
-    'glacambre/firenvim',
-    init = function() vim.fn['firenvim#install'](0) end,
+    "glacambre/firenvim",
+    init = function()
+      vim.fn["firenvim#install"](0)
+    end,
     lazy = true,
   },
 }
@@ -21,8 +23,10 @@ M.ordinalnvim = {
   },
   { "nvim-lua/plenary.nvim" },
   {
-    'glacambre/firenvim',
-    init = function() vim.fn['firenvim#install'](0) end,
+    "glacambre/firenvim",
+    init = function()
+      vim.fn["firenvim#install"](0)
+    end,
     lazy = true,
     enabled = api.env.is_firenvim(),
   },
@@ -30,13 +34,13 @@ M.ordinalnvim = {
   -- # Color
   -- ################################################
   {
-    'folke/tokyonight.nvim',
-    config = get_config('_tokyonight').setup,
+    "folke/tokyonight.nvim",
+    config = get_config("_tokyonight").setup,
   },
-  { 'RRethy/vim-illuminate' },
+  { "RRethy/vim-illuminate" },
   {
     "folke/twilight.nvim",
-    config = get_config('_twilight').setup,
+    config = get_config("_twilight").setup,
   },
   -- ################################################
   -- # Fonts
@@ -46,55 +50,55 @@ M.ordinalnvim = {
   --  dependencies = { 'kyazdani42/nvim-web-devicons' },
   --},
   {
-    'uga-rosa/jam.nvim'
+    "uga-rosa/jam.nvim",
   },
   -- ################################################
   -- # Motion
   -- ################################################
   {
-    'phaazon/hop.nvim',
-    config = get_config('_hop').setup,
+    "phaazon/hop.nvim",
+    config = get_config("_hop").setup,
     keys = api.keymaps.maps.hop,
   },
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    config = get_config('_surround').setup,
+    config = get_config("_surround").setup,
   },
   {
-    'stevearc/aerial.nvim',
-    config = get_config('_aerial').setup,
+    "stevearc/aerial.nvim",
+    config = get_config("_aerial").setup,
     keys = api.keymaps.maps.aerial,
   },
   {
     "tversteeg/registers.nvim",
-    config = get_config('_registers').setup,
+    config = get_config("_registers").setup,
   },
   {
-    'jpalardy/vim-slime',
-    config = get_config('_slime').setup,
+    "jpalardy/vim-slime",
+    config = get_config("_slime").setup,
   },
   -- ################################################
   -- # Explorer
   -- ################################################
   {
-    'obaland/vfiler.vim',
-    dependencies = { 'obaland/vfiler-column-devicons', 'kyazdani42/nvim-web-devicons' },
-    config = get_config('_vfiler').setup,
+    "obaland/vfiler.vim",
+    dependencies = { "obaland/vfiler-column-devicons", "kyazdani42/nvim-web-devicons" },
+    config = get_config("_vfiler").setup,
     keys = api.keymaps.maps.vfiler,
   },
   {
-    'ibhagwan/fzf-lua',
+    "ibhagwan/fzf-lua",
     -- optional for icon support
-    dependencies = { 'kyazdani42/nvim-web-devicons' },
-    config = get_config('_fzflua').setup,
+    dependencies = { "kyazdani42/nvim-web-devicons" },
+    config = get_config("_fzflua").setup,
     enabled = not api.env.is_win_os(),
     keys = require("my.keymaps").maps.fzflua,
   },
   {
-    'amirrezaask/fuzzy.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    config = get_config('_fuzzy').setup,
+    "amirrezaask/fuzzy.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = get_config("_fuzzy").setup,
     enabled = false,
   },
   -- ################################################
@@ -103,7 +107,7 @@ M.ordinalnvim = {
   {
     "folke/trouble.nvim",
     dependencies = "kyazdani42/nvim-web-devicons",
-    config = get_config('_trouble').setup,
+    config = get_config("_trouble").setup,
     keys = api.keymaps.maps.trouble,
   },
   {
@@ -112,18 +116,18 @@ M.ordinalnvim = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
       "antoinemadec/FixCursorHold.nvim",
-      'nvim-neotest/neotest-python',
-      'nvim-neotest/neotest-plenary',
-      'nvim-neotest/neotest-vim-test',
-      'marilari88/neotest-vitest',
-      'haydenmeade/neotest-jest',
-      'sidlatau/neotest-dart',
-      'nvim-neotest/neotest-go',
-      'rouge8/neotest-rust',
-      'Issafalcon/neotest-dotnet',
-      'MarkEmmons/neotest-deno',
+      "nvim-neotest/neotest-python",
+      "nvim-neotest/neotest-plenary",
+      "nvim-neotest/neotest-vim-test",
+      "marilari88/neotest-vitest",
+      "haydenmeade/neotest-jest",
+      "sidlatau/neotest-dart",
+      "nvim-neotest/neotest-go",
+      "rouge8/neotest-rust",
+      "Issafalcon/neotest-dotnet",
+      "MarkEmmons/neotest-deno",
     },
-    config = get_config('_neotest').setup,
+    config = get_config("_neotest").setup,
     keys = api.keymaps.maps.neotest,
   },
   -- ################################################
@@ -139,44 +143,47 @@ M.ordinalnvim = {
     dependencies = { "nvim-telescope/telescope.nvim" },
   },
   {
-    'simrat39/symbols-outline.nvim',
-    config = get_config('_symbols_outline').setup,
+    "simrat39/symbols-outline.nvim",
+    config = get_config("_symbols_outline").setup,
   },
   {
     "gennaro-tedesco/nvim-peekup",
   },
   {
-    'feline-nvim/feline.nvim',
-    require = { 'nvim-lua/plenary.nvim', 'lewis6991/gitsigns.nvim' },
-    config = get_config('_feline').setup,
+    "feline-nvim/feline.nvim",
+    require = { "nvim-lua/plenary.nvim", "lewis6991/gitsigns.nvim" },
+    config = get_config("_feline").setup,
     enabled = not api.env.is_firenvim(),
   },
   {
-    'akinsho/bufferline.nvim',
+    "akinsho/bufferline.nvim",
     version = "v2.*",
     dependencies = {
-      'kyazdani42/nvim-web-devicons'
+      "kyazdani42/nvim-web-devicons",
     },
-    config = get_config('_buffer_line').setup,
+    config = get_config("_buffer_line").setup,
   },
   {
-    'b0o/incline.nvim',
-    config = get_config('_incline').setup,
+    "b0o/incline.nvim",
+    config = get_config("_incline").setup,
     enabled = not api.env.is_firenvim(),
   },
   {
-    'sindrets/diffview.nvim',
-    dependencies = 'nvim-lua/plenary.nvim',
+    "sindrets/diffview.nvim",
+    dependencies = "nvim-lua/plenary.nvim",
     keys = api.keymaps.maps.diffview,
   },
   {
-    'nvim-telescope/telescope.nvim',
-    dependencies = { 'folke/trouble.nvim', 'nvim-lua/plenary.nvim', --[[ 'akinsho/flutter-tools.nvim'  ]] },
-    config = get_config('_telescope').setup,
+    "nvim-telescope/telescope.nvim",
+    dependencies = {
+      "folke/trouble.nvim",
+      "nvim-lua/plenary.nvim", --[[ 'akinsho/flutter-tools.nvim'  ]]
+    },
+    config = get_config("_telescope").setup,
   },
   {
-    'folke/which-key.nvim',
-    config = get_config('_whichkey').setup,
+    "folke/which-key.nvim",
+    config = get_config("_whichkey").setup,
     keys = api.keymaps.maps.whichkey,
   },
   {
@@ -184,18 +191,18 @@ M.ordinalnvim = {
     keys = api.keymaps.maps.floaterm,
   },
   {
-    'akinsho/toggleterm.nvim',
-    version = '*',
-    config = get_config('_toggleterm').setup,
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    config = get_config("_toggleterm").setup,
     keys = api.keymaps.maps.toggleterm,
   },
   {
-    'kevinhwang91/nvim-ufo',
+    "kevinhwang91/nvim-ufo",
     dependencies = {
-      'kevinhwang91/promise-async',
-      'nvim-treesitter/nvim-treesitter'
+      "kevinhwang91/promise-async",
+      "nvim-treesitter/nvim-treesitter",
     },
-    config = get_config('_ufo').setup,
+    config = get_config("_ufo").setup,
     keys = api.keymaps.maps.ufo,
   },
   --{
@@ -203,15 +210,15 @@ M.ordinalnvim = {
   --  config = get_config('_specs').setup,
   --},
   {
-    'folke/noice.nvim',
-    config = get_config('_noice').setup,
+    "folke/noice.nvim",
+    config = get_config("_noice").setup,
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module='...'` entries
-      'MunifTanjim/nui.nvim',
+      "MunifTanjim/nui.nvim",
       -- OPTIONAL:
       --   `nvim-notify` is only needed, if you want to use the notification view.
       --   If not available, we use `mini` as the fallback
-      'rcarriga/nvim-notify',
+      "rcarriga/nvim-notify",
     },
   },
   --{
@@ -222,9 +229,9 @@ M.ordinalnvim = {
   -- # Flutter
   -- ################################################
   {
-    'akinsho/flutter-tools.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig', 'mfussenegger/nvim-dap' },
-    config = get_config('_flutter').setup,
+    "akinsho/flutter-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig", "mfussenegger/nvim-dap" },
+    config = get_config("_flutter").setup,
     keys = api.keymaps.maps.flutter,
   },
   -- ################################################
@@ -233,18 +240,17 @@ M.ordinalnvim = {
   { "dart-lang/dart-vim-plugin" },
   { "natebosch/vim-lsc" },
   { "natebosch/vim-lsc-dart" },
-  { "jiangmiao/auto-pairs" },
-  { 'lervag/vimtex', lazy = true }, -- Use braces when passing options
+  { "lervag/vimtex",            lazy = true }, -- Use braces when passing options
   -- ################################################
   -- # Rust
   -- ################################################
   {
-    'simrat39/rust-tools.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig', 'mfussenegger/nvim-dap' },
-    config = get_config('_rust').setup,
+    "simrat39/rust-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig", "mfussenegger/nvim-dap" },
+    config = get_config("_rust").setup,
   },
   {
-    'alaviss/nim.nvim',
+    "alaviss/nim.nvim",
   },
   -- ################################################
   -- # Lua
@@ -256,7 +262,7 @@ M.ordinalnvim = {
       "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",
     },
-    config = get_config('_neodev').setup,
+    config = get_config("_neodev").setup,
   },
   -- Install this plugin.
   { "tjdevries/nlua.nvim" },
@@ -271,31 +277,31 @@ M.ordinalnvim = {
   -- # Git
   -- ################################################
   {
-    'lewis6991/gitsigns.nvim',
-    config = get_config('_gitsigns').setup,
+    "lewis6991/gitsigns.nvim",
+    config = get_config("_gitsigns").setup,
   },
   {
-    'tpope/vim-fugitive',
-    config = get_config('_fugitive').setup,
+    "tpope/vim-fugitive",
+    config = get_config("_fugitive").setup,
     keys = api.keymaps.maps.fugitive,
   },
   {
-    'TimUntersberger/neogit',
-    dependencies = 'nvim-lua/plenary.nvim',
+    "TimUntersberger/neogit",
+    dependencies = "nvim-lua/plenary.nvim",
     keys = api.keymaps.maps.neogit,
   },
   {
-    'pwntester/octo.nvim',
+    "pwntester/octo.nvim",
     dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope.nvim',
-      'kyazdani42/nvim-web-devicons',
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+      "kyazdani42/nvim-web-devicons",
     },
-    config = get_config('_octo').setup,
+    config = get_config("_octo").setup,
     cmd = "Octo",
   },
   {
-    'kdheepak/lazygit.nvim',
+    "kdheepak/lazygit.nvim",
     keys = api.keymaps.maps.lazygit,
     cmd = "LazyGit",
   },
@@ -304,14 +310,14 @@ M.ordinalnvim = {
   -- ################################################
   {
     "lukas-reineke/indent-blankline.nvim",
-    config = get_config('_indent').setup,
+    config = get_config("_indent").setup,
   },
   -- ################################################
   -- # Comment
   -- ################################################
   {
-    'numToStr/Comment.nvim',
-    config = get_config('_comment').setup,
+    "numToStr/Comment.nvim",
+    config = get_config("_comment").setup,
   },
   -- ################################################
   -- # LSP
@@ -321,15 +327,15 @@ M.ordinalnvim = {
     dependencies = { "vim-denops/denops.vim" },
   },
   {
-    'mfussenegger/nvim-lint',
-    config = get_config('_lint').setup,
+    "mfussenegger/nvim-lint",
+    config = get_config("_lint").setup,
   },
   {
-    "rafamadriz/friendly-snippets"
+    "rafamadriz/friendly-snippets",
   },
   {
     "L3MON4D3/LuaSnip",
-    config = get_config('_luasnip').setup,
+    config = get_config("_luasnip").setup,
   },
   {
     "saadparwaiz1/cmp_luasnip",
@@ -344,12 +350,12 @@ M.ordinalnvim = {
     dependencies = {
       "jose-elias-alvarez/null-ls.nvim",
       "mfussenegger/nvim-dap",
-      'ray-x/lsp_signature.nvim',
-      'hrsh7th/cmp-nvim-lsp',
-      'onsails/lspkind.nvim',
-      'kevinhwang91/nvim-ufo',
+      "ray-x/lsp_signature.nvim",
+      "hrsh7th/cmp-nvim-lsp",
+      "onsails/lspkind.nvim",
+      "kevinhwang91/nvim-ufo",
     },
-    config = get_config('_mason').setup,
+    config = get_config("_mason").setup,
   },
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -357,72 +363,79 @@ M.ordinalnvim = {
   },
   {
     "ray-x/lsp_signature.nvim",
-    config = get_config('_lsp_sig').setup,
+    config = get_config("_lsp_sig").setup,
   },
   {
-    'onsails/lspkind.nvim',
-    config = get_config('_lsp_kind').setup,
+    "onsails/lspkind.nvim",
+    config = get_config("_lsp_kind").setup,
   },
   {
-    'weilbith/nvim-code-action-menu',
-    cmd = 'CodeActionMenu',
+    "weilbith/nvim-code-action-menu",
+    cmd = "CodeActionMenu",
   },
   {
     "glepnir/lspsaga.nvim",
     branch = "main",
-    config = get_config('_lsp_saga').setup,
+    config = get_config("_lsp_saga").setup,
     keys = api.keymaps.maps.lspsaga,
   },
   -- ################################################
   -- # Auto Complete
   -- ################################################
   {
-    'nvim-treesitter/nvim-treesitter',
+    "nvim-treesitter/nvim-treesitter",
     dependencies = {
-      'JoosepAlviste/nvim-ts-context-commentstring',
-      'windwp/nvim-ts-autotag',
-      'nvim-treesitter/nvim-treesitter-refactor',
-      'nvim-treesitter/nvim-treesitter-context',
-      'windwp/nvim-ts-autotag',
-      'p00f/nvim-ts-rainbow',
+      "JoosepAlviste/nvim-ts-context-commentstring",
+      "nvim-treesitter/nvim-treesitter-refactor",
+      "nvim-treesitter/nvim-treesitter-context",
+      "windwp/nvim-ts-autotag",
+      "p00f/nvim-ts-rainbow",
     },
-    init = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
-    config = get_config('_treesitter').setup,
+    init = function()
+      require("nvim-treesitter.install").update({ with_sync = true })
+    end,
+    config = get_config("_treesitter").setup,
   },
   {
-    'KadoBOT/cmp-plugins',
-    config = get_config('_cmp_plugins').setup,
+    "KadoBOT/cmp-plugins",
+    config = get_config("_cmp_plugins").setup,
   },
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
-      'chrisgrieser/cmp-nerdfont',
-      'f3fora/cmp-spell',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-calc',
-      'hrsh7th/cmp-cmdline',
-      'hrsh7th/cmp-emoji',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-nvim-lsp-signature-help',
-      'hrsh7th/cmp-nvim-lua',
+      "chrisgrieser/cmp-nerdfont",
+      "f3fora/cmp-spell",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-calc",
+      "hrsh7th/cmp-cmdline",
+      "hrsh7th/cmp-emoji",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
+      "hrsh7th/cmp-nvim-lua",
       -- "hrsh7th/cmp-vsnip",
       -- "hrsh7th/vim-vsnip",
       -- "hrsh7th/vim-vsnip-integ",
-      'jc-doyle/cmp-pandoc-references',
-      'KadoBOT/cmp-plugins',
-      'octaltree/cmp-look',
-      'ray-x/cmp-treesitter',
+      "jc-doyle/cmp-pandoc-references",
+      "KadoBOT/cmp-plugins",
+      "octaltree/cmp-look",
+      "ray-x/cmp-treesitter",
+      "windwp/nvim-autopairs",
     },
-    config = get_config('_cmp').setup,
+    config = get_config("_cmp").setup,
   },
   {
-    'jose-elias-alvarez/null-ls.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    config = get_config('_null_ls').setup,
+    "windwp/nvim-autopairs",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = get_config("_autopairs").setup,
   },
   {
-    'alec-gibson/nvim-tetris'
+    "jose-elias-alvarez/null-ls.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = get_config("_null_ls").setup,
+  },
+  {
+    "alec-gibson/nvim-tetris",
   },
 }
 
