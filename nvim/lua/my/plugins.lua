@@ -141,6 +141,7 @@ M.ordinalnvim = {
   {
     "lalitmee/browse.nvim",
     dependencies = { "nvim-telescope/telescope.nvim" },
+    keys = api.keymaps.maps.telescope,
   },
   {
     "simrat39/symbols-outline.nvim",

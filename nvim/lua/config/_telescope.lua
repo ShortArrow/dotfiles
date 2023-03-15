@@ -8,10 +8,10 @@ M.setup = function()
   -- local trouble = require('trouble.providers.telescope')
   telescope.setup {
     defaults = {
-      layout = 'horizontal',
+      layout = 'vertical',
       winblend = 20,
-      prompt_prefix = 'ﱢ ',
-      selection_caret = ' ',
+      prompt_prefix = ' ',
+      selection_caret = ' ',
       entry_prefix = '  ',
       initial_mode = 'insert',
       border = false,
