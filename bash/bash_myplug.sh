@@ -139,3 +139,6 @@ export PATH="$DVM_DIR/bin:$PATH"
 
 # nim
 export PATH="$HOME/.nimble/bin:$PATH"
+
+# completion
+. ./bash_mycompletion.sh
