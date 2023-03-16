@@ -43,8 +43,8 @@ M.setup = function()
         cmp_autopairs.on_confirm_done({
           filetypes = {
             -- "*" is a alias to all filetypes
-            ["*"] = {
-              ["("] = {
+                ["*"] = {
+                  ["("] = {
                 kind = {
                   cmp.lsp.CompletionItemKind.Function,
                   cmp.lsp.CompletionItemKind.Method,
@@ -53,7 +53,7 @@ M.setup = function()
               },
             },
             lua = {
-              ["("] = {
+                  ["("] = {
                 kind = {
                   cmp.lsp.CompletionItemKind.Function,
                   cmp.lsp.CompletionItemKind.Method,
@@ -82,9 +82,19 @@ M.setup = function()
   if cmp ~= nil then
     cmp.setup({
       enabled = function()
-        -- disable completion in comments
         local context = require("cmp.config.context")
-        -- keep command mode completion enabled when cursor is in a comment
+        local function is_emoji()
+          return vim.api.nvim_get_current_line():match("^.*:[%w%-_]*$") ~= nil
+        end
+        -- disable completion in dart language
+        if vim.tbl_contains({ "dart" }, vim.bo.filetype) then
+          return false
+        end
+        -- enable completion in comments for emoji 😄
+        if is_emoji() then
+          return true
+        end
+        -- disable completion in comments
         if vim.api.nvim_get_mode().mode == "c" then
           return true
         else
@@ -117,26 +127,26 @@ M.setup = function()
         documentation = cmp.config.window.bordered(),
       },
       mapping = cmp.mapping.preset.insert({
-        ["<Up>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-        ["<Down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-        ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-        ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-        ["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-        ["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-        ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
-        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
-        ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-        ["<C-y>"] = cmp.config.disable,
-        ["<C-e>"] = cmp.mapping({
+            ["<Up>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+            ["<Down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+            ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+            ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+            ["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+            ["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+            ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
+            ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
+            ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+            ["<C-y>"] = cmp.config.disable,
+            ["<C-e>"] = cmp.mapping({
           i = cmp.mapping.abort(),
           c = cmp.mapping.close(),
         }),
-        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-        ["<CR>"] = cmp.mapping.confirm({
+            ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+            ["<CR>"] = cmp.mapping.confirm({
           behavior = cmp.ConfirmBehavior.Replace,
           select = true, -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         }),
-        ["<Tab>"] = cmp.mapping(function(fallback)
+            ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
           elseif luasnip.expandable() then
@@ -149,7 +159,7 @@ M.setup = function()
             fallback()
           end
         end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
+            ["<S-Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
           elseif luasnip.jumpable(-1) then
@@ -161,8 +171,8 @@ M.setup = function()
       }),
       sources = cmp.config.sources({
         { name = "calc" },
-        { name = "emoji" },
-        { name = "nerdfont" },
+        { name = "emoji",                  max_item_count = 10 },
+        { name = "nerdfont",               max_item_count = 10 },
         { name = "nvim_lsp" },
         { name = "nvim_lsp_signature_help" },
         { name = "nvim_lua" },
@@ -200,7 +210,7 @@ M.setup = function()
               local icon, hl_group =
                   require("nvim-web-devicons").get_icon(entry:get_completion_item().label)
               if icon then
-                vim_item.kind = icon
+                vim_item.kind = icon + " "
                 vim_item.kind_hl_group = hl_group
                 return vim_item
               end
