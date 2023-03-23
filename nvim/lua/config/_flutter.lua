@@ -2,7 +2,7 @@ local M = {}
 
 function M.setup()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.snippetSupport = true;
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
   -- flutter-tools
   local on_attach = function(client, bufnr)
     local function buf_set_keymap(...)
@@ -30,46 +30,68 @@ function M.setup()
     buf_set_keymap("n", "<leader>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
     buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
   end
+  local get_flutter_path = function()
+    return vim.api.nvim_eval("system('which flutter')")
+  end
   local config = {
-      lsp = {
-          color = {
-              enabled = true,
-              background = true,
-              foreground = false,
-              virtual_text = true,
-              virtual_text_str = "■",
-          },
-          on_attach = function(client, bufnr)
-            vim.cmd [[hi FlutterWidgetGuides ctermfg=237 guifg=#33374c]]
-            vim.cmd [[hi ClosingTags ctermfg=244 guifg=#8389a3]]
-            on_attach(client, bufnr)
-          end,
-          capabilities = capabilities,
-          widget_guides = {
-              enabled = true,
-          },
-          settings = {
-              showTodos = true,
-              completeFunctionCalls = true,
-              -- analysisExcludedFolders = { "<path-to-flutter-sdk-packages>" },
-              renameFilesWithClasses = "prompt", -- "always"
-              enableSnippets = true,
-          },
-          debugger = {
-              enabled = false,
-              register_configurations = function(_)
-                require("dap").configurations.dart = {}
-                require("dap.ext.vscode").load_launchjs()
-              end,
-          },
-      }
+    ui = {
+      -- the border type to use for all floating windows, the same options/formats
+      -- used for ":h nvim_open_win" e.g. "single" | "shadow" | {<table-of-eight-chars>}
+      border = "rounded",
+    },
+    lsp = {
+      color = {
+        enabled = true,
+        background = true,
+        foreground = false,
+        virtual_text = true,
+        virtual_text_str = "■",
+      },
+      on_attach = function(client, bufnr)
+        vim.cmd([[hi FlutterWidgetGuides ctermfg=237 guifg=#33374c]])
+        vim.cmd([[hi ClosingTags ctermfg=244 guifg=#8389a3]])
+        on_attach(client, bufnr)
+      end,
+      capabilities = capabilities,
+      settings = {
+        showTodos = true,
+        completeFunctionCalls = true,
+        analysisExcludedFolders = { get_flutter_path() },
+        renameFilesWithClasses = "prompt", -- "always"
+        enableSnippets = true,
+      },
+    },
+    closing_tags = {
+      prefix = " //", -- character to use for close tag e.g. > Widget
+      enabled = true, -- set to false to disable
+    },
+    dev_log = { open_cmd = "tabedit" },
+    widget_guides = {
+      enabled = true,
+    },
+    outline = {
+      open_cmd = "35vnew",
+    },
+    debugger = {
+      enabled = false,
+      register_configurations = function(_)
+        require("dap").configurations.dart = {}
+        require("dap.ext.vscode").load_launchjs()
+      end,
+    },
+    dev_tools = {
+      autostart = false,      -- autostart devtools server if not detected
+      auto_open_browser = false, -- Automatically opens devtools in the browser
+    },
   }
   require("flutter-tools").setup(config)
-  vim.api.nvim_set_keymap('n', '<Leader>fr', ':FlutterRun -d web-server<CR>'
-      , { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('n', '<Leader>fc',
-      [[<Cmd>lua require('telescope').extensions.flutter.commands()<CR>]],
-      { noremap = true, silent = true })
+  vim.api.nvim_set_keymap("n", "<Leader>fr", ":FlutterRun -d web-server<CR>", { noremap = true, silent = true })
+  vim.api.nvim_set_keymap(
+    "n",
+    "<Leader>fc",
+    [[<Cmd>lua require('telescope').extensions.flutter.commands()<CR>]],
+    { noremap = true, silent = true }
+  )
 end
 
 return M
