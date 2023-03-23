@@ -1,5 +1,4 @@
 ---
-title : 'Neovim'
 summary: "neovim config"
 tags: ["docs"]
 ---
@@ -23,7 +22,8 @@ Where-Object { $_.Attributes -match "ReparsePoint" -and $_.Name -match "nvim"}
 
 ```bash
 rm -rf ~/.config/nvim
-ln -s $HOME/Documents/GitHub/dotfiles/nvim ~/.config/nvim # caution! Don't needs slash at last.
+# caution! Don't needs slash at last.
+ln -s $HOME/Documents/GitHub/dotfiles/nvim ~/.config/nvim
 ls ~/.config/nvim # check link
 ```
 
@@ -74,6 +74,3 @@ sudo apt install /tmp/nvim.deb
 mkdir ~/.config/nvim/colors/
 curl https://raw.githubusercontent.com/cocopon/iceberg.vim/master/src/iceberg.vim -o ~/.config/nvim/colors/iceberg.vim
 ```
-
-
-

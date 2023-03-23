@@ -4,15 +4,17 @@ description: "deno setting"
 summary: "deno settings"
 tags: ["docs"]
 ---
-# Deno
 
 ## Install
 
 In Arch,
 
-   ```
-   sudo pacman -S deno
-   ```
-##  LSP
+```bash
+sudo pacman -S deno
+```
 
-check conflicts with ts-server.
+## LSP
+
+```bash
+:MasonInstall deno
+```
