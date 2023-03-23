@@ -231,7 +231,7 @@ M.ordinalnvim = {
   -- ################################################
   {
     "akinsho/flutter-tools.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig", "mfussenegger/nvim-dap" },
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig", "mfussenegger/nvim-dap","stevearc/dressing.nvim" },
     config = get_config("_flutter").setup,
     keys = api.keymaps.maps.flutter,
   },
