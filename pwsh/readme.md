@@ -8,7 +8,7 @@ echo $PROFILE
 
 [about_Profiles](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_profiles)
 
-# Windows
+### Windows
 
 Make SymbolicLink.
 
@@ -25,14 +25,14 @@ Where-Object { $_.Attributes -match "ReparsePoint" -and $_.Name -match "nvim"}
 ```powershell
 Get-ExecutionPolicy -List
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-Get-ExecutionPolicy -List 
+Get-ExecutionPolicy -List
 ```
 
 [about_Execution_Policies](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies)
 
 ## add to profile
 
-```
+```powershell
 . $PROFILE/pwsh_myplug.ps1
 ```
 
@@ -40,7 +40,7 @@ read [script-scope-and-dot-sourcing](https://docs.microsoft.com/en-us/powershell
 
 ## sudo
 
-```
+```powershell
 go install github.com/mattn/sudo@latest
 ```
 

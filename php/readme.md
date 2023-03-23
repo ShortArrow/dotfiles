@@ -1,9 +1,9 @@
 ---
-title : 'PHP'
 description: "PHP settings"
 summary: "PHP settings"
 tags: ["docs"]
 ---
+
 # my php config
 
 ## Install LSP
@@ -14,18 +14,19 @@ tags: ["docs"]
 
 ## Install php
 
-### Debian
+### Install php in Debian
 
 ```bash
 sudo apt update && sudo apt -y upgrade
 sudo apt -y install php php-common
 php -v
-sudo apt -y install php-cli php-fpm php-json php-pdo php-mysql php-zip php-gd  php-mbstring php-curl php-xml php-pear php-bcmath
+sudo apt -y install php-cli php-fpm php-json \
+php-pdo php-mysql php-zip php-gd  php-mbstring php-curl php-xml php-pear php-bcmath
 ```
 
 ## Install composer
 
-### Debian
+### Install composer in Debian
 
 ```bash
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"

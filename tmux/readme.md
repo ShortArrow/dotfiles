@@ -1,17 +1,17 @@
 ---
-title : 'Tmux'
 summary: "tmux config"
 tags: ["docs"]
 ---
 
-# my tmux config 
+# my tmux config
 
 <!--toc:start-->
+
 - [my tmux config](#my-tmux-config)
   - [Usage](#usage)
   - [Reload config](#reload-config)
   - [Dependencies](#dependencies)
-<!--toc:end-->
+  <!--toc:end-->
 
 ## Usage
 
@@ -21,7 +21,8 @@ tags: ["docs"]
 
 ```bash
 rm -rf ~/.tmux_myplug
-ln -s $HOME/Documents/GitHub/dotfiles/tmux/tmux_myplug.sh ~/.tmux_myplug # caution! Don't needs slash at last.
+# caution! Don't needs slash at last of directory name
+ln -s $HOME/Documents/GitHub/dotfiles/tmux/tmux_myplug.sh ~/.tmux_myplug
 file ~/.tmux_myplug # check link
 ```
 
@@ -42,7 +43,8 @@ Write this at the end of `~/.tmux.conf`.
 source ~/.tmux_myplug
 ```
 
-For load the settings, restart tmux session, or run command as bellow in current tmux session after `<C-b>:`.
+For load the settings, restart tmux session,
+or run command as bellow in current tmux session after `<C-b>:`.
 
 ```bash
 source ~/.tmux.conf
@@ -52,11 +54,10 @@ source ~/.tmux.conf
 
 Way reload `tmux_myplug.sh` on keep tmux is alive.
 
-```
+```bash
 source ~/.tmux.conf
 ```
 
 ## Dependencies
 
 - [iceberg fork by ShortArrow](https://github.com/ShortArrow/iceberg-dark)
-

@@ -1,9 +1,8 @@
 ---
-title : 'Python'
+title: "Python"
 summary: "python config"
 tags: ["docs"]
 ---
-# my python settings
 
 ## Install python
 
@@ -15,13 +14,13 @@ choco install python
 
 In Debian,
 
-```
+```bash
 sudo apt install python
 ```
 
 In Arch,
 
-```
+```bash
 sudo pacman -S python
 ```
 
@@ -33,18 +32,21 @@ pip install -g neovim
 
 ## Install LSP
 
-by `:Mason`
+```bash
+:MasonInstall python-language-server
+:MasonInstall pyright
+```
 
 ## virtual envy
 
 Linux
 
-```
+```bash
 source ./.venv/bin/activate
 ```
 
 Windows
 
-```
+```bash
 ./.venv/Scripts/activate.ps1
 ```

@@ -12,8 +12,8 @@ Install [rustup](https://rustup.rs/)
 ## LSP
 
 ```bash
-rustup +nightly component add rust-analyzer-preview
- sudo ln -s $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer /usr/bin/rust-analyzer
+:MasonInstall rust-analyzer
+:MasonInstall rust-fmt
 ```
 
 ## bashrc
