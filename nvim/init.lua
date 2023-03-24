@@ -1,59 +1,31 @@
+local vim = vim
 if vim.g.vscode then
   -- vscode extension
   print("load vscode extension config")
+
   -- THEME CHANGER
+  vim.api.nvim_exec([[
+    " THEME CHANGER
+    function! SetCursorLineNrColorInsert(mode)
+        " Insert mode: blue
+        if a:mode == "i"
+            call VSCodeNotify('nvim-theme.insert')
 
-  function SetCursorLineNrColorInsert(mode)
-    -- Insert mode: blue
-    if mode == "i" then
-      vim.api.nvim_call_function("VSCodeNotify", { "nvim-theme.insert" })
-      -- Replace mode: red
-    elseif mode == "r" then
-      vim.api.nvim_call_function("VSCodeNotify", { "nvim-theme.replace" })
-    end
-  end
+        " Replace mode: red
+        elseif a:mode == "r"
+            call VSCodeNotify('nvim-theme.replace')
+        endif
+    endfunction
 
-  function SetCursorLineNrColorVisual()
-    vim.api.nvim_command("set updatetime=0")
-    vim.api.nvim_call_function("VSCodeNotify", { "nvim-theme.visual" })
-  end
-
-  vim.api.nvim_set_keymap(
-    "v",
-    "<SID>SetCursorLineNrColorVisual",
-    "<expr> v:lua.SetCursorLineNrColorVisual()",
-    { silent = true }
-  )
-  vim.api.nvim_set_keymap(
-    "n",
-    "v<SID>SetCursorLineNrColorVisual",
-    "<script> v<SID>SetCursorLineNrColorVisual()",
-    { silent = true }
-  )
-  vim.api.nvim_set_keymap(
-    "n",
-    "V<SID>SetCursorLineNrColorVisual",
-    "<script> V<SID>SetCursorLineNrColorVisual()",
-    { silent = true }
-  )
-  vim.api.nvim_set_keymap(
-    "n",
-    "<C-v><SID>SetCursorLineNrColorVisual",
-    "<script> <C-v><SID>SetCursorLineNrColorVisual()",
-    { silent = true }
-  )
-
-  vim.api.nvim_exec(
-    [[
-augroup CursorLineNrColorSwap
-autocmd!
-autocmd InsertEnter * call v:lua.SetCursorLineNrColorInsert(vim.fn.expand('<a:insertmode>'))
-autocmd InsertLeave * call vim.api.nvim_call_function('VSCodeNotify', {'nvim-theme.normal'})
-autocmd CursorHold * call vim.api.nvim_call_function('VSCodeNotify', {'nvim-theme.normal'})
-augroup END
-]],
-    false
-  )
+    augroup CursorLineNrColorSwap
+        autocmd!
+        autocmd ModeChanged *:[vV\x16]* call VSCodeNotify('nvim-theme.visual')
+        autocmd ModeChanged *:[R]* call VSCodeNotify('nvim-theme.replace')
+        autocmd InsertEnter * call SetCursorLineNrColorInsert(v:insertmode)
+        autocmd InsertLeave * call VSCodeNotify('nvim-theme.normal')
+        autocmd CursorHold * call VSCodeNotify('nvim-theme.normal')
+    augroup END
+]], false)
 elseif 0 ~= vim.fn.exists("g:started_by_firenvim") then
   -- general config for firenvim
   print("load firenvim config")
@@ -62,7 +34,7 @@ elseif 0 ~= vim.fn.exists("g:started_by_firenvim") then
       alt = "all",
     },
     localSettings = {
-          [".*"] = {
+      [".*"] = {
         cmdline = "neovim",
         content = "text",
         priority = 0,
