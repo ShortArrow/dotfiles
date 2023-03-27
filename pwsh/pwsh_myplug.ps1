@@ -65,6 +65,10 @@ Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory
 # choco install gsudo
 Import-Module 'C:\tools\gsudo\Current\gsudoModule.psd1'
 
+# git-graph
+# cargo install git-graph
+New-Alias -Name gg -Value git-graph
+
 # lazygit
 # choco install lazygit
 New-Alias -Name lg -Value lazygit
