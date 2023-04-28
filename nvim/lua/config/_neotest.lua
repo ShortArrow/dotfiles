@@ -24,11 +24,6 @@ M.setup = function()
       require("neotest-vitest"),
       require("neotest-rust")(api.lang.rust.neotest),
       require('neotest-dart')(api.lang.dart.neotest),
-      require("neotest-vim-test")({
-        ignore_file_types = {
-          "python", "vim", "lua", "vitest", "darttest", "fluttertest", "jest", "cargotest", "cargonextest"
-        },
-      }),
     },
   })
 end
