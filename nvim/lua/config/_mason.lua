@@ -39,44 +39,43 @@ M.setup = function()
   }
   _mason_lspconfig.setup()
   _mason_dap.setup({
-    automatic_setup = true,
+    handlers = {
+      function(source_name)
+        -- all sources with no handler get passed here
+
+
+        -- Keep original functionality of `automatic_setup = true`
+        require('mason-nvim-dap.automatic_setup')(source_name)
+      end,
+      python = function(source_name)
+        _mason_nullls.adapters.python = {
+          type = "executable",
+          command = "/usr/bin/python3",
+          args = {
+            "-m",
+            "debugpy.adapter",
+          },
+        }
+
+        _mason_dap.configurations.python = {
+          {
+            type = "python",
+            request = "launch",
+            name = "Launch file",
+            program = "${file}", -- This configuration will launch the current file if used.
+          },
+        }
+      end,
+    }
   })
-  _mason_dap.setup_handlers {
-    function(source_name)
-      -- all sources with no handler get passed here
-
-
-      -- Keep original functionality of `automatic_setup = true`
-      require('mason-nvim-dap.automatic_setup')(source_name)
-    end,
-    python = function(source_name)
-      _mason_nullls.adapters.python = {
-        type = "executable",
-        command = "/usr/bin/python3",
-        args = {
-          "-m",
-          "debugpy.adapter",
-        },
-      }
-
-      _mason_dap.configurations.python = {
-        {
-          type = "python",
-          request = "launch",
-          name = "Launch file",
-          program = "${file}", -- This configuration will launch the current file if used.
-        },
-      }
-    end,
-  }
   _mason_nullls.setup({
     ensure_installed = {
       -- Opt to list sources here, when available in mason.
     },
     automatic_installation = false,
     automatic_setup = true, -- Recommended, but optional
+    handlers = {}
   })
-  _mason_nullls.setup_handlers() -- If `automatic_setup` is true.
   _mason_lspconfig.setup_handlers({
     function(server_name)
       local _opts = {}
