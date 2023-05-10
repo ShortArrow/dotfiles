@@ -40,6 +40,7 @@ export PATH="$PATH:$HOME/go/bin"
 # rust
 . "$HOME/.cargo/env"
 export PATH="$PATH:$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer"
+export PATH="$PATH:$HOME/.cargo/bin"
 
 # vimmer terminal
 set -o vi
