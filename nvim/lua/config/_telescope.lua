@@ -18,6 +18,9 @@ M.setup = function()
       border = true,
       sorting_strategy = 'ascending',
       path_display = { 'truncate' },
+      file_ignore_patterns = {
+        'node_modules'
+      },
       -- mappings = {
       --   i = {
       --     ['<esc>'] = actions.close,
