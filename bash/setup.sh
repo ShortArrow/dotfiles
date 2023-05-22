@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # make symbolic link
-rm -rf ~/.bash_myplug
+rm -rf "$HOME/.bash_myplug"
 
 # caution! Don't needs slash at last of directory name.
 REPO="$HOME/Documents/GitHub/dotfiles/bash/src"
