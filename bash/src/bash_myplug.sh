@@ -2,7 +2,6 @@
 
 source "$HOME/.bash_myplug/bash_checkers.sh"
 source "$HOME/.bash_myplug/bash_mycompletion.sh"
-source "$HOME/.bash_myplug/bash_mycolor.sh"
 
 # ls
 if command_exists "lsd"; then
@@ -128,3 +127,10 @@ export PATH="$DVM_DIR/bin:$PATH"
 
 # nim
 export PATH="$HOME/.nimble/bin:$PATH"
+
+# vivid
+if command_exists "vivid"; then
+	export LS_COLORS="$(vivid generate molokai)"
+else
+	echo "please install vivid"
+fi
