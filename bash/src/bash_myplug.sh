@@ -2,6 +2,7 @@
 
 source "$HOME/.bash_myplug/bash_checkers.sh"
 source "$HOME/.bash_myplug/bash_mycompletion.sh"
+source "$HOME/.bash_myplug/bash_mycolor.sh"
 
 # ls
 if command_exists "lsd"; then
@@ -17,6 +18,12 @@ else
 	alias ls="ls --color=tty"
 	alias ls.="ls -a --color=tty"
 fi
+
+# ip
+alias ip='ip -color=auto'
+
+# less
+export LESS='-R --use-color -Dd+r$Du+b'
 
 # bat
 if command_exists "bat"; then
