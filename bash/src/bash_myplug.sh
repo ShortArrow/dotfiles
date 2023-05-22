@@ -1,7 +1,7 @@
 #!/bin/bash
 
-source "$HOME/.bash_myplug/bash_checkers.sh"
-source "$HOME/.bash_myplug/bash_mycompletion.sh"
+source "/usr/local/bin/.bash_myplug/bash_checkers.sh"
+source "/usr/local/bin/.bash_myplug/bash_mycompletion.sh"
 
 # ls
 if command_exists "lsd"; then
@@ -22,7 +22,7 @@ fi
 alias ip='ip -color=auto'
 
 # less
-export LESS='-R --use-color -Dd+r$Du+b'
+export LESS="-R --use-color -Dd+r\$Du+b"
 
 # bat
 if command_exists "bat"; then
@@ -44,9 +44,8 @@ export LC_CTYPE="en_US.UTF8"
 export PATH="$PATH:$HOME/go/bin"
 
 # rust
-. "$HOME/.cargo/env"
 export PATH="$PATH:$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer"
-export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:$HOME/.cargo/bin" # this is `source "$HOME/.cargo/env"`
 
 # vimmer terminal
 set -o vi
@@ -130,7 +129,15 @@ export PATH="$HOME/.nimble/bin:$PATH"
 
 # vivid
 if command_exists "vivid"; then
-	export LS_COLORS="$(vivid generate molokai)"
+	LS_COLORS="$(vivid generate molokai)"
+	export LS_COLORS
 else
 	echo "please install vivid"
+fi
+
+# zellij
+if command_exists "zellij"; then
+	alias zj='zellij'
+else
+	echo "please install zellij"
 fi
