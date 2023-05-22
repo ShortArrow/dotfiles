@@ -11,7 +11,7 @@ directory_exists() {
 
 # Function to check if a command exists
 command_exists() {
-	if which "$1" >/dev/null; then
+	if which "$1" >/dev/null 2>&1; then
 		return 0 # The command was found, return success
 	else
 		return 1 # The command was not found, return failure
