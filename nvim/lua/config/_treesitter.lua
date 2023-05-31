@@ -1,11 +1,11 @@
 local M = {}
 
 M.setup = function()
-  require('nvim-ts-autotag').setup()
-  require('nvim-treesitter.install').compilers = { "zig" }
-  require('nvim-treesitter.configs').setup {
+  require("nvim-ts-autotag").setup()
+  require("nvim-treesitter.install").compilers = { "zig" }
+  require("nvim-treesitter.configs").setup({
     context_commentstring = {
-      enable = true
+      enable = true,
     },
     auto_install = true,
     autotag = {
@@ -73,8 +73,8 @@ M.setup = function()
         node_decremental = "grm",
       },
     },
-  }
-  local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+  })
+  local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
   parser_config.tsx.filetype_to_parsername = { "javascript", "typescript.tsx" }
 end
 

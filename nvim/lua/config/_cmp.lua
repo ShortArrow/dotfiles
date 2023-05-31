@@ -8,6 +8,9 @@ M.setup = function()
   -- Setup nvim-cmp.
   local lspkind_ok, lspkind = pcall(require, "lspkind")
   local luasnip_ok, luasnip = pcall(require, "luasnip")
+  if not lspkind_ok then
+    return
+  end
   if not luasnip_ok then
     return
   end
@@ -82,6 +85,9 @@ M.setup = function()
   if cmp ~= nil then
     cmp.setup({
       enabled = function()
+        if vim.bo.buftype == 'prompt' then
+          return false
+        end
         local context = require("cmp.config.context")
         local function is_emoji()
           return vim.api.nvim_get_current_line():match("^.*:[%w%-_]*$") ~= nil
