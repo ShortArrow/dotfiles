@@ -1,14 +1,14 @@
-function ExistsCommand
+function Test-CommandExist
 {
   param (
     [string]$targetCommand
   )
   if (Get-Command $targetCommand -ea SilentlyContinue)
   {
-    Write-Output 'Success!'
+    return $true
   } else
   {
-    Write-Error 'Error!'
+    return $false
   }
 }
 
@@ -46,7 +46,6 @@ Set-PSReadlineOption -AddToHistoryHandler {
 # Word delimiters on cursor navigation by ctrl + arrows
 Set-PSReadLineOption -WordDelimiters ";:,.[]{}()/\|^&*-=+'`" !?@#$%&_<>「」（）『』『』［］、，。：；／"
 
-
 # prompt setting
 # choco install starship
 Invoke-Expression (&starship init powershell)
@@ -67,11 +66,48 @@ Import-Module 'C:\tools\gsudo\Current\gsudoModule.psd1'
 
 # git-graph
 # cargo install git-graph
-New-Alias -Name gg -Value git-graph
+if (Test-CommandExist('git-graph'))
+{
+  New-Alias -Name gg -Value git-graph
+}
 
 # lazygit
 # choco install lazygit
-New-Alias -Name lg -Value lazygit
+if (Test-CommandExist('lazygit'))
+{
+  New-Alias -Name lg -Value lazygit
+}
 
 ## lunarvim
-New-Alias -Name lvim -Value "$env:USERPROFILE\.local\bin\lvim.ps1"
+$lunarvimPath = "$env:USERPROFILE\.local\bin\lvim.ps1"
+if(Test-Path($lunarvimPath))
+{
+  New-Alias -Name lvim -Value $lunarvimPath
+}
+
+## lsd
+function Get-FilteredChildItem
+{
+  Get-ChildItem -Force | Where-Object { -not $_.Name.StartsWith(".") }
+}
+function Get-AllChildItem
+{
+  Get-ChildItem -Force 
+}
+function llong
+{
+  lsd -l --sort extension
+}
+function lldot
+{
+  lsd -al --sort extension
+}
+if(Test-CommandExist('lsd'))
+{
+  New-Alias -Name 'll' -Value llong
+  New-Alias -Name 'll.' -Value lldot
+} else
+{
+  New-Alias -Name 'll' -Value Get-FilteredChildItem
+  New-Alias -Name 'll.' -Value Get-AllChildItem
+}
