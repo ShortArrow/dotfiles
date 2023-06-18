@@ -70,28 +70,25 @@ export PATH="$PATH":"$HOME/.pub-cache/bin"
 # crontab
 alias crontab="crontab -i"
 
-# git-foresta
-alias foresta="git-foresta --all | less -RSX"
-
 # git-graph
 if command_exists "git-graph"; then
 	alias gg="git-graph --style round --color always | less -RSX"
 else
-	alias gg="echo command git-graph is not found.\nPlease run \`cargo install git-graph\`"
+	alias gg="echo command git-graph is not found.\nPlease install \'git-graph\'"
 fi
 
 # lazydocker
 if command_exists "lazydocker"; then
 	alias lzd=lazydocker
 else
-	alias lzd="echo command lazydocker is not found.\nPlease install lazydocker\`"
+	alias lzd="echo command lazydocker is not found.\nPlease install \'lazydocker\'"
 fi
 
 # lazygit
 if command_exists "lazygit"; then
 	alias lg=lazygit
 else
-	alias lg="echo command lazygit is not found.\nPlease run \`cargo install git-graph\` or \`go install github.com/jesseduffield/lazygit@latest\`, \`pkg install lazygit\`"
+	alias lg="echo command lazygit is not found.\nPlease install \'lazygit\'"
 fi
 
 # japanese
