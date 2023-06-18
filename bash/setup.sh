@@ -1,11 +1,16 @@
 #!/bin/bash
 
 # Get the username of the user who launched the script
-orig_user=$(logname)
+if [ "$EUID" -eq 0 ]; then
+	orig_user=$SUDO_USER
+else
+	echo 'Please run as root.'
+  exit
+fi
 
 # Get the home directory of the original user
 orig_home=$(getent passwd "$orig_user" | cut -d: -f6)
-orig_home=$HOME
+echo "$orig_home"
 
 # make symbolic link
 rm -rf "$orig_home/.bash_myplug"
