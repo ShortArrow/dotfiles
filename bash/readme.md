@@ -53,3 +53,12 @@ sudo -E bash ./setup.sh
 :MasonInstall shellcheck
 :MasonInstall shellfmt
 ```
+
+## sudo lecture
+
+Add these lines in your sudoers file.
+
+```bash
+Defaults lecture=always
+Defaults lecture_file=~/GitHub/Documents/dotfiles/bash/src/sudo_lecture.txt
+```
