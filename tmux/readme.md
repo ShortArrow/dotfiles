@@ -1,4 +1,5 @@
 ---
+title: "Tmux"
 summary: "tmux config"
 tags: ["docs"]
 ---

@@ -1,7 +1,7 @@
 ---
-title : 'nvim test'
+title : 'Neovim Test'
 description: "nvim test"
-summary: "nevim test setting"
+summary: "neovim test setting"
 tags: ["docs"]
 ---
 # test guide of nvim config
