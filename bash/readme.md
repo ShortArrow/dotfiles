@@ -54,11 +54,20 @@ sudo -E bash ./setup.sh
 :MasonInstall shellfmt
 ```
 
-## sudo lecture
+## sudo 
+
+### lecture
 
 Add these lines in your sudoers file.
 
 ```bash
 Defaults lecture=always
 Defaults lecture_file=~/GitHub/Documents/dotfiles/bash/src/sudo_lecture.txt
+```
+
+### visudo
+
+```bash
+sudo unlink /usr/bin/vi
+sudo ln -s /usr/bin/nvim /usr/sbin/vi
 ```
