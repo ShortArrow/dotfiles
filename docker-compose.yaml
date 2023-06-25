@@ -3,7 +3,8 @@ version: '3'
 services:
   nvim:
     build:
-      context: ./playground/linux
+      context: .
+      dockerfile: ./playground/linux/dockerfile
     tty: true
   docsserver:
     image: klakegg/hugo:0.107.0

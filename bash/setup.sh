@@ -2,10 +2,19 @@
 
 # Get the username of the user who launched the script
 if [ "$EUID" -eq 0 ]; then
-	orig_user=$SUDO_USER
+	# Check if the script is run by the root user directly
+	if [ "" = "$SUDO_USER" ]; then
+		if [ "" = "$1" ]; then
+			orig_user=$1
+		else
+			echo 'Please set username at first argument'
+		fi
+	else
+		orig_user="$SUDO_USER"
+	fi
 else
-	echo 'Please run as root.'
-  exit
+	echo 'Please run as root or using sudo.'
+	exit 1
 fi
 
 # Get the home directory of the original user
