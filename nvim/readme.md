@@ -1,4 +1,5 @@
 ---
+title: "Neovim"
 summary: "neovim config"
 tags: ["docs"]
 ---
