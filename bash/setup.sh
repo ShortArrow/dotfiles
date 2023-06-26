@@ -18,7 +18,7 @@ else
 fi
 
 # Get the home directory of the original user
-orig_home=$(getent passwd "$orig_user" | cut -d: -f6)
+orig_home="/home/$orig_user"
 echo "$orig_home"
 
 # make symbolic link
