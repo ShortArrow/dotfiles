@@ -4,7 +4,7 @@ services:
   nvim:
     build:
       context: .
-      dockerfile: ./playground/linux/Dockerfile
+      dockerfile: ./playground/archlinux/Dockerfile
     tty: true
   docsserver:
     image: klakegg/hugo:0.107.0
