@@ -39,11 +39,10 @@ RUN useradd -m -G wheel -s /bin/bash $USERNAME
 ENV HOME /home/$USERNAME
 WORKDIR /home/$USERNAME
 USER $USERNAME
-ENV PATH "/home/$USERNAME/.cargo/bin"
 
 # Add cargo
 RUN rustup install stable
-ENV PATH "/home/$USERNAME/.cargo/bin:${PATH}"
+ENV PATH "/home/$USERNAME/.cargo/bin:$PATH"
 ENV RUSTUP_HOME "/home/$USERNAME/.rustup"
 
 # Install Rust Tools
@@ -57,10 +56,9 @@ RUN /bin/mkdir -p /home/$USERNAME/Documents/GitHub/dotfiles
 WORKDIR /home/$USERNAME/Documents/GitHub/dotfiles
 COPY . .
 
-
 # Link Bash config
-USER root
 RUN ln -s "/home/$USERNAME/Documents/GitHub/dotfiles/bash/src" ~/.bash_myplug
+USER root
 RUN ln -s "/home/$USERNAME/Documents/GitHub/dotfiles/bash/src" /usr/local/bin/.bash_myplug
 USER $USERNAME
 RUN bash \
