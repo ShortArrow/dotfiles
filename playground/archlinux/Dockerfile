@@ -17,6 +17,7 @@ RUN pacman --noconfirm -S \
 RUN pacman --noconfirm -S \
   zig \
   nodejs \
+  npm \
   python \
   go \
   rustup \
@@ -42,7 +43,7 @@ USER $USERNAME
 
 # Add cargo
 RUN rustup install stable
-ENV PATH "/home/$USERNAME/.cargo/bin:$PATH"
+ENV PATH "`yarn global bin`:$PATH"
 ENV RUSTUP_HOME "/home/$USERNAME/.rustup"
 
 # Install Rust Tools
@@ -50,6 +51,10 @@ RUN cargo install \
   git-graph \
   vivid \
   lsd
+
+# Install Yarn Tools
+ENV PATH "/home/$USERNAME/.yarn/bin:$PATH"
+RUN yarn global add neovim
 
 # Clone Repo
 RUN /bin/mkdir -p /home/$USERNAME/Documents/GitHub/dotfiles
