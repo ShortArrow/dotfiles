@@ -22,7 +22,7 @@ fi
 alias ip='ip -color=auto'
 
 # less
-export LESS="-R --use-color -Dd+r\$Du+b"
+export LESS="-r"
 
 # bat
 if command_exists "bat"; then
@@ -72,7 +72,7 @@ alias crontab="crontab -i"
 
 # git-graph
 if command_exists "git-graph"; then
-	alias gg="git-graph --style round --color always | less -RSX"
+	alias gg="git-graph --style round --color always | less"
 else
 	alias gg="echo command git-graph is not found.\nPlease install \'git-graph\'"
 fi
