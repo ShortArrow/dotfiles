@@ -18,6 +18,11 @@ M.firenvim = {
 M.ordinalnvim = {
   -- self manage
   {
+    "https://codeberg.org/esensar/nvim-dev-container",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = get_config("_devcontainer").setup,
+  },
+  {
     "lewis6991/impatient.nvim",
     config = get_config("_impatient").setup,
   },
@@ -231,7 +236,12 @@ M.ordinalnvim = {
   -- ################################################
   {
     "akinsho/flutter-tools.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig", "mfussenegger/nvim-dap","stevearc/dressing.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "neovim/nvim-lspconfig",
+      "mfussenegger/nvim-dap",
+      "stevearc/dressing.nvim",
+    },
     config = get_config("_flutter").setup,
     keys = api.keymaps.maps.flutter,
   },
