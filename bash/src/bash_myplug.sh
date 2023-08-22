@@ -62,6 +62,13 @@ export PATH="$PATH:$HOME/.yarn/bin"
 export PATH="$PATH:$HOME/.npm-global/bin"
 # `npm doctor` `npm root -g` `npm bin -g`
 
+# pnpm
+export PNPM_HOME="/home/who/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
 # flutter
 export PATH="$PATH:$HOME/Documents/GitHub/flutter/bin"
 export CHROME_EXECUTABLE="/usr/bin/chromium"
