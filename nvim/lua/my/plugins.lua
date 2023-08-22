@@ -139,6 +139,10 @@ M.ordinalnvim = {
   -- # UI
   -- ################################################
   {
+    "folke/zen-mode.nvim",
+    opts = {},
+  },
+  {
     "SmiteshP/nvim-gps",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     config = get_config("_gps").setup,
