@@ -18,6 +18,10 @@ M.firenvim = {
 M.ordinalnvim = {
   -- self manage
   {
+    "github/copilot.vim",
+    lazy=false,
+  },
+  {
     "https://codeberg.org/esensar/nvim-dev-container",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     config = get_config("_devcontainer").setup,
