@@ -17,7 +17,7 @@ M.has_deno_json = function()
   end
 
   local package_json_path = table.concat({ output[1], 'deno.json' }, '/') -- パスを結合して deno.json のパスを作成
-  return vim.fn.filereadable(package_json_path) ~= 0 -- package.json が存在する場合は真を返す
+  return vim.fn.filereadable(package_json_path) ~= 0                      -- package.json が存在する場合は真を返す
 end
 
 M.get_deno_json_path = function()

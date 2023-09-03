@@ -19,7 +19,7 @@ M.ordinalnvim = {
   -- self manage
   {
     "github/copilot.vim",
-    lazy=false,
+    lazy = false,
   },
   {
     "https://codeberg.org/esensar/nvim-dev-container",

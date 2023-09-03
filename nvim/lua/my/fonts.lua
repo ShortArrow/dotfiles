@@ -1,6 +1,6 @@
 local M = {}
 
-M.concatinate_fontnames = function (list)
+M.concatinate_fontnames = function(list)
   local line
   for key, value in pairs(list) do
     if string.find(value, ' ') then
