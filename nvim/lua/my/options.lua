@@ -32,21 +32,21 @@ M.activate  = function()
   opt.helplang       = 'ja' --, 'en'
   opt.inccommand     = 'split'
   opt.fillchars      = {
-      vert = "│",
-      fold = "f",
-      eob = "e", -- suppress ~ at EndOfBuffer
-      diff = "⣿", -- alternatives = ⣿ ░ ─ ╱
-      msgsep = "‾",
-      foldopen = "",
-      foldsep = "│",
-      foldclose = "",
+    vert = "│",
+    fold = "f",
+    eob = "e", -- suppress ~ at EndOfBuffer
+    diff = "⣿", -- alternatives = ⣿ ░ ─ ╱
+    msgsep = "‾",
+    foldopen = "",
+    foldsep = "│",
+    foldclose = "",
   }
   opt.listchars      = {
-      eol = '⤶',
-      space = '·',
-      trail = '-',
-      extends = '◀',
-      precedes = '▶',
+    eol = '⤶',
+    space = '·',
+    trail = '-',
+    extends = '◀',
+    precedes = '▶',
   }
 end
 
