@@ -1,4 +1,5 @@
 gui:
+  language: ja
   showIcons: true
 git:
   merging:
