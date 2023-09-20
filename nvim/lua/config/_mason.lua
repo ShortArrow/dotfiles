@@ -116,10 +116,13 @@ M.setup = function()
         _opts.settings = _api.lang.python.pyright
       elseif server_name == "pyls" then
         _opts.settings = _api.lang.python.pylsp
+      elseif server_name == "clangd" then
+        _opts.settings = _api.lang.clang.clangd
       elseif server_name == "powershell_es" then
         _opts.settings = _api.lang.pwsh.powershell_es
       end
       _opts.capabilities = capabilities
+      _opts.capabilities.offsetEncoding = { 'utf-16' } -- this is temporary patch https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428
       _opts.on_attach = function(_, bufnr)
         _lsp_sig.on_attach(M.lsp_sig_config, bufnr)
       end
