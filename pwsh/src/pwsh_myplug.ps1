@@ -71,6 +71,12 @@ if (Test-CommandExist('git-graph'))
   New-Alias -Name gg -Value git-graph
 }
 
+# pnpm
+# volta install pnpm
+if (Test-CommandExist('pnpm')){
+  $env:Path = "$env:Path$(pnpm bin);"
+}
+
 # lazygit
 # choco install lazygit
 if (Test-CommandExist('lazygit'))
