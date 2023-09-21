@@ -21,7 +21,10 @@ M.ordinalnvim = {
     "github/copilot.vim",
     lazy = false,
   },
-  { "nvim-tree/nvim-web-devicons", lazy = true },
+  {
+    "nvim-tree/nvim-web-devicons",
+    lazy = false,
+  },
   {
     "https://codeberg.org/esensar/nvim-dev-container",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
@@ -57,7 +60,7 @@ M.ordinalnvim = {
   -- ################################################
   -- {
   --  'yamatsum/nvim-nonicons',
-  --  dependencies = { 'kyazdani42/nvim-web-devicons' },
+  --  dependencies = { 'nvim-tree/nvim-web-devicons' },
   --},
   {
     "uga-rosa/jam.nvim",
@@ -93,14 +96,14 @@ M.ordinalnvim = {
   -- ################################################
   {
     "obaland/vfiler.vim",
-    dependencies = { "obaland/vfiler-column-devicons", "kyazdani42/nvim-web-devicons" },
+    dependencies = { "obaland/vfiler-column-devicons", "nvim-tree/nvim-web-devicons" },
     config = get_config("_vfiler").setup,
     keys = api.keymaps.maps.vfiler,
   },
   {
     "ibhagwan/fzf-lua",
     -- optional for icon support
-    dependencies = { "kyazdani42/nvim-web-devicons" },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     config = get_config("_fzflua").setup,
     enabled = not api.env.is_win_os(),
     keys = require("my.keymaps").maps.fzflua,
@@ -116,7 +119,7 @@ M.ordinalnvim = {
   -- ################################################
   {
     "folke/trouble.nvim",
-    dependencies = "kyazdani42/nvim-web-devicons",
+    dependencies = "nvim-tree/nvim-web-devicons",
     config = get_config("_trouble").setup,
     keys = api.keymaps.maps.trouble,
   },
@@ -174,7 +177,7 @@ M.ordinalnvim = {
     "akinsho/bufferline.nvim",
     version = "*",
     dependencies = {
-      "kyazdani42/nvim-web-devicons",
+      "nvim-tree/nvim-web-devicons",
     },
     config = get_config("_buffer_line").setup,
   },
@@ -200,6 +203,7 @@ M.ordinalnvim = {
     "folke/which-key.nvim",
     config = get_config("_whichkey").setup,
     keys = api.keymaps.maps.whichkey,
+    lazy = true,
   },
   {
     "voldikss/vim-floaterm",
@@ -315,7 +319,7 @@ M.ordinalnvim = {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
-      "kyazdani42/nvim-web-devicons",
+      "nvim-tree/nvim-web-devicons",
     },
     config = get_config("_octo").setup,
     cmd = "Octo",
