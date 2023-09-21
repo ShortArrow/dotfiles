@@ -21,6 +21,7 @@ M.ordinalnvim = {
     "github/copilot.vim",
     lazy = false,
   },
+  { "nvim-tree/nvim-web-devicons", lazy = true },
   {
     "https://codeberg.org/esensar/nvim-dev-container",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
@@ -171,7 +172,7 @@ M.ordinalnvim = {
   },
   {
     "akinsho/bufferline.nvim",
-    version = "v2.*",
+    version = "*",
     dependencies = {
       "kyazdani42/nvim-web-devicons",
     },
