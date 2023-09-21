@@ -1,6 +1,6 @@
 gui:
   language: en
-  showIcons: true
+  nerdFontsVersion: "3"
 git:
   merging:
     args: "--no-ff"
