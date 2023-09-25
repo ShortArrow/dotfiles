@@ -1,8 +1,10 @@
 gui:
-  showIcons: true
+  language: en
+  nerdFontsVersion: "3"
 git:
   merging:
     args: "--no-ff"
   paging:
     colorArg: always
-    pager: delta --dark --paging=never
+    # pager: delta --dark --paging=never
+    pager: diff-so-fancy

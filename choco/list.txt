@@ -1,0 +1,6 @@
+delta
+7zip
+gimp
+filezilla
+inkscape
+
