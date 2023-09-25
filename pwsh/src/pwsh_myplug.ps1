@@ -117,3 +117,10 @@ if(Test-CommandExist('lsd'))
   New-Alias -Name 'll' -Value Get-FilteredChildItem
   New-Alias -Name 'll.' -Value Get-AllChildItem
 }
+
+if(Test-CommandExist('zoxide'))
+{
+  # New-Alias -Name z -Value zoxide
+  Invoke-Expression (& { (zoxide init powershell | Out-String) })
+  Write-Output "zoxide is active"
+}
