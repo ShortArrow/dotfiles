@@ -10,14 +10,11 @@ echo $PROFILE
 
 ### Windows
 
-Make SymbolicLink.
+Make SymbolicLink. Please run `setup.ps1` as Administrator priviledges.
 
 ```powershell
-$ProfileDir=(Split-Path $PROFILE -Parent)
-Remove-Item (Resolve-Path $ProfileDir/pwsh_myplug.ps1) -Force
-New-Item -Type SymbolicLink -Path "$ProfileDir" -Name "pwsh_myplug.ps1" -Value "$env:USERPROFILE/Documents/GitHub/dotfiles/pwsh_myplug.ps1"
-Get-ChildItem -Path $env:LOCALAPPDATA -Force -ErrorAction 'silentlycontinue' |
-Where-Object { $_.Attributes -match "ReparsePoint" -and $_.Name -match "nvim"}
+cd dotfiles/pwsh
+./setup.ps1
 ```
 
 ## setup execution policy
@@ -33,7 +30,7 @@ Get-ExecutionPolicy -List
 ## add to profile
 
 ```powershell
-. $PROFILE/pwsh_myplug.ps1
+. $PROFILE/myplug/pwsh_myplug.ps1
 ```
 
 read [script-scope-and-dot-sourcing](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_scripts#script-scope-and-dot-sourcing)

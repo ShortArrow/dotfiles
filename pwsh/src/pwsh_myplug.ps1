@@ -71,6 +71,12 @@ if (Test-CommandExist('git-graph'))
   New-Alias -Name gg -Value git-graph
 }
 
+# pnpm
+# volta install pnpm
+if (Test-CommandExist('pnpm')){
+  $env:Path = "$env:Path$(pnpm bin);"
+}
+
 # lazygit
 # choco install lazygit
 if (Test-CommandExist('lazygit'))
@@ -110,4 +116,11 @@ if(Test-CommandExist('lsd'))
 {
   New-Alias -Name 'll' -Value Get-FilteredChildItem
   New-Alias -Name 'll.' -Value Get-AllChildItem
+}
+
+if(Test-CommandExist('zoxide'))
+{
+  # New-Alias -Name z -Value zoxide
+  Invoke-Expression (& { (zoxide init powershell | Out-String) })
+  Write-Output "zoxide is active"
 }
