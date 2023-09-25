@@ -145,3 +145,7 @@ if command_exists "zellij"; then
 else
 	echo "please install zellij"
 fi
+
+if command_exists "zoxide"; then
+  eval "$(zoxide init bash)"
+fi
