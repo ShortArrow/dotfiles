@@ -28,23 +28,6 @@ ln -s $HOME/Documents/GitHub/dotfiles/nvim ~/.config/nvim
 ls ~/.config/nvim # check link
 ```
 
-## Install Packer
-
-<https://github.com/wbthomason/packer.nvim/blob/master/README.md#quickstart>
-
-### win
-
-```bash
-git clone https://github.com/wbthomason/packer.nvim "$env:LOCALAPPDATA\nvim-data\site\pack\packer\start\packer.nvim"
-```
-
-### Linux
-
-```bash
-git clone --depth 1 https://github.com/wbthomason/packer.nvim\
- ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-```
-
 ## Install Nerd fonts
 
 Install from [nerdfonts.com](https://www.nerdfonts.com/).
@@ -67,11 +50,4 @@ fc-list | grep nerd # check
 ```bash
 wget -O /tmp/nvim.deb https://github.com/neovim/neovim/releases/download/v0.7.0/nvim-linux64.deb
 sudo apt install /tmp/nvim.deb
-```
-
-## Neovim colorscheme
-
-```bash
-mkdir ~/.config/nvim/colors/
-curl https://raw.githubusercontent.com/cocopon/iceberg.vim/master/src/iceberg.vim -o ~/.config/nvim/colors/iceberg.vim
 ```
