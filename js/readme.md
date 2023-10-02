@@ -7,23 +7,61 @@ tags: ["docs"]
 
 ## Version Management
 
-Use [fnm](https://github.com/Schniz/fnm) for node.js version management
+Use [volta](https://volta.sh/).
+
+```bash
+curl https://get.volta.sh | bash
+```
+
+### node
+
+```bash
+volta install node@20
+```
+
+### yarn
+
+```bash
+volta install node@20
+```
+
+### npm
+
+```bash
+volta install npm
+```
+
+### pnpm
+
+```bash
+volta install pnpm
+```
+
+## In Docker
+
+### pnpm in Docker
+
+```bash
+corepack enable && corepack prepare pnpm@latest --activate
+```
+
+### yarn in Docker
+
+```bash
+corepack enable
+```
 
 ## Library version management in Project
 
-check npm doctor and enable yarn.
-
 ```bash
-fnm use 16
 npm doctor
-corepack enable
 ```
 
 ## Install LSP
 
 ```bash
-yarn global add diagnostic-languageserver
-yarn global add eslint_d
-yarn global add tsserver 
-yarn global add tsc
+:MasonInstall typescript-language-server
+:MasonInstall eslint-lsp
+:MasonInstall eslintd
+:MasonInstall biome
 ```
