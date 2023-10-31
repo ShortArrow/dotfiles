@@ -334,6 +334,8 @@ M.ordinalnvim = {
   -- ################################################
   {
     "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    opts = {},
     config = get_config("_indent").setup,
   },
   -- ################################################
