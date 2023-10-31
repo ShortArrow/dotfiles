@@ -64,6 +64,12 @@ Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory
 # choco install gsudo
 Import-Module 'C:\tools\gsudo\Current\gsudoModule.psd1'
 
+# go path
+if (Test-CommandExist('go'))
+{
+  $env:Path = "$env:Path;$env:USERPROFILE\go\bin;"
+}
+
 # git-graph
 # cargo install git-graph
 if (Test-CommandExist('git-graph'))
@@ -82,6 +88,12 @@ if (Test-CommandExist('pnpm')){
 if (Test-CommandExist('lazygit'))
 {
   New-Alias -Name lg -Value lazygit
+}
+
+# lazydocker
+if (Test-CommandExist('lazydocker'))
+{
+  New-Alias -Name lzd -Value lazydocker
 }
 
 ## lunarvim
