@@ -7,5 +7,6 @@
 install and refresh
 
 ```bash
+ln -s $HOME/Documents/GitHub/dotfiles/archlinux/fontconfig ~/.config/
 fc-cache -f -v
 ```
