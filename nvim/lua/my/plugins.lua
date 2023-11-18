@@ -19,6 +19,7 @@ M.ordinalnvim = {
   -- self manage
   {
     "github/copilot.vim",
+    config = get_config("_copilot").setup,
     lazy = false,
   },
   {
