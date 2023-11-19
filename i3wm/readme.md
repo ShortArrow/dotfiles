@@ -6,3 +6,5 @@
     ```text
     include ~/.config/i3/myplug/myplug
     ```
+
+1. reload with `<Mod> + Shift + r`.

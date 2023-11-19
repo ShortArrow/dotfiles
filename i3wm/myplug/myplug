@@ -1,2 +1,11 @@
 exec --no-startup-id ~/.config/i3/myplug/naturalscroll.sh
 
+# 全画面スクリーンショット(endeavour OS is already attached)
+#bindsym Print exec scrot ~/Pictures/screenshot_%Y-%m-%d-%T.png
+
+# 現在のウィンドウのスクリーンショット
+bindsym $mod+Print exec scrot -u ~/Pictures/windowshot_%Y-%m-%d-%T.png
+
+# 矩形選択スクリーンショット
+bindsym Shift+Print exec scrot -s ~/Pictures/selectshot_%Y-%m-%d-%T.png
+
