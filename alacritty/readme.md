@@ -1,4 +1,4 @@
-# Aracritty
+# Alacritty
 
 ## Usage
 
@@ -7,12 +7,11 @@ Make SymbolicLink.
 ### Windows
 
 ```powershell
-Remove-Item $env:Appdata/alacritty/alacritty -Force
-New-Item -Type SymbolicLink -Path "$env:appdata/alacritty" -Name "alacritty.yml" -Value "$env:USERPROFILE/Documents/GitHub/dotfiles/alacritty/alacritty.yml"
+./setup.ps1
 ```
 
 ### Linux
 
 ```bash
+./setup.sh
 ```
-
