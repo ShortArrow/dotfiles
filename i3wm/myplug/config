@@ -9,3 +9,5 @@ bindsym $mod+Print exec scrot -u ~/Pictures/windowshot_%Y-%m-%d-%T.png
 # 矩形選択スクリーンショット
 bindsym Shift+Print exec scrot -s ~/Pictures/selectshot_%Y-%m-%d-%T.png
 
+# alacrittyを起動
+bindsym $mod+Shift+s exec alacritty
