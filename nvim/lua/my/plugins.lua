@@ -360,14 +360,14 @@ M.ordinalnvim = {
   {
     "rafamadriz/friendly-snippets",
   },
-  {
-    "L3MON4D3/LuaSnip",
-    config = get_config("_luasnip").setup,
-  },
-  {
-    "saadparwaiz1/cmp_luasnip",
-    dependencies = "L3MON4D3/LuaSnip",
-  },
+--  {
+--    "L3MON4D3/LuaSnip",
+--    config = get_config("_luasnip").setup,
+--  },
+--  {
+--    "saadparwaiz1/cmp_luasnip",
+--    dependencies = "L3MON4D3/LuaSnip",
+--  },
   {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
