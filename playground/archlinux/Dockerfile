@@ -16,7 +16,8 @@ RUN pacman --noconfirm -S \
   tmux \
   bat \
   fzf \
-  exa
+  exa \
+  zellij
 
 # Install Languages
 RUN pacman --noconfirm -S \
@@ -71,6 +72,7 @@ COPY . .
 RUN ln -s "/home/$USERNAME/Documents/GitHub/dotfiles/bash/src" ~/.bash_myplug
 USER root
 RUN ln -s "/home/$USERNAME/Documents/GitHub/dotfiles/bash/src" /usr/local/bin/.bash_myplug
+RUN chsh -s /bin/bash $USERNAME
 USER $USERNAME
 RUN bash \
   && echo 'source ~/.bash_myplug/bash_myplug.sh' >> ~/.bashrc
