@@ -11,7 +11,12 @@ RUN pacman --noconfirm -S \
   unzip \
   sudo \
   starship \
-  zsh
+  zsh \
+  neofetch \
+  tmux \
+  bat \
+  fzf \
+  exa
 
 # Install Languages
 RUN pacman --noconfirm -S \
@@ -30,6 +35,7 @@ RUN corepack enable
 RUN pacman --noconfirm -S \
   lazygit \
   git-delta \
+  diff-so-fancy \
   ripgrep \
   fd \
   github-cli
@@ -74,5 +80,7 @@ RUN rm -rf ~/.config/nvim \
   && mkdir -p ~/.config \
   && ln -s $HOME/Documents/GitHub/dotfiles/nvim ~/.config/nvim \
   && file ~/.config/nvim
+
+RUN git config --global --add safe.directory /home/who/Documents/GitHub/dotfiles
 
 ENTRYPOINT ["/bin/bash", "-l"]
