@@ -52,14 +52,14 @@ M.setup = function()
     ensure_installed = {
       "tsx",
       "toml",
-      "fish",
-      "php",
+      "bash",
+      "markdown",
+      "markdown_inline",
       "json",
       "yaml",
-      "swift",
       "html",
       "lua",
-      "scss",
+      "css",
     },
     incremental_selection = {
       enable = true,
