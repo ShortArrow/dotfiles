@@ -171,10 +171,9 @@ M.maps = {
     -- { mode = 't',  '',  '<C-Bslash><C-n>/', },
   },
   lspsaga = {
-    -- rename (Lsp Name)
-    { "<Leader>ln", ":Lspsaga rename<CR>" },
-    -- code_action (Lsp Action)
-    { "<Leader>la", ":Lspsaga code_action<CR>" },
+    { mode = "n", "<Leader>ln", ":Lspsaga rename<CR>",      desc = "rename (lspsaga)" },
+    { mode = "n", "<Leader>la", ":Lspsaga code_action<CR>", desc = "Code Action (lspsaga)" },
+    { mode = "n", "<Leader>ls", ":Lspsaga finder<CR>",      desc = "Lsp Search (lspsaga)" },
   },
   common = {
     -- # lsp keymaps

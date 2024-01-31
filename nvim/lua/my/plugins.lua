@@ -407,7 +407,7 @@ M.ordinalnvim = {
       'nvim-tree/nvim-web-devicons',       -- optional
     },
     config = get_config("_lsp_saga").setup,
-    keys = api.keymaps.maps.lspsaga,
+    -- keys = api.keymaps.maps.lspsaga,
   },
   -- ################################################
   -- # Auto Complete
