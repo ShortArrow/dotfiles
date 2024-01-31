@@ -48,7 +48,7 @@ export PATH="$PATH:$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin
 export PATH="$PATH:$HOME/.cargo/bin" # this is `source "$HOME/.cargo/env"`
 
 # vimmer terminal
-set -o vi
+#set -o vi
 export VISUAL=vim
 export EDITOR=vim
 unset LESSEDIT
@@ -142,6 +142,10 @@ else
 	echo "please install zellij"
 fi
 
+# zoxide
 if command_exists "zoxide"; then
   eval "$(zoxide init bash)"
 fi
+
+# poetry
+export PATH="$PATH:$HOME/.local/bin"
