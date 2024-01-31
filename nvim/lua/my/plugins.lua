@@ -360,14 +360,14 @@ M.ordinalnvim = {
   {
     "rafamadriz/friendly-snippets",
   },
---  {
---    "L3MON4D3/LuaSnip",
---    config = get_config("_luasnip").setup,
---  },
---  {
---    "saadparwaiz1/cmp_luasnip",
---    dependencies = "L3MON4D3/LuaSnip",
---  },
+  --  {
+  --    "L3MON4D3/LuaSnip",
+  --    config = get_config("_luasnip").setup,
+  --  },
+  --  {
+  --    "saadparwaiz1/cmp_luasnip",
+  --    dependencies = "L3MON4D3/LuaSnip",
+  --  },
   {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
@@ -402,7 +402,10 @@ M.ordinalnvim = {
   },
   {
     "glepnir/lspsaga.nvim",
-    branch = "main",
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',   -- optional
+      'nvim-tree/nvim-web-devicons',       -- optional
+    },
     config = get_config("_lsp_saga").setup,
     keys = api.keymaps.maps.lspsaga,
   },
