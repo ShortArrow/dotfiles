@@ -14,7 +14,6 @@ vim.opt.rtp:prepend(lazypath)
 local plugins = require("my.plugins").ordinalnvim
 local opts = {
   ui = {
-
     icons = {
       cmd = "",
       config = "",
@@ -23,7 +22,7 @@ local opts = {
       init = "",
       import = "",
       keys = "",
-      lazy = "鈴",
+      lazy = "  ",
       loaded = "●",
       not_loaded = "○",
       plugin = "",
@@ -37,3 +36,7 @@ local opts = {
 }
 
 require("lazy").setup(plugins, opts)
+-- https://github.com/folke/lazy.nvim/issues/133
+local ViewConfig = require("lazy.view.config")
+ViewConfig.keys.profile_filter = "<C-f>"
+ViewConfig.keys.profile_sort = "<C-s>"
