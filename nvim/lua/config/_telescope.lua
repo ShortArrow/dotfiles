@@ -63,7 +63,7 @@ M.setup = function()
     },
     extensions = {}
   }
-  telescope.load_extension "flutter"
+  -- telescope.load_extension "flutter"
 end
 
 return M
