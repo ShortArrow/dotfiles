@@ -80,18 +80,12 @@ function M.setup()
       end,
     },
     dev_tools = {
-      autostart = false,      -- autostart devtools server if not detected
+      autostart = false,         -- autostart devtools server if not detected
       auto_open_browser = false, -- Automatically opens devtools in the browser
     },
   }
   require("flutter-tools").setup(config)
-  vim.api.nvim_set_keymap("n", "<Leader>fr", ":FlutterRun -d web-server<CR>", { noremap = true, silent = true })
-  vim.api.nvim_set_keymap(
-    "n",
-    "<Leader>fc",
-    [[<Cmd>lua require('telescope').extensions.flutter.commands()<CR>]],
-    { noremap = true, silent = true }
-  )
+  require('telescope').load_extension('flutter')
 end
 
 return M

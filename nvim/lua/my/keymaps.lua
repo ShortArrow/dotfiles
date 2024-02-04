@@ -46,6 +46,9 @@ end
 M.fh = function()
   require("telescope.builtin").help_tags()
 end
+M.fc = function()
+  require("telescope.builtin").current_buffer_fuzzy_find()
+end
 M.packer_sync = function()
   require("packer").sync()
 end
@@ -70,6 +73,7 @@ M.maps = {
     { "<Leader>fg", M.fg, desc = "Telescope live_grep" },
     { "<Leader>fb", M.fb, desc = "Telescope buffers" },
     { "<Leader>fh", M.fh, desc = "Telescope help_tags" },
+    { "<Leader>cb", M.fc, desc = "Telescope current_buffer_fuzzy_find" },
   },
   neotest = {
     { "ntr", M.neotest_run,         desc = "Neo Test Run (nearest run)" },
@@ -138,8 +142,8 @@ M.maps = {
     { "<Leader>k", ":WhichKey<CR>" },
   },
   flutter = {
-    { "<Leader>fr", ":FlutterRun -d web-server<CR>" },
-    { "<Leader>fc", M.flutter_open },
+    { mode = "n", "<Leader>fr", ":FlutterRun -d web-server<CR>", desc = "Flutter Run" },
+    { mode = "n", "<Leader>fc", M.flutter_open, desc = "Flutter Open" },
   },
   trouble = {
     { "<Leader>tr", ":TroubleToggle<CR>" },

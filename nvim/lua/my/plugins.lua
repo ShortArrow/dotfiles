@@ -256,6 +256,7 @@ M.ordinalnvim = {
       "mfussenegger/nvim-dap",
       "stevearc/dressing.nvim",
     },
+    after = "telescope.nvim",
     config = get_config("_flutter").setup,
     keys = api.keymaps.maps.flutter,
   },
