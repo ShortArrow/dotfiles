@@ -24,6 +24,11 @@ alias ip='ip -color=auto'
 # less
 export LESS="-r"
 
+# nvim
+if command_exists "nvim"; then
+  alias nv="nvim"
+fi
+
 # bat
 if command_exists "bat"; then
 	alias ncat="cat" # meaning normal cat
