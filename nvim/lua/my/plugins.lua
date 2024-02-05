@@ -430,7 +430,9 @@ M.ordinalnvim = {
   },
   {
     "KadoBOT/cmp-plugins",
+    after = "nvim-cmp",
     config = get_config("_cmp_plugins").setup,
+    event = { "InsertEnter", "CmdlineEnter" },
   },
   {
     "hrsh7th/nvim-cmp",
@@ -454,6 +456,7 @@ M.ordinalnvim = {
       "ray-x/cmp-treesitter",
       "windwp/nvim-autopairs",
     },
+    event = { "InsertEnter", "CmdlineEnter" },
     config = get_config("_cmp").setup,
   },
   {
