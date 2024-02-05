@@ -9,5 +9,6 @@ M.dart = require('my.lang.dart')
 M.ts = require('my.lang.ts')
 M.rust = require('my.lang.rust')
 M.clang = require('my.lang.clang')
+M.astro = require('my.lang.astro')
 
 return M

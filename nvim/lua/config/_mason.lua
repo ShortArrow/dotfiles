@@ -120,6 +120,8 @@ M.setup = function()
         _opts.settings = _api.lang.clang.clangd
       elseif server_name == "powershell_es" then
         _opts.settings = _api.lang.pwsh.powershell_es
+      elseif server_name == "astro-ls" then
+        _opts.settings = _api.lang.astro.astro_ls
       end
       _opts.capabilities = capabilities
       _opts.capabilities.offsetEncoding = { 'utf-16' } -- this is temporary patch https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428
