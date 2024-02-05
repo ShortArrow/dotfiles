@@ -29,6 +29,16 @@ M.ordinalnvim = {
   {
     "https://codeberg.org/esensar/nvim-dev-container",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
+    cmd = {
+      "DevcontainerStart",
+      "DevcontainerAttach",
+      "DevcontainerExec",
+      "DevcontainerStop",
+      "DevcontainerStopAll",
+      "DevcontainerRemoveAll",
+      "DevcontainerLogs",
+      "DevcontainerEditNearestConfig",
+    },
     config = get_config("_devcontainer").setup,
   },
   {
@@ -404,8 +414,8 @@ M.ordinalnvim = {
   {
     "glepnir/lspsaga.nvim",
     dependencies = {
-      'nvim-treesitter/nvim-treesitter',   -- optional
-      'nvim-tree/nvim-web-devicons',       -- optional
+      'nvim-treesitter/nvim-treesitter', -- optional
+      'nvim-tree/nvim-web-devicons',     -- optional
     },
     config = get_config("_lsp_saga").setup,
     -- keys = api.keymaps.maps.lspsaga,
