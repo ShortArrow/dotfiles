@@ -211,6 +211,16 @@ M.ordinalnvim = {
     config = get_config("_telescope").setup,
   },
   {
+    'nvim-telescope/telescope-media-files.nvim',
+    dependencies = {
+      'nvim-lua/popup.nvim',
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+    },
+    after = 'telescope.nvim',
+    config = get_config('_telescope_media_files').setup,
+  },
+  {
     "folke/which-key.nvim",
     config = get_config("_whichkey").setup,
     keys = api.keymaps.maps.whichkey,
@@ -283,7 +293,7 @@ M.ordinalnvim = {
   {
     "simrat39/rust-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig", "mfussenegger/nvim-dap" },
-    ft = {"rust"},
+    ft = { "rust" },
     config = get_config("_rust").setup,
   },
   {
