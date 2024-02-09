@@ -34,6 +34,9 @@ end
 M.flutter_open = function()
   require("telescope").extensions.flutter.commands()
 end
+M.fm = function()
+  require('telescope').extensions.media_files.media_files()
+end
 M.ff = function()
   require("telescope.builtin").find_files()
 end
@@ -74,6 +77,7 @@ M.maps = {
     { "<Leader>fb", M.fb, desc = "Telescope buffers" },
     { "<Leader>fh", M.fh, desc = "Telescope help_tags" },
     { "<Leader>cb", M.fc, desc = "Telescope current_buffer_fuzzy_find" },
+    { "<Leader>fm", M.fm, desc = "Telescope media_files" },
   },
   neotest = {
     { "ntr", M.neotest_run,         desc = "Neo Test Run (nearest run)" },
