@@ -12,6 +12,22 @@ function Test-CommandExist
   }
 }
 
+$needInstallList = @()
+
+function Show-NeedInstall
+{
+  # print list of need install
+  Write-Host "Need install: $script:needInstallList"
+}
+
+function Add-NeedInstall
+{
+  param (
+    [string]$targetCommand
+  )
+  $script:needInstallList += $targetCommand
+}
+
 # Reload Env
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 
@@ -75,12 +91,21 @@ if (Test-CommandExist('go'))
 if (Test-CommandExist('git-graph'))
 {
   New-Alias -Name gg -Value git-graph
+} else
+{
+  New-Alias -Name gg -Value Show-NeedInstall
+  Add-NeedInstall 'pnpm'
 }
 
 # pnpm
 # volta install pnpm
-if (Test-CommandExist('pnpm')){
+if (Test-CommandExist('pnpm'))
+{
   $env:Path = "$env:Path$(pnpm bin);"
+} else
+{
+  New-Alias -Name pnpm -Value Show-NeedInstall
+  Add-NeedInstall 'pnpm'
 }
 
 # lazygit
@@ -88,12 +113,20 @@ if (Test-CommandExist('pnpm')){
 if (Test-CommandExist('lazygit'))
 {
   New-Alias -Name lg -Value lazygit
+} else
+{
+  New-Alias -Name lg -Value Show-NeedInstall
+  Add-NeedInstall 'lazygit'
 }
 
 # lazydocker
 if (Test-CommandExist('lazydocker'))
 {
   New-Alias -Name lzd -Value lazydocker
+} else
+{
+  New-Alias -Name lzd -Value Show-NeedInstall
+  Add-NeedInstall 'lzd'
 }
 
 ## lunarvim
@@ -101,6 +134,10 @@ $lunarvimPath = "$env:USERPROFILE\.local\bin\lvim.ps1"
 if(Test-Path($lunarvimPath))
 {
   New-Alias -Name lvim -Value $lunarvimPath
+} else
+{
+  New-Alias -Name lvim -Value Show-NeedInstall
+  Add-NeedInstall 'lunarvim'
 }
 
 ## lsd
@@ -132,7 +169,9 @@ if(Test-CommandExist('lsd'))
 
 if(Test-CommandExist('zoxide'))
 {
-  # New-Alias -Name z -Value zoxide
   Invoke-Expression (& { (zoxide init powershell | Out-String) })
-  Write-Output "zoxide is active"
+} else
+{
+  New-Alias -Name z -Value Show-NeedInstall
+  Add-NeedInstall 'zoxide'
 }
