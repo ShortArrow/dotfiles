@@ -26,7 +26,7 @@ export LESS="-r"
 
 # nvim
 if command_exists "nvim"; then
-  alias nv="nvim"
+	alias nv="nvim"
 fi
 
 # bat
@@ -70,8 +70,8 @@ export PATH="$PATH:$HOME/.npm-global/bin"
 # pnpm
 export PNPM_HOME="/home/who/.local/share/pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+*":$PNPM_HOME:"*) ;;
+*) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
 # flutter
@@ -149,7 +149,15 @@ fi
 
 # zoxide
 if command_exists "zoxide"; then
-  eval "$(zoxide init bash)"
+	eval "$(zoxide init bash)"
+fi
+
+# pyenv
+if command_exists "pyenv"; then
+  eval "$(pyenv init -)"
+  # add pyenv shims to PATH
+  # pyenvRoot="$(pyenv root)"
+  # export PATH="$pyenvRoot/shims:$PATH"
 fi
 
 # poetry
