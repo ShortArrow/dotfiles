@@ -43,6 +43,9 @@ fc-list | grep nerd # check
 > **Note**
 > If you using WSL, check config of Windows Terminal.
 
+> **Note**
+> If you using Archlinux, check AUR. fonts could install with pacman or paru.
+
 ## Install Neovim
 
 ### Debian
