@@ -3,32 +3,39 @@ if vim.g.vscode then
   -- vscode extension
   print("load vscode extension config")
 
-  -- THEME CHANGER
-  vim.api.nvim_exec(
-    [[
-    " THEME CHANGER
-    function! SetCursorLineNrColorInsert(mode)
-        " Insert mode: blue
-        if a:mode == "i"
-            call VSCodeNotify('nvim-theme.insert')
+  ---This function is must be called when the mode changes
+  local function changeThemeOnModeChange()
+    local mode = vim.api.nvim_get_mode().mode
+    if mode == "i" then                                    -- insert mode
+      vim.fn.VSCodeNotify("nvim-theme.insert")
+    elseif mode == "R" or mode == "r" then                 -- replace mode
+      vim.fn.VSCodeNotify("nvim-theme.replace")
+    elseif mode == "v" or mode == "V" or mode == "\x16" then -- visual mode
+      vim.fn.VSCodeNotify("nvim-theme.visual")
+    else                                                   -- normal mode
+      vim.fn.VSCodeNotify("nvim-theme.normal")
+    end
+  end
 
-        " Replace mode: red
-        elseif a:mode == "r"
-            call VSCodeNotify('nvim-theme.replace')
-        endif
-    endfunction
+  ---This autocmd group is used to change the theme when the mode changes
+  local augroup = vim.api.nvim_create_augroup("ThemeChangeOnMode", { clear = true })
 
-    augroup CursorLineNrColorSwap
-        autocmd!
-        autocmd ModeChanged *:[vV\x16]* call VSCodeNotify('nvim-theme.visual')
-        autocmd ModeChanged *:[R]* call VSCodeNotify('nvim-theme.replace')
-        autocmd InsertEnter * call SetCursorLineNrColorInsert(v:insertmode)
-        autocmd InsertLeave * call VSCodeNotify('nvim-theme.normal')
-        autocmd CursorHold * call VSCodeNotify('nvim-theme.normal')
-    augroup END
-]],
-    false
-  )
+  ---Add an autocmd to the ModeChanged event to change the theme when the mode changes
+  vim.api.nvim_create_autocmd({ "ModeChanged" }, {
+    pattern = "*",
+    callback = changeThemeOnModeChange,
+    group = augroup,
+  })
+
+  ---Add an autocmd to the InsertEnter, InsertLeave, and VimEnter events to change the theme when the mode changes
+  ---@note some mode changes cannot be captured by the ModeChanged event, so we need to capture them with specific events
+  vim.api.nvim_create_autocmd({ "InsertEnter", "InsertLeave", "VimEnter" }, {
+    pattern = "*",
+    callback = changeThemeOnModeChange,
+    group = augroup,
+  })
+
+  ---This function is used to change the theme when the cursor moves
   vim.api.nvim_set_keymap("x", "gc", "<Plug>VSCodeCommentary", { noremap = false, silent = true })
   vim.api.nvim_set_keymap("n", "gc", "<Plug>VSCodeCommentary", { noremap = false, silent = true })
   vim.api.nvim_set_keymap("o", "gc", "<Plug>VSCodeCommentary", { noremap = false, silent = true })
