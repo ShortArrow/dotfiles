@@ -4,7 +4,8 @@ if vim.g.vscode then
   print("load vscode extension config")
 
   -- THEME CHANGER
-  vim.api.nvim_exec([[
+  vim.api.nvim_exec(
+    [[
     " THEME CHANGER
     function! SetCursorLineNrColorInsert(mode)
         " Insert mode: blue
@@ -25,7 +26,13 @@ if vim.g.vscode then
         autocmd InsertLeave * call VSCodeNotify('nvim-theme.normal')
         autocmd CursorHold * call VSCodeNotify('nvim-theme.normal')
     augroup END
-]], false)
+]],
+    false
+  )
+  vim.api.nvim_set_keymap("x", "gc", "<Plug>VSCodeCommentary", { noremap = false, silent = true })
+  vim.api.nvim_set_keymap("n", "gc", "<Plug>VSCodeCommentary", { noremap = false, silent = true })
+  vim.api.nvim_set_keymap("o", "gc", "<Plug>VSCodeCommentary", { noremap = false, silent = true })
+  vim.api.nvim_set_keymap("n", "gcc", "<Plug>VSCodeCommentaryLine", { noremap = false, silent = true })
 elseif 0 ~= vim.fn.exists("g:started_by_firenvim") then
   -- general config for firenvim
   print("load firenvim config")
