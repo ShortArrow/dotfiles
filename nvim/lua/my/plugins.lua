@@ -274,6 +274,7 @@ M.ordinalnvim = {
     "simrat39/rust-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig", "mfussenegger/nvim-dap" },
     config = get_config("_rust").setup,
+    keys = api.keymaps.maps.rust_tools,
   },
   {
     "alaviss/nim.nvim",
