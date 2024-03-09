@@ -58,6 +58,16 @@ end
 M.toggleterm_open = function()
   require("config/_toggleterm").toggle_repl_term()
 end
+M.rust_tools = {
+  hover_actions = function()
+    require("rust-tools.hover_actions").hover_actions()
+  end,
+  code_action_group = {
+    code_action_group = function()
+      require("rust-tools.code_action_group").code_action_group()
+    end,
+  },
+}
 M.maps = {
   aerial = {
     {
@@ -70,6 +80,10 @@ M.maps = {
   },
   lazygit = {
     { "<Leader>lg", ":LazyGit<CR>" },
+  },
+  rust_tools = {
+    { mode = "n", "K", M.rust_tools.hover_actions, desc = "Rust Hover"},
+    { mode = "n", "<Leader>ca", M.rust_tools.code_action_group, desc = "Rust Code Action Group"},
   },
   telescope = {
     { "<Leader>ff", M.ff, desc = "Telescope find_files" },
