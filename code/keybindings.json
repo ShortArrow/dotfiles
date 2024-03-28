@@ -1,0 +1,38 @@
+[
+  {
+    "key": "tab",
+    "command": "-tab",
+    "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus"
+  },
+  {
+    "command": "vscode-neovim.compositeEscape1",
+    "key": "j",
+    "when": "neovim.mode == insert && editorTextFocus",
+    "args": "j"
+  },
+  {
+    "key": "space d",
+    "command": "editor.action.goToDeclaration",
+    "when": "neovim.mode == normal && editorTextFocus"
+  },
+  {
+    "key": "space b",
+    "command": "workbench.action.navigateBack",
+    "when": "neovim.mode == normal && editorTextFocus"
+  },
+  {
+    "key": "space h",
+    "command": "editor.action.showHover",
+    "when": "neovim.mode == normal && editorTextFocus"
+  },
+  {
+    "key": "space l f",
+    "command": "editor.action.formatDocument",
+    "when": "neovim.mode == normal && editorTextFocus"
+  },
+  {
+    "key": "space s",
+    "command": "workbench.action.files.save",
+    "when": "neovim.mode == normal && editorTextFocus"
+  }
+]
