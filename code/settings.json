@@ -1,0 +1,64 @@
+{
+    "workbench.colorCustomizations": {
+        "editorCursor.foreground": "#ffc600"
+    },
+    "editor.tabSize": 2,
+    "LineNumberDeco.enableRainbow": false,
+    "LineNumberDeco.centerColorOfRainbow": "#9090C0",
+    "google-translate.maxSizeOfResult": 500,
+    "google-translate.firstLanguage": "ja-jp",
+    "googleTranslateExt.languages": [
+        "en",
+        "ja"
+    ],
+    "arduino.useArduinoCli": true,
+    "git.autofetch": true,
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": "true",
+        "markdown": true,
+        "scminput": "true"
+    },
+    "debug.disassemblyView.showSourceCode": false,
+    "editor.fontFamily": "'JetBrainsMono Nerd Font Mono', Consolas, 'Courier New', monospace",
+    "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font Mono'",
+    "debug.console.fontFamily": "'JetBrainsMono Nerd Font Mono'",
+    "chat.editor.fontFamily": "'JetBrainsMono Nerd Font Mono'",
+    "C_Cpp.intelliSenseEngine": "disabled",
+    "clangd.path": "c:\\Users\\shoutarou_t\\AppData\\Roaming\\Code\\User\\globalStorage\\llvm-vs-code-extensions.vscode-clangd\\install\\16.0.2\\clangd_16.0.2\\bin\\clangd.exe",
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "[dart]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.rulers": [
+            80
+        ],
+        "editor.selectionHighlight": false,
+        "editor.suggestSelection": "first",
+        "editor.tabCompletion": "onlySnippets",
+        "editor.wordBasedSuggestions": "off"
+    },
+    "LineNumberDeco.activeForeground": "#219DDD",
+    "LineNumberDeco.enableRepeatingDigits": true,
+    "github.copilot.chat.localeOverride": "ja",
+    "github.copilot.chat.welcomeMessage": "never",
+    "remote.SSH.remotePlatform": {
+        "192.168.29.173": "linux",
+        "192.168.29.168": "linux",
+        "Jetson": "linux",
+        "192.168.29.159": "linux",
+        "192.168.29.172": "linux"
+    },
+    "python.analysis.typeCheckingMode": "basic",
+    "remote.autoForwardPortsSource": "hybrid",
+    "clangd.arguments": [
+        "--log=verbose"
+    ],
+    "diffEditor.hideUnchangedRegions.enabled": true,
+    "workbench.editor.showTabs": "single",
+    "terminal.integrated.enableImages": true,
+    "powershell.pester.codeLens": false,
+    "git.openRepositoryInParentFolders": "never"
+}
