@@ -66,6 +66,11 @@ M.ordinalnvim = {
     "folke/twilight.nvim",
     config = get_config("_twilight").setup,
   },
+  {
+    "uga-rosa/ccc.nvim",
+    config = get_config("_ccc").setup,
+    cmd = "CccPick",
+  },
   -- ################################################
   -- # Fonts
   -- ################################################
