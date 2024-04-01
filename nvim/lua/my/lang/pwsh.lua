@@ -28,8 +28,6 @@ M.powershell_es = {
     "-HostProfileId", "0",
     "-HostVersion", "1.0.0", "-Stdio", "-LogLevel", "Normal" },
   bundle_path = M.bundle_path,
-  shell = 'pwsh',
-  root_dir = './',
 }
 
 return M
@@ -66,14 +64,16 @@ return M
 -- powershell.developer.editorServicesLogLevel                 default: "Normal"
 -- powershell.developer.editorServicesWaitForDebugger          default: false
 -- powershell.developer.featureFlags                           default: []
+-- powershell.developer.setExecutionPolicy                     default: true
 -- powershell.developer.waitForSessionFileTimeoutSeconds       default: 240
 -- powershell.enableProfileLoading                             default: true
 -- powershell.enableReferencesCodeLens                         default: true
 -- powershell.helpCompletion                                   default: "BlockComment"
 -- powershell.integratedConsole.focusConsoleOnExecute          default: true
 -- powershell.integratedConsole.forceClearScrollbackBuffer     default: false
--- powrshell.integratedConsole.showOnStartup                  default: true
+-- powershell.integratedConsole.showOnStartup                  default: true
 -- powershell.integratedConsole.startInBackground              default: false
+-- powershell.integratedConsole.startLocation                  default: "Panel"
 -- powershell.integratedConsole.suppressStartupBanner          default: false
 -- powershell.integratedConsole.useLegacyReadLine              default: false
 -- powershell.pester.codeLens                                  default: true
@@ -88,8 +88,10 @@ return M
 -- powershell.scriptAnalysis.enable                            default: true
 -- powershell.scriptAnalysis.settingsPath                      default: "PSScriptAnalyzerSettings.psd1"
 -- powershell.sideBar.CommandExplorerExcludeFilter             default: []
--- powershell.sideBar.CommandExplorerVisibility                default: true
+-- powershell.sideBar.CommandExplorerVisibility                default: false
 -- powershell.startAsLoginShell.linux                          default: false
 -- powershell.startAsLoginShell.osx                            default: true
 -- powershell.startAutomatically                               default: true
+-- powershell.suppressAdditionalExeNotFoundWarning             default: false
+-- powershell.trace.server                                     default: "off"
 -- powershell.useX86Host                                       default: false
