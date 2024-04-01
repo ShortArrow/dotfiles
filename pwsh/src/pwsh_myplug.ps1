@@ -175,3 +175,27 @@ if(Test-CommandExist('zoxide'))
   New-Alias -Name z -Value Show-NeedInstall
   Add-NeedInstall 'zoxide'
 }
+
+## password generator
+function Get-NewPassword($length = 32)
+{
+  $currentTime = Get-Date
+
+  # Generate a hash from the current time
+  $hash = [System.Security.Cryptography.HashAlgorithm]::Create("SHA256")
+  $byteArray = [System.Text.Encoding]::UTF8.GetBytes($currentTime.ToString())
+  $hashedBytes = $hash.ComputeHash($byteArray)
+  $hashString = -join $hashedBytes.ForEach({ $_.ToString("x2") })
+
+  # Set current time as random seed
+  $seed = [int]($currentTime.Ticks % [int]::MaxValue)
+  $random = New-Object System.Random($seed)
+
+  # Pick random characters from the hash string
+  $password = for ($i = 0; $i -lt $length; $i++)
+  {
+    $position = $random.Next(0, $hashString.Length)
+    $hashString[$position]
+  }
+  -join $password
+}
