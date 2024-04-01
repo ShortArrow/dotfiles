@@ -53,6 +53,9 @@ bar:
   offset_x: "0"
   offset_y: "0"
   border_radius: "0"
+  always_on_top: true
+  component_separator:
+    label: " | "
   components_left:
     - type: "workspaces"
       focused_workspace_background: "#ffffff33"
@@ -87,34 +90,34 @@ bar:
       label_thunderstorm: "⚡ {temperature_celsius}°C"
       label_cloud: "☁️ {temperature_celsius}°C"
     - type: "network"
-      label_no_internet: "✂️  | "
-      label_ethernet: "🚅 | "
-      label_wifi_strength_0: "📶: 0% | "
-      label_wifi_strength_25: "📶: 25% | "
-      label_wifi_strength_50: "📶: 50% | "
-      label_wifi_strength_75: "📶: 75% | "
-      label_wifi_strength_100: "📶: 100% | "
+      label_no_internet: "✂️ "
+      label_ethernet: "🚅"
+      label_wifi_strength_0: "📶: 0%"
+      label_wifi_strength_25: "📶: 25%"
+      label_wifi_strength_50: "📶: 50%"
+      label_wifi_strength_75: "📶: 75%"
+      label_wifi_strength_100: "📶: 100%"
     - type: "gpu"
-      label: "🎨{percent_usage}% | "
+      label: "🎨{percent_usage}%"
       # How often this counter is refreshed.
       refresh_interval_ms: 1000
     - type: "memory"
-      label: "🐑{percent_usage}% | "
+      label: "🐑{percent_usage}%"
       # How often this counter is refreshed.
       refresh_interval_ms: 1000
     - type: "cpu"
-      label: "🧠{percent_usage}% | "
+      label: "🧠{percent_usage}%"
       # How often this counter is refreshed.
       refresh_interval_ms: 1000
     - type: "battery"
-      label_draining: "🔋{battery_level}%| "
-      label_power_saver: "🪫{battery_level}%| "
-      label_charging: "⚡{battery_level}%| "
+      label_draining: "🔋{battery_level}%"
+      label_power_saver: "🪫{battery_level}%"
+      label_charging: "⚡{battery_level}%"
     - type: "volume"
-      label_low: "🔈 | "
-      label_medium: "🔉{volume_level}% | "
-      label_high: "🔊 | "
-      label_mute: "🔇 | "
+      label_low: "🔈"
+      label_medium: "🔉{volume_level}%"
+      label_high: "🔊"
+      label_mute: "🔇"
     - type: "clock"
       # Documentation on formatting date/time string:
       # https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings
