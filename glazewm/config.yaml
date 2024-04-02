@@ -125,9 +125,21 @@ bar:
 
 workspaces:
   - name: "1"
+    display_name: "🌐1"
+    bind_to_monitor: 1
+    keep_alive: true
   - name: "2"
+    display_name: "🐚2"
+    bind_to_monitor: 1
+    keep_alive: true
   - name: "3"
+    display_name: "🆚3"
+    bind_to_monitor: 1
+    keep_alive: true
   - name: "4"
+    display_name: "💬4"
+    bind_to_monitor: 1
+    keep_alive: true
   - name: "5"
   - name: "6"
   - name: "7"
@@ -153,6 +165,30 @@ window_rules:
   # Some applications (eg. Steam) have borders that extend past the normal border size.
   - command: "resize borders 0px -7px -7px -7px"
     match_process_name: "steam"
+
+  - command: "move to workspace 1"
+    match_process_name: "chrome"
+
+  - command: "move to workspace 1"
+    match_process_name: "firefox"
+
+  - command: "move to workspace 1"
+    match_process_name: "thorium"
+
+  - command: "move to workspace 1"
+    match_process_name: "msedge" # Edge
+
+  - command: "move to workspace 2"
+    match_process_name: "WindowsTerminal" # Microsoft Terminal
+
+  - command: "move to workspace 3"
+    match_process_name: "Code" # Visual Studio Code
+
+  - command: "move to workspace 4"
+    match_process_name: "ms-teams" # Teams
+
+  - command: "move to workspace 4"
+    match_process_name: "olk" # Outlook
 
 binding_modes:
   - name: "resize"
