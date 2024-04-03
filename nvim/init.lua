@@ -6,15 +6,19 @@ if vim.g.vscode then
   ---This function is must be called when the mode changes
   local function changeThemeOnModeChange()
     local mode = vim.api.nvim_get_mode().mode
-    if mode == "i" then                                    -- insert mode
+    if mode == "i" then                                      -- insert mode
       vim.fn.VSCodeNotify("nvim-theme.insert")
-    elseif mode == "R" or mode == "r" then                 -- replace mode
+    elseif mode == "R" or mode == "r" then                   -- replace mode
       vim.fn.VSCodeNotify("nvim-theme.replace")
     elseif mode == "v" or mode == "V" or mode == "\x16" then -- visual mode
       vim.fn.VSCodeNotify("nvim-theme.visual")
-    else                                                   -- normal mode
+    else                                                     -- normal mode
       vim.fn.VSCodeNotify("nvim-theme.normal")
     end
+  end
+
+  local function vscodeFormat()
+    vim.fn.VSCodeNotify("editor.action.formatDocument")
   end
 
   ---This autocmd group is used to change the theme when the mode changes
@@ -40,6 +44,13 @@ if vim.g.vscode then
   vim.api.nvim_set_keymap("n", "gc", "<Plug>VSCodeCommentary", { noremap = false, silent = true })
   vim.api.nvim_set_keymap("o", "gc", "<Plug>VSCodeCommentary", { noremap = false, silent = true })
   vim.api.nvim_set_keymap("n", "gcc", "<Plug>VSCodeCommentaryLine", { noremap = false, silent = true })
+  ---add format action shortcut
+  vim.keymap.set(
+    "n",
+    "<Leader>f",
+    function() vim.fn.VSCodeNotify('editor.action.formatDocument') end,
+    { noremap = false, silent = true }
+  )
 elseif 0 ~= vim.fn.exists("g:started_by_firenvim") then
   -- general config for firenvim
   print("load firenvim config")
