@@ -1,6 +1,6 @@
 {
     "workbench.colorCustomizations": {
-        "editorCursor.foreground": "#ffc600"
+        "editorCursor.foreground": "#673AB7"
     },
     "editor.tabSize": 2,
     "LineNumberDeco.enableRainbow": false,
@@ -60,5 +60,9 @@
     "workbench.editor.showTabs": "single",
     "terminal.integrated.enableImages": true,
     "powershell.pester.codeLens": false,
-    "git.openRepositoryInParentFolders": "never"
+    "git.openRepositoryInParentFolders": "never",
+    "Lua.diagnostics.globals": [
+        "vim"
+    ],
+    "Lua.runtime.version": "Lua 5.1"
 }
