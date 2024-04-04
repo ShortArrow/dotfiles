@@ -58,9 +58,12 @@ bar:
     label: " | "
   components_left:
     - type: "workspaces"
-      focused_workspace_background: "#ffffff33"
+      focused_workspace_background: "#227722ff"
+      focused_workspace_foreground: "#ffffffff"
       displayed_workspace_background: "#00000033"
+      displayed_workspace_foreground: "#ff000033"
       default_workspace_background: "transparent"
+      default_workspace_foreground: "#99ff99ff"
   components_center:
     - type: "window title"
   components_right:
@@ -141,10 +144,16 @@ workspaces:
     bind_to_monitor: 1
     keep_alive: true
   - name: "5"
+    display_name: "✉5"
+    bind_to_monitor: 1
+    keep_alive: true
   - name: "6"
   - name: "7"
   - name: "8"
   - name: "9"
+    display_name: "🐳9"
+    bind_to_monitor: 1
+    keep_alive: true
 
 window_rules:
   # Task Manager requires admin privileges to manage and should be ignored unless running
@@ -168,13 +177,10 @@ window_rules:
 
   - command: "move to workspace 1"
     match_process_name: "chrome"
-
   - command: "move to workspace 1"
     match_process_name: "firefox"
-
   - command: "move to workspace 1"
     match_process_name: "thorium"
-
   - command: "move to workspace 1"
     match_process_name: "msedge" # Edge
 
@@ -187,8 +193,14 @@ window_rules:
   - command: "move to workspace 4"
     match_process_name: "ms-teams" # Teams
 
-  - command: "move to workspace 4"
+  - command: "move to workspace 5"
     match_process_name: "olk" # Outlook
+
+  - command: "move to workspace 6"
+    match_process_name: "CubeChecker" # CubeChecker
+
+  - command: "move to workspace 9"
+    match_process_name: "Docker Desktop" # Docker Desktop
 
 binding_modes:
   - name: "resize"
