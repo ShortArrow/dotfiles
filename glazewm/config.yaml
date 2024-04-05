@@ -47,7 +47,7 @@ bar:
   opacity: 1.0
   background: "#20242cc4"
   foreground: "#99ff99"
-  font_family: "Segoe UI"
+  font_family: "Meiryo UI"
   font_size: "13px"
   padding: "4px 6px"
   offset_x: "0"
@@ -127,6 +127,10 @@ bar:
       time_formatting: "⌚HH:mm tt  d ddd MMM yyyy"
 
 workspaces:
+  - name: "0"
+    display_name: "🐚0"
+    bind_to_monitor: 1
+    keep_alive: true
   - name: "1"
     display_name: "🌐1"
     bind_to_monitor: 1
@@ -302,6 +306,8 @@ keybindings:
     binding: "Alt+Shift+T"
 
   # Change focus to a workspace defined in `workspaces` config.
+  - command: "focus workspace 0"
+    binding: "Alt+0"
   - command: "focus workspace 1"
     binding: "Alt+1"
   - command: "focus workspace 2"
@@ -332,6 +338,8 @@ keybindings:
     binding: "Alt+S"
 
   # Move focused window to a workspace defined in `workspaces` config.
+  - commands: ["move to workspace 0", "focus workspace 0"]
+    binding: "Alt+Shift+0"
   - commands: ["move to workspace 1", "focus workspace 1"]
     binding: "Alt+Shift+1"
   - commands: ["move to workspace 2", "focus workspace 2"]
