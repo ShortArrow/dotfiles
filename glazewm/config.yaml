@@ -53,7 +53,7 @@ bar:
   offset_x: "0"
   offset_y: "0"
   border_radius: "0"
-  always_on_top: true
+  always_on_top: false
   component_separator:
     label: " | "
   components_left:
