@@ -10,64 +10,6 @@ M.commonmaps_activate = function()
   end
 end
 
-M.neotest_toggle = function()
-  require("neotest").summary.toggle()
-end
-M.neotest_run = function()
-  require("neotest").run.run()
-end
-M.neotest_run_current = function()
-  require("neotest").run.run(vim.fn.expand("%"))
-end
-M.neotest_run_dap = function()
-  require("neotest").run.run({ strategy = "dap" })
-end
-M.neogit_open = function()
-  require("neogit").open()
-end
-M.ufo_open = function()
-  require("ufo").openAllFolds()
-end
-M.ufo_close = function()
-  require("ufo").closeAllFolds()
-end
-M.flutter_open = function()
-  require("telescope").extensions.flutter.commands()
-end
-M.fm = function()
-  require('telescope').extensions.media_files.media_files()
-end
-M.ff = function()
-  require("telescope.builtin").find_files()
-end
-M.fg = function()
-  require("telescope.builtin").live_grep()
-end
-M.fb = function()
-  require("telescope.builtin").buffers()
-end
-M.fh = function()
-  require("telescope.builtin").help_tags()
-end
-M.fc = function()
-  require("telescope.builtin").current_buffer_fuzzy_find()
-end
-M.packer_sync = function()
-  require("packer").sync()
-end
-M.toggleterm_open = function()
-  require("config/_toggleterm").toggle_repl_term()
-end
-M.rust_tools = {
-  hover_actions = function()
-    require("rust-tools.hover_actions").hover_actions()
-  end,
-  code_action_group = {
-    code_action_group = function()
-      require("rust-tools.code_action_group").code_action_group()
-    end,
-  },
-}
 M.maps = {
   aerial = {
     {
@@ -82,29 +24,43 @@ M.maps = {
     { "<Leader>lg", ":LazyGit<CR>" },
   },
   rust_tools = {
-    { mode = "n", "K", M.rust_tools.hover_actions, desc = "Rust Hover"},
-    { mode = "n", "<Leader>ca", M.rust_tools.code_action_group, desc = "Rust Code Action Group"},
+    {
+      mode = "n",
+      "K",
+      function()
+        require("rust-tools.hover_actions").hover_actions()
+      end,
+      desc = "Rust Hover"
+    },
+    {
+      mode = "n",
+      "<Leader>ca",
+      function()
+        require("rust-tools.code_action_group").code_action_group()
+      end,
+      desc = "Rust Code Action Group"
+    },
   },
   telescope = {
-    { "<Leader>ff", M.ff, desc = "Telescope find_files" },
-    { "<Leader>fg", M.fg, desc = "Telescope live_grep" },
-    { "<Leader>fb", M.fb, desc = "Telescope buffers" },
-    { "<Leader>fh", M.fh, desc = "Telescope help_tags" },
-    { "<Leader>cb", M.fc, desc = "Telescope current_buffer_fuzzy_find" },
-    { "<Leader>fm", M.fm, desc = "Telescope media_files" },
+    { "<Leader>ff", require("telescope.builtin").find_files(),                 desc = "Telescope find_files" },
+    { "<Leader>fg", require("telescope.builtin").live_grep(),                  desc = "Telescope live_grep" },
+    { "<Leader>fb", require("telescope.builtin").buffers(),                    desc = "Telescope buffers" },
+    { "<Leader>fh", require("telescope.builtin").help_tags(),                  desc = "Telescope help_tags" },
+    { "<Leader>cb", require("telescope.builtin").current_buffer_fuzzy_find(),  desc = "Telescope current_buffer_fuzzy_find" },
+    { "<Leader>fm", require('telescope').extensions.media_files.media_files(), desc = "Telescope media_files" },
   },
   neotest = {
-    { "ntr", M.neotest_run,         desc = "Neo Test Run (nearest run)" },
-    { "ntt", M.neotest_toggle,      desc = "Neo Test Summary Open (NeoTest Open)" },
-    { "ntc", M.neotest_run_current, desc = "Neo Test Run (current run)" },
-    { "ntd", M.neotest_run_dap,     desc = "Neo Test Run (dup run)" },
+    { "ntr", function() require("neotest").run.run() end,                     desc = "Neo Test Run (nearest run)" },
+    { "ntt", function() require("neotest").summary.toggle() end,              desc = "Neo Test Summary Open (NeoTest Open)" },
+    { "ntc", function() require("neotest").run.run(vim.fn.expand("%")) end,   desc = "Neo Test Run (current run)" },
+    { "ntd", function() require("neotest").run.run({ strategy = "dap" }) end, desc = "Neo Test Run (dup run)" },
   },
   neogit = {
-    { "<Leader>ng", M.neogit_open },
+    { "<Leader>ng", function() require("neogit").open() end },
   },
   ufo = {
-    { "ng", M.ufo_open },
-    { "zM", M.ufo_close },
+    { "ng", function() require("ufo").openAllFolds() end },
+    { "zM", function() require("ufo").closeAllFolds() end },
   },
   hop = {
     -- { mode = 'n',  'f',
@@ -160,8 +116,8 @@ M.maps = {
     { "<Leader>k", ":WhichKey<CR>" },
   },
   flutter = {
-    { mode = "n", "<Leader>fr", ":FlutterRun -d web-server<CR>", desc = "Flutter Run" },
-    { mode = "n", "<Leader>fc", M.flutter_open, desc = "Flutter Open" },
+    { mode = "n", "<Leader>fr", ":FlutterRun -d web-server<CR>",                                   desc = "Flutter Run" },
+    { mode = "n", "<Leader>fc", function() require("telescope").extensions.flutter.commands() end, desc = "Flutter Open" },
   },
   trouble = {
     { "<Leader>tr", ":TroubleToggle<CR>" },
@@ -170,7 +126,7 @@ M.maps = {
     { "<Leader>zf", ":FzfLua files<CR>" },
   },
   packer = {
-    { mode = "n", "<Leader>ps", M.packer_sync },
+    { mode = "n", "<Leader>ps", function() require("packer").sync() end },
   },
   vfiler = {
     { "<Leader>vf", ":VFiler<CR>" },
@@ -181,10 +137,14 @@ M.maps = {
     { "<Leader>flzd", ":FloatermNew lzd<CR>", desc = "Floaterm lazydocker" },
   },
   toggleterm = {
-    { "<Leader>tt", M.toggleterm_open, desc = "ToggleTerm normal" },
-    { mode = "n",   "<C-k>",           "<C-w><C-w>W",             desc = "back from ToggleTerm when Normal mode" },
-    { mode = "i",   "<C-k>",           "<Esc><C-w>W" },
-    { mode = "t",   "<C-k>",           "<C-Bslash><C-n><C-w>W" },
+    {
+      "<Leader>tt",
+      function() require("config/_toggleterm").toggle_repl_term() end,
+      desc = "ToggleTerm normal"
+    },
+    { mode = "n", "<C-k>", "<C-w><C-w>W",          desc = "back from ToggleTerm when Normal mode" },
+    { mode = "i", "<C-k>", "<Esc><C-w>W" },
+    { mode = "t", "<C-k>", "<C-Bslash><C-n><C-w>W" },
     -- { mode = 'n',  '',  ':', },
     -- { mode = 'i',  '',  '<Esc><C-o>:', },
     -- { mode = 't',  '',  '<C-Bslash><C-n><C-w>:', },
