@@ -30,7 +30,7 @@ M.maps = {
       function()
         require("rust-tools.hover_actions").hover_actions()
       end,
-      desc = "Rust Hover"
+      desc = "Rust Hover",
     },
     {
       mode = "n",
@@ -38,21 +38,60 @@ M.maps = {
       function()
         require("rust-tools.code_action_group").code_action_group()
       end,
-      desc = "Rust Code Action Group"
+      desc = "Rust Code Action Group",
     },
   },
   neotest = {
-    { "ntr", function() require("neotest").run.run() end,                     desc = "Neo Test Run (nearest run)" },
-    { "ntt", function() require("neotest").summary.toggle() end,              desc = "Neo Test Summary Open (NeoTest Open)" },
-    { "ntc", function() require("neotest").run.run(vim.fn.expand("%")) end,   desc = "Neo Test Run (current run)" },
-    { "ntd", function() require("neotest").run.run({ strategy = "dap" }) end, desc = "Neo Test Run (dup run)" },
+    {
+      "ntr",
+      function()
+        require("neotest").run.run()
+      end,
+      desc = "Neo Test Run (nearest run)",
+    },
+    {
+      "ntt",
+      function()
+        require("neotest").summary.toggle()
+      end,
+      desc = "Neo Test Summary Open (NeoTest Open)",
+    },
+    {
+      "ntc",
+      function()
+        require("neotest").run.run(vim.fn.expand("%"))
+      end,
+      desc = "Neo Test Run (current run)",
+    },
+    {
+      "ntd",
+      function()
+        require("neotest").run.run({ strategy = "dap" })
+      end,
+      desc = "Neo Test Run (dup run)",
+    },
   },
   neogit = {
-    { "<Leader>ng", function() require("neogit").open() end },
+    {
+      "<Leader>ng",
+      function()
+        require("neogit").open()
+      end,
+    },
   },
   ufo = {
-    { "ng", function() require("ufo").openAllFolds() end },
-    { "zM", function() require("ufo").closeAllFolds() end },
+    {
+      "ng",
+      function()
+        require("ufo").openAllFolds()
+      end,
+    },
+    {
+      "zM",
+      function()
+        require("ufo").closeAllFolds()
+      end,
+    },
   },
   hop = {
     -- { mode = 'n',  'f',
@@ -108,8 +147,20 @@ M.maps = {
     { "<Leader>km", ":WhichKey<CR>" },
   },
   flutter = {
-    { mode = "n", "<Leader>fr", ":FlutterRun -d web-server<CR>",                                   desc = "Flutter Run" },
-    { mode = "n", "<Leader>fc", function() require("telescope").extensions.flutter.commands() end, desc = "Flutter Open" },
+    {
+      mode = "n",
+      "<Leader>fr",
+      ":FlutterRun -d web-server<CR>",
+      desc = "Flutter Run",
+    },
+    {
+      mode = "n",
+      "<Leader>fc",
+      function()
+        require("telescope").extensions.flutter.commands()
+      end,
+      desc = "Flutter Open",
+    },
   },
   trouble = {
     { "<Leader>tr", ":TroubleToggle<CR>" },
@@ -118,7 +169,13 @@ M.maps = {
     { "<Leader>zf", ":FzfLua files<CR>" },
   },
   packer = {
-    { mode = "n", "<Leader>ps", function() require("packer").sync() end },
+    {
+      mode = "n",
+      "<Leader>ps",
+      function()
+        require("packer").sync()
+      end,
+    },
   },
   vfiler = {
     { "<Leader>vf", ":VFiler<CR>" },
@@ -126,8 +183,10 @@ M.maps = {
   toggleterm = {
     {
       "<Leader>tt",
-      function() require("config/_toggleterm").toggle_repl_term() end,
-      desc = "ToggleTerm normal"
+      function()
+        require("config/_toggleterm").toggle_repl_term()
+      end,
+      desc = "ToggleTerm normal",
     },
     { mode = "n", "<C-k>", "<C-w><C-w>W",          desc = "back from ToggleTerm when Normal mode" },
     { mode = "i", "<C-k>", "<Esc><C-w>W" },
@@ -145,21 +204,103 @@ M.maps = {
     { "<Leader>flzd", ":FloatermNew lzd<CR>", desc = "Floaterm lazydocker" },
   },
   telescope = {
-    { "<Leader>ff", function() require("telescope.builtin").find_files() end,                 desc = "Telescope find_files" },
-    { "<Leader>fg", function() require("telescope.builtin").live_grep() end,                  desc = "Telescope live_grep" },
-    { "<Leader>fb", function() require("telescope.builtin").buffers() end,                    desc = "Telescope buffers" },
-    { "<Leader>fh", function() require("telescope.builtin").help_tags() end,                  desc = "Telescope help_tags" },
-    { "<Leader>cb", function() require("telescope.builtin").current_buffer_fuzzy_find() end,  desc = "Telescope current_buffer_fuzzy_find" },
-    { "<Leader>fm", function() require('telescope').extensions.media_files.media_files() end, desc = "Telescope media_files" },
-    { "<Leader>cs", function() require("telescope.builtin").commands() end,                   desc = "Telescope commands" },
-    { "<Leader>li", function() require("telescope.builtin").lsp_implementations() end,        desc = "Telescope implementations" },
-    { "<F12>",      function() require("telescope.builtin").lsp_definitions() end,            desc = "Telescope difinitions" },
-    { "gd",         function() require("telescope.builtin").lsp_definitions() end,            desc = "Telescope difinitions" },
+    {
+      "<Leader>ff",
+      function()
+        require("telescope.builtin").find_files()
+      end,
+      desc = "Telescope find_files",
+    },
+    {
+      "<Leader>fg",
+      function()
+        require("telescope.builtin").live_grep()
+      end,
+      desc = "Telescope live_grep",
+    },
+    {
+      "<Leader>fb",
+      function()
+        require("telescope.builtin").buffers()
+      end,
+      desc = "Telescope buffers",
+    },
+    {
+      "<Leader>fh",
+      function()
+        require("telescope.builtin").help_tags()
+      end,
+      desc = "Telescope help_tags",
+    },
+    {
+      "<Leader>cb",
+      function()
+        require("telescope.builtin").current_buffer_fuzzy_find()
+      end,
+      desc = "Telescope current_buffer_fuzzy_find",
+    },
+    {
+      "<Leader>fm",
+      function()
+        require("telescope").extensions.media_files.media_files()
+      end,
+      desc = "Telescope media_files",
+    },
+    {
+      "<Leader>cs",
+      function()
+        require("telescope.builtin").commands()
+      end,
+      desc = "Telescope commands",
+    },
+    {
+      "<Leader>li",
+      function()
+        require("telescope.builtin").lsp_implementations()
+      end,
+      desc = "Telescope implementations",
+    },
+    {
+      "<F12>",
+      function()
+        require("telescope.builtin").lsp_definitions()
+      end,
+      desc = "Telescope difinitions",
+    },
+    {
+      "gd",
+      function()
+        require("telescope.builtin").lsp_definitions()
+      end,
+      desc = "Telescope difinitions",
+    },
     -- back is <C-o>
-    { "<Leader>lt", function() require("telescope.builtin").lsp_type_definitions() end,       desc = "Telescope type_definitions" },
-    { "<S-F12>",    function() require("telescope.builtin").lsp_references() end,             desc = "Telescope references" },
-    { "<Leader>jl", function() require("telescope.builtin").jumplist() end,                   desc = "Telescope jumplist" },
-    { "<Leader>b",  "<C-o>",                                                                  desc = "back jump list" },
+    {
+      "<Leader>lt",
+      function()
+        require("telescope.builtin").lsp_type_definitions()
+      end,
+      desc = "Telescope type_definitions",
+    },
+    {
+      "<S-F12>",
+      function()
+        require("telescope.builtin").lsp_references()
+      end,
+      desc = "Telescope references",
+    },
+    {
+      "<Leader>jl",
+      function()
+        require("telescope.builtin").jumplist()
+      end,
+      desc = "Telescope jumplist",
+    },
+    {
+      "<Leader>b",
+      "<C-o>",
+      desc = "back jump list",
+    },
   },
   lspsaga = {
     { mode = "n", "<Leader>ln", ":Lspsaga rename<CR>",      desc = "rename (lspsaga)" },
@@ -168,7 +309,7 @@ M.maps = {
   },
   common = {
     -- # zen mode
-    { "<Leader>zm", ":ZenMode<CR>", desc = "Zen Mode" },
+    { "<Leader>zm", ":ZenMode<CR>",         desc = "Zen Mode" },
     -- # lsp keymaps
     { "<Leader>lk", vim.lsp.buf.hover,      desc = "show references (Lsp References)" },
     { "<Leader>ld", vim.lsp.buf.definition, desc = "jump to definition (Lsp Definition)" },
