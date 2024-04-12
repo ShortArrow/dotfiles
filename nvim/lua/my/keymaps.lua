@@ -41,14 +41,6 @@ M.maps = {
       desc = "Rust Code Action Group"
     },
   },
-  telescope = {
-    { "<Leader>ff", require("telescope.builtin").find_files(),                 desc = "Telescope find_files" },
-    { "<Leader>fg", require("telescope.builtin").live_grep(),                  desc = "Telescope live_grep" },
-    { "<Leader>fb", require("telescope.builtin").buffers(),                    desc = "Telescope buffers" },
-    { "<Leader>fh", require("telescope.builtin").help_tags(),                  desc = "Telescope help_tags" },
-    { "<Leader>cb", require("telescope.builtin").current_buffer_fuzzy_find(),  desc = "Telescope current_buffer_fuzzy_find" },
-    { "<Leader>fm", require('telescope').extensions.media_files.media_files(), desc = "Telescope media_files" },
-  },
   neotest = {
     { "ntr", function() require("neotest").run.run() end,                     desc = "Neo Test Run (nearest run)" },
     { "ntt", function() require("neotest").summary.toggle() end,              desc = "Neo Test Summary Open (NeoTest Open)" },
@@ -113,7 +105,7 @@ M.maps = {
     { "<Leader>dvo", ":DiffviewOpen<CR>" },
   },
   whichkey = {
-    { "<Leader>k", ":WhichKey<CR>" },
+    { "<Leader>km", ":WhichKey<CR>" },
   },
   flutter = {
     { mode = "n", "<Leader>fr", ":FlutterRun -d web-server<CR>",                                   desc = "Flutter Run" },
@@ -131,11 +123,6 @@ M.maps = {
   vfiler = {
     { "<Leader>vf", ":VFiler<CR>" },
   },
-  floaterm = {
-    { "<Leader>fn",   ":FloatermNew<CR>",     desc = "Floaterm normal" },
-    { "<Leader>flg",  ":FloatermNew lg<CR>",  desc = "Floaterm lazygit" },
-    { "<Leader>flzd", ":FloatermNew lzd<CR>", desc = "Floaterm lazydocker" },
-  },
   toggleterm = {
     {
       "<Leader>tt",
@@ -151,6 +138,26 @@ M.maps = {
     -- { mode = 'n',  '',  '/', },
     -- { mode = 'i',  '',  '<Esc><C-o>/', },
     -- { mode = 't',  '',  '<C-Bslash><C-n>/', },
+  },
+  floaterm = {
+    { "<Leader>fn",   ":FloatermNew<CR>",     desc = "Floaterm normal" },
+    { "<Leader>flg",  ":FloatermNew lg<CR>",  desc = "Floaterm lazygit" },
+    { "<Leader>flzd", ":FloatermNew lzd<CR>", desc = "Floaterm lazydocker" },
+  },
+  telescope = {
+    { "<Leader>ff", function() require("telescope.builtin").find_files() end,                 desc = "Telescope find_files" },
+    { "<Leader>fg", function() require("telescope.builtin").live_grep() end,                  desc = "Telescope live_grep" },
+    { "<Leader>fb", function() require("telescope.builtin").buffers() end,                    desc = "Telescope buffers" },
+    { "<Leader>fh", function() require("telescope.builtin").help_tags() end,                  desc = "Telescope help_tags" },
+    { "<Leader>cb", function() require("telescope.builtin").current_buffer_fuzzy_find() end,  desc = "Telescope current_buffer_fuzzy_find" },
+    { "<Leader>fm", function() require('telescope').extensions.media_files.media_files() end, desc = "Telescope media_files" },
+    { "<Leader>cs", function() require("telescope.builtin").commands() end,                   desc = "Telescope commands" },
+    { "<Leader>li",      function() require("telescope.builtin").lsp_implementations() end,        desc = "Telescope implementations" },
+    { "<F12>", function() require("telescope.builtin").lsp_definitions() end,            desc = "Telescope difinitions" },
+    { "gd", function() require("telescope.builtin").lsp_definitions() end,            desc = "Telescope difinitions" },
+    -- back is <C-o>
+    { "<Leader>lt",    function() require("telescope.builtin").lsp_type_definitions() end,       desc = "Telescope type_definitions" },
+    { "<S-F12>", function() require("telescope.builtin").lsp_references() end,            desc = "Telescope references" },
   },
   lspsaga = {
     { mode = "n", "<Leader>ln", ":Lspsaga rename<CR>",      desc = "rename (lspsaga)" },
