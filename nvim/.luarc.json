@@ -1,13 +1,40 @@
 {
-    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
-    "diagnostics.globals": ["vim"],
-    "Lua.diagnostics.globals": [
-      "vim"
+  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+  "diagnostics.globals": [
+    "vim"
+  ],
+  "diagnostics": {
+    "enable": true,
+    "globals": [
+      "hs",
+      "vim",
+      "it",
+      "describe",
+      "before_each",
+      "after_each"
     ],
-    "Lua.workspace.library": [
-        "C:\\Program Files\\Neovim\\share\\nvim\\runtime",
-        "C:\\tools\\neovim\\nvim-win64\\share\\nvim\\runtime",
-        "C:\\tools\\neovim\\nvim-win64\\lib\\nvim",
-        "${3rd}/luassert/library"
+    "disable": [
+      "lowercase-global"
     ]
+  },
+  "Lua.diagnostics": {
+    "enable": true,
+    "globals": [
+      "hs",
+      "vim",
+      "it",
+      "describe",
+      "before_each",
+      "after_each"
+    ],
+    "disable": [
+      "lowercase-global"
+    ]
+  },
+  "Lua.workspace.library": [
+    "/tools/neovim/nvim-win64/share/nvim/runtime/lua",
+    "./lua/?.lua",
+    "./lua/?/init.lua",
+    "${3rd}/luassert/library"
+  ]
 }
