@@ -142,9 +142,10 @@ M.ordinalnvim = {
   {
     "nvim-neotest/neotest",
     dependencies = {
+      "nvim-neotest/nvim-nio",
       "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
       "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter",
       "nvim-neotest/neotest-python",
       "nvim-neotest/neotest-plenary",
       "nvim-neotest/neotest-vim-test",
@@ -440,7 +441,7 @@ M.ordinalnvim = {
     "glepnir/lspsaga.nvim",
     dependencies = {
       "nvim-treesitter/nvim-treesitter", -- optional
-      "nvim-tree/nvim-web-devicons",  -- optional
+      "nvim-tree/nvim-web-devicons",     -- optional
     },
     config = get_config("_lsp_saga").setup,
     -- keys = api.keymaps.maps.lspsaga,
