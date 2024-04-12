@@ -216,14 +216,14 @@ M.ordinalnvim = {
     config = get_config("_telescope").setup,
   },
   {
-    'nvim-telescope/telescope-media-files.nvim',
+    "nvim-telescope/telescope-media-files.nvim",
     dependencies = {
-      'nvim-lua/popup.nvim',
-      'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope.nvim',
+      "nvim-lua/popup.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
     },
-    after = 'telescope.nvim',
-    config = get_config('_telescope_media_files').setup,
+    after = "telescope.nvim",
+    config = get_config("_telescope_media_files").setup,
   },
   {
     "folke/which-key.nvim",
@@ -388,6 +388,14 @@ M.ordinalnvim = {
   {
     "rafamadriz/friendly-snippets",
   },
+  {
+    "L3MON4D3/LuaSnip",
+    -- follow latest release.
+    version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+    -- install jsregexp (optional!).
+    build = "make install_jsregexp",
+    config = get_config("_luasnip").setup,
+  },
   --  {
   --    "L3MON4D3/LuaSnip",
   --    config = get_config("_luasnip").setup,
@@ -431,8 +439,8 @@ M.ordinalnvim = {
   {
     "glepnir/lspsaga.nvim",
     dependencies = {
-      'nvim-treesitter/nvim-treesitter', -- optional
-      'nvim-tree/nvim-web-devicons',     -- optional
+      "nvim-treesitter/nvim-treesitter", -- optional
+      "nvim-tree/nvim-web-devicons",  -- optional
     },
     config = get_config("_lsp_saga").setup,
     -- keys = api.keymaps.maps.lspsaga,
