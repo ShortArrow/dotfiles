@@ -9,9 +9,11 @@ M.setup = function()
   local lspkind_ok, lspkind = pcall(require, "lspkind")
   local luasnip_ok, luasnip = pcall(require, "luasnip")
   if not lspkind_ok then
+    print("can't require() lspkind", lspkind)
     return
   end
   if not luasnip_ok then
+    print("can't require() luasnip", luasnip)
     return
   end
 
