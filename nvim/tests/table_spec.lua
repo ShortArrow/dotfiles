@@ -1,21 +1,18 @@
 describe("table basics", function()
   local table1 = {
-    { name = 'cat', age = 10 },
-    { name = 'dog', age = 2 },
-    { name = 'box' },
+    { name = "cat", age = 10 },
+    { name = "dog", age = 2 },
+    { name = "box" },
   }
   local table2 = {
-    { name = 'cake', age = 33 },
-    { name = 'box', age = 1 },
-    { name = 'dog', age = 5 },
+    { name = "cake", age = 33 },
+    { name = "box",  age = 1 },
+    { name = "dog",  age = 5 },
   }
 
-  local function merge_table()
-    
-  end
+  local function merge_table() end
 
-  before_each(function()
-  end)
+  before_each(function() end)
 
   it("merge", function()
     -- TODO: create table merge function
@@ -29,5 +26,4 @@ describe("table basics", function()
     end
     assert.equals(table1[#table1].name, target)
   end)
-
 end)
