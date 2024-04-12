@@ -167,6 +167,8 @@ M.maps = {
     { mode = "n", "<Leader>ls", ":Lspsaga finder<CR>",      desc = "Lsp Search (lspsaga)" },
   },
   common = {
+    -- # zen mode
+    { "<Leader>zm", ":ZenMode<CR>", desc = "Zen Mode" },
     -- # lsp keymaps
     { "<Leader>lk", vim.lsp.buf.hover,      desc = "show references (Lsp References)" },
     { "<Leader>ld", vim.lsp.buf.definition, desc = "jump to definition (Lsp Definition)" },
