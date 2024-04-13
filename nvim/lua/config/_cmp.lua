@@ -18,19 +18,19 @@ M.setup = function()
   end
 
   local source_mapping = {
-    buffer = "[Buffer]",
-    nvim_lsp = "[LSP]",
-    nvim_lua = "[Lua]",
-    treesitter = "[🌳TS]",
-    plugins = "[Plugins]",
-    vsnip = "[VSnip]",
-    path = "[Path]",
-    calc = "[Calc]",
-    emoji = "[Emoji]",
-    nerdfont = "[Nerd]",
-    nvim_lsp_signature_help = "[Signature]",
-    pandac_reference = "[Pandac]",
-    tmux = "[TMUX]",
+    buffer = "🐃 ",
+    nvim_lsp = "󰒍 ",
+    nvim_lua = "󰢱 ",
+    treesitter = " ",
+    plugins = "󰐱 ",
+    vsnip = "󰷥 ",
+    path = "󰑪 ",
+    calc = "󰪚 ",
+    emoji = " ",
+    nerdfont = "󰊪 ",
+    nvim_lsp_signature_help = "󰷻 ",
+    pandac_reference = "󰏚 ",
+    tmux = "󱇙 ",
   }
   local function has_words_before()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
