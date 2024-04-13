@@ -31,11 +31,11 @@ M.ordinalnvim = {
       require("copilot_cmp").setup()
     end
   },
-  {
-    "github/copilot.vim",
-    config = get_config("_copilot").setup,
-    lazy = false,
-  },
+  -- {
+  --   "github/copilot.vim",
+  --   config = get_config("_copilot").setup,
+  --   lazy = false,
+  -- },
   {
     "nvim-tree/nvim-web-devicons",
     lazy = false,
