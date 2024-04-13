@@ -18,6 +18,7 @@ M.setup = function()
   end
 
   local source_mapping = {
+    copilot = " ",
     buffer = "🐃 ",
     nvim_lsp = "󰒍 ",
     nvim_lua = "󰢱 ",
@@ -178,6 +179,7 @@ M.setup = function()
         end, { "i", "s" }),
       }),
       sources = cmp.config.sources({
+        { name = "copilot", group_index = 2 },
         { name = "calc" },
         { name = "emoji",                  max_item_count = 10 },
         { name = "nerdfont",               max_item_count = 10 },

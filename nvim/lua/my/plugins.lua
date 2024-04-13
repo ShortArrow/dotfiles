@@ -18,6 +18,20 @@ M.firenvim = {
 M.ordinalnvim = {
   -- self manage
   {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({})
+    end,
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+    config = function()
+      require("copilot_cmp").setup()
+    end
+  },
+  {
     "github/copilot.vim",
     config = get_config("_copilot").setup,
     lazy = false,
