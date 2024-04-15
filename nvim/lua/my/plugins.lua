@@ -457,8 +457,9 @@ M.ordinalnvim = {
       "nvim-treesitter/nvim-treesitter", -- optional
       "nvim-tree/nvim-web-devicons",     -- optional
     },
+    cmd = "Lspsaga",
     config = get_config("_lsp_saga").setup,
-    -- keys = api.keymaps.maps.lspsaga,
+    keys = api.keymaps.maps.lspsaga,
   },
   -- ################################################
   -- # Auto Complete
