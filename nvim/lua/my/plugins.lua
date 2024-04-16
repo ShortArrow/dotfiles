@@ -199,10 +199,19 @@ M.ordinalnvim = {
     "gennaro-tedesco/nvim-peekup",
   },
   {
-    "feline-nvim/feline.nvim",
+    "freddiehaddad/feline.nvim",
     require = { "nvim-lua/plenary.nvim", "lewis6991/gitsigns.nvim" },
     config = get_config("_feline").setup,
     enabled = not api.env.is_firenvim(),
+  },
+  {
+    "rebelot/heirline.nvim",
+    -- You can optionally lazy-load heirline on UiEnter
+    -- to make sure all required plugins and colorschemes are loaded before setup
+    -- event = "UiEnter",
+    config = function()
+      require("heirline").setup({})
+    end
   },
   {
     "akinsho/bufferline.nvim",
