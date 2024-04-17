@@ -1,7 +1,6 @@
 local M = {}
 
 M.setup = function()
-  local _vfiler = require('vfiler')
   local _vfiler_action = require('vfiler/action')
   local _vfiler_config = require('vfiler/config')
   _vfiler_config.setup {
@@ -9,9 +8,8 @@ M.setup = function()
       name = 'vfiler',
       auto_cd = true,
       auto_resize = true,
-      keep = true,
-      layout = 'left',
-      width = 30,
+      keep = false,
+      layout = 'floating',
       columns = 'indent,devicons,name,git',
       preview = {
         layout = 'right',
