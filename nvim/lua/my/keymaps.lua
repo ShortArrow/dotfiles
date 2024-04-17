@@ -311,6 +311,8 @@ M.maps = {
     { mode = "n", "<S-F8>", ":Lspsaga diagnostic_jump_prev<CR>",      desc = "Lsp diagnostic_jump_prev(lspsaga)" },
   },
   common = {
+    -- # noice dismiss
+    { "<Leader><Esc>", ":NoiceDismiss<CR>", desc = "dismiss noice error and escape"},
     -- # zen mode
     { "<Leader>zm", ":ZenMode<CR>",         desc = "Zen Mode" },
     -- # lsp keymaps
