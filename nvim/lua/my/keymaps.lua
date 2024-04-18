@@ -306,6 +306,8 @@ M.maps = {
     { mode = "n", "<Leader>ln", ":Lspsaga rename<CR>",      desc = "rename (lspsaga)" },
     { mode = "n", "<F2>", ":Lspsaga rename<CR>",      desc = "rename (lspsaga)" },
     { mode = "n", "<Leader>la", ":Lspsaga code_action<CR>", desc = "Code Action (lspsaga)" },
+    { mode = "n", "<Leader>ld", ":Lspsaga goto_definition<CR>", desc = "Goto definition(lspsaga)" },
+    -- { mode = "n", "<Leader>lt", ":Lspsaga goto_type_definition<CR>", desc = "Goto type definition(lspsaga)" },
     { mode = "n", "<Leader>ls", ":Lspsaga finder<CR>",      desc = "Lsp Search (lspsaga)" },
     { mode = "n", "<F8>", ":Lspsaga diagnostic_jump_next<CR>",      desc = "Lsp diagnostic_jump_next(lspsaga)" },
     { mode = "n", "<S-F8>", ":Lspsaga diagnostic_jump_prev<CR>",      desc = "Lsp diagnostic_jump_prev(lspsaga)" },
@@ -317,9 +319,9 @@ M.maps = {
     { "<Leader>zm", ":ZenMode<CR>",         desc = "Zen Mode" },
     -- # lsp keymaps
     { "<Leader>lk", vim.lsp.buf.hover,      desc = "show references (Lsp References)" },
-    { "<Leader>ld", vim.lsp.buf.definition, desc = "jump to definition (Lsp Definition)" },
+    -- { "<Leader>ld", vim.lsp.buf.definition, desc = "jump to definition (Lsp Definition)" },
     { "<Leader>lf", vim.lsp.buf.format,     desc = "auto formatting (Lsp Formatting)" },
-    { "<A-F>",      vim.lsp.buf.format,     desc = "auto formatting (Lsp Formatting)" },
+    -- { "<A-S-F>",      vim.lsp.buf.format,     desc = "auto formatting (Lsp Formatting)" },
     { "<Leader>lr", vim.lsp.buf.references, desc = "show references (Lsp References)" },
     -- rename (Lsp Name)
     -- {  '<Leader>ln',  ':lua vim.lsp.buf.rename()<CR>', },
