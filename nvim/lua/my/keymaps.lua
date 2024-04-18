@@ -297,7 +297,7 @@ M.maps = {
       desc = "Telescope jumplist",
     },
     {
-      "<Leader>b",
+      "<Leader>lb",
       "<C-o>",
       desc = "back jump list",
     },
