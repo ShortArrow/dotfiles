@@ -199,3 +199,17 @@ function Get-NewPassword($length = 32)
   }
   -join $password
 }
+
+## reboot
+function Go-Reboot()
+{
+  Restart-Computer -Force
+}
+New-Alias -Name reboot -Value Go-Reboot
+
+## poweroff
+function Go-Poweroff()
+{
+  Poweroff-Computer -Force
+}
+New-Alias -Name poweroff -Value Go-Poweroff
