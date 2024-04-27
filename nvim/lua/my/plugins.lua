@@ -18,6 +18,13 @@ M.firenvim = {
 M.ordinalnvim = {
   -- self manage
   {
+    "shortarrow/hanzen.nvim",
+    config = function()
+      require("hanzen").setup()
+    end,
+    dev = true,
+  },
+  {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     event = "InsertEnter",
