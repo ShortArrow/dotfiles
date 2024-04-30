@@ -1,5 +1,33 @@
 local M = {}
 
+---@param names string[]
+---@return string[]
+local function get_plugin_paths(names)
+  local lazypath = vim.fn.stdpath('data') .. "/lazy/"
+  local plugins = require("my.plugins").ordinalplugins
+  local paths = {}
+  for _, name in ipairs(names) do
+    if plugins[name] then
+      table.insert(paths, plugins[name].dir .. "/lua")
+    else
+      vim.notify("Invalid plugin name: " .. name)
+    end
+  end
+  return paths
+end
+
+---@param plugins string[]
+---@return string[]
+local function library(plugins)
+  -- local paths = get_plugin_paths(plugins)
+  local paths = {}
+  table.insert(paths, vim.fn.stdpath("data") .. "/lazy/plenary.nvim/lua/luassert")
+  table.insert(paths, vim.api.nvim_get_runtime_file("", true))
+  table.insert(paths, vim.fn.stdpath("config") .. "/lua")
+  table.insert(paths, vim.env.VIMRUNTIME .. "/lua")
+  return paths
+end
+
 M.sumneko_lua = {
   Lua = {
     diagnostics = {
@@ -9,10 +37,7 @@ M.sumneko_lua = {
     },
     completion = { callSnippet = "Replace" },
     workspace = {
-      library = {
-        vim.api.nvim_get_runtime_file("", true),
-        "${3rd}/luassert/library",
-      },
+      library = library({ "lazy.nvim" }),
       checkThirdParty = false,
     },
     telemetry = { enable = false },
