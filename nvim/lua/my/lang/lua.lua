@@ -35,6 +35,12 @@ M.sumneko_lua = {
       globals = { 'vim', 'it', 'describe', 'before_each', 'after_each' },
       disable = { "lowercase-global" },
     },
+    format = {
+      enable = true,
+      defaultConfig = {
+        insertFinalNewline = true
+      }
+    },
     completion = { callSnippet = "Replace" },
     workspace = {
       library = library({ "lazy.nvim" }),
