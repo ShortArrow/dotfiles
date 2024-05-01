@@ -1,4 +1,3 @@
-local vim = vim
 if vim.g.vscode then
   -- vscode extension
   print("load vscode extension config")
