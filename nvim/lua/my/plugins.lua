@@ -22,7 +22,7 @@ M.ordinalnvim = {
     config = function()
       require("hanzen").setup()
     end,
-    dev = true,
+    dev = false,
   },
   {
     "zbirenbaum/copilot.lua",
