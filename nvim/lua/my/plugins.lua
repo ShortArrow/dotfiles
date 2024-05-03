@@ -31,6 +31,7 @@ M.ordinalnvim = {
     config = function()
       require("copilot").setup({})
     end,
+    keys = api.keymaps.maps.copilotchat,
   },
   {
     "zbirenbaum/copilot-cmp",
