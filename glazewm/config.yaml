@@ -295,8 +295,9 @@ keybindings:
 
   # Launch CMD terminal (alternatively `exec wt` or `exec %ProgramFiles%/Git/git-bash.exe`
   # to start Windows Terminal and Git Bash respectively.
-  - command: "exec wt"
-    binding: "Alt+Enter"
+  # Notice: In Excel, This Key is make new line in cell.
+  # - command: "exec wt"
+  #   binding: "Alt+Enter"
 
   # Focus the workspace that last had focus.
   - command: "focus workspace recent"
