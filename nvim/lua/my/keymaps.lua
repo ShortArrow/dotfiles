@@ -21,10 +21,10 @@ M.maps = {
     -- vim.keymap.set('n', '}', '<cmd>AerialNext<CR>', { buffer = bufnr })
   },
   copilotchat = {
-    { "<Leader>cc", ":CopilotChat<CR>" },
+    { "<Leader>cc", "<cmd>CopilotChat<CR>" },
   },
   lazygit = {
-    { "<Leader>lg", ":LazyGit<CR>" },
+    { "<Leader>lg", "<cmd>LazyGit<CR>" },
   },
   rust_tools = {
     {
@@ -123,37 +123,37 @@ M.maps = {
     --     hint_offset = -1,
     --   }),
     -- },
-    { "<Leader>hw", ":HopWord<CR>" },
-    { "<Leader>hl", ":HopLine<CR>" },
-    { "<Leader>hp", ":HopPattern<CR>" },
+    { "<Leader>hw", "<cmd>HopWord<CR>" },
+    { "<Leader>hl", "<cmd>HopLine<CR>" },
+    { "<Leader>hp", "<cmd>HopPattern<CR>" },
   },
   fugitive = {
     { "<Leader>ga",  "keymap" },
-    { "<Leader>ga",  ":Git add .<CR>" },
-    { "<Leader>gb",  ":Git blame<CR>" },
+    { "<Leader>ga",  "<cmd>Git add .<CR>" },
+    { "<Leader>gb",  "<cmd>Git blame<CR>" },
     { "<Leader>gc",  ":Git commit -m " },
-    { "<Leader>gd",  ":Gvdiffsplit<CR>" },
-    { "<Leader>gll", ":Gllog<CR>" },
-    { "<Leader>glc", ":Gclog<CR>" },
-    { "<Leader>gp",  ":Git push<CR>" },
-    { "<Leader>gs",  ":Git status<CR>" },
+    { "<Leader>gd",  "<cmd>Gvdiffsplit<CR>" },
+    { "<Leader>gll", "<cmd>Gllog<CR>" },
+    { "<Leader>glc", "<cmd>Gclog<CR>" },
+    { "<Leader>gp",  "<cmd>Git push<CR>" },
+    { "<Leader>gs",  "<cmd>Git status<CR>" },
   },
   diffview = {
-    { "<Leader>dvh", ":DiffviewFileHistory<CR>" },
-    { "<Leader>dvc", ":DiffviewClose<CR>" },
-    { "<Leader>dvt", ":DiffviewToggleFiles<CR>" },
-    { "<Leader>dvf", ":DiffviewFocusFiles<CR>" },
-    { "<Leader>dvr", ":DiffviewRefresh<CR>" },
-    { "<Leader>dvo", ":DiffviewOpen<CR>" },
+    { "<Leader>dvh", "<cmd>DiffviewFileHistory<CR>" },
+    { "<Leader>dvc", "<cmd>DiffviewClose<CR>" },
+    { "<Leader>dvt", "<cmd>DiffviewToggleFiles<CR>" },
+    { "<Leader>dvf", "<cmd>DiffviewFocusFiles<CR>" },
+    { "<Leader>dvr", "<cmd>DiffviewRefresh<CR>" },
+    { "<Leader>dvo", "<cmd>DiffviewOpen<CR>" },
   },
   whichkey = {
-    { "<Leader>km", ":WhichKey<CR>" },
+    { "<Leader>km", "<cmd>WhichKey<CR>" },
   },
   flutter = {
     {
       mode = "n",
       "<Leader>fr",
-      ":FlutterRun -d web-server<CR>",
+      "<cmd>FlutterRun -d web-server<CR>",
       desc = "Flutter Run",
     },
     {
@@ -166,10 +166,10 @@ M.maps = {
     },
   },
   trouble = {
-    { "<Leader>tr", ":TroubleToggle<CR>" },
+    { "<Leader>tr", "<cmd>TroubleToggle<CR>" },
   },
   fzflua = {
-    { "<Leader>zf", ":FzfLua files<CR>" },
+    { "<Leader>zf", "<cmd>FzfLua files<CR>" },
   },
   packer = {
     {
@@ -181,7 +181,7 @@ M.maps = {
     },
   },
   vfiler = {
-    { "<Leader>vf", ":VFiler<CR>" },
+    { "<Leader>vf", "<cmd>VFiler<CR>" },
   },
   toggleterm = {
     {
@@ -202,9 +202,9 @@ M.maps = {
     -- { mode = 't',  '',  '<C-Bslash><C-n>/', },
   },
   floaterm = {
-    { "<Leader>fn",   ":FloatermNew<CR>",     desc = "Floaterm normal" },
-    { "<Leader>flg",  ":FloatermNew lg<CR>",  desc = "Floaterm lazygit" },
-    { "<Leader>flzd", ":FloatermNew lzd<CR>", desc = "Floaterm lazydocker" },
+    { "<Leader>fn",   "<cmd>FloatermNew<CR>",     desc = "Floaterm normal" },
+    { "<Leader>flg",  "<cmd>FloatermNew lg<CR>",  desc = "Floaterm lazygit" },
+    { "<Leader>flzd", "<cmd>FloatermNew lzd<CR>", desc = "Floaterm lazydocker" },
   },
   telescope = {
     {
@@ -306,20 +306,20 @@ M.maps = {
     },
   },
   lspsaga = {
-    { mode = "n", "<Leader>ln", ":Lspsaga rename<CR>",      desc = "rename (lspsaga)" },
-    { mode = "n", "<F2>", ":Lspsaga rename<CR>",      desc = "rename (lspsaga)" },
-    { mode = "n", "<Leader>la", ":Lspsaga code_action<CR>", desc = "Code Action (lspsaga)" },
-    { mode = "n", "<Leader>ld", ":Lspsaga goto_definition<CR>", desc = "Goto definition(lspsaga)" },
-    -- { mode = "n", "<Leader>lt", ":Lspsaga goto_type_definition<CR>", desc = "Goto type definition(lspsaga)" },
-    { mode = "n", "<Leader>ls", ":Lspsaga finder<CR>",      desc = "Lsp Search (lspsaga)" },
-    { mode = "n", "<F8>", ":Lspsaga diagnostic_jump_next<CR>",      desc = "Lsp diagnostic_jump_next(lspsaga)" },
-    { mode = "n", "<S-F8>", ":Lspsaga diagnostic_jump_prev<CR>",      desc = "Lsp diagnostic_jump_prev(lspsaga)" },
+    { mode = "n", "<Leader>ln", "<cmd>Lspsaga rename<CR>",      desc = "rename (lspsaga)" },
+    { mode = "n", "<F2>", "<cmd>Lspsaga rename<CR>",      desc = "rename (lspsaga)" },
+    { mode = "n", "<Leader>la", "<cmd>Lspsaga code_action<CR>", desc = "Code Action (lspsaga)" },
+    { mode = "n", "<Leader>ld", "<cmd>Lspsaga goto_definition<CR>", desc = "Goto definition(lspsaga)" },
+    -- { mode = "n", "<Leader>lt", "<cmd>Lspsaga goto_type_definition<CR>", desc = "Goto type definition(lspsaga)" },
+    { mode = "n", "<Leader>ls", "<cmd>Lspsaga finder<CR>",      desc = "Lsp Search (lspsaga)" },
+    { mode = "n", "<F8>", "<cmd>Lspsaga diagnostic_jump_next<CR>",      desc = "Lsp diagnostic_jump_next(lspsaga)" },
+    { mode = "n", "<S-F8>", "<cmd>Lspsaga diagnostic_jump_prev<CR>",      desc = "Lsp diagnostic_jump_prev(lspsaga)" },
   },
   common = {
     -- # noice dismiss
-    { "<Leader><Esc>", ":NoiceDismiss<CR>", desc = "dismiss noice error and escape"},
+    { "<Leader><Esc>", "<cmd>NoiceDismiss<CR>", desc = "dismiss noice error and escape"},
     -- # zen mode
-    { "<Leader>zm", ":ZenMode<CR>",         desc = "Zen Mode" },
+    { "<Leader>zm", "<cmd>ZenMode<CR>",         desc = "Zen Mode" },
     -- # lsp keymaps
     { "<Leader>lk", vim.lsp.buf.hover,      desc = "show references (Lsp References)" },
     -- { "<Leader>ld", vim.lsp.buf.definition, desc = "jump to definition (Lsp Definition)" },
@@ -327,9 +327,9 @@ M.maps = {
     -- { "<A-S-F>",      vim.lsp.buf.format,     desc = "auto formatting (Lsp Formatting)" },
     { "<Leader>lr", vim.lsp.buf.references, desc = "show references (Lsp References)" },
     -- rename (Lsp Name)
-    -- {  '<Leader>ln',  ':lua vim.lsp.buf.rename()<CR>', },
+    -- {  '<Leader>ln',  '<cmd>lua vim.lsp.buf.rename()<CR>', },
     -- code_action (Lsp Action)
-    -- {  '<Leader>la',  ':lua vim.lsp.buf.code_action()<CR>', },
+    -- {  '<Leader>la',  '<cmd>lua vim.lsp.buf.code_action()<CR>', },
 
     -- # window keymaps
     { "<Leader>wp", "<C-w>p",               desc = "go to previous window (Window Previous)" },
@@ -339,8 +339,8 @@ M.maps = {
     { "<Leader>wk", "<C-w>k",               desc = "up (Window K)" },
 
     -- # buffer keymaps
-    { "<Leader>bp", ":bprevious<CR>",       desc = "go to previous buffer (Buffer Previous)" },
-    { "<Leader>bn", ":bnext<CR>",           desc = "go to next buffer (Buffer Next)" },
+    { "<Leader>bp", "<cmd>bprevious<CR>",       desc = "go to previous buffer (Buffer Previous)" },
+    { "<Leader>bn", "<cmd>bnext<CR>",           desc = "go to next buffer (Buffer Next)" },
 
     -- # japanese keymaps
     {
@@ -439,7 +439,7 @@ M.maps = {
     -- { mode = 'n', '<C-S-l>', '<Right>', desc = "IME safe of <Right>" },
 
     -- # help keymaps
-    { "<Leader>?", ":h quickref<CR>" },
+    { "<Leader>?", "<cmd>h quickref<CR>" },
   },
 }
 
