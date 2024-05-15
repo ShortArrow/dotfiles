@@ -24,6 +24,7 @@ M.setup = function()
       require("neotest-vitest"),
       require("neotest-rust")(api.lang.rust.neotest),
       require('neotest-dart')(api.lang.dart.neotest),
+      require('neotest-dotnet')(api.lang.csharp.neotest),
     },
   })
 end
