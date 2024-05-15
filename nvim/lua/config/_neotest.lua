@@ -13,8 +13,9 @@ M.setup = function()
       final_child_prefix = "╰",
       non_collapsible = "─",
       passed = " ",
-      running = "ﰌ ",
-      running_animated = { "/", "|", "\\", "-", "/", "|", "\\", "-" },
+      running = "󰑓 ",
+      running_animated = { " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
+        " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " },
       skipped = "↩️ ",
       unknown = "?"
     },
