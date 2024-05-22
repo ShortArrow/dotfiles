@@ -42,17 +42,17 @@ focus_borders:
     color: "#0f0f0f"
 
 bar:
-  height: "30px"
+  height: "38px"
   position: "top"
   opacity: 1.0
-  background: "#20242cc4"
+  background: "#000000ff"
   foreground: "#99ff99"
   font_family: "Meiryo UI"
   font_size: "13px"
-  padding: "4px 6px"
-  offset_x: "0"
-  offset_y: "0"
-  border_radius: "0"
+  padding: "8px 8px"
+  offset_x: "5px"
+  offset_y: "5px"
+  border_radius: "6"
   always_on_top: false
   component_separator:
     label: " | "
@@ -100,9 +100,9 @@ bar:
       label_wifi_strength_50: "📶: 50%"
       label_wifi_strength_75: "📶: 75%"
       label_wifi_strength_100: "📶: 100%"
-    - type: "gpu"
-      label: "🎨{percent_usage}%"
-      # How often this counter is refreshed.
+    # - type: "gpu"
+    #   label: "🎨{percent_usage}%"
+    #   # How often this counter is refreshed.
       refresh_interval_ms: 1000
     - type: "memory"
       label: "🐑{percent_usage}%"
