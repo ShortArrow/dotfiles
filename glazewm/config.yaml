@@ -45,7 +45,7 @@ bar:
   height: "38px"
   position: "top"
   opacity: 1.0
-  background: "#000000ff"
+  background: "#113311ff"
   foreground: "#99ff99"
   font_family: "Meiryo UI"
   font_size: "13px"
@@ -58,10 +58,10 @@ bar:
     label: " | "
   components_left:
     - type: "workspaces"
-      focused_workspace_background: "#227722ff"
+      focused_workspace_background: "transparent"
       focused_workspace_foreground: "#ffffffff"
-      displayed_workspace_background: "#00000033"
-      displayed_workspace_foreground: "#ff000033"
+      displayed_workspace_background: "transparent"
+      displayed_workspace_foreground: "#ff0000ff"
       default_workspace_background: "transparent"
       default_workspace_foreground: "#99ff99ff"
   components_center:
