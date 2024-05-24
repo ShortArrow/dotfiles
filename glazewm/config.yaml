@@ -45,7 +45,7 @@ bar:
   height: "38px"
   position: "top"
   opacity: 1.0
-  background: "#112211ff"
+  background: "#114411ff"
   foreground: "#99ff99"
   font_family: "Meiryo UI"
   font_size: "13px"
