@@ -25,6 +25,12 @@
     "when": "neovim.mode == normal && editorTextFocus"
   },
   {
+    "command": "vscode-neovim.send",
+    "key": "f space",
+    "when": "editorTextFocus && neovim.mode != insert",
+    "args": "f<Space>"
+  },
+  {
     "key": "space s",
     "command": "workbench.action.files.save",
     "when": "neovim.mode == normal && editorTextFocus"
