@@ -56,6 +56,11 @@
     "clangd.arguments": [
         "--log=verbose"
     ],
+    "vscode-neovim.compositeKeys": {
+      "jj": {
+          "command": "vscode-neovim.escape"
+      }
+    },
     "diffEditor.hideUnchangedRegions.enabled": true,
     "workbench.editor.showTabs": "single",
     "terminal.integrated.enableImages": true,
