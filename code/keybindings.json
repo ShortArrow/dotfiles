@@ -5,12 +5,6 @@
     "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus"
   },
   {
-    "command": "vscode-neovim.compositeEscape1",
-    "key": "j",
-    "when": "neovim.mode == insert && editorTextFocus",
-    "args": "j"
-  },
-  {
     "key": "space d",
     "command": "editor.action.goToDeclaration",
     "when": "neovim.mode == normal && editorTextFocus"
