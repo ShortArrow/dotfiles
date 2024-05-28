@@ -46,28 +46,28 @@ M.maps = {
   },
   neotest = {
     {
-      "ntr",
+      "<Leader>tr",
       function()
         require("neotest").run.run()
       end,
       desc = "Neo Test Run (nearest run)",
     },
     {
-      "ntt",
+      "<Leader>tt",
       function()
         require("neotest").summary.toggle()
       end,
       desc = "Neo Test Summary Open (NeoTest Open)",
     },
     {
-      "ntc",
+      "<Leader>tc",
       function()
         require("neotest").run.run(vim.fn.expand("%"))
       end,
       desc = "Neo Test Run (current run)",
     },
     {
-      "ntd",
+      "<Leader>td",
       function()
         require("neotest").run.run({ strategy = "dap" })
       end,
