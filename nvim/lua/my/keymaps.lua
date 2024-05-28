@@ -84,7 +84,7 @@ M.maps = {
   },
   ufo = {
     {
-      "ng",
+      "zR",
       function()
         require("ufo").openAllFolds()
       end,
