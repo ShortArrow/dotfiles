@@ -8,6 +8,7 @@ M.commonmaps_activate = function()
       vim.keymap.set("n", map[1], map[2])
     end
   end
+  vim.api.nvim_set_keymap('i', 'jj', '<Esc>', {noremap = true})
 end
 
 M.maps = {
