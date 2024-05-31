@@ -1,21 +1,21 @@
 #!/bin/bash
 
-source "/usr/local/bin/.bash_myplug/bash_checkers.sh"
-source "/usr/local/bin/.bash_myplug/bash_mycompletion.sh"
+source "$HOME/.bashrc.d/bash_checkers.sh"
+source "$HOME/.bashrc.d/bash_mycompletion.sh"
 
 # ls
 if command_exists "lsd"; then
-	alias l.="lsd -d .* "
-	alias ll="lsd -l "
-	alias ll.="lsd -al "
-	alias ls="lsd "
-	alias ls.="lsd -a "
+  alias l.="lsd -d .* "
+  alias ll="lsd -l "
+  alias ll.="lsd -al "
+  alias ls="lsd "
+  alias ls.="lsd -a "
 else
-	alias l.="ls -d .* --color=tty"
-	alias ll="ls -l --color=tty"
-	alias ll.="ls -al --color=tty"
-	alias ls="ls --color=tty"
-	alias ls.="ls -a --color=tty"
+  alias l.="ls -d .* --color=tty"
+  alias ll="ls -l --color=tty"
+  alias ll.="ls -al --color=tty"
+  alias ls="ls --color=tty"
+  alias ls.="ls -a --color=tty"
 fi
 
 # ip
@@ -26,13 +26,13 @@ export LESS="-r"
 
 # nvim
 if command_exists "nvim"; then
-	alias nv="nvim"
+  alias nv="nvim"
 fi
 
 # bat
 if command_exists "bat"; then
-	alias ncat="cat" # meaning normal cat
-	alias cat="bat"
+  alias ncat="cat" # meaning normal cat
+  alias cat="bat"
 fi
 
 # sudo refresher
@@ -84,23 +84,23 @@ alias crontab="crontab -i"
 
 # git-graph
 if command_exists "git-graph"; then
-	alias gg="git-graph --style round --color always | less"
+  alias gg="git-graph --style round --color always | less"
 else
-	alias gg="echo command git-graph is not found.\nPlease install \'git-graph\'"
+  alias gg="echo command git-graph is not found.\nPlease install \'git-graph\'"
 fi
 
 # lazydocker
 if command_exists "lazydocker"; then
-	alias lzd=lazydocker
+  alias lzd=lazydocker
 else
-	alias lzd="echo command lazydocker is not found.\nPlease install \'lazydocker\'"
+  alias lzd="echo command lazydocker is not found.\nPlease install \'lazydocker\'"
 fi
 
 # lazygit
 if command_exists "lazygit"; then
-	alias lg=lazygit
+  alias lg=lazygit
 else
-	alias lg="echo command lazygit is not found.\nPlease install \'lazygit\'"
+  alias lg="echo command lazygit is not found.\nPlease install \'lazygit\'"
 fi
 
 # japanese
@@ -110,7 +110,7 @@ export MODIFIERS=@im=ibus
 
 # color check
 checkcolor() {
-	curl -s "https://gist.githubusercontent.com/lifepillar/09a44b8cf0f9397465614e622979107f/raw/24-bit-color.sh" | bash
+  curl -s "https://gist.githubusercontent.com/lifepillar/09a44b8cf0f9397465614e622979107f/raw/24-bit-color.sh" | bash
 }
 echo "If you want to check color support, run \`checkcolor\`"
 
@@ -134,22 +134,22 @@ export PATH="$HOME/.nimble/bin:$PATH"
 
 # vivid
 if command_exists "vivid"; then
-	LS_COLORS="$(vivid generate molokai)"
-	export LS_COLORS
+  LS_COLORS="$(vivid generate molokai)"
+  export LS_COLORS
 else
-	echo "please install vivid"
+  echo "please install vivid"
 fi
 
 # zellij
 if command_exists "zellij"; then
-	alias zj='zellij'
+  alias zj='zellij'
 else
-	echo "please install zellij"
+  echo "please install zellij"
 fi
 
 # zoxide
 if command_exists "zoxide"; then
-	eval "$(zoxide init bash)"
+  eval "$(zoxide init bash)"
 fi
 
 # pyenv
