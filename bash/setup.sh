@@ -23,7 +23,7 @@ echo "$orig_home"
 
 # make symbolic link
 rm -rf "$orig_home/.bash_myplug"
-rm -rf "/usr/local/bin/.bash_myplug"
+rm -rf "$orig_home/.bashrc.d"
 
 REPO="$orig_home/Documents/GitHub/dotfiles/bash/src"
 
@@ -31,7 +31,7 @@ PLUG="$orig_home/.bash_myplug"
 ln -s "$REPO" "$PLUG"
 file "$PLUG" # check link
 
-PLUG="/usr/local/bin/.bash_myplug"
+PLUG="$orig_home/.bashrc.d"
 ln -s "$REPO" "$PLUG"
 file "$PLUG" # check link
 
