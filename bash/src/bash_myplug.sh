@@ -1,7 +1,16 @@
 #!/bin/bash
 
-source "$HOME/.bashrc.d/bash_checkers.sh"
-source "$HOME/.bashrc.d/bash_mycompletion.sh"
+# dot source for user permission
+if [ -d "$HOME/.bashrc.d/" ]; then
+  source "$HOME/.bashrc.d/bash_checkers.sh"
+  source "$HOME/.bashrc.d/bash_mycompletion.sh"
+fi
+
+# dot source for lsp
+if [ -d "/usr/local/bin/.bash_myplug/" ]; then
+  source "/usr/local/bin/.bash_myplug/bash_checkers.sh"
+  source "/usr/local/bin/.bash_myplug/bash_mycompletion.sh"
+fi
 
 # ls
 if command_exists "lsd"; then
