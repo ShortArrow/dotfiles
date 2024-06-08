@@ -171,3 +171,6 @@ fi
 
 # poetry
 export PATH="$PATH:$HOME/.local/bin"
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
