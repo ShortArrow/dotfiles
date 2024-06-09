@@ -36,6 +36,7 @@ export LESS="-r"
 # nvim
 if command_exists "nvim"; then
   alias nv="nvim"
+  alias んヴぃｍ="nvim"
 fi
 
 # bat
