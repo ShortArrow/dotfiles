@@ -175,7 +175,7 @@ M.maps = {
     },
   },
   trouble = {
-    { "<Leader>tr", "<cmd>TroubleToggle<CR>" },
+    { "<Leader>tr", "<cmd>Trouble diagnostics<CR>" },
   },
   fzflua = {
     { "<Leader>zf", "<cmd>FzfLua files<CR>" },
