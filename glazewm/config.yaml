@@ -168,6 +168,9 @@ window_rules:
   - command: "ignore"
     match_process_name: "/Taskmgr|ScreenClippingHost|GoogleDriveFS|HakkoAI/"
 
+  - command: "ignore"
+    match_process_name: "/UriageGenka/"
+
   # Launches system dialogs as floating by default (eg. File Explorer save/open dialog).
   - command: "set floating"
     match_class_name: "#32770"
