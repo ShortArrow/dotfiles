@@ -1,4 +1,5 @@
 local function usecase_vscode()
+  vim.g.mapleader = " "
   local vscode = require("vscode")
   ---This function is must be called when the mode changes
   local function changeThemeOnModeChange()
@@ -43,11 +44,15 @@ local function usecase_vscode()
       vscode.action(cmd)
     end
   end
-  vim.keymap.set("n", "<space>d", action("editor.action.goToDeclaration"))
-  vim.keymap.set("n", "<space>b", action("workbench.action.navigateBack"))
-  vim.keymap.set("n", "<space>h", action("editor.action.showHover"))
-  vim.keymap.set("n", "<space>f", action("editor.action.formatDocument"))
-  vim.keymap.set("n", "<space>s", action("workbench.action.files.save"))
+  vim.keymap.set("n", "<Leader>d", action("editor.action.goToDeclaration"))
+  vim.keymap.set("n", "<Leader>b", action("workbench.action.navigateBack"))
+  vim.keymap.set("n", "<Leader>h", action("editor.action.showHover"))
+  vim.keymap.set("n", "<Leader>f", action("editor.action.formatDocument"))
+  vim.keymap.set("n", "<Leader>s", action("workbench.action.files.save"))
+  vim.keymap.set("n", "<Leader>wl", action("workbench.action.nextEditor"))
+  vim.keymap.set("n", "<Leader>wh", action("workbench.action.previousEditor"))
+  vim.keymap.set("n", "<Leader>wj", action("workbench.action.nextEditorInGroup"))
+  vim.keymap.set("n", "<Leader>wk", action("workbench.action.previousEditorInGroup"))
 end
 
 local function usecase_firenvim()
