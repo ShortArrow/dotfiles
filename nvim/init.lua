@@ -1,23 +1,17 @@
-if vim.g.vscode then
-  -- vscode extension
-  print("load vscode extension config")
-
+local function usecase_vscode()
+  local vscode = require("vscode")
   ---This function is must be called when the mode changes
   local function changeThemeOnModeChange()
     local mode = vim.api.nvim_get_mode().mode
-    if mode == "i" then                                      -- insert mode
+    if mode == "i" then                                    -- insert mode
       vim.fn.VSCodeNotify("nvim-theme.insert")
-    elseif mode == "R" or mode == "r" then                   -- replace mode
+    elseif mode == "R" or mode == "r" then                 -- replace mode
       vim.fn.VSCodeNotify("nvim-theme.replace")
     elseif mode == "v" or mode == "V" or mode == "\x16" then -- visual mode
       vim.fn.VSCodeNotify("nvim-theme.visual")
-    else                                                     -- normal mode
+    else                                                   -- normal mode
       vim.fn.VSCodeNotify("nvim-theme.normal")
     end
-  end
-
-  local function vscodeFormat()
-    vim.fn.VSCodeNotify("editor.action.formatDocument")
   end
 
   ---This autocmd group is used to change the theme when the mode changes
@@ -43,16 +37,20 @@ if vim.g.vscode then
   vim.api.nvim_set_keymap("n", "gc", "<Plug>VSCodeCommentary", { noremap = false, silent = true })
   vim.api.nvim_set_keymap("o", "gc", "<Plug>VSCodeCommentary", { noremap = false, silent = true })
   vim.api.nvim_set_keymap("n", "gcc", "<Plug>VSCodeCommentaryLine", { noremap = false, silent = true })
-  ---add format action shortcut
-  vim.keymap.set(
-    "n",
-    "<Leader>f",
-    function() vim.fn.VSCodeNotify('editor.action.formatDocument') end,
-    { noremap = false, silent = true }
-  )
-elseif 0 ~= vim.fn.exists("g:started_by_firenvim") then
-  -- general config for firenvim
-  print("load firenvim config")
+  -- Set VSCode command to Neovim keymap
+  local action = function(cmd)
+    return function()
+      vscode.action(cmd)
+    end
+  end
+  vim.keymap.set("n", "<space>d", action("editor.action.goToDeclaration"))
+  vim.keymap.set("n", "<space>b", action("workbench.action.navigateBack"))
+  vim.keymap.set("n", "<space>h", action("editor.action.showHover"))
+  vim.keymap.set("n", "<space>f", action("editor.action.formatDocument"))
+  vim.keymap.set("n", "<space>s", action("workbench.action.files.save"))
+end
+
+local function usecase_firenvim()
   vim.g.firenvim_config = {
     globalSettigs = {
       alt = "all",
@@ -101,9 +99,9 @@ elseif 0 ~= vim.fn.exists("g:started_by_firenvim") then
   local plugins = require("my.plugins").firenvim
   local opts = {}
   require("lazy").setup(plugins, opts)
-else
-  -- ordinary neovim
+end
 
+local function usecase_ordinal()
   local options = require("my.options")
   options.activate()
 
@@ -117,4 +115,17 @@ else
   require("config._mason").setup()
   -- vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = "#FF0000" })
   require("my.diagnotics")
+end
+
+if vim.g.vscode then
+  -- vscode extension
+  print("load vscode extension config")
+  usecase_vscode()
+elseif 0 ~= vim.fn.exists("g:started_by_firenvim") then
+  -- general config for firenvim
+  print("load firenvim config")
+  usecase_firenvim()
+else
+  -- ordinary neovim
+  usecase_ordinal()
 end
