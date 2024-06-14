@@ -25,6 +25,9 @@ M.ordinalnvim = {
     dev = false,
   },
   {
+    "xiyaowong/transparent.nvim",
+  },
+  {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     event = "InsertEnter",
@@ -37,14 +40,14 @@ M.ordinalnvim = {
     "zbirenbaum/copilot-cmp",
     config = function()
       require("copilot_cmp").setup()
-    end
+    end,
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     branch = "canary",
     dependencies = {
       { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-      { "nvim-lua/plenary.nvim" },  -- for curl, log wrapper
+      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
     },
     opts = get_config("_copilot_chat").opts,
     -- See Commands section for default commands if you want to lazy load on them
@@ -229,7 +232,7 @@ M.ordinalnvim = {
     -- event = "UiEnter",
     config = function()
       require("heirline").setup({})
-    end
+    end,
   },
   {
     "akinsho/bufferline.nvim",
@@ -482,7 +485,7 @@ M.ordinalnvim = {
     "glepnir/lspsaga.nvim",
     dependencies = {
       "nvim-treesitter/nvim-treesitter", -- optional
-      "nvim-tree/nvim-web-devicons",     -- optional
+      "nvim-tree/nvim-web-devicons",  -- optional
     },
     cmd = "Lspsaga",
     config = get_config("_lsp_saga").setup,
