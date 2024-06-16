@@ -34,13 +34,11 @@ local function usecase_vscode()
   })
 
   ---This is keymap of commentout
-  vim.keymap.set("x", "gc", "<Plug>VSCodeCommentary")
-  vim.keymap.set("n", "gc", "<Plug>VSCodeCommentary")
-  vim.keymap.set("o", "gc", "<Plug>VSCodeCommentary")
-  vim.keymap.set("n", "gcc", "<Plug>VSCodeCommentaryLine")
+  vim.keymap.set({ "x", "o", "n" }, "gc", "<Plug>VSCodeCommentary")
+  vim.keymap.set({ "n" }, "gcc", "<Plug>VSCodeCommentaryLine")
 
   -- Set VSCode command to Neovim keymap
-  local action = function(cmd)
+  local function action(cmd)
     return function()
       vscode.action(cmd)
     end
