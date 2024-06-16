@@ -1,13 +1,9 @@
 local M = {}
 
 M.setup = function()
-  require("nvim-ts-autotag").setup()
   require("nvim-treesitter.install").compilers = { "zig", "clang", "gcc" }
   require("nvim-treesitter.configs").setup({
     auto_install = true,
-    autotag = {
-      enable = true,
-    },
     highlight = {
       -- `false` will disable the whole extension
       enable = true,
