@@ -47,7 +47,7 @@ M.ordinalnvim = {
     branch = "canary",
     dependencies = {
       { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+      { "nvim-lua/plenary.nvim" },  -- for curl, log wrapper
     },
     opts = get_config("_copilot_chat").opts,
     -- See Commands section for default commands if you want to lazy load on them
@@ -485,7 +485,7 @@ M.ordinalnvim = {
     "glepnir/lspsaga.nvim",
     dependencies = {
       "nvim-treesitter/nvim-treesitter", -- optional
-      "nvim-tree/nvim-web-devicons",  -- optional
+      "nvim-tree/nvim-web-devicons",     -- optional
     },
     cmd = "Lspsaga",
     config = get_config("_lsp_saga").setup,
@@ -508,6 +508,13 @@ M.ordinalnvim = {
       require("nvim-treesitter.install").update({ with_sync = true })
     end,
     config = get_config("_treesitter").setup,
+  },
+  {
+    "windwp/nvim-ts-autotag",
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
   },
   {
     "KadoBOT/cmp-plugins",
