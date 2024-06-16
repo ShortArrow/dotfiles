@@ -1,23 +1,19 @@
 FROM archlinux:latest
 SHELL ["/bin/bash", "-l", "-c"]
 
-RUN pacman --noconfirm -Syu
+RUN pacman --noconfirm -Syu && pacman -Scc --noconfirm
 
 # Install General Purpose Tools
 RUN pacman --noconfirm -S \
-  git \
   neovim \
-  wget \
-  unzip \
-  sudo \
   starship \
   zsh \
-  neofetch \
+  fastfetch \
   tmux \
   bat \
   fzf \
-  exa \
-  zellij
+  zellij \
+  && pacman -Scc --noconfirm
 
 # Install Languages
 RUN pacman --noconfirm -S \
@@ -29,7 +25,8 @@ RUN pacman --noconfirm -S \
   rustup \
   deno \
   luarocks \
-  python-pip
+  python-pip \
+  && pacman -Scc --noconfirm
 RUN corepack enable
 
 # Install Tools
@@ -39,7 +36,9 @@ RUN pacman --noconfirm -S \
   diff-so-fancy \
   ripgrep \
   fd \
-  github-cli
+  github-cli \
+  zellij \
+  && pacman -Scc --noconfirm
 
 # Make User
 ARG USERNAME='who'
@@ -57,11 +56,23 @@ ENV RUSTUP_HOME "/home/$USERNAME/.rustup"
 RUN cargo install \
   git-graph \
   vivid \
-  lsd
+  zoxide \
+  lsd \
+  && rm -rf /usr/local/cargo/registry \
+          /usr/local/cargo/git
 
 # Install Yarn Tools
 ENV PATH "/home/$USERNAME/.yarn/bin:$PATH"
-RUN yarn global add neovim
+
+ENV SHELL "/bin/bash"
+RUN pnpm setup
+ENV PNPM_HOME="/home/who/.local/share/pnpm"
+RUN export PNPM_HOME="/home/who/.local/share/pnpm" \
+  && case ":$PATH:" in \
+    *":$PNPM_HOME:"*) ;; \
+    *) export PATH="$PNPM_HOME:$PATH" ;; \
+  esac \
+  && pnpm add -g neovim
 
 # Clone Repo
 RUN /bin/mkdir -p /home/$USERNAME/Documents/GitHub/dotfiles
