@@ -1,4 +1,4 @@
-local api = require('my')
+local api = require("my")
 local M = {}
 
 M.setup = function()
@@ -14,21 +14,64 @@ M.setup = function()
       non_collapsible = "─",
       passed = " ",
       running = "󰑓 ",
-      running_animated = { " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
-        " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " },
+      running_animated = {
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+      },
       skipped = "↩️ ",
-      unknown = "?"
+      unknown = "?",
     },
     adapters = {
       require("neotest-plenary"),
       require("neotest-python")(api.lang.python.neotest),
       require("neotest-vitest"),
       require("neotest-rust")(api.lang.rust.neotest),
-      require('neotest-dart')(api.lang.dart.neotest),
-      require('neotest-dotnet')(api.lang.csharp.neotest),
+      require("neotest-dart")(api.lang.dart.neotest),
+      require("neotest-dotnet")(api.lang.csharp.neotest),
     },
   })
 end
+
+M.commands = {
+  run = function()
+    require("neotest").run.run()
+  end,
+  toggle = function()
+    require("neotest").summary.toggle()
+  end,
+  current = function()
+    require("neotest").run.run(vim.fn.expand("%"))
+  end,
+  dap = function()
+    require("neotest").run.run({ strategy = "dap" })
+  end,
+}
 
 return M
 -- | pytest          |   [neotest-python](https://github.com/nvim-neotest/neotest-python)   |
