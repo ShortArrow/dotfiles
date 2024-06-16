@@ -169,7 +169,7 @@ window_rules:
     match_process_name: "/Taskmgr|ScreenClippingHost|GoogleDriveFS|HakkoAI/"
 
   - command: "ignore"
-    match_process_name: "/UriageGenka/"
+    match_process_name: "/UriageGenka|CubePDF/"
 
   # Launches system dialogs as floating by default (eg. File Explorer save/open dialog).
   - command: "set floating"
