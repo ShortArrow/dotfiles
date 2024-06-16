@@ -1,7 +1,7 @@
-local api = require("my")
 local M = {}
 
 M.setup = function()
+  local api = require("my")
   require("neotest").setup({
     icons = {
       child_indent = "│",
