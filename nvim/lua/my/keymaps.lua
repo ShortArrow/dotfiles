@@ -2,19 +2,15 @@ local M = {}
 
 M.commonmaps_activate = function()
   for _, map in pairs(M.maps.common) do
-    if "string" == type(map[2]) then
-      if map.mode then
-        vim.api.nvim_set_keymap(map.mode, map[1], map[2], { noremap = true })
-      else
-        vim.api.nvim_set_keymap("n", map[1], map[2], { noremap = true })
-      end
-    else
-      if map.mode then
-        vim.keymap.set(map.mode, map[1], map[2])
-      else
-        vim.keymap.set("n", map[1], map[2])
-      end
-    end
+    local mode = map.mode or "n"
+    vim.keymap.set(mode, map[1], map[2], {
+      -- noremap: true
+      -- silent: false
+      -- script: false
+      -- expr: false
+      -- buffer: nil
+      -- nowait: false
+    })
   end
 end
 
@@ -315,14 +311,24 @@ M.maps = {
     },
   },
   lspsaga = {
-    { mode = "n", "<Leader>ln", "<cmd>Lspsaga rename<CR>",               desc = "rename (lspsaga)" },
-    { mode = "n", "<F2>",       "<cmd>Lspsaga rename<CR>",               desc = "rename (lspsaga)" },
-    { mode = "n", "<Leader>la", "<cmd>Lspsaga code_action<CR>",          desc = "Code Action (lspsaga)" },
-    { mode = "n", "<Leader>ld", "<cmd>Lspsaga goto_definition<CR>",      desc = "Goto definition(lspsaga)" },
+    { mode = "n", "<Leader>ln", "<cmd>Lspsaga rename<CR>",          desc = "rename (lspsaga)" },
+    { mode = "n", "<F2>",       "<cmd>Lspsaga rename<CR>",          desc = "rename (lspsaga)" },
+    { mode = "n", "<Leader>la", "<cmd>Lspsaga code_action<CR>",     desc = "Code Action (lspsaga)" },
+    { mode = "n", "<Leader>ld", "<cmd>Lspsaga goto_definition<CR>", desc = "Goto definition(lspsaga)" },
     -- { mode = "n", "<Leader>lt", "<cmd>Lspsaga goto_type_definition<CR>", desc = "Goto type definition(lspsaga)" },
-    { mode = "n", "<Leader>ls", "<cmd>Lspsaga finder<CR>",               desc = "Lsp Search (lspsaga)" },
-    { mode = "n", "<F8>",       "<cmd>Lspsaga diagnostic_jump_next<CR>", desc = "Lsp diagnostic_jump_next(lspsaga)" },
-    { mode = "n", "<S-F8>",     "<cmd>Lspsaga diagnostic_jump_prev<CR>", desc = "Lsp diagnostic_jump_prev(lspsaga)" },
+    { mode = "n", "<Leader>ls", "<cmd>Lspsaga finder<CR>",          desc = "Lsp Search (lspsaga)" },
+    {
+      mode = "n",
+      "<F8>",
+      "<cmd>Lspsaga diagnostic_jump_next<CR>",
+      desc = "Lsp diagnostic_jump_next(lspsaga)",
+    },
+    {
+      mode = "n",
+      "<S-F8>",
+      "<cmd>Lspsaga diagnostic_jump_prev<CR>",
+      desc = "Lsp diagnostic_jump_prev(lspsaga)",
+    },
   },
   common = {
     -- # noice dismiss
@@ -352,33 +358,33 @@ M.maps = {
     { "<Leader>bn", "<cmd>bnext<CR>", desc = "go to next buffer (Buffer Next)" },
 
     -- # japanese keymaps
-    { "<Down>", "gj", desc = "IME safe of あ", },
-    { "<Up>", "gk", desc = "IME safe of あ", },
-    { "あ", "a", desc = "IME safe of あ", },
-    { "い", "i", desc = "IME safe of い", },
-    { "う", "u", desc = "IME safe of う", },
-    { "お", "o", desc = "IME safe of お", },
-    { "っd", "dd", desc = "IME safe of dd", },
-    { "ｄｄ", "dd", desc = "IME safe of dd", },
-    { "っy", "yy", desc = "IME safe of yy", },
-    { "ｙｙ", "yy", desc = "IME safe of yy", },
-    { "ｊｊ", "<Esc>", desc = "IME safe of jj", },
-    { "ｊ", "<Down>", desc = "IME safe of j", },
-    { "ｋ", "<Up>", desc = "IME safe of k", },
-    { 'し"', 'ci"', desc = "IME safe of ci", },
-    { "し'", "ci'", desc = "IME safe of ci", },
-    { "し”", 'ci"', desc = "IME safe of ci", },
-    { "し’", "ci'", desc = "IME safe of ci", },
-    { "：ｗ", "<cmd>w<CR>", desc = "IME safe of :w", },
-    { "：ｗｑ", "<cmd>wq<CR>", desc = "IME safe of :wq", },
-    { "：ｑ", "<cmd>q<CR>", desc = "IME safe of :w", },
-    { "：くぁ", "<cmd>qa<CR>", desc = "IME safe of :w", },
+    { "<Down>", "gj", desc = "IME safe of あ" },
+    { "<Up>", "gk", desc = "IME safe of あ" },
+    { "あ", "a", desc = "IME safe of あ" },
+    { "い", "i", desc = "IME safe of い" },
+    { "う", "u", desc = "IME safe of う" },
+    { "お", "o", desc = "IME safe of お" },
+    { "っd", "dd", desc = "IME safe of dd" },
+    { "ｄｄ", "dd", desc = "IME safe of dd" },
+    { "っy", "yy", desc = "IME safe of yy" },
+    { "ｙｙ", "yy", desc = "IME safe of yy" },
+    { "ｊｊ", "<Esc>", desc = "IME safe of jj" },
+    { "ｊ", "<Down>", desc = "IME safe of j" },
+    { "ｋ", "<Up>", desc = "IME safe of k" },
+    { 'し"', 'ci"', desc = "IME safe of ci" },
+    { "し'", "ci'", desc = "IME safe of ci" },
+    { "し”", 'ci"', desc = "IME safe of ci" },
+    { "し’", "ci'", desc = "IME safe of ci" },
+    { "：ｗ", "<cmd>w<CR>", desc = "IME safe of :w" },
+    { "：ｗｑ", "<cmd>wq<CR>", desc = "IME safe of :wq" },
+    { "：ｑ", "<cmd>q<CR>", desc = "IME safe of :w" },
+    { "：くぁ", "<cmd>qa<CR>", desc = "IME safe of :w" },
     -- { mode = 'n', '<C-S-h>', '<Left>', desc = "IME safe of <Left>" },
     -- { mode = 'n', '<C-S-j>', '<Down>', desc = "IME safe of <Down>" },
     -- { mode = 'n', '<C-S-k>', '<Up>', desc = "IME safe of <Up>" },
     -- { mode = 'n', '<C-S-l>', '<Right>', desc = "IME safe of <Right>" },
 
-    { mode = "i", "jj", "<Esc>", desc = "Escape with jj", },
+    { mode = "i", "jj", "<Esc>", desc = "Escape with jj" },
     -- # help keymaps
     { "<Leader>?", "<cmd>h quickref<CR>" },
   },

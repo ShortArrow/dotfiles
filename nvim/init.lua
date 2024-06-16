@@ -33,11 +33,12 @@ local function usecase_vscode()
     group = augroup,
   })
 
-  ---This function is used to change the theme when the cursor moves
-  vim.api.nvim_set_keymap("x", "gc", "<Plug>VSCodeCommentary", { noremap = false, silent = true })
-  vim.api.nvim_set_keymap("n", "gc", "<Plug>VSCodeCommentary", { noremap = false, silent = true })
-  vim.api.nvim_set_keymap("o", "gc", "<Plug>VSCodeCommentary", { noremap = false, silent = true })
-  vim.api.nvim_set_keymap("n", "gcc", "<Plug>VSCodeCommentaryLine", { noremap = false, silent = true })
+  ---This is keymap of commentout
+  vim.keymap.set("x", "gc", "<Plug>VSCodeCommentary")
+  vim.keymap.set("n", "gc", "<Plug>VSCodeCommentary")
+  vim.keymap.set("o", "gc", "<Plug>VSCodeCommentary")
+  vim.keymap.set("n", "gcc", "<Plug>VSCodeCommentaryLine")
+
   -- Set VSCode command to Neovim keymap
   local action = function(cmd)
     return function()
