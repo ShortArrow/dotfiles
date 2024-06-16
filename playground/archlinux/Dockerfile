@@ -2,15 +2,21 @@ FROM archlinux:latest
 SHELL ["/bin/bash", "-l", "-c"]
 
 RUN pacman --noconfirm -Syu && pacman -Scc --noconfirm
+RUN sed -i '/en_US.UTF-8/s/^#//g' /etc/locale.gen
+RUN locale-gen
+ENV LANG=en_US.UTF-8
+ENV LC_CTYPE=en_US.UTF8
 
 # Install General Purpose Tools
 RUN pacman --noconfirm -S \
   neovim \
+  vim \
   starship \
   zsh \
   fastfetch \
   tmux \
   bat \
+  make \
   fzf \
   zellij \
   && pacman -Scc --noconfirm
