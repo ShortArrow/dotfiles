@@ -1,5 +1,7 @@
 local M = {}
 
+local telescope = require("config/_telescope").commands
+
 M.commonmaps_activate = function()
   for _, map in pairs(M.maps.common) do
     local mode = map.mode or "n"
@@ -25,8 +27,7 @@ M.maps = {
     -- vim.keymap.set('n', '}', '<cmd>AerialNext<CR>', { buffer = bufnr })
   },
   copilotchat = {
-    { mode = "v", "<Leader>cc", "<cmd>CopilotChat<CR>" },
-    { mode = "n", "<Leader>cc", "<cmd>CopilotChat<CR>" },
+    { mode = { "n", "v" }, "<Leader>cc", "<cmd>CopilotChat<CR>" },
   },
   lazygit = {
     { "<Leader>lg", "<cmd>LazyGit<CR>" },
@@ -155,20 +156,8 @@ M.maps = {
     { "<Leader>km", "<cmd>WhichKey<CR>" },
   },
   flutter = {
-    {
-      mode = "n",
-      "<Leader>fr",
-      "<cmd>FlutterRun -d web-server<CR>",
-      desc = "Flutter Run",
-    },
-    {
-      mode = "n",
-      "<Leader>fc",
-      function()
-        require("telescope").extensions.flutter.commands()
-      end,
-      desc = "Flutter Open",
-    },
+    { "<Leader>fr", "<cmd>FlutterRun -d web-server<CR>", desc = "Flutter Run" },
+    { "<Leader>fc", telescope.flutter_commands,          desc = "Flutter Open" },
   },
   trouble = {
     { "<Leader>tr", "<cmd>Trouble diagnostics<CR>" },
@@ -196,9 +185,9 @@ M.maps = {
       end,
       desc = "ToggleTerm normal",
     },
-    { mode = "n", "<C-k>", "<C-w><C-w>W",          desc = "back from ToggleTerm when Normal mode" },
-    { mode = "i", "<C-k>", "<Esc><C-w>W" },
-    { mode = "t", "<C-k>", "<C-Bslash><C-n><C-w>W" },
+    { mode = "n", "<C-k>", "<C-w><C-w>W",           desc = "back from ToggleTerm when Normal mode" },
+    { mode = "i", "<C-k>", "<Esc><C-w>W",           desc = "back from ToggleTerm when Normal mode" },
+    { mode = "t", "<C-k>", "<C-Bslash><C-n><C-w>W", desc = "back from ToggleTerm when Normal mode" },
     -- { mode = 'n',  '',  ':', },
     -- { mode = 'i',  '',  '<Esc><C-o>:', },
     -- { mode = 't',  '',  '<C-Bslash><C-n><C-w>:', },
@@ -212,111 +201,33 @@ M.maps = {
     { "<Leader>flzd", "<cmd>FloatermNew lzd<CR>", desc = "Floaterm lazydocker" },
   },
   telescope = {
-    {
-      "<Leader>ff",
-      function()
-        require("telescope.builtin").find_files()
-      end,
-      desc = "Telescope find_files",
-    },
-    {
-      "<Leader>fg",
-      function()
-        require("telescope.builtin").live_grep()
-      end,
-      desc = "Telescope live_grep",
-    },
-    {
-      "<Leader>fb",
-      function()
-        require("telescope.builtin").buffers()
-      end,
-      desc = "Telescope buffers",
-    },
-    {
-      "<Leader>fh",
-      function()
-        require("telescope.builtin").help_tags()
-      end,
-      desc = "Telescope help_tags",
-    },
-    {
-      "<Leader>cb",
-      function()
-        require("telescope.builtin").current_buffer_fuzzy_find()
-      end,
-      desc = "Telescope current_buffer_fuzzy_find",
-    },
-    {
-      "<Leader>fm",
-      function()
-        require("telescope").extensions.media_files.media_files()
-      end,
-      desc = "Telescope media_files",
-    },
-    {
-      "<Leader>cs",
-      function()
-        require("telescope.builtin").commands()
-      end,
-      desc = "Telescope commands",
-    },
-    {
-      "<Leader>li",
-      function()
-        require("telescope.builtin").lsp_implementations()
-      end,
-      desc = "Telescope implementations",
-    },
-    {
-      "<F12>",
-      function()
-        require("telescope.builtin").lsp_definitions()
-      end,
-      desc = "Telescope difinitions",
-    },
-    {
-      "gd",
-      function()
-        require("telescope.builtin").lsp_definitions()
-      end,
-      desc = "Telescope difinitions",
-    },
-    -- back is <C-o>
-    {
-      "<Leader>lt",
-      function()
-        require("telescope.builtin").lsp_type_definitions()
-      end,
-      desc = "Telescope type_definitions",
-    },
-    {
-      "<S-F12>",
-      function()
-        require("telescope.builtin").lsp_references()
-      end,
-      desc = "Telescope references",
-    },
-    {
-      "<Leader>jl",
-      function()
-        require("telescope.builtin").jumplist()
-      end,
-      desc = "Telescope jumplist",
-    },
-    {
-      "<Leader>lb",
-      "<C-o>",
-      desc = "back jump list",
-    },
+    { "<Leader>ff", telescope.find_files,                desc = "Telescope find_files" },
+    { "<Leader>fg", telescope.live_grep,                 desc = "Telescope live_grep" },
+    { "<Leader>fb", telescope.buffers,                   desc = "Telescope buffers" },
+    { "<Leader>fh", telescope.help_tags,                 desc = "Telescope help_tags" },
+    { "<Leader>cb", telescope.current_buffer_fuzzy_find, desc = "Telescope current_buffer_fuzzy_find" },
+    { "<Leader>fm", telescope.media_files,               desc = "Telescope media_files" },
+    { "<Leader>cs", telescope.commands,                  desc = "Telescope commands" },
+    { "<Leader>li", telescope.lsp_implementations,       desc = "Telescope implementations" },
+    { "<F12>",      telescope.lsp_definitions,           desc = "Telescope difinitions" },
+    { "gd",         telescope.lsp_definitions,           desc = "Telescope difinitions" },
+    { "<Leader>lt", telescope.lsp_type_definitions,      desc = "Telescope type_definitions" },
+    { "<S-F12>",    telescope.lsp_references,            desc = "Telescope references" },
+    { "<Leader>jl", telescope.jump_list,                 desc = "Telescope jumplist" },
+    { "<Leader>lb", "<C-o>",                             desc = "back jump list" },
   },
   lspsaga = {
-    { mode = "n", "<Leader>ln", "<cmd>Lspsaga rename<CR>",          desc = "rename (lspsaga)" },
-    { mode = "n", "<F2>",       "<cmd>Lspsaga rename<CR>",          desc = "rename (lspsaga)" },
-    { mode = "n", "<Leader>la", "<cmd>Lspsaga code_action<CR>",     desc = "Code Action (lspsaga)" },
-    { mode = "n", "<Leader>ld", "<cmd>Lspsaga goto_definition<CR>", desc = "Goto definition(lspsaga)" },
+    { "<Leader>ln", "<cmd>Lspsaga rename<CR>",          desc = "rename (lspsaga)" },
+    { "<F2>",       "<cmd>Lspsaga rename<CR>",          desc = "rename (lspsaga)" },
+    { "<Leader>la", "<cmd>Lspsaga code_action<CR>",     desc = "Code Action (lspsaga)" },
+    { "<Leader>ld", "<cmd>Lspsaga goto_definition<CR>", desc = "Goto definition(lspsaga)" },
     -- { mode = "n", "<Leader>lt", "<cmd>Lspsaga goto_type_definition<CR>", desc = "Goto type definition(lspsaga)" },
-    { mode = "n", "<Leader>ls", "<cmd>Lspsaga finder<CR>",          desc = "Lsp Search (lspsaga)" },
+    {
+      mode = "n",
+      "<Leader>ls",
+      "<cmd>Lspsaga finder<CR>",
+      desc = "Lsp Search (lspsaga)",
+    },
     {
       mode = "n",
       "<F8>",
