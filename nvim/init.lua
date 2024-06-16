@@ -43,15 +43,18 @@ local function usecase_vscode()
       vscode.action(cmd)
     end
   end
-  vim.keymap.set("n", "<Leader>d", action("editor.action.goToDeclaration"))
-  vim.keymap.set("n", "<Leader>b", action("workbench.action.navigateBack"))
-  vim.keymap.set("n", "<Leader>h", action("editor.action.showHover"))
-  vim.keymap.set("n", "<Leader>f", action("editor.action.formatDocument"))
+  vim.keymap.set("n", "<Leader>ld", action("editor.action.goToDeclaration"))
+  vim.keymap.set("n", "<Leader>lh", action("editor.action.showHover"))
+  vim.keymap.set("n", "<Leader>lf", action("editor.action.formatDocument"))
+  vim.keymap.set("n", "<Leader>ln", action("editor.action.rename"))
+  vim.keymap.set("n", "<Leader>lb", action("workbench.action.navigateBack"))
   vim.keymap.set("n", "<Leader>s", action("workbench.action.files.save"))
   vim.keymap.set("n", "<Leader>wl", action("workbench.action.nextEditor"))
   vim.keymap.set("n", "<Leader>wh", action("workbench.action.previousEditor"))
   vim.keymap.set("n", "<Leader>wj", action("workbench.action.nextEditorInGroup"))
   vim.keymap.set("n", "<Leader>wk", action("workbench.action.previousEditorInGroup"))
+  vim.keymap.set("n", "<Leader>bp", "<cmd>bp<CR>")
+  vim.keymap.set("n", "<Leader>bn", "<cmd>bn<CR>")
 end
 
 local function usecase_firenvim()
