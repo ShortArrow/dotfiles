@@ -1,6 +1,7 @@
 local M = {}
 
 local telescope = require("config/_telescope").commands
+local neotest = require("config/_neotest").commands
 
 M.commonmaps_activate = function()
   for _, map in pairs(M.maps.common) do
@@ -18,10 +19,7 @@ end
 
 M.maps = {
   aerial = {
-    {
-      "{",
-      "<cmd>AerialPrev<CR>",
-    },
+    { "{", "<cmd>AerialPrev<CR>" },
     { "}", "<cmd>AerialNext<CR>" },
     -- vim.keymap.set('n', '{', '<cmd>AerialPrev<CR>', { buffer = bufnr })
     -- vim.keymap.set('n', '}', '<cmd>AerialNext<CR>', { buffer = bufnr })
@@ -51,34 +49,10 @@ M.maps = {
     },
   },
   neotest = {
-    {
-      "gtr",
-      function()
-        require("neotest").run.run()
-      end,
-      desc = "Neo Test Run (nearest run)",
-    },
-    {
-      "gtt",
-      function()
-        require("neotest").summary.toggle()
-      end,
-      desc = "Neo Test Summary Open (NeoTest Open)",
-    },
-    {
-      "gtc",
-      function()
-        require("neotest").run.run(vim.fn.expand("%"))
-      end,
-      desc = "Neo Test Run (current run)",
-    },
-    {
-      "gtd",
-      function()
-        require("neotest").run.run({ strategy = "dap" })
-      end,
-      desc = "Neo Test Run (dup run)",
-    },
+    { "gtr", neotest.run,     desc = "NeoTest nearest run" },
+    { "gtt", neotest.toggle,  desc = "NeoTest Open" },
+    { "gtc", neotest.current, desc = "NeoTest current run" },
+    { "gtd", neotest.dap,     desc = "NeoTest dap run" },
   },
   neogit = {
     {
@@ -103,32 +77,6 @@ M.maps = {
     },
   },
   hop = {
-    -- { mode = 'n',  'f',
-    --  require('hop').hint_char1({
-    --     direction = require('hop.hint').HintDirection.AFTER_CURSOR,
-    --     current_line_only = true,
-    --   }),
-    -- },
-    -- { mode = 'n',  'F',
-    --  require('hop').hint_char1({
-    --     direction = require('hop.hint').HintDirection.BEFORE_CURSOR,
-    --     current_line_only = true,
-    --   }),
-    -- },
-    -- { mode = 'n',  't',
-    --  require('hop').hint_char1({
-    --     direction = require('hop.hint').HintDirection.AFTER_CURSOR,
-    --     current_line_only = true,
-    --     hint_offset = -1,
-    --   }),
-    -- },
-    -- { mode = 'n',  'T',
-    --  require('hop').hint_char1({
-    --     direction = require('hop.hint').HintDirection.BEFORE_CURSOR,
-    --     current_line_only = true,
-    --     hint_offset = -1,
-    --   }),
-    -- },
     { "<Leader>hw", "<cmd>HopWord<CR>" },
     { "<Leader>hl", "<cmd>HopLine<CR>" },
     { "<Leader>hp", "<cmd>HopPattern<CR>" },
