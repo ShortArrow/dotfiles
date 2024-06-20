@@ -4,13 +4,13 @@ local function usecase_vscode()
   ---This function is must be called when the mode changes
   local function changeThemeOnModeChange()
     local mode = vim.api.nvim_get_mode().mode
-    if mode == "i" then                                    -- insert mode
+    if mode == "i" then                                      -- insert mode
       vim.fn.VSCodeNotify("nvim-theme.insert")
-    elseif mode == "R" or mode == "r" then                 -- replace mode
+    elseif mode == "R" or mode == "r" then                   -- replace mode
       vim.fn.VSCodeNotify("nvim-theme.replace")
     elseif mode == "v" or mode == "V" or mode == "\x16" then -- visual mode
       vim.fn.VSCodeNotify("nvim-theme.visual")
-    else                                                   -- normal mode
+    else                                                     -- normal mode
       vim.fn.VSCodeNotify("nvim-theme.normal")
     end
   end
@@ -49,10 +49,10 @@ local function usecase_vscode()
   vim.keymap.set("n", "<Leader>ln", action("editor.action.rename"))
   vim.keymap.set("n", "<Leader>lb", action("workbench.action.navigateBack"))
   vim.keymap.set("n", "<Leader>s", action("workbench.action.files.save"))
-  vim.keymap.set("n", "<Leader>wl", action("workbench.action.nextEditor"))
-  vim.keymap.set("n", "<Leader>wh", action("workbench.action.previousEditor"))
-  vim.keymap.set("n", "<Leader>wj", action("workbench.action.nextEditorInGroup"))
-  vim.keymap.set("n", "<Leader>wk", action("workbench.action.previousEditorInGroup"))
+  vim.keymap.set("n", "<Leader>wl", action("workbench.action.focusRightGroup"))
+  vim.keymap.set("n", "<Leader>wh", action("workbench.action.focusLeftGroup"))
+  vim.keymap.set("n", "<Leader>wj", action("workbench.action.focusBellowGroup"))
+  vim.keymap.set("n", "<Leader>wk", action("workbench.action.focusAboveGroup"))
   vim.keymap.set("n", "<Leader>ff", action("workbench.view.explorer"))
   vim.keymap.set("n", "<Leader>lg", action("workbench.view.scm"))
   vim.keymap.set("n", "<Leader>fg", action("workbench.action.findInFiles"))
