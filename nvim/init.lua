@@ -44,7 +44,7 @@ local function usecase_vscode()
     end
   end
   vim.keymap.set("n", "<Leader>ld", action("editor.action.goToDeclaration"))
-  vim.keymap.set("n", "<Leader>lh", action("editor.action.showHover"))
+  --vim.keymap.set("n", "<Leader>lh", action("editor.action.showHover"))
   vim.keymap.set("n", "<Leader>lf", action("editor.action.formatDocument"))
   vim.keymap.set("n", "<Leader>ln", action("editor.action.rename"))
   vim.keymap.set("n", "<Leader>lb", action("workbench.action.navigateBack"))
@@ -55,7 +55,7 @@ local function usecase_vscode()
   vim.keymap.set("n", "<Leader>wk", action("workbench.action.focusAboveGroup"))
   vim.keymap.set("n", "<Leader>ff", action("workbench.view.explorer"))
   vim.keymap.set("n", "<Leader>lg", action("workbench.view.scm"))
-  vim.keymap.set("n", "<Leader>fg", action("workbench.action.findInFiles"))
+  vim.keymap.set("n", "<Leader>fg", action("workbench.action.replaceInFiles"))
   vim.keymap.set("n", "<Leader>bp", "<cmd>bp<CR>")
   vim.keymap.set("n", "<Leader>bn", "<cmd>bn<CR>")
 end
