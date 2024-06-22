@@ -386,6 +386,7 @@ M.ordinalnvim = {
   {
     "TimUntersberger/neogit",
     dependencies = "nvim-lua/plenary.nvim",
+    config = get_config("_neogit").setup,
     keys = api.keymaps.maps.neogit,
   },
   {
