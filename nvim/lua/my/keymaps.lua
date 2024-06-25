@@ -2,9 +2,9 @@ local M = {}
 
 local telescope = require("config/_telescope").commands
 local neotest = require("config/_neotest").commands
-
-M.commonmaps_activate = function()
-  for _, map in pairs(M.maps.common) do
+ 
+M.maps_activate = function(map)
+  for _, map in pairs(map) do
     local mode = map.mode or "n"
     vim.keymap.set(mode, map[1], map[2], {
       -- noremap: true
@@ -15,6 +15,14 @@ M.commonmaps_activate = function()
       -- nowait: false
     })
   end
+end
+
+M.commonmaps_activate = function()
+  M.maps_activate(M.maps.common)
+end
+
+M.vscode_map_activate = function()
+  M.maps_activate(M.maps.vscode)
 end
 
 M.maps = {
