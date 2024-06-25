@@ -33,31 +33,46 @@ local function usecase_vscode()
     group = augroup,
   })
 
-  ---This is keymap of commentout
-  vim.keymap.set({ "x", "o", "n" }, "gc", "<Plug>VSCodeCommentary")
-  vim.keymap.set({ "n" }, "gcc", "<Plug>VSCodeCommentaryLine")
-
   -- Set VSCode command to Neovim keymap
   local function action(cmd)
     return function()
+      print("action", cmd)
       vscode.action(cmd)
     end
   end
-  vim.keymap.set("n", "<Leader>ld", action("editor.action.goToDeclaration"))
+
+  local k = function(mode, lhs, rhs)
+    vim.keymap.set(mode, lhs, rhs)
+  end
+
+  ---This is keymap of commentout
+  k({ "x", "o", "n" }, "gc", "<Plug>VSCodeCommentary")
+  k({ "n" }, "gcc", "<Plug>VSCodeCommentaryLine")
+  k("n", "<Leader>ld", action("editor.action.goToDeclaration"))
   --vim.keymap.set("n", "<Leader>lh", action("editor.action.showHover"))
-  vim.keymap.set("n", "<Leader>lf", action("editor.action.formatDocument"))
-  vim.keymap.set("n", "<Leader>ln", action("editor.action.rename"))
-  vim.keymap.set("n", "<Leader>lb", action("workbench.action.navigateBack"))
-  vim.keymap.set("n", "<Leader>s", action("workbench.action.files.save"))
-  vim.keymap.set("n", "<Leader>wl", action("workbench.action.focusRightGroup"))
-  vim.keymap.set("n", "<Leader>wh", action("workbench.action.focusLeftGroup"))
-  vim.keymap.set("n", "<Leader>wj", action("workbench.action.focusBellowGroup"))
-  vim.keymap.set("n", "<Leader>wk", action("workbench.action.focusAboveGroup"))
-  vim.keymap.set("n", "<Leader>ff", action("workbench.view.explorer"))
-  vim.keymap.set("n", "<Leader>lg", action("workbench.view.scm"))
-  vim.keymap.set("n", "<Leader>fg", action("workbench.action.replaceInFiles"))
-  vim.keymap.set("n", "<Leader>bp", "<cmd>bp<CR>")
-  vim.keymap.set("n", "<Leader>bn", "<cmd>bn<CR>")
+  k("n", "<Leader>lf", action("editor.action.formatDocument"))
+  k("n", "<Leader>ln", action("editor.action.rename"))
+  k("n", "<Leader>lb", action("workbench.action.navigateBack"))
+  k("n", "<Leader>s", action("workbench.action.files.save"))
+  k("n", "<Leader>wl", action("workbench.action.focusRightGroup"))
+  k("n", "<Leader>wh", action("workbench.action.focusLeftGroup"))
+  k("n", "<Leader>wj", action("workbench.action.focusBellowGroup"))
+  k("n", "<Leader>wk", action("workbench.action.focusAboveGroup"))
+  k("n", "<Leader>ff", action("workbench.view.explorer"))
+  k("n", "<Leader>lg", action("workbench.view.scm"))
+  k("n", "<Leader>fg", action("workbench.action.replaceInFiles"))
+  k("n", "<Leader>bp", "<cmd>bp<CR>")
+  k("n", "<Leader>bn", "<cmd>bn<CR>")
+  -- Copy to clipboard
+  k("v", "<Leader>y", '"+y')
+  k("n", "<Leader>Y", '"+yg_')
+  k("n", "<Leader>y", '"+y')
+  k("n", "<Leader>yy", '"+yy')
+  -- Paste from clipboard
+  k("n", "<Leader>p", '"+p')
+  k("n", "<Leader>P", '"+P')
+  k("v", "<Leaderp", '"+p')
+  k("v", "<LeaderP", '"+P')
 end
 
 local function usecase_firenvim()
