@@ -200,7 +200,11 @@ M.ordinalnvim = {
   -- ################################################
   {
     "folke/zen-mode.nvim",
-    opts = {},
+    opts = {
+      plugins = {
+        twilight = { enabled = false }, -- enable to start Twilight when zen mode opens
+      },
+    },
   },
   {
     "SmiteshP/nvim-gps",
