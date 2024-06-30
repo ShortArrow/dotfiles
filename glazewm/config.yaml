@@ -196,6 +196,10 @@ window_rules:
 
   - command: "move to workspace 2"
     match_process_name: "WindowsTerminal" # Microsoft Terminal
+  - command: "move to workspace 2"
+    match_class_name: "org.wezfurlong.wezterm" # WezTerm
+  - command: "move to workspace 2"
+    match_process_name: "alacritty" # Alacritty
 
   - command: "move to workspace 3"
     match_process_name: "Code" # Visual Studio Code
