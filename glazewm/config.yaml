@@ -336,13 +336,13 @@ keybindings:
 
   # Move focused workspace to a monitor in a given direction.
   - command: "move workspace left"
-    binding: "Alt+A"
+    binding: "Ctrl+Alt+H"
   - command: "move workspace right"
-    binding: "Alt+F"
+    binding: "Ctrl+Alt+L"
   - command: "move workspace up"
-    binding: "Alt+D"
+    binding: "Ctrl+Alt+K"
   - command: "move workspace down"
-    binding: "Alt+S"
+    binding: "Ctrl+Alt+J"
 
   # Move focused window to a workspace defined in `workspaces` config.
   - commands: ["move to workspace 0", "focus workspace 0"]
