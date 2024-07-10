@@ -6,7 +6,13 @@ end
 
 M.setup = function()
   local toggleterm = require("toggleterm")
-  toggleterm.setup()
+  if vim.fn.has('win32') == 1 then
+    toggleterm.setup({
+      shell = "pwsh",
+    })
+  else
+    toggleterm.setup()
+  end
 end
 
 M.toggle_repl_term = function()
