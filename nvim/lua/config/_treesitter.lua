@@ -56,6 +56,8 @@ M.setup = function()
       "html",
       "lua",
       "css",
+      "vim",
+      "regex",
     },
     incremental_selection = {
       enable = true,
