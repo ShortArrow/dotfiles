@@ -78,7 +78,7 @@ export PATH="$PATH:$HOME/.npm-global/bin"
 # `npm doctor` `npm root -g` `npm bin -g`
 
 # pnpm
-export PNPM_HOME="/home/who/.local/share/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
 *":$PNPM_HOME:"*) ;;
 *) export PATH="$PNPM_HOME:$PATH" ;;
