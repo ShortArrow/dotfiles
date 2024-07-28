@@ -49,7 +49,7 @@ vim.diagnostic.config({
   underline = true,
   severity_sort = true,
   float = {
-    source = "if_many",     -- "always" Or "if_many"
+    source = "if_many", -- "always" Or "if_many"
     border = 'rounded',
     header = '',
     prefix = '',

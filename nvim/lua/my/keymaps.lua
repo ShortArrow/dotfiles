@@ -198,6 +198,14 @@ M.maps = {
     },
   },
   common = {
+    -- # Dap
+    { "<Leader>dc", "<cmd>lua require('dap').continue()<CR>", desc = "Dap Continue" },
+    { "<Leader>dr", "<cmd>lua require('dap').repl.open()<CR>", desc = "Dap Repl" },
+    { "<Leader>ds", "<cmd>lua require('dap').step_over()<CR>", desc = "Dap Step Over" },
+    { "<Leader>di", "<cmd>lua require('dap').step_into()<CR>", desc = "Dap Step Into" },
+    { "<Leader>do", "<cmd>lua require('dap').step_out()<CR>", desc = "Dap Step Out" },
+    { "<Leader>db", "<cmd>lua require('dap').toggle_breakpoint()<CR>", desc = "Dap Toggle Breakpoint" },
+    { "<Leader>dl", "<cmd>lua require('dap').run_last()<CR>", desc = "Dap Run Last" },
     -- # noice dismiss
     { "<Leader><Esc>", "<cmd>NoiceDismiss<CR>", desc = "dismiss noice error and escape" },
     -- # zen mode
