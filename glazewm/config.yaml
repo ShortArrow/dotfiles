@@ -119,6 +119,14 @@ window_rules:
       - window_process: { equals: 'PowerToys.PowerAccent' }
       - window_process: { equals: 'Lively' }
         window_class: { regex: 'HwndWrapper*' }
+      - window_process: { equals: 'GoogleDriveFS' }
+      - window_process: { equals: 'HakkoAI' }
+      - window_process: { equals: 'UriageGenka' }
+      - window_process: { equals: 'CubePDF' }
+
+      # Ignore rules for Windows Default Installed Apps.
+      - window_process: { equals: 'Taskmgr' }
+      - window_process: { equals: 'ScreenClippingHost' }
 
 binding_modes:
   # When enabled, the focused window can be resized via arrow keys or HJKL.
