@@ -128,6 +128,39 @@ window_rules:
       - window_process: { equals: 'Taskmgr' }
       - window_process: { equals: 'ScreenClippingHost' }
 
+  - commands: ['move --workspace 1']
+    match:
+      - window_process: { equals: 'chrome' }
+      - window_process: { equals: 'firefox' }
+      - window_process: { equals: 'thorium' }
+      - window_process: { equals: 'msedge' } # Microsoft Edge
+
+  - commands: ['move --workspace 2']
+    match:
+      - window_process: { equals: 'WindowsTerminal' } # Microsoft Terminal
+      - window_class: { equals: 'org.wezfurlong.wezterm' } # WezTerm
+      - window_process: { equals: 'alacritty' } # Alacritty
+
+  - commands: ['move --workspace 3']
+    match:
+      - window_process: { equals: 'Code' } # Visual Studio Code
+
+  - commands: ['move --workspace 4']
+    match:
+      - window_process: { equals: 'ms-teams' } # Teams
+
+  - commands: ['move --workspace 5']
+    match:
+      - window_process: { equals: 'olk' } # Outlook
+  
+  - commands: ['move --workspace 6']
+    match:
+      - window_process: { equals: 'CubeChecker' } # CubeChecker
+
+  - commands: ['move --workspace 9']
+    match:
+      - window_process: { equals: 'Docker Desktop' } # Docker Desktop
+
 binding_modes:
   # When enabled, the focused window can be resized via arrow keys or HJKL.
   - name: 'resize'
