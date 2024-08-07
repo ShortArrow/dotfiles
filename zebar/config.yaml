@@ -82,10 +82,11 @@ window/bar:
           }
         }
       providers: ['glazewm']
-      events:
-        - type: 'click'
-          fn_path: 'script.js#focusWorkspace'
-          selector: '.workspace'
+      # Failed to fetch dynamically imported module: http://asset.localhost/C%3A%5CUsers%5Cshoutarou_t%5C.glzr%5Czebar%5Cscript.js
+      # events:
+      #   - type: 'click'
+      #     fn_path: 'script.js#focusWorkspace'
+      #     selector: '.workspace'
       template: |
         @for (workspace of glazewm.currentWorkspaces) {
           <button
