@@ -105,7 +105,7 @@ window/bar:
       providers: ['date']
       # Available date tokens: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
       template: |
-        {{ date.toFormat(date.now, 'EEE	d MMM t') }}
+        {{ date.toFormat(date.now, 'EEE	d MMM T a y z ZZ') }}
 
   group/right:
     styles: |
