@@ -270,8 +270,9 @@ keybindings:
   # Launch CMD terminal. Alternatively, use `shell-exec wt` or
   # `shell-exec %ProgramFiles%/Git/git-bash.exe` to start Windows
   # Terminal and Git Bash respectively.
-  - commands: ['shell-exec cmd']
-    bindings: ['alt+enter']
+  # CAUTION! This is Conflict Excel Shortcut of new line in cell
+  # - commands: ['shell-exec cmd']
+  #   bindings: ['alt+enter']
 
   # Focus the next/previous workspace defined in `workspaces` config.
   - commands: ['focus --next-workspace']
