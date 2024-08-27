@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Hyprland
+Comment=Hyprland Wayland Session
+Exec=Hyprland
+Type=Application
+
