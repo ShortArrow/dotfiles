@@ -13,15 +13,19 @@ sudo pacman -S \
 	--noconfirm
 
 # Create link xinitrc
+rm -f ~/.xinitrc
 ln -s /vagrant/xinitrc ~/.xinitrc
 
 # Customize Hyprland configuration
 mkdir -p ~/.config/hypr
+rm -f ~/.config/hypr/startup.sh
 ln -s /vagrant/startup.sh ~/.config/hypr/startup.sh
+rm -f ~/.config/hypr/hyprland.conf
 ln -s /vagrant/hyprland.conf ~/.config/hypr/hyprland.conf
 
 # Set Hyprland session for GDM
 sudo mkdir -p /usr/share/wayland-sessions
+sudo rm -f /usr/share/wayland-sessions/hyprland.desktop
 sudo ln -s /vagrant/hyprland.desktop /usr/share/wayland-sessions/hyprland.desktop
 
 # Enable GDM
