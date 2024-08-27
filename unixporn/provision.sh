@@ -7,9 +7,10 @@
 sudo pacman -Syu --noconfirm
 sudo pacman -S \
 	gnome-keyring \
-	gdm wayland xorg-xwayland hyprland \
+	gdm wayland xorg-xwayland hyprland waybar \
 	dunst pipewire wireplumber qt5-wayland qt6-wayland polkit-kde-agent \
 	vim neovim wezterm kitty alacritty \
+  firefox \
 	--noconfirm
 
 # Create link xinitrc
