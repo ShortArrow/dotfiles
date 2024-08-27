@@ -1,0 +1,42 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "archlinux/archlinux"
+
+  # VirtualBox config
+  config.vm.provider "virtualbox" do |v|
+    v.customize ["modifyvm", :id, "--accelerate3d", "on"]  # Enable 3D accelaration
+    v.customize ["modifyvm", :id, "--vram", "128"]        # Set 128MB video memory size
+    v.customize ["modifyvm", :id, "--graphicscontroller", "vmsvga"]  # Set VMSVGA graphic controller
+  end
+
+  # Install Wayland and Hyprland
+  config.vm.provision "shell", privileged: false, inline: <<-SHELL
+    # Update system latest
+    sudo pacman -Syu --noconfirm
+    sudo pacman -S gnome-keyring gdm wayland xorg-xwayland hyprland vim neovim wezterm kitty alacritty dunst pipewire wireplumber qt5-wayland qt6-wayland polkit-kde-agent --noconfirm
+    echo 'exec dunst' >> ~/.config/hypr/startup.sh
+    echo 'exec /usr/lib/polkit-kde-authentication-agent-1' >> ~/.config/hypr/startup.sh
+
+    # Enable GDM
+    sudo systemctl enable gdm
+
+    # Set startup Hyprland
+    echo 'exec Hyprland' >> ~/.xinitrc
+
+    # Customize Hyprland configuration
+    mkdir -p ~/.config/hypr
+    echo 'monitor=, highres, auto, 1' > ~/.config/hypr/hyprland.conf
+    echo 'bind=SUPER, Q, exec, $terminal' >> ~/.config/hypr/hyprland.conf
+    echo 'exec-once=$terminal' >> ~/.config/hypr/hyprland.conf
+
+    # Set Hyprland session for GDM
+    sudo mkdir -p /usr/share/wayland-sessions
+    echo "[Desktop Entry]" | sudo tee /usr/share/wayland-sessions/hyprland.desktop
+    echo "Name=Hyprland" | sudo tee -a /usr/share/wayland-sessions/hyprland.desktop
+    echo "Comment=Hyprland Wayland Session" | sudo tee -a /usr/share/wayland-sessions/hyprland.desktop
+    echo "Exec=Hyprland" | sudo tee -a /usr/share/wayland-sessions/hyprland.desktop
+    echo "Type=Application" | sudo tee -a /usr/share/wayland-sessions/hyprland.desktop
+
+    # Restart GDM
+    sudo systemctl restart gdm
+  SHELL
+end
