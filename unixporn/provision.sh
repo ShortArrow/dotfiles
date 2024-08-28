@@ -8,14 +8,20 @@ sudo pacman -Syu --noconfirm
 sudo pacman -S \
 	gnome-keyring \
 	gdm wayland xorg-xwayland hyprland waybar \
+	hyprpaper wofi rofi cliphist brightnessctl hypridle hyprlock \
 	dunst pipewire wireplumber qt5-wayland qt6-wayland polkit-kde-agent \
-	vim neovim wezterm kitty alacritty \
+	thunar dolphin network-manager-applet \
+	vim neovim wezterm kitty alacritty foot \
   firefox \
 	--noconfirm
 
 # Create link xinitrc
 rm -f ~/.xinitrc
 ln -s /vagrant/xinitrc ~/.xinitrc
+
+# Create link xprofile
+rm -f ~/.xprofile
+ln -s /vagrant/.xprofile ~/.xprofile
 
 # Customize Hyprland configuration
 mkdir -p ~/.config/hypr
