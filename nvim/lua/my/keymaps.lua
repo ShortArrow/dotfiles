@@ -2,7 +2,7 @@ local M = {}
 
 local telescope = require("config/_telescope").commands
 local neotest = require("config/_neotest").commands
- 
+
 M.maps_activate = function(map)
   for _, map in pairs(map) do
     local mode = map.mode or "n"
@@ -161,7 +161,7 @@ M.maps = {
     { "<Leader>fg", telescope.live_grep,                 desc = "Telescope live_grep" },
     { "<Leader>fb", telescope.buffers,                   desc = "Telescope buffers" },
     { "<Leader>fh", telescope.help_tags,                 desc = "Telescope help_tags" },
-    { "<Leader>cb", telescope.current_buffer_fuzzy_find, desc = "Telescope current_buffer_fuzzy_find" },
+    { "<Leader>fl", telescope.current_buffer_fuzzy_find, desc = "Telescope current_buffer_fuzzy_find" },
     { "<Leader>fm", telescope.media_files,               desc = "Telescope media_files" },
     { "<Leader>cs", telescope.commands,                  desc = "Telescope commands" },
     { "<Leader>li", telescope.lsp_implementations,       desc = "Telescope implementations" },
