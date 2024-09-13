@@ -325,6 +325,10 @@ M.ordinalnvim = {
       "rcarriga/nvim-notify",
     },
   },
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+  },
   --{
   --  'yamatsum/nvim-cursorline',
   --  config = get_config('_cursorline').setup,
