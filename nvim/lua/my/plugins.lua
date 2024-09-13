@@ -1,3 +1,4 @@
+--- https://qiita.com/delphinus/items/d07994f29550764bd8bc
 local api = require("my")
 
 local M = {}
