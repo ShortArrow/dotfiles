@@ -6,6 +6,7 @@ local fonts = require("my.fonts")
 M.activate = function()
   g.mapleader = " "
   g.copilot_no_tab_map = true -- GitHub Copilot
+  g.editorconfig = true
   opt.number = true
   opt.relativenumber = true
   opt.termguicolors = true
