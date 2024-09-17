@@ -134,6 +134,10 @@ window_rules:
       - window_process: { equals: 'msrdc' }
       - window_process: { equals: 'wslhost' }
 
+  - commands: ['move --workspace 0']
+    match:
+      - window_process: { equals: 'glazewm' }
+
   - commands: ['move --workspace 1']
     match:
       - window_process: { equals: 'chrome' }
