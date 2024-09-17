@@ -124,6 +124,7 @@ window_rules:
       - window_process: { equals: 'UriageGenka' }
       - window_process: { equals: 'CubePDF' }
       - window_process: { equals: 'VirtualBoxVM'}
+      - window_process: { equals: 'ScreenToGif'}
 
       # Ignore rules for Windows Default Installed Apps.
       - window_process: { equals: 'Taskmgr' }
