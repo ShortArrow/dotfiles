@@ -115,6 +115,9 @@ window_rules:
       - window_title: { regex: '[Pp]icture.in.[Pp]icture' }
         window_class: { regex: 'Chrome_WidgetWin_1|MozillaDialogClass' }
 
+      # Orakuin
+      - window_process: { equals: 'orakuin' }
+
       # Ignore rules for various 3rd-party apps.
       - window_process: { equals: 'PowerToys.PowerAccent' }
       - window_process: { equals: 'Lively' }
