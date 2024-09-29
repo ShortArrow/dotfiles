@@ -179,3 +179,8 @@ fi
 # WSL2
 
 alias explorer="explorer.exe ."
+
+# for reloading this script
+
+alias reload="source \$HOME/.bashrc"
+
