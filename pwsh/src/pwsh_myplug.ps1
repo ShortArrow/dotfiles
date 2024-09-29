@@ -177,7 +177,7 @@ if(Test-CommandExist('zoxide'))
 }
 
 ## password generator
-function Get-NewPassword($length = 32)
+function New-Password($length = 32)
 {
   $currentTime = Get-Date
 
@@ -201,15 +201,21 @@ function Get-NewPassword($length = 32)
 }
 
 ## reboot
-function Go-Reboot()
+function Start-Reboot()
 {
   Restart-Computer -Force
 }
-New-Alias -Name reboot -Value Go-Reboot
+New-Alias -Name reboot -Value Start-Reboot
 
 ## poweroff
-function Go-Poweroff()
+function Start-Poweroff()
 {
-  Poweroff-Computer -Force
+  Stop-Computer -Force
 }
-New-Alias -Name poweroff -Value Go-Poweroff
+New-Alias -Name poweroff -Value Start-Poweroff
+
+## Reload this profile
+function Read-Profile()
+{
+  . $PROFILE
+}
