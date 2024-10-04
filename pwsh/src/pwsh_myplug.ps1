@@ -31,6 +31,14 @@ function Add-NeedInstall
 # Reload Env
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 
+## Reload this profile
+function Read-Profile()
+{
+  . $PROFILE
+  Write-Host "Reloaded profile. 😀" -ForeGroundColor Green
+}
+New-Alias -Name reload -Value Read-Profile -Force
+
 # New-Item -Type File -Path $PROFILE -Force
 
 Set-PSReadLineOption -PredictionSource History -PredictionViewStyle ListView
@@ -90,10 +98,10 @@ if (Test-CommandExist('go'))
 # cargo install git-graph
 if (Test-CommandExist('git-graph'))
 {
-  New-Alias -Name gg -Value git-graph
+  New-Alias -Name gg -Value git-graph -Force
 } else
 {
-  New-Alias -Name gg -Value Show-NeedInstall
+  New-Alias -Name gg -Value Show-NeedInstall -Force
   Add-NeedInstall 'pnpm'
 }
 
@@ -104,7 +112,7 @@ if (Test-CommandExist('pnpm'))
   $env:Path = "$env:Path$(pnpm bin);"
 } else
 {
-  New-Alias -Name pnpm -Value Show-NeedInstall
+  New-Alias -Name pnpm -Value Show-NeedInstall -Force
   Add-NeedInstall 'pnpm'
 }
 
@@ -112,20 +120,20 @@ if (Test-CommandExist('pnpm'))
 # choco install lazygit
 if (Test-CommandExist('lazygit'))
 {
-  New-Alias -Name lg -Value lazygit
+  New-Alias -Name lg -Value lazygit -Force
 } else
 {
-  New-Alias -Name lg -Value Show-NeedInstall
+  New-Alias -Name lg -Value Show-NeedInstall -Force
   Add-NeedInstall 'lazygit'
 }
 
 # lazydocker
 if (Test-CommandExist('lazydocker'))
 {
-  New-Alias -Name lzd -Value lazydocker
+  New-Alias -Name lzd -Value lazydocker -Force
 } else
 {
-  New-Alias -Name lzd -Value Show-NeedInstall
+  New-Alias -Name lzd -Value Show-NeedInstall -Force
   Add-NeedInstall 'lzd'
 }
 
@@ -133,10 +141,10 @@ if (Test-CommandExist('lazydocker'))
 $lunarvimPath = "$env:USERPROFILE\.local\bin\lvim.ps1"
 if(Test-Path($lunarvimPath))
 {
-  New-Alias -Name lvim -Value $lunarvimPath
+  New-Alias -Name lvim -Value $lunarvimPath -Force
 } else
 {
-  New-Alias -Name lvim -Value Show-NeedInstall
+  New-Alias -Name lvim -Value Show-NeedInstall -Force
   Add-NeedInstall 'lunarvim'
 }
 
@@ -159,12 +167,12 @@ function lldot
 }
 if(Test-CommandExist('lsd'))
 {
-  New-Alias -Name 'll' -Value llong
-  New-Alias -Name 'll.' -Value lldot
+  New-Alias -Name 'll' -Value llong -Force
+  New-Alias -Name 'll.' -Value lldot -Force
 } else
 {
-  New-Alias -Name 'll' -Value Get-FilteredChildItem
-  New-Alias -Name 'll.' -Value Get-AllChildItem
+  New-Alias -Name 'll' -Value Get-FilteredChildItem -Force
+  New-Alias -Name 'll.' -Value Get-AllChildItem -Force
 }
 
 if(Test-CommandExist('zoxide'))
@@ -172,7 +180,7 @@ if(Test-CommandExist('zoxide'))
   Invoke-Expression (& { (zoxide init powershell | Out-String) })
 } else
 {
-  New-Alias -Name z -Value Show-NeedInstall
+  New-Alias -Name z -Value Show-NeedInstall -Force
   Add-NeedInstall 'zoxide'
 }
 
@@ -205,17 +213,12 @@ function Start-Reboot()
 {
   Restart-Computer -Force
 }
-New-Alias -Name reboot -Value Start-Reboot
+New-Alias -Name reboot -Value Start-Reboot -Force
 
 ## poweroff
 function Start-Poweroff()
 {
   Stop-Computer -Force
 }
-New-Alias -Name poweroff -Value Start-Poweroff
+New-Alias -Name poweroff -Value Start-Poweroff -Force
 
-## Reload this profile
-function Read-Profile()
-{
-  . $PROFILE
-}
