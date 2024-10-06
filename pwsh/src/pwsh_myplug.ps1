@@ -208,6 +208,26 @@ function New-Password($length = 32)
   -join $password
 }
 
+## escape sequence color checker
+function Test-TrueColor
+{
+  $testStringForeground =
+  " `e[48;2;255;255;255m`e[38;2;255;0;0m 赤 `e[0m" +
+  " `e[48;2;255;255;255m`e[38;2;0;255;0m 緑 `e[0m" +
+  " `e[48;2;255;255;255m`e[38;2;0;0;255m 青 `e[0m"
+  $testStringBackground =
+  " `e[48;2;255;0;0m`e[38;2;255;255;255m 赤 `e[0m" +
+  " `e[48;2;0;255;0m`e[38;2;255;255;255m 緑 `e[0m" +
+  " `e[48;2;0;0;255m`e[38;2;255;255;255m 青 `e[0m"
+
+  Write-Host -NoNewline "`r`n"
+  Write-Host -NoNewline $testStringForeground
+  Write-Host -NoNewline "`r`n`r`n"
+  Write-Host -NoNewline $testStringBackground
+  Write-Host -NoNewline "`r`n`r`n"
+  Write-Host "if the text above is displayed in RGB, TrueColor is supported."
+}
+
 ## reboot
 function Start-Reboot()
 {
