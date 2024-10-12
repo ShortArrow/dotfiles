@@ -185,9 +185,11 @@ alias explorer="explorer.exe ."
 alias reload="source \$HOME/.bashrc"
 
 # GPG
+#
 # enable passphrase prompt for gpg
 # GPG_TTY=$(tty)
 # export GPG_TTY
+#
 # sudo ln -s /mnt/c/Program\ Files\ \(x86\)/GnuPG/bin/gpg.exe /usr/local/bin/gpg
 # sudo ln -s gpg /usr/local/bin/gpg2
 
