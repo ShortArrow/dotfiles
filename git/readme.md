@@ -12,9 +12,9 @@ Windows
 
 ```powershell
 git config --global gpg.program "C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe"
-git config user.signingkey=7B66415DC7B803DD
-git config commit.gpgsign true
-git config --global gpg.program "gpg.exe --pinentry-mode loopback"
+git config --global commit.gpgsign true
+git config user.signingkey 7B66415DC7B803DD
+#git config --global gpg.program "gpg.exe --pinentry-mode loopback"
 ```
 
 WSL2
@@ -26,11 +26,10 @@ sudo ln -s /mnt/c/Program\ Files\ \(x86\)/GnuPG/bin/gpg.exe /usr/local/bin/gpg
 sudo ln -s gpg /usr/local/bin/gpg2
 ```
 
-In the `~/.gnupg/gpg-agent.conf`
+In the `~/.gnupg/gpg-agent.conf`<- maybe not need.
 
 ```bash
-# pinentry
-pinentry-program /mnt/c/Program Files (x86)/Gpg4win/bin/pinentry.exe
+pinentry-program "/mnt/c/Program Files (x86)/Gpg4win/bin/pinentry.exe"
 ```
 
 ```powershell
