@@ -13,7 +13,7 @@ Windows
 ```powershell
 git config --global gpg.program "C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe"
 git config user.signingkey=7B66415DC7B803DD
-git config commit.gpgsign=true
+git config commit.gpgsign true
 git config --global gpg.program "gpg.exe --pinentry-mode loopback"
 ```
 
