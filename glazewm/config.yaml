@@ -128,6 +128,7 @@ window_rules:
       - window_process: { equals: 'CubePDF' }
       - window_process: { equals: 'VirtualBoxVM'}
       - window_process: { equals: 'ScreenToGif'}
+      - window_process: { equals: 'pinentry' }
 
       # Ignore rules for Windows Default Installed Apps.
       - window_process: { equals: 'Taskmgr' }
