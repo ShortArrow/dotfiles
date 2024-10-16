@@ -162,6 +162,9 @@ M.ordinalnvim = {
     keys = api.keymaps.maps.vfiler,
   },
   {
+    "obaland/vfiler-patch-noice.nvim"
+  },
+  {
     "ibhagwan/fzf-lua",
     -- optional for icon support
     dependencies = { "nvim-tree/nvim-web-devicons" },
