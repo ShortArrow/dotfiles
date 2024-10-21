@@ -31,10 +31,18 @@ nvim --startuptime ./startup.log
 
 ## No Them No Life
 
-- neovim
-- vscode
-  - gitgraph
-  - GitHub
+- CUI
+  - Github CLI
+  - PowerShell
+- TUI
+  - LazyDocker
+  - LazyGit
+  - Bottom
+  - Zellij
+  - Neovim
+- GUI
+  - Inkscape
+  - Gimp
 - ChromeExtensions
   - Vimium
   - DarkReader
@@ -42,15 +50,8 @@ nvim --startuptime ./startup.log
   - uBlacklist
   - Google Translate
   - DeepL
-  - LeechBlock
   - Wikiwand 
-  - Language Reacter
   - Google検索キーボードショートカット
-- Bash
-  - nmap
-  - naabu
-- Powershell
-- GitHub
 
 ## Add Docs
 
