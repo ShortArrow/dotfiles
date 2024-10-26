@@ -170,6 +170,11 @@ if command_exists "pyenv"; then
   # export PATH="$pyenvRoot/shims:$PATH"
 fi
 
+# zed
+if command_exists "zeditor"; then
+  alias zed='zeditor'
+fi
+
 # poetry
 export PATH="$PATH:$HOME/.local/bin"
 if [ -f /etc/bash_completion ]; then
