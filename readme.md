@@ -1,31 +1,19 @@
-# CONFIG
+# dotfiles
 
 configration of @ShortArrow
 
 ## Quick Test on Docker
 
-```
+```bash
 git clone https://github.com/ShortArrow/dotfiles.git
 cd dotfiles
 docker compose up -d --build
 docker compose exec nvim /bin/bash -c nvim
 ```
 
-## overview
-
-1. install neovim
-1. git clone this repository
-1. make symboliclink of neovim dotfile
-1. install packer
-1. run packerinstall command
-1. install nerd font
-1. install git-foresta
-1. install tmux
-1. make symboliclink of tmux dotfile
-
 ## check startuptime
 
-```
+```bash
 nvim --startuptime ./startup.log
 ```
 
@@ -40,6 +28,10 @@ nvim --startuptime ./startup.log
   - Bottom
   - Zellij
   - Neovim
+- WM
+  - GlazeWM
+  - Hyprland
+  - i3wm
 - GUI
   - Inkscape
   - Gimp
@@ -50,19 +42,19 @@ nvim --startuptime ./startup.log
   - uBlacklist
   - Google Translate
   - DeepL
-  - Wikiwand 
+  - Wikiwand
   - Google検索キーボードショートカット
 
 ## Add Docs
 
-```
+```bash
 cd ./content/ja
 ln -s ../../bash ./bash
 ```
 
 or
 
-```
+```bash
 hugo new ./content/ja/newmd.md
 ```
 
