@@ -16,3 +16,7 @@ Add taskscheduler action
 %LocalAppData%\Microsoft\WinGet\Links\glazewm.exe
 ```
 
+```text
+pwsh
+-c "$PSStyle.OutputRendering='Ansi'; Start-Process -NoNewWindow 'C:\Users\who\Documents\GitHub\glazewm\target\release\glazewm.exe' -ArgumentList 'start'; pause;"
+```
