@@ -66,6 +66,8 @@
     "terminal.integrated.enableImages": true,
     "powershell.pester.codeLens": false,
     "git.openRepositoryInParentFolders": "never",
+    "scm.alwaysShowActions": true,
+    "scm.alwaysShowRepositories": true,
     "Lua.diagnostics.globals": [
         "vim"
     ],
