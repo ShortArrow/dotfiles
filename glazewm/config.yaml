@@ -182,9 +182,9 @@ binding_modes:
   - name: 'resize'
     keybindings:
       - commands: ['resize --width -2%']
-        bindings: ['h', 'left']
-      - commands: ['resize --width +2%']
         bindings: ['l', 'right']
+      - commands: ['resize --width +2%']
+        bindings: ['h', 'left']
       - commands: ['resize --height +2%']
         bindings: ['k', 'up']
       - commands: ['resize --height -2%']
