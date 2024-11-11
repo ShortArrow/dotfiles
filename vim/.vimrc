@@ -67,7 +67,7 @@ set showmatch
 " 改行時に入力された行の末尾に合わせて次の行のインデントを増減する
 set smartindent
 " スワップファイルを作成しない
-set noswapfile
+set swapfile
 " 検索にマッチした行以外を折りたたむ(フォールドする)機能
 set nofoldenable
 " タイトルを表示
@@ -101,4 +101,19 @@ augroup MyXML
   autocmd Filetype xml inoremap <buffer> </ </<C-x><C-o>
   autocmd Filetype html inoremap <buffer> </ </<C-x><C-o>
 augroup END
+
+if has("mac")
+	" mac用の設定
+elseif has("unix")
+	" unix固有の設定
+elseif has("win64")
+	" 64bit_windows固有の設定
+  call mkdir($TEMP.."/vim", "p")
+  set directory=$TEMP/vim
+  set backupdir=$TEMP/vim
+elseif has("win32unix")
+	" Cygwin固有の設定
+elseif has("win32")
+	" 32bit_windows固有の設定
+endif
 
