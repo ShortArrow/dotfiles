@@ -2,6 +2,7 @@ local M = {}
 
 M.activate = function()
   vim.g.mapleader = " "
+  vim.opt.virtualedit = "block"
   local vscode = require("vscode")
   ---This function is must be called when the mode changes
   local function changeThemeOnModeChange()
