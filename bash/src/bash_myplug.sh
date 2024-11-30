@@ -198,3 +198,5 @@ alias reload="source \$HOME/.bashrc"
 # sudo ln -s /mnt/c/Program\ Files\ \(x86\)/GnuPG/bin/gpg.exe /usr/local/bin/gpg
 # sudo ln -s gpg /usr/local/bin/gpg2
 
+# fzf
+eval "$(fzf --bash)"
