@@ -200,3 +200,6 @@ alias reload="source \$HOME/.bashrc"
 
 # fzf
 eval "$(fzf --bash)"
+
+# mcfly
+eval "$(mcfly init bash)"
