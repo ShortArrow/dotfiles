@@ -1,0 +1,5 @@
+# ~/.config/starship.toml
+
+[container]
+disabled = true
+
