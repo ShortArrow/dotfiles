@@ -69,7 +69,11 @@ export EDITOR=vim
 unset LESSEDIT
 
 # starship
-eval "$(starship init bash)"
+if command_exists "starship"; then
+  eval "$(starship init bash)"
+else
+  echo "please install starship"
+fi
 
 # npm, node, yarn
 # export PATH=~/.npm-global/bin:$PATH
@@ -92,25 +96,18 @@ export PATH="$PATH":"$HOME/.pub-cache/bin"
 # crontab
 alias crontab="crontab -i"
 
-# git-graph
-if command_exists "git-graph"; then
-  alias gg="git-graph --style round --color always | less"
-else
-  alias gg="echo command git-graph is not found.\nPlease install \'git-graph\'"
-fi
-
 # lazydocker
 if command_exists "lazydocker"; then
   alias lzd=lazydocker
 else
-  alias lzd="echo command lazydocker is not found.\nPlease install \'lazydocker\'"
+  alias lzd="Please install 'lazydocker'"
 fi
 
 # lazygit
 if command_exists "lazygit"; then
   alias lg=lazygit
 else
-  alias lg="echo command lazygit is not found.\nPlease install \'lazygit\'"
+  alias lg="Please install 'lazygit'"
 fi
 
 # japanese
@@ -133,7 +130,11 @@ alias tmux="tmux -2"
 
 # arduino-cli
 # https://github.com/cli/cli
-alias acli='${HOME}/bin/arduino-cli'
+if command_exists "arduino-cli"; then
+  alias acli='${HOME}/bin/arduino-cli'
+else
+  alias acli="Please install 'arduino-cli'"
+fi
 
 # dvm (deno version manager)
 export DVM_DIR="/home/who/.dvm"
@@ -160,6 +161,8 @@ fi
 # zoxide
 if command_exists "zoxide"; then
   eval "$(zoxide init bash)"
+else
+  echo "please install zoxide"
 fi
 
 # pyenv
@@ -199,7 +202,28 @@ alias reload="source \$HOME/.bashrc"
 # sudo ln -s gpg /usr/local/bin/gpg2
 
 # fzf
-eval "$(fzf --bash)"
+if command_exists "fzf"; then
+  export FZF_DEFAULT_OPTS="
+    --height 40%
+    --layout=reverse
+    --border
+    --color header:italic
+    --preview 'bat -n --color=always {}'"
+  export FZF_COMPLETION_TRIGGER='**'
+  export FZF_COMPLETION_OPTS="
+    --walker-skip .git,node_modules,target
+    --info=inline"
+  export FZF_COMPLETION_PATH_OPTS="--walker file,follow,hidden"
+  export FZF_COMPLETION_DIR_OPTS="--walker dir,follow"
+  export FZF_TMUX=1
+  eval "$(fzf --bash)"
+else
+  echo "please install fzf"
+fi
 
 # mcfly
-eval "$(mcfly init bash)"
+if command_exists "mcfly"; then
+  eval "$(mcfly init bash)"
+else
+  echo "please install mcfly"
+fi
