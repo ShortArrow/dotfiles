@@ -242,3 +242,12 @@ function Start-Poweroff()
 }
 New-Alias -Name poweroff -Value Start-Poweroff -Force
 
+## CFA (Controlled Folder Access)
+function GetCfaEvent()
+{
+  Get-WinEvent -LogName "Microsoft-Windows-Windows Defender/Operational"
+    | Where-Object {$_.Id -eq "1123" }
+    | fzf --reverse
+}
+New-Alias -Name cfa -Value GetCfaEvent -Force
+
