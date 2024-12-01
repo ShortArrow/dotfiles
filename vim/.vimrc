@@ -18,6 +18,8 @@ set wrapscan
 set incsearch
 " 検索結果をハイライト表示
 set hlsearch
+" 末尾改行の自動追加をOFF
+set nofixeol
 
 "----------------------------------------
 " 表示設定
