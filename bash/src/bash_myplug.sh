@@ -227,3 +227,10 @@ if command_exists "mcfly"; then
 else
   echo "please install mcfly"
 fi
+
+# WSL
+if command_exists "wsl.exe";then
+  alias wsl="wsl.exe"
+else
+  alias wsl="echo 'wsl.exe is not found, are you in Windows?'"
+fi
