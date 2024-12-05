@@ -251,3 +251,10 @@ function GetCfaEvent()
 }
 New-Alias -Name cfa -Value GetCfaEvent -Force
 
+function LoginGhcrIo()
+{
+  gh auth refresh --scopes read:packages
+  $username = Read-Host "Enter your username"
+  gh auth token | docker login ghcr.io --username $username --password-stdin
+}
+
