@@ -32,6 +32,11 @@
     ]
   },
   "Lua.workspace.library": [
+    "./?.lua",
+    "/Program Files/Neovim/bin/lua/?.lua",
+    "/Program Files/Neovim/bin/lua/?/init.lua",
+    "/Users/shoutarou_t/AppData/Local/nvim-data/lazy-rocks/telescope.nvim/share/lua/5.1/?.lua",
+    "/Users/shoutarou_t/AppData/Local/nvim-data/lazy-rocks/telescope.nvim/share/lua/5.1/?/init.lua",
     "/tools/neovim/nvim-win64/share/nvim/runtime/lua",
     "./lua/?.lua",
     "./lua/?/init.lua",
