@@ -11,5 +11,6 @@ M.rust = require('my.lang.rust')
 M.clang = require('my.lang.clang')
 M.astro = require('my.lang.astro')
 M.csharp = require('my.lang.csharp')
+M.xml = require('my.lang.xml')
 
 return M
