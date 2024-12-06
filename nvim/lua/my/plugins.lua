@@ -25,12 +25,13 @@ M.ordinalnvim = {
     end,
     dev = false,
   },
+  { 'echasnovski/mini.nvim' },
   {
     'MeanderingProgrammer/markdown.nvim',
     main = "render-markdown",
     opts = {},
-    name = 'render-markdown',                                                      -- Only needed if you have another plugin named markdown.nvim
-    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+    name = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
   },
@@ -52,13 +53,15 @@ M.ordinalnvim = {
       require("copilot_cmp").setup()
     end,
   },
+  { "zbirenbaum/copilot.lua" }, -- for CopilotC-Nvim/CopilotChat.nvim
+  { "nvim-lua/plenary.nvim" },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     branch = "canary",
-    dependencies = {
-      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-      { "nvim-lua/plenary.nvim" },  -- for curl, log wrapper
-    },
+    -- dependencies = {
+    --   { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+    --   { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+    -- },
     opts = get_config("_copilot_chat").opts,
     -- See Commands section for default commands if you want to lazy load on them
   },
@@ -177,7 +180,7 @@ M.ordinalnvim = {
   },
   {
     "https://codeberg.org/esensar/nvim-dev-container",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    -- dependencies = { "nvim-treesitter/nvim-treesitter" },
     cmd = {
       "DevcontainerStart",
       "DevcontainerAttach",
@@ -259,9 +262,13 @@ M.ordinalnvim = {
   -- ################################################
   -- # Explorer
   -- ################################################
+  { "obaland/vfiler-column-devicons" },
   {
     "obaland/vfiler.vim",
-    dependencies = { "obaland/vfiler-column-devicons", "nvim-tree/nvim-web-devicons" },
+    -- dependencies = {
+    --   "obaland/vfiler-column-devicons",
+    --   "nvim-tree/nvim-web-devicons",
+    -- },
     config = get_config("_vfiler").setup,
     keys = api.keymaps.maps.vfiler,
   },
@@ -271,14 +278,14 @@ M.ordinalnvim = {
   {
     "ibhagwan/fzf-lua",
     -- optional for icon support
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    -- dependencies = { "nvim-tree/nvim-web-devicons" },
     config = get_config("_fzflua").setup,
     enabled = not api.env.is_win_os(),
     keys = require("my.keymaps").maps.fzflua,
   },
   {
     "amirrezaask/fuzzy.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    -- dependencies = { "nvim-lua/plenary.nvim" },
     config = get_config("_fuzzy").setup,
     enabled = false,
   },
@@ -287,28 +294,41 @@ M.ordinalnvim = {
   -- ################################################
   {
     "folke/trouble.nvim",
-    dependencies = "nvim-tree/nvim-web-devicons",
+    -- dependencies = "nvim-tree/nvim-web-devicons",
     config = get_config("_trouble").setup,
     keys = api.keymaps.maps.trouble,
   },
+  -- neotest
+  { "nvim-neotest/neotest-python" },
+  { "nvim-neotest/neotest-plenary" },
+  { "nvim-neotest/neotest-vim-test" },
+  { "marilari88/neotest-vitest" },
+  { "haydenmeade/neotest-jest" },
+  { "sidlatau/neotest-dart" },
+  { "nvim-neotest/neotest-go" },
+  { "rouge8/neotest-rust" },
+  { "Issafalcon/neotest-dotnet" },
+  { "MarkEmmons/neotest-deno" },
+  { "antoinemadec/FixCursorHold.nvim" },
+  { "nvim-neotest/nvim-nio" },
   {
     "nvim-neotest/neotest",
-    dependencies = {
-      "nvim-neotest/nvim-nio",
-      "nvim-lua/plenary.nvim",
-      "antoinemadec/FixCursorHold.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-neotest/neotest-python",
-      "nvim-neotest/neotest-plenary",
-      "nvim-neotest/neotest-vim-test",
-      "marilari88/neotest-vitest",
-      "haydenmeade/neotest-jest",
-      "sidlatau/neotest-dart",
-      "nvim-neotest/neotest-go",
-      "rouge8/neotest-rust",
-      "Issafalcon/neotest-dotnet",
-      "MarkEmmons/neotest-deno",
-    },
+    -- dependencies = {
+    --   "nvim-neotest/nvim-nio",
+    --   "nvim-lua/plenary.nvim",
+    --   "antoinemadec/FixCursorHold.nvim",
+    --   "nvim-treesitter/nvim-treesitter",
+    --   "nvim-neotest/neotest-python",
+    --   "nvim-neotest/neotest-plenary",
+    --   "nvim-neotest/neotest-vim-test",
+    --   "marilari88/neotest-vitest",
+    --   "haydenmeade/neotest-jest",
+    --   "sidlatau/neotest-dart",
+    --   "nvim-neotest/neotest-go",
+    --   "rouge8/neotest-rust",
+    --   "Issafalcon/neotest-dotnet",
+    --   "MarkEmmons/neotest-deno",
+    -- },
     config = get_config("_neotest").setup,
     keys = api.keymaps.maps.neotest,
   },
@@ -325,7 +345,7 @@ M.ordinalnvim = {
   },
   {
     "SmiteshP/nvim-gps",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    -- dependencies = { "nvim-treesitter/nvim-treesitter" },
     config = get_config("_gps").setup,
   },
   {
@@ -411,7 +431,7 @@ M.ordinalnvim = {
     "kevinhwang91/nvim-ufo",
     dependencies = {
       "kevinhwang91/promise-async",
-      "nvim-treesitter/nvim-treesitter",
+      -- "nvim-treesitter/nvim-treesitter",
     },
     config = get_config("_ufo").setup,
     keys = api.keymaps.maps.ufo,
@@ -436,6 +456,7 @@ M.ordinalnvim = {
     "rcarriga/nvim-dap-ui",
     dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
   },
+  { "mfussenegger/nvim-dap" },
   --{
   --  'yamatsum/nvim-cursorline',
   --  config = get_config('_cursorline').setup,
@@ -480,11 +501,11 @@ M.ordinalnvim = {
   -- ################################################
   {
     "folke/neodev.nvim",
-    dependencies = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-      "neovim/nvim-lspconfig",
-    },
+    -- dependencies = {
+    --   "williamboman/mason.nvim",
+    --   "williamboman/mason-lspconfig.nvim",
+    --   "neovim/nvim-lspconfig",
+    -- },
     config = get_config("_neodev").setup,
   },
   -- Install this plugin.
@@ -575,20 +596,21 @@ M.ordinalnvim = {
   --    "saadparwaiz1/cmp_luasnip",
   --    dependencies = "L3MON4D3/LuaSnip",
   --  },
+  { "hrsh7th/cmp-nvim-lsp" },
   {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
     "jayp0521/mason-null-ls.nvim",
     "jayp0521/mason-nvim-dap.nvim",
-    dependencies = {
-      "jose-elias-alvarez/null-ls.nvim",
-      "mfussenegger/nvim-dap",
-      "ray-x/lsp_signature.nvim",
-      "hrsh7th/cmp-nvim-lsp",
-      "onsails/lspkind.nvim",
-      "kevinhwang91/nvim-ufo",
-    },
+    -- dependencies = {
+    --   "jose-elias-alvarez/null-ls.nvim",
+    --   "mfussenegger/nvim-dap",
+    --   "ray-x/lsp_signature.nvim",
+    --   "hrsh7th/cmp-nvim-lsp",
+    --   "onsails/lspkind.nvim",
+    --   "kevinhwang91/nvim-ufo",
+    -- },
     config = get_config("_mason").setup,
   },
   {
@@ -609,10 +631,10 @@ M.ordinalnvim = {
   },
   {
     "glepnir/lspsaga.nvim",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter", -- optional
-      "nvim-tree/nvim-web-devicons",     -- optional
-    },
+    -- dependencies = {
+    --   "nvim-treesitter/nvim-treesitter", -- optional
+    --   "nvim-tree/nvim-web-devicons", -- optional
+    -- },
     cmd = "Lspsaga",
     config = get_config("_lsp_saga").setup,
     keys = api.keymaps.maps.lspsaga,
@@ -640,7 +662,7 @@ M.ordinalnvim = {
     config = function()
       require("nvim-ts-autotag").setup()
     end,
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    -- dependencies = { "nvim-treesitter/nvim-treesitter" },
   },
   {
     "KadoBOT/cmp-plugins",
@@ -675,7 +697,7 @@ M.ordinalnvim = {
   },
   {
     "windwp/nvim-autopairs",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    -- dependencies = { "nvim-treesitter/nvim-treesitter" },
     config = get_config("_autopairs").setup,
   },
   {
