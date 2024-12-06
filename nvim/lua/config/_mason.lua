@@ -115,6 +115,8 @@ M.setup = function()
         -- }
       elseif server_name == "intelephense" then
         _opts.settings = _api.lang.php.intelephense
+      elseif server_name == "lemminx" then
+        _opts.settings = _api.lang.xml.lemminx
       elseif server_name == "pyright" then
         _opts.settings = _api.lang.python.pyright
       elseif server_name == "pyls" then
