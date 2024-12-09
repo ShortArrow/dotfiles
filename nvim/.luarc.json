@@ -1,8 +1,8 @@
 {
   "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
-  "diagnostics.globals": [
-    "vim"
-  ],
+  "runtime": {
+    "version": "Lua 5.1"
+  },
   "diagnostics": {
     "enable": true,
     "globals": [
@@ -17,21 +17,7 @@
       "lowercase-global"
     ]
   },
-  "Lua.diagnostics": {
-    "enable": true,
-    "globals": [
-      "hs",
-      "vim",
-      "it",
-      "describe",
-      "before_each",
-      "after_each"
-    ],
-    "disable": [
-      "lowercase-global"
-    ]
-  },
-  "Lua.workspace.library": [
+  "workspace.library": [
     "./?.lua",
     "/Program Files/Neovim/bin/lua/?.lua",
     "/Program Files/Neovim/bin/lua/?/init.lua",
@@ -41,5 +27,35 @@
     "./lua/?.lua",
     "./lua/?/init.lua",
     "${3rd}/luassert/library"
-  ]
+  ],
+  "Lua": {
+    "runtime": {
+      "version": "Lua 5.1"
+    },
+    "diagnostics": {
+      "enable": true,
+      "globals": [
+        "hs",
+        "vim",
+        "it",
+        "describe",
+        "before_each",
+        "after_each"
+      ],
+      "disable": [
+        "lowercase-global"
+      ]
+    },
+    "workspace.library": [
+      "./?.lua",
+      "/Program Files/Neovim/bin/lua/?.lua",
+      "/Program Files/Neovim/bin/lua/?/init.lua",
+      "/Users/shoutarou_t/AppData/Local/nvim-data/lazy-rocks/telescope.nvim/share/lua/5.1/?.lua",
+      "/Users/shoutarou_t/AppData/Local/nvim-data/lazy-rocks/telescope.nvim/share/lua/5.1/?/init.lua",
+      "/tools/neovim/nvim-win64/share/nvim/runtime/lua",
+      "./lua/?.lua",
+      "./lua/?/init.lua",
+      "${3rd}/luassert/library"
+    ]
+  }
 }
