@@ -1,14 +1,16 @@
-$list = @(
-  "keymap.json",  
-  "settings.json"
-)
+#! pwsh
 
-foreach ($item in $list)
-{
-  Remove-Item "$env:USERPROFILE/Appdata/Roaming/Zed/$item" -Force
-  New-Item -Type SymbolicLink `
-    -Path "$env:USERPROFILE/Appdata/Roaming/Zed/" `
-    -Name $item `
-    -Value "$env:USERPROFILE/Documents/GitHub/dotfiles/zed/src/$item"
+# Get the directory of the script
+$scriptDirectory = Split-Path -Parent $MyInvocation.MyCommand.Definition
+
+$Roaming = "$env:USERPROFILE/Appdata/Roaming/"
+$zedConfig = Join-Path $Roaming "Zed"
+
+if(Test-Path $zedConfig) {
+  Remove-Item -Recurse -Force $zedConfig
 }
+New-Item -Type SymbolicLink `
+  -Path $Roaming `
+  -Name Zed `
+  -Value "$scriptDirectory/src"
 
