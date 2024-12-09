@@ -22,5 +22,10 @@
     "mode": "system",
     "light": "Tokyo Night Light",
     "dark": "Tokyo Night"
+  },
+  "terminal": {
+    "shell": {
+      "program": "pwsh"
+    }
   }
 }
