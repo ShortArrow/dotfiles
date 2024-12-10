@@ -1,17 +1,28 @@
 #! pwsh
 
 $taskName = "GlazeWM_Task"
-$user = "$env:COMPUTERNAME\$env:USERNAME"
+$glazewmPath = Resolve-Path `
+    -Path "$env:USERPROFILE/Documents/GitHub/glazewm/target/release/glazewm.exe"
+$argument = @(
+        "-c `"`$PSStyle.OutputRendering='Ansi'",
+        "Start-Process -NoNewWindow '$glazewmPath' -ArgumentList 'start'",
+        "pause",
+        "`""
+    ) -join ";"
 $trigger = New-ScheduledTaskTrigger -AtLogOn
 $settings = New-ScheduledTaskSettingsSet `
     -AllowStartIfOnBatteries `
     -StartWhenAvailable `
-    -DontStopIfGoingOnBatteries `
-    -StartIfNotIdle `
-    -RestartOnIdle
+    -DontStopIfGoingOnBatteries
 $action = New-ScheduledTaskAction `
-  -Execute "%userprofile%\Documents\GitHub\glazewm\target\release\glazewm.exe" `
-  -Argument "start"
+    -Execute "pwsh.exe" `
+    -Argument $argument
 
-Register-ScheduledTask -TaskName $taskName -User $user -Trigger $trigger -Action $action -Settings $settings -Force
+Register-ScheduledTask `
+    -TaskName $taskName `
+    -User $env:USERNAME `
+    -Trigger $trigger `
+    -Action $action `
+    -Settings $settings `
+    -Force
 
