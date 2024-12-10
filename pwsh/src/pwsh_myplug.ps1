@@ -262,16 +262,16 @@ function LoginGhcrIo()
 $chromeDevPath = "C:\Program Files\Google\Chrome Dev\Application\chrome.exe"
 if(Test-Path $chromeDevPath)
 {
-  New-Alias -Name chromedev -Value $chromeDevPath
+  New-Alias -Force -Name chromedev -Value $chromeDevPath
 } else {
-  New-Alias -Name chromedev -Value "Write-Host 'Please install Chrome Dev.'"
+  New-Alias -Force -Name chromedev -Value "Write-Host 'Please install Chrome Dev.'"
 }
 # glazewm dev
 $glazewmPath= "$env:USERPROFILE/Documents/GitHub/glazewm/target/release/glazewm.exe"
 if(Test-Path $glazewmPath)
 {
-  New-Alias -Name glazewmdev -Value $glazewmPath
+  New-Alias -Force -Name glazewmdev -Value $glazewmPath
 } else {
-  New-Alias -Name glazewmdev -Value "Write-Host 'Please build glazewm Dev.'"
+  New-Alias -Force -Name glazewmdev -Value "Write-Host 'Please build glazewm Dev.'"
 }
 
