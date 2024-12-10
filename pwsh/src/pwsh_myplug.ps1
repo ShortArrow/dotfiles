@@ -275,3 +275,20 @@ if(Test-Path $glazewmPath)
   New-Alias -Force -Name glazewmdev -Value "Write-Host 'Please build glazewm Dev.'"
 }
 
+# default Apps
+function Set-DefaultApp()
+{
+  param
+  (
+    [string]$FileType,
+    [string]$AppPath
+  )
+  Set-ItemProperty `
+    -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\$fileType\OpenWithList" `
+    -Name "(default)" `
+    -Value $appPath
+}
+
+# This is not work
+Set-DefaultApp -FileType ".pdf" -AppPath $chromeDevPath
+
