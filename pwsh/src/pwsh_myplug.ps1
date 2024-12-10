@@ -276,19 +276,10 @@ if(Test-Path $glazewmPath)
 }
 
 # default Apps
-function Set-DefaultApp()
+function SetDefaultApp()
 {
-  param
-  (
-    [string]$FileType,
-    [string]$AppPath
-  )
-  Set-ItemProperty `
-    -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\$fileType\OpenWithList" `
-    -Name "(default)" `
-    -Value $appPath
+  # https://learn.microsoft.com/en-us/windows/uwp/launch-resume/launch-settings-app
+  Start-Process ms-settings:defaultapps
 }
-
-# This is not work
-Set-DefaultApp -FileType ".pdf" -AppPath $chromeDevPath
+New-Alias -Name Set-DefaultApp -Value SetDefaultApp -Force
 
