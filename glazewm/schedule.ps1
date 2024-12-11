@@ -9,10 +9,7 @@ function IsAdmin() {
 
 function RestartWithAdmin()
 {
-    param(
-        [string]$scriptPath
-    )
-    $scriptPath = Resolve-Path $scriptPath
+    $scriptPath = Resolve-Path $Script:MyInvocation.MyCommand.Path
     # if you want debug, add '-noe' option to $arguments
     $arguments = @("-nop", "-nol", "-ex", "RemoteSigned", "-f", "$scriptPath")
     Start-Process pwsh -ArgumentList $arguments -Verb RunAs -Wait -PassThru
@@ -20,8 +17,7 @@ function RestartWithAdmin()
 }
 
 if (-not (IsAdmin)) {
-    $scriptPath = $MyInvocation.MyCommand.Path
-    RestartWithAdmin($scriptPath)
+    RestartWithAdmin
 }
 
 $taskName = "GlazeWM_Task"
