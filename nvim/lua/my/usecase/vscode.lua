@@ -4,37 +4,6 @@ M.activate = function()
   vim.g.mapleader = " "
   vim.opt.virtualedit = "block"
   local vscode = require("vscode")
-  ---This function is must be called when the mode changes
-  local function changeThemeOnModeChange()
-    local mode = vim.api.nvim_get_mode().mode
-    if mode == "i" then                                      -- insert mode
-      vim.fn.VSCodeNotify("nvim-theme.insert")
-    elseif mode == "R" or mode == "r" then                   -- replace mode
-      vim.fn.VSCodeNotify("nvim-theme.replace")
-    elseif mode == "v" or mode == "V" or mode == "\x16" then -- visual mode
-      vim.fn.VSCodeNotify("nvim-theme.visual")
-    else                                                     -- normal mode
-      vim.fn.VSCodeNotify("nvim-theme.normal")
-    end
-  end
-
-  ---This autocmd group is used to change the theme when the mode changes
-  local augroup = vim.api.nvim_create_augroup("ThemeChangeOnMode", { clear = true })
-
-  ---Add an autocmd to the ModeChanged event to change the theme when the mode changes
-  vim.api.nvim_create_autocmd({ "ModeChanged" }, {
-    pattern = "*",
-    callback = changeThemeOnModeChange,
-    group = augroup,
-  })
-
-  ---Add an autocmd to the InsertEnter, InsertLeave, and VimEnter events to change the theme when the mode changes
-  ---@note some mode changes cannot be captured by the ModeChanged event, so we need to capture them with specific events
-  vim.api.nvim_create_autocmd({ "InsertEnter", "InsertLeave", "VimEnter" }, {
-    pattern = "*",
-    callback = changeThemeOnModeChange,
-    group = augroup,
-  })
 
   -- Set VSCode command to Neovim keymap
   local function action(cmd)
@@ -44,44 +13,44 @@ M.activate = function()
     end
   end
 
-  local k = function(mode, lhs, rhs)
+  local keymap = function(mode, lhs, rhs)
     vim.keymap.set(mode, lhs, rhs)
   end
 
   ---This is keymap of commentout
-  k({ "x", "o", "n" }, "gc", "<Plug>VSCodeCommentary")
-  k({ "n" }, "gcc", "<Plug>VSCodeCommentaryLine")
-  k("n", "<Leader>tr", action("workbench.actions.view.problems"))
-  k("n", "<Leader>tt", action("workbench.action.terminal.toggleTerminal"))
-  k("n", "<Leader>ld", action("editor.action.goToDeclaration"))
+  keymap({ "x", "o", "n" }, "gc", "<Plug>VSCodeCommentary")
+  keymap({ "n" }, "gcc", "<Plug>VSCodeCommentaryLine")
+  keymap("n", "<Leader>tr", action("workbench.actions.view.problems"))
+  keymap("n", "<Leader>tt", action("workbench.action.terminal.toggleTerminal"))
+  keymap("n", "<Leader>ld", action("editor.action.goToDeclaration"))
   --vim.keymap.set("n", "<Leader>lh", action("editor.action.showHover"))
-  k("n", "<Leader>lf", action("editor.action.formatDocument"))
-  k("n", "<Leader>ln", action("editor.action.rename"))
-  k("n", "<Leader>lb", action("workbench.action.navigateBack"))
-  k("n", "<Leader>wl", action("workbench.action.focusRightGroup"))
-  k("n", "<Leader>wh", action("workbench.action.focusLeftGroup"))
-  k("n", "<Leader>wj", action("workbench.action.focusLastEditorGroup"))
-  k("n", "<Leader>wk", action("workbench.action.focusFirstSideEditor"))
-  k("n", "<Leader>wb", action("workbench.action.focusStatusBar"))
-  k("n", "<Leader>ws", action("workbench.action.focusSideBar"))
-  k("n", "<Leader>wr", action("workbench.debug.action.focusRepl"))
-  k("n", "<Leader>fb", action("workbench.action.quickOpen"))
-  k("n", "<Leader>wd", action("workbench.view.debug"))
-  k("n", "<Leader>ff", action("workbench.view.explorer"))
-  k("n", "<Leader>lg", action("workbench.view.scm"))
-  k("n", "<Leader>fg", action("workbench.action.replaceInFiles"))
-  k("n", "<Leader>bp", "<cmd>bp<CR>")
-  k("n", "<Leader>bn", "<cmd>bn<CR>")
+  keymap("n", "<Leader>lf", action("editor.action.formatDocument"))
+  keymap("n", "<Leader>ln", action("editor.action.rename"))
+  keymap("n", "<Leader>lb", action("workbench.action.navigateBack"))
+  keymap("n", "<Leader>wl", action("workbench.action.focusRightGroup"))
+  keymap("n", "<Leader>wh", action("workbench.action.focusLeftGroup"))
+  keymap("n", "<Leader>wj", action("workbench.action.focusLastEditorGroup"))
+  keymap("n", "<Leader>wk", action("workbench.action.focusFirstSideEditor"))
+  keymap("n", "<Leader>wb", action("workbench.action.focusStatusBar"))
+  keymap("n", "<Leader>ws", action("workbench.action.focusSideBar"))
+  keymap("n", "<Leader>wr", action("workbench.debug.action.focusRepl"))
+  keymap("n", "<Leader>fb", action("workbench.action.quickOpen"))
+  keymap("n", "<Leader>wd", action("workbench.view.debug"))
+  keymap("n", "<Leader>ff", action("workbench.view.explorer"))
+  keymap("n", "<Leader>lg", action("workbench.view.scm"))
+  keymap("n", "<Leader>fg", action("workbench.action.replaceInFiles"))
+  keymap("n", "<Leader>bp", "<cmd>bp<CR>")
+  keymap("n", "<Leader>bn", "<cmd>bn<CR>")
   -- Copy to clipboard
-  k("v", "<Leader>y", '"+y')
-  k("n", "<Leader>Y", '"+yg_')
-  k("n", "<Leader>y", '"+y')
-  k("n", "<Leader>yy", '"+yy')
+  keymap("v", "<Leader>y", '"+y')
+  keymap("n", "<Leader>Y", '"+yg_')
+  keymap("n", "<Leader>y", '"+y')
+  keymap("n", "<Leader>yy", '"+yy')
   -- Paste from clipboard
-  k("n", "<Leader>p", '"+p')
-  k("n", "<Leader>P", '"+P')
-  k("v", "<Leaderp", '"+p')
-  k("v", "<LeaderP", '"+P')
+  keymap("n", "<Leader>p", '"+p')
+  keymap("n", "<Leader>P", '"+P')
+  keymap("v", "<Leaderp", '"+p')
+  keymap("v", "<LeaderP", '"+P')
 end
 
 return M
