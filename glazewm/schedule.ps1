@@ -45,6 +45,7 @@ Register-ScheduledTask `
     -Trigger $trigger `
     -Action $action `
     -Settings $settings `
+    -RunLevel Highest `
     -Force
 
 exit
