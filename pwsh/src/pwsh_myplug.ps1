@@ -305,3 +305,12 @@ Function gig {
   Invoke-WebRequest -Uri "https://www.toptal.com/developers/gitignore/api/$params" | select -ExpandProperty content | Out-File -FilePath $(Join-Path -path $pwd -ChildPath ".gitignore") -Encoding ascii
 }
 
+# Thorium
+$thoriumPath = "$env:LOCALAPPDATA/Thorium/Application/thorium.exe"
+if(Test-Path $thoriumPath)
+{
+  New-Alias -Force -Name thorium -Value $thoriumPath
+} else {
+  New-Alias -Force -Name thorium -Value "Write-Host 'Please install Thorium.'"
+}
+
