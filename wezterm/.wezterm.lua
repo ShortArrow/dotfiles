@@ -4,8 +4,12 @@ local wezterm = require 'wezterm'
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
---
-config.default_prog = { 'pwsh' }
+-- only in windows use pwsh
+local is_windows = package.config:sub(1, 1) == '\\'
+
+if is_windows then
+  config.default_prog = { 'pwsh' }
+end
 
 config.font = wezterm.font 'JetBrainsMonoNL Nerd Font'
 
@@ -15,6 +19,8 @@ config.color_scheme = 'Tomorrow Night Night'
 -- config.color_scheme = 'AdventureTime'
 
 config.hide_tab_bar_if_only_one_tab = true
+
+config.enable_wayland = false
 
 -- and finally, return the configuration to wezterm
 return config
