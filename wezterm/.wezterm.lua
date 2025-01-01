@@ -13,10 +13,10 @@ end
 
 config.font = wezterm.font 'JetBrainsMonoNL Nerd Font'
 
--- For example, changing the color scheme:
-config.color_scheme = 'Tokyo Night Night'
-config.color_scheme = 'Tomorrow Night Night'
--- config.color_scheme = 'AdventureTime'
+config.color_scheme = 'Tokyo Night'
+config.color_scheme = 'Tomorrow Night'
+config.color_scheme = 'AdventureTime'
+config.color_scheme = 'Kibble'
 
 config.hide_tab_bar_if_only_one_tab = true
 
