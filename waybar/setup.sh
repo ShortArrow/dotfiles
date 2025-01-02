@@ -1,5 +1,10 @@
 #!/bin/bash
 
-rm -rf ~/.config/waybar
+script_dir=$(dirname "$(readlink -f "$0")")
+config_dir="$HOME/.config/waybar"
 
-ln -s "$HOME/Documents/GitHub/dotfiles/waybar/config" ~/.config/waybar
+rm -rf "$config_dir"
+
+ln -s "$script_dir/src" "$config_dir"
+
+file "$config_dir"
