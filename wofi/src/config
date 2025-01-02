@@ -10,6 +10,7 @@ allow_markup=true
 gtk_dark=true
 prompt=
 display_generic=true
+exec_search=true
 key_expand=Tab
 key_up=Ctrl-p
 key_down=Ctrl-n
