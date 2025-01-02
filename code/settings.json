@@ -25,7 +25,6 @@
     "debug.console.fontFamily": "'JetBrainsMono Nerd Font Mono'",
     "chat.editor.fontFamily": "'JetBrainsMono Nerd Font Mono'",
     "C_Cpp.intelliSenseEngine": "disabled",
-    "clangd.path": "c:\\Users\\shoutarou_t\\AppData\\Roaming\\Code\\User\\globalStorage\\llvm-vs-code-extensions.vscode-clangd\\install\\16.0.2\\clangd_16.0.2\\bin\\clangd.exe",
     "extensions.experimental.affinity": {
         "asvetliakov.vscode-neovim": 1
     },
@@ -44,13 +43,6 @@
     "LineNumberDeco.enableRepeatingDigits": true,
     "github.copilot.chat.localeOverride": "ja",
     "github.copilot.chat.welcomeMessage": "never",
-    "remote.SSH.remotePlatform": {
-        "192.168.29.173": "linux",
-        "192.168.29.168": "linux",
-        "Jetson": "linux",
-        "192.168.29.159": "linux",
-        "192.168.29.172": "linux"
-    },
     "python.analysis.typeCheckingMode": "basic",
     "remote.autoForwardPortsSource": "hybrid",
     "clangd.arguments": [
@@ -68,6 +60,7 @@
     "git.openRepositoryInParentFolders": "never",
     "scm.alwaysShowActions": true,
     "scm.alwaysShowRepositories": true,
+    "window.menuBarVisibility": "toggle",
     "Lua.diagnostics.globals": [
         "vim"
     ],
