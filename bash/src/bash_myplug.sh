@@ -234,3 +234,11 @@ if command_exists "wsl.exe";then
 else
   alias wsl="echo 'wsl.exe is not found, are you in Windows?'"
 fi
+
+# waybar
+if command_exists "waybar"; then
+  alias waybar-reload="pkill waybar && hyprctl dispatch exec waybar"
+else
+  alias waybar-reload="echo 'waybar is not found'"
+fi
+
