@@ -1,13 +1,20 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: 'JetBrainMono Nerd Font Mono', FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-    font-size: 12px;
-    padding: 0;
-    margin: 0;
+    font-size: 1em;
+}
+
+window {
 }
 
 window#waybar {
-    background-color: rgba(50, 50, 50, 0.6);
+    /* use gradient background 3 colors */
+    background: linear-gradient(
+      90deg,
+      rgba(020, 020, 060, 0.8),
+      rgba(000, 020, 020, 0.5),
+      rgba(020, 020, 060, 0.8)
+    );
     color: #FFFFFF;
     transition-property: background-color;
     transition-duration: .5s;
@@ -51,7 +58,7 @@ window#waybar.chromium {
 
 /* If workspaces is the leftmost module, omit left margin */
 .modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
+    margin-left: 12px;
 }
 
 /* If workspaces is the rightmost module, omit right margin */
@@ -59,19 +66,18 @@ window#waybar.chromium {
     margin-right: 0;
 }
 
-@keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: #000000;
-    }
+.modules-right > widget:last-child > #tray {
+    margin-right: 12px;
 }
 
 label:focus {
     background-color: #000000;
 }
 
-#tray
+#tray button
 {
+  padding: 0;
+  margin: 0;
 }
 
 #workspaces button,
@@ -97,10 +103,11 @@ label:focus {
 #temperature,
 #wireplumber,
 #mpd {
-    margin: 0px 0px;
-    padding: 0rem 0.5rem;
-    border-radius: 3px;
-    background-color: rgb(20, 20, 20);
+    margin: 0.5rem 0;
+    padding: 0.2rem 0.5rem;
+    font-size: 1em;
+    border-radius: 0.2rem;
+    background-color: rgb(40, 40, 50);
     color: rgb(200, 200, 200);
 }
 
@@ -187,6 +194,13 @@ label:focus {
     animation-timing-function: steps(12);
     animation-iteration-count: infinite;
     animation-direction: alternate;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
 }
 
 #tray > .passive {
