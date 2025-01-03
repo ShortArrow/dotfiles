@@ -4,9 +4,9 @@ local telescope = require("config/_telescope").commands
 local neotest = require("config/_neotest").commands
 
 M.maps_activate = function(map)
-  for _, map in pairs(map) do
-    local mode = map.mode or "n"
-    vim.keymap.set(mode, map[1], map[2], {
+  for _, item in pairs(map) do
+    local mode = item.mode or "n"
+    vim.keymap.set(mode, item[1], item[2], {
       -- noremap: true
       -- silent: false
       -- script: false
