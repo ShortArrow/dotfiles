@@ -20,13 +20,13 @@
         "idle_inhibitor",
         "pulseaudio",
         "network",
-        "power-profiles-daemon",
         "cpu",
         "memory",
         "temperature",
         "backlight",
         "keyboard-state",
         "hyprland/language",
+        "power-profiles-daemon",
         "battery",
         "battery#bat2",
         "clock",
@@ -50,9 +50,12 @@
         }
     },
     "keyboard-state": {
-        "numlock": true,
         "capslock": true,
-        "format": "{name} {icon}",
+        "numlock": true,
+        "format": {
+          "capslock": "c {icon}",
+          "numlock": "n {icon}",
+        },
         "format-icons": {
             "locked": "",
             "unlocked": ""
@@ -97,12 +100,12 @@
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": "",
-            "deactivated": ""
+            "activated": "",
+            "deactivated": ""
         }
     },
     "tray": {
-        // "icon-size": 21,
+        "icon-size": 22,
         "spacing": 10
     },
     "clock": {
@@ -112,7 +115,7 @@
     },
     "cpu": {
         "format": "{usage}% ",
-        "tooltip": false
+        "tooltip": true
     },
     "memory": {
         "format": "{}% "
@@ -121,7 +124,6 @@
         "thermal-zone": 3, // /sys/class/thermal
         // "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
         "critical-threshold": 70,
-        "format-critical": "{temperatureC}°C {icon}",
         "format": "{temperatureC}°C {icon}",
         "format-icons": ["󰻽", "", "󰈸"]
     },
@@ -153,19 +155,23 @@
       "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
       "tooltip": true,
       "format-icons": {
-        "default": "n/a",
-        "performance": "",
-        "balanced": "",
-        "power-saver": ""
+        "default": "󰟢",
+        "performance": "󰈸",
+        "balanced": "󰗑",
+        "power-saver": "󰌪"
       }
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) 󰖩",
-        "format-ethernet": "{ipaddr}/{cidr} 󰈁",
-        "tooltip-format": "{ifname} via {gwaddr} 󰔣",
-        "format-linked": "{ifname} (No IP) 󰌹",
-        "format-disconnected": "Disconnected ⚠",
+        "tooltip-format-wifi": "SSID: {essid} ({signalStrength}%)\nIP: {ipaddr}/{cidr}\nGW: {gwaddr}",
+        "tooltip-format-ethernet": "I/F: {ifname}\nIP: {ipaddr}/{cidr}\nGW: {gwaddr}",
+        "tooltip-format-linked": "I/F: {ifname}\n(No IP)",
+        "tooltip-format-disconnected": "Disconnected",
+        "format-wifi": "{signalStrength}% 󰖩",
+        "format-ethernet": "󰈁",
+        "tooltip-format": "{ipaddr}/{cidr}",
+        "format-linked": "󰌹",
+        "format-disconnected": "⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
