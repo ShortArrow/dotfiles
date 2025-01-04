@@ -25,7 +25,7 @@ M.ordinalnvim = {
     end,
     dev = false,
   },
-  { 'echasnovski/mini.nvim' },
+  -- { 'echasnovski/mini.nvim' },
   {
     'MeanderingProgrammer/markdown.nvim',
     main = "render-markdown",
@@ -267,29 +267,44 @@ M.ordinalnvim = {
   {
     "gennaro-tedesco/nvim-peekup",
   },
+  -- {
+  --   "freddiehaddad/feline.nvim",
+  --   require = { "nvim-lua/plenary.nvim", "lewis6991/gitsigns.nvim" },
+  --   config = get_config("_feline").setup,
+  --   enabled = not api.env.is_firenvim(),
+  -- },
   {
-    "freddiehaddad/feline.nvim",
-    require = { "nvim-lua/plenary.nvim", "lewis6991/gitsigns.nvim" },
-    config = get_config("_feline").setup,
-    enabled = not api.env.is_firenvim(),
+    "stevearc/overseer.nvim"
   },
   {
+
     "rebelot/heirline.nvim",
     -- You can optionally lazy-load heirline on UiEnter
     -- to make sure all required plugins and colorschemes are loaded before setup
-    -- event = "UiEnter",
-    config = function()
-      require("heirline").setup({})
-    end,
+    event = "UiEnter",
+    opts = get_config("_heirline").opts,
+    config = get_config("_heirline").cofig,
   },
-  {
-    "akinsho/bufferline.nvim",
-    version = "*",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
-    config = get_config("_buffer_line").setup,
-  },
+  { "Zeioth/heirline-components.nvim" },
+  -- { "lewis6991/gitsigns.nvim" },
+  -- { "nvim-telescope/telescope.nvim" },
+  { "zeioth/compiler.nvim" },
+  { "mfussenegger/nvim-dap" },
+  { "echasnovski/mini.bufremove" },
+  { "nvim-neo-tree/neo-tree.nvim" },
+  -- { "stevearc/aerial.nvim" },
+  -- { "folke/zen-mode.nvim" },
+  { "linux-cultist/venv-selector.nvim" },
+  { "echasnovski/mini.nvim" },
+  -- {
+  --   "akinsho/bufferline.nvim",
+  --   version = "*",
+  --   dependencies = {
+  --     -- "nvim-tree/nvim-web-devicons",
+  --   },
+  --   config = get_config("_buffer_line").setup,
+  -- },
+  { "nvim-tree/nvim-web-devicons" },
   {
     "b0o/incline.nvim",
     config = get_config("_incline").setup,
@@ -363,7 +378,6 @@ M.ordinalnvim = {
     "rcarriga/nvim-dap-ui",
     dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
   },
-  { "mfussenegger/nvim-dap" },
   --{
   --  'yamatsum/nvim-cursorline',
   --  config = get_config('_cursorline').setup,
