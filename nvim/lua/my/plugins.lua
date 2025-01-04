@@ -29,6 +29,7 @@ M.ordinalnvim = {
   {
     'MeanderingProgrammer/markdown.nvim',
     main = "render-markdown",
+    event = "BufRead",
     opts = {},
     name = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
@@ -57,7 +58,6 @@ M.ordinalnvim = {
   { "nvim-lua/plenary.nvim" },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "canary",
     -- dependencies = {
     --   { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
     --   { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
@@ -275,9 +275,6 @@ M.ordinalnvim = {
   -- },
   {
     "stevearc/overseer.nvim",
-    config = function()
-      require('overseer').setup()
-    end,
   },
   {
     "rebelot/heirline.nvim",
