@@ -274,10 +274,12 @@ M.ordinalnvim = {
   --   enabled = not api.env.is_firenvim(),
   -- },
   {
-    "stevearc/overseer.nvim"
+    "stevearc/overseer.nvim",
+    config = function()
+      require('overseer').setup()
+    end,
   },
   {
-
     "rebelot/heirline.nvim",
     -- You can optionally lazy-load heirline on UiEnter
     -- to make sure all required plugins and colorschemes are loaded before setup
