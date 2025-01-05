@@ -2,29 +2,16 @@
     "workbench.colorCustomizations": {
         "editorCursor.foreground": "#673AB7"
     },
-    "editor.tabSize": 2,
-    "LineNumberDeco.enableRainbow": false,
-    "LineNumberDeco.centerColorOfRainbow": "#9090C0",
-    "google-translate.maxSizeOfResult": 500,
-    "google-translate.firstLanguage": "ja-jp",
     "googleTranslateExt.languages": [
         "en",
         "ja"
     ],
-    "arduino.useArduinoCli": true,
-    "git.autofetch": true,
     "github.copilot.enable": {
         "*": true,
-        "plaintext": "true",
+        "plaintext": true,
         "markdown": true,
-        "scminput": "true"
+        "scminput": true
     },
-    "debug.disassemblyView.showSourceCode": false,
-    "editor.fontFamily": "'JetBrainsMono Nerd Font Mono', Consolas, 'Courier New', monospace",
-    "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font Mono'",
-    "debug.console.fontFamily": "'JetBrainsMono Nerd Font Mono'",
-    "chat.editor.fontFamily": "'JetBrainsMono Nerd Font Mono'",
-    "C_Cpp.intelliSenseEngine": "disabled",
     "extensions.experimental.affinity": {
         "asvetliakov.vscode-neovim": 1
     },
@@ -39,12 +26,51 @@
         "editor.tabCompletion": "onlySnippets",
         "editor.wordBasedSuggestions": "off"
     },
+    "C_Cpp.intelliSenseEngine": "disabled",
     "LineNumberDeco.activeForeground": "#219DDD",
+    "LineNumberDeco.centerColorOfRainbow": "#9090C0",
+    "LineNumberDeco.enableRainbow": false,
     "LineNumberDeco.enableRepeatingDigits": true,
+    "arduino.useArduinoCli": true,
+    "chat.editor.fontFamily": "'JetBrainsMono Nerd Font Mono', Consolas, 'Courier New', monospace",
+    "debug.console.fontFamily": "'JetBrainsMono Nerd Font Mono', Consolas, 'Courier New', monospace",
+    "diffEditor.hideUnchangedRegions.enabled": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "dotnet.preferCSharpExtension": true,
+    "editor.fontFamily": "'JetBrainsMono Nerd Font Mono', Consolas, 'Courier New', monospace",
+    "editor.tabSize": 2,
+    "editor.wrappingStrategy": "advanced",
+    "git.autofetch": true,
+    "git.openRepositoryInParentFolders": "never",
+    "github.copilot.chat.generateTests.codeLens": true,
+    "github.copilot.chat.inlineChatCompletionTrigger.enabled": true,
+    "github.copilot.chat.inlineChatHint.enabled": true,
     "github.copilot.chat.localeOverride": "ja",
+    "github.copilot.chat.search.semanticTextResults": true,
+    "github.copilot.chat.temporalContext.enabled": true,
     "github.copilot.chat.welcomeMessage": "never",
+    "gitlens.ai.model": "openai:gpt-4o",
+    "google-translate.firstLanguage": "ja-jp",
+    "google-translate.maxSizeOfResult": 500,
+    "intellicode-completions-cdk.runAlongsideCopilot": true,
+    "markdown-pdf.breaks": true,
+    "markdown.preview.breaks": true,
+    "omnisharp.enableDecompilationSupport": true,
+    "powershell.integratedConsole.showOnStartup": false,
+    "powershell.pester.codeLens": false,
     "python.analysis.typeCheckingMode": "basic",
     "remote.autoForwardPortsSource": "hybrid",
+    "scm.alwaysShowActions": true,
+    "scm.alwaysShowRepositories": true,
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.enableImages": true,
+    "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font Mono', Consolas, 'Courier New', monospace",
+    "vscode-neovim.logOutputToConsole": true,
+    "window.commandCenter": false,
+    "window.menuBarVisibility": "toggle",
+    "workbench.colorTheme": "Tango+",
+    "workbench.editor.showTabs": "single",
+    "workbench.layoutControl.enabled": false,
     "clangd.arguments": [
         "--log=verbose"
     ],
@@ -53,14 +79,6 @@
           "command": "vscode-neovim.escape"
       }
     },
-    "diffEditor.hideUnchangedRegions.enabled": true,
-    "workbench.editor.showTabs": "single",
-    "terminal.integrated.enableImages": true,
-    "powershell.pester.codeLens": false,
-    "git.openRepositoryInParentFolders": "never",
-    "scm.alwaysShowActions": true,
-    "scm.alwaysShowRepositories": true,
-    "window.menuBarVisibility": "toggle",
     "Lua.diagnostics.globals": [
         "vim"
     ],
