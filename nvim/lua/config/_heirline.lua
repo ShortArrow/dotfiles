@@ -40,6 +40,7 @@ local function add_color()
     terminal = "lime",
     visual = "purple",
     winbar_fg = "#c0caf5",
+    winbar_bg = "#1e222a",
   }
   scheme.normal = local_scheme.normal
   scheme.command = local_scheme.command
