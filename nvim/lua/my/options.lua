@@ -55,6 +55,7 @@ M.activate = function()
     extends = "◀",
     precedes = "▶",
   }
+  fonts.set_font_width()
 end
 
 local windows_ff_group = vim.api.nvim_create_augroup("WindowsFileFormat", { clear = true })
