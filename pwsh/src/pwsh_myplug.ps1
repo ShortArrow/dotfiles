@@ -45,8 +45,8 @@ Set-PSReadLineOption -PredictionSource History -PredictionViewStyle ListView
 Set-PSReadlineOption -HistoryNoDuplicates
 Set-PSReadlineOption -BellStyle None
 Set-PSReadlineOption -EditMode "Vi"
-Set-PSReadLineKeyHandler -Chord "Ctrl+j" -Function HistorySearchForward
-Set-PSReadLineKeyHandler -Chord "Ctrl+k" -Function HistorySearchBackward
+Set-PSReadLineKeyHandler -Chord "Ctrl+n" -Function HistorySearchForward
+Set-PSReadLineKeyHandler -Chord "Ctrl+p" -Function HistorySearchBackward
 
 # criteria of when leave history, contains word "SKIPHISTORY", or only one charactor of alphabet, or finish terminal command.
 
