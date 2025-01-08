@@ -44,6 +44,7 @@ local function add_color()
   }
   scheme.normal = local_scheme.normal
   scheme.command = local_scheme.command
+  scheme.visual = local_scheme.visual
   scheme.insert = local_scheme.insert
   scheme.terminal = local_scheme.terminal
   scheme.cmd_info_fg = local_scheme.cmd_info_fg
