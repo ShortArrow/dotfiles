@@ -53,6 +53,10 @@ local function add_color()
   scheme.winbar_fg = local_scheme.winbar_fg
   scheme.tab_fg = local_scheme.fg
   scheme.tab_bg = local_scheme.bg
+  scheme.tab_active_fg = scheme.green
+  scheme.tab_active_bg = local_scheme.bg
+  scheme.tab_close_fg = scheme.red
+  scheme.tab_close_bg = local_scheme.bg
   scheme.tabline_fg = local_scheme.tabline_fg
   scheme.tabline_bg = local_scheme.tabline_bg
   scheme.file_info_fg = local_scheme.file_info_fg
