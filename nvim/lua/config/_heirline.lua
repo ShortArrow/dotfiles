@@ -51,6 +51,10 @@ local function add_color()
   scheme.cmd_info_bg = local_scheme.cmd_info_bg
   scheme.mode_fg = local_scheme.mode_fg
   scheme.winbar_fg = local_scheme.winbar_fg
+  scheme.tab_fg = local_scheme.fg
+  scheme.tab_bg = local_scheme.bg
+  scheme.tabline_fg = local_scheme.tabline_fg
+  scheme.tabline_bg = local_scheme.tabline_bg
   scheme.file_info_fg = local_scheme.file_info_fg
   scheme.file_info_bg = local_scheme.file_info_bg
   scheme.git_added = scheme.green
