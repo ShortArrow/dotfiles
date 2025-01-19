@@ -18,7 +18,8 @@ config.color_scheme = 'Tomorrow Night'
 config.color_scheme = 'AdventureTime'
 config.color_scheme = 'Kibble'
 
-config.hide_tab_bar_if_only_one_tab = true
+-- config.hide_tab_bar_if_only_one_tab = true
+config.window_decorations = 'RESIZE'
 
 config.enable_wayland = false
 config.window_background_gradient =
