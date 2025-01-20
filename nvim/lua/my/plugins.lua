@@ -435,15 +435,6 @@ M.ordinalnvim = {
       },
     },
   },
-  {
-    "folke/neodev.nvim",
-    -- dependencies = {
-    --   "williamboman/mason.nvim",
-    --   "williamboman/mason-lspconfig.nvim",
-    --   "neovim/nvim-lspconfig",
-    -- },
-    config = get_config("_neodev").setup,
-  },
   -- Install this plugin.
   { "tjdevries/nlua.nvim" },
   -- (OPTIONAL): This is recommended to get better auto-completion UX experience for builtin LSP.
