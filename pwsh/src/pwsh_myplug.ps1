@@ -314,3 +314,13 @@ if(Test-Path $thoriumPath)
   New-Alias -Force -Name thorium -Value "Write-Host 'Please install Thorium.'"
 }
 
+# Tshark
+
+$tsharkPath = "C:\Program Files\Wireshark\tshark.exe"
+if(Test-Path $tsharkPath)
+{
+  New-Alias -Force -Name tshark -Value $tsharkPath
+} else {
+  New-Alias -Force -Name tshark -Value "Write-Host 'Please install Wireshark.'"
+}
+
