@@ -72,6 +72,8 @@ local function add_color()
   scheme.nav_fg = local_scheme.nav_fg
   scheme.nav_bg = local_scheme.nav_bg
   scheme.scrollbar = local_scheme.scrollbar
+  scheme.virtual_env_bg = scheme.bg
+  scheme.virtual_env_fg = scheme.green
   scheme.diag_ERROR = scheme.red
   scheme.diag_HINT = scheme.purple
   scheme.diag_INFO = scheme.blue
