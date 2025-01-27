@@ -80,4 +80,22 @@ M.env = function()
   end
 end
 
+M.nullls_config = {
+  type = "executable",
+  command = "/usr/bin/python3",
+  args = {
+    "-m",
+    "debugpy.adapter",
+  },
+}
+
+M.dap_config = {
+  {
+    type = "python",
+    request = "launch",
+    name = "Launch file",
+    program = "${file}", -- This configuration will launch the current file if used.
+  },
+}
+
 return M
