@@ -23,7 +23,7 @@ M.setup = function()
   local _lsp_sig = require('lsp_signature')
   local _cmp_nvim_lsp = require('cmp_nvim_lsp')
   local _mason_dap = require("mason-nvim-dap")
-  require('dap')
+  local _dap = require('dap')
   -- Define the sign for a breakpoint
   vim.fn.sign_define('DapBreakpoint', { text = ' ', texthl = 'ErrorMsg', linehl = '', numhl = '' })
   local capabilities = _cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -43,31 +43,18 @@ M.setup = function()
   _mason_lspconfig.setup()
   _mason_dap.setup({
     handlers = {
-      function(source_name)
+      function(config)
         -- all sources with no handler get passed here
-
-
         -- Keep original functionality of `automatic_setup = true`
-        require('mason-nvim-dap.automatic_setup')(source_name)
+        require('mason-nvim-dap.automatic_setup')(config)
       end,
-      python = function(source_name)
-        _mason_nullls.adapters.python = {
-          type = "executable",
-          command = "/usr/bin/python3",
-          args = {
-            "-m",
-            "debugpy.adapter",
-          },
-        }
-
-        _mason_dap.configurations.python = {
-          {
-            type = "python",
-            request = "launch",
-            name = "Launch file",
-            program = "${file}", -- This configuration will launch the current file if used.
-          },
-        }
+      coreclr = function(config)
+        _dap.adapters.coreclr = _api.lang.csharp.nullls_config
+        _dap.configurations.cs = _api.lang.csharp.dap_config
+      end,
+      python = function(config)
+        _mason_nullls.adapters.python = _api.lang.python.nullls_config
+        _mason_dap.configurations.python = _api.lang.python.dap_config
       end,
     }
   })

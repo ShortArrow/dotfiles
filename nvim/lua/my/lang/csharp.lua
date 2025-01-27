@@ -22,7 +22,24 @@ M.neotest = {
   -- Tell neotest-dotnet to use either solution (requires .sln file) or project (requires .csproj or .fsproj file) as project root
   -- Note: If neovim is opened from the solution root, using the 'project' setting may sometimes find all nested projects, however,
   --       to locate all test projects in the solution more reliably (if a .sln file is present) then 'solution' is better.
-  discovery_root = "solution"     -- Default is project
+  discovery_root = "solution" -- Default is project
+}
+
+M.dap_config = {
+  type = 'executable',
+  command = '/path/to/dotnet/netcoredbg/netcoredbg',
+  args = { '--interpreter=vscode' }
+}
+
+M.nullls_config = {
+  {
+    type = "coreclr",
+    name = "launch - netcoredbg",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+    end,
+  },
 }
 
 return M
