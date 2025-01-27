@@ -48,7 +48,7 @@ local function add_color()
   scheme.insert = local_scheme.insert
   scheme.terminal = local_scheme.terminal
   scheme.cmd_info_fg = local_scheme.cmd_info_fg
-  scheme.cmd_info_bg = local_scheme.cmd_info_bg
+  scheme.cmd_info_bg = scheme.bg
   scheme.mode_fg = local_scheme.mode_fg
   scheme.winbar_fg = local_scheme.winbar_fg
   scheme.tab_fg = local_scheme.fg
@@ -60,17 +60,17 @@ local function add_color()
   scheme.tabline_fg = local_scheme.tabline_fg
   scheme.tabline_bg = local_scheme.tabline_bg
   scheme.file_info_fg = local_scheme.file_info_fg
-  scheme.file_info_bg = local_scheme.file_info_bg
+  scheme.file_info_bg = scheme.bg
   scheme.git_added = scheme.green
-  scheme.git_branch_bg = local_scheme.git_branch_bg
+  scheme.git_branch_bg = scheme.bg
   scheme.git_branch_fg = local_scheme.git_branch_fg
   scheme.git_changed = scheme.orange
-  scheme.git_diff_bg = local_scheme.git_diff_bg
+  scheme.git_diff_bg = scheme.bg
   scheme.git_removed = scheme.red
   scheme.lsp_fg = local_scheme.lsp_fg
-  scheme.lsp_bg = local_scheme.lsp_bg
+  scheme.lsp_bg = scheme.bg
   scheme.nav_fg = local_scheme.nav_fg
-  scheme.nav_bg = local_scheme.nav_bg
+  scheme.nav_bg = scheme.bg
   scheme.scrollbar = local_scheme.scrollbar
   scheme.virtual_env_bg = scheme.bg
   scheme.virtual_env_fg = scheme.green
@@ -78,7 +78,7 @@ local function add_color()
   scheme.diag_HINT = scheme.purple
   scheme.diag_INFO = scheme.blue
   scheme.diag_WARN = scheme.yellow
-  scheme.diagnostics_bg = local_scheme.diagnostics_bg
+  scheme.diagnostics_bg = scheme.bg
   scheme.diagnostics_fg = local_scheme.diagnostics_fg
   highlights.load_colors(scheme)
 end
