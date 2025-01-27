@@ -254,6 +254,7 @@ M.maps = {
     { "<Leader>di", "<cmd>lua require('dap').step_into()<CR>", desc = "Dap Step Into" },
     { "<Leader>do", "<cmd>lua require('dap').step_out()<CR>", desc = "Dap Step Out" },
     { "<Leader>db", "<cmd>lua require('dap').toggle_breakpoint()<CR>", desc = "Dap Toggle Breakpoint" },
+    { "<Leader>du", "<cmd>lua require('dapui').setup(); require('dapui').open()<CR>", desc = "Dap UI Open" },
     { "<Leader>dl", "<cmd>lua require('dap').run_last()<CR>", desc = "Dap Run Last" },
     -- # noice dismiss
     { "<Leader><Esc>", "<cmd>NoiceDismiss<CR>", desc = "dismiss noice error and escape" },
