@@ -25,21 +25,34 @@ M.neotest = {
   discovery_root = "solution" -- Default is project
 }
 
-M.dap_config = {
-  type = 'executable',
-  command = '/path/to/dotnet/netcoredbg/netcoredbg',
-  args = { '--interpreter=vscode' }
+M.nullls_config = {
+  {
+    type = 'executable',
+    command = 'netcoredbg',
+    args = { '--interpreter=vscode' }
+  }
 }
 
-M.nullls_config = {
+M.dap_config = {
   {
     type = "coreclr",
     name = "launch - netcoredbg",
     request = "launch",
     program = function()
-      return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+      return vim.fn.input('Path to dll', vim.fn.getcwd() .. [[\bin\Debug\]], 'file')
+      -- vim.ui.select({ prompt = 'Path to dll: ', default = vim.fn.getcwd() .. [[\bin\Debug\]] }, function(input)
+      --   if input then
+      --     -- inputがユーザーによって提供された場合の処理
+      --     print("Selected path: " .. input)
+      --     return input
+      --   else
+      --     -- inputがキャンセルされた場合の処理
+      --     print("Input was cancelled")
+      --     return ""
+      --   end
+      -- end)
     end,
-  },
+  }
 }
 
 return M
