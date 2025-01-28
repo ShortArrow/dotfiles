@@ -26,11 +26,9 @@ M.neotest = {
 }
 
 M.nullls_config = {
-  {
-    type = 'executable',
-    command = 'netcoredbg',
-    args = { '--interpreter=vscode' }
-  }
+  type = 'executable',
+  command = 'netcoredbg.cmd',
+  args = { '--interpreter=vscode' }
 }
 
 M.dap_config = {
@@ -39,18 +37,7 @@ M.dap_config = {
     name = "launch - netcoredbg",
     request = "launch",
     program = function()
-      return vim.fn.input('Path to dll', vim.fn.getcwd() .. [[\bin\Debug\]], 'file')
-      -- vim.ui.select({ prompt = 'Path to dll: ', default = vim.fn.getcwd() .. [[\bin\Debug\]] }, function(input)
-      --   if input then
-      --     -- inputがユーザーによって提供された場合の処理
-      --     print("Selected path: " .. input)
-      --     return input
-      --   else
-      --     -- inputがキャンセルされた場合の処理
-      --     print("Input was cancelled")
-      --     return ""
-      --   end
-      -- end)
+      return vim.fn.input('Path to dll', './', 'file')
     end,
   }
 }
