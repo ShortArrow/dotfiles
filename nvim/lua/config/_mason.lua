@@ -48,10 +48,11 @@ M.setup = function()
         -- Keep original functionality of `automatic_setup = true`
         require('mason-nvim-dap.automatic_setup')(config)
       end,
-      coreclr = function(config)
-        _dap.adapters.coreclr = _api.lang.csharp.nullls_config
-        _dap.configurations.cs = _api.lang.csharp.dap_config
-      end,
+      -- coreclr = function(config)
+      --   _dap.adapters.coreclr = _api.lang.csharp.nullls_config
+      --   -- _dap.adapters.cs = _api.lang.csharp.nullls_config
+      --   _dap.configurations.cs = _api.lang.csharp.dap_config
+      -- end,
       python = function(config)
         _mason_nullls.adapters.python = _api.lang.python.nullls_config
         _mason_dap.configurations.python = _api.lang.python.dap_config
