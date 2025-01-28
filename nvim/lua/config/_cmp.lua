@@ -49,8 +49,8 @@ M.setup = function()
         cmp_autopairs.on_confirm_done({
           filetypes = {
             -- "*" is a alias to all filetypes
-                ["*"] = {
-                  ["("] = {
+            ["*"] = {
+              ["("] = {
                 kind = {
                   cmp.lsp.CompletionItemKind.Function,
                   cmp.lsp.CompletionItemKind.Method,
@@ -59,7 +59,7 @@ M.setup = function()
               },
             },
             lua = {
-                  ["("] = {
+              ["("] = {
                 kind = {
                   cmp.lsp.CompletionItemKind.Function,
                   cmp.lsp.CompletionItemKind.Method,
@@ -136,26 +136,26 @@ M.setup = function()
         documentation = cmp.config.window.bordered(),
       },
       mapping = cmp.mapping.preset.insert({
-            ["<Up>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-            ["<Down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-            ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-            ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-            ["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-            ["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-            ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
-            ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
-            ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-            ["<C-y>"] = cmp.config.disable,
-            ["<C-e>"] = cmp.mapping({
+        ["<Up>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+        ["<Down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+        ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+        ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+        ["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+        ["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+        ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
+        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
+        ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+        ["<C-y>"] = cmp.config.disable,
+        ["<C-e>"] = cmp.mapping({
           i = cmp.mapping.abort(),
           c = cmp.mapping.close(),
         }),
-            ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-            ["<CR>"] = cmp.mapping.confirm({
+        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+        ["<CR>"] = cmp.mapping.confirm({
           behavior = cmp.ConfirmBehavior.Replace,
           select = true, -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         }),
-            ["<Tab>"] = cmp.mapping(function(fallback)
+        ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
           elseif luasnip.expandable() then
@@ -168,7 +168,7 @@ M.setup = function()
             fallback()
           end
         end, { "i", "s" }),
-            ["<S-Tab>"] = cmp.mapping(function(fallback)
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
           elseif luasnip.jumpable(-1) then
@@ -179,7 +179,7 @@ M.setup = function()
         end, { "i", "s" }),
       }),
       sources = cmp.config.sources({
-        { name = "copilot", group_index = 2 },
+        { name = "copilot",                group_index = 2 },
         { name = "calc" },
         { name = "emoji",                  max_item_count = 10 },
         { name = "nerdfont",               max_item_count = 10 },
@@ -209,9 +209,9 @@ M.setup = function()
       }),
       formatting = {
         format = lspkind.cmp_format({
-          mode = "symbol_text", --  options: 'text', 'text_symbol', 'symbol_text', 'symbol'
+          mode = "symbol_text",  --  options: 'text', 'text_symbol', 'symbol_text', 'symbol'
           with_text = false,
-          maxwidth = 50,    -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+          maxwidth = 50,         -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
           ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
           -- The function below will be called before any actual modifications from lspkind
           -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
@@ -258,6 +258,21 @@ M.setup = function()
       }, {
         { name = "cmdline" },
       }),
+    })
+
+    -- For vim.fn.input()
+    cmp.setup.cmdline('@', {
+      sources = cmp.config.sources({
+        {
+          name = 'cmdline-prompt',
+          ---@type prompt.Option
+          option = {
+            ---@type string[]
+            excludes = { 'file', 'dir' }, -- complete with 'hrsh7th/cmp-path' instead of 'cmdline-prompt'
+          }
+        },
+        { name = 'path' },
+      })
     })
   else
     debugger.print("cmp not loaded")
