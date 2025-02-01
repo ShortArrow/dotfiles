@@ -111,9 +111,9 @@ else
 fi
 
 # japanese
-export GTK_IM_MODULE=ibus
-export T_IM_MODULE=ibus
-export MODIFIERS=@im=ibus
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export MODIFIERS=@im=fcitx
 
 # color check
 checkcolor() {
