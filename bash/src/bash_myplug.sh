@@ -242,3 +242,7 @@ else
   alias waybar-reload="echo 'waybar is not found'"
 fi
 
+# gitignore
+function gig() {
+  curl -sL https://www.toptal.com/developers/gitignore/api/\$@
+}
