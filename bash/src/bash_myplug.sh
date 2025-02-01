@@ -244,5 +244,5 @@ fi
 
 # gitignore
 function gig() {
-  curl -sL https://www.toptal.com/developers/gitignore/api/\$@
+  curl -sL "https://gitignore.io/api/${*}"
 }
