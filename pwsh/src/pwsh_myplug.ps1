@@ -269,8 +269,9 @@ if(Test-Path $chromeDevPath)
 }
 # glazewm dev
 $glazewmPath= "$env:USERPROFILE/Documents/GitHub/glazewm/target/release/glazewm.exe"
+$glazewmCliPath= "$env:USERPROFILE/Documents/GitHub/glazewm/target/release/glazewm-cli.exe"
 function GetGlazewmWindows(){
-  $(glazewmdev query windows | ConvertFrom-Json ).data.windows
+  $(glazewmCliPath query windows | ConvertFrom-Json ).data.windows
     | %{$index=0}{
       [PSCustomObject]@{
         Index = $index
@@ -283,6 +284,7 @@ function GetGlazewmWindows(){
 if(Test-Path $glazewmPath)
 {
   New-Alias -Force -Name glazewmdev -Value $glazewmPath
+  New-Alias -Force -Name glazewm-cli -Value $glazewmCliPath
   New-Alias -Force -Name Get-GlazewmWindows -Value GetGlazewmWindows
 } else {
   New-Alias -Force -Name glazewmdev -Value "Write-Host 'Please build glazewm Dev.'"
