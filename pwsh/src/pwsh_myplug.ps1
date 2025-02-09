@@ -159,11 +159,11 @@ function Get-AllChildItem
 }
 function llong
 {
-  lsd -l --sort extension
+  lsd -l extension
 }
 function lldot
 {
-  lsd -al --sort extension
+  lsd -la extension
 }
 if(Test-CommandExist('lsd'))
 {
