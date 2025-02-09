@@ -153,15 +153,17 @@ if(Test-Path($lunarvimPath))
 ## lsd
 function Get-FilteredChildItem
 {
-  Get-ChildItem -Force | Where-Object { -not $_.Name.StartsWith(".") }
+  param($args)
+  Get-ChildItem -Force @args | Where-Object { -not $_.Name.StartsWith(".") }
 }
 function Get-AllChildItem
 { 
-  Get-ChildItem -Force
+  param($args)
+  Get-ChildItem -Force @args
 }
-function llong { lsd -l }
-function lldot { lsd -la }
-function ldot { lsd -a }
+function llong { param($args) lsd -l @args }
+function lldot { param($args) lsd -la @args }
+function ldot { param($args) lsd -a @args }
 if(Test-CommandExist('lsd'))
 {
   New-Alias -Name 'ls' -Value lsd -Force
