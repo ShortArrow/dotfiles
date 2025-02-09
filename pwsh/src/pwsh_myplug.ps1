@@ -47,6 +47,7 @@ Set-PSReadlineOption -BellStyle None
 Set-PSReadlineOption -EditMode "Vi"
 Set-PSReadLineKeyHandler -Chord "Ctrl+n" -Function HistorySearchForward
 Set-PSReadLineKeyHandler -Chord "Ctrl+p" -Function HistorySearchBackward
+Set-PSReadLineKeyHandler -Chord "Ctrl+delete" -Function BackwardKillWord
 
 # criteria of when leave history, contains word "SKIPHISTORY", or only one charactor of alphabet, or finish terminal command.
 
@@ -83,6 +84,7 @@ Set-PSReadLineKeyHandler -Key "alt+r" -BriefDescription "reloadPROFILE" -LongDes
 
 # PSFzf
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
+$env:FZF_DEFAULT_OPTS = '--bind ctrl-u:unix-line-discard'
 
 # gsudo
 # choco install gsudo
@@ -154,19 +156,16 @@ function Get-FilteredChildItem
   Get-ChildItem -Force | Where-Object { -not $_.Name.StartsWith(".") }
 }
 function Get-AllChildItem
-{
-  Get-ChildItem -Force 
+{ 
+  Get-ChildItem -Force
 }
-function llong
-{
-  lsd -l extension
-}
-function lldot
-{
-  lsd -la extension
-}
+function llong { lsd -l }
+function lldot { lsd -la }
+function ldot { lsd -a }
 if(Test-CommandExist('lsd'))
 {
+  New-Alias -Name 'ls' -Value lsd -Force
+  New-Alias -Name 'l.' -Value ldot -Force
   New-Alias -Name 'll' -Value llong -Force
   New-Alias -Name 'll.' -Value lldot -Force
 } else
