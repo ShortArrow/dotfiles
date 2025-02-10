@@ -271,7 +271,7 @@ if(Test-Path $chromeDevPath)
 $glazewmPath= "$env:USERPROFILE/Documents/GitHub/glazewm/target/release/glazewm.exe"
 $glazewmCliPath= "$env:USERPROFILE/Documents/GitHub/glazewm/target/release/glazewm-cli.exe"
 function GetGlazewmWindows(){
-  $(glazewmCliPath query windows | ConvertFrom-Json ).data.windows
+  $(& "$glazewmCliPath" query windows | ConvertFrom-Json ).data.windows
     | %{$index=0}{
       [PSCustomObject]@{
         Index = $index
