@@ -265,11 +265,23 @@ if(Test-Path $chromeDevPath)
 } else {
   New-Alias -Force -Name chromedev -Value "Write-Host 'Please install Chrome Dev.'"
 }
+
+# ConvertFrom-Json for ShiftJIS
+Function ConvertFrom-JsonShiftJIS {
+  param(
+    [Parameter(Mandatory=$true, ValueFromPipeline=$true)]
+    [string]$json
+  )
+  $jsonBytes = [System.Text.Encoding]::GetEncoding("shift_jis").GetBytes($json)
+  $jsonString = [System.Text.Encoding]::UTF8.GetString($jsonBytes)
+  ConvertFrom-Json -InputObject $jsonString
+}
+
 # glazewm dev
 $glazewmPath= "$env:USERPROFILE/Documents/GitHub/glazewm/target/release/glazewm.exe"
 $glazewmCliPath= "$env:USERPROFILE/Documents/GitHub/glazewm/target/release/glazewm-cli.exe"
 function GetGlazewmWindows(){
-  $(& "$glazewmCliPath" query windows | ConvertFrom-Json ).data.windows
+  $(& "$glazewmCliPath" query windows | ConvertFrom-JsonShiftJIS ).data.windows
     | %{$index=0}{
       [PSCustomObject]@{
         Index = $index
