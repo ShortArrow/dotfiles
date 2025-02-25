@@ -27,4 +27,7 @@ elseif 0 ~= vim.fn.exists("g:started_by_firenvim") then
 else
   -- ordinary neovim
   usecase_ordinal()
+  if vim.g.neovide then
+    vim.o.guifont = "JetBrainsMonoNL Nerd Font:h14"
+  end
 end
