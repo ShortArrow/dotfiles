@@ -21,7 +21,7 @@ M.activate = function()
   keymap({ "x", "o", "n" }, "gc", "<Plug>VSCodeCommentary")
   keymap({ "n" }, "gcc", "<Plug>VSCodeCommentaryLine")
   keymap("n", "<Leader>tr", action("workbench.actions.view.problems"))
-  keymap("n", "<Leader>tt", action("workbench.action.terminal.toggleTerminal"))
+  keymap("n", "<Leader>tt", action("workbench.action.terminal.focus"))
   keymap("n", "<Leader>ld", action("editor.action.goToDeclaration"))
   --vim.keymap.set("n", "<Leader>lh", action("editor.action.showHover"))
   keymap("n", "<Leader>lf", action("editor.action.formatDocument"))
@@ -49,8 +49,8 @@ M.activate = function()
   -- Paste from clipboard
   keymap("n", "<Leader>p", '"+p')
   keymap("n", "<Leader>P", '"+P')
-  keymap("v", "<Leaderp", '"+p')
-  keymap("v", "<LeaderP", '"+P')
+  keymap("v", "<Leader>p", '"+p')
+  keymap("v", "<Leader>P", '"+P')
 end
 
 return M
