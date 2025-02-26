@@ -164,6 +164,7 @@ window_rules:
       - window_process: { equals: 'Code' } # Visual Studio Code
       - window_process: { equals: 'Code - Insiders' } # Visual Studio Code Insiders
       - window_process: { equals: 'zed' } # Zed editor
+      - window_process: { equals: 'neovide' }
 
   - commands: ['move --workspace 4']
     match:
