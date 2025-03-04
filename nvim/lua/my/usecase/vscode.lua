@@ -3,7 +3,9 @@ local M = {}
 M.activate = function()
   vim.g.mapleader = " "
   vim.opt.virtualedit = "block"
+  vim.g.clipboard = vim.g.vscode_clipboard
   local vscode = require("vscode")
+  vim.notify = vscode.notify
 
   -- Set VSCode command to Neovim keymap
   local function action(cmd)
@@ -18,6 +20,11 @@ M.activate = function()
   end
 
   ---This is keymap of commentout
+  vim.keymap.set({ "n", "x" }, "<leader>r", function()
+    vscode.with_insert(function()
+      vscode.action("editor.action.refactor")
+    end)
+  end)
   keymap({ "x", "o", "n" }, "gc", "<Plug>VSCodeCommentary")
   keymap({ "n" }, "gcc", "<Plug>VSCodeCommentaryLine")
   keymap("n", "<Leader>tr", action("workbench.actions.view.problems"))
