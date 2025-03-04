@@ -1,7 +1,4 @@
 {
-    "workbench.colorCustomizations": {
-        "editorCursor.foreground": "#673AB7"
-    },
     "googleTranslateExt.languages": [
         "en",
         "ja"
@@ -15,6 +12,17 @@
     "extensions.experimental.affinity": {
         "asvetliakov.vscode-neovim": 1
     },
+    "clangd.arguments": [
+        "--log=verbose"
+    ],
+    "vscode-neovim.compositeKeys": {
+      "jj": {
+          "command": "vscode-neovim.escape"
+      }
+    },
+    "Lua.diagnostics.globals": [
+        "vim"
+    ],
     "[dart]": {
         "editor.formatOnSave": true,
         "editor.formatOnType": true,
@@ -26,28 +34,35 @@
         "editor.tabCompletion": "onlySnippets",
         "editor.wordBasedSuggestions": "off"
     },
+    "[python]": {
+        "diffEditor.ignoreTrimWhitespace": false,
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.formatOnType": true
+    },
     "C_Cpp.intelliSenseEngine": "disabled",
-    "LineNumberDeco.activeForeground": "#219DDD",
+    "LineNumberDeco.activeForeground": "#219ddd",
     "LineNumberDeco.centerColorOfRainbow": "#9090C0",
     "LineNumberDeco.enableRainbow": false,
     "LineNumberDeco.enableRepeatingDigits": true,
     "arduino.useArduinoCli": true,
     "chat.editor.fontFamily": "'JetBrainsMono Nerd Font Mono', Consolas, 'Courier New', monospace",
+    "cmake.showOptionsMovedNotification": false,
     "debug.console.fontFamily": "'JetBrainsMono Nerd Font Mono', Consolas, 'Courier New', monospace",
     "diffEditor.hideUnchangedRegions.enabled": true,
     "diffEditor.ignoreTrimWhitespace": false,
-    "dotnet.preferCSharpExtension": true,
+    "diffEditor.renderSideBySide": false,
     "editor.fontFamily": "'JetBrainsMono Nerd Font Mono', Consolas, 'Courier New', monospace",
+    "editor.stickyScroll.enabled": false,
     "editor.tabSize": 2,
     "editor.wrappingStrategy": "advanced",
     "git.autofetch": true,
     "git.openRepositoryInParentFolders": "never",
+    "github.copilot.chat.editor.temporalContext.enabled": true,
     "github.copilot.chat.generateTests.codeLens": true,
     "github.copilot.chat.inlineChatCompletionTrigger.enabled": true,
     "github.copilot.chat.inlineChatHint.enabled": true,
     "github.copilot.chat.localeOverride": "ja",
     "github.copilot.chat.search.semanticTextResults": true,
-    "github.copilot.chat.temporalContext.enabled": true,
     "github.copilot.chat.welcomeMessage": "never",
     "gitlens.ai.model": "openai:gpt-4o",
     "google-translate.firstLanguage": "ja-jp",
@@ -55,7 +70,8 @@
     "intellicode-completions-cdk.runAlongsideCopilot": true,
     "markdown-pdf.breaks": true,
     "markdown.preview.breaks": true,
-    "omnisharp.enableDecompilationSupport": true,
+    "markdown.preview.scrollEditorWithPreview": false,
+    "markdown.preview.scrollPreviewWithEditor": false,
     "powershell.integratedConsole.showOnStartup": false,
     "powershell.pester.codeLens": false,
     "python.analysis.typeCheckingMode": "basic",
@@ -71,16 +87,5 @@
     "workbench.colorTheme": "Tango+",
     "workbench.editor.showTabs": "single",
     "workbench.layoutControl.enabled": false,
-    "clangd.arguments": [
-        "--log=verbose"
-    ],
-    "vscode-neovim.compositeKeys": {
-      "jj": {
-          "command": "vscode-neovim.escape"
-      }
-    },
-    "Lua.diagnostics.globals": [
-        "vim"
-    ],
     "Lua.runtime.version": "Lua 5.1"
 }
