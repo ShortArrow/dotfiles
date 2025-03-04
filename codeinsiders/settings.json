@@ -7,11 +7,31 @@
         "*": true,
         "plaintext": true,
         "markdown": true,
-        "scminput": true
+        "scminput": true,
+        "csharp": true
     },
     "extensions.experimental.affinity": {
         "asvetliakov.vscode-neovim": 1
     },
+    "clangd.arguments": [
+        "--log=verbose"
+    ],
+    "vscode-neovim.compositeKeys": {
+      "jj": {
+          "command": "vscode-neovim.escape"
+      }
+    },
+    "Lua.diagnostics.globals": [
+        "vim"
+    ],
+    "roo-cline.allowedCommands": [
+        "npm test",
+        "npm install",
+        "tsc",
+        "git log",
+        "git diff",
+        "git show"
+    ],
     "[dart]": {
         "editor.formatOnSave": true,
         "editor.formatOnType": true,
@@ -35,17 +55,24 @@
     "diffEditor.hideUnchangedRegions.enabled": true,
     "diffEditor.ignoreTrimWhitespace": false,
     "editor.fontFamily": "'JetBrainsMono Nerd Font Mono', Consolas, 'Courier New', monospace",
+    "editor.lineNumbers": "relative",
     "editor.stickyScroll.enabled": false,
     "editor.tabSize": 2,
     "editor.wrappingStrategy": "advanced",
     "git.autofetch": true,
     "git.openRepositoryInParentFolders": "never",
     "github.copilot.chat.editor.temporalContext.enabled": true,
+    "github.copilot.chat.edits.codesearch.enabled": true,
+    "github.copilot.chat.edits.temporalContext.enabled": true,
+    "github.copilot.chat.enableUserPreferences": true,
     "github.copilot.chat.generateTests.codeLens": true,
     "github.copilot.chat.inlineChatCompletionTrigger.enabled": true,
     "github.copilot.chat.inlineChatHint.enabled": true,
+    "github.copilot.chat.languageContext.typescript.enabled": true,
     "github.copilot.chat.localeOverride": "ja",
+    "github.copilot.chat.scopeSelection": true,
     "github.copilot.chat.search.semanticTextResults": true,
+    "github.copilot.chat.startDebugging.enabled": false,
     "github.copilot.chat.welcomeMessage": "never",
     "github.copilot.nextEditSuggestions.enabled": true,
     "gitlens.ai.model": "openai:gpt-4o",
@@ -65,22 +92,11 @@
     "terminal.integrated.defaultProfile.windows": "PowerShell",
     "terminal.integrated.enableImages": true,
     "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font Mono', Consolas, 'Courier New', monospace",
-    "vscode-neovim.logOutputToConsole": true,
     "window.commandCenter": false,
     "window.menuBarVisibility": "toggle",
     "workbench.colorTheme": "Tango+",
     "workbench.editor.showTabs": "single",
     "workbench.layoutControl.enabled": false,
-    "clangd.arguments": [
-        "--log=verbose"
-    ],
-    "vscode-neovim.compositeKeys": {
-      "jj": {
-          "command": "vscode-neovim.escape"
-      }
-    },
-    "Lua.diagnostics.globals": [
-        "vim"
-    ],
+    "workbench.navigationControl.enabled": false,
     "Lua.runtime.version": "Lua 5.1"
 }
