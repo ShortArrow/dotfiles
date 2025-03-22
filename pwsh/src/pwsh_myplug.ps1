@@ -350,3 +350,9 @@ if(Test-Path $tsharkPath)
   New-Alias -Force -Name tshark -Value "Write-Host 'Please install Wireshark.'"
 }
 
+# Windows wmic
+function Get-LogicalDisks
+{
+  wmic logicaldisk get name, volumename
+}
+
