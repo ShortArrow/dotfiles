@@ -159,9 +159,15 @@ function Get-AllChildItem
 { 
   & Get-ChildItem -Force @args
 }
-function llong { & lsd -l @args }
-function lldot { & lsd -la @args }
-function ldot { & lsd -a @args }
+function llong
+{ & lsd -l @args 
+}
+function lldot
+{ & lsd -la @args 
+}
+function ldot
+{ & lsd -a @args 
+}
 if(Test-CommandExist('lsd'))
 {
   New-Alias -Name 'ls' -Value lsd -Force
@@ -245,8 +251,8 @@ New-Alias -Name poweroff -Value Start-Poweroff -Force
 function GetCfaEvent()
 {
   Get-WinEvent -LogName "Microsoft-Windows-Windows Defender/Operational"
-    | Where-Object {$_.Id -eq "1123" }
-    | fzf --reverse
+  | Where-Object {$_.Id -eq "1123" }
+  | fzf --reverse
 }
 New-Alias -Name cfa -Value GetCfaEvent -Force
 
@@ -262,12 +268,14 @@ $chromeDevPath = "C:\Program Files\Google\Chrome Dev\Application\chrome.exe"
 if(Test-Path $chromeDevPath)
 {
   New-Alias -Force -Name chromedev -Value $chromeDevPath
-} else {
+} else
+{
   New-Alias -Force -Name chromedev -Value "Write-Host 'Please install Chrome Dev.'"
 }
 
 # ConvertFrom-Json for ShiftJIS
-Function ConvertFrom-JsonShiftJIS {
+Function ConvertFrom-JsonShiftJIS
+{
   param(
     [Parameter(Mandatory=$true, ValueFromPipeline=$true)]
     [string]$json
@@ -280,23 +288,25 @@ Function ConvertFrom-JsonShiftJIS {
 # glazewm dev
 $glazewmPath= "$env:USERPROFILE/Documents/GitHub/glazewm/target/release/glazewm.exe"
 $glazewmCliPath= "$env:USERPROFILE/Documents/GitHub/glazewm/target/release/glazewm-cli.exe"
-function GetGlazewmWindows(){
+function GetGlazewmWindows()
+{
   $(& "$glazewmCliPath" query windows | ConvertFrom-JsonShiftJIS ).data.windows
-    | %{$index=0}{
-      [PSCustomObject]@{
-        Index = $index
-        Title = $_.title
-        ProcessName = $_.processname
-        ClassName = $_.classname
-      };$index++;}
-    | ft -AutoSize
+  | %{$index=0}{
+    [PSCustomObject]@{
+      Index = $index
+      Title = $_.title
+      ProcessName = $_.processname
+      ClassName = $_.classname
+    };$index++;}
+  | ft -AutoSize
 }
 if(Test-Path $glazewmPath)
 {
   New-Alias -Force -Name glazewmdev -Value $glazewmPath
   New-Alias -Force -Name glazewm-cli -Value $glazewmCliPath
   New-Alias -Force -Name Get-GlazewmWindows -Value GetGlazewmWindows
-} else {
+} else
+{
   New-Alias -Force -Name glazewmdev -Value "Write-Host 'Please build glazewm Dev.'"
 }
 
@@ -309,7 +319,8 @@ function SetDefaultApp()
 New-Alias -Name Set-DefaultApp -Value SetDefaultApp -Force
 
 #For PowerShell v3
-Function gig {
+Function gig
+{
   param(
     [Parameter(Mandatory=$true)]
     [string[]]$list
@@ -323,7 +334,8 @@ $thoriumPath = "$env:LOCALAPPDATA/Thorium/Application/thorium.exe"
 if(Test-Path $thoriumPath)
 {
   New-Alias -Force -Name thorium -Value $thoriumPath
-} else {
+} else
+{
   New-Alias -Force -Name thorium -Value "Write-Host 'Please install Thorium.'"
 }
 
@@ -333,7 +345,8 @@ $tsharkPath = "C:\Program Files\Wireshark\tshark.exe"
 if(Test-Path $tsharkPath)
 {
   New-Alias -Force -Name tshark -Value $tsharkPath
-} else {
+} else
+{
   New-Alias -Force -Name tshark -Value "Write-Host 'Please install Wireshark.'"
 }
 
