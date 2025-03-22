@@ -4,6 +4,7 @@ M.activate = function()
   vim.g.mapleader = " "
   vim.opt.virtualedit = "block"
   vim.g.clipboard = vim.g.vscode_clipboard
+  vim.g.loaded_python3_provider = 0
   local vscode = require("vscode")
   vim.notify = vscode.notify
 
