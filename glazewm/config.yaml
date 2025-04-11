@@ -148,6 +148,7 @@ window_rules:
   - commands: ['move --workspace 0']
     match:
       - window_process: { equals: 'glazewm' }
+      - window_process: { equals: 'TkTopLevel' }
 
   - commands: ['move --workspace 1']
     match:
