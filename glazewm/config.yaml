@@ -180,6 +180,7 @@ window_rules:
   - commands: ['move --workspace 6']
     match:
       - window_process: { equals: 'CubeChecker' } # CubeChecker
+      - window_process: { equals: 'RDCMan' }
 
   - commands: ['move --workspace 9']
     match:
