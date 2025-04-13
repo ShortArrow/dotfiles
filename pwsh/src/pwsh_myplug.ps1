@@ -356,3 +356,16 @@ function Get-LogicalDisks
   wmic logicaldisk get name, volumename
 }
 
+function Get-RecycleBin
+{
+  $recycleBin = Get-ChildItem -Path "C:\$Recycle.Bin" -Force
+  $recycleBin | Where-Object { $_.PSIsContainer } | ForEach-Object {
+    Write-Host "Drive: $($_.Name)"
+    Get-ChildItem -Path $_.FullName -Force | Select-Object Name, Length, LastWriteTime
+  }
+}
+function Show-RecycleBin
+{
+  explorer.exe shell:RecycleBinFolder
+}
+
