@@ -29,7 +29,10 @@ function Add-NeedInstall
 }
 
 # Reload Env
-$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+function Reload-EnvironmentVariables{
+  $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+}
+Reload-EnvironmentVariables
 
 ## Reload this profile
 function Read-Profile()
@@ -356,6 +359,7 @@ function Get-LogicalDisks
   wmic logicaldisk get name, volumename
 }
 
+# RecycleBin
 function Get-RecycleBin
 {
   $recycleBin = Get-ChildItem -Path "C:\$Recycle.Bin" -Force
@@ -364,8 +368,54 @@ function Get-RecycleBin
     Get-ChildItem -Path $_.FullName -Force | Select-Object Name, Length, LastWriteTime
   }
 }
+
 function Show-RecycleBin
 {
   explorer.exe shell:RecycleBinFolder
+}
+
+# path
+function Edit-Env {
+  param(
+    [string]$ScopeName,
+    [string]$VariableName,
+    [string]$EditorName
+  )
+  # Check if Vim is available
+  if (-not (Get-Command $EditorName -ErrorAction SilentlyContinue)) {
+    Write-Error "${EditorName}is not installed or not in PATH."
+    return
+  }
+
+  # Get current user PATH
+  $currentPath = [Environment]::GetEnvironmentVariable($VariableName, $ScopeName)
+
+  # Create a temporary file with the current PATH (each directory on a separate line for better editing)
+  $tempFile = [System.IO.Path]::GetTempFileName()
+  $currentPath -split ";" | Where-Object { $_ } | ForEach-Object { $_ } | Out-File -FilePath $tempFile -Encoding utf8
+
+  # Open Vim to edit the PATH
+  Start-Process -FilePath $EditorName -ArgumentList $tempFile -Wait -NoNewWindow
+
+  # Read the edited content
+  $newPathItems = Get-Content -Path $tempFile | Where-Object { $_ -ne "" }
+
+  # Join the items with semicolons
+  $newPath = $newPathItems -join ";"
+
+  # Set the environment variable
+  [Environment]::SetEnvironmentVariable($VariableName, $newPath, $ScopeName)
+
+  # Clean up
+  Remove-Item -Path $tempFile -Force
+
+  Write-Host "PATH has been updated." -ForegroundColor Green
+  Write-Host "Please restart your shell or run 'refreshenv'."
+}
+function Edit-PathForUser {
+  Edit-Env -ScopeName "User" -VariableName "Path" -EditorName "vim"
+}
+function Edit-PathForMachine{
+  Edit-Env -ScopeName "Machine" -VariableName "Path" -EditorName "vim"
 }
 
