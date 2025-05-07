@@ -8,3 +8,9 @@ git:
     colorArg: always
     # pager: delta --dark --paging=never
     pager: diff-so-fancy
+customCommands:
+  - key: "C"
+    context: "files"
+    command: "git commit -v"
+    description: "Commit changes using git editor"
+    subprocess: true
