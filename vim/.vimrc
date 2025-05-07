@@ -119,3 +119,37 @@ elseif has("win32")
 	" 32bit_windows固有の設定
 endif
 
+" GitHub Copilot
+let g:copilot_filetypes = #{
+  \   gitcommit: v:true,
+  \   markdown: v:true,
+  \   text: v:true,
+  \ }
+
+autocmd BufReadPre *
+    \ let f=getfsize(expand("<afile>"))
+    \ | if f > 100000 || f == -2
+    \ | let b:copilot_enabled = v:false
+    \ | endif
+
+function s:append_diff() abort
+  " Get the Git repository root directory
+    let git_dir = system('git rev-parse --show-toplevel')
+    if v:shell_error
+        echom "Not a Git repository"
+    else
+        let git_root = substitute(git_dir, '\n$', '', '')
+    endif
+
+  " Get the diff of the staged changes relative to the Git repository root
+  let diff = system('git -C ' . git_root . ' diff --cached')
+
+  " Add a comment character to each line of the diff
+  let comment_diff = join(map(split(diff, '\n'), {idx, line -> '# ' . line}), "\n")
+
+  " Append the diff to the commit message
+  call append(line('$'), split(comment_diff, '\n'))
+endfunction
+
+autocmd BufReadPost COMMIT_EDITMSG call s:append_diff()
+
