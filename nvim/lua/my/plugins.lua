@@ -553,10 +553,7 @@ M.ordinalnvim = {
   { "hrsh7th/cmp-nvim-lsp" },
   {
     "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
-    "jayp0521/mason-null-ls.nvim",
-    "jayp0521/mason-nvim-dap.nvim",
     -- dependencies = {
     --   "jose-elias-alvarez/null-ls.nvim",
     --   "mfussenegger/nvim-dap",
@@ -566,6 +563,18 @@ M.ordinalnvim = {
     --   "kevinhwang91/nvim-ufo",
     -- },
     config = get_config("_mason").setup,
+  },
+  {
+    "jayp0521/mason-nvim-dap.nvim",
+    config = get_config("_mason_nvim_dap").setup,
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    config = get_config("_mason_lspconfig").setup,
+  },
+  {
+    "jayp0521/mason-null-ls.nvim",
+    config = get_config("_mason_null_ls").setup,
   },
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
