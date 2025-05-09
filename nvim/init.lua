@@ -1,3 +1,4 @@
+-- require "luadebug" : start "127.0.0.1:4980" : event "wait"
 local function usecase_ordinal()
   local options = require("my.options")
   options.activate()
