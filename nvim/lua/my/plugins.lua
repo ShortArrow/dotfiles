@@ -680,8 +680,8 @@ M.ordinalnvim = {
     config = get_config("_autopairs").setup,
   },
   {
-    "jose-elias-alvarez/null-ls.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    "nvimtools/none-ls.nvim",
+    -- dependencies = { "nvim-lua/plenary.nvim" },
     config = get_config("_null_ls").setup,
   },
   {
