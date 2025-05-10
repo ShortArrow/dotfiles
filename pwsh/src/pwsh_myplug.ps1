@@ -31,8 +31,28 @@ function Add-NeedInstall
 # Reload Env
 function Reload-EnvironmentVariables{
   $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+  $env:EDITOR = [System.Environment]::GetEnvironmentVariable("EDITOR","Machine") ? [System.Environment]::GetEnvironmentVariable("EDITOR","Machine") : [System.Environment]::GetEnvironmentVariable("EDITOR","User")
+  $env:VISUAL = [System.Environment]::GetEnvironmentVariable("VISUAL", "Machine") ? [System.Environment]::GetEnvironmentVariable("VISUAL","Machine") : [System.Environment]::GetEnvironmentVariable("VISUAL","User")
+  Write-Host "Current session Path updated." -ForegroundColor Cyan
+
+  # Environment variable change broadcast
+  if (-not ([System.Management.Automation.PSTypeName]'NativeMethodsForEnvReload').Type) {
+    Add-Type @"
+    using System;
+    using System.Runtime.InteropServices;
+
+    public class NativeMethodsForEnvReload {
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool SendNotifyMessage(IntPtr hWnd, uint Msg, IntPtr wParam, string lParam);
+    }
+"@
+  }
+  $HWND_BROADCAST = [System.IntPtr]0xffff
+  $WM_SETTINGCHANGE = 0x1a
+  [NativeMethodsForEnvReload]::SendNotifyMessage($HWND_BROADCAST, $WM_SETTINGCHANGE, [System.IntPtr]::Zero, "Environment") | Out-Null
+  Write-Host "Environment variable change broadcasted to the system." -ForegroundColor Cyan
 }
-Reload-EnvironmentVariables
 
 ## Reload this profile
 function Read-Profile()
@@ -419,3 +439,4 @@ function Edit-PathForMachine{
   Edit-Env -ScopeName "Machine" -VariableName "Path" -EditorName "vim"
 }
 
+Reload-EnvironmentVariables
