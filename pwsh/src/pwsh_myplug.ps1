@@ -7,17 +7,31 @@ $script:needInstallList = @()
 
 # Helper functions
 function Test-CommandExist([string]$cmd) {
-  $script:commandExistCache[$cmd] = $script:commandExistCache[$cmd] ?? (Get-Command $cmd -ea SilentlyContinue).Count -gt 0
-  return $script:commandExistCache[$cmd]
+  if ($script:commandExistCache.ContainsKey($cmd)) {
+    return $script:commandExistCache[$cmd]
+  }
+
+  $foundCommand = Get-Command $cmd -ErrorAction SilentlyContinue
+  $exists = $null -ne $foundCommand -and $foundCommand.Count -gt 0
+  
+  $script:commandExistCache[$cmd] = $exists
+  return $exists
 }
 
-function Set-CommandAlias([string]$name, [string]$command, [string]$fallback = "") {
-  if (Test-CommandExist($command)) {
-    New-Alias -Name $name -Value $command -Force
+function Set-CommandAlias([string]$aliasName, [string]$commandName, [string]$fallback = "") {
+  if (Test-CommandExist($commandName)) {
+    New-Alias -Name $aliasName -Value $commandName -Force -Scope Global -ErrorAction Stop
   }
   else {
-    New-Alias -Name $name -Value { Write-Host "Please install $command" } -Force
-    $script:needInstallList += $command
+    $msg = "Please install $commandName"
+    $fallbackFunctionName = "Invoke_$($aliasName)_Fallback"
+    # Dynamically create a function for the fallback
+    Set-Item -Path "Function:Global:$fallbackFunctionName" -Value {
+      param([string]$message = $msg) # Capture $msg in the closure
+      Write-Host $message
+    }.GetNewClosure()
+    New-Alias -Name $aliasName -Value $fallbackFunctionName -Force -Scope Global -ErrorAction Stop
+    $script:needInstallList += $commandName
   }
 }
 
@@ -157,17 +171,6 @@ Set-Item -Path Function:\gsudo -Value ${function:Initialize-Gsudo}
 # go path
 if (Test-CommandExist('go')) {
   $env:Path = "$env:Path;$env:USERPROFILE\go\bin;"
-}
-
-# Set up common command aliases
-$commonAliases = @{
-  'gg'  = 'git-graph'
-  'lg'  = 'lazygit'
-  'lzd' = 'lazydocker'
-}
-
-foreach ($alias in $commonAliases.GetEnumerator()) {
-  Set-CommandAlias $alias.Key $alias.Value
 }
 
 # pnpm setup
@@ -447,5 +450,16 @@ $DebugPreference = 'Continue'
 # Initialize only essential environment variables
 Reload-EnvironmentVariables
 
-# Clear command existence cache after initial load
+# Set up common command aliases AFTER environment variables are reloaded
+$commonAliases = @{
+  'gg'  = 'git-graph'
+  'lg'  = 'lazygit'
+  'lzd' = 'lazydocker'
+}
+
+foreach ($alias in $commonAliases.GetEnumerator()) {
+  Set-CommandAlias $alias.Key $alias.Value
+}
+
+# Clear command existence cache after initial load and alias setup
 $script:commandExistCache.Clear()
