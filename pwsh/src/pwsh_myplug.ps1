@@ -207,23 +207,22 @@ else {
 }
 
 if (Test-CommandExist('zoxide')) {
-  # Lazy load zoxide
-  $env:ZOXIDE_INITIALIZED = $false
-  function Initialize-Zoxide {
-    if (-not $env:ZOXIDE_INITIALIZED) {
-      Invoke-Expression (& { (zoxide init powershell | Out-String) })
-      $env:ZOXIDE_INITIALIZED = $true
-    }
-  }
-  # Initialize on first use
-  $ExecutionContext.SessionState.InvokeCommand.PreCommandLookupAction = {
-    param($commandName)
-    if ($commandName -eq 'z' -and -not $env:ZOXIDE_INITIALIZED) {
-      Initialize-Zoxide
-    }
-  }
+  Invoke-Expression (& { (zoxide init powershell | Out-String) })
 }
 else {
+  # Define Show-NeedInstall if not already defined
+  if (-not (Get-Command Show-NeedInstall -ErrorAction SilentlyContinue)) {
+    function Show-NeedInstall {
+      Write-Host "Required command not found. Please install it."
+    }
+  }
+  # Define Add-NeedInstall if not already defined
+  if (-not (Get-Command Add-NeedInstall -ErrorAction SilentlyContinue)) {
+    function Add-NeedInstall([string]$command) {
+      $script:needInstallList += $command
+      Write-Host "$command added to the list of commands to install."
+    }
+  }
   New-Alias -Name z -Value Show-NeedInstall -Force
   Add-NeedInstall 'zoxide'
 }
