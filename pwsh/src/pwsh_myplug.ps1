@@ -99,7 +99,8 @@ Set-PSReadLineOption -WordDelimiters ";:,.[]{}()/\|^&*-=+'`" !?@#$%&_<>「」（
 Invoke-Expression (&starship init powershell)
 
 # Reload PROFILE
-Set-PSReadLineKeyHandler -Key "alt+r" -BriefDescription "reloadPROFILE" -LongDescription "reloadPROFILE" -ScriptBlock {
+Set-PSReadLineKeyHandler -Key "Alt+R" -BriefDescription "reloadPROFILE" -LongDescription "reloadPROFILE" -ScriptBlock {
+  Write-Output "Reloading profile..."
   [Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
   [Microsoft.PowerShell.PSConsoleReadLine]::Insert('<#SKIPHISTORY#> . $PROFILE')
   [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
