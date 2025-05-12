@@ -1,5 +1,10 @@
 #! pwsh
 
+param(
+    [ValidateSet("Debug", "Release", "None")]
+    [string]$Target = "None"
+)
+
 function IsAdmin() {
     $identity = [System.Security.Principal.WindowsIdentity]::GetCurrent()
     $principal = New-Object System.Security.Principal.WindowsPrincipal($identity)
@@ -11,18 +16,29 @@ function RestartWithAdmin()
 {
     $scriptPath = Resolve-Path $Script:MyInvocation.MyCommand.Path
     # if you want debug, add '-noe' option to $arguments
-    $arguments = @("-nop", "-nol", "-ex", "RemoteSigned", "-f", "$scriptPath")
+    $arguments = @("-nop", "-nol", "-ex", "RemoteSigned", "-c", "$scriptPath -Target $Target")
     Start-Process pwsh -ArgumentList $arguments -Verb RunAs -Wait -PassThru
-    exit
 }
 
 if (-not (IsAdmin)) {
     RestartWithAdmin
+    exit
+}
+
+# check in no capital or lower case
+if ($Target.ToLower() -eq "debug") {
+    $glazewmPath = Resolve-Path `
+        -Path "$env:USERPROFILE/Documents/GitHub/glazewm/target/debug/glazewm.exe"
+}
+elseif ($Target.ToLower() -eq "release") {
+    $glazewmPath = Resolve-Path `
+        -Path "$env:USERPROFILE/Documents/GitHub/glazewm/target/release/glazewm.exe"
+}
+else {
+    $glazewmPath = "glazewm.exe"
 }
 
 $taskName = "GlazeWM_Task"
-$glazewmPath = Resolve-Path `
-    -Path "$env:USERPROFILE/Documents/GitHub/glazewm/target/release/glazewm.exe"
 $argument = @(
         "-c `"`$PSStyle.OutputRendering='Ansi'",
         "`$host.UI.RawUI.WindowTitle = 'GlazewmLog'",
