@@ -1,4 +1,18 @@
-if (Test-Path "$env:APPDATA/lazygit/config.yml"){
-  Remove-Item "$env:APPDATA/lazygit/config.yml"
+#!pwsh
+
+$scriptDirectory = Split-Path -Parent $MyInvocation.MyCommand.Definition
+
+$targetDirectory = "$env:APPDATA"
+
+$item = "lazygit"
+
+if (Test-Path "$targetDirectory/$item") {
+    Remove-Item "$targetDirectory/$item" -Force
 }
-New-Item -ItemType SymbolicLink -Path "$env:APPDATA\lazygit\config.yml" -Value "$env:USERPROFILE/Documents/GitHub/dotfiles/lazygit/config.yaml"
+
+New-Item `
+  -Type SymbolicLink `
+  -Path "$targetDirectory" `
+  -Name "$item" `
+  -Value (Resolve-Path "$scriptDirectory")
+
