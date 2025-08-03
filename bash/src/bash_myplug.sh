@@ -51,9 +51,7 @@ alias sudo="sudo -v; sudo"
 # ignore case on completion
 bind "set completion-ignore-case on"
 
-# mosh
-export LANG="en_US.UTF8"
-export LC_CTYPE="en_US.UTF8"
+
 
 # go
 export PATH="$PATH:$HOME/go/bin"
@@ -182,6 +180,15 @@ fi
 export PATH="$PATH:$HOME/.local/bin"
 if [ -f /etc/bash_completion ]; then
   . /etc/bash_completion
+fi
+
+# SUDO_ASKPASS - GUI password prompt for sudo
+if command_exists "zenity"; then
+  export SUDO_ASKPASS="zenity --password --title='sudo password required'"
+elif command_exists "kdialog"; then
+  export SUDO_ASKPASS="kdialog --password 'sudo password required'"
+elif command_exists "ssh-askpass"; then
+  export SUDO_ASKPASS="ssh-askpass"
 fi
 
 # WSL2
