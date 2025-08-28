@@ -38,7 +38,7 @@ window_effects:
     # ** Exclusive to Windows 11 due to API limitations.
     border:
       enabled: true
-      color: '#8dbcff'
+      color: '#00ff00'
 
   # Visual effects to apply to non-focused windows.
   other_windows:
@@ -72,37 +72,37 @@ window_behavior:
 
 workspaces:
   - name: "0"
-    display_name: "🐚0"
+    display_name: "0"
     bind_to_monitor: 1
     keep_alive: true
   - name: "1"
-    display_name: "🌐1"
+    display_name: "1"
     bind_to_monitor: 1
     keep_alive: true
   - name: "2"
-    display_name: "🐚2"
+    display_name: "2"
     bind_to_monitor: 1
     keep_alive: true
   - name: "3"
-    display_name: "🆚3"
+    display_name: "3"
     bind_to_monitor: 1
     keep_alive: true
   - name: "4"
-    display_name: "💬4"
+    display_name: "4"
     bind_to_monitor: 1
     keep_alive: true
   - name: "5"
-    display_name: "✉5"
+    display_name: "5"
     bind_to_monitor: 1
     keep_alive: true
   - name: "6"
-    display_name: "📖6"
+    display_name: "6"
     bind_to_monitor: 1
     keep_alive: true
   - name: "7"
   - name: "8"
   - name: "9"
-    display_name: "🐳9"
+    display_name: "9"
     bind_to_monitor: 1
     keep_alive: true
 
@@ -162,6 +162,7 @@ window_rules:
       - window_process: { equals: 'WindowsTerminal' } # Microsoft Terminal
       - window_class: { equals: 'org.wezfurlong.wezterm' } # WezTerm
       - window_process: { equals: 'alacritty' } # Alacritty
+      - window_process: { equals: 'warp.exe' } # Warp terminal
 
   - commands: ['move --workspace 3']
     match:
@@ -177,7 +178,8 @@ window_rules:
   - commands: ['move --workspace 5']
     match:
       - window_process: { equals: 'olk' } # Outlook
-  
+      - window_title: { regex: '.*Outlook.*PWA.*' } # Outlook
+
   - commands: ['move --workspace 6']
     match:
       - window_process: { equals: 'CubeChecker' } # CubeChecker
