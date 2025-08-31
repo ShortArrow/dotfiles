@@ -6,12 +6,13 @@
 # Inserts a blank line between shell prompts
 add_newline = true
 
-# Replace the '❯' symbol in the prompt with '➜'
-[character] # The name of the module we are configuring is 'character'
-success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
-
 # The symbol to display when the last command failed
 command_timeout = 5
+
+# Replace the '❯' symbol in the prompt with '➜'
+[character] # The name of the module we are configuring is 'character'
+success_symbol = '[ ](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
+vimcmd_symbol = '[ ](bold green)' # The 'error_symbol' segment is being set to '➜' with the color 'bold red''[❮](bold green)' The format string used before the text input if the shell is in vim normal mode.
 
 # Disable the package module, hiding it from the prompt completely
 [battery]
