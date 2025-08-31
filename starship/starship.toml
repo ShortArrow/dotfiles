@@ -68,9 +68,11 @@ symbol = "  "
 
 [buf]
 symbol = " "
+format = "via [$symbol]($style)"
 
 [bun]
 symbol = " "
+format = "via [$symbol]($style)"
 
 [c]
 symbol = " "
@@ -80,30 +82,40 @@ symbol = " "
 
 [cmake]
 symbol = " "
+format = "via [$symbol]($style)"
 
 [conda]
 symbol = " "
 
 [crystal]
 symbol = " "
+format = "via [$symbol]($style)"
 
 [dart]
 symbol = " "
+format = "via [$symbol]($style)"
 
 [deno]
 symbol = " "
+format = "via [$symbol]($style)"
 
 [docker_context]
 symbol = " "
 
+[dotnet]
+format = "[$symbol(🎯 $tfm )]($style)"
+
 [elixir]
 symbol = " "
+format = 'via [$symbol]($style)'
 
 [elm]
 symbol = " "
+format = 'via [$symbol]($style)'
 
 [fennel]
 symbol = " "
+format = 'via [$symbol]($style)'
 
 [fossil_branch]
 symbol = " "
@@ -114,6 +126,7 @@ symbol = "  "
 [golang]
 disabled = true
 symbol = " "
+format = 'via [$symbol]($style)'
 
 [guix_shell]
 symbol = " "
@@ -123,6 +136,7 @@ symbol = " "
 
 [haxe]
 symbol = " "
+format = 'via [$symbol]($style)'
 
 [hg_branch]
 symbol = " "
@@ -132,33 +146,41 @@ ssh_symbol = " "
 
 [java]
 symbol = " "
+format = 'via [$symbol]($style)'
 
 [julia]
 symbol = " "
+format = 'via [$symbol]($style)'
 
 [kotlin]
 symbol = " "
+format = 'via [$symbol]($style)'
 
 [lua]
 symbol = " "
+format = 'via [$symbol]($style)'
 
 [memory_usage]
 symbol = "󰍛 "
 
 [meson]
 symbol = "󰔷 "
+format = 'via [$symbol]($style)'
 
 [nim]
 symbol = "󰆥 "
+format = 'via [$symbol]($style)'
 
 [nix_shell]
 symbol = " "
 
 [nodejs]
 symbol = " "
+format = 'via [$symbol]($style)'
 
 [ocaml]
 symbol = " "
+format = 'via [$symbol(\($switch_indicator$switch_name\) )]($style)'
 
 [os.symbols]
 Alpaquita = " "
@@ -209,37 +231,92 @@ Windows = "󰍲 "
 
 [perl]
 symbol = " "
+format = 'via [$symbol]($style)'
 
 [php]
 symbol = " "
+format = 'via [$symbol]($style)'
 
 [pijul_channel]
 symbol = " "
 
 [pixi]
 symbol = "󰏗 "
+format = 'via [$symbol($environment )]($style)'
 
 [python]
 symbol = " "
+format = 'via [$symbol]($style)'
 
 [rlang]
 symbol = "󰟔 "
+format = 'via [$symbol]($style)'
 
 [ruby]
 symbol = " "
+format = 'via [$symbol]($style)'
 
 [rust]
 symbol = "󱘗 "
+format = 'via [$symbol]($style)'
 
 [scala]
 symbol = " "
+format = 'via [$symbol]($style)'
 
 [swift]
 symbol = " "
+format = 'via [$symbol]($style)'
 
 [zig]
 symbol = " "
+format = 'via [$symbol]($style)'
 
 [gradle]
 symbol = " "
+format = 'via [$symbol]($style)'
 
+[cobol]
+format = "via [$symbol]($style)"
+
+[daml]
+format = "via [$symbol]($style)"
+
+[erlang]
+format = 'via [$symbol]($style)'
+
+[gleam]
+format = 'via [$symbol]($style)'
+
+[helm]
+format = 'via [$symbol]($style)'
+
+[opa]
+format = 'via [$symbol]($style)'
+
+[pulumi]
+format = 'via [$symbol$stack]($style)'
+
+[purescript]
+format = 'via [$symbol]($style)'
+
+[quarto]
+format = 'via [$symbol]($style)'
+
+[raku]
+format = 'via [$symbol]($style)'
+
+[red]
+format = 'via [$symbol]($style)'
+
+[solidity]
+format = 'via [$symbol]($style)'
+
+[typst]
+format = 'via [$symbol]($style)'
+
+[vagrant]
+format = 'via [$symbol]($style)'
+
+[vlang]
+format = 'via [$symbol]($style)'
