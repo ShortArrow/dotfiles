@@ -8,6 +8,10 @@ M.setup = function()
   -- local trouble = require('trouble.providers.telescope')
   telescope.setup({
     defaults = {
+      -- Disable Treesitter for previews
+      preview = {
+        treesitter = false,
+      },
       layout = "vertical",
       layout_strategy = "vertical",
       winblend = 10,

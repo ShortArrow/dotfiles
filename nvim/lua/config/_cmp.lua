@@ -91,7 +91,11 @@ M.setup = function()
         if vim.bo.buftype == 'prompt' then
           return false
         end
-        local context = require("cmp.config.context")
+        -- Avoid Treesitter errors
+        local ok_context, context = pcall(require, "cmp.config.context")
+        if not ok_context then
+          return true  -- Keep cmp enabled even if error occurs
+        end
         local function is_emoji()
           return vim.api.nvim_get_current_line():match("^.*:[%w%-_]*$") ~= nil
         end

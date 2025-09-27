@@ -9,13 +9,13 @@ M.tsserver = {
 }
 
 M.has_package_json = function()
-  local output = vim.fn.systemlist('git rev-parse --show-toplevel') -- プロジェクトルートのパスを取得
+  local output = vim.fn.systemlist('git rev-parse --show-toplevel') -- Get project root path
   if vim.v.shell_error ~= 0 or #output == 0 then
     return false
   end
 
-  local package_json_path = table.concat({ output[1], 'package.json' }, '/') -- パスを結合して package.json のパスを作成
-  return vim.fn.filereadable(package_json_path) ~= 0                         -- package.json が存在する場合は真を返す
+  local package_json_path = table.concat({ output[1], 'package.json' }, '/') -- Combine paths to create package.json path
+  return vim.fn.filereadable(package_json_path) ~= 0                         -- Return true if package.json exists
 end
 
 M.get_package_json_path = function()

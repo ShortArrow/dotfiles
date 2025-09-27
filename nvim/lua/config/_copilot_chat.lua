@@ -5,23 +5,23 @@ M.opts = {
   -- See Configuration section for rest
   prompts = {
     Explain = {
-      prompt = '/COPILOT_EXPLAIN カーソル上のコードの説明を段落をつけて書いてください。',
+      prompt = '/COPILOT_EXPLAIN Write an explanation of the code under the cursor with paragraphs.',
     },
     Tests = {
-      prompt = '/COPILOT_TESTS カーソル上のコードの詳細な単体テスト関数を書いてください。',
+      prompt = '/COPILOT_TESTS Write detailed unit test functions for the code under the cursor.',
     },
     Fix = {
-      prompt = '/COPILOT_FIX このコードには問題があります。バグを修正したコードに書き換えてください。',
+      prompt = '/COPILOT_FIX There is a problem with this code. Rewrite it with the bug fixed.',
     },
     Optimize = {
-      prompt = '/COPILOT_REFACTOR 選択したコードを最適化し、パフォーマンスと可読性を向上させてください。',
+      prompt = '/COPILOT_REFACTOR Optimize the selected code to improve performance and readability.',
     },
     Docs = {
       prompt =
-      '/COPILOT_REFACTOR 選択したコードのドキュメントを書いてください。ドキュメントをコメントとして追加した元のコードを含むコードブロックで回答してください。使用するプログラミング言語に最も適したドキュメントスタイルを使用してください（例：JavaScriptのJSDoc、Pythonのdocstringsなど）',
+      '/COPILOT_REFACTOR Write documentation for the selected code. Answer with a code block including the original code with documentation added as comments. Use the documentation style most appropriate for the programming language (e.g., JSDoc for JavaScript, docstrings for Python, etc.)',
     },
     FixDiagnostic = {
-      prompt = 'ファイル内の次のような診断上の問題を解決してください：',
+      prompt = 'Please fix the following diagnostic issue in the file:',
     }
   }
 }

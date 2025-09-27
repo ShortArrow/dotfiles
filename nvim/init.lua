@@ -1,4 +1,6 @@
 -- require "luadebug" : start "127.0.0.1:4980" : event "wait"
+vim.g.lazy_ui_active = false
+
 local function usecase_ordinal()
   local options = require("my.options")
   options.activate()
@@ -8,11 +10,40 @@ local function usecase_ordinal()
   api.keymaps.commonmaps_activate()
   require("boot_lazy")
 
-  -- local log_path = vim.fn.stdpath('cache') .. '/packer.nvim.log'
-  -- print log_path
-  require("config._mason").setup()
   -- vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = "#FF0000" })
-  require("my.diagnotics")
+  vim.api.nvim_create_autocmd("VimEnter", {
+    pattern = "*",
+    once = true,
+    callback = function()
+      require("my.diagnotics")
+    end,
+  })
+
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "LazyWinEnter",
+    callback = function()
+      vim.g.lazy_ui_active = true
+    end,
+  })
+
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "LazyWinLeave",
+    callback = function()
+      vim.schedule(function()
+        vim.g.lazy_ui_active = false
+        vim.cmd("redraws!")
+      end)
+    end,
+  })
+end
+
+-- Forward deprecated LSP functions to new API
+if vim.lsp.buf_get_clients then
+  -- Redirect deprecated functions to new API
+  vim.lsp.buf_get_clients = function(bufnr)
+    bufnr = bufnr or 0
+    return vim.lsp.get_clients({ buffer = bufnr })
+  end
 end
 
 if vim.g.vscode then
