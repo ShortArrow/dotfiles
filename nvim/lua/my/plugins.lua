@@ -69,14 +69,14 @@ M.ordinalnvim = {
   {
     "echasnovski/mini.icons"
   },
-  {
-    "folke/snacks.nvim",
-    priority = 1000,
-    lazy = false,
-    opts = get_config("_snacks").opts,
-    keys = api.keymaps.maps.snacks,
-    init = get_config("_snacks").init,
-  },
+  -- {
+  --   "folke/snacks.nvim",
+  --   priority = 1000,
+  --   event = "VeryLazy",
+  --   opts = get_config("_snacks").opts,
+  --   keys = api.keymaps.maps.snacks,
+  --   config = get_config("_snacks").config,
+  -- },
   {
     "https://codeberg.org/esensar/nvim-dev-container",
     -- dependencies = { "nvim-treesitter/nvim-treesitter" },
@@ -147,6 +147,7 @@ M.ordinalnvim = {
   },
   {
     "stevearc/aerial.nvim",
+    enabled = false, -- Disabled due to Treesitter conflicts
     config = get_config("_aerial").setup,
     keys = api.keymaps.maps.aerial,
   },
@@ -255,6 +256,7 @@ M.ordinalnvim = {
   },
   {
     "SmiteshP/nvim-gps",
+    enabled = false, -- Requires Treesitter
     -- dependencies = { "nvim-treesitter/nvim-treesitter" },
     config = get_config("_gps").setup,
   },
@@ -281,13 +283,17 @@ M.ordinalnvim = {
   },
   {
     "rebelot/heirline.nvim",
-    -- You can optionally lazy-load heirline on UiEnter
-    -- to make sure all required plugins and colorschemes are loaded before setup
-    event = "UiEnter",
+    dependencies = {
+      "Zeioth/heirline-components.nvim",
+      "lewis6991/gitsigns.nvim",
+      "zeioth/compiler.nvim",
+      "linux-cultist/venv-selector.nvim",
+      "nvim-neo-tree/neo-tree.nvim",
+      "stevearc/aerial.nvim",
+    },
     opts = get_config("_heirline").opts,
-    config = get_config("_heirline").cofig,
+    config = get_config("_heirline").config,
   },
-  { "Zeioth/heirline-components.nvim" },
   -- { "lewis6991/gitsigns.nvim" },
   -- { "nvim-telescope/telescope.nvim" },
   { "zeioth/compiler.nvim" },
@@ -364,18 +370,20 @@ M.ordinalnvim = {
   --  'edluffy/specs.nvim',
   --  config = get_config('_specs').setup,
   --},
-  {
-    "folke/noice.nvim",
-    config = get_config("_noice").setup,
-    dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module='...'` entries
-      "MunifTanjim/nui.nvim",
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
-      "rcarriga/nvim-notify",
-    },
-  },
+  -- {
+  --   "folke/noice.nvim",
+  --   priority = 1001,
+  --   event = "VeryLazy",
+  --   config = get_config("_noice").setup,
+  --   dependencies = {
+  --     -- if you lazy-load any plugin below, make sure to add proper `module='...'` entries
+  --     "MunifTanjim/nui.nvim",
+  --     -- OPTIONAL:
+  --     --   `nvim-notify` is only needed, if you want to use the notification view.
+  --     --   If not available, we use `mini` as the fallback
+  --     "rcarriga/nvim-notify",
+  --   },
+  -- },
   {
     "rcarriga/nvim-dap-ui",
     -- dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
@@ -538,7 +546,7 @@ M.ordinalnvim = {
     "L3MON4D3/LuaSnip",
     -- follow latest release.
     version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-    -- install jsregexp (optional!).
+    -- install jsregexp (optional!)
     build = "make install_jsregexp",
     config = get_config("_luasnip").setup,
   },
@@ -553,32 +561,20 @@ M.ordinalnvim = {
   { "hrsh7th/cmp-nvim-lsp" },
   {
     "williamboman/mason.nvim",
-    "neovim/nvim-lspconfig",
-    -- dependencies = {
-    --   "jose-elias-alvarez/null-ls.nvim",
-    --   "mfussenegger/nvim-dap",
-    --   "ray-x/lsp_signature.nvim",
-    --   "hrsh7th/cmp-nvim-lsp",
-    --   "onsails/lspkind.nvim",
-    --   "kevinhwang91/nvim-ufo",
-    -- },
-    config = get_config("_mason").setup,
-  },
-  {
-    "jayp0521/mason-nvim-dap.nvim",
-    config = get_config("_mason_nvim_dap").setup,
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    config = get_config("_mason_lspconfig").setup,
-  },
-  {
-    "jayp0521/mason-null-ls.nvim",
-    config = get_config("_mason_null_ls").setup,
-  },
-  {
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-    config = get_config("_mason_installer").setup,
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "williamboman/mason-lspconfig.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+      "jayp0521/mason-nvim-dap.nvim",
+      "jayp0521/mason-null-ls.nvim",
+    },
+    config = function()
+      require("config._mason").setup()
+      require("config._mason_lspconfig").setup()
+      require("config._mason_installer").setup()
+      require("config._mason_nvim_dap").setup()
+      require("config._mason_null_ls").setup()
+    end,
   },
   {
     "ray-x/lsp_signature.nvim",
@@ -606,12 +602,40 @@ M.ordinalnvim = {
   -- # Auto Complete
   -- ################################################
   {
+    "nvim-treesitter/nvim-treesitter-context",
+    enabled = false, -- Disabled until Treesitter stabilizes
+    config = function()
+      require("treesitter-context").setup({
+        enable = true,
+        max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+        min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+        line_numbers = true,
+        multiline_threshold = 20, -- Maximum number of lines to show for a single context
+        trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+        mode = 'cursor',  -- Line used to calculate context. Choices: 'cursor', 'topline'
+        -- Separator between context and content. Should be a single character string, like '-'.
+        -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
+        separator = nil,
+        zindex = 20, -- The Z-index of the context window
+        on_attach = function(bufnr)
+          -- Disable for special buffer types
+          local ok_buftype, buftype = pcall(vim.api.nvim_buf_get_option, bufnr, 'buftype')
+          local ok_filetype, filetype = pcall(vim.api.nvim_buf_get_option, bufnr, 'filetype')
+          if (ok_buftype and buftype ~= '') or (ok_filetype and filetype == 'lazy') then
+            return false
+          end
+          return true
+        end,
+      })
+    end,
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
+    enabled = true, -- Re-enabled
     build = ":TSUpdate",
     dependencies = {
       "JoosepAlviste/nvim-ts-context-commentstring",
       "nvim-treesitter/nvim-treesitter-refactor",
-      "nvim-treesitter/nvim-treesitter-context",
       "windwp/nvim-ts-autotag",
       "p00f/nvim-ts-rainbow",
     },
