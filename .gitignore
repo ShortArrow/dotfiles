@@ -14,3 +14,11 @@ hugo.linux
 
 # neovim startup log
 startup.log
+
+# AI
+
+CLAUDE.md
+AGENTS.md
+.serena
+.crush
+.claude
