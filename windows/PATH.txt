@@ -1,0 +1,79 @@
+%LocalAppData%\Keybase
+%LocalAppData%\Microsoft\WinGet\Links
+%LocalAppData%\Microsoft\WinGet\Packages\BurntSushi.ripgrep.GNU_Microsoft.Winget.Source_8wekyb3d8bbwe\ripgrep-14.1.1-x86_64-pc-windows-gnu
+%LocalAppData%\Microsoft\WinGet\Packages\GNU.Nano_Microsoft.Winget.Source_8wekyb3d8bbwe
+%LocalAppData%\Microsoft\WinGet\Packages\Google.PlatformTools_Microsoft.Winget.Source_8wekyb3d8bbwe\platform-tools
+%LocalAppData%\Microsoft\WinGet\Packages\JesseDuffield.Lazydocker_Microsoft.Winget.Source_8wekyb3d8bbwe
+%LocalAppData%\Microsoft\WinGet\Packages\JesseDuffield.lazygit_Microsoft.Winget.Source_8wekyb3d8bbwe
+%LocalAppData%\Microsoft\WinGet\Packages\Microsoft.Edit_Microsoft.Winget.Source_8wekyb3d8bbwe\edit-1.2.0-x86_64-windows
+%LocalAppData%\Microsoft\WinGet\Packages\Microsoft.Sysinternals_Microsoft.Winget.Source_8wekyb3d8bbwe
+%LocalAppData%\Microsoft\WinGet\Packages\Rufus.Rufus_Microsoft.Winget.Source_8wekyb3d8bbwe
+%LocalAppData%\Microsoft\WinGet\Packages\Typst.Typst_Microsoft.Winget.Source_8wekyb3d8bbwe\typst-x86_64-pc-windows-msvc
+%LocalAppData%\Microsoft\WinGet\Packages\YS-L.csvlens_Microsoft.Winget.Source_8wekyb3d8bbwe
+%LocalAppData%\Microsoft\WinGet\Packages\ajeetdsouza.zoxide_Microsoft.Winget.Source_8wekyb3d8bbwe
+%LocalAppData%\Microsoft\WinGet\Packages\astral-sh.uv_Microsoft.Winget.Source_8wekyb3d8bbwe
+%LocalAppData%\Microsoft\WinGet\Packages\junegunn.fzf_Microsoft.Winget.Source_8wekyb3d8bbwe
+%LocalAppData%\Microsoft\WinGet\Packages\lsd-rs.lsd_Microsoft.Winget.Source_8wekyb3d8bbwe\lsd-v1.1.5-x86_64-pc-windows-msvc
+%LocalAppData%\Microsoft\WinGet\Packages\sharkdp.fd_Microsoft.Winget.Source_8wekyb3d8bbwe\fd-v10.2.0-x86_64-pc-windows-msvc
+%LocalAppData%\Microsoft\WinGet\Packages\zig.zig_Microsoft.Winget.Source_8wekyb3d8bbwe\zig-x86_64-windows-0.14.1
+%LocalAppData%\Microsoft\WindowsApps
+%LocalAppData%\Microsoft\WindowsApps\40174MouriNaruto.NanaZip_gnj4mf6z9tkrc
+%LocalAppData%\Microsoft\WindowsApps\MSTeams_8wekyb3d8bbwe
+%LocalAppData%\Microsoft\WindowsApps\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe
+%LocalAppData%\Microsoft\WindowsApps\Microsoft.GetHelp_8wekyb3d8bbwe
+%LocalAppData%\Microsoft\WindowsApps\Microsoft.OutlookForWindows_8wekyb3d8bbwe
+%LocalAppData%\Microsoft\WindowsApps\Microsoft.Paint_8wekyb3d8bbwe
+%LocalAppData%\Microsoft\WindowsApps\Microsoft.ScreenSketch_8wekyb3d8bbwe
+%LocalAppData%\Microsoft\WindowsApps\Microsoft.WindowsNotepad_8wekyb3d8bbwe
+%LocalAppData%\Microsoft\WindowsApps\Microsoft.WindowsTerminal_8wekyb3d8bbwe
+%LocalAppData%\Microsoft\WindowsApps\Microsoft.XboxGamingOverlay_8wekyb3d8bbwe
+%LocalAppData%\Microsoft\WindowsApps\Microsoft.ZuneMusic_8wekyb3d8bbwe
+%LocalAppData%\Microsoft\WindowsApps\MicrosoftCorporationII.WindowsSubsystemForLinux_8wekyb3d8bbwe
+%LocalAppData%\Microsoft\WindowsApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy
+%LocalAppData%\PowerToys
+%LocalAppData%\Programs\Microsoft VS Code Insiders\bin
+%LocalAppData%\Programs\Microsoft VS Code\bin
+%LocalAppData%\Programs\Ollama
+%LocalAppData%\Volta\bin
+%ProgramFiles%\Amazon Corretto\jdk24.0.2_12\bin
+%ProgramFiles%\Arduino CLI\
+%ProgramFiles%\Docker\Docker\resources\bin
+%ProgramFiles%\GitHub CLI\
+%ProgramFiles%\Git\cmd
+%ProgramFiles%\Go\bin
+%ProgramFiles%\IVI Foundation\VISA\Win64\Bin\
+%ProgramFiles%\Microsoft Visual Studio\2022\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin
+%ProgramFiles%\Neovim\bin
+%ProgramFiles%\PowerShell\7\
+%ProgramFiles%\SqlCmd\
+%ProgramFiles%\Vim\vim91\
+%ProgramFiles%\Volta\
+%ProgramFiles%\WezTerm
+%ProgramFiles%\Wireshark
+%ProgramFiles%\bottom\bin\
+%ProgramFiles%\dotnet\
+%ProgramFiles%\glzr.io\GlazeWM\cli
+%ProgramFiles%\glzr.io\Zebar\
+%ProgramFiles%\starship\bin\
+%ProgramFiles%\usbipd-win\
+%ProgramFiles(x86)%\Arm GNU Toolchain arm-none-eabi\14.2 rel1\bin
+%ProgramFiles(x86)%\GnuWin32\bin
+%ProgramFiles(x86)%\Gpg4win\..\GnuPG\bin
+%ProgramFiles(x86)%\IVI Foundation\VISA\WinNT\Bin
+%ProgramFiles(x86)%\Renesas\Hew
+%ProgramFiles(x86)%\Renesas\Hew\Tools\Renesas\Sh\9_4_3\bin
+%ProgramFiles(x86)%\Windows Kits\10\Windows Performance Toolkit\
+%SystemDrive%\intelFPGA_lite\24.1std\questa_fe\win64
+%SystemDrive%\intelFPGA_lite\24.1std\questa_fse\win64
+%SystemRoot%
+%SystemRoot%\System32\OpenSSH\
+%SystemRoot%\System32\Wbem
+%SystemRoot%\System32\WindowsPowerShell\v1.0\
+%SystemRoot%\system32
+%UserProfile%\.cargo\bin
+%UserProfile%\.dotnet\tools
+%UserProfile%\.local\bin
+%UserProfile%\.rustup\toolchains\esp\xtensa-esp-elf\bin
+%UserProfile%\.rustup\toolchains\esp\xtensa-esp32-elf-clang\esp-clang\bin
+%UserProfile%\go\bin
+
