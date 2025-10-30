@@ -141,7 +141,7 @@ Set-PSReadLineKeyHandler -Key "Alt+R" -BriefDescription "reloadPROFILE" -LongDes
 }
 
 # PSFzf
-Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
+#Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
 $env:FZF_DEFAULT_OPTS = '--bind ctrl-u:unix-line-discard'
 
 # gsudo
