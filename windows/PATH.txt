@@ -63,6 +63,8 @@
 %ProgramFiles(x86)%\Renesas\Hew
 %ProgramFiles(x86)%\Renesas\Hew\Tools\Renesas\Sh\9_4_3\bin
 %ProgramFiles(x86)%\Windows Kits\10\Windows Performance Toolkit\
+%SystemDrive%\intelFPGA_lite\24.1std\quartus\sopc_builder\bin
+%SystemDrive%\intelFPGA_lite\24.1std\quartus\bin64
 %SystemDrive%\intelFPGA_lite\24.1std\questa_fe\win64
 %SystemDrive%\intelFPGA_lite\24.1std\questa_fse\win64
 %SystemRoot%
