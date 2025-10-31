@@ -142,6 +142,7 @@ Set-PSReadLineKeyHandler -Key "Alt+R" -BriefDescription "reloadPROFILE" -LongDes
 
 # PSFzf
 $env:FZF_DEFAULT_OPTS = @'
+--style=minimal
 --bind ctrl-u:unix-line-discard
 --gutter '󰌪' --color gutter:green
 --color gutter:green
