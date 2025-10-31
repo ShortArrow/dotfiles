@@ -141,8 +141,31 @@ Set-PSReadLineKeyHandler -Key "Alt+R" -BriefDescription "reloadPROFILE" -LongDes
 }
 
 # PSFzf
-#Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
-$env:FZF_DEFAULT_OPTS = '--bind ctrl-u:unix-line-discard'
+$env:FZF_DEFAULT_OPTS = @'
+--bind ctrl-u:unix-line-discard
+--gutter '󰌪' --color gutter:green
+--color gutter:green
+'@
+
+# Preview file content using bat (https://github.com/sharkdp/bat)
+# $env:FZF_CTRL_T_OPTS=@'
+#   --walker-skip .git,node_modules,target
+#   --preview 'bat -n --color=always {}'
+#   --bind 'ctrl-/:change-preview-window(down|hidden|)'
+# '@
+
+# CTRL-Y to copy the command into clipboard using pbcopy
+$env:FZF_CTRL_R_OPTS=@'
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --color header:italic
+  --header 'Press CTRL-Y to copy command into clipboard'
+'@
+
+# Print tree structure in the preview window
+# $env:FZF_ALT_C_OPTS=@'
+#   --walker-skip .git,node_modules,target
+#   --preview 'tree -C {}'
+# '@
 
 # gsudo
 # choco install gsudo
