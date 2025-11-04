@@ -53,7 +53,8 @@
 %ProgramFiles%\GitHub CLI
 %ProgramFiles%\Git\cmd
 %ProgramFiles%\Go\bin
-%ProgramFiles%\IVI Foundation\VISA\Win64\Bin\
+%ProgramFiles%\IVI Foundation\VISA\Win64\Bin
+%ProgramFiles%\Android\Android Studio\jbr\bin
 %ProgramFiles%\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64
 %ProgramFiles%\Microsoft Visual Studio\2022\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin
 %ProgramFiles%\Neovim\bin
