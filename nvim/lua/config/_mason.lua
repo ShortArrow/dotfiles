@@ -16,11 +16,9 @@ end
 
 M.setup = function()
   local _api = require('my')
-  local _nvim_lsp = require('lspconfig')
   local _mason = require('mason')
   local _mason_lspconfig = require('mason-lspconfig')
   local _mason_nullls = require('mason-null-ls')
-  local _lsp_sig = require('lsp_signature')
   local _cmp_nvim_lsp = require('cmp_nvim_lsp')
   local _mason_dap = require("mason-nvim-dap")
   local _dap = require('dap')
@@ -40,6 +38,11 @@ M.setup = function()
       }
     }
   }
+
+  -- Set bordered LSP hover/signature help globally
+  local with = vim.lsp.with
+  vim.lsp.handlers["textDocument/hover"] = with(vim.lsp.handlers.hover, { border = "rounded" })
+  vim.lsp.handlers["textDocument/signatureHelp"] = with(vim.lsp.handlers.signature_help, { border = "rounded" })
 end
 
 return M

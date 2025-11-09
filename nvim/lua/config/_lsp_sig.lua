@@ -1,14 +1,15 @@
 local M = {}
 
 M.config = {
-  bind = true, -- This is mandatory, otherwise border config won't get registered.
-  handler_opts = {
-    border = "rounded"
-  }
+  bind = true,
+  hint_enable = false,
+  floating_window = false,
+  handler_opts = { border = "rounded" },
 }
 
 M.setup = function()
---  require('lsp_signature').setup(M.config)
+  -- Disabled to avoid deprecated API noise; rely on built-in signature help or cmp-nvim-lsp-signature-help
+  -- require('lsp_signature').setup(M.config)
 end
 
 return M

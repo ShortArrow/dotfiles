@@ -280,6 +280,7 @@ M.ordinalnvim = {
   -- },
   {
     "stevearc/overseer.nvim",
+    version = "v1.6.0",
   },
   {
     "rebelot/heirline.nvim",
