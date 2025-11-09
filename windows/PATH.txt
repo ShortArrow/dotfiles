@@ -52,6 +52,7 @@
 %ProgramFiles%\Docker\Docker\resources\bin
 %ProgramFiles%\GitHub CLI
 %ProgramFiles%\Git\cmd
+%ProgramFiles%\LLVM\bin
 %ProgramFiles%\Go\bin
 %ProgramFiles%\IVI Foundation\VISA\Win64\Bin
 %ProgramFiles%\Android\Android Studio\jbr\bin
