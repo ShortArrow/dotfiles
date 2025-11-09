@@ -40,9 +40,7 @@ M.setup = function()
   }
 
   -- Set bordered LSP hover/signature help globally
-  local with = vim.lsp.with
-  vim.lsp.handlers["textDocument/hover"] = with(vim.lsp.handlers.hover, { border = "rounded" })
-  vim.lsp.handlers["textDocument/signatureHelp"] = with(vim.lsp.handlers.signature_help, { border = "rounded" })
+  require("config._ui_float").setup()
 end
 
 return M

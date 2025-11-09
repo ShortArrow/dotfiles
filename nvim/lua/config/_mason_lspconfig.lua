@@ -9,6 +9,8 @@ local function get_project_root()
 end
 
 M.setup = function()
+  if vim.g.__mason_lspconfig_setup_done then return end
+  vim.g.__mason_lspconfig_setup_done = true
   local mason_lspconfig = require("mason-lspconfig")
   local cmp_nvim_lsp = require("cmp_nvim_lsp")
   local api = require("my")
@@ -17,41 +19,50 @@ M.setup = function()
 
   mason_lspconfig.setup()
 
-  local has_vim_lsp_config = type(vim.lsp.config) == "function"
-  local lspconfig = nil
-  if not has_vim_lsp_config then
-    pcall(function()
-      lspconfig = require("lspconfig")
-    end)
-  end
+  -- On Nvim 0.11+, use vim.lsp.config to resolve configs from nvim-lspconfig's lsp/ directory.
+
+  -- Deduplicate same-named clients per buffer (e.g., duplicate lua_ls)
+  local dedup_grp = vim.api.nvim_create_augroup("MyLsp/Dedup", { clear = true })
+  vim.api.nvim_create_autocmd("LspAttach", {
+    group = dedup_grp,
+    callback = function(args)
+      local bufnr = args.buf
+      local by_name = {}
+      for _, c in ipairs(vim.lsp.get_clients({ buffer = bufnr })) do
+        if by_name[c.name] then
+          pcall(function() c.stop() end)
+        else
+          by_name[c.name] = true
+        end
+      end
+    end,
+  })
 
   local function setup_server(server_name, opts)
     opts = opts or {}
     opts.capabilities = vim.tbl_deep_extend("force", capabilities, opts.capabilities or {})
-    opts.name = opts.name or server_name
-
-    local config
-    if has_vim_lsp_config then
-      config = vim.lsp.config(server_name, opts)
-    else
-      if not (lspconfig and lspconfig[server_name]) then
-        return
-      end
-      local defaults = (lspconfig[server_name].document_config and lspconfig[server_name].document_config.default_config) or {}
-      config = vim.tbl_deep_extend("force", defaults, opts)
+    local function canonical_name(name)
+      if name == "sumneko_lua" then return "lua_ls" end
+      if name == "astro_ls" or name == "astro-ls" then return "astro" end
+      if name == "pyls" then return "pylsp" end
+      return name
     end
+    local cfg_name = canonical_name(server_name)
+    opts.name = opts.name or cfg_name
+    local config = vim.lsp.config(cfg_name, opts)
+    if not config then return end
     local group = vim.api.nvim_create_augroup("MyLspSetup/" .. server_name, { clear = true })
     local fts = config.filetypes or {}
 
     local function start_for_buf(bufnr)
       local has_same = false
       for _, c in ipairs(vim.lsp.get_clients({ buffer = bufnr })) do
-        if c.name == server_name then
+        if c.name == cfg_name then
           has_same = true
           break
         end
       end
-      local flag_key = "__lsp_started_" .. server_name
+      local flag_key = "__lsp_started_" .. cfg_name
       local started_flag = false
       if bufnr and bufnr > 0 then
         started_flag = vim.b[bufnr][flag_key] == true
