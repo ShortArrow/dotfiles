@@ -4,7 +4,15 @@ M.setup = function()
   local saga = require("lspsaga")
 
   saga.setup({
-    -- your configuration
+    ui = {
+      border = "rounded",
+    },
+    hover = {
+      open_link = "gx",
+    },
+    lightbulb = {
+      enable = false,
+    },
   })
 end
 
