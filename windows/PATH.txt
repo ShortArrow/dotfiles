@@ -78,6 +78,7 @@
 %ProgramFiles(x86)%\Renesas\Hew
 %ProgramFiles(x86)%\Renesas\Hew\Tools\Renesas\Sh\9_4_3\bin
 %ProgramFiles(x86)%\Windows Kits\10\Windows Performance Toolkit
+%ProgramFiles(x86)%\Nmap
 %SystemDrive%\Strawberry\c\bin
 %SystemDrive%\Strawberry\perl\bin
 %SystemDrive%\Strawberry\perl\site\bin
