@@ -261,31 +261,7 @@ M.maps = {
     -- # zen mode
     { "<Leader>zm", "<cmd>ZenMode<CR>", desc = "Zen Mode" },
     -- # lsp keymaps
-    {
-      "K",
-      function()
-        local ft = vim.bo.filetype
-        local is_c_family = (ft == "c" or ft == "cpp" or ft == "objc" or ft == "objcpp" or ft == "cuda" or ft == "h")
-        if is_c_family then
-          local bufnr = vim.api.nvim_get_current_buf()
-          local clients = vim.lsp.get_clients({ buffer = bufnr, name = "clangd" })
-          if #clients > 0 then
-            local client = clients[1]
-            local params = vim.lsp.util.make_position_params(0, client.offset_encoding)
-            local handler = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-            client.request('textDocument/hover', params, handler, bufnr)
-            return
-          end
-        end
-        local ok = pcall(require, "lspsaga")
-        if ok then
-          vim.cmd("Lspsaga hover_doc")
-        else
-          vim.lsp.buf.hover()
-        end
-      end,
-      desc = "LSP Hover (smart)",
-    },
+    { "K", "<cmd>Lspsaga hover_doc<CR>", desc = "LSP Hover (lspsaga)" },
     { "<Leader>lk", vim.lsp.buf.hover, desc = "show references (Lsp References)" },
     -- { "<Leader>ld", vim.lsp.buf.definition, desc = "jump to definition (Lsp Definition)" },
     { "<Leader>lf", vim.lsp.buf.format, desc = "auto formatting (Lsp Formatting)" },
