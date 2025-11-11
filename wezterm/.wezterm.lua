@@ -9,6 +9,8 @@ local is_windows = package.config:sub(1, 1) == '\\'
 
 if is_windows then
   config.default_prog = { 'pwsh' }
+else
+  config.default_prog = { 'bash', '-l' }
 end
 
 config.font = wezterm.font 'JetBrainsMonoNL Nerd Font'
