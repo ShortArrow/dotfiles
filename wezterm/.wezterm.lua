@@ -13,7 +13,14 @@ else
   config.default_prog = { 'bash' }
 end
 
-config.font = wezterm.font 'JetBrainsMonoNL Nerd Font'
+config.font = wezterm.font_with_fallback {
+  'JetBrainsMonoNL Nerd Font',
+  'Cica',
+  'Consolas',
+  'Noto Sans CJK JP',
+  'Noto Color Emoji',
+}
+config.font_size = 10.0
 
 config.color_scheme = 'Tokyo Night'
 config.color_scheme = 'Tomorrow Night'
