@@ -1,4 +1,45 @@
-%ANDROID_HOME%\cmdline-tools\latest\bin
+%SystemRoot%
+%SystemRoot%\System32\OpenSSH
+%SystemRoot%\System32\Wbem
+%SystemRoot%\System32\WindowsPowerShell\v1.0
+%SystemRoot%\system32
+%ProgramFiles%\Alacritty
+%ProgramFiles%\Amazon Corretto\jdk24.0.2_12\bin
+%ProgramFiles%\Android\Android Studio\jbr\bin
+%ProgramFiles%\Arduino CLI
+%ProgramFiles%\CMake\bin
+%ProgramFiles%\Docker\Docker\resources\bin
+%ProgramFiles%\GitHub CLI
+%ProgramFiles%\Git\cmd
+%ProgramFiles%\Go\bin
+%ProgramFiles%\IVI Foundation\VISA\Win64\Bin
+%ProgramFiles%\LLVM\bin
+%ProgramFiles%\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64
+%ProgramFiles%\Microsoft Visual Studio\2022\Community\VC\vcpkg
+%ProgramFiles%\Microsoft Visual Studio\2022\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin
+%ProgramFiles%\Microsoft Visual Studio\2022\Professional\VC\vcpkg
+%ProgramFiles%\Neovim\bin
+%ProgramFiles%\PowerShell\7
+%ProgramFiles%\SqlCmd\
+%ProgramFiles%\Vim\vim91
+%ProgramFiles%\Volta
+%ProgramFiles%\WezTerm
+%ProgramFiles%\Wireshark
+%ProgramFiles%\bottom\bin
+%ProgramFiles%\dotnet
+%ProgramFiles%\glzr.io\GlazeWM\cli
+%ProgramFiles%\glzr.io\Zebar
+%ProgramFiles%\starship\bin
+%ProgramFiles%\usbipd-win
+%ProgramFiles(x86)%\elm\0.19.1\bin
+%ProgramFiles(x86)%\Arm GNU Toolchain arm-none-eabi\14.2 rel1\bin
+%ProgramFiles(x86)%\GnuWin32\bin
+%ProgramFiles(x86)%\Gpg4win\..\GnuPG\bin
+%ProgramFiles(x86)%\IVI Foundation\VISA\WinNT\Bin
+%ProgramFiles(x86)%\Nmap
+%ProgramFiles(x86)%\Renesas\Hew
+%ProgramFiles(x86)%\Renesas\Hew\Tools\Renesas\Sh\9_4_3\bin
+%ProgramFiles(x86)%\Windows Kits\10\Windows Performance Toolkit
 %LocalAppData%\Keybase
 %LocalAppData%\Microsoft\WinGet\Links
 %LocalAppData%\Microsoft\WinGet\Packages\BurntSushi.ripgrep.GNU_Microsoft.Winget.Source_8wekyb3d8bbwe\ripgrep-14.1.1-x86_64-pc-windows-gnu
@@ -44,43 +85,8 @@
 %LocalAppData%\Programs\Microsoft VS Code\bin
 %LocalAppData%\Programs\Ollama
 %LocalAppData%\Volta\bin
+%LocalAppData%\powertoys\dscmodules
 %ProgramData%\chocolatey\bin
-%ProgramFiles%\Alacritty
-%ProgramFiles%\Amazon Corretto\jdk24.0.2_12\bin
-%ProgramFiles%\Android\Android Studio\jbr\bin
-%ProgramFiles%\Arduino CLI
-%ProgramFiles%\CMake\bin
-%ProgramFiles%\Docker\Docker\resources\bin
-%ProgramFiles%\GitHub CLI
-%ProgramFiles%\Git\cmd
-%ProgramFiles%\Go\bin
-%ProgramFiles%\IVI Foundation\VISA\Win64\Bin
-%ProgramFiles%\LLVM\bin
-%ProgramFiles%\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64
-%ProgramFiles%\Microsoft Visual Studio\2022\Community\VC\vcpkg
-%ProgramFiles%\Microsoft Visual Studio\2022\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin
-%ProgramFiles%\Microsoft Visual Studio\2022\Professional\VC\vcpkg
-%ProgramFiles%\Neovim\bin
-%ProgramFiles%\PowerShell\7
-%ProgramFiles%\SqlCmd\
-%ProgramFiles%\Vim\vim91
-%ProgramFiles%\Volta
-%ProgramFiles%\WezTerm
-%ProgramFiles%\Wireshark
-%ProgramFiles%\bottom\bin
-%ProgramFiles%\dotnet
-%ProgramFiles%\glzr.io\GlazeWM\cli
-%ProgramFiles%\glzr.io\Zebar
-%ProgramFiles%\starship\bin
-%ProgramFiles%\usbipd-win
-%ProgramFiles(x86)%\Arm GNU Toolchain arm-none-eabi\14.2 rel1\bin
-%ProgramFiles(x86)%\GnuWin32\bin
-%ProgramFiles(x86)%\Gpg4win\..\GnuPG\bin
-%ProgramFiles(x86)%\IVI Foundation\VISA\WinNT\Bin
-%ProgramFiles(x86)%\Nmap
-%ProgramFiles(x86)%\Renesas\Hew
-%ProgramFiles(x86)%\Renesas\Hew\Tools\Renesas\Sh\9_4_3\bin
-%ProgramFiles(x86)%\Windows Kits\10\Windows Performance Toolkit
 %SystemDrive%\Strawberry\c\bin
 %SystemDrive%\Strawberry\perl\bin
 %SystemDrive%\Strawberry\perl\site\bin
@@ -88,11 +94,6 @@
 %SystemDrive%\intelFPGA_lite\24.1std\quartus\sopc_builder\bin
 %SystemDrive%\intelFPGA_lite\24.1std\questa_fe\win64
 %SystemDrive%\intelFPGA_lite\24.1std\questa_fse\win64
-%SystemRoot%
-%SystemRoot%\System32\OpenSSH
-%SystemRoot%\System32\Wbem
-%SystemRoot%\System32\WindowsPowerShell\v1.0
-%SystemRoot%\system32
 %UserProfile%\.cargo\bin
 %UserProfile%\.dotnet\tools
 %UserProfile%\.lmstudio\bin
@@ -101,4 +102,5 @@
 %UserProfile%\.rustup\toolchains\esp\xtensa-esp32-elf-clang\esp-clang\bin
 %UserProfile%\Documents\picotool
 %UserProfile%\go\bin
+%ANDROID_HOME%\cmdline-tools\latest\bin
 
