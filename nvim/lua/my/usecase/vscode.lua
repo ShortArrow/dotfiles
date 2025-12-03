@@ -61,6 +61,9 @@ M.activate = function()
   keymap("n", "<Leader>P", '"+P')
   keymap("v", "<Leader>p", '"+p')
   keymap("v", "<Leader>P", '"+P')
+  -- Sort
+  keymap('v', '<Leader>s', ':sort<CR>')
+  keymap('v', '<Leader>S', ':sort!<CR>')
 end
 
 return M
