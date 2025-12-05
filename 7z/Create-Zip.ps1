@@ -8,6 +8,7 @@ param(
 if(!(Test-Path $Source))
 {
   Write-Host "Unexists path" -ForegroundColor Red
+  exit
 }
 
 $7zpass = (New-Password)
