@@ -1,5 +1,3 @@
-%LocalAppData%\Keybase
-%LocalAppData%\Microsoft\WinGet\Links
 %LocalAppData%\Microsoft\WinGet\Packages\BurntSushi.ripgrep.GNU_Microsoft.Winget.Source_8wekyb3d8bbwe\ripgrep-14.1.1-x86_64-pc-windows-gnu
 %LocalAppData%\Microsoft\WinGet\Packages\Docker.DockerCompose_Microsoft.Winget.Source_8wekyb3d8bbwe
 %LocalAppData%\Microsoft\WinGet\Packages\GNU.Nano_Microsoft.Winget.Source_8wekyb3d8bbwe
@@ -23,35 +21,3 @@
 %LocalAppData%\Microsoft\WinGet\Packages\lsd-rs.lsd_Microsoft.Winget.Source_8wekyb3d8bbwe\lsd-v1.1.5-x86_64-pc-windows-msvc
 %LocalAppData%\Microsoft\WinGet\Packages\sharkdp.fd_Microsoft.Winget.Source_8wekyb3d8bbwe\fd-v10.2.0-x86_64-pc-windows-msvc
 %LocalAppData%\Microsoft\WinGet\Packages\zig.zig_Microsoft.Winget.Source_8wekyb3d8bbwe\zig-x86_64-windows-0.14.1
-%LocalAppData%\Microsoft\WindowsApps
-%LocalAppData%\Microsoft\WindowsApps\40174MouriNaruto.NanaZip_gnj4mf6z9tkrc
-%LocalAppData%\Microsoft\WindowsApps\MSTeams_8wekyb3d8bbwe
-%LocalAppData%\Microsoft\WindowsApps\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe
-%LocalAppData%\Microsoft\WindowsApps\Microsoft.GetHelp_8wekyb3d8bbwe
-%LocalAppData%\Microsoft\WindowsApps\Microsoft.OutlookForWindows_8wekyb3d8bbwe
-%LocalAppData%\Microsoft\WindowsApps\Microsoft.Paint_8wekyb3d8bbwe
-%LocalAppData%\Microsoft\WindowsApps\Microsoft.ScreenSketch_8wekyb3d8bbwe
-%LocalAppData%\Microsoft\WindowsApps\Microsoft.WindowsNotepad_8wekyb3d8bbwe
-%LocalAppData%\Microsoft\WindowsApps\Microsoft.WindowsTerminal_8wekyb3d8bbwe
-%LocalAppData%\Microsoft\WindowsApps\Microsoft.XboxGamingOverlay_8wekyb3d8bbwe
-%LocalAppData%\Microsoft\WindowsApps\Microsoft.ZuneMusic_8wekyb3d8bbwe
-%LocalAppData%\Microsoft\WindowsApps\MicrosoftCorporationII.WindowsSubsystemForLinux_8wekyb3d8bbwe
-%LocalAppData%\Microsoft\WindowsApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy
-%LocalAppData%\PowerToys
-%LocalAppData%\Programs\Kiro\bin
-%LocalAppData%\Programs\Microsoft VS Code Insiders\bin
-%LocalAppData%\Programs\Microsoft VS Code\bin
-%LocalAppData%\Programs\Ollama
-%LocalAppData%\Volta\bin
-%LocalAppData%\powertoys\dscmodules
-%LocalAppData%\Programs\Zed\bin
-%UserProfile%\.cargo\bin
-%UserProfile%\.dotnet\tools
-%UserProfile%\.lmstudio\bin
-%UserProfile%\.local\bin
-%UserProfile%\.rustup\toolchains\esp\xtensa-esp-elf\bin
-%UserProfile%\.rustup\toolchains\esp\xtensa-esp32-elf-clang\esp-clang\bin
-%UserProfile%\Documents\picotool
-%UserProfile%\go\bin
-%ANDROID_HOME%\cmdline-tools\latest\bin
-
