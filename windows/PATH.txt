@@ -39,6 +39,7 @@
 %LocalAppData%\Microsoft\WindowsApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy
 %LocalAppData%\PowerToys
 %LocalAppData%\Programs\Kiro\bin
+%LocalAppData%\Programs\nu\bin
 %LocalAppData%\Programs\Microsoft VS Code Insiders\bin
 %LocalAppData%\Programs\Microsoft VS Code\bin
 %LocalAppData%\Programs\Ollama
