@@ -47,5 +47,47 @@ config.window_background_gradient =
 
 config.window_background_opacity = 0.9
 
+config.hyperlink_rules = wezterm.default_hyperlink_rules()
+
+-- convert dotnet link "V:\path\to\file.cs (123,45)" to "editor://..."
+table.insert(config.hyperlink_rules, {
+  -- drive:\path\to\file (line,col)
+  regex = [[([A-Za-z]:[^\s()]+)\s*\((\d+),(\d+)\)]],
+  format = 'editor://$1:$2:$3',
+})
+
+wezterm.on('open-uri', function(_, _, uri) -- _window, _pane
+  wezterm.log_info('open-uri received: ' .. uri)
+  local editor_scheme = 'editor://'
+  if uri:sub(1, #editor_scheme) ~= editor_scheme then
+    return true
+  end
+
+  local path_with_coords = uri:sub(#editor_scheme + 1)
+  local path, line, col = path_with_coords:match('^(.*):(%d+):(%d+)$')
+  if not path then
+    path, line = path_with_coords:match('^(.*):(%d+)$')
+  end
+  if not path or not line then
+    wezterm.log_error('Failed to parse editor uri: ' .. uri)
+    return true
+  end
+
+  local line_num = tonumber(line) or 1
+  local col_num = tonumber(col) or 1
+  local editor = os.getenv('WEZTERM_EDITOR') or 'code'
+  local target = string.format('%s:%d:%d', path, line_num, col_num)
+  local cmd
+  if is_windows then
+    cmd = { 'cmd.exe', '/c', editor, '--goto', target }
+  else
+    cmd = { editor, '--goto', target }
+  end
+
+  wezterm.log_info('Opening in VS Code: ' .. table.concat(cmd, ' '))
+  wezterm.run_child_process(cmd)
+  return false
+end)
+
 -- and finally, return the configuration to wezterm
 return config
