@@ -2,6 +2,7 @@
 vim.g.lazy_ui_active = false
 
 local function usecase_ordinal()
+  vim.loader.enable()
   local options = require("my.options")
   options.activate()
 
