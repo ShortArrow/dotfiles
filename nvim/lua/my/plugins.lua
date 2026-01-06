@@ -92,10 +92,6 @@ M.ordinalnvim = {
     },
     config = get_config("_devcontainer").setup,
   },
-  {
-    "lewis6991/impatient.nvim",
-    config = get_config("_impatient").setup,
-  },
   { "nvim-lua/plenary.nvim" },
   {
     "glacambre/firenvim",
@@ -111,6 +107,7 @@ M.ordinalnvim = {
   {
     "folke/tokyonight.nvim",
     config = get_config("_tokyonight").setup,
+    event = "BufEnter",
   },
   { "RRethy/vim-illuminate" },
   {
@@ -294,6 +291,7 @@ M.ordinalnvim = {
     },
     opts = get_config("_heirline").opts,
     config = get_config("_heirline").config,
+    event = "BufEnter",
   },
   -- { "lewis6991/gitsigns.nvim" },
   -- { "nvim-telescope/telescope.nvim" },
@@ -331,6 +329,7 @@ M.ordinalnvim = {
       "nvim-lua/plenary.nvim", --[[ 'akinsho/flutter-tools.nvim'  ]]
     },
     config = get_config("_telescope").setup,
+    event = { "BufRead", "CmdlineEnter" },
   },
   {
     "nvim-telescope/telescope-media-files.nvim",
@@ -341,6 +340,7 @@ M.ordinalnvim = {
     },
     after = "telescope.nvim",
     config = get_config("_telescope_media_files").setup,
+    event = "BufRead"
   },
   {
     "folke/which-key.nvim",
@@ -487,6 +487,7 @@ M.ordinalnvim = {
   {
     "lewis6991/gitsigns.nvim",
     config = get_config("_gitsigns").setup,
+    event = "BufRead",
   },
   {
     "tpope/vim-fugitive",
@@ -551,6 +552,7 @@ M.ordinalnvim = {
     -- install jsregexp (optional!)
     build = "make install_jsregexp",
     config = get_config("_luasnip").setup,
+    event = { "InsertEnter", "CmdlineEnter" }
   },
   --  {
   --    "L3MON4D3/LuaSnip",
@@ -577,6 +579,7 @@ M.ordinalnvim = {
       require("config._mason_nvim_dap").setup()
       require("config._mason_null_ls").setup()
     end,
+    event = { "BufReadPre", "CmdlineEnter" }
   },
   {
     "ray-x/lsp_signature.nvim",
@@ -609,12 +612,12 @@ M.ordinalnvim = {
     config = function()
       require("treesitter-context").setup({
         enable = true,
-        max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-        min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+        max_lines = 0,            -- How many lines the window should span. Values <= 0 mean no limit.
+        min_window_height = 0,    -- Minimum editor window height to enable context. Values <= 0 mean no limit.
         line_numbers = true,
         multiline_threshold = 20, -- Maximum number of lines to show for a single context
-        trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-        mode = 'cursor',  -- Line used to calculate context. Choices: 'cursor', 'topline'
+        trim_scope = 'outer',     -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+        mode = 'cursor',          -- Line used to calculate context. Choices: 'cursor', 'topline'
         -- Separator between context and content. Should be a single character string, like '-'.
         -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
         separator = nil,
@@ -638,13 +641,18 @@ M.ordinalnvim = {
     dependencies = {
       "JoosepAlviste/nvim-ts-context-commentstring",
       "nvim-treesitter/nvim-treesitter-refactor",
-      "windwp/nvim-ts-autotag",
+      -- "windwp/nvim-ts-autotag",
       "p00f/nvim-ts-rainbow",
     },
-    init = function()
-      require("nvim-treesitter.install").update({ with_sync = true })
-    end,
+    -- init = function()
+    --   require("nvim-treesitter.install").update({ with_sync = true })
+    -- end,
     config = get_config("_treesitter").setup,
+    event = "BufRead",
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-refactor",
+    event = "InsertEnter"
   },
   {
     "windwp/nvim-ts-autotag",
@@ -652,6 +660,7 @@ M.ordinalnvim = {
       require("nvim-ts-autotag").setup()
     end,
     -- dependencies = { "nvim-treesitter/nvim-treesitter" },
+    event = "InsertEnter"
   },
   {
     "KadoBOT/cmp-plugins",
@@ -659,9 +668,9 @@ M.ordinalnvim = {
     config = get_config("_cmp_plugins").setup,
     event = { "InsertEnter", "CmdlineEnter" },
   },
-  { "teramako/cmp-cmdline-prompt.nvim",    lazy = true },
-  { "chrisgrieser/cmp-nerdfont",           lazy = true },
-  { "f3fora/cmp-spell",                    lazy = true },
+  { "teramako/cmp-cmdline-prompt.nvim", lazy = true },
+  { "chrisgrieser/cmp-nerdfont",        lazy = true },
+  { "f3fora/cmp-spell",                 lazy = true },
   -- { "hrsh7th/cmp-buffer",                  lazy = true },
   -- { "hrsh7th/cmp-calc",                    lazy = true },
   -- { "hrsh7th/cmp-cmdline",                 lazy = true },
@@ -670,11 +679,11 @@ M.ordinalnvim = {
   -- { "hrsh7th/cmp-nvim-lsp",                lazy = true },
   -- { "hrsh7th/cmp-nvim-lsp-signature-help", lazy = true },
   -- { "hrsh7th/cmp-nvim-lua",                lazy = true },
-  { "jc-doyle/cmp-pandoc-references",      lazy = true },
-  { "KadoBOT/cmp-plugins",                 lazy = true },
-  { "octaltree/cmp-look",                  lazy = true },
-  { "ray-x/cmp-treesitter",                lazy = true },
-  { "windwp/nvim-autopairs",               lazy = true },
+  { "jc-doyle/cmp-pandoc-references",   lazy = true },
+  { "KadoBOT/cmp-plugins",              lazy = true },
+  { "octaltree/cmp-look",               lazy = true },
+  { "ray-x/cmp-treesitter",             lazy = true },
+  { "windwp/nvim-autopairs",            lazy = true },
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -709,6 +718,7 @@ M.ordinalnvim = {
     "nvimtools/none-ls.nvim",
     -- dependencies = { "nvim-lua/plenary.nvim" },
     config = get_config("_null_ls").setup,
+    event = { "BufReadPre", "CmdlineEnter" }
   },
   {
     "alec-gibson/nvim-tetris",
