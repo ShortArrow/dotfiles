@@ -15,3 +15,9 @@ if(!(Test-Path $configDirctory))
 
 "COMMIT_EDITMSG filetype=gitcommit`n" > "$configDirctory/attributes"
 
+## delta
+
+git config --global core.pager "delta"
+git config --global interactive.diffFileter "delta --color-only"
+git config delta.navigate true
+git config merge.conflictStyle zdiff3
