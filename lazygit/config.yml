@@ -1,6 +1,9 @@
 gui:
   language: en
   nerdFontsVersion: "3"
+  theme:
+    inactiveBorderColor:
+      - "#777777"
 git:
   merging:
     args: "--no-ff"
