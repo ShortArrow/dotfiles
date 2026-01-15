@@ -2,7 +2,9 @@ param(
   [string]
   $Destination=".",
   [string]
-  $Source
+  $Source,
+  [switch]
+  $NoPassword
 )
 
 if(!(Test-Path $Source))
@@ -11,15 +13,19 @@ if(!(Test-Path $Source))
   exit
 }
 
-$7zpass = (New-Password)
-
-Write-Host $7zpass
-
-$ArchiveName = "$(Get-Date -Format 'yyMMddHHmmss').zip"
+$ArchiveName = "$(Get-Date -Format 'yyyyMMddHHmmss').zip"
 
 $Destination = (Join-Path -Path $Destination -ChildPath $ArchiveName)
 
 Write-Host "Source: ${Source}"
 Write-Host "Destination: ${Destination}"
 
-7z a -tzip -mcp=932 -p"$7zpass" $Destination $Source
+if ($NoPassword)
+{
+  7z a -tzip -mcp=932 $Destination $Source
+} else
+{
+  $7zpass = (New-Password)
+  Write-Host $7zpass
+  7z a -tzip -mcp=932 -p"$7zpass" $Destination $Source
+}
