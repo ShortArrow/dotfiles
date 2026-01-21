@@ -17,6 +17,7 @@
 %ProgramFiles%\Arduino CLI
 %ProgramFiles%\CMake\bin
 %ProgramFiles%\Docker\Docker\resources\bin
+%ProgramFiles%\Emacs\emacs-30.2\bin
 %ProgramFiles%\GitHub CLI
 %ProgramFiles%\Git\cmd
 %ProgramFiles%\Go\bin
