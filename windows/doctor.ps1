@@ -108,10 +108,12 @@ $Commands = @(
   # Terminal
   "wt",
   "wezterm",
+
   "alacritty",
   # Editor
   "nvim",
   "vim",
+  "emacs",
   "code",
   "code-insiders",
   "zed",
@@ -130,6 +132,14 @@ $Commands = @(
   "elm",
   # UI
   "glazewm",
+  # Tool
+  "mise",
+  "tshark",
+  "ffmpeg",
+  "imagick",
+  "nmap",
+  "csvlens",
+  "inkscape",
   # Basic
   "qemu"
   "ssh"
