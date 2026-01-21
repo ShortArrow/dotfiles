@@ -1,3 +1,4 @@
+%LocalAppData%\Antigravity\bin
 %LocalAppData%\Keybase
 %LocalAppData%\Microsoft\WinGet\Links
 %LocalAppData%\Microsoft\WinGet\Packages\BurntSushi.ripgrep.GNU_Microsoft.Winget.Source_8wekyb3d8bbwe\ripgrep-14.1.1-x86_64-pc-windows-gnu
