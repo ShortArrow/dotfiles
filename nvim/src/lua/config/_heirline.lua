@@ -113,6 +113,17 @@ M.opts = function()
   package.loaded = safe_loaded
   
   local lib = require "heirline-components.all"
+
+  -- Show current buffer line ending (LF/CRLF)
+  local file_format = {
+    provider = function()
+      local symbols = { unix = "LF", dos = "CRLF", mac = "CR" }
+      local fmt = symbols[vim.bo.fileformat] or vim.bo.fileformat
+      return " " .. fmt .. " "
+    end,
+    hl = { fg = "file_info_fg", bg = "file_info_bg" },
+    update = { "BufReadPost", "BufWritePost", "BufEnter", "OptionSet" },
+  }
   
   -- Additional safety measures: Override each available check
   if lib.condition then
@@ -279,6 +290,7 @@ M.opts = function()
             lib.component.mode(),
             lib.component.git_branch(),
             lib.component.file_info(),
+            file_format,
             lib.component.git_diff(),
             lib.component.diagnostics(),
             lib.component.fill(),
