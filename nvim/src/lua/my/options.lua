@@ -22,8 +22,8 @@ M.activate = function()
   opt.guifont = fonts.get_fonts()
   opt.encoding = "UTF-8"
   opt.fileencodings = { "UTF-8", "sjis" }
-  opt.fileformat = "unix" -- use LF
   opt.fileencoding = ""
+  opt.fileformats = { "unix", "dos", "mac" }
   opt.expandtab = true
   opt.smartindent = true -- (default : off)
   opt.tabstop = 2
@@ -57,12 +57,5 @@ M.activate = function()
   }
   fonts.set_font_width()
 end
-
-local windows_ff_group = vim.api.nvim_create_augroup("WindowsFileFormat", { clear = true })
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  pattern = { "*.bat", "*.cmd", "*.cs", "*.ps1" },
-  command = "setlocal fileformat=dos",
-  group = windows_ff_group,
-})
 
 return M
