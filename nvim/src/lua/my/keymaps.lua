@@ -236,14 +236,37 @@ M.maps = {
     {
       mode = "n",
       "<F8>",
-      "<cmd>Lspsaga diagnostic_jump_next<CR>",
-      desc = "Lsp diagnostic_jump_next(lspsaga)",
+      function()
+        vim.diagnostic.open_float(nil, { focus = true, scope = "cursor" })
+      end,
+      desc = "Show diagnostic float at cursor",
     },
     {
       mode = "n",
       "<S-F8>",
-      "<cmd>Lspsaga diagnostic_jump_prev<CR>",
-      desc = "Lsp diagnostic_jump_prev(lspsaga)",
+      function()
+        local ok, trouble = pcall(require, "trouble")
+        if not ok then
+          vim.notify("trouble.nvim is not available", vim.log.levels.WARN)
+          return
+        end
+
+        if trouble.toggle then
+          trouble.toggle("diagnostics", {
+            focus = true,
+            win = { position = "bottom" },
+          })
+          return
+        end
+
+        if trouble.open then
+          trouble.open({ mode = "workspace_diagnostics", position = "bottom" })
+          return
+        end
+
+        vim.cmd("TroubleToggle workspace_diagnostics")
+      end,
+      desc = "Toggle Trouble diagnostics (bottom)",
     },
   },
   common = {
