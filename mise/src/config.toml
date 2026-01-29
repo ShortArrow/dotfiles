@@ -1,0 +1,11 @@
+# ~/.config/mise/config.toml
+
+[tasks.cargo-build]
+description = "Build the Rust project using Cargo"
+run = "cargo build --release"
+[tasks.open]
+description = "mise wo hirogeru"
+run = """
+pwsh -nop -c 'echo "OPEN SESAME!"'
+"""
+
