@@ -124,6 +124,35 @@ M.opts = function()
     hl = { fg = "file_info_fg", bg = "file_info_bg" },
     update = { "BufReadPost", "BufWritePost", "BufEnter", "OptionSet" },
   }
+
+  -- Show current buffer encoding with BOM info (e.g., UTF-8+BOM, UTF-16LE)
+  local file_encoding = {
+    provider = function()
+      local enc = vim.bo.fileencoding
+      if enc == "" or not enc then
+        enc = vim.o.encoding
+      end
+      enc = enc:lower()
+      local map = {
+        ["utf-8"] = "UTF-8",
+        ["utf-16le"] = "UTF-16LE",
+        ["utf-16be"] = "UTF-16BE",
+        ["ucs-2le"] = "UCS-2LE",
+        ["ucs-2"] = "UCS-2",
+        ["sjis"] = "Shift_JIS",
+        ["cp932"] = "CP932",
+        ["euc-jp"] = "EUC-JP",
+        ["latin1"] = "Latin1",
+      }
+      local label = map[enc] or enc:upper()
+      if vim.bo.bomb then
+        label = label .. "+BOM"
+      end
+      return " " .. label .. " "
+    end,
+    hl = { fg = "file_info_fg", bg = "file_info_bg" },
+    update = { "BufReadPost", "BufWritePost", "BufEnter", "OptionSet" },
+  }
   
   -- Additional safety measures: Override each available check
   if lib.condition then
@@ -291,6 +320,7 @@ M.opts = function()
             lib.component.git_branch(),
             lib.component.file_info(),
             file_format,
+            file_encoding,
             lib.component.git_diff(),
             lib.component.diagnostics(),
             lib.component.fill(),
