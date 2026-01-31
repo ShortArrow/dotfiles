@@ -336,6 +336,20 @@ M.maps = {
     { mode = "i", "jj", "<Esc>", desc = "Escape with jj" },
     -- # help keymaps
     { "<Leader>?", "<cmd>h quickref<CR>" },
+    -- # message viewer
+    {
+      "<Leader>m",
+      function()
+        local msg = vim.fn.execute("messages")
+        vim.cmd("enew")
+        local buf = vim.api.nvim_get_current_buf()
+        vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(msg, "\n"))
+        vim.bo[buf].buftype = "nofile"
+        vim.bo[buf].bufhidden = "wipe"
+        vim.bo[buf].swapfile = false
+      end,
+      desc = "Show messages in fullscreen buffer"
+    },
   },
 }
 
