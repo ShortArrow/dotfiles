@@ -109,12 +109,20 @@ end
 
 M.commands = {
   find_files = function()
+    if vim.fn.executable("rg") ~= 1 then
+      vim.notify("telescope: ripgrep (rg) not found in PATH", vim.log.levels.WARN)
+      return
+    end
     require("telescope.builtin").find_files()
   end,
   flutter_commands = function()
     require("telescope").extensions.flutter.commands()
   end,
   live_grep = function()
+    if vim.fn.executable("rg") ~= 1 then
+      vim.notify("telescope: ripgrep (rg) not found in PATH", vim.log.levels.WARN)
+      return
+    end
     require("telescope.builtin").live_grep()
   end,
   buffers = function()
