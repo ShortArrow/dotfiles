@@ -55,6 +55,7 @@ M.activate = function()
     extends = "◀",
     precedes = "▶",
   }
+  require("my.clipboard").setup()
   fonts.set_font_width()
 end
 
