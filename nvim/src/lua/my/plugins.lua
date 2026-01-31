@@ -640,19 +640,15 @@ M.ordinalnvim = {
     build = ":TSUpdate",
     dependencies = {
       "JoosepAlviste/nvim-ts-context-commentstring",
-      "nvim-treesitter/nvim-treesitter-refactor",
+      { "nvim-treesitter/nvim-treesitter-refactor", enabled = false },
       -- "windwp/nvim-ts-autotag",
-      "p00f/nvim-ts-rainbow",
+      { "p00f/nvim-ts-rainbow", enabled = false },
     },
     -- init = function()
     --   require("nvim-treesitter.install").update({ with_sync = true })
     -- end,
     config = get_config("_treesitter").setup,
     event = "BufRead",
-  },
-  {
-    "nvim-treesitter/nvim-treesitter-refactor",
-    event = "InsertEnter"
   },
   {
     "windwp/nvim-ts-autotag",

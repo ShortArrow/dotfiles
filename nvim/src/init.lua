@@ -10,6 +10,7 @@ local function usecase_ordinal()
   api.lang.python.env()
   api.keymaps.commonmaps_activate()
   require("boot_lazy")
+  require("config._kakehashi").setup()
 
   -- vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = "#FF0000" })
   vim.api.nvim_create_autocmd("VimEnter", {
