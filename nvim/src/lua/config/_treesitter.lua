@@ -4,6 +4,7 @@ M.setup = function()
   require("nvim-treesitter.install").compilers = { "zig", "clang", "gcc" }
   require("nvim-treesitter.configs").setup({
     auto_install = false,
+    modules = {},  -- Add explicit modules field to prevent nil error
     highlight = {
       enable = true,
       -- Disable for shell scripts due to parser issues
@@ -16,7 +17,7 @@ M.setup = function()
     },
     ensure_installed = {
       "lua",
-      "vim", 
+      "vim",
       "vimdoc",
       "markdown",
       "markdown_inline",

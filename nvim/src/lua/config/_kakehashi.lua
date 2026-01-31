@@ -62,7 +62,13 @@ M.setup = function()
     callback = function(args)
       local client = vim.lsp.get_client_by_id(args.data.client_id)
       if client and client.name == "kakehashi" then
-        pcall(vim.treesitter.stop, args.buf)
+        -- Safely stop treesitter only if it's actually running
+        vim.schedule(function()
+          local ok, ts = pcall(require, "nvim-treesitter")
+          if ok and ts then
+            pcall(vim.treesitter.stop, args.buf)
+          end
+        end)
       end
     end,
   })
