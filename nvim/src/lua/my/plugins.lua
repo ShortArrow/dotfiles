@@ -644,9 +644,10 @@ M.ordinalnvim = {
       -- "windwp/nvim-ts-autotag",
       { "p00f/nvim-ts-rainbow", enabled = false },
     },
-    -- init = function()
-    --   require("nvim-treesitter.install").update({ with_sync = true })
-    -- end,
+    init = function()
+      -- Prevent plugin's auto-setup from running
+      vim.g.loaded_nvim_treesitter = true
+    end,
     config = get_config("_treesitter").setup,
     event = "BufRead",
   },
@@ -656,7 +657,7 @@ M.ordinalnvim = {
       require("nvim-ts-autotag").setup()
     end,
     -- dependencies = { "nvim-treesitter/nvim-treesitter" },
-    event = "InsertEnter"
+    event = "BufRead"
   },
   {
     "KadoBOT/cmp-plugins",
