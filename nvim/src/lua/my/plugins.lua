@@ -109,7 +109,10 @@ M.ordinalnvim = {
     config = get_config("_tokyonight").setup,
     event = "BufEnter",
   },
-  { "RRethy/vim-illuminate" },
+  {
+    "RRethy/vim-illuminate",
+    config = get_config("_illuminate").setup,
+  },
   {
     "folke/twilight.nvim",
     config = get_config("_twilight").setup,
