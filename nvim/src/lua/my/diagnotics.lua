@@ -10,11 +10,12 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 -- severity levels of problems
 -- By default, they are E for Error, W for Warning, H for Hints, I for Informations.
 -- They are shown in the sign column on the left-most side
-local signs = { Error = " ", Warn = " ", Hint = "󰅺 ", Info = " " }
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
+local signs = {
+  [vim.diagnostic.severity.ERROR] = " ",
+  [vim.diagnostic.severity.WARN] = " ",
+  [vim.diagnostic.severity.HINT] = "󰅺 ",
+  [vim.diagnostic.severity.INFO] = "󰋼 ",
+}
 
 -- print error/warning/hints/information in the message area
 -- when your cursor is on any line having them
@@ -40,11 +41,11 @@ end
 -- vim.cmd [[ autocmd! CursorHold * lua PrintDiagnostics() ]]
 
 vim.diagnostic.config({
+  signs = { text = signs },
   virtual_text = {
     -- source = "always",  -- "always" Or "if_many"
     prefix = '●', -- Could be '■', '▎', 'x'
   },
-  signs = true,
   update_in_insert = true,
   underline = true,
   severity_sort = true,
