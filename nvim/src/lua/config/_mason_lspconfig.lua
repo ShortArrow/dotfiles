@@ -27,6 +27,18 @@ M.setup = function()
     group = dedup_grp,
     callback = function(args)
       local bufnr = args.buf
+      -- Shim deprecated client.is_stopped accessor to avoid warnings on nightly
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      if client and client.is_stopped then
+        client.is_stopped = function(self)
+          local ok, res = pcall(function()
+            return self:is_stopped()
+          end)
+          if ok then return res end
+          return false
+        end
+      end
+
       local by_name = {}
       for _, c in ipairs(vim.lsp.get_clients({ buffer = bufnr })) do
         if by_name[c.name] then
