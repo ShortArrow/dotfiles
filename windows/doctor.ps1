@@ -60,13 +60,86 @@ function Test-Command()
   Write-Host ", $CommandPath" -ForegroundColor DarkGray
 }
 
+$HilightPattern = @(
+  "$env:USERPROFILE",
+  "$env:APPDATA",
+  "$env:LOCALAPPDATA",
+  "$env:PROGRAMFILES",
+  "$env:PROGRAMFILES(X86)",
+  "$env:SYSTEMROOT"
+)
+
+function Get-PrefixMatchIndices
+{
+  [OutputType([int])]
+  param(
+    [string[]]$Patterns,
+    [string]$Text,
+    [bool]$IgnoreCase = $true
+  )
+  if (-not $Text -or -not $Patterns)
+  {
+    return $null
+  }
+  $cmp = if ($IgnoreCase)
+  {
+    [System.StringComparison]::OrdinalIgnoreCase
+  } else
+  {
+    [System.StringComparison]::Ordinal
+  }
+  $bestLength = 0
+  foreach ($pattern in $Patterns)
+  {
+    if ([string]::IsNullOrEmpty($pattern))
+    {
+      continue
+    }
+    if ($Text.StartsWith($pattern, $cmp) -and $pattern.Length -gt $bestLength)
+    {
+      $bestLength = $pattern.Length
+    }
+  }
+  if ($bestLength -gt 0)
+  {
+    return $bestLength
+  } else
+  {
+    return $null
+  }
+}
+
+function Show-HilightedList
+{
+  param(
+    [string[]]$List,
+    [string[]]$Pattern
+  )
+  foreach($target in $List)
+  {
+    $hlength = Get-PrefixMatchIndices -Patterns $Pattern -Text $target
+    if ($hlength)
+    {
+      $prefix = $target.Substring(0, $hlength)
+      $suffix = $target.Substring($hlength)
+      Write-Host "$prefix" -ForegroundColor DarkGray -NoNewline
+      Write-Host "$suffix"
+    } else
+    {
+      Write-Host "$target"
+    }
+  }
+}
+
 # Only Show
 $UserEnvPath = "HKCU:\Environment"
 Write-Host "User Environment Variables:" -ForegroundColor Cyan
-Get-ItemPropertyValue -Path $UserEnvPath -Name Path
+$UserEnvPathes = (Get-ItemPropertyValue -Path $UserEnvPath -Name Path) -split ';'
+Show-HilightedList -List $UserEnvPathes -Pattern $HilightPattern
 $SystemEnvPath = "HKLM:\System\CurrentControlSet\Control\Session Manager\Environment"
 Write-Host "System Environment Variables:" -ForegroundColor Cyan
-Get-ItemPropertyValue -Path $SystemEnvPath -Name Path
+$SystemEnvPathes = (Get-ItemPropertyValue -Path $SystemEnvPath -Name Path) -split ';'
+Show-HilightedList -List $SystemEnvPathes -Pattern $HilightPattern
 
 # Check diff
 Write-Host "Checking Windows Environment Variables..." -ForegroundColor Cyan
