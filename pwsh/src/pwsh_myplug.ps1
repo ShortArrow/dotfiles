@@ -127,6 +127,30 @@ Set-PSReadLineOption -WordDelimiters ";:,.[]{}()/\|^&*-=+'`" !?@#$%&_<>「」（
 # Initialize starship - needed for prompt functionality
 if (Test-CommandExist('starship')) {
   Invoke-Expression (&starship init powershell)
+
+  # OSC escape sequence for terminal title (tab title)
+  function Set-TerminalTitle {
+    $folder = Split-Path -Leaf (Get-Location)
+    if (-not $folder) {
+      $folder = (Get-Location).Path  # Drive root
+    }
+    # HOME -> ~
+    if ((Get-Location).Path -eq $HOME) {
+      $folder = "~"
+    }
+    # OSC 1 (icon title / tab title)
+    Write-Host -NoNewline "`e]1;$folder`a"
+    # OSC 7 (CWD notification for wezterm)
+    $uri = "file://$env:COMPUTERNAME/" + ((Get-Location).Path -replace '\\', '/')
+    Write-Host -NoNewline "`e]7;$uri`a"
+  }
+
+  # Wrap starship prompt to set terminal title
+  $script:originalPrompt = $function:prompt
+  function prompt {
+    Set-TerminalTitle
+    & $script:originalPrompt
+  }
 }
 else {
   Write-Warning "Starship is not installed. Prompt customization will be disabled."

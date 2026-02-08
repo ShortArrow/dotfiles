@@ -89,5 +89,42 @@ wezterm.on('open-uri', function(_, _, uri) -- _window, _pane
   return false
 end)
 
+-- HOME directory path (for Windows)
+local home_dir = os.getenv("USERPROFILE") or os.getenv("HOME") or ""
+
+-- Helper function to extract folder name from cwd
+local function get_folder_name(cwd)
+  if not cwd then return nil end
+  local path = cwd.file_path or tostring(cwd)
+
+  -- Remove URL scheme prefix (file:///C:/...)
+  path = path:gsub("^file:///", "")
+  -- Remove trailing slashes
+  path = path:gsub("[/\\]+$", "")
+
+  -- Return ~ for HOME directory
+  local home_normalized = home_dir:gsub("\\", "/"):lower()
+  local path_normalized = path:gsub("\\", "/"):lower()
+  if path_normalized == home_normalized then
+    return "~"
+  end
+
+  -- Get last segment
+  local folder = path:match("([^/\\]+)$")
+
+  -- Handle drive root (C:, etc.)
+  if not folder or folder == "" then
+    folder = path:match("^([A-Za-z]:)") or path
+  end
+
+  return folder
+end
+
+-- Customize window title
+wezterm.on('format-window-title', function(tab, pane, tabs, _config)
+  local folder = get_folder_name(pane.current_working_dir)
+  return folder or "WezTerm"
+end)
+
 -- and finally, return the configuration to wezterm
 return config
