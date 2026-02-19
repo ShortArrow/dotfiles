@@ -126,5 +126,19 @@ wezterm.on('format-window-title', function(tab, pane, tabs, _config)
   return folder or "WezTerm"
 end)
 
+-- Keymaps
+config.leader = { key = 'Space', mods = 'CTRL', timeout_milliseconds = 1000 }
+config.keys = {
+  -- Detach window
+  {
+    key = '!',
+    mods = 'LEADER | SHIFT',
+    action = wezterm.action_callback(function(win, pane)
+      local tab, window = pane:move_to_new_window()
+    end),
+  },
+}
+
+
 -- and finally, return the configuration to wezterm
 return config
