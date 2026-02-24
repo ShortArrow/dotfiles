@@ -336,6 +336,24 @@ M.maps = {
     { mode = "i", "jj", "<Esc>", desc = "Escape with jj" },
     -- # help keymaps
     { "<Leader>?", "<cmd>h quickref<CR>" },
+    -- # zz cycle (center -> top -> bottom -> center...)
+    {
+      "zz",
+      function()
+        local zz_state = vim.g.zz_cycle_state or 0
+        if zz_state == 0 then
+          vim.cmd("normal! zz")
+          vim.g.zz_cycle_state = 1
+        elseif zz_state == 1 then
+          vim.cmd("normal! zt")
+          vim.g.zz_cycle_state = 2
+        else
+          vim.cmd("normal! zb")
+          vim.g.zz_cycle_state = 0
+        end
+      end,
+      desc = "Cycle cursor line position (center/top/bottom)"
+    },
     -- # message viewer
     {
       "<Leader>m",
