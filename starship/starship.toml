@@ -33,8 +33,10 @@ use_logical_path = true
 style = "bold cyan"
 read_only = " 󰌾"
 
-#[time]
-#disabled = true
+[time]
+disabled = false
+format = '󰄉 $time ($style) '
+time_format = '%T'
 
 [git_branch]
 disabled = true
