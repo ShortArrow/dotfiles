@@ -34,7 +34,6 @@
 %ProgramFiles%\SqlCmd
 %ProgramFiles%\Tailscale
 %ProgramFiles%\Vim\vim91
-%ProgramFiles%\Volta
 %ProgramFiles%\WezTerm
 %ProgramFiles%\Wireshark
 %ProgramFiles%\bottom\bin

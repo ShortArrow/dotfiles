@@ -6,11 +6,9 @@
 %LocalAppData%\Microsoft\WinGet\Packages\GNU.Nano_Microsoft.Winget.Source_8wekyb3d8bbwe
 %LocalAppData%\Microsoft\WinGet\Packages\Google.PlatformTools_Microsoft.Winget.Source_8wekyb3d8bbwe\platform-tools
 %LocalAppData%\Microsoft\WinGet\Packages\Google.Protobuf_Microsoft.Winget.Source_8wekyb3d8bbwe\bin
-%LocalAppData%\Microsoft\WinGet\Packages\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\ffmpeg-7.1.1-full_build\bin
 %LocalAppData%\Microsoft\WinGet\Packages\Hugo.Hugo.Extended_Microsoft.Winget.Source_8wekyb3d8bbwe
 %LocalAppData%\Microsoft\WinGet\Packages\JesseDuffield.Lazydocker_Microsoft.Winget.Source_8wekyb3d8bbwe
 %LocalAppData%\Microsoft\WinGet\Packages\JesseDuffield.lazygit_Microsoft.Winget.Source_8wekyb3d8bbwe
-%LocalAppData%\Microsoft\WinGet\Packages\LibreHardwareMonitor.LibreHardwareMonitor_Microsoft.Winget.Source_8wekyb3d8bbwe
 %LocalAppData%\Microsoft\WinGet\Packages\Microsoft.Edit_Microsoft.Winget.Source_8wekyb3d8bbwe\edit-1.2.0-x86_64-windows
 %LocalAppData%\Microsoft\WinGet\Packages\Microsoft.Sysinternals_Microsoft.Winget.Source_8wekyb3d8bbwe
 %LocalAppData%\Microsoft\WinGet\Packages\Rufus.Rufus_Microsoft.Winget.Source_8wekyb3d8bbwe
@@ -18,7 +16,6 @@
 %LocalAppData%\Microsoft\WinGet\Packages\VictorIX.BlenderLauncher_Microsoft.Winget.Source_8wekyb3d8bbwe
 %LocalAppData%\Microsoft\WinGet\Packages\YS-L.csvlens_Microsoft.Winget.Source_8wekyb3d8bbwe
 %LocalAppData%\Microsoft\WinGet\Packages\ajeetdsouza.zoxide_Microsoft.Winget.Source_8wekyb3d8bbwe
-%LocalAppData%\Microsoft\WinGet\Packages\akeo.ie.Zadig_Microsoft.Winget.Source_8wekyb3d8bbwe
 %LocalAppData%\Microsoft\WinGet\Packages\astral-sh.uv_Microsoft.Winget.Source_8wekyb3d8bbwe
 %LocalAppData%\Microsoft\WinGet\Packages\junegunn.fzf_Microsoft.Winget.Source_8wekyb3d8bbwe
 %LocalAppData%\Microsoft\WinGet\Packages\lsd-rs.lsd_Microsoft.Winget.Source_8wekyb3d8bbwe\lsd-v1.1.5-x86_64-pc-windows-msvc
