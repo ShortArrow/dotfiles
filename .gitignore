@@ -17,8 +17,7 @@ startup.log
 
 # AI
 
-CLAUDE.md
-AGENTS.md
-.serena
-.crush
-.claude
+.claude/settings.local.json
+.serena/cache/
+.serena/memories/
+.serena/logs/
