@@ -12,6 +12,7 @@ M.setup = function()
       -- you can turn off/on auto_update per tool
       { 'bash-language-server', auto_update = true },
 
+      'kakehashi',
       'lua-language-server',
       'vim-language-server',
       -- 'gopls',

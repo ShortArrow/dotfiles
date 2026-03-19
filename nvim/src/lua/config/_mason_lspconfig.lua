@@ -165,6 +165,18 @@ M.setup = function()
 
     elseif server_name == "astro" or server_name == "astro_ls" or server_name == "astro-ls" then
       opts.settings = api.lang.astro.astro_ls
+
+    elseif server_name == "kakehashi" then
+      opts.cmd = { "kakehashi" }
+      opts.filetypes = {
+        "lua", "vim", "vimdoc",
+        "markdown", "markdown_inline",
+        "json", "yaml", "toml",
+        "html", "css",
+        "javascript", "typescript", "tsx",
+        "python",
+      }
+      opts.init_options = { autoInstall = true }
     end
     return opts
   end
