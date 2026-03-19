@@ -176,7 +176,33 @@ M.setup = function()
         "javascript", "typescript", "tsx",
         "python",
       }
-      opts.init_options = { autoInstall = true }
+      opts.init_options = {
+        autoInstall = true,
+        languages = {
+          markdown = {
+            bridge = {
+              typescript = { enabled = true },
+              javascript = { enabled = true },
+              python = { enabled = true },
+              lua = { enabled = true },
+            },
+          },
+        },
+        languageServers = {
+          ["typescript-language-server"] = {
+            cmd = { "typescript-language-server", "--stdio" },
+            languages = { "typescript", "javascript", "tsx" },
+          },
+          ["pyright"] = {
+            cmd = { "pyright-langserver", "--stdio" },
+            languages = { "python" },
+          },
+          ["lua-language-server"] = {
+            cmd = { "lua-language-server" },
+            languages = { "lua" },
+          },
+        },
+      }
     end
     return opts
   end
