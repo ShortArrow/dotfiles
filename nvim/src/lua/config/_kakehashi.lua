@@ -1,45 +1,10 @@
 local M = {}
 
--- need `cargo install kakehashi`
+-- kakehashi is installed via Mason (see _mason_installer.lua)
 
 M.setup = function()
   if vim.g.__kakehashi_setup_done then return end
   vim.g.__kakehashi_setup_done = true
-
-  -- Skip entirely if the binary is missing (avoid noisy warnings on every buffer)
-  if vim.fn.executable("kakehashi") ~= 1 then
-    vim.schedule(function()
-      vim.notify("kakehashi not found in PATH; skipping LSP setup", vim.log.levels.INFO)
-    end)
-    return
-  end
-
-  local kakehashi_filetypes = {
-    "lua",
-    "vim",
-    "vimdoc",
-    "markdown",
-    "markdown_inline",
-    "json",
-    "yaml",
-    "toml",
-    "html",
-    "css",
-    "javascript",
-    "typescript",
-    "tsx",
-    "python",
-  }
-
-  vim.lsp.config("kakehashi", {
-    cmd = { "kakehashi" },
-    filetypes = kakehashi_filetypes,
-    init_options = {
-      autoInstall = true,
-    },
-  })
-
-  vim.lsp.enable("kakehashi")
 
   -- Avoid highlight conflicts with built-in treesitter when kakehashi attaches.
   local group_ts = vim.api.nvim_create_augroup("KakehashiTreesitterOff", { clear = true })
