@@ -1,0 +1,66 @@
+version = 1
+
+[[abbr]]
+key = "rx"
+expand = "runex"
+when_command_exists = ["runex"]
+
+[[abbr]]
+key = "ls"
+expand = "lsd"
+when_command_exists = ["lsd"]
+
+[[abbr]]
+key = "ll"
+expand = "lsd -l"
+when_command_exists = ["lsd"]
+
+[[abbr]]
+key = "ll."
+expand = "lsd -la"
+when_command_exists = ["lsd"]
+
+[[abbr]]
+key = "ls."
+expand = "lsd -a"
+when_command_exists = ["lsd"]
+
+[[abbr]]
+key = "l."
+expand = "lsd -d .*"
+when_command_exists = ["lsd"]
+
+[[abbr]]
+key = "cat"
+expand = "bat"
+when_command_exists = ["bat"]
+
+[[abbr]]
+key = "nv"
+expand = "nvim"
+when_command_exists = ["nvim"]
+
+[[abbr]]
+key = "lg"
+expand = "lazygit"
+when_command_exists = ["lazygit"]
+
+[[abbr]]
+key = "lzd"
+expand = "lazydocker"
+when_command_exists = ["lazydocker"]
+
+[[abbr]]
+key = "gg"
+expand = "git-graph"
+when_command_exists = ["git-graph"]
+
+[[abbr]]
+key = "zj"
+expand = "zellij"
+when_command_exists = ["zellij"]
+
+[[abbr]]
+key = "zed"
+expand = "zeditor"
+when_command_exists = ["zeditor"]
