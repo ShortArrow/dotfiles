@@ -1,3 +1,6 @@
+# Skip profile for non-interactive sessions (e.g. pwsh -c)
+if (-not [Environment]::UserInteractive -or [Console]::IsInputRedirected) { return }
+
 # Profile load time measurement
 $profileLoadStart = Get-Date
 
@@ -221,41 +224,18 @@ if (Test-CommandExist('go')) {
   $env:Path = "$env:Path;$env:USERPROFILE\go\bin;"
 }
 
-# pnpm setup
-if (Test-CommandExist('pnpm')) {
-  $env:Path = "$env:Path$(pnpm bin);"
-}
+# mise setup
+(& mise activate pwsh)| Out-String | Invoke-Expression 
+# $MiseShimPath = "$HOME\.local\share\mise\shims"
+# if (Test-Path $MiseShimPath) {
+#     $env:PATH = "$MiseShimPath;" + $env:PATH
+# }
 
 # lunarvim setup
 $lunarvimPath = "$env:USERPROFILE\.local\bin\lvim.ps1"
 Set-CommandAlias 'lvim' $lunarvimPath -fallback 'lunarvim'
 
-# lsd setup
-function Get-FilteredChildItem {
-  & Get-ChildItem -Force @args | Where-Object { -not $_.Name.StartsWith(".") }
-}
-function Get-AllChildItem { 
-  & Get-ChildItem -Force @args
-}
-function llong {
-  & lsd -l @args 
-}
-function lldot {
-  & lsd -la @args 
-}
-function ldot {
-  & lsd -a @args 
-}
-if (Test-CommandExist('lsd')) {
-  New-Alias -Name 'ls' -Value lsd -Force
-  New-Alias -Name 'l.' -Value ldot -Force
-  New-Alias -Name 'll' -Value llong -Force
-  New-Alias -Name 'll.' -Value lldot -Force
-}
-else {
-  New-Alias -Name 'll' -Value Get-FilteredChildItem -Force
-  New-Alias -Name 'll.' -Value Get-AllChildItem -Force
-}
+# lsd: ls, ll, l., ll. are handled by runex
 
 if (Test-CommandExist('zoxide')) {
   Invoke-Expression (& { (zoxide init powershell | Out-String) })
@@ -498,15 +478,9 @@ $DebugPreference = 'Continue'
 # Initialize only essential environment variables
 Reload-EnvironmentVariables
 
-# Set up common command aliases AFTER environment variables are reloaded
-$commonAliases = @{
-  'gg'  = 'git-graph'
-  'lg'  = 'lazygit'
-  'lzd' = 'lazydocker'
-}
-
-foreach ($alias in $commonAliases.GetEnumerator()) {
-  Set-CommandAlias $alias.Key $alias.Value
+# runex abbreviation engine
+if (Test-CommandExist('runex')) {
+  (& runex export pwsh) | Out-String | Invoke-Expression
 }
 
 # Clear command existence cache after initial load and alias setup
