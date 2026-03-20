@@ -1,5 +1,6 @@
-%LocalAppData%\Programs\Antigravity\bin
+%ANDROID_HOME%\cmdline-tools\latest\bin
 %LocalAppData%\Keybase
+%LocalAppData%\mise\shims
 %LocalAppData%\Microsoft\WinGet\Links
 %LocalAppData%\Microsoft\WinGet\Packages\BurntSushi.ripgrep.GNU_Microsoft.Winget.Source_8wekyb3d8bbwe\ripgrep-14.1.1-x86_64-pc-windows-gnu
 %LocalAppData%\Microsoft\WinGet\Packages\Docker.DockerCompose_Microsoft.Winget.Source_8wekyb3d8bbwe
@@ -36,14 +37,14 @@
 %LocalAppData%\Microsoft\WindowsApps\MicrosoftCorporationII.WindowsSubsystemForLinux_8wekyb3d8bbwe
 %LocalAppData%\Microsoft\WindowsApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy
 %LocalAppData%\PowerToys
+%LocalAppData%\powertoys\dscmodules
+%LocalAppData%\Programs\Antigravity\bin
 %LocalAppData%\Programs\Kiro\bin
-%LocalAppData%\Programs\nu\bin
 %LocalAppData%\Programs\Microsoft VS Code Insiders\bin
 %LocalAppData%\Programs\Microsoft VS Code\bin
 %LocalAppData%\Programs\Ollama
-%LocalAppData%\Volta\bin
-%LocalAppData%\powertoys\dscmodules
 %LocalAppData%\Programs\Zed\bin
+%LocalAppData%\Programs\nu\bin
 %UserProfile%\.cargo\bin
 %UserProfile%\.dotnet\tools
 %UserProfile%\.lmstudio\bin
@@ -52,5 +53,4 @@
 %UserProfile%\.rustup\toolchains\esp\xtensa-esp32-elf-clang\esp-clang\bin
 %UserProfile%\Documents\picotool
 %UserProfile%\go\bin
-%ANDROID_HOME%\cmdline-tools\latest\bin
 
