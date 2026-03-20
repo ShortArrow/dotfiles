@@ -5,7 +5,15 @@ description = "Build the Rust project using Cargo"
 run = "cargo build --release"
 [tasks.open]
 description = "mise wo hirogeru"
-run = """
-pwsh -nop -c 'echo "OPEN SESAME!"'
-"""
+run = "echo 'OPEN SESAME!'"
+
+[tools]
+bun = "latest"
+node = "latest"
+"npm:@anthropic-ai/claude-code" = "latest"
+"npm:@google/gemini-cli" = "latest"
+"npm:@openai/codex" = "latest"
+"npm:node-gyp-build" = "latest"
+pnpm = "latest"
+yarn = "latest"
 
