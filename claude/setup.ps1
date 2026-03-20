@@ -9,7 +9,8 @@ $targetDirectory = "$env:USERPROFILE\.claude"
 # Link targets
 $linkNames = @(
   "notify.ps1",
-  "CLAUDE.md"
+  "CLAUDE.md",
+  "statusline.sh"
 )
 
 # --- Functions ---
