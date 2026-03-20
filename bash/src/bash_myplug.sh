@@ -1,30 +1,18 @@
 #!/bin/bash
 
-# dot source for user permission
-if [ -d "$HOME/.bashrc.d/" ]; then
-  source "$HOME/.bashrc.d/bash_checkers.sh"
-  source "$HOME/.bashrc.d/bash_mycompletion.sh"
-fi
+# dot source (resolve from the same directory as this script)
+_myplug_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$_myplug_dir/bash_checkers.sh"
+source "$_myplug_dir/bash_mycompletion.sh"
+unset _myplug_dir
 
-# dot source for lsp
-if [ -d "/usr/local/bin/.bash_myplug/" ]; then
-  source "/usr/local/bin/.bash_myplug/bash_checkers.sh"
-  source "/usr/local/bin/.bash_myplug/bash_mycompletion.sh"
-fi
-
-# ls
-if command_exists "lsd"; then
-  alias l.="lsd -d .* "
-  alias ll="lsd -l "
-  alias ll.="lsd -al "
-  alias ls="lsd "
-  alias ls.="lsd -a "
-else
+# lsd: ls, ll, l., ll. are handled by runex
+# fallback for environments without lsd
+if ! command_exists "lsd"; then
   alias l.="ls -d .* --color=tty"
   alias ll="ls -l --color=tty"
   alias ll.="ls -al --color=tty"
   alias ls="ls --color=tty"
-  alias ls.="ls -a --color=tty"
 fi
 
 # ip
@@ -33,16 +21,14 @@ alias ip='ip -color=auto'
 # less
 export LESS="-r"
 
-# nvim
+# nvim (nv→nvim is handled by runex)
 if command_exists "nvim"; then
-  alias nv="nvim"
   alias んヴぃｍ="nvim"
 fi
 
-# bat
+# bat (cat→bat is handled by runex)
 if command_exists "bat"; then
   alias ncat="cat" # meaning normal cat
-  alias cat="bat"
 fi
 
 # sudo refresher
@@ -65,6 +51,11 @@ export PATH="$PATH:$HOME/.cargo/bin" # this is `source "$HOME/.cargo/env"`
 export VISUAL=vim
 export EDITOR=vim
 unset LESSEDIT
+
+# runex abbreviation engine
+if command_exists "runex"; then
+  eval "$(runex export bash)"
+fi
 
 # starship
 if command_exists "starship"; then
@@ -94,19 +85,7 @@ export PATH="$PATH":"$HOME/.pub-cache/bin"
 # crontab
 alias crontab="crontab -i"
 
-# lazydocker
-if command_exists "lazydocker"; then
-  alias lzd=lazydocker
-else
-  alias lzd="Please install 'lazydocker'"
-fi
-
-# lazygit
-if command_exists "lazygit"; then
-  alias lg=lazygit
-else
-  alias lg="Please install 'lazygit'"
-fi
+# lazydocker, lazygit: lzd, lg are handled by runex
 
 # japanese
 export GTK_IM_MODULE=fcitx
@@ -149,12 +128,7 @@ else
   echo "please install vivid"
 fi
 
-# zellij
-if command_exists "zellij"; then
-  alias zj='zellij'
-else
-  echo "please install zellij"
-fi
+# zellij: zj is handled by runex
 
 # zoxide
 if command_exists "zoxide"; then
@@ -171,10 +145,7 @@ if command_exists "pyenv"; then
   # export PATH="$pyenvRoot/shims:$PATH"
 fi
 
-# zed
-if command_exists "zeditor"; then
-  alias zed='zeditor'
-fi
+# zed: zed→zeditor is handled by runex
 
 # poetry
 export PATH="$PATH:$HOME/.local/bin"
