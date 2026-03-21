@@ -9,12 +9,12 @@ if ! grep -qF ".bashrc" "$HOME/.bash_profile" 2>/dev/null; then
   echo "Added .bashrc sourcing to ~/.bash_profile"
 fi
 
-# Add source line to ~/.bashrc if not already present
+# Ensure ~/.bashrc sources bash_myplug.sh with the correct path
 entry="source \"$src_dir/bash_myplug.sh\""
-if ! grep -qF "bash_myplug.sh" "$HOME/.bashrc" 2>/dev/null; then
-  echo "$entry" >> "$HOME/.bashrc"
-  echo "Added to ~/.bashrc:"
-  echo "  $entry"
-else
-  echo "~/.bashrc already contains bash_myplug.sh entry"
+if grep -qF "bash_myplug.sh" "$HOME/.bashrc" 2>/dev/null; then
+  sed -i '\|bash_myplug.sh|d' "$HOME/.bashrc"
+  echo "Removed old bash_myplug.sh entry from ~/.bashrc"
 fi
+echo "$entry" >> "$HOME/.bashrc"
+echo "Added to ~/.bashrc:"
+echo "  $entry"
