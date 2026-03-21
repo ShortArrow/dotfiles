@@ -28,6 +28,12 @@ local function library(plugins)
   return paths
 end
 
+M.bridge = {
+  server = "lua-language-server",
+  cmd = { "lua-language-server" },
+  languages = { "lua" },
+}
+
 M.sumneko_lua = {
   Lua = {
     diagnostics = {
