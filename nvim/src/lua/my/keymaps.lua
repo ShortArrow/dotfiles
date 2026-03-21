@@ -1,7 +1,11 @@
 local M = {}
 
-local telescope = require("config/_telescope").commands
-local neotest = require("config/_neotest").commands
+local function telescope()
+  return require("config/_telescope").commands
+end
+local function neotest()
+  return require("config/_neotest").commands
+end
 
 M.maps_activate = function(map)
   for _, item in pairs(map) do
@@ -57,10 +61,10 @@ M.maps = {
     },
   },
   neotest = {
-    { "gtr", neotest.run,     desc = "NeoTest nearest run" },
-    { "gtt", neotest.toggle,  desc = "NeoTest Open" },
-    { "gtc", neotest.current, desc = "NeoTest current run" },
-    { "gtd", neotest.dap,     desc = "NeoTest dap run" },
+    { "gtr", function() neotest().run() end,     desc = "NeoTest nearest run" },
+    { "gtt", function() neotest().toggle() end,  desc = "NeoTest toggle" },
+    { "gtc", function() neotest().current() end, desc = "NeoTest current run" },
+    { "gtd", function() neotest().dap() end,     desc = "NeoTest dap run" },
   },
   neogit = {
     {
@@ -112,8 +116,8 @@ M.maps = {
     { "<Leader>km", "<cmd>WhichKey<CR>" },
   },
   flutter = {
-    { "<Leader>fr", "<cmd>FlutterRun -d web-server<CR>", desc = "Flutter Run" },
-    { "<Leader>fc", telescope.flutter_commands,          desc = "Flutter Open" },
+    { "<Leader>fr", "<cmd>FlutterRun -d web-server<CR>",              desc = "Flutter Run" },
+    { "<Leader>fc", function() telescope().flutter_commands() end, desc = "Flutter Open" },
   },
   trouble = {
     { "<Leader>tr", "<cmd>Trouble diagnostics<CR>" },
@@ -206,19 +210,19 @@ M.maps = {
     { "<Leader>flzd", "<cmd>FloatermNew lzd<CR>", desc = "Floaterm lazydocker" },
   },
   telescope = {
-    { "<Leader>ff", telescope.find_files,                desc = "Telescope find_files" },
-    { "<Leader>fg", telescope.live_grep,                 desc = "Telescope live_grep" },
-    { "<Leader>fb", telescope.buffers,                   desc = "Telescope buffers" },
-    { "<Leader>fh", telescope.help_tags,                 desc = "Telescope help_tags" },
-    { "<Leader>fl", telescope.current_buffer_fuzzy_find, desc = "Telescope current_buffer_fuzzy_find" },
-    { "<Leader>fm", telescope.media_files,               desc = "Telescope media_files" },
-    { "<Leader>cs", telescope.commands,                  desc = "Telescope commands" },
-    { "<Leader>li", telescope.lsp_implementations,       desc = "Telescope implementations" },
-    { "<F12>",      telescope.lsp_definitions,           desc = "Telescope difinitions" },
-    { "gd",         telescope.lsp_definitions,           desc = "Telescope difinitions" },
-    { "<Leader>lt", telescope.lsp_type_definitions,      desc = "Telescope type_definitions" },
-    { "<S-F12>",    telescope.lsp_references,            desc = "Telescope references" },
-    { "<Leader>jl", telescope.jump_list,                 desc = "Telescope jumplist" },
+    { "<Leader>ff", function() telescope().find_files() end,                desc = "Telescope find_files" },
+    { "<Leader>fg", function() telescope().live_grep() end,                 desc = "Telescope live_grep" },
+    { "<Leader>fb", function() telescope().buffers() end,                   desc = "Telescope buffers" },
+    { "<Leader>fh", function() telescope().help_tags() end,                 desc = "Telescope help_tags" },
+    { "<Leader>fl", function() telescope().current_buffer_fuzzy_find() end, desc = "Telescope current_buffer_fuzzy_find" },
+    { "<Leader>fm", function() telescope().media_files() end,               desc = "Telescope media_files" },
+    { "<Leader>cs", function() telescope().commands() end,                  desc = "Telescope commands" },
+    { "<Leader>li", function() telescope().lsp_implementations() end,       desc = "Telescope implementations" },
+    { "<F12>",      function() telescope().lsp_definitions() end,           desc = "Telescope definitions" },
+    { "gd",         function() telescope().lsp_definitions() end,           desc = "Telescope definitions" },
+    { "<Leader>lt", function() telescope().lsp_type_definitions() end,      desc = "Telescope type_definitions" },
+    { "<S-F12>",    function() telescope().lsp_references() end,            desc = "Telescope references" },
+    { "<Leader>jl", function() telescope().jump_list() end,                 desc = "Telescope jumplist" },
     { "<Leader>lb", "<C-o>",                             desc = "back jump list" },
   },
   lspsaga = {
@@ -333,6 +337,7 @@ M.maps = {
     -- { mode = 'n', '<C-S-k>', '<Up>', desc = "IME safe of <Up>" },
     -- { mode = 'n', '<C-S-l>', '<Right>', desc = "IME safe of <Right>" },
 
+    { mode = "v", "<Leader>fk", function() require("my.utils").convert_to_zenkaku() end, desc = "Convert to zenkaku katakana" },
     { mode = "i", "jj", "<Esc>", desc = "Escape with jj" },
     -- # help keymaps
     { "<Leader>?", "<cmd>h quickref<CR>" },

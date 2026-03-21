@@ -68,11 +68,4 @@ M.is_selection_hankaku_katakana = function(start_line, start_col, end_line, end_
   return true
 end
 
-vim.keymap.set(
-  'v',
-  '<Leader>fk'           ,
-  function() M.convert_to_zenkaku() end,
-  { noremap = true, silent = true }
-)
-
 return M
