@@ -1,5 +1,11 @@
 local M = {}
 
+M.bridge = {
+  server = "typescript-language-server",
+  cmd = { "typescript-language-server", "--stdio" },
+  languages = { "typescript", "javascript", "tsx" },
+}
+
 M.tsserver = {
   javascript = {
     inlayHints = {

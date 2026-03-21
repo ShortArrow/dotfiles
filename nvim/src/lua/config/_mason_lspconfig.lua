@@ -176,32 +176,27 @@ M.setup = function()
         "javascript", "typescript", "tsx",
         "python",
       }
+      -- my/lang/*.bridge から Mason インストール済みの LSP を自動検出して bridge 接続
+      -- init_options は起動時に一度だけ評価される。Mason で LSP 追加後は :LspRestart kakehashi で反映。
+      local mr = require("mason-registry")
+      local bridge = {}
+      local language_servers = {}
+      for _, lang_cfg in pairs(api.lang) do
+        if type(lang_cfg) == "table" and lang_cfg.bridge then
+          local b = lang_cfg.bridge
+          if mr.is_installed(b.server) then
+            language_servers[b.server] = { cmd = b.cmd, languages = b.languages }
+            for _, lang in ipairs(b.languages) do
+              bridge[lang] = { enabled = true }
+            end
+          end
+        end
+      end
+
       opts.init_options = {
         autoInstall = true,
-        languages = {
-          markdown = {
-            bridge = {
-              typescript = { enabled = true },
-              javascript = { enabled = true },
-              python = { enabled = true },
-              lua = { enabled = true },
-            },
-          },
-        },
-        languageServers = {
-          ["typescript-language-server"] = {
-            cmd = { "typescript-language-server", "--stdio" },
-            languages = { "typescript", "javascript", "tsx" },
-          },
-          ["pyright"] = {
-            cmd = { "pyright-langserver", "--stdio" },
-            languages = { "python" },
-          },
-          ["lua-language-server"] = {
-            cmd = { "lua-language-server" },
-            languages = { "lua" },
-          },
-        },
+        languages = { markdown = { bridge = bridge } },
+        languageServers = language_servers,
       }
     end
     return opts

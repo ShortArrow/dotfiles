@@ -1,5 +1,11 @@
 local M = {}
 
+M.bridge = {
+  server = "pyright",
+  cmd = { "pyright-langserver", "--stdio" },
+  languages = { "python" },
+}
+
 M.is_test_of_python = function(stuff)
   return nil ~= string.match(stuff, "tests?.*%.py")
 end
