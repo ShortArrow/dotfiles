@@ -1,5 +1,9 @@
 version = 1
 
+[keybind]
+trigger = "space"
+bash = "alt-space"
+
 [[abbr]]
 key = "rx"
 expand = "runex"
