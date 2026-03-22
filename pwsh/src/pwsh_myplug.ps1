@@ -225,7 +225,14 @@ if (Test-CommandExist('go')) {
 }
 
 # mise setup
-(& mise activate pwsh)| Out-String | Invoke-Expression 
+if ((Test-CommandExist('mise')) -and -not $env:RUNEX_DISABLE_MISE) {
+  try {
+    (& mise activate pwsh | Out-String) | Invoke-Expression
+  }
+  catch {
+    Write-Warning "mise activation failed: $($_.Exception.Message)"
+  }
+}
 # $MiseShimPath = "$HOME\.local\share\mise\shims"
 # if (Test-Path $MiseShimPath) {
 #     $env:PATH = "$MiseShimPath;" + $env:PATH
@@ -485,3 +492,7 @@ if (Test-CommandExist('runex')) {
 
 # Clear command existence cache after initial load and alias setup
 $script:commandExistCache.Clear()
+
+
+
+
