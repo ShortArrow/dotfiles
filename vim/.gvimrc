@@ -12,6 +12,9 @@ colorscheme darkblue
 " 最初に追加
 gui
 
+" ダークモードのタイトルバー
+set guioptions+=d
+
 " UIを消す
 set guioptions-=m " remove menu bar
 set guioptions-=T " remove tool bar
