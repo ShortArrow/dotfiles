@@ -16,4 +16,6 @@ node = "latest"
 "npm:node-gyp-build" = "latest"
 pnpm = "latest"
 yarn = "latest"
+uv = "latest"
+python = "latest"
 
