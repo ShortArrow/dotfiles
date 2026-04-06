@@ -33,7 +33,7 @@
 %ProgramFiles%\PowerShell\7
 %ProgramFiles%\SqlCmd
 %ProgramFiles%\Tailscale
-%ProgramFiles%\Vim\vim91
+%ProgramFiles%\Vim\vim92
 %ProgramFiles%\WezTerm
 %ProgramFiles%\Wireshark
 %ProgramFiles%\bottom\bin
