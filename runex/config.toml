@@ -1,7 +1,10 @@
 version = 1
 
-[keybind]
-trigger = "space"
+[keybind.trigger]
+pwsh = "space"
+bash = "space"
+zsh = "space"
+nu = "space"
 
 [[abbr]]
 key = "rx"
