@@ -27,8 +27,13 @@ config.color_scheme = 'Tomorrow Night'
 config.color_scheme = 'AdventureTime'
 config.color_scheme = 'Kibble'
 
--- config.hide_tab_bar_if_only_one_tab = true
+config.hide_tab_bar_if_only_one_tab = true
+config.show_new_tab_button_in_tab_bar = false
 config.window_decorations = 'RESIZE'
+config.window_frame = {
+  inactive_titlebar_bg = "none",
+  active_titlebar_bg = "none",
+}
 
 config.enable_wayland = false
 config.window_background_gradient =
@@ -139,6 +144,24 @@ config.keys = {
   },
 }
 
+
+wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+  local background = "#40405e"
+  local foreground = "#FFFFFF"
+
+  if tab.is_active then
+    background = "#00FF00"
+    foreground = "#000000"
+  end
+
+  local title = "   " .. wezterm.truncate_right(tab.active_pane.title, max_width - 1) .. "   "
+
+  return {
+    { Background = { Color = background } },
+    { Foreground = { Color = foreground } },
+    { Text = title },
+  }
+end)
 
 -- and finally, return the configuration to wezterm
 return config
