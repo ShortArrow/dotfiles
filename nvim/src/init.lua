@@ -9,6 +9,14 @@ local function usecase_ordinal()
   local api = require("my")
   api.lang.python.env()
   api.keymaps.commonmaps_activate()
+
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    callback = function(ev)
+      api.keymaps.maps_activate_buf(api.keymaps.maps.markdown, ev.buf)
+    end,
+  })
+
   require("boot_lazy")
   require("config._kakehashi").setup()
 

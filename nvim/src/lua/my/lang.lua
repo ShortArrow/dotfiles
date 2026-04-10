@@ -13,5 +13,6 @@ M.astro = require('my.lang.astro')
 M.csharp = require('my.lang.csharp')
 M.xml = require('my.lang.xml')
 M.bash = require('my.lang.bash')
+M.markdown = require('my.lang.markdown')
 
 return M
