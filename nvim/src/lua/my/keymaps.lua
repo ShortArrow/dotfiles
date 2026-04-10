@@ -21,6 +21,16 @@ M.maps_activate = function(map)
   end
 end
 
+M.maps_activate_buf = function(map, bufnr)
+  for _, item in pairs(map) do
+    local mode = item.mode or "n"
+    vim.keymap.set(mode, item[1], item[2], {
+      buffer = bufnr,
+      desc = item.desc,
+    })
+  end
+end
+
 M.commonmaps_activate = function()
   M.maps_activate(M.maps.common)
 end
@@ -41,6 +51,18 @@ M.maps = {
   },
   lazygit = {
     { "<Leader>lg", "<cmd>LazyGit<CR>" },
+  },
+  markdown = {
+    {
+      "K",
+      function() require("my.lang.markdown").hover_or_preview() end,
+      desc = "Markdown hover/preview",
+    },
+    {
+      "<Leader>ld",
+      function() require("my.lang.markdown").goto_definition() end,
+      desc = "Markdown goto link/definition",
+    },
   },
   rust_tools = {
     {
