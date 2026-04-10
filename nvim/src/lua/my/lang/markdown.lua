@@ -1,6 +1,6 @@
 local M = {}
 
---- カーソル位置のmarkdownリンクを抽出する
+--- Extract the markdown link under the cursor
 --- @return { type: "file", path: string } | { type: "url", url: string } | nil
 local function get_link_under_cursor()
   local line = vim.api.nvim_get_current_line()

@@ -85,12 +85,46 @@ M.setup = function()
         vim.b[bufnr][flag_key] = true
       end
 
+      local function resolve_and_start()
+        local cfg = vim.deepcopy(config)
+        if type(cfg.root_dir) == "function" then
+          local resolved
+          local target_buf = bufnr or vim.api.nvim_get_current_buf()
+          -- Try async signature: function(bufnr, on_dir)
+          local ok = pcall(cfg.root_dir, target_buf, function(dir) resolved = dir end)
+          if not ok or resolved == nil then
+            -- Fall back to sync call: function(fname) -> string
+            local fname = vim.api.nvim_buf_get_name(target_buf)
+            local ok2, r = pcall(cfg.root_dir, fname)
+            if ok2 and type(r) == "string" then resolved = r end
+          end
+          if type(resolved) == "string" then
+            cfg.root_dir = resolved
+          else
+            -- Last resort: use directory of the current file
+            local fname = vim.api.nvim_buf_get_name(target_buf)
+            if fname ~= "" then
+              cfg.root_dir = vim.fs.dirname(fname)
+            else
+              cfg.root_dir = vim.fn.getcwd()
+            end
+          end
+        end
+        -- lua_ls: skip nvim-specific settings when .luarc.json is present
+        if (cfg_name == "lua_ls") and type(cfg.root_dir) == "string" then
+          if vim.uv.fs_stat(cfg.root_dir .. "/.luarc.json")
+            or vim.uv.fs_stat(cfg.root_dir .. "/.luarc.jsonc") then
+            cfg.settings = cfg.settings or {}
+            cfg.settings.Lua = vim.empty_dict()
+          end
+        end
+        vim.lsp.start(cfg)
+      end
+
       if bufnr == nil then
-        vim.lsp.start(config)
+        resolve_and_start()
       else
-        vim.api.nvim_buf_call(bufnr, function()
-          vim.lsp.start(config)
-        end)
+        vim.api.nvim_buf_call(bufnr, resolve_and_start)
       end
     end
 
@@ -114,13 +148,66 @@ M.setup = function()
       end
     end
 
-    -- Do not proactively start for already-open buffers to avoid races; rely on FileType/BufReadPost
+    -- Retroactively start for already-loaded buffers whose filetype matches.
+    -- Needed because mason-lspconfig loads lazily via BufReadPre; the FileType
+    -- event may have already fired by the time autocmds are registered.
+    vim.schedule(function()
+      local ft_set = {}
+      for _, ft in ipairs(fts) do ft_set[ft] = true end
+      for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+        if vim.api.nvim_buf_is_loaded(buf) then
+          local buf_ft = vim.bo[buf].filetype
+          if #fts == 0 or ft_set[buf_ft] then
+            start_for_buf(buf)
+          end
+        end
+      end
+    end)
   end
 
   local function build_opts(server_name)
     local opts = {}
     if server_name == "lua_ls" or server_name == "sumneko_lua" then
       opts.settings = api.lang.lua.sumneko_lua
+      opts.root_dir = function(arg1, arg2)
+        -- Handle both sync function(fname)->string and async function(bufnr, on_dir)
+        local fname
+        if type(arg1) == "number" then
+          fname = vim.api.nvim_buf_get_name(arg1)
+        elseif type(arg1) == "string" then
+          fname = arg1
+        else
+          fname = vim.api.nvim_buf_get_name(0)
+        end
+        local resolved
+        if fname and fname ~= "" then
+          -- Prefer the repository root (.git) to match VSCode's workspace
+          -- behavior: even when a nested .luarc.json exists, use the repo root.
+          resolved = vim.fs.root(fname, ".git")
+            or vim.fs.root(fname, {
+              ".luarc.json", ".luarc.jsonc", ".luacheckrc",
+              ".stylua.toml", "stylua.toml",
+              "selene.toml", "selene.yml",
+            })
+            or vim.fs.dirname(fname)
+        else
+          resolved = vim.fn.getcwd()
+        end
+        if type(arg2) == "function" then
+          arg2(resolved)
+        else
+          return resolved
+        end
+      end
+      opts.on_init = function(client)
+        if client.workspace_folders then
+          local path = client.workspace_folders[1].name
+          if vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc") then
+            client.config.settings.Lua = {}
+            return
+          end
+        end
+      end
 
     elseif server_name == "tsserver" then
       if not api.lang.ts.has_package_json() then
@@ -176,8 +263,37 @@ M.setup = function()
         "javascript", "typescript", "tsx",
         "python",
       }
-      -- my/lang/*.bridge から Mason インストール済みの LSP を自動検出して bridge 接続
-      -- init_options は起動時に一度だけ評価される。Mason で LSP 追加後は :LspRestart kakehashi で反映。
+      opts.root_dir = function(arg1, arg2)
+        -- Handle both sync function(fname)->string and async function(bufnr, on_dir)
+        local fname
+        if type(arg1) == "number" then
+          fname = vim.api.nvim_buf_get_name(arg1)
+        elseif type(arg1) == "string" then
+          fname = arg1
+        else
+          fname = vim.api.nvim_buf_get_name(0)
+        end
+        local resolved
+        if fname and fname ~= "" then
+          -- Prefer repository root (.git) to match VSCode's workspace behavior
+          resolved = vim.fs.root(fname, ".git")
+            or vim.fs.root(fname, {
+              ".luarc.json", ".luarc.jsonc",
+              "pyproject.toml", "package.json", "deno.json", "deno.jsonc",
+            })
+            or vim.fs.dirname(fname)
+        else
+          resolved = vim.fn.getcwd()
+        end
+        if type(arg2) == "function" then
+          arg2(resolved)
+        else
+          return resolved
+        end
+      end
+      -- Auto-detect Mason-installed LSPs from my/lang/*.bridge and wire them
+      -- into the kakehashi bridge. init_options is evaluated once at startup;
+      -- after installing new LSPs via Mason, run :LspRestart kakehashi to apply.
       local mr = require("mason-registry")
       local bridge = {}
       local language_servers = {}

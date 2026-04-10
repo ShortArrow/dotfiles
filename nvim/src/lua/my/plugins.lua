@@ -467,6 +467,16 @@ M.ordinalnvim = {
   {
     "folke/lazydev.nvim",
     ft = "lua", -- only load on lua files
+    -- Only load when the first opened lua file lives under the nvim config.
+    -- lazydev forcibly overrides lua_ls's root_dir, so the most reliable way
+    -- to honor an external project's .luarc.json is to skip loading the
+    -- plugin entirely for those sessions.
+    cond = function()
+      local bufname = vim.api.nvim_buf_get_name(0)
+      if bufname == "" then return false end
+      local function norm(p) return (p:gsub("\\", "/")):lower() end
+      return vim.startswith(norm(bufname), norm(vim.fn.stdpath("config")))
+    end,
     opts = {
       library = {
         -- See the configuration section for more details
@@ -478,8 +488,11 @@ M.ordinalnvim = {
       },
     },
   },
-  -- Install this plugin.
-  { "tjdevries/nlua.nvim" },
+  -- nlua.nvim removed: it installs a buffer-local K mapping that runs :help
+  -- via nlua.keyword_program(), which overrides Lspsaga hover_doc and gives
+  -- unrelated results (e.g. perl API help) for non-nvim Lua code.
+  -- LSP hover via Lspsaga + lua_ls/lazydev covers the use case.
+  -- { "tjdevries/nlua.nvim" },
   -- (OPTIONAL): This is recommended to get better auto-completion UX experience for builtin LSP.
   -- {"nvim-lua/completion-nvim"},
   -- (OPTIONAL): This is a suggested plugin to get better Lua syntax highlighting
