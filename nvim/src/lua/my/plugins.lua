@@ -690,11 +690,9 @@ M.ordinalnvim = {
   },
   {
     "windwp/nvim-ts-autotag",
-    config = function()
-      require("nvim-ts-autotag").setup()
-    end,
-    -- dependencies = { "nvim-treesitter/nvim-treesitter" },
-    event = "BufRead"
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    ft = { "html", "xml", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "astro", "php", "markdown" },
+    opts = {},
   },
   {
     "KadoBOT/cmp-plugins",
