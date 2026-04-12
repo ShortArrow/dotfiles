@@ -1,12 +1,3 @@
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-  update_in_insert = false,
-  virtual_text = {
-    format = function(diagnostic)
-      return string.format("%s (%s: %s)", diagnostic.message, diagnostic.source, diagnostic.code)
-    end,
-  },
-})
-
 -- severity levels of problems
 -- By default, they are E for Error, W for Warning, H for Hints, I for Informations.
 -- They are shown in the sign column on the left-most side
@@ -45,6 +36,9 @@ vim.diagnostic.config({
   virtual_text = {
     -- source = "always",  -- "always" Or "if_many"
     prefix = '●', -- Could be '■', '▎', 'x'
+    format = function(diagnostic)
+      return string.format("%s (%s: %s)", diagnostic.message, diagnostic.source, diagnostic.code)
+    end,
   },
   update_in_insert = true,
   underline = true,
