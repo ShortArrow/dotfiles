@@ -459,6 +459,24 @@ M.ordinalnvim = {
     -- keys = api.keymaps.maps.rust_tools,
   },
   {
+    "cordx56/rustowl",
+    version = "*",
+    -- Do NOT build from source. `cargo install rustowl` is fragile
+    -- (nightly toolchain pinning + dependency drift), and the upstream
+    -- docs/installation.md recommends prebuilt binaries instead:
+    --   Windows: winget install Cordx56.Rustowl
+    --   Others:  cargo binstall rustowl / release tarball / installer script
+    -- This entry only loads the Neovim client; the `rustowl` LSP
+    -- server binary must already be on PATH.
+    cond = function() return vim.fn.executable("rustowl") == 1 end,
+    lazy = false, -- This plugin is already lazy
+    -- `init` (runs before plugin loads) rather than `opts`/`config`:
+    -- rustowl's ftplugin/rust.lua requires rustowl.config immediately
+    -- on the first Rust buffer and caches vim.g.rustowl, so the value
+    -- has to be set before the plugin is loaded.
+    init = get_config("_rustowl").init,
+  },
+  {
     "alaviss/nim.nvim",
   },
   -- ################################################
