@@ -134,10 +134,10 @@ end)
 -- Keymaps
 config.leader = { key = 'Space', mods = 'CTRL', timeout_milliseconds = 1000 }
 config.keys = {
-  -- Detach window
+  -- Detach pane to a new window
   {
     key = '!',
-    mods = 'LEADER | SHIFT',
+    mods = 'LEADER',
     action = wezterm.action_callback(function(win, pane)
       local tab, window = pane:move_to_new_window()
     end),
@@ -148,6 +148,13 @@ config.keys = {
 -- Custom command palette entries
 wezterm.on("augment-command-palette", function(window, pane)
   return {
+    {
+      brief = "Detach Pane to New Window",
+      icon = "md_window_restore",
+      action = wezterm.action_callback(function(_win, current_pane)
+        current_pane:move_to_new_window()
+      end),
+    },
     {
       brief = "Split: Claude (top) + Lazygit (bottom)",
       icon = "cod_split_vertical",
