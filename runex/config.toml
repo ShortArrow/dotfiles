@@ -18,12 +18,12 @@ when_command_exists = ["lsd"]
 
 [[abbr]]
 key = "ll"
-expand = "lsd -l"
+expand = "lsd -lF --group-dirs first"
 when_command_exists = ["lsd"]
 
 [[abbr]]
 key = "ll."
-expand = "lsd -la"
+expand = "lsd -laF --group-dirs first"
 when_command_exists = ["lsd"]
 
 [[abbr]]
@@ -35,6 +35,11 @@ when_command_exists = ["lsd"]
 key = "l."
 expand = "lsd -d .*"
 when_command_exists = ["lsd"]
+
+[[abbr]]
+key = "rmf"
+expand = "Remove-Item -Recurse -Force"
+when_command_exists = ["Remove-Item"]
 
 [[abbr]]
 key = "cat"
