@@ -17,4 +17,5 @@ yarn = "latest"
 uv = "latest"
 python = "latest"
 "npm:ccusage" = "latest"
+"github:k1LoW/mo" = "latest"
 
