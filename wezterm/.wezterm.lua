@@ -171,6 +171,22 @@ wezterm.on("augment-command-palette", function(window, pane)
         }
       end),
     },
+    {
+      brief = "Split: Claude resume (top) + Lazygit (bottom)",
+      icon = "cod_split_vertical",
+      action = wezterm.action_callback(function(_win, current_pane)
+        -- Run claude in the current (top) pane
+        current_pane:send_text("claude --resume\r")
+        -- Split horizontally (new pane below) and run lazygit in a shell
+        -- so the pane stays open after lazygit exits
+        local shell = is_windows and { "pwsh", "-NoLogo", "-NoExit", "-Command", "lazygit" }
+          or { "bash", "-c", "lazygit; exec bash" }
+        current_pane:split {
+          direction = "Bottom",
+          args = shell,
+        }
+      end),
+    },
   }
 end)
 
