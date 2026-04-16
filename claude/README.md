@@ -4,3 +4,5 @@
 - [openai/skills](https://github.com/openai/skills)
 - [anthropics/skills](https://github.com/anthropics/skills)
 - [microsoftDocs/skills](https://github.com/MicrosoftDocs/Agent-Skills/tree/main/skills)
+- [cloudflare/skills](https://github.com/cloudflare/skills)
+- [android/skills](https://github.com/android/skills)
