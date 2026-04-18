@@ -46,10 +46,36 @@ function Reload-EnvironmentVariables {
     [System.Environment]::GetEnvironmentVariable($name, $scope)
   }
 
+  # Merge Machine + User PATH while preserving process-specific entries (e.g. mise shims)
+  # and removing case-insensitive duplicates. Order: process-only -> Machine -> User.
+  $machinePath = (Get-EnvVar 'Path' 'Machine') -split ';' | Where-Object { $_ }
+  $userPath = (Get-EnvVar 'Path' 'User')    -split ';' | Where-Object { $_ }
+  $currentPath = $env:Path -split ';' | Where-Object { $_ }
+
+  $machineSet = [System.Collections.Generic.HashSet[string]]::new(
+    [string[]]($machinePath | ForEach-Object { $_.TrimEnd('\') }),
+    [System.StringComparer]::OrdinalIgnoreCase)
+  $userSet = [System.Collections.Generic.HashSet[string]]::new(
+    [string[]]($userPath | ForEach-Object { $_.TrimEnd('\') }),
+    [System.StringComparer]::OrdinalIgnoreCase)
+
+  $processOnly = $currentPath | Where-Object {
+    $n = $_.TrimEnd('\')
+    -not $machineSet.Contains($n) -and -not $userSet.Contains($n)
+  }
+
+  $merged = @($processOnly) + @($machinePath) + @($userPath)
+  $seen = [System.Collections.Generic.HashSet[string]]::new(
+    [System.StringComparer]::OrdinalIgnoreCase)
+  $deduped = foreach ($p in $merged) {
+    if ($seen.Add($p.TrimEnd('\'))) { $p }
+  }
+  $newPath = ($deduped -join ';')
+
   $envVars = @{
     Path   = @{
       Current = $env:Path
-      New     = "$(Get-EnvVar 'Path' 'Machine');$(Get-EnvVar 'Path' 'User')"
+      New     = $newPath
     }
     EDITOR = @{
       Current = $env:EDITOR
@@ -89,7 +115,7 @@ function Reload-EnvironmentVariables {
     $HWND_BROADCAST = [System.IntPtr]0xffff
     $WM_SETTINGCHANGE = 0x1a
     [NativeMethodsForEnvReload]::SendNotifyMessage($HWND_BROADCAST, $WM_SETTINGCHANGE, [System.IntPtr]::Zero, "Environment") | Out-Null
-    Write-Host "Environment variables updated and broadcasted." -ForegroundColor Cyan
+    Write-Debug "Environment variables updated and broadcasted."
   }
 
   $reloadDuration = (Get-Date) - $reloadStart
@@ -104,26 +130,39 @@ New-Alias -Name reload -Value Read-Profile -Force
 
 # New-Item -Type File -Path $PROFILE -Force
 
-Set-PSReadLineOption -PredictionSource History -PredictionViewStyle ListView
-Set-PSReadlineOption -HistoryNoDuplicates
-Set-PSReadlineOption -BellStyle None
-Set-PSReadlineOption -EditMode "Vi"
-Set-PSReadLineKeyHandler -Chord "Ctrl+n" -Function HistorySearchForward
-Set-PSReadLineKeyHandler -Chord "Ctrl+p" -Function HistorySearchBackward
-Set-PSReadLineKeyHandler -Chord "Ctrl+delete" -Function BackwardKillWord
+# PSReadLine requires a console host with virtual terminal support. Skip setup in
+# non-interactive / redirected sessions to avoid initialization errors.
+if ((Get-Module PSReadLine -ListAvailable) -and [Environment]::UserInteractive -and -not [Console]::IsInputRedirected) {
+  Import-Module PSReadLine -ErrorAction SilentlyContinue
+  try {
+    Set-PSReadLineOption -PredictionSource History -PredictionViewStyle ListView
+    Set-PSReadlineOption -HistoryNoDuplicates
+    Set-PSReadlineOption -BellStyle None
+    Set-PSReadlineOption -EditMode "Vi"
+    Set-PSReadLineKeyHandler -Chord "Ctrl+n" -Function HistorySearchForward
+    Set-PSReadLineKeyHandler -Chord "Ctrl+p" -Function HistorySearchBackward
+    Set-PSReadLineKeyHandler -Chord "Ctrl+delete" -Function BackwardKillWord
 
-# criteria of when leave history, contains word "SKIPHISTORY", or only one charactor of alphabet, or finish terminal command.
+    # Skip history entries matching: literal SKIPHISTORY, single alphabetic chars, or exit.
+    Set-PSReadlineOption -AddToHistoryHandler {
+      param ($command)
+      if ([string]::IsNullOrEmpty($command)) { return $false }
+      try {
+        switch -regex ($command) {
+          "SKIPHISTORY|^[a-z]$|exit" { return $false }
+          default { return $true }
+        }
+      } catch {
+        return $true
+      }
+    }
 
-Set-PSReadlineOption -AddToHistoryHandler {
-  param ($command)
-  switch -regex ($command) {
-    "SKIPHISTORY|^[a-z]$|exit" { return $false }
-    default { return $true }
+    # Word delimiters on cursor navigation by ctrl + arrows
+    Set-PSReadLineOption -WordDelimiters ";:,.[]{}()/\|^&*-=+'`" !?@#$%&_<>「」（）『』『』［］、，。：；／"
+  } catch {
+    Write-Debug "PSReadLine setup failed: $($_.Exception.Message)"
   }
 }
-
-# Word delimiters on cursor navigation by ctrl + arrows
-Set-PSReadLineOption -WordDelimiters ";:,.[]{}()/\|^&*-=+'`" !?@#$%&_<>「」（）『』『』［］、，。：；／"
 
 # prompt setting
 # choco install starship
@@ -219,15 +258,24 @@ function Initialize-Gsudo {
 # Register the proxy function
 Set-Item -Path Function:\gsudo -Value ${function:Initialize-Gsudo}
 
-# go path
+# go path (appended only if not already present)
 if (Test-CommandExist('go')) {
-  $env:Path = "$env:Path;$env:USERPROFILE\go\bin;"
+  $goBin = "$env:USERPROFILE\go\bin"
+  $hasGoBin = ($env:Path -split ';') |
+    Where-Object { $_.TrimEnd('\').Equals($goBin.TrimEnd('\'), [StringComparison]::OrdinalIgnoreCase) }
+  if (-not $hasGoBin) { $env:Path = "$env:Path;$goBin" }
 }
 
 # mise setup
+# mise's command_not_found hook dereferences GetHistoryItems()[-1].CommandLine without
+# a null check, which throws when history is empty. Patch the output before executing.
 if ((Test-CommandExist('mise')) -and -not $env:RUNEX_DISABLE_MISE) {
   try {
-    (& mise activate pwsh | Out-String) | Invoke-Expression
+    $miseActivate = (& mise activate pwsh | Out-String)
+    $miseActivate = $miseActivate -replace `
+      '\[Microsoft\.PowerShell\.PSConsoleReadLine\]::GetHistoryItems\(\)\[-1\]\.CommandLine', `
+      '$(try { ([Microsoft.PowerShell.PSConsoleReadLine]::GetHistoryItems() | Select-Object -Last 1).CommandLine } catch { '''' })'
+    $miseActivate | Invoke-Expression
   }
   catch {
     Write-Warning "mise activation failed: $($_.Exception.Message)"
@@ -494,6 +542,12 @@ if (Test-CommandExist('runex')) {
 # Clear command existence cache after initial load and alias setup
 $script:commandExistCache.Clear()
 
+# Final PATH deduplication (case-insensitive, trailing-backslash normalized).
+# Late-stage additions (go, mise, runex) may reintroduce duplicates; clean them up here.
+$__seenPath = [System.Collections.Generic.HashSet[string]]::new(
+  [System.StringComparer]::OrdinalIgnoreCase)
+$env:Path = (($env:Path -split ';' | Where-Object { $_ -and $__seenPath.Add($_.TrimEnd('\')) }) -join ';')
+Remove-Variable __seenPath -ErrorAction SilentlyContinue
 
-
-
+$profileLoadDuration = (Get-Date) - $profileLoadStart
+Write-Debug ("Profile loaded in {0:N0} ms" -f $profileLoadDuration.TotalMilliseconds)
