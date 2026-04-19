@@ -117,6 +117,53 @@ dst.windows = "$APPDATA/Code - Insiders/User"
 dst.linux   = "$XDG_CONFIG_HOME/Code - Insiders/User"
 
 
+# ---- Linux-only simple symlinks ----
+
+[tools.hyprland]
+description = "Hyprland window manager"
+platforms = ["linux"]
+[[tools.hyprland.links]]
+src = "hyprland/hypr"
+dst.linux = "$XDG_CONFIG_HOME/hypr"
+
+
+[tools.i3wm]
+description = "i3 window manager myplug fragment"
+platforms = ["linux"]
+[[tools.i3wm.links]]
+src = "i3wm/myplug"
+dst.linux = "$XDG_CONFIG_HOME/i3/myplug"
+
+
+[tools.lazydocker]
+description = "lazydocker TUI"
+platforms = ["linux"]
+[[tools.lazydocker.links]]
+src = "lazydocker"
+dst.linux = "$XDG_CONFIG_HOME/lazydocker"
+
+
+# ---- Delegation to legacy setup scripts (too exotic for declarative links) ----
+
+[tools.tmux]
+description = "tmux config (downloads theme, creates ~/.tmux_myplug)"
+platforms = ["linux"]
+[tools.tmux.script]
+linux = "tmux/setup.sh"
+
+[tools.keyd]
+description = "keyd (/etc/keyd, requires root)"
+platforms = ["linux"]
+[tools.keyd.script]
+linux = "keyd/setup.sh"
+
+[tools.lunarvim]
+description = "LunarVim (runs upstream curl installer)"
+platforms = ["linux"]
+[tools.lunarvim.script]
+linux = "lunarvim/setup.sh"
+
+
 # ---- Doctor-only meta tools (no symlinks, just checks) ----
 
 [tools.windows]
