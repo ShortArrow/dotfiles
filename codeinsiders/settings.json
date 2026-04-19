@@ -17,20 +17,12 @@
         "--log=verbose"
     ],
     "vscode-neovim.compositeKeys": {
-      "jj": {
-          "command": "vscode-neovim.escape"
-      }
+        "jj": {
+            "command": "vscode-neovim.escape"
+        }
     },
     "Lua.diagnostics.globals": [
         "vim"
-    ],
-    "roo-cline.allowedCommands": [
-        "npm test",
-        "npm install",
-        "tsc",
-        "git log",
-        "git diff",
-        "git show"
     ],
     "[dart]": {
         "editor.formatOnSave": true,
@@ -54,8 +46,7 @@
     "debug.console.fontFamily": "'JetBrainsMono Nerd Font Mono', Consolas, 'Courier New', monospace",
     "diffEditor.hideUnchangedRegions.enabled": true,
     "diffEditor.ignoreTrimWhitespace": false,
-    "editor.fontFamily": "'JetBrainsMono Nerd Font Mono', Consolas, 'Courier New', monospace",
-    "editor.lineNumbers": "relative",
+    "editor.fontFamily": "Cica, 'JetBrainsMono Nerd Font Mono', Consolas, 'Courier New', monospace",
     "editor.stickyScroll.enabled": false,
     "editor.tabSize": 2,
     "editor.wrappingStrategy": "advanced",
