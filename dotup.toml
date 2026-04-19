@@ -115,3 +115,12 @@ description = "VS Code Insiders user settings"
 src = { dir = "codeinsiders", include = ["settings.json", "keybindings.json"] }
 dst.windows = "$APPDATA/Code - Insiders/User"
 dst.linux   = "$XDG_CONFIG_HOME/Code - Insiders/User"
+
+
+# ---- Doctor-only meta tools (no symlinks, just checks) ----
+
+[tools.windows]
+description = "Windows environment health checks (no symlinks)"
+platforms = ["windows"]
+[tools.windows.doctor]
+windows = "windows/doctor.ps1"
