@@ -117,6 +117,73 @@ dst.windows = "$APPDATA/Code - Insiders/User"
 dst.linux   = "$XDG_CONFIG_HOME/Code - Insiders/User"
 
 
+# ---- Category B: symlink + post-apply side effects ----
+
+[tools.git]
+description = "Git global config (+ set init.defaultBranch)"
+[[tools.git.post_apply]]
+run = ["git", "config", "--global", "init.defaultBranch", "main"]
+[[tools.git.post_apply]]
+run = ["git", "config", "--global", "core.pager", "delta"]
+[[tools.git.post_apply]]
+run = ["git", "config", "--global", "interactive.diffFilter", "delta --color-only"]
+[[tools.git.post_apply]]
+run = ["git", "config", "--global", "delta.navigate", "true"]
+[[tools.git.post_apply]]
+run = ["git", "config", "--global", "merge.conflictStyle", "zdiff3"]
+
+
+[tools.nvim]
+description = "Neovim configuration directory"
+[[tools.nvim.links]]
+src = "nvim/src"
+dst.windows = "$LOCALAPPDATA/nvim"
+dst.linux   = "$XDG_CONFIG_HOME/nvim"
+
+
+[tools.pwsh]
+description = "PowerShell myplug sourced from $PROFILE"
+platforms = ["windows"]
+[[tools.pwsh.links]]
+src = "pwsh/src"
+dst.windows = "$USERPROFILE/Documents/PowerShell/myplug"
+# User's $PROFILE is left untouched; add `. $HOME/Documents/PowerShell/myplug/pwsh_myplug.ps1`
+# once to bootstrap (see pwsh/readme).
+
+
+[tools.claude]
+description = "Claude Code settings (notify.ps1, CLAUDE.md, statusline.sh)"
+[[tools.claude.links]]
+src = { dir = "claude", include = ["notify.ps1", "CLAUDE.md", "statusline.sh"] }
+dst.windows = "$USERPROFILE/.claude"
+dst.linux   = "$HOME/.claude"
+
+
+[tools.zebar]
+description = "Zebar taskbar (Windows only)"
+platforms = ["windows"]
+[[tools.zebar.links]]
+src = { dir = "zebar", include = ["config.yaml", "script.js", "start.bat", "start.sh"] }
+dst.windows = "$USERPROFILE/.glzr/zebar"
+
+
+# ---- Category B with custom logic delegated to existing setup scripts ----
+
+[tools.claude-skills]
+description = "Claude Code skills (auto-discovered subdirectories with SKILL.md)"
+# Skill set changes often; delegate to the existing setup.ps1 which enumerates
+# <dir>/SKILL.md directories dynamically. Migrate to declarative include once
+# dotup supports glob.
+[tools.claude-skills.script]
+windows = "claude/skills/setup.ps1"
+
+[tools.bash]
+description = "bash myplug (edits ~/.bashrc and ~/.bash_profile)"
+platforms = ["linux"]
+[tools.bash.script]
+linux = "bash/setup.sh"
+
+
 # ---- Linux-only simple symlinks ----
 
 [tools.hyprland]
