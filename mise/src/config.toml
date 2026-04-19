@@ -3,19 +3,32 @@
 [tasks.cargo-build]
 description = "Build the Rust project using Cargo"
 run = "cargo build --release"
+
 [tasks.open]
 description = "mise wo hirogeru"
 run = "echo 'OPEN SESAME!'"
 
 [tools]
-bun = "latest"
+"aqua:jesseduffield/lazydocker" = "latest"
+"aqua:jesseduffield/lazygit" = "latest"
+"aqua:sharkdp/bat" = "latest"
+"aqua:sharkdp/numbat" = "latest"
+"cargo:git-bahn/git-graph" = "latest"
+"cargo:sharkdp/bat" = "latest"
+go = "latest"
+"go:github.com/x-motemen/ghq" = "latest"
+gradle = "latest"
+java = "latest"
 node = "latest"
-"npm:node-gyp-build" = "latest"
-"npm:@openai/codex" = "latest"
+npm = "latest"
+"npm:@google/gemini-cli" = "latest"
 pnpm = "latest"
-yarn = "latest"
-uv = "latest"
 python = "latest"
-"npm:ccusage" = "latest"
-"github:k1LoW/mo" = "latest"
 
+[tool_alias]
+python3 = "python"
+
+[tool_alias.python]
+
+[tool_alias.python.versions]
+python3 = "python"
