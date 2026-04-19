@@ -53,6 +53,7 @@ dst.linux   = "$HOME/.wezterm.lua"
 
 [tools.vim]
 description = "Vim (.vimrc and .gvimrc)"
+# .gvimrc has no Linux destination; apply platforms per link instead
 [[tools.vim.links]]
 src = "vim/.vimrc"
 dst.windows = "$USERPROFILE/.vimrc"
@@ -60,7 +61,6 @@ dst.linux   = "$HOME/.vimrc"
 [[tools.vim.links]]
 src = "vim/.gvimrc"
 dst.windows = "$USERPROFILE/.gvimrc"
-# .gvimrc is Windows-only in this repo; omit dst.linux.
 
 
 [tools.runex]
@@ -104,22 +104,14 @@ dst.linux = "$XDG_CONFIG_HOME/lazygit/config.yml"
 [tools.code]
 description = "VS Code user settings"
 [[tools.code.links]]
-src = "code/settings.json"
-dst.windows = "$APPDATA/Code/User/settings.json"
-dst.linux   = "$XDG_CONFIG_HOME/Code/User/settings.json"
-[[tools.code.links]]
-src = "code/keybindings.json"
-dst.windows = "$APPDATA/Code/User/keybindings.json"
-dst.linux   = "$XDG_CONFIG_HOME/Code/User/keybindings.json"
+src = { dir = "code", include = ["settings.json", "keybindings.json"] }
+dst.windows = "$APPDATA/Code/User"
+dst.linux   = "$XDG_CONFIG_HOME/Code/User"
 
 
 [tools.codeinsiders]
 description = "VS Code Insiders user settings"
 [[tools.codeinsiders.links]]
-src = "codeinsiders/settings.json"
-dst.windows = "$APPDATA/Code - Insiders/User/settings.json"
-dst.linux   = "$XDG_CONFIG_HOME/Code - Insiders/User/settings.json"
-[[tools.codeinsiders.links]]
-src = "codeinsiders/keybindings.json"
-dst.windows = "$APPDATA/Code - Insiders/User/keybindings.json"
-dst.linux   = "$XDG_CONFIG_HOME/Code - Insiders/User/keybindings.json"
+src = { dir = "codeinsiders", include = ["settings.json", "keybindings.json"] }
+dst.windows = "$APPDATA/Code - Insiders/User"
+dst.linux   = "$XDG_CONFIG_HOME/Code - Insiders/User"
