@@ -3,22 +3,9 @@
 [tasks.cargo-build]
 description = "Build the Rust project using Cargo"
 run = "cargo build --release"
-
 [tasks.open]
 description = "mise wo hirogeru"
 run = "echo 'OPEN SESAME!'"
-
-# --- 7z wrappers (Windows, require pwsh + 7z on PATH) ---
-# These delegate to V:/dotfiles/7z/*.ps1 so they are reachable from any cwd
-# via `mise run create-zip -- ...` / `mise run extract-zip -- ...`.
-
-[tasks.create-zip]
-description = "Create a timestamped 7z zip archive (auto-password unless --no-password)."
-run = "pwsh -NoLogo -File $HOME/Documents/GitHub/dotfiles/7z/Create-Zip.ps1"
-
-[tasks.extract-zip]
-description = "Extract a 7z archive (auto-destination = archive basename if omitted)."
-run = "pwsh -NoLogo -File $HOME/Documents/GitHub/dotfiles/7z/Extract-Zip.ps1"
 
 [tools]
 bun = "latest"
