@@ -85,6 +85,8 @@ platforms = ["windows"]
 [[tools.glazewm.links]]
 src = "glazewm/config.yaml"
 dst.windows = "$USERPROFILE/.glzr/glazewm/config.yaml"
+[tools.glazewm.doctor]
+windows = "glazewm/doctor.ps1"
 
 
 [tools.lazygit]
