@@ -1,11 +1,19 @@
 #!pwsh
 param(
+  [ValidateSet("User", "Machine")]
+  [string]$Target = "User",
+
   [ValidateSet("env", "resolve")]
   [string]$Mode = "env"
 )
 
-$PathRegistryLocation = "HKCU:\Environment"
-$DesiredRaw = Get-Content -Path "$PSScriptRoot/PATH.txt"
+[bool]$IsUser = $Target -eq "User"
+[string]$Source = $IsUser ? "$PSScriptRoot/PATH.txt" : "$PSScriptRoot/SYSTEM_PATH.txt"
+[string]$UserPath = "HKCU:\Environment"
+[string]$SystemPath = "HKLM:\System\CurrentControlSet\Control\Session Manager\Environment"
+[string]$PathRegistryLocation = $IsUser ? $UserPath : $SystemPath
+
+$DesiredRaw = Get-Content -Path $Source
 $CurrentPathEntry = Get-ItemProperty -Path $PathRegistryLocation -Name Path
 $CurrentRaw = $CurrentPathEntry.Path -split ";"
 
@@ -58,20 +66,21 @@ if ($Mode -eq "resolve") {
 $Missing = $Desired | Where-Object { $_ -notin $Current }
 $Extra = $Current | Where-Object { $_ -notin $Desired }
 
+Write-Host -ForegroundColor Yellow "Target: $Target  (reference: $Source)"
 Write-Host -ForegroundColor Yellow "Mode: $Mode"
 Write-Host -ForegroundColor Yellow "Desired entries: $($Desired.Count); Current entries: $($Current.Count)"
 
 if ($Missing.Count -eq 0 -and $Extra.Count -eq 0) {
-  Write-Host -ForegroundColor Green "PATH matches PATH.txt under '$Mode' normalization."
+  Write-Host -ForegroundColor Green "$Target PATH matches $(Split-Path -Leaf $Source) under '$Mode' normalization."
   exit 0
 }
 
 if ($Missing.Count -gt 0) {
-  Write-Host -ForegroundColor Red "Missing (present in PATH.txt, absent in current PATH):"
+  Write-Host -ForegroundColor Red "Missing (present in $(Split-Path -Leaf $Source), absent in current $Target PATH):"
   $Missing | ForEach-Object { Write-Host "  $_" }
 }
 
 if ($Extra.Count -gt 0) {
-  Write-Host -ForegroundColor Cyan "Extra (present in current PATH, absent in PATH.txt):"
+  Write-Host -ForegroundColor Cyan "Extra (present in current $Target PATH, absent in $(Split-Path -Leaf $Source)):"
   $Extra | ForEach-Object { Write-Host "  $_" }
 }
