@@ -1,0 +1,123 @@
+# dotup registry for V:/dotfiles
+#
+# This file declares every tool that dotup knows how to link on this dotfiles repo.
+# Per-machine tool selection lives in ~/.config/dotup/config.toml.
+#
+# Schema:
+#   [tools.<name>]                      # tool entry
+#   description = "..."                 # shown by `dotup list`
+#   platforms = ["windows","linux"]     # optional OS filter
+#
+#   [[tools.<name>.links]]
+#   src = "<path relative to this file>"
+#   dst.windows = "$APPDATA/..."        # env vars expanded at apply time
+#   dst.linux   = "$XDG_CONFIG_HOME/..."
+#
+# Supported dst variables: $HOME, $USERPROFILE, $APPDATA, $LOCALAPPDATA,
+# $XDG_CONFIG_HOME (falls back to $HOME/.config), ~.
+
+
+# ---- Category A: simple symlinks ----
+
+[tools.alacritty]
+description = "Alacritty terminal emulator"
+[[tools.alacritty.links]]
+src = "alacritty"
+dst.windows = "$APPDATA/alacritty"
+dst.linux   = "$XDG_CONFIG_HOME/alacritty"
+
+
+[tools.mise]
+description = "mise version manager"
+[[tools.mise.links]]
+src = "mise/src/config.toml"
+dst.windows = "$USERPROFILE/.config/mise/config.toml"
+dst.linux   = "$XDG_CONFIG_HOME/mise/config.toml"
+
+
+[tools.starship]
+description = "Starship prompt"
+[[tools.starship.links]]
+src = "starship/starship.toml"
+dst.windows = "$USERPROFILE/.config/starship.toml"
+dst.linux   = "$XDG_CONFIG_HOME/starship.toml"
+
+
+[tools.wezterm]
+description = "WezTerm terminal emulator"
+[[tools.wezterm.links]]
+src = "wezterm/.wezterm.lua"
+dst.windows = "$USERPROFILE/.wezterm.lua"
+dst.linux   = "$HOME/.wezterm.lua"
+
+
+[tools.vim]
+description = "Vim (.vimrc and .gvimrc)"
+[[tools.vim.links]]
+src = "vim/.vimrc"
+dst.windows = "$USERPROFILE/.vimrc"
+dst.linux   = "$HOME/.vimrc"
+[[tools.vim.links]]
+src = "vim/.gvimrc"
+dst.windows = "$USERPROFILE/.gvimrc"
+# .gvimrc is Windows-only in this repo; omit dst.linux.
+
+
+[tools.runex]
+description = "runex abbreviation engine"
+[[tools.runex.links]]
+src = "runex/config.toml"
+dst.windows = "$USERPROFILE/.config/runex/config.toml"
+dst.linux   = "$XDG_CONFIG_HOME/runex/config.toml"
+
+
+[tools.zed]
+description = "Zed editor"
+[[tools.zed.links]]
+src = "zed/src"
+dst.windows = "$APPDATA/Zed"
+dst.linux   = "$XDG_CONFIG_HOME/zed"
+
+
+[tools.glazewm]
+description = "GlazeWM tiling window manager (Windows only)"
+platforms = ["windows"]
+[[tools.glazewm.links]]
+src = "glazewm/config.yaml"
+dst.windows = "$USERPROFILE/.glzr/glazewm/config.yaml"
+
+
+[tools.lazygit]
+description = "lazygit TUI"
+# Windows pulls the whole directory into %LOCALAPPDATA%\lazygit, matching the
+# legacy setup.ps1 behavior. Linux only needs the config file.
+[[tools.lazygit.links]]
+src = "lazygit"
+dst.windows = "$LOCALAPPDATA/lazygit"
+[[tools.lazygit.links]]
+src = "lazygit/config.yml"
+dst.linux = "$XDG_CONFIG_HOME/lazygit/config.yml"
+
+
+[tools.code]
+description = "VS Code user settings"
+[[tools.code.links]]
+src = "code/settings.json"
+dst.windows = "$APPDATA/Code/User/settings.json"
+dst.linux   = "$XDG_CONFIG_HOME/Code/User/settings.json"
+[[tools.code.links]]
+src = "code/keybindings.json"
+dst.windows = "$APPDATA/Code/User/keybindings.json"
+dst.linux   = "$XDG_CONFIG_HOME/Code/User/keybindings.json"
+
+
+[tools.codeinsiders]
+description = "VS Code Insiders user settings"
+[[tools.codeinsiders.links]]
+src = "codeinsiders/settings.json"
+dst.windows = "$APPDATA/Code - Insiders/User/settings.json"
+dst.linux   = "$XDG_CONFIG_HOME/Code - Insiders/User/settings.json"
+[[tools.codeinsiders.links]]
+src = "codeinsiders/keybindings.json"
+dst.windows = "$APPDATA/Code - Insiders/User/keybindings.json"
+dst.linux   = "$XDG_CONFIG_HOME/Code - Insiders/User/keybindings.json"
