@@ -75,3 +75,29 @@ when_command_exists = ["zellij"]
 key = "zed"
 expand = "zeditor"
 when_command_exists = ["zeditor"]
+
+# dotfm shortcuts. `df` is intentionally not shadowed (POSIX disk-free).
+[[abbr]]
+key = "dfa"
+expand = "dotfm apply"
+when_command_exists = ["dotfm"]
+
+[[abbr]]
+key = "dfs"
+expand = "dotfm status"
+when_command_exists = ["dotfm"]
+
+[[abbr]]
+key = "dfd"
+expand = "dotfm diff"
+when_command_exists = ["dotfm"]
+
+[[abbr]]
+key = "dfl"
+expand = "dotfm list"
+when_command_exists = ["dotfm"]
+
+[[abbr]]
+key = "dfdr"
+expand = "dotfm doctor"
+when_command_exists = ["dotfm"]
