@@ -10,7 +10,7 @@
 [[rule]]
 name = "mise shims override system tools"
 before = "mise\\shims"
-after = ["chocolatey\\bin", "Strawberry\\c\\bin", "ProgramFiles\\Go\\bin"]
+after = ["chocolatey\\bin", "Strawberry\\c\\bin", "Program Files\\Go\\bin"]
 
 [[rule]]
 name = "user cargo bin precedes Strawberry's gcc/perl"
@@ -18,6 +18,15 @@ name = "user cargo bin precedes Strawberry's gcc/perl"
 # the user's local cargo binaries should win.
 before = ".cargo\\bin"
 after = ["Strawberry"]
+
+[[rule]]
+name = "user cargo bin precedes winget Links shims"
+# When developing a tool that's also installed via winget (e.g. runex),
+# the locally-built `cargo install` binary should win so we test the
+# in-repo build instead of the released one.
+before = ".cargo\\bin"
+after = ["WinGet\\Links"]
+
 
 [[rule]]
 name = "winget Links precedes Microsoft Store stub WindowsApps"
