@@ -1,0 +1,40 @@
+# Recommended ordering rules for the process PATH on Windows.
+#
+# Each `[[rule]]` says: at least one entry whose path *contains* `before`
+# must appear before every entry whose path contains any of `after`.
+# Match is substring, case-insensitive, after env-var expansion.
+#
+# `target` is informational; today the rules are evaluated against the
+# composite process PATH ($env:PATH = Machine ";" User in Windows).
+
+[[rule]]
+name = "mise shims override system tools"
+before = "mise\\shims"
+after = ["chocolatey\\bin", "Strawberry\\c\\bin", "ProgramFiles\\Go\\bin"]
+
+[[rule]]
+name = "user cargo bin precedes Strawberry's gcc/perl"
+# When both Strawberry Perl and rust-installed binaries are on PATH,
+# the user's local cargo binaries should win.
+before = ".cargo\\bin"
+after = ["Strawberry"]
+
+[[rule]]
+name = "winget Links precedes Microsoft Store stub WindowsApps"
+# WindowsApps stubs (python.exe etc.) shouldn't shadow real installs
+# delivered via winget.
+before = "WinGet\\Links"
+after = ["WindowsApps"]
+
+[[rule]]
+name = "PowerShell 7 precedes legacy WindowsPowerShell"
+# pwsh.exe should resolve to the modern install, not v5's WindowsPowerShell.
+before = "PowerShell\\7"
+after = ["WindowsPowerShell\\v1.0"]
+
+[[rule]]
+name = "Git's usr/bin (POSIX tools) precedes WindowsApps stubs"
+# `bash`, `vim`, `ssh` etc. from Git for Windows should win over
+# WindowsApps placeholders.
+before = "Git\\usr\\bin"
+after = ["WindowsApps"]

@@ -224,3 +224,7 @@ foreach ($Command in $Commands)
   Test-Command -CommandName $Command
 }
 
+# PATH order rules (declared in path-order.toml)
+Write-Host ""
+. "$PSScriptRoot/Test-PathOrder.ps1"
+
