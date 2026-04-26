@@ -1,6 +1,7 @@
 %ANDROID_HOME%\cmdline-tools\latest\bin
 %LocalAppData%\Keybase
 %LocalAppData%\mise\shims
+%UserProfile%\.cargo\bin
 %LocalAppData%\Microsoft\WinGet\Links
 %LocalAppData%\Microsoft\WinGet\Packages\BurntSushi.ripgrep.GNU_Microsoft.Winget.Source_8wekyb3d8bbwe\ripgrep-14.1.1-x86_64-pc-windows-gnu
 %LocalAppData%\Microsoft\WinGet\Packages\Docker.DockerCompose_Microsoft.Winget.Source_8wekyb3d8bbwe
@@ -45,7 +46,6 @@
 %LocalAppData%\Programs\Ollama
 %LocalAppData%\Programs\Zed\bin
 %LocalAppData%\Programs\nu\bin
-%UserProfile%\.cargo\bin
 %UserProfile%\.dotnet\tools
 %UserProfile%\.lmstudio\bin
 %UserProfile%\.local\bin
