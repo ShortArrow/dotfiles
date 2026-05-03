@@ -18,3 +18,7 @@ customCommands:
     command: "git commit -v"
     description: "Commit changes using git editor"
     output: terminal
+  - key: "L"
+    command: "tig --all"
+    context: "localBranches"
+    output: terminal
