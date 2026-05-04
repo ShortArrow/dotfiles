@@ -1,19 +1,20 @@
 #!pwsh
+. "$PSScriptRoot/../lib/_lib.ps1"
 
-# Generate runex's clink integration script into clink's state directory.
-# Requires `runex` to be on PATH.
+# Generates runex's clink integration into clink's state directory.
+# Requires `runex` on PATH; gracefully exits otherwise.
 
-$clinkDir = "$env:LOCALAPPDATA/clink"
-if (-not (Test-Path -Path $clinkDir)) {
-  New-Item -ItemType Directory -Path $clinkDir | Out-Null
+$clinkDir = Join-Path $env:LOCALAPPDATA 'clink'
+if (-not (Test-Path -LiteralPath $clinkDir)) {
+  New-Item -ItemType Directory -Path $clinkDir -Force | Out-Null
 }
 
-$target = "$clinkDir/runex.lua"
+$target = Join-Path $clinkDir 'runex.lua'
 
 if (-not (Get-Command runex -ErrorAction SilentlyContinue)) {
-  Write-Warning "runex not found on PATH. Skipping clink integration."
+  Write-DotfileWarn 'runex not on PATH; skipping clink integration.'
   return
 }
 
-runex export clink | Set-Content -Path $target -Encoding utf8
-Write-Host "Wrote $target"
+runex export clink | Set-Content -LiteralPath $target -Encoding utf8
+Write-DotfileOk "wrote $target"

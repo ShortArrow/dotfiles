@@ -1,10 +1,6 @@
-#!/bin/bash
-
-script_dir=$(dirname "$(readlink -f "$0")")
-dst_dir="$HOME/.config/nvim"
-src_dir="${script_dir}/src"
-
-rm -rf "$HOME/.config/nvim"
-ln -s "$src_dir" "$dst_dir"
-ls -la "$HOME/.config/nvim" # check link
-
+#!/usr/bin/env bash
+set -o errexit -o pipefail -o nounset
+script_dir="$(cd -P "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=../lib/_lib.sh
+source "$script_dir/../lib/_lib.sh"
+set_dotfile_links nvim

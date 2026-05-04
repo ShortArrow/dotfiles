@@ -1,20 +1,24 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -o errexit -o pipefail -o nounset
+script_dir="$(cd -P "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=../lib/_lib.sh
+source "$script_dir/../lib/_lib.sh"
 
-script_dir=$(cd "$(dirname "$0")" && pwd)
 src_dir="$script_dir/src"
 
-# Ensure ~/.bash_profile sources ~/.bashrc (for login shells like Git Bash)
-if ! grep -qF ".bashrc" "$HOME/.bash_profile" 2>/dev/null; then
-  echo '[ -f "$HOME/.bashrc" ] && source "$HOME/.bashrc"' >> "$HOME/.bash_profile"
-  echo "Added .bashrc sourcing to ~/.bash_profile"
+dotfile_info 'bash: ensure ~/.bash_profile sources ~/.bashrc'
+append_unique_line "$HOME/.bash_profile" '[ -f "$HOME/.bashrc" ] && source "$HOME/.bashrc"'
+
+dotfile_info 'bash: ensure ~/.bashrc sources bash_myplug.sh'
+entry="source \"$src_dir/bash_myplug.sh\""
+
+# Remove any prior bash_myplug entry pointing at a different path
+if [[ -f "$HOME/.bashrc" ]] && grep -qF 'bash_myplug.sh' "$HOME/.bashrc"; then
+  if ! grep -qF "$entry" "$HOME/.bashrc"; then
+    sed -i.bak.dotfm '\|bash_myplug\.sh|d' "$HOME/.bashrc"
+    dotfile_warn "removed stale bash_myplug entry from ~/.bashrc (backup: ~/.bashrc.bak.dotfm)"
+  fi
 fi
 
-# Ensure ~/.bashrc sources bash_myplug.sh with the correct path
-entry="source \"$src_dir/bash_myplug.sh\""
-if grep -qF "bash_myplug.sh" "$HOME/.bashrc" 2>/dev/null; then
-  sed -i '\|bash_myplug.sh|d' "$HOME/.bashrc"
-  echo "Removed old bash_myplug.sh entry from ~/.bashrc"
-fi
-echo "$entry" >> "$HOME/.bashrc"
-echo "Added to ~/.bashrc:"
-echo "  $entry"
+append_unique_line "$HOME/.bashrc" "$entry"
+dotfile_ok "$entry"

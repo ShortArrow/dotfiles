@@ -1,13 +1,6 @@
-#!/bin/bash
-
-script_dir=$(dirname "$(readlink -f "$0")")
-config_dir="$HOME/.config/Code/User"
-
-rm -f "$config_dir/keybindings.json"
-rm -f "$config_dir/settings.json"
-
-ln -s "$script_dir/keybindings.json" "$config_dir/keybindings.json"
-ln -s "$script_dir/settings.json" "$config_dir/settings.json"
-
-file "$config_dir/keybindings.json"
-file "$config_dir/settings.json"
+#!/usr/bin/env bash
+set -o errexit -o pipefail -o nounset
+script_dir="$(cd -P "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=../lib/_lib.sh
+source "$script_dir/../lib/_lib.sh"
+set_dotfile_links code
