@@ -1,12 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -o errexit -o pipefail -o nounset
+script_dir="$(cd -P "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=../lib/_lib.sh
+source "$script_dir/../lib/_lib.sh"
 
-#/etc/keyd/default.conf
+# keyd installs to /etc/keyd, which is owned by root.
+if [[ "${EUID:-$(id -u)}" -ne 0 ]]; then
+  dotfile_error 'keyd setup must run as root (try: sudo bash keyd/setup.sh)'
+  exit 1
+fi
 
-script_dir=$(dirname "$(readlink -f "$0")")
-config_dir=/etc/keyd
-
-rm -rf "$config_dir"
-
-ln -s "$script_dir/src" "$config_dir"
-
-file "$config_dir"
+new_dotfile_symlink "$script_dir/src" /etc/keyd

@@ -1,23 +1,19 @@
 #!pwsh
+. "$PSScriptRoot/../lib/_lib.ps1"
 
-## default branch
-git config --global init.defaultBranch main
+# Mirrors [tools.git.post_apply] in dotfm.toml.
+# Idempotent: git config --global is set every run; same value -> no-op effectively.
 
-## github copilot
-$configDirctory = "$env:USERPROFILE/.config/git/"
+Write-DotfileInfo 'git: applying global config'
+$pairs = @(
+  @{ key = 'init.defaultBranch';      value = 'main' }
+  @{ key = 'core.pager';              value = 'delta' }
+  @{ key = 'interactive.diffFilter';  value = 'delta --color-only' }
+  @{ key = 'delta.navigate';          value = 'true' }
+  @{ key = 'merge.conflictStyle';     value = 'zdiff3' }
+)
 
-if(!(Test-Path $configDirctory))
-{
-  mkdir -p $configDirctory
+foreach ($p in $pairs) {
+  & git config --global $p.key $p.value
+  Write-DotfileOk "$($p.key) = $($p.value)"
 }
-
-"[commit]`n  verbose = true`n" > "$configDirctory/config"
-
-"COMMIT_EDITMSG filetype=gitcommit`n" > "$configDirctory/attributes"
-
-## delta
-
-git config --global core.pager "delta"
-git config --global interactive.diffFileter "delta --color-only"
-git config delta.navigate true
-git config merge.conflictStyle zdiff3

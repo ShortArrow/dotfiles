@@ -1,9 +1,6 @@
-#!/bin/bash
-
-configName=".wezterm.lua"
-
-script_dir=$(dirname "$(readlink -f "$0")")
-
-ln -s "$script_dir/$configName" "$HOME/$configName"
-
-file "$HOME/$configName"
+#!/usr/bin/env bash
+set -o errexit -o pipefail -o nounset
+script_dir="$(cd -P "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=../lib/_lib.sh
+source "$script_dir/../lib/_lib.sh"
+set_dotfile_links wezterm

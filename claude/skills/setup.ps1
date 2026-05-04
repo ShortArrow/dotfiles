@@ -1,47 +1,28 @@
 #!pwsh
+. "$PSScriptRoot/../../lib/_lib.ps1"
 
-# Get the directory of the script
+# Auto-discover skill directories (anything that contains a SKILL.md)
+# and symlink them under ~/.claude/skills/.
+
 $scriptDirectory = Split-Path -Parent $MyInvocation.MyCommand.Definition
+$targetDirectory = Join-Path $env:USERPROFILE '.claude/skills'
 
-# Set the target directory
-$targetDirectory = "$env:USERPROFILE\.claude\skills"
-
-# Make directory if it does not exist
-if (-not (Test-Path -Path $targetDirectory))
-{
+if (-not (Test-Path -LiteralPath $targetDirectory)) {
   New-Item -ItemType Directory -Path $targetDirectory -Force | Out-Null
-  Write-Host "✓ Created directory: $targetDirectory" -ForegroundColor Green
+  Write-DotfileOk "created $targetDirectory"
 }
 
-# Get all skill directories (directories containing SKILL.md)
-$skillDirs = Get-ChildItem -Path $scriptDirectory -Directory | Where-Object {
-  Test-Path (Join-Path $_.FullName "SKILL.md")
-}
+$skillDirs = Get-ChildItem -LiteralPath $scriptDirectory -Directory |
+  Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName 'SKILL.md') }
 
-if ($skillDirs.Count -eq 0)
-{
-  Write-Host "⚠ No skills found in $scriptDirectory" -ForegroundColor Yellow
+if (-not $skillDirs -or $skillDirs.Count -eq 0) {
+  Write-DotfileWarn "no skills (directories with SKILL.md) found in $scriptDirectory"
   exit 0
 }
 
-# Create symbolic links for each skill
-foreach ($skill in $skillDirs)
-{
+foreach ($skill in $skillDirs) {
   $linkPath = Join-Path $targetDirectory $skill.Name
-
-  if (Test-Path $linkPath)
-  {
-    Remove-Item $linkPath -Force -Recurse
-  }
-
-  New-Item `
-    -Type SymbolicLink `
-    -Path $targetDirectory `
-    -Name $skill.Name `
-    -Value $skill.FullName | Out-Null
-
-  Write-Host "✓ Created symlink: $linkPath -> $skill.FullName" -ForegroundColor Green
+  New-DotfileSymlink -Source $skill.FullName -Destination $linkPath | Out-Null
 }
 
-Write-Host ""
-Write-Host "Skills installed: $($skillDirs.Count)" -ForegroundColor Cyan
+Write-DotfileInfo "skills installed: $($skillDirs.Count)"
