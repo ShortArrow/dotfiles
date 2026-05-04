@@ -1,6 +1,7 @@
 version = 1
 
 [keybind.trigger]
+default = "space"
 pwsh = "space"
 bash = "space"
 zsh = "space"
