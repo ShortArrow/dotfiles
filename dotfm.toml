@@ -1,11 +1,11 @@
-# dotup registry for V:/dotfiles
+# dotfm registry for V:/dotfiles
 #
-# This file declares every tool that dotup knows how to link on this dotfiles repo.
-# Per-machine tool selection lives in ~/.config/dotup/config.toml.
+# This file declares every tool that dotfm knows how to link on this dotfiles repo.
+# Per-machine tool selection lives in ~/.config/dotfm/config.toml.
 #
 # Schema:
 #   [tools.<name>]                      # tool entry
-#   description = "..."                 # shown by `dotup list`
+#   description = "..."                 # shown by `dotfm list`
 #   platforms = ["windows","linux"]     # optional OS filter
 #
 #   [[tools.<name>.links]]
@@ -69,6 +69,13 @@ description = "runex abbreviation engine"
 src = "runex/config.toml"
 dst.windows = "$USERPROFILE/.config/runex/config.toml"
 dst.linux   = "$XDG_CONFIG_HOME/runex/config.toml"
+
+
+[tools.clink]
+description = "Clink (generates runex clink integration into %LOCALAPPDATA%/clink)"
+platforms = ["windows"]
+[tools.clink.script]
+windows = "clink/setup.ps1"
 
 
 [tools.zed]
