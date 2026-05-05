@@ -1,3 +1,3 @@
 #!pwsh
 . "$PSScriptRoot/../lib/_lib.ps1"
-Set-DotfileLinks -ToolName 'zebar'
+Set-DotfileLinks -ToolName 'yazi'

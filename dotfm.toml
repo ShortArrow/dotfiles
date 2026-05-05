@@ -217,6 +217,38 @@ src = "lazydocker"
 dst.linux = "$XDG_CONFIG_HOME/lazydocker"
 
 
+[tools.waybar]
+description = "Waybar status bar"
+platforms = ["linux"]
+[[tools.waybar.links]]
+src = "waybar/src"
+dst.linux = "$XDG_CONFIG_HOME/waybar"
+
+
+[tools.wofi]
+description = "Wofi launcher"
+platforms = ["linux"]
+[[tools.wofi.links]]
+src = "wofi/src"
+dst.linux = "$XDG_CONFIG_HOME/wofi"
+
+
+[tools.yazi]
+description = "Yazi terminal file manager"
+[[tools.yazi.links]]
+src = "yazi/src"
+dst.windows = "$APPDATA/yazi/config"
+dst.linux   = "$XDG_CONFIG_HOME/yazi"
+
+
+[tools.zellij]
+description = "Zellij terminal multiplexer"
+platforms = ["linux"]
+[[tools.zellij.links]]
+src = "zellij"
+dst.linux = "$XDG_CONFIG_HOME/zellij"
+
+
 # ---- Delegation to legacy setup scripts (too exotic for declarative links) ----
 
 [tools.tmux]
