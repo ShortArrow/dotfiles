@@ -25,6 +25,7 @@ npm = "latest"
 "npm:@google/gemini-cli" = "latest"
 pnpm = "latest"
 python = "latest"
+"github:ShortArrow/runex" = "0.1.14"
 
 [tool_alias]
 python3 = "python"
