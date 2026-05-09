@@ -136,9 +136,13 @@ M.ordinalnvim = {
   -- # Motion
   -- ################################################
   {
-    "phaazon/hop.nvim",
-    config = get_config("_hop").setup,
-    keys = api.keymaps.maps.hop,
+    -- Replaces phaazon/hop.nvim (archived 2024-09). flash.nvim is the
+    -- successor of choice: maintained by folke (lazy.nvim, which-key,
+    -- noice...), Treesitter-aware, and integrated with native search.
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    config = get_config("_flash").setup,
+    keys = api.keymaps.maps.flash,
   },
   {
     "kylechui/nvim-surround",
