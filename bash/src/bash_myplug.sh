@@ -92,8 +92,25 @@ _runex_strip_windows_mise_paths() {
 _runex_strip_windows_mise_paths
 
 # runex abbreviation engine
+#
+# Resolve runex to its real binary path before sourcing the export
+# script: the export bakes the binary name into the bash hook
+# function, and if `runex` resolves through a mise shim (the shim
+# dir is on $PATH ahead of ~/.cargo/bin), every keystroke pays
+# ~470 ms of mise startup before the hook even runs. `which -a`
+# returns every match in PATH order; we skip any /mise/shims/
+# entry and pick the next real candidate (~/.cargo/bin/runex,
+# /usr/local/bin/runex, etc.).
 if command_exists "runex"; then
-  eval "$(runex export bash)"
+  _runex_real_bin="$(which -a runex 2>/dev/null \
+    | grep -v '/mise/shims/' \
+    | head -1)"
+  if [ -n "$_runex_real_bin" ]; then
+    eval "$("$_runex_real_bin" export bash --bin "$_runex_real_bin")"
+  else
+    eval "$(runex export bash)"
+  fi
+  unset _runex_real_bin
 fi
 
 # starship
