@@ -52,6 +52,26 @@ export VISUAL=vim
 export EDITOR=vim
 unset LESSEDIT
 
+# WSL: drop Windows-side mise shims from $PATH before any
+# command_exists check below. Windows interop appends the user's
+# Windows PATH to the WSL session's $PATH, which on this host
+# includes /mnt/c/Users/who/AppData/Local/mise/shims/. Any binary
+# in that directory is a stub that calls a Windows .exe; from a
+# Linux bash session the .exe either fails outright or — as is the
+# case for the `runex` shim — fails with "Argument list too long"
+# when bash passes a long $READLINE_LINE through `bind -x`. Either
+# way it breaks the integration. We strip just the shims dir
+# (keep the rest of the inherited Windows PATH so Windows tools
+# called explicitly still work).
+case "$(uname -r)" in
+  *microsoft*|*Microsoft*|*WSL*)
+    PATH="$(echo "$PATH" | tr ':' '\n' \
+      | grep -v '^/mnt/c/Users/.*/AppData/Local/mise/shims$' \
+      | paste -sd ':' -)"
+    export PATH
+    ;;
+esac
+
 # runex abbreviation engine
 if command_exists "runex"; then
   eval "$(runex export bash)"
