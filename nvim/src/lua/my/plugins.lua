@@ -673,20 +673,15 @@ M.ordinalnvim = {
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    enabled = true, -- Re-enabled
+    branch = "main",                          -- master is unmaintained; main is required for Neovim >= 0.11
     build = ":TSUpdate",
     dependencies = {
       "JoosepAlviste/nvim-ts-context-commentstring",
       { "nvim-treesitter/nvim-treesitter-refactor", enabled = false },
-      -- "windwp/nvim-ts-autotag",
-      { "p00f/nvim-ts-rainbow", enabled = false },
+      { "p00f/nvim-ts-rainbow",                     enabled = false },
     },
-    init = function()
-      -- Prevent plugin's auto-setup from running
-      vim.g.loaded_nvim_treesitter = true
-    end,
     config = get_config("_treesitter").setup,
-    event = "BufRead",
+    event = { "BufReadPost", "BufNewFile" },
   },
   {
     "windwp/nvim-ts-autotag",
