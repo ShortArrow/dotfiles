@@ -110,10 +110,15 @@ M.maps = {
       end,
     },
   },
-  hop = {
-    { "<Leader>hw", "<cmd>HopWord<CR>" },
-    { "<Leader>hl", "<cmd>HopLine<CR>" },
-    { "<Leader>hp", "<cmd>HopPattern<CR>" },
+  flash = {
+    -- s / S: flash's default jump triggers (search-with-labels).
+    { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end,        desc = "Flash" },
+    { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end,  desc = "Flash Treesitter" },
+
+    -- Compatibility with the previous hop.nvim bindings.
+    { "<Leader>hw", function() require("flash").jump() end,                                       desc = "Flash word (was HopWord)" },
+    { "<Leader>hl", function() require("flash").jump({ search = { mode = "search", max_length = 0 } }) end, desc = "Flash line (was HopLine)" },
+    { "<Leader>hp", function() require("flash").jump({ search = { mode = "fuzzy" } }) end,        desc = "Flash pattern (was HopPattern)" },
   },
   fugitive = {
     { "<Leader>ga",  "keymap" },
