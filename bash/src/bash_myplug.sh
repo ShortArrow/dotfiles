@@ -76,14 +76,12 @@ unset LESSEDIT
 # stays so explicit calls to Windows tools still resolve. This
 # matches the user's preference to keep Windows defaults intact
 # except where they actively interfere with WSL workflow.
-case "$(uname -r)" in
-  *microsoft*|*Microsoft*|*WSL*)
-    PATH="$(echo "$PATH" | tr ':' '\n' \
-      | grep -v '^/mnt/c/Users/.*/AppData/Local/mise/' \
-      | paste -sd ':' -)"
-    export PATH
-    ;;
-esac
+if [ -n "$WSL_DISTRO_NAME" ] || [ -n "$WSL_INTEROP" ]; then
+  PATH="$(echo "$PATH" | tr ':' '\n' \
+    | grep -v '^/mnt/c/Users/.*/AppData/Local/mise/' \
+    | paste -sd ':' -)"
+  export PATH
+fi
 
 # runex abbreviation engine
 if command_exists "runex"; then
