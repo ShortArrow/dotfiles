@@ -7,6 +7,9 @@ bash = "space"
 zsh = "space"
 nu = "space"
 
+[keybind.paste_intercept]
+nu = "ctrl-v"
+
 [[abbr]]
 key = "rx"
 expand = "runex"
