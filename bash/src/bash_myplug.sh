@@ -76,12 +76,20 @@ unset LESSEDIT
 # stays so explicit calls to Windows tools still resolve. This
 # matches the user's preference to keep Windows defaults intact
 # except where they actively interfere with WSL workflow.
-if [ -n "$WSL_DISTRO_NAME" ] || [ -n "$WSL_INTEROP" ]; then
-  PATH="$(echo "$PATH" | tr ':' '\n' \
-    | grep -v '^/mnt/c/Users/.*/AppData/Local/mise/' \
-    | paste -sd ':' -)"
-  export PATH
-fi
+# Defined as a function so we can call it once before the runex
+# integration (so the bash hook's PATH walk is fast) and once at
+# the end of this file (after every later \`eval "\$(... init
+# bash)"\` that might have re-injected Windows-side dirs through
+# bash interop). Both call sites are required.
+_runex_strip_windows_mise_paths() {
+  if [ -n "$WSL_DISTRO_NAME" ] || [ -n "$WSL_INTEROP" ]; then
+    PATH="$(echo "$PATH" | tr ':' '\n' \
+      | grep -v '^/mnt/c/Users/.*/AppData/Local/mise/' \
+      | paste -sd ':' -)"
+    export PATH
+  fi
+}
+_runex_strip_windows_mise_paths
 
 # runex abbreviation engine
 if command_exists "runex"; then
@@ -255,3 +263,9 @@ fi
 function gig() {
   curl -sL "https://gitignore.io/api/${*}"
 }
+
+# Final pass: re-strip Windows-side mise paths in case any later
+# `eval "$(... init bash)"` (starship, zoxide, mcfly, fzf, etc.)
+# re-injected them through bash interop. The function definition
+# is up at the runex integration block.
+_runex_strip_windows_mise_paths
