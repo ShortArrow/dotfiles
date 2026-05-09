@@ -52,21 +52,34 @@ export VISUAL=vim
 export EDITOR=vim
 unset LESSEDIT
 
-# WSL: drop Windows-side mise shims from $PATH before any
-# command_exists check below. Windows interop appends the user's
-# Windows PATH to the WSL session's $PATH, which on this host
-# includes /mnt/c/Users/who/AppData/Local/mise/shims/. Any binary
-# in that directory is a stub that calls a Windows .exe; from a
-# Linux bash session the .exe either fails outright or — as is the
-# case for the `runex` shim — fails with "Argument list too long"
-# when bash passes a long $READLINE_LINE through `bind -x`. Either
-# way it breaks the integration. We strip just the shims dir
-# (keep the rest of the inherited Windows PATH so Windows tools
-# called explicitly still work).
+# WSL: drop Windows-side mise paths from $PATH. Two reasons,
+# graded by severity:
+#
+# 1. Correctness — `mise/shims/*` are stubs that exec a Windows
+#    .exe through wslpath translation. From a Linux bash session
+#    they fail outright, and specifically the `runex` shim fails
+#    with "Argument list too long" when bash passes a long
+#    $READLINE_LINE through `bind -x`, silently breaking the
+#    abbreviation engine integration sourced below.
+#
+# 2. Performance — `mise/installs/*` are tens of small per-tool
+#    bin/ directories on the Windows-side filesystem. Walking
+#    them through 9p (WSL interop) is ~1 ms per entry, so any
+#    PATH-walking lookup that doesn't terminate early (think
+#    `which Remove-Item` returning nothing) spends ~100 ms
+#    iterating Windows mise dirs that contain no relevant Linux
+#    binary anyway. `runex hook` does this on every keystroke for
+#    `when_command_exists` checks; the latency adds up fast.
+#
+# We strip just /mnt/c/Users/*/AppData/Local/mise/ — the rest of
+# the inherited Windows PATH (Program Files, WindowsApps, etc.)
+# stays so explicit calls to Windows tools still resolve. This
+# matches the user's preference to keep Windows defaults intact
+# except where they actively interfere with WSL workflow.
 case "$(uname -r)" in
   *microsoft*|*Microsoft*|*WSL*)
     PATH="$(echo "$PATH" | tr ':' '\n' \
-      | grep -v '^/mnt/c/Users/.*/AppData/Local/mise/shims$' \
+      | grep -v '^/mnt/c/Users/.*/AppData/Local/mise/' \
       | paste -sd ':' -)"
     export PATH
     ;;
