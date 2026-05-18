@@ -113,7 +113,9 @@ window_rules:
       - window_process: { equals: 'zebar' }
 
       # Ignores warnedge
+      - window_process: { equals: 'dotnet' }
       - window_process: { equals: 'warnedge'}
+      - window_process: { equals: 'PpapCourier' }
 
       # Ignores picture-in-picture windows for browsers.
       - window_title: { regex: '[Pp]icture.in.[Pp]icture' }
@@ -132,6 +134,7 @@ window_rules:
       - window_process: { equals: 'GoogleDriveFS' }
       - window_process: { equals: 'HakkoAI' }
       - window_process: { equals: 'UriageGenka' }
+      - window_process: { equals: 'UGPrint' }
       - window_process: { equals: 'CubePDF' }
       - window_process: { equals: 'VirtualBoxVM'}
       - window_process: { equals: 'ScreenToGif'}
