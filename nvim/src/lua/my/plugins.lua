@@ -156,8 +156,13 @@ M.ordinalnvim = {
     keys = api.keymaps.maps.aerial,
   },
   {
-    "tversteeg/registers.nvim",
-    config = get_config("_registers").setup,
+    "AckslD/nvim-neoclip.lua",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+    config = get_config("_neoclip").setup,
+    event = "VeryLazy",
   },
   {
     "jpalardy/vim-slime",
