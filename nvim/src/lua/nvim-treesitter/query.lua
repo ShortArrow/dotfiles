@@ -1,5 +1,16 @@
-local ok, mod = pcall(require, "vim.treesitter.query")
-local query = ok and mod or vim.treesitter.query
+local config_dir = vim.fn.stdpath("config")
+local runtime = vim.api.nvim_get_runtime_file("lua/nvim-treesitter/query.lua", true)
+
+local query = {}
+for _, path in ipairs(runtime) do
+  if not path:find(config_dir, 1, true) then
+    local ok, mod = pcall(dofile, path)
+    if ok and type(mod) == "table" then
+      query = mod
+    end
+    break
+  end
+end
 
 if query and not query.has_locals then
   query.has_locals = function(lang)
