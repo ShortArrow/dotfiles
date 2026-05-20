@@ -4,6 +4,10 @@
 
 ## Development Rules
 
+### Branch Strategy
+
+main 単一ブランチ運用。topic ブランチを切る場合は main へ PR/merge する。
+
 ### Files
 
 - `docs/PRD.md`: Always included - Product context and business objectives
