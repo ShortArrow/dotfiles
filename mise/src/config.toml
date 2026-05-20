@@ -9,7 +9,7 @@ description = "mise wo hirogeru"
 run = "echo 'OPEN SESAME!'"
 
 [tools]
-"aqua:anthropics/claude-code" = "latest"
+"aqua:anthropics/claude-code" = { version = "latest", os = ["linux", "macos"] }
 "aqua:jesseduffield/lazydocker" = "latest"
 "aqua:jesseduffield/lazygit" = "latest"
 "aqua:openai/codex" = "latest"
@@ -18,7 +18,6 @@ run = "echo 'OPEN SESAME!'"
 "aqua:tree-sitter/tree-sitter" = "latest"
 "aqua:astral-sh/uv" = "latest"
 "cargo:git-bahn/git-graph" = "latest"
-"cargo:sharkdp/bat" = "latest"
 "go:github.com/x-motemen/ghq" = "latest"
 "npm:ccusage" = "latest"
 "npm:node-gyp-build" = "latest"
