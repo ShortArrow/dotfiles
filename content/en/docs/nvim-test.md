@@ -1,1 +1,1 @@
-../../../nvim/tests/readme.md
+../../../nvim/src/tests/readme.md
