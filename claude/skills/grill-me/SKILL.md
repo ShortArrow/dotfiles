@@ -1,10 +1,27 @@
 ---
 name: grill-me
-description: Interview the user relentlessly about a plan or design until reaching shared understanding, resolving each branch of the decision tree. Use when user wants to stress-test a plan, get grilled on their design, or mentions "grill me".
+description: Resolve only implementation-critical ambiguity.
 ---
 
-Interview me relentlessly about every aspect of this plan until we reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.
+## Allowed Tools
 
-Ask the questions one at a time.
+* Read
+* Grep
+* Glob
+* LS
+* AskUserQuestion
+* TodoWrite
+* Agent
+* EnterPlanMode
+* ExitPlanMode
 
-If a question can be answered by exploring the codebase, explore the codebase instead.
+## Rules
+
+* Infer from the codebase before asking
+* Ask only high-impact decisions
+* One question at a time
+* Prefer choices over open-ended questions
+* Avoid asking about established conventions
+* Avoid speculative requirements
+* Stop when implementation is safe
+
