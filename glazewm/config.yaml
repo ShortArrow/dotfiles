@@ -112,6 +112,12 @@ window_rules:
       # Ignores any Zebar windows.
       - window_process: { equals: 'zebar' }
 
+      # Ignore Dialog
+      - window_process: { equals: 'Microsoft.AAD.BrokerPlugin' }
+
+      # Ignores VM
+      - window_process: { equals: 'WindowsSandboxRemoteSession' }
+
       # Ignores warnedge
       - window_process: { equals: 'dotnet' }
       - window_process: { equals: 'warnedge'}
@@ -177,6 +183,8 @@ window_rules:
   - commands: ['move --workspace 4']
     match:
       - window_process: { equals: 'ms-teams' } # Teams
+      - window_process: { equals: 'slack' }
+      - window_process: { equals: 'discord' }
 
   - commands: ['move --workspace 5']
     match:
