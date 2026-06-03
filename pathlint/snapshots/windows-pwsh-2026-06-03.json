@@ -1,0 +1,1708 @@
+[
+  {
+    "index": 0,
+    "entry": "C:\\Program Files\\PowerShell\\7",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%ProgramFiles%\\PowerShell\\7"
+  },
+  {
+    "index": 1,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\aqua-jesseduffield-lazydocker\\0.25.2",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%LocalAppData%\\mise\\installs\\aqua-jesseduffield-lazydocker\\0.25.2"
+  },
+  {
+    "index": 2,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\aqua-jesseduffield-lazygit\\0.61.1",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%LocalAppData%\\mise\\installs\\aqua-jesseduffield-lazygit\\0.61.1"
+  },
+  {
+    "index": 3,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\aqua-sharkdp-bat\\0.26.1\\bat-v0.26.1-x86_64-pc-windows-msvc",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%LocalAppData%\\mise\\installs\\aqua-sharkdp-bat\\0.26.1\\bat-v0.26.1-x86_64-pc-windows-msvc"
+  },
+  {
+    "index": 4,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\aqua-sharkdp-numbat\\1.23.0\\numbat-v1.23.0-x86_64-pc-windows-msvc",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%LocalAppData%\\mise\\installs\\aqua-sharkdp-numbat\\1.23.0\\numbat-v1.23.0-x86_64-pc-windows-msvc"
+  },
+  {
+    "index": 5,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\aqua-astral-sh-uv\\0.11.12",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%LocalAppData%\\mise\\installs\\aqua-astral-sh-uv\\0.11.12"
+  },
+  {
+    "index": 6,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\cargo-git-bahn-git-graph\\HEAD\\bin",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%LocalAppData%\\mise\\installs\\cargo-git-bahn-git-graph\\HEAD\\bin"
+  },
+  {
+    "index": 7,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\cargo-sharkdp-bat\\HEAD\\bin",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%LocalAppData%\\mise\\installs\\cargo-sharkdp-bat\\HEAD\\bin"
+  },
+  {
+    "index": 8,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\go\\1.26.3\\bin",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%LocalAppData%\\mise\\installs\\go\\1.26.3\\bin"
+  },
+  {
+    "index": 9,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\go-github-com-x-motemen-ghq\\1.10.1\\bin",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%LocalAppData%\\mise\\installs\\go-github-com-x-motemen-ghq\\1.10.1\\bin"
+  },
+  {
+    "index": 10,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\gradle\\9.6.0-M1\\gradle-9.6.0-milestone-1/bin",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%LocalAppData%\\mise\\installs\\gradle\\9.6.0-M1\\gradle-9.6.0-milestone-1/bin"
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%LocalAppData%\\mise\\installs\\java\\26.0.1\\bin"
+  },
+  {
+    "index": 12,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\npm\\11.14.1",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%LocalAppData%\\mise\\installs\\npm\\11.14.1"
+  },
+  {
+    "index": 13,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\node\\26.1.0",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%LocalAppData%\\mise\\installs\\node\\26.1.0"
+  },
+  {
+    "index": 14,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\npm-google-gemini-cli\\0.41.2",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%LocalAppData%\\mise\\installs\\npm-google-gemini-cli\\0.41.2"
+  },
+  {
+    "index": 15,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\pnpm\\10.33.0",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%LocalAppData%\\mise\\installs\\pnpm\\10.33.0"
+  },
+  {
+    "index": 16,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\python\\3.14.4",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%LocalAppData%\\mise\\installs\\python\\3.14.4"
+  },
+  {
+    "index": 17,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\github-k1-lo-w-mo\\1.5.4",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%LocalAppData%\\mise\\installs\\github-k1-lo-w-mo\\1.5.4"
+  },
+  {
+    "index": 18,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\github-short-arrow-runex\\0.1.14",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%LocalAppData%\\mise\\installs\\github-short-arrow-runex\\0.1.14"
+  },
+  {
+    "index": 19,
+    "entry": "C:\\Program Files\\Alacritty\\",
+    "severity": "warn",
+    "kind": "trailing_slash"
+  },
+  {
+    "index": 19,
+    "entry": "C:\\Program Files\\Alacritty\\",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%ProgramFiles%\\Alacritty\\"
+  },
+  {
+    "index": 20,
+    "entry": "C:\\Program Files\\Volta\\",
+    "severity": "warn",
+    "kind": "trailing_slash"
+  },
+  {
+    "index": 20,
+    "entry": "C:\\Program Files\\Volta\\",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%ProgramFiles%\\Volta\\"
+  },
+  {
+    "index": 21,
+    "entry": "C:\\Program Files\\glzr.io\\GlazeWM\\\\cli",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%ProgramFiles%\\glzr.io\\GlazeWM\\\\cli"
+  },
+  {
+    "index": 25,
+    "entry": "%SYSTEMROOT%\\System32\\WindowsPowerShell\\v1.0\\",
+    "severity": "warn",
+    "kind": "trailing_slash"
+  },
+  {
+    "index": 26,
+    "entry": "%SYSTEMROOT%\\System32\\OpenSSH\\",
+    "severity": "warn",
+    "kind": "trailing_slash"
+  },
+  {
+    "index": 27,
+    "entry": "C:\\Program Files\\WezTerm",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%ProgramFiles%\\WezTerm"
+  },
+  {
+    "index": 28,
+    "entry": "C:\\Program Files\\glzr.io\\Zebar\\",
+    "severity": "warn",
+    "kind": "trailing_slash"
+  },
+  {
+    "index": 28,
+    "entry": "C:\\Program Files\\glzr.io\\Zebar\\",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%ProgramFiles%\\glzr.io\\Zebar\\"
+  },
+  {
+    "index": 29,
+    "entry": "C:\\Program Files\\GitHub CLI\\",
+    "severity": "warn",
+    "kind": "trailing_slash"
+  },
+  {
+    "index": 29,
+    "entry": "C:\\Program Files\\GitHub CLI\\",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%ProgramFiles%\\GitHub CLI\\"
+  },
+  {
+    "index": 30,
+    "entry": "C:\\Program Files\\Git\\cmd",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%ProgramFiles%\\Git\\cmd"
+  },
+  {
+    "index": 31,
+    "entry": "C:\\Program Files\\dotnet\\",
+    "severity": "warn",
+    "kind": "trailing_slash"
+  },
+  {
+    "index": 31,
+    "entry": "C:\\Program Files\\dotnet\\",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%ProgramFiles%\\dotnet\\"
+  },
+  {
+    "index": 32,
+    "entry": "C:\\Program Files (x86)\\Gpg4win\\..\\GnuPG\\bin",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%ProgramFiles(x86)%\\Gpg4win\\..\\GnuPG\\bin"
+  },
+  {
+    "index": 33,
+    "entry": "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\",
+    "severity": "warn",
+    "kind": "trailing_slash"
+  },
+  {
+    "index": 33,
+    "entry": "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%ProgramFiles(x86)%\\Windows Kits\\10\\Windows Performance Toolkit\\"
+  },
+  {
+    "index": 34,
+    "entry": "C:\\Program Files\\bottom\\bin\\",
+    "severity": "warn",
+    "kind": "trailing_slash"
+  },
+  {
+    "index": 34,
+    "entry": "C:\\Program Files\\bottom\\bin\\",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%ProgramFiles%\\bottom\\bin\\"
+  },
+  {
+    "index": 35,
+    "entry": "C:\\Program Files\\Go\\bin",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%ProgramFiles%\\Go\\bin"
+  },
+  {
+    "index": 36,
+    "entry": "C:\\Program Files\\Arduino CLI\\",
+    "severity": "warn",
+    "kind": "trailing_slash"
+  },
+  {
+    "index": 36,
+    "entry": "C:\\Program Files\\Arduino CLI\\",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%ProgramFiles%\\Arduino CLI\\"
+  },
+  {
+    "index": 37,
+    "entry": "C:\\Program Files\\CMake\\bin",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%ProgramFiles%\\CMake\\bin"
+  },
+  {
+    "index": 41,
+    "entry": "C:\\ProgramData\\chocolatey\\bin",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%ProgramData%\\chocolatey\\bin"
+  },
+  {
+    "index": 42,
+    "entry": "C:\\Program Files\\Docker\\Docker\\resources\\bin",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%ProgramFiles%\\Docker\\Docker\\resources\\bin"
+  },
+  {
+    "index": 43,
+    "entry": "C:\\Program Files\\Tailscale\\",
+    "severity": "warn",
+    "kind": "trailing_slash"
+  },
+  {
+    "index": 43,
+    "entry": "C:\\Program Files\\Tailscale\\",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%ProgramFiles%\\Tailscale\\"
+  },
+  {
+    "index": 44,
+    "entry": "C:\\Program Files\\PowerShell\\7\\",
+    "severity": "warn",
+    "kind": "trailing_slash"
+  },
+  {
+    "index": 44,
+    "entry": "C:\\Program Files\\PowerShell\\7\\",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%ProgramFiles%\\PowerShell\\7\\"
+  },
+  {
+    "index": 45,
+    "entry": "C:\\Program Files\\starship\\bin\\",
+    "severity": "warn",
+    "kind": "trailing_slash"
+  },
+  {
+    "index": 45,
+    "entry": "C:\\Program Files\\starship\\bin\\",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%ProgramFiles%\\starship\\bin\\"
+  },
+  {
+    "index": 46,
+    "entry": "C:\\Program Files\\Neovim\\bin",
+    "severity": "warn",
+    "kind": "shortenable",
+    "suggestion": "%ProgramFiles%\\Neovim\\bin"
+  },
+  {
+    "index": 47,
+    "entry": "%ANDROID_HOME%\\cmdline-tools\\latest\\bin",
+    "severity": "warn",
+    "kind": "missing"
+  },
+  {
+    "index": 48,
+    "entry": "%LocalAppData%\\Keybase",
+    "severity": "warn",
+    "kind": "missing"
+  },
+  {
+    "index": 52,
+    "entry": "%LocalAppData%\\Microsoft\\WinGet\\Packages\\BurntSushi.ripgrep.GNU_Microsoft.Winget.Source_8wekyb3d8bbwe\\ripgrep-14.1.1-x86_64-pc-windows-gnu",
+    "severity": "warn",
+    "kind": "missing"
+  },
+  {
+    "index": 54,
+    "entry": "%LocalAppData%\\Microsoft\\WinGet\\Packages\\GNU.Nano_Microsoft.Winget.Source_8wekyb3d8bbwe",
+    "severity": "warn",
+    "kind": "missing"
+  },
+  {
+    "index": 55,
+    "entry": "%LocalAppData%\\Microsoft\\WinGet\\Packages\\Google.PlatformTools_Microsoft.Winget.Source_8wekyb3d8bbwe\\platform-tools",
+    "severity": "warn",
+    "kind": "missing"
+  },
+  {
+    "index": 58,
+    "entry": "%LocalAppData%\\Microsoft\\WinGet\\Packages\\JesseDuffield.Lazydocker_Microsoft.Winget.Source_8wekyb3d8bbwe",
+    "severity": "warn",
+    "kind": "missing"
+  },
+  {
+    "index": 60,
+    "entry": "%LocalAppData%\\Microsoft\\WinGet\\Packages\\Microsoft.Edit_Microsoft.Winget.Source_8wekyb3d8bbwe\\edit-1.2.0-x86_64-windows",
+    "severity": "warn",
+    "kind": "missing"
+  },
+  {
+    "index": 61,
+    "entry": "%LocalAppData%\\Microsoft\\WinGet\\Packages\\Microsoft.Sysinternals_Microsoft.Winget.Source_8wekyb3d8bbwe",
+    "severity": "warn",
+    "kind": "missing"
+  },
+  {
+    "index": 62,
+    "entry": "%LocalAppData%\\Microsoft\\WinGet\\Packages\\Rufus.Rufus_Microsoft.Winget.Source_8wekyb3d8bbwe",
+    "severity": "warn",
+    "kind": "missing"
+  },
+  {
+    "index": 63,
+    "entry": "%LocalAppData%\\Microsoft\\WinGet\\Packages\\Typst.Typst_Microsoft.Winget.Source_8wekyb3d8bbwe\\typst-x86_64-pc-windows-msvc",
+    "severity": "warn",
+    "kind": "missing"
+  },
+  {
+    "index": 65,
+    "entry": "%LocalAppData%\\Microsoft\\WinGet\\Packages\\YS-L.csvlens_Microsoft.Winget.Source_8wekyb3d8bbwe",
+    "severity": "warn",
+    "kind": "missing"
+  },
+  {
+    "index": 69,
+    "entry": "%LocalAppData%\\Microsoft\\WinGet\\Packages\\lsd-rs.lsd_Microsoft.Winget.Source_8wekyb3d8bbwe\\lsd-v1.1.5-x86_64-pc-windows-msvc",
+    "severity": "warn",
+    "kind": "missing"
+  },
+  {
+    "index": 93,
+    "entry": "%LocalAppData%\\Programs\\Zed\\bin",
+    "severity": "warn",
+    "kind": "missing"
+  },
+  {
+    "index": 95,
+    "entry": "%UserProfile%\\.dotnet\\tools",
+    "severity": "warn",
+    "kind": "missing"
+  },
+  {
+    "index": 49,
+    "entry": "%LocalAppData%\\mise\\shims",
+    "severity": "warn",
+    "kind": "conflict",
+    "diagnostic": "mise_activate_both",
+    "groups": [
+      [
+        49
+      ],
+      [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ]
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "7z",
+    "shadowed_indexes": [
+      73
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "7zfm",
+    "shadowed_indexes": [
+      73
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "7zg",
+    "shadowed_indexes": [
+      73
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "actionsmcphost",
+    "shadowed_indexes": [
+      85
+    ]
+  },
+  {
+    "index": 22,
+    "entry": "%SystemRoot%\\system32",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "bash",
+    "shadowed_indexes": [
+      72,
+      84
+    ]
+  },
+  {
+    "index": 3,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\aqua-sharkdp-bat\\0.26.1\\bat-v0.26.1-x86_64-pc-windows-msvc",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "bat",
+    "shadowed_indexes": [
+      7,
+      49
+    ]
+  },
+  {
+    "index": 37,
+    "entry": "C:\\Program Files\\CMake\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "cmake",
+    "shadowed_indexes": [
+      38
+    ]
+  },
+  {
+    "index": 37,
+    "entry": "C:\\Program Files\\CMake\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "cmcldeps",
+    "shadowed_indexes": [
+      38
+    ]
+  },
+  {
+    "index": 37,
+    "entry": "C:\\Program Files\\CMake\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "cpack",
+    "shadowed_indexes": [
+      38
+    ]
+  },
+  {
+    "index": 0,
+    "entry": "C:\\Program Files\\PowerShell\\7",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "createdump",
+    "shadowed_indexes": [
+      33,
+      44
+    ]
+  },
+  {
+    "index": 37,
+    "entry": "C:\\Program Files\\CMake\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "ctest",
+    "shadowed_indexes": [
+      38
+    ]
+  },
+  {
+    "index": 31,
+    "entry": "C:\\Program Files\\dotnet\\",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "dnx",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 42,
+    "entry": "C:\\Program Files\\Docker\\Docker\\resources\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "docker-compose",
+    "shadowed_indexes": [
+      53
+    ]
+  },
+  {
+    "index": 31,
+    "entry": "C:\\Program Files\\dotnet\\",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "dotnet",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "gamebarelevatedft_alias",
+    "shadowed_indexes": [
+      82
+    ]
+  },
+  {
+    "index": 14,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\npm-google-gemini-cli\\0.41.2",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "gemini",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "gethelp",
+    "shadowed_indexes": [
+      76
+    ]
+  },
+  {
+    "index": 9,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\go-github-com-x-motemen-ghq\\1.10.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "ghq",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 6,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\cargo-git-bahn-git-graph\\HEAD\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "git-graph",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 8,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\go\\1.26.3\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "go",
+    "shadowed_indexes": [
+      35,
+      49
+    ]
+  },
+  {
+    "index": 8,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\go\\1.26.3\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "gofmt",
+    "shadowed_indexes": [
+      35,
+      49
+    ]
+  },
+  {
+    "index": 10,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\gradle\\9.6.0-M1\\gradle-9.6.0-milestone-1/bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "gradle",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 13,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\node\\26.1.0",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "install_tools",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "jabswitch",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "jaccessinspector",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "jaccesswalker",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "jar",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "jarsigner",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "java",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "javac",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "javadoc",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "javap",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "javaw",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "jcmd",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "jconsole",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "jdb",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "jdeprscan",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "jdeps",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "jfr",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "jhsdb",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "jimage",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "jinfo",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "jlink",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "jmap",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "jmod",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "jnativescan",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "jpackage",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "jps",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "jshell",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "jstack",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "jstat",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "jstatd",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "jwebserver",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "k7",
+    "shadowed_indexes": [
+      73
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "k7c",
+    "shadowed_indexes": [
+      73
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "k7g",
+    "shadowed_indexes": [
+      73
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "keytool",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "kinit",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "klist",
+    "shadowed_indexes": [
+      22,
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "ktab",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 1,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\aqua-jesseduffield-lazydocker\\0.25.2",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "lazydocker",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 2,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\aqua-jesseduffield-lazygit\\0.61.1",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "lazygit",
+    "shadowed_indexes": [
+      49,
+      59
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "mediaplayer",
+    "shadowed_indexes": [
+      83
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "microsoftwindows.desktopstickereditorcentennial",
+    "shadowed_indexes": [
+      85
+    ]
+  },
+  {
+    "index": 17,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\github-k1-lo-w-mo\\1.5.4",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "mo",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "ms-teams",
+    "shadowed_indexes": [
+      74
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "ms-teams_ac",
+    "shadowed_indexes": [
+      74
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "ms-teams_autostarter",
+    "shadowed_indexes": [
+      74
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "ms-teamsupdate",
+    "shadowed_indexes": [
+      74
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "mspaint",
+    "shadowed_indexes": [
+      78
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "nanazip",
+    "shadowed_indexes": [
+      73
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "nanazipc",
+    "shadowed_indexes": [
+      73
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "nanazipg",
+    "shadowed_indexes": [
+      73
+    ]
+  },
+  {
+    "index": 13,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\node\\26.1.0",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "node",
+    "shadowed_indexes": [
+      20,
+      49
+    ]
+  },
+  {
+    "index": 13,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\node\\26.1.0",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "nodevars",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 22,
+    "entry": "%SystemRoot%\\system32",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "notepad",
+    "shadowed_indexes": [
+      23,
+      72,
+      80
+    ]
+  },
+  {
+    "index": 12,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\npm\\11.14.1",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "npm",
+    "shadowed_indexes": [
+      13,
+      20,
+      49
+    ]
+  },
+  {
+    "index": 12,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\npm\\11.14.1",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "npx",
+    "shadowed_indexes": [
+      13,
+      20,
+      49
+    ]
+  },
+  {
+    "index": 4,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\aqua-sharkdp-numbat\\1.23.0\\numbat-v1.23.0-x86_64-pc-windows-msvc",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "numbat",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "olk",
+    "shadowed_indexes": [
+      77
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "pbrush",
+    "shadowed_indexes": [
+      78
+    ]
+  },
+  {
+    "index": 15,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\pnpm\\10.33.0",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "pnpm",
+    "shadowed_indexes": [
+      20,
+      49
+    ]
+  },
+  {
+    "index": 0,
+    "entry": "C:\\Program Files\\PowerShell\\7",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "pwsh",
+    "shadowed_indexes": [
+      44
+    ]
+  },
+  {
+    "index": 16,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\python\\3.14.4",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "python",
+    "shadowed_indexes": [
+      49,
+      72,
+      75,
+      97
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "python3",
+    "shadowed_indexes": [
+      75,
+      97
+    ]
+  },
+  {
+    "index": 16,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\python\\3.14.4",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "pythonw",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "rmiregistry",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 18,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\github-short-arrow-runex\\0.1.14",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "runex",
+    "shadowed_indexes": [
+      49,
+      50
+    ]
+  },
+  {
+    "index": 11,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\java\\26.0.1\\bin",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "serialver",
+    "shadowed_indexes": [
+      49
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "snippingtool",
+    "shadowed_indexes": [
+      79
+    ]
+  },
+  {
+    "index": 27,
+    "entry": "C:\\Program Files\\WezTerm",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "unins000",
+    "shadowed_indexes": [
+      92
+    ]
+  },
+  {
+    "index": 5,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\aqua-astral-sh-uv\\0.11.12",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "uv",
+    "shadowed_indexes": [
+      49,
+      67
+    ]
+  },
+  {
+    "index": 5,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\aqua-astral-sh-uv\\0.11.12",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "uvw",
+    "shadowed_indexes": [
+      49,
+      67
+    ]
+  },
+  {
+    "index": 5,
+    "entry": "C:\\Users\\who\\AppData\\Local\\mise\\installs\\aqua-astral-sh-uv\\0.11.12",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "uvx",
+    "shadowed_indexes": [
+      49,
+      67
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "windowspackagemanagermcpserver",
+    "shadowed_indexes": [
+      75
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "windowspackagemanagerserver",
+    "shadowed_indexes": [
+      75
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "winget",
+    "shadowed_indexes": [
+      75
+    ]
+  },
+  {
+    "index": 22,
+    "entry": "%SystemRoot%\\system32",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "wpr",
+    "shadowed_indexes": [
+      33
+    ]
+  },
+  {
+    "index": 22,
+    "entry": "%SystemRoot%\\system32",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "wsl",
+    "shadowed_indexes": [
+      72,
+      84
+    ]
+  },
+  {
+    "index": 22,
+    "entry": "%SystemRoot%\\system32",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "wslconfig",
+    "shadowed_indexes": [
+      72,
+      84
+    ]
+  },
+  {
+    "index": 72,
+    "entry": "%LocalAppData%\\Microsoft\\WindowsApps",
+    "severity": "warn",
+    "kind": "duplicate_but_shadowed",
+    "command": "wt",
+    "shadowed_indexes": [
+      81
+    ]
+  },
+  {
+    "index": 47,
+    "entry": "%ANDROID_HOME%\\cmdline-tools\\latest\\bin",
+    "severity": "warn",
+    "kind": "relative_path_entry"
+  },
+  {
+    "index": 0,
+    "entry": "C:\\Program Files\\PowerShell\\7",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 19,
+    "entry": "C:\\Program Files\\Alacritty\\",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 20,
+    "entry": "C:\\Program Files\\Volta\\",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 21,
+    "entry": "C:\\Program Files\\glzr.io\\GlazeWM\\\\cli",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 22,
+    "entry": "%SystemRoot%\\system32",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 23,
+    "entry": "%SystemRoot%",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 24,
+    "entry": "%SystemRoot%\\System32\\Wbem",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 25,
+    "entry": "%SYSTEMROOT%\\System32\\WindowsPowerShell\\v1.0\\",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 26,
+    "entry": "%SYSTEMROOT%\\System32\\OpenSSH\\",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 27,
+    "entry": "C:\\Program Files\\WezTerm",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 28,
+    "entry": "C:\\Program Files\\glzr.io\\Zebar\\",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 29,
+    "entry": "C:\\Program Files\\GitHub CLI\\",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 30,
+    "entry": "C:\\Program Files\\Git\\cmd",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 31,
+    "entry": "C:\\Program Files\\dotnet\\",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 32,
+    "entry": "C:\\Program Files (x86)\\Gpg4win\\..\\GnuPG\\bin",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 33,
+    "entry": "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 34,
+    "entry": "C:\\Program Files\\bottom\\bin\\",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 35,
+    "entry": "C:\\Program Files\\Go\\bin",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 36,
+    "entry": "C:\\Program Files\\Arduino CLI\\",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 37,
+    "entry": "C:\\Program Files\\CMake\\bin",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 38,
+    "entry": "C:\\Strawberry\\c\\bin",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 39,
+    "entry": "C:\\Strawberry\\perl\\site\\bin",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 40,
+    "entry": "C:\\Strawberry\\perl\\bin",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 41,
+    "entry": "C:\\ProgramData\\chocolatey\\bin",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 42,
+    "entry": "C:\\Program Files\\Docker\\Docker\\resources\\bin",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 43,
+    "entry": "C:\\Program Files\\Tailscale\\",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 44,
+    "entry": "C:\\Program Files\\PowerShell\\7\\",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 45,
+    "entry": "C:\\Program Files\\starship\\bin\\",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 46,
+    "entry": "C:\\Program Files\\Neovim\\bin",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 88,
+    "entry": "%LocalAppData%\\Programs\\Antigravity\\bin",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 89,
+    "entry": "%LocalAppData%\\Programs\\Kiro\\bin",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 90,
+    "entry": "%LocalAppData%\\Programs\\Microsoft VS Code Insiders\\bin",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  },
+  {
+    "index": 91,
+    "entry": "%LocalAppData%\\Programs\\Microsoft VS Code\\bin",
+    "severity": "warn",
+    "kind": "writeable_path_dir"
+  }
+]
