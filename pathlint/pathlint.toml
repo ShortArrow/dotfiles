@@ -1,0 +1,13 @@
+# pathlint dogfood — Round 1 (minimal-first, doctor-only)
+#
+# This file is intentionally empty (no [[expect]], no [source] overrides).
+# Round 1 captures `pathlint doctor` findings on this host without R1
+# (resolve-order) noise. R1 / R2 / R4 / sort --apply / shell startup hooks
+# are all out of scope here.
+#
+# The companion `windows/path-order.toml` + `windows/Test-PathOrder.ps1`
+# stay untouched and serve as the baseline this experiment is compared
+# against. See `pathlint/readme.md` for invocation and the non-goals.
+#
+# Started: 2026-06-03. Host: Windows 11 pwsh (102 PATH entries).
+# pathlint version at first snapshot: 0.0.33.
