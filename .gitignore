@@ -21,3 +21,6 @@ startup.log
 .serena/cache/
 .serena/memories/
 .serena/logs/
+
+# pathlint dogfood snapshots are kept local-only (too large + host-PII-ish)
+pathlint/snapshots/
