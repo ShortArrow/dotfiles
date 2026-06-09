@@ -228,9 +228,13 @@ alias reload="source \$HOME/.bashrc"
 
 # GPG
 #
-# enable passphrase prompt for gpg
-# GPG_TTY=$(tty)
-# export GPG_TTY
+# Tell gpg-agent which TTY to use for pinentry. Without this,
+# signing from inside a fresh shell (e.g. `git commit -S` during
+# rebase) can fail with "Inappropriate ioctl for device" or fall
+# through to "no agent running" when the agent can't find a tty
+# to prompt on.
+GPG_TTY=$(tty)
+export GPG_TTY
 #
 # sudo ln -s /mnt/c/Program\ Files\ \(x86\)/GnuPG/bin/gpg.exe /usr/local/bin/gpg
 # sudo ln -s gpg /usr/local/bin/gpg2
