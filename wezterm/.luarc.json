@@ -1,0 +1,27 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+  "runtime.version": "Lua 5.4",
+  "workspace.library": [
+    "C:/Users/<you>/dev/wezterm-types"
+  ],
+  "diagnostics": {
+    "enable": true,
+    "globals": [
+      "hs",
+      "it",
+      "describe",
+      "before_each",
+      "after_each"
+    ],
+    "disable": [
+      "lowercase-global"
+    ]
+  },
+  "workspace.library": [
+    "./?.lua",
+    "./lua/?.lua",
+    "./lua/?/init.lua",
+    "${3rd}/luassert/library"
+  ],
+  "hint.enable": true
+}
