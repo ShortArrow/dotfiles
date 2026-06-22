@@ -26,10 +26,10 @@ gradle = "latest"
 java = "latest"
 node = "latest"
 npm = "latest"
-"aqua:pnpm/pnpm" = "latest"
+"aqua:npm/pnpm" = "latest"
 python = "latest"
 "github:k1LoW/mo" = "latest"
-"github:ShortArrow/runex" = "0.1.14"
+"github:ShortArrow/runex" = "latest"
 
 [tool_alias]
 python3 = "python"
