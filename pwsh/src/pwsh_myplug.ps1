@@ -528,6 +528,12 @@ function Edit-PathForMachine {
   Edit-Env -ScopeName "Machine" -VariableName "Path" -EditorName "vim"
 }
 
+[Environment]::SetEnvironmentVariable(
+    "YAZI_FILE_ONE",
+    (Join-Path $env:ProgramFiles "\Git\usr\bin\file.exe"),
+    "User"
+)
+
 # Enable debug output
 $DebugPreference = 'Continue'
 
