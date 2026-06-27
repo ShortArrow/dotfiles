@@ -170,7 +170,7 @@ dst.linux   = "$HOME/.claude"
 description = "Zebar taskbar (Windows only)"
 platforms = ["windows"]
 [[tools.zebar.links]]
-src = { dir = "zebar", include = ["config.yaml", "script.js", "start.bat", "start.sh"] }
+src = { dir = "zebar", include = ["config.yaml", "script.js", "start.bat", "start.sh", "overline-zebar"] }
 dst.windows = "$USERPROFILE/.glzr/zebar"
 
 
