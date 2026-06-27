@@ -1,3 +1,4 @@
 [submodule "zebar/overline-zebar"]
 	path = zebar/overline-zebar
 	url = https://github.com/ShortArrow/overline-zebar
+	branch = custom
