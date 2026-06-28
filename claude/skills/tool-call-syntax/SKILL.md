@@ -31,6 +31,17 @@ court
 - 各呼び出し: `antml:invoke`（`name` 属性に正確なツール名）
 - 各引数: `antml:parameter`（`name` 属性に引数名）
 
+正しい構造の見本 (下記は山括弧を全角 ＜＞ にして無害化してある。実際の呼び出しでは半角 `<>` を使う):
+
+```
+＜antml:function_calls＞
+  ＜antml:invoke name="Bash"＞
+    ＜antml:parameter name="command"＞ls＜/antml:parameter＞
+    ＜antml:parameter name="description"＞list files＜/antml:parameter＞
+  ＜/antml:invoke＞
+＜/antml:function_calls＞
+```
+
 **素の `<invoke>` / `<function_calls>` / `<parameter>` は無効**。必ず `antml:` 接頭辞が付く。`court` のような独自タグで囲むのは論外。
 
 ## チェックリスト (呼び出し前に自問)
