@@ -24,3 +24,7 @@ startup.log
 
 # pathlint dogfood snapshots are kept local-only (too large + host-PII-ish)
 pathlint/snapshots/
+
+# Working directory
+/work
+
