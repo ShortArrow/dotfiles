@@ -266,25 +266,9 @@ if (Test-CommandExist('go')) {
   if (-not $hasGoBin) { $env:Path = "$env:Path;$goBin" }
 }
 
-# mise setup
-# mise's command_not_found hook dereferences GetHistoryItems()[-1].CommandLine without
-# a null check, which throws when history is empty. Patch the output before executing.
-if ((Test-CommandExist('mise')) -and -not $env:RUNEX_DISABLE_MISE) {
-  try {
-    $miseActivate = (& mise activate pwsh | Out-String)
-    $miseActivate = $miseActivate -replace `
-      '\[Microsoft\.PowerShell\.PSConsoleReadLine\]::GetHistoryItems\(\)\[-1\]\.CommandLine', `
-      '$(try { ([Microsoft.PowerShell.PSConsoleReadLine]::GetHistoryItems() | Select-Object -Last 1).CommandLine } catch { '''' })'
-    $miseActivate | Invoke-Expression
-  }
-  catch {
-    Write-Warning "mise activation failed: $($_.Exception.Message)"
-  }
-}
-# $MiseShimPath = "$HOME\.local\share\mise\shims"
-# if (Test-Path $MiseShimPath) {
-#     $env:PATH = "$MiseShimPath;" + $env:PATH
-# }
+# mise: resolved via %LocalAppData%\mise\shims on the persistent PATH (windows/PATH.txt).
+# `mise activate` is intentionally not used — it prepends ~20 per-tool install dirs and
+# pushes the process PATH past cmd.exe's 8191-char limit, breaking npm run-scripts.
 
 # lunarvim setup
 $lunarvimPath = "$env:USERPROFILE\.local\bin\lvim.ps1"
