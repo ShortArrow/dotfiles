@@ -28,3 +28,9 @@ pathlint/snapshots/
 # Working directory
 /work
 
+# Local agent endpoints (LAN IP)
+/agents.config.json
+
+# PATH snapshots with raw user paths
+windows/*.bk.txt
+
