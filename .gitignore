@@ -24,3 +24,13 @@ startup.log
 
 # pathlint dogfood snapshots are kept local-only (too large + host-PII-ish)
 pathlint/snapshots/
+
+# Working directory
+/work
+
+# Local agent endpoints (LAN IP)
+/agents.config.json
+
+# PATH snapshots with raw user paths
+windows/*.bk.txt
+
