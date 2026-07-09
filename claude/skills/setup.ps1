@@ -5,7 +5,8 @@
 # and symlink them under ~/.claude/skills/.
 
 $scriptDirectory = Split-Path -Parent $MyInvocation.MyCommand.Definition
-$targetDirectory = Join-Path $env:USERPROFILE '.claude/skills'
+$homeDirectory = if ($env:USERPROFILE) { $env:USERPROFILE } else { $env:HOME }
+$targetDirectory = Join-Path $homeDirectory '.claude/skills'
 
 if (-not (Test-Path -LiteralPath $targetDirectory)) {
   New-Item -ItemType Directory -Path $targetDirectory -Force | Out-Null
