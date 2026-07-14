@@ -269,6 +269,12 @@ if (Test-CommandExist('go')) {
 # mise: resolved via %LocalAppData%\mise\shims on the persistent PATH (windows/PATH.txt).
 # `mise activate` is intentionally not used — it prepends ~20 per-tool install dirs and
 # pushes the process PATH past cmd.exe's 8191-char limit, breaking npm run-scripts.
+# node-gyp must resolve python without going through a mise shim: a shimmed `python`
+# runs `mise x`, which blocks on the lock held by a parent `mise install`/`mise up`.
+if (Test-CommandExist('mise') -and -not $env:NODE_GYP_FORCE_PYTHON) {
+  $misePython = mise which python 2>$null
+  if ($misePython -and (Test-Path $misePython)) { $env:NODE_GYP_FORCE_PYTHON = $misePython }
+}
 
 # lunarvim setup
 $lunarvimPath = "$env:USERPROFILE\.local\bin\lvim.ps1"
