@@ -1,0 +1,46 @@
+name: nvim-tests
+
+on:
+  push:
+    paths:
+      - "nvim/**"
+      - ".github/workflows/nvim-tests.yml"
+  pull_request:
+    paths:
+      - "nvim/**"
+      - ".github/workflows/nvim-tests.yml"
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: stable
+
+      - name: Point Neovim at the repo config
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/xdg-config"
+          cp -r nvim/src "$RUNNER_TEMP/xdg-config/nvim"
+          echo "XDG_CONFIG_HOME=$RUNNER_TEMP/xdg-config" >> "$GITHUB_ENV"
+
+      - name: Install plugins
+        shell: bash
+        run: nvim --headless "+Lazy! sync" +qa
+
+      - name: Install omnisharp via mason
+        shell: bash
+        run: nvim --headless "+lua require('lazy').load({plugins={'mason.nvim'}})" "+MasonInstall omnisharp" "+qa!"
+
+      - name: Run tests
+        shell: bash
+        run: bash nvim/tests/run.sh
