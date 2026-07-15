@@ -34,15 +34,14 @@ M.ordinalnvim = {
     cmd = "Copilot",
     event = "InsertEnter",
     config = function()
-      require("copilot").setup({})
+      require("copilot").setup({
+        -- blink-copilot drives suggestions through blink.cmp; disable the
+        -- builtin ghost-text panel to avoid duplicate completions.
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      })
     end,
     keys = api.keymaps.maps.copilotchat,
-  },
-  {
-    "zbirenbaum/copilot-cmp",
-    config = function()
-      require("copilot_cmp").setup()
-    end,
   },
   { "zbirenbaum/copilot.lua" }, -- for CopilotC-Nvim/CopilotChat.nvim
   { "nvim-lua/plenary.nvim" },
@@ -608,7 +607,6 @@ M.ordinalnvim = {
   --    "saadparwaiz1/cmp_luasnip",
   --    dependencies = "L3MON4D3/LuaSnip",
   --  },
-  { "hrsh7th/cmp-nvim-lsp" },
   {
     "williamboman/mason.nvim",
     dependencies = {
@@ -630,10 +628,6 @@ M.ordinalnvim = {
   {
     "ray-x/lsp_signature.nvim",
     config = get_config("_lsp_sig").setup,
-  },
-  {
-    "onsails/lspkind.nvim",
-    config = get_config("_lsp_kind").setup,
   },
   {
     "weilbith/nvim-code-action-menu",
@@ -698,52 +692,32 @@ M.ordinalnvim = {
     ft = { "html", "xml", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "astro", "php", "markdown" },
     opts = {},
   },
+  -- Legacy cmp-* sources kept for blink.compat bridge (calc/emoji/nerdfont/treesitter/pandoc-references/plugins).
+  { "hrsh7th/cmp-calc",               lazy = true },
+  { "hrsh7th/cmp-emoji",              lazy = true },
+  { "chrisgrieser/cmp-nerdfont",      lazy = true },
+  { "jc-doyle/cmp-pandoc-references", lazy = true },
+  { "KadoBOT/cmp-plugins",            lazy = true },
+  { "windwp/nvim-autopairs",          lazy = true },
+  { "saghen/blink.compat",            lazy = true, version = "*" },
+  { "fang2hou/blink-copilot",           lazy = true },
   {
-    "KadoBOT/cmp-plugins",
-    after = "nvim-cmp",
-    config = get_config("_cmp_plugins").setup,
-    event = { "InsertEnter", "CmdlineEnter" },
-  },
-  { "teramako/cmp-cmdline-prompt.nvim", lazy = true },
-  { "chrisgrieser/cmp-nerdfont",        lazy = true },
-  { "f3fora/cmp-spell",                 lazy = true },
-  -- { "hrsh7th/cmp-buffer",                  lazy = true },
-  -- { "hrsh7th/cmp-calc",                    lazy = true },
-  -- { "hrsh7th/cmp-cmdline",                 lazy = true },
-  -- { "hrsh7th/cmp-emoji",                   lazy = true },
-  -- { "hrsh7th/cmp-path",                    lazy = true },
-  -- { "hrsh7th/cmp-nvim-lsp",                lazy = true },
-  -- { "hrsh7th/cmp-nvim-lsp-signature-help", lazy = true },
-  -- { "hrsh7th/cmp-nvim-lua",                lazy = true },
-  { "jc-doyle/cmp-pandoc-references",   lazy = true },
-  { "KadoBOT/cmp-plugins",              lazy = true },
-  { "octaltree/cmp-look",               lazy = true },
-  { "ray-x/cmp-treesitter",             lazy = true },
-  { "windwp/nvim-autopairs",            lazy = true },
-  {
-    "hrsh7th/nvim-cmp",
+    "saghen/blink.cmp",
+    version = "v1.*",
     dependencies = {
-      -- "chrisgrieser/cmp-nerdfont",
-      -- "f3fora/cmp-spell",
-      "hrsh7th/cmp-buffer",
+      "L3MON4D3/LuaSnip",
+      "rafamadriz/friendly-snippets",
+      "saghen/blink.compat",
+      "fang2hou/blink-copilot",
+      "zbirenbaum/copilot.lua",
       "hrsh7th/cmp-calc",
-      "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-emoji",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
-      "hrsh7th/cmp-nvim-lua",
-      -- "hrsh7th/cmp-vsnip",
-      -- "hrsh7th/vim-vsnip",
-      -- "hrsh7th/vim-vsnip-integ",
-      -- "jc-doyle/cmp-pandoc-references",
-      -- "KadoBOT/cmp-plugins",
-      -- "octaltree/cmp-look",
-      -- "ray-x/cmp-treesitter",
-      -- "windwp/nvim-autopairs",
+      "chrisgrieser/cmp-nerdfont",
+      "jc-doyle/cmp-pandoc-references",
+      "KadoBOT/cmp-plugins",
     },
     event = { "InsertEnter", "CmdlineEnter" },
-    config = get_config("_cmp").setup,
+    config = get_config("_blink").setup,
   },
   {
     "windwp/nvim-autopairs",
