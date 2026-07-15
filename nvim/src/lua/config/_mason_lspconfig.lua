@@ -16,7 +16,14 @@ M.setup = function()
 
   local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-  mason_lspconfig.setup()
+  -- automatic_enable starts every installed server, so C# would get
+  -- csharp_ls + omnisharp(+mono) on the same buffer: triple solution loads
+  -- and a flooded UI thread. Keep omnisharp only.
+  mason_lspconfig.setup({
+    automatic_enable = {
+      exclude = { "csharp_ls", "omnisharp_mono" },
+    },
+  })
 
   -- On Nvim 0.11+, use vim.lsp.config to resolve configs from nvim-lspconfig's lsp/ directory.
 
