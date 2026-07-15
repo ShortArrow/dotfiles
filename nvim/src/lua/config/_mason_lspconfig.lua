@@ -1,11 +1,7 @@
 local M = {}
 
 local function get_project_root()
-  local output = vim.fn.systemlist('git rev-parse --show-toplevel')
-  if vim.v.shell_error ~= 0 or #output == 0 then
-    return nil
-  end
-  return output[1]
+  return require("my.utils").project_root()
 end
 
 M.setup = function()
@@ -14,7 +10,11 @@ M.setup = function()
   local mason_lspconfig = require("mason-lspconfig")
   local api = require("my")
 
-  local capabilities = require("blink.cmp").get_lsp_capabilities()
+  -- blink.cmp merges its full capabilities into vim.lsp.config('*') when it
+  -- loads; requiring it here instead costs ~1s of UI block on the first
+  -- BufReadPre. Advertise the plugin-independent essentials only.
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
 
   -- automatic_enable starts every installed server, so C# would get
   -- csharp_ls + omnisharp(+mono) on the same buffer: triple solution loads

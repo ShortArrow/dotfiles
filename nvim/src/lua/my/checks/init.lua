@@ -69,6 +69,16 @@ M.lsp_log_size = function()
     ("lsp.log is %.1f MB (%s)"):format(size / 1024 / 1024, path)) }
 end
 
+--- blink.cmp takes ~1s to require; it must stay off the file-open critical
+--- path (its lazy trigger is InsertEnter, and its vim.lsp.config('*') merge
+--- covers LSP capabilities once it loads).
+M.blink_lazy_until_insert = function()
+  local loaded = package.loaded["blink.cmp"] ~= nil
+  return { result(not loaded,
+    loaded and "blink.cmp was loaded without InsertEnter (blocks file open by ~1s)"
+    or "blink.cmp is not loaded before InsertEnter") }
+end
+
 --- Loading the config must not leave error messages behind.
 M.no_startup_errors = function()
   local messages = vim.fn.execute("messages")

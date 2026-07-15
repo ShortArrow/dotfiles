@@ -8,6 +8,14 @@ M.is_boolean = function(stuff)
   return type(stuff) == 'boolean'
 end
 
+---Repository root of the current working directory, or nil outside a repo.
+---A pure stat walk; never spawns a git process (a synchronous spawn blocks
+---the UI thread for ~100ms per call on Windows).
+---@return string|nil
+M.project_root = function()
+  return vim.fs.root(vim.fn.getcwd(), '.git')
+end
+
 ---Converts to zenkaku katakana from hankaku katakana
 ---@return nil
 M.convert_to_zenkaku = function()
