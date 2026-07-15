@@ -60,6 +60,13 @@ M.setup = function()
       local ok_parser = pcall(vim.treesitter.get_parser, args.buf, lang)
       if not ok_parser then return end
 
+      -- An installed parser can still be older than the plugin's highlight
+      -- query (e.g. bundled `vim` parser without the "substitute" node).
+      -- Starting anyway floods every redraw with decoration errors, so fall
+      -- back to regex syntax instead.
+      local ok_query, query = pcall(vim.treesitter.query.get, lang, "highlights")
+      if not ok_query or not query then return end
+
       pcall(vim.treesitter.start, args.buf, lang)
     end,
   })
