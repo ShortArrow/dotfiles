@@ -12,10 +12,9 @@ M.setup = function()
   if vim.g.__mason_lspconfig_setup_done then return end
   vim.g.__mason_lspconfig_setup_done = true
   local mason_lspconfig = require("mason-lspconfig")
-  local cmp_nvim_lsp = require("cmp_nvim_lsp")
   local api = require("my")
 
-  local capabilities = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local capabilities = require("blink.cmp").get_lsp_capabilities()
 
   mason_lspconfig.setup()
 
@@ -243,14 +242,9 @@ M.setup = function()
 
     elseif server_name == "kakehashi" then
       opts.cmd = { "kakehashi" }
-      opts.filetypes = {
-        "lua", "vim", "vimdoc",
-        "markdown", "markdown_inline",
-        "json", "yaml", "toml",
-        "html", "css",
-        "javascript", "typescript", "tsx",
-        "python",
-      }
+      -- Restrict to markdown so kakehashi only bridges fenced code blocks.
+      -- Letting it attach to .lua/.py/etc. blocks the native LSP from starting.
+      opts.filetypes = { "markdown", "markdown_inline" }
       opts.root_dir = function(arg1, arg2)
         -- Handle both sync function(fname)->string and async function(bufnr, on_dir)
         local fname

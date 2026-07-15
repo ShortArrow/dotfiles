@@ -19,12 +19,11 @@ M.setup = function()
   local _mason = require('mason')
   local _mason_lspconfig = require('mason-lspconfig')
   local _mason_nullls = require('mason-null-ls')
-  local _cmp_nvim_lsp = require('cmp_nvim_lsp')
   local _mason_dap = require("mason-nvim-dap")
   local _dap = require('dap')
   -- Define the sign for a breakpoint
   vim.fn.sign_define('DapBreakpoint', { text = ' ', texthl = 'ErrorMsg', linehl = '', numhl = '' })
-  local capabilities = _cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local capabilities = require('blink.cmp').get_lsp_capabilities()
   capabilities.textDocument.foldingRange = {
     dynamicRegistration = false,
     lineFoldingOnly = true
