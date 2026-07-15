@@ -27,6 +27,7 @@ vim.defer_fn(function()
 
   local results = checks.attached_clients_match(buf, "cs")
   vim.list_extend(results, checks.single_cs_server())
+  vim.list_extend(results, checks.blink_lazy_until_insert())
 
   for _, r in ipairs(results) do
     print((r.ok and "OK: " or "FAIL: ") .. r.msg)

@@ -14,28 +14,22 @@ M.tsserver = {
   },
 }
 
-M.has_package_json = function()
-  local output = vim.fn.systemlist('git rev-parse --show-toplevel') -- Get project root path
-  if vim.v.shell_error ~= 0 or #output == 0 then
-    return false
-  end
-
-  local package_json_path = table.concat({ output[1], 'package.json' }, '/') -- Combine paths to create package.json path
-  return vim.fn.filereadable(package_json_path) ~= 0                         -- Return true if package.json exists
-end
-
 M.get_package_json_path = function()
-  local output = vim.fn.systemlist('git rev-parse --show-toplevel')
-  if vim.v.shell_error ~= 0 or #output == 0 then
+  local root = require('my.utils').project_root()
+  if not root then
     return nil
   end
 
-  local package_json_path = table.concat({ output[1], 'package.json' }, '/')
+  local package_json_path = table.concat({ root, 'package.json' }, '/')
   if vim.fn.filereadable(package_json_path) == 0 then
     return nil
   end
 
   return package_json_path
+end
+
+M.has_package_json = function()
+  return M.get_package_json_path() ~= nil
 end
 
 return M
