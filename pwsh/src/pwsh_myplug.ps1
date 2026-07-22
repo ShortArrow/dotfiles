@@ -38,6 +38,71 @@ function Set-CommandAlias([string]$aliasName, [string]$commandName, [string]$fal
   }
 }
 
+function Get-CachedInit {
+  <#
+    .SYNOPSIS
+      Returns the path to a dot-sourceable shell-init script for a tool, regenerating
+      it only when the tool's executable changes.
+    .DESCRIPTION
+      Startup spends most of its time spawning external tools (starship/zoxide/runex)
+      to print their PowerShell integration. Under a real-time AV that scans every
+      process creation, each spawn costs ~150 ms warm and seconds cold. Caching the
+      generated init to disk turns each per-start spawn into a stat + dot-source.
+
+      Freshness is keyed on the tool exe (path|length|LastWriteTimeUtc). A version
+      bump moves/rewrites the exe and invalidates the cache. Tool config (starship.toml,
+      runex abbreviations, zoxide db) is read at prompt/runtime, not baked into the init,
+      so config edits need no invalidation. ResolveExe runs only on a cache miss.
+    .PARAMETER Name
+      Cache key; the init script is stored as <Name>.ps1.
+    .PARAMETER ResolveExe
+      Returns the absolute exe path used for the freshness stamp. Called only on miss.
+    .PARAMETER Generate
+      Receives the resolved exe path and emits the init-script text.
+  #>
+  param(
+    [Parameter(Mandatory)][string] $Name,
+    [Parameter(Mandatory)][scriptblock] $ResolveExe,
+    [Parameter(Mandatory)][scriptblock] $Generate
+  )
+  $cacheDir = Join-Path $HOME '.cache/pwsh-init'
+  $scriptPath = Join-Path $cacheDir "$Name.ps1"
+  $stampPath = Join-Path $cacheDir "$Name.stamp"
+
+  $isFresh = $false
+  if ((Test-Path -LiteralPath $scriptPath) -and (Test-Path -LiteralPath $stampPath)) {
+    $savedStamp = Get-Content -LiteralPath $stampPath -Raw
+    $savedExe = ($savedStamp -split '\|', 2)[0]
+    if ($savedExe -and (Test-Path -LiteralPath $savedExe)) {
+      $exeInfo = Get-Item -LiteralPath $savedExe
+      $currentStamp = "$savedExe|$($exeInfo.Length)|$($exeInfo.LastWriteTimeUtc.Ticks)"
+      $isFresh = $currentStamp -eq $savedStamp
+    }
+  }
+
+  if (-not $isFresh) {
+    if (-not (Test-Path -LiteralPath $cacheDir)) {
+      New-Item -ItemType Directory -Path $cacheDir -Force | Out-Null
+    }
+    $exe = & $ResolveExe
+    ((& $Generate $exe) | Out-String) | Set-Content -LiteralPath $scriptPath -Encoding UTF8
+    $stamp = if ($exe -and (Test-Path -LiteralPath $exe)) {
+      $exeInfo = Get-Item -LiteralPath $exe
+      "$exe|$($exeInfo.Length)|$($exeInfo.LastWriteTimeUtc.Ticks)"
+    } else { '' }
+    Set-Content -LiteralPath $stampPath -Value $stamp -Encoding UTF8 -NoNewline
+  }
+
+  $scriptPath
+}
+
+function Clear-InitCache {
+  <# .SYNOPSIS Force regeneration of all Get-CachedInit scripts on next shell start. #>
+  $cacheDir = Join-Path $HOME '.cache/pwsh-init'
+  if (Test-Path -LiteralPath $cacheDir) { Remove-Item -LiteralPath $cacheDir -Recurse -Force }
+  Write-Host 'Init cache cleared. Restart the shell to regenerate. 🧹' -ForegroundColor Green
+}
+
 # Environment variable management
 function Reload-EnvironmentVariables {
   $reloadStart = [DateTime]::Now
@@ -168,7 +233,9 @@ if ((Get-Module PSReadLine -ListAvailable) -and [Environment]::UserInteractive -
 # choco install starship
 # Initialize starship - needed for prompt functionality
 if (Test-CommandExist('starship')) {
-  Invoke-Expression (&starship init powershell)
+  . (Get-CachedInit 'starship' `
+      { (Get-Command starship -ErrorAction SilentlyContinue).Source } `
+      { param($exe) & $exe init powershell --print-full-init })
 
   # OSC escape sequence for terminal title (tab title)
   function Set-TerminalTitle {
@@ -272,8 +339,13 @@ if (Test-CommandExist('go')) {
 # node-gyp must resolve python without going through a mise shim: a shimmed `python`
 # runs `mise x`, which blocks on the lock held by a parent `mise install`/`mise up`.
 if (Test-CommandExist('mise') -and -not $env:NODE_GYP_FORCE_PYTHON) {
-  $misePython = mise which python 2>$null
-  if ($misePython -and (Test-Path $misePython)) { $env:NODE_GYP_FORCE_PYTHON = $misePython }
+  # Cache the resolved python path; the stamp exe IS the path, so a python version
+  # change (new install dir) invalidates it without spawning mise on every start.
+  $pyCache = Get-CachedInit 'node-gyp-python' `
+    { mise which python 2>$null } `
+    { param($exe) $exe }
+  $misePython = (Get-Content -LiteralPath $pyCache -Raw).Trim()
+  if ($misePython -and (Test-Path -LiteralPath $misePython)) { $env:NODE_GYP_FORCE_PYTHON = $misePython }
 }
 
 # lunarvim setup
@@ -283,7 +355,9 @@ Set-CommandAlias 'lvim' $lunarvimPath -fallback 'lunarvim'
 # lsd: ls, ll, l., ll. are handled by runex
 
 if (Test-CommandExist('zoxide')) {
-  Invoke-Expression (& { (zoxide init powershell | Out-String) })
+  . (Get-CachedInit 'zoxide' `
+      { (Get-Command zoxide -ErrorAction SilentlyContinue).Source } `
+      { param($exe) & $exe init powershell })
 }
 else {
   # Define Show-NeedInstall if not already defined
@@ -518,11 +592,17 @@ function Edit-PathForMachine {
   Edit-Env -ScopeName "Machine" -VariableName "Path" -EditorName "vim"
 }
 
-[Environment]::SetEnvironmentVariable(
-    "YAZI_FILE_ONE",
-    (Join-Path $env:ProgramFiles "\Git\usr\bin\file.exe"),
-    "User"
-)
+# yazi needs file.exe; expose it via YAZI_FILE_ONE.
+# Persist to the User scope only when it actually changes: a same-value write still
+# broadcasts WM_SETTINGCHANGE via a *blocking* SendMessageTimeout, which stalls for
+# seconds when any top-level window is slow to answer. New shells inherit the User
+# value at launch, so steady-state writes are pure cost. Always set the process env
+# so the current session (and the very first run) has it without waiting on the broadcast.
+$yaziFileOne = Join-Path $env:ProgramFiles 'Git\usr\bin\file.exe'
+if ([Environment]::GetEnvironmentVariable('YAZI_FILE_ONE', 'User') -ne $yaziFileOne) {
+  [Environment]::SetEnvironmentVariable('YAZI_FILE_ONE', $yaziFileOne, 'User')
+}
+$env:YAZI_FILE_ONE = $yaziFileOne
 
 # Enable debug output
 $DebugPreference = 'Continue'
@@ -530,9 +610,13 @@ $DebugPreference = 'Continue'
 # Initialize only essential environment variables
 Reload-EnvironmentVariables
 
-# runex abbreviation engine
+# runex abbreviation engine.
+# Resolve the real exe (mise which) so the cache is keyed on the actual binary and
+# the shim's triple-spawn (cmd -> mise -> runex) is paid only on a cache miss.
 if (Test-CommandExist('runex')) {
-  (& runex export pwsh) | Out-String | Invoke-Expression
+  . (Get-CachedInit 'runex' `
+      { (mise which runex 2>$null) ?? (Get-Command runex -ErrorAction SilentlyContinue).Source } `
+      { param($exe) & $exe export pwsh })
 }
 
 # Clear command existence cache after initial load and alias setup
