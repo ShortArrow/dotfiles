@@ -122,6 +122,14 @@ window_rules:
       - window_process: { equals: 'dotnet' }
       - window_process: { equals: 'warnedge'}
       - window_process: { equals: '***REMOVED***' }
+      - window_process: { equals: '***REMOVED***' }
+      - window_process: { equals: 'server-gui' }
+      - window_process: { equals: '***REMOVED***' }
+      - window_process: { equals: '***REMOVED***' }
+      - window_process: { equals: '***REMOVED***' }
+      - window_process: { equals: 'hanuke-gui' }
+      - window_process: { equals: '***REMOVED***' }
+      - window_process: { equals: 'menreiki-desktop' }
 
       # Ignores picture-in-picture windows for browsers.
       - window_title: { regex: '[Pp]icture.in.[Pp]icture' }
@@ -168,8 +176,8 @@ window_rules:
 
   - commands: ['move --workspace 2']
     match:
-      - window_process: { equals: 'WindowsTerminal' } # Microsoft Terminal
-      - window_class: { equals: 'org.wezfurlong.wezterm' } # WezTerm
+      # - window_process: { equals: 'WindowsTerminal' } # Microsoft Terminal
+      # - window_class: { equals: 'org.wezfurlong.wezterm' } # WezTerm
       - window_process: { equals: 'alacritty' } # Alacritty
       - window_process: { equals: 'warp.exe' } # Warp terminal
 
