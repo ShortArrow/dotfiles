@@ -1,4 +1,5 @@
 #!pwsh
+
 <#
 .SYNOPSIS
   Install the winget-managed packages for this machine.
