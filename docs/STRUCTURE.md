@@ -103,6 +103,38 @@ and the `setup.*` launchers.
    enough; the corresponding SHA-256 must live in the script (or
    be supplied via env var with a clear failure mode).
 
+## Package installation layers
+
+`dotfm` links configuration files; it does not install the tools
+themselves. Installation is split by what each manager can reach.
+
+| Layer | Owns | Declared in |
+|-------|------|-------------|
+| **mise** | CLI tools and language runtimes — anything with a usable aqua / cargo / go / npm / github backend | `mise/src/config.toml` |
+| **winget** | GUI applications, OS integration, compilers and SDKs — what mise has no backend for | `winget/public_usecase.txt`, `winget/private_usecase.txt` |
+
+Rules:
+
+1. **A tool belongs to exactly one layer.** Check `mise registry` first; if
+   a backend resolves, mise owns the tool.
+2. **winget keeps only what mise cannot install** — packages missing from
+   the mise registry (ImageMagick), GUI applications whose name collides
+   with an unrelated CLI (the Claude desktop app against the `claude` CLI,
+   NI Package Manager against `npm:@antfu/ni`), and Windows installers with
+   no upstream archive to fetch (Git for Windows).
+3. **`mise` itself and PowerShell cannot move.** PowerShell is the shell
+   that activates mise, so routing either through a mise shim is circular.
+4. **`public_usecase.txt` is the work and development environment;
+   `private_usecase.txt` is hobby and personal apps.** The two sets are
+   disjoint, so a private machine imports both:
+   `winget/init.ps1 -IncludePrivate`.
+5. **Runtime dependencies and OS-bundled apps are not declared.**
+   VCRedist, WindowsAppRuntime, UI.Xaml, VCLibs, Edge and OneDrive arrive
+   with their dependents.
+
+Both manifests are `winget import` format, so `winget export` output can
+be diffed against them directly.
+
 ## Adding a new tool
 
 1. Create the tool directory and put the config files inside.

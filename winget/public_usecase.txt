@@ -1,0 +1,269 @@
+{
+  "$schema": "https://aka.ms/winget-packages.schema.2.0.json",
+  "Sources": [
+    {
+      "Packages": [
+        {
+          "PackageIdentifier": "7zip.7zip"
+        },
+        {
+          "PackageIdentifier": "akeo.ie.Zadig"
+        },
+        {
+          "PackageIdentifier": "Anthropic.Claude"
+        },
+        {
+          "PackageIdentifier": "AntibodySoftware.WizTree"
+        },
+        {
+          "PackageIdentifier": "ArduinoSA.CLI"
+        },
+        {
+          "PackageIdentifier": "ArduinoSA.IDE.stable"
+        },
+        {
+          "PackageIdentifier": "Arm.GnuArmEmbeddedToolchain"
+        },
+        {
+          "PackageIdentifier": "chrisant996.Clink"
+        },
+        {
+          "PackageIdentifier": "CPUID.HWMonitor"
+        },
+        {
+          "PackageIdentifier": "CrystalDewWorld.CrystalDiskInfo"
+        },
+        {
+          "PackageIdentifier": "DBeaver.DBeaver.Community"
+        },
+        {
+          "PackageIdentifier": "Deskflow.Deskflow"
+        },
+        {
+          "PackageIdentifier": "desowin.USBPcap"
+        },
+        {
+          "PackageIdentifier": "Docker.DockerDesktop"
+        },
+        {
+          "PackageIdentifier": "dorssel.usbipd-win"
+        },
+        {
+          "PackageIdentifier": "Git.Git"
+        },
+        {
+          "PackageIdentifier": "glzr-io.glazewm"
+        },
+        {
+          "PackageIdentifier": "GNU.Emacs"
+        },
+        {
+          "PackageIdentifier": "GNU.Nano"
+        },
+        {
+          "PackageIdentifier": "GnuPG.GnuPG"
+        },
+        {
+          "PackageIdentifier": "GnuPG.Gpg4win"
+        },
+        {
+          "PackageIdentifier": "Google.AndroidStudio"
+        },
+        {
+          "PackageIdentifier": "Google.AntigravityIDE"
+        },
+        {
+          "PackageIdentifier": "Google.Chrome"
+        },
+        {
+          "PackageIdentifier": "Google.Chrome.Canary"
+        },
+        {
+          "PackageIdentifier": "Google.Chrome.Dev"
+        },
+        {
+          "PackageIdentifier": "Google.PlatformTools"
+        },
+        {
+          "PackageIdentifier": "Gyan.FFmpeg"
+        },
+        {
+          "PackageIdentifier": "ImageMagick.ImageMagick.Q16"
+        },
+        {
+          "PackageIdentifier": "jdx.mise"
+        },
+        {
+          "PackageIdentifier": "LibreHardwareMonitor.LibreHardwareMonitor"
+        },
+        {
+          "PackageIdentifier": "LLVM.clangd"
+        },
+        {
+          "PackageIdentifier": "LLVM.LLVM"
+        },
+        {
+          "PackageIdentifier": "M2Team.NanaZip"
+        },
+        {
+          "PackageIdentifier": "Magicsplat.TclTk"
+        },
+        {
+          "PackageIdentifier": "Microsoft.AccessDatabaseEngine.2016"
+        },
+        {
+          "PackageIdentifier": "Microsoft.DotNet.AspNetCore.8"
+        },
+        {
+          "PackageIdentifier": "Microsoft.DotNet.DesktopRuntime.8"
+        },
+        {
+          "PackageIdentifier": "Microsoft.DotNet.Framework.DeveloperPack.4.6"
+        },
+        {
+          "PackageIdentifier": "Microsoft.DotNet.SDK.10"
+        },
+        {
+          "PackageIdentifier": "Microsoft.DotNet.SDK.6"
+        },
+        {
+          "PackageIdentifier": "Microsoft.DotNet.SDK.8"
+        },
+        {
+          "PackageIdentifier": "Microsoft.PowerShell"
+        },
+        {
+          "PackageIdentifier": "Microsoft.PowerToys"
+        },
+        {
+          "PackageIdentifier": "Microsoft.Sqlcmd"
+        },
+        {
+          "PackageIdentifier": "Microsoft.Teams"
+        },
+        {
+          "PackageIdentifier": "Microsoft.VisualStudio.2022.Professional"
+        },
+        {
+          "PackageIdentifier": "Microsoft.VisualStudioCode"
+        },
+        {
+          "PackageIdentifier": "Microsoft.VisualStudioCode.Insiders"
+        },
+        {
+          "PackageIdentifier": "Microsoft.WinDbg"
+        },
+        {
+          "PackageIdentifier": "Microsoft.WindowsSDK.10.0.26100"
+        },
+        {
+          "PackageIdentifier": "Microsoft.WindowsTerminal"
+        },
+        {
+          "PackageIdentifier": "Microsoft.WindowsWDK.10.0.26100"
+        },
+        {
+          "PackageIdentifier": "Microsoft.WSL"
+        },
+        {
+          "PackageIdentifier": "Mozilla.Firefox"
+        },
+        {
+          "PackageIdentifier": "Mozilla.Firefox.DeveloperEdition"
+        },
+        {
+          "PackageIdentifier": "NI.ni-packagemanager"
+        },
+        {
+          "PackageIdentifier": "nim.nim"
+        },
+        {
+          "PackageIdentifier": "Nushell.Nushell"
+        },
+        {
+          "PackageIdentifier": "OlegShparber.Zeal"
+        },
+        {
+          "PackageIdentifier": "RealVNC.VNCViewer"
+        },
+        {
+          "PackageIdentifier": "RedHat.VirtIO"
+        },
+        {
+          "PackageIdentifier": "Rufus.Rufus"
+        },
+        {
+          "PackageIdentifier": "SerialStudio.SerialStudio"
+        },
+        {
+          "PackageIdentifier": "Sigrok.PulseView.Nightly"
+        },
+        {
+          "PackageIdentifier": "SlackTechnologies.Slack"
+        },
+        {
+          "PackageIdentifier": "SoftwareFreedomConservancy.QEMU"
+        },
+        {
+          "PackageIdentifier": "Tailscale.Tailscale"
+        },
+        {
+          "PackageIdentifier": "TechPowerUp.GPU-Z"
+        },
+        {
+          "PackageIdentifier": "TeraTermProject.teraterm5"
+        },
+        {
+          "PackageIdentifier": "uvncbvba.UltraVNC"
+        },
+        {
+          "PackageIdentifier": "vim.vim"
+        },
+        {
+          "PackageIdentifier": "Warp.Warp"
+        },
+        {
+          "PackageIdentifier": "wez.wezterm"
+        },
+        {
+          "PackageIdentifier": "WinDirStat.WinDirStat"
+        },
+        {
+          "PackageIdentifier": "WinSCP.WinSCP"
+        },
+        {
+          "PackageIdentifier": "WiresharkFoundation.Wireshark"
+        },
+        {
+          "PackageIdentifier": "YS-L.csvlens"
+        },
+        {
+          "PackageIdentifier": "ZedIndustries.Zed"
+        }
+      ],
+      "SourceDetails": {
+        "Argument": "https://cdn.winget.microsoft.com/cache",
+        "Identifier": "Microsoft.Winget.Source_8wekyb3d8bbwe",
+        "Name": "winget",
+        "Type": "Microsoft.PreIndexed.Package"
+      }
+    },
+    {
+      "Packages": [
+        {
+          "PackageIdentifier": "XP8BT8DW290MPQ"
+        },
+        {
+          "PackageIdentifier": "XP99J3KP4XZ4VV"
+        }
+      ],
+      "SourceDetails": {
+        "Argument": "https://storeedgefd.dsx.mp.microsoft.com/v9.0",
+        "Identifier": "StoreEdgeFD",
+        "Name": "msstore",
+        "Type": "Microsoft.Rest"
+      }
+    }
+  ],
+  "WinGetVersion": "1.11.510"
+}
