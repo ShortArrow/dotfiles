@@ -230,7 +230,6 @@ if ((Get-Module PSReadLine -ListAvailable) -and [Environment]::UserInteractive -
 }
 
 # prompt setting
-# choco install starship
 # Initialize starship - needed for prompt functionality
 if (Test-CommandExist('starship')) {
   . (Get-CachedInit 'starship' `
@@ -302,7 +301,6 @@ $env:FZF_CTRL_R_OPTS=@'
 # '@
 
 # gsudo
-# choco install gsudo
 $gsudoModulePath = 'C:\tools\gsudo\Current\gsudoModule.psd1'
 
 # Create a proxy function for gsudo that loads the module on first use

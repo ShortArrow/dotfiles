@@ -10,7 +10,6 @@
 %SystemDrive%\intelFPGA_lite\24.1std\quartus\sopc_builder\bin
 %SystemDrive%\intelFPGA_lite\24.1std\questa_fe\win64
 %SystemDrive%\intelFPGA_lite\24.1std\questa_fse\win64
-%ProgramData%\chocolatey\bin
 %ProgramFiles%\Alacritty
 %ProgramFiles%\Amazon Corretto\jdk24.0.2_12\bin
 %ProgramFiles%\Android\Android Studio\jbr\bin

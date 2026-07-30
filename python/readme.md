@@ -9,7 +9,7 @@ tags: ["docs"]
 In Windows,
 
 ```powershell
-choco install python
+mise use -g python
 ```
 
 In Debian,

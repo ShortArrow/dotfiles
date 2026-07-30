@@ -10,7 +10,7 @@
 [[rule]]
 name = "mise shims override system tools"
 before = "mise\\shims"
-after = ["chocolatey\\bin", "Strawberry\\c\\bin", "Program Files\\Go\\bin"]
+after = ["Strawberry\\c\\bin", "Program Files\\Go\\bin"]
 
 [[rule]]
 name = "user cargo bin precedes Strawberry's gcc/perl"
