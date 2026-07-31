@@ -346,9 +346,16 @@ if (Test-CommandExist('mise') -and -not $env:NODE_GYP_FORCE_PYTHON) {
   if ($misePython -and (Test-Path -LiteralPath $misePython)) { $env:NODE_GYP_FORCE_PYTHON = $misePython }
 }
 
-# lunarvim setup
-$lunarvimPath = "$env:USERPROFILE\.local\bin\lvim.ps1"
-Set-CommandAlias 'lvim' $lunarvimPath -fallback 'lunarvim'
+# Rescue editor. NVIM_APPNAME points Neovim at nvim-rescue/ instead of the main
+# config, with a separate data directory, so a broken nvim/src cannot reach it.
+# Restore the variable afterwards: leaving it set would redirect every later nvim
+# in this session.
+function Invoke-RescueNvim {
+  $previous = $env:NVIM_APPNAME
+  $env:NVIM_APPNAME = 'nvim-rescue'
+  try { nvim @args } finally { $env:NVIM_APPNAME = $previous }
+}
+New-Alias -Name nvimr -Value Invoke-RescueNvim -Force
 
 # lsd: ls, ll, l., ll. are handled by runex
 

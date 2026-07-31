@@ -86,7 +86,7 @@ instead of inline imperative code.
 For tools whose work is *only* a side effect (no symlinks), the
 script just calls `_lib` helpers — see `git/setup.{ps1,sh}`,
 `bash/setup.sh`, `tmux/setup.sh`, `keyd/setup.sh`,
-`lunarvim/setup.sh`, `clink/setup.ps1` for current examples.
+`clink/setup.ps1` for current examples.
 
 ## Security & maintenance rules
 
@@ -94,7 +94,10 @@ These rules apply equally to `dotfm`'s `script`/`post_apply` paths
 and the `setup.*` launchers.
 
 1. **No `curl | bash`.** Download to a tempfile, verify SHA-256,
-   then run. See `lunarvim/setup.sh` for the canonical pattern.
+   then run. See `tmux/setup.sh` for the canonical pattern. Better
+   still, avoid the upstream installer: `nvim-rescue/` replaced a
+   distribution that needed one with a config the repo carries
+   directly, and became reproducible offline as a result.
 2. **Privilege checks first.** A script that needs root must check
    `EUID` before mutating anything. See `keyd/setup.sh`.
 3. **No `$PROFILE` / shell-rc rewrites.** Append-only with a

@@ -271,11 +271,12 @@ platforms = ["linux"]
 [tools.keyd.script]
 linux = "keyd/setup.sh"
 
-[tools.lunarvim]
-description = "LunarVim (runs upstream curl installer)"
-platforms = ["linux"]
-[tools.lunarvim.script]
-linux = "lunarvim/setup.sh"
+[tools.nvim-rescue]
+description = "Isolated fallback Neovim config, launched via NVIM_APPNAME"
+[[tools.nvim-rescue.links]]
+src = "nvim-rescue"
+dst.windows = "$LOCALAPPDATA/nvim-rescue"
+dst.linux   = "$XDG_CONFIG_HOME/nvim-rescue"
 
 
 # ---- Doctor-only meta tools (no symlinks, just checks) ----
