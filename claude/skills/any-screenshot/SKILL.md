@@ -15,7 +15,8 @@ allowed-tools: Read
 |---|---|---|
 | Web ページ | Claude in Chrome、無ければ Playwright | MCP ブラウザツール / `page.screenshot()` |
 | Avalonia アプリのウィンドウ | 画面外レンダリング | `avalonia-screenshot` |
-| Win32 / WPF / WinForms のウィンドウ | PrintWindow（PID 指定） | `windows-screenshot` |
+| 実行中アプリのウィンドウ全体 | PrintWindow（PID 指定） | `windows-screenshot` |
+| 実行中アプリの要素単位 / 操作してから撮る | UI Automation | `flaui-screenshot` |
 | デスクトップ全体 | GDI キャプチャ | `windows-screenshot` |
 | SSH / RDP 越しのデスクトップ | スケジュールタスク経由 | `windows-screenshot` |
 | TUI アプリ | **撮らない** | `tui-debug` |
@@ -42,6 +43,20 @@ Avalonia ならアプリの起動すら不要。Win32 系は `PrintWindow` で�
 
 ANSI escape で stdout に描画内容が流れているので、リダイレクトして復元する方が確実で速い。画像にすると OCR が要る。`tui-debug` を使う。
 
-## 未整備
+## PrintWindow と UI Automation の使い分け
 
-**FlaUI**（Win32 / WPF / WinForms を UI Automation で操作しながら撮る）は、この環境に実装が無いため個別スキルを用意していない。要素単位で撮りたい、あるいは操作してから撮りたい場合に必要になる。`windows-screenshot` の PID 指定はウィンドウ全体までしか撮れない。
+どちらも実行中アプリを撮るが、性質が逆。
+
+| | `windows-screenshot` | `flaui-screenshot` |
+|---|---|---|
+| 方式 | ウィンドウ自身に描画させる | 画面領域をコピーする |
+| 隠れたウィンドウ | 撮れる | 撮れない（前面化が必要） |
+| 粒度 | ウィンドウ全体 | 要素単位 |
+| 操作してから撮る | できない | できる |
+| 対象の準備 | 不要 | AutomationId が要る |
+
+隠したまま撮りたいだけなら前者。押してから撮る、あるいはボタン 1 個を切り出すなら後者。
+
+## Web
+
+Claude in Chrome が使えるならそれが最短。使えない環境では Playwright の `page.screenshot()`。どちらも個別スキルは用意していない — 分岐がここで完結し、手法固有の落とし穴が少ないため。
