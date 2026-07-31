@@ -1,82 +1,47 @@
 ---
 name: any-screenshot
 description: |
-  画面を撮る手法の選択ゲート。何を撮るか（Web ページ / GUI アプリ / 特定ウィンドウ / 画面全体 / SSH・RDP 越し）で正解の手法が変わり、選択を誤ると黒画像やタイムアウトを掴む。
-  SSH セッションや切断中の RDP セッションには対話デスクトップが無く、GDI キャプチャはエラーを出さずに真っ黒な PNG を返す — この沈黙する失敗を避けるのがこのスキルの主目的。
-  Triggers: スクリーンショット, screenshot, スクショ, 画面を撮って, UI確認, 見た目確認, 画面が真っ黒, リモートで画面を見たい
-allowed-tools: Bash, Read
+  画面を撮る手法の選択ゲート。撮る前にここで分岐する。何を撮るか（Web ページ / Avalonia アプリ / Win32 ウィンドウ / TUI / デスクトップ / SSH・RDP 越し）で正解が変わり、選択を誤ると黒画像や崩れた画像を掴む。
+  失敗の多くはエラーを出さない — 撮れたつもりで進んでしまうのを防ぐのが目的。実際の撮影は windows-screenshot / avalonia-screenshot などの個別スキルが担う。
+  Triggers: スクリーンショット, screenshot, スクショ, 画面を撮って, UI確認, 見た目確認, デザイン確認, 画面が真っ黒
+allowed-tools: Read
 ---
 
 # Any Screenshot
 
-**撮る前に手法を選ぶ。** 手を動かす前にこの表で分岐する。
+**撮る前に手法を選ぶ。** 手を動かす前にこの表で分岐し、該当するスキルへ移る。
 
-| 撮りたいもの | 手法 | 入口 |
+| 撮りたいもの | 手法 | 移動先 |
 |---|---|---|
 | Web ページ | Claude in Chrome、無ければ Playwright | MCP ブラウザツール / `page.screenshot()` |
-| Avalonia アプリのウィンドウ | ヘッドレスレンダリング | アプリを起動せず描画。***REMOVED*** の `***REMOVED***` が実例 |
-| Win32 / WPF / WinForms の特定ウィンドウ | FlaUI | UI Automation で要素を掴んでから撮る |
-| TUI アプリ | **撮らない** | `tui-debug` を使う |
-| 任意のプロセスのウィンドウ（PID 指定） | PrintWindow | `scripts/Save-WindowScreenshot.ps1` |
-| 画面全体（対話セッション内） | GDI キャプチャ | `scripts/Save-Screenshot.ps1` |
-| 画面全体（SSH / RDP 越し） | スケジュールタスク経由 | `scripts/Invoke-ScreenshotViaTask.ps1` |
+| Avalonia アプリのウィンドウ | 画面外レンダリング | `avalonia-screenshot` |
+| Win32 / WPF / WinForms のウィンドウ | PrintWindow（PID 指定） | `windows-screenshot` |
+| デスクトップ全体 | GDI キャプチャ | `windows-screenshot` |
+| SSH / RDP 越しのデスクトップ | スケジュールタスク経由 | `windows-screenshot` |
+| TUI アプリ | **撮らない** | `tui-debug` |
 
-## 沈黙する失敗
+## 貫く原則
 
-**SSH セッションと切断中の RDP セッションには window station が無い。** GDI の `CopyFromScreen` はそこで例外を投げず、**真っ黒な PNG を正常終了で返す**。撮れたつもりで進んでしまうのが厄介で、この一点がこのスキルの存在理由。
+**キャプチャの失敗は例外を出さない。** 終了コード 0 で、中身の無い画像が残る。だから撮った後に「本当に中身があるか」を確かめるまでが 1 セットになる。
 
-回避策は、対話ユーザーとして動く一回限りのスケジュールタスクを登録し、その中で撮らせること。呼び出し側はヘッドレスのまま、撮影だけがデスクトップセッションで起きる。
-
-```pwsh
-./scripts/Invoke-ScreenshotViaTask.ps1 -Path C:/temp/remote.png
-```
-
-対象ユーザーがログオンしてデスクトップを持っていることが前提。完全にサインアウトしたマシンには撮るものが無い。
-
-## 対話セッション内なら直接
-
-```pwsh
-./scripts/Save-Screenshot.ps1 -Path C:/temp/before.png
-```
-
-全モニタを囲む矩形（virtual screen）を 1 枚に収める。どちらのスクリプトも保存先パスを stdout に出すので、そのまま `Read` に渡せる。
-
-## PID を指定してウィンドウを撮る
-
-```pwsh
-./scripts/Save-WindowScreenshot.ps1 -ProcessId 11268 -List
-./scripts/Save-WindowScreenshot.ps1 -ProcessId 11268 -TitleMatch 'dotfiles' -Path C:/temp/w.png
-```
-
-`PrintWindow` にウィンドウ自身を描画させるので、**他のウィンドウに隠れていても撮れる**。画面座標を切り取る方式と違い、前面に出す操作が要らない。GPU 合成されたウィンドウが `BitBlt` で黒くなる問題も起きない。
-
-1 プロセスが複数ウィンドウを持つ場合（wezterm など）は全て列挙する。`-List` で確認し、`-TitleMatch` で絞る。複数該当すればファイル名に連番が付く。
-
-**中身が無くなる 2 状態を検出して既定で拒否する。**
-
-| 状態 | 理由 |
+| 症状 | 原因 |
 |---|---|
-| 最小化 | 描画すべきサーフェスが無い |
-| DWM cloak | シェルが隠している。サスペンド中の UWP、タイリング WM が非表示ワークスペースに置いたウィンドウ |
+| 真っ黒 / 単色 | SSH や切断中 RDP で window station が無い。最小化。DWM cloak |
+| 空 / 崩れている | レイアウト完了前に描画した（Avalonia 系） |
+| 目的と違うものが写る | 画面座標の切り取りで、手前のウィンドウを撮った |
 
-cloak は特に厄介で、ウィンドウは生きていて列挙にも出るのに撮ると単色になる。実測でも cloak されたウィンドウを強制撮影すると distinct color が 1 だった。`-IncludeEmpty` で意図的に上書きできる。
+疑わしければ distinct color を数えるのが早い。単色に近ければ失敗している。
 
-## GUI アプリは画面全体を撮らない
+## ウィンドウ単位で撮れるならそうする
 
-ウィンドウ単位で撮れるなら、そちらが常に良い。他のウィンドウが被らず、解像度に依存せず、差分比較が安定する。
+デスクトップ全体より常に良い。他のウィンドウが被らず、解像度に依存せず、実行間の差分比較が安定する。
 
-**Avalonia** はヘッドレスでウィンドウを描画できるので、アプリを起動する必要すらない。AXAML を直して撮って確認、というループが速く回る。
-
-**FlaUI** は UI Automation で目的のウィンドウや要素を特定してから撮る。Win32 / WPF / WinForms が対象。アプリの起動は必要。
+Avalonia ならアプリの起動すら不要。Win32 系は `PrintWindow` で隠れたまま撮れる。デスクトップ全体を撮るのは、対象が特定できないときの最後の手段。
 
 ## TUI は撮らない
 
-ANSI escape で stdout に描画内容が流れているので、リダイレクトして復元する方が確実で速い。画像にすると OCR が要る。`tui-debug` スキルを使う。
+ANSI escape で stdout に描画内容が流れているので、リダイレクトして復元する方が確実で速い。画像にすると OCR が要る。`tui-debug` を使う。
 
-## 出典
+## 未整備
 
-`scripts/` は [ShortArrow/Get-ScreenShot](https://github.com/ShortArrow/Get-ScreenShot)（private）から取り込んだもの。取り込みにあたって加えた変更:
-
-- 保存先を `-Path` で指定できるようにし、確定したパスを stdout に返す。呼び出し側が撮れたファイルを読めないと自動化にならないため
-- 固定 3 秒待ちを、ファイル出現のポーリング（既定 30 秒）に置換。高解像度や低速なデスクトップでは 3 秒後の `Unregister-ScheduledTask` が撮影中のタスクを消し得た
-- タスク名に GUID 断片を付与し、多重実行で衝突しないようにした
+**FlaUI**（Win32 / WPF / WinForms を UI Automation で操作しながら撮る）は、この環境に実装が無いため個別スキルを用意していない。要素単位で撮りたい、あるいは操作してから撮りたい場合に必要になる。`windows-screenshot` の PID 指定はウィンドウ全体までしか撮れない。

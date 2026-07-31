@@ -140,5 +140,5 @@ Get-Content "$env:TEMP\tui_err.log" | Select-Object -Last 30
 ## 関連スキル / 補完
 
 - 完全自動化 (キー操作含む) → expect / pty 自動化 (このスキルは扱わない)
-- screenshot 取得 (GUI app) → `any-screenshot` スキル。 対象ごとに手法が違い、 SSH / 切断中 RDP セッションでは `CopyFromScreen` がエラー無しで真っ黒な PNG を返すため、 手法選択を誤ると気付かずに進む
+- screenshot 取得 (GUI app) → `any-screenshot` で手法を選ぶ (実撮影は `windows-screenshot` / `avalonia-screenshot`)。 キャプチャの失敗は例外を出さず終了コード 0 で無内容な画像を残すので、 手法選択を誤ると気付かずに進む
 - TUI 内部 state を直接抜く → IPC 経由 (アプリに JSON dump endpoint を仕込む等)、 そっちが楽な場合も多い
