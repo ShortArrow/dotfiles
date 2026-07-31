@@ -209,14 +209,6 @@ src = "hyprland/hypr"
 dst.linux = "$XDG_CONFIG_HOME/hypr"
 
 
-[tools.i3wm]
-description = "i3 window manager myplug fragment"
-platforms = ["linux"]
-[[tools.i3wm.links]]
-src = "i3wm/myplug"
-dst.linux = "$XDG_CONFIG_HOME/i3/myplug"
-
-
 [tools.lazydocker]
 description = "lazydocker TUI"
 platforms = ["linux"]

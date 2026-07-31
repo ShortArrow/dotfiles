@@ -63,7 +63,7 @@ docker compose exec nvim /bin/bash -c nvim
 | Shells / prompt | bash, pwsh, clink, starship |
 | Terminals | wezterm, alacritty, windows-terminal |
 | Editors | neovim (`nvim/src/`), vim, vscode, zed |
-| Multiplexers / WM | tmux, zellij, glazewm, hyprland, i3wm |
+| Multiplexers / WM | tmux, zellij, glazewm, hyprland |
 | Git stack | git, lazygit, neogit, delta |
 | Tool manager | mise (`mise/src/config.toml`) — node, python, go, java, rust-cli, aqua |
 | File / nav | yazi, fzf, zoxide, lsd, fd, ripgrep |
