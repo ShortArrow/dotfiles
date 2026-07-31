@@ -87,5 +87,8 @@
     "workbench.colorTheme": "Tango+",
     "workbench.editor.showTabs": "single",
     "workbench.layoutControl.enabled": false,
-    "Lua.runtime.version": "Lua 5.1"
+    "Lua.runtime.version": "Lua 5.1",
+    "workbench.editorAssociations": {
+        "*.md": "vscode.markdown.preview.editor"
+    }
 }
