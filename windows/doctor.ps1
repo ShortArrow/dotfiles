@@ -228,3 +228,23 @@ foreach ($Command in $Commands)
 Write-Host ""
 . "$PSScriptRoot/Test-PathOrder.ps1"
 
+# PATH length budget.
+# cmd.exe expands an environment variable to at most 8191 characters. npm/pnpm
+# run-scripts and Node's child_process both go through cmd, and a mise shim
+# prepends the install directory of every managed tool, so the persistent PATH
+# has to leave room for that. Past the limit cmd resolves nothing from PATH and
+# reports "'x' is not recognized as an internal or external command".
+Write-Host ""
+Write-Host "Checking PATH budget for cmd.exe..." -ForegroundColor Cyan
+$CmdExpansionLimit = 8191
+$PathUnderMise = if (Test-CommandExist "mise")
+{
+  [int](mise exec -- pwsh -NoProfile -c '$env:PATH.Length' 2>$null)
+} else
+{
+  $env:PATH.Length
+}
+Show-Result -IsOK ($PathUnderMise -lt $CmdExpansionLimit)
+Write-Host "$PathUnderMise chars under a mise shim" -NoNewline
+Write-Host ", limit $CmdExpansionLimit, persistent $($env:PATH.Length)" -ForegroundColor DarkGray
+
