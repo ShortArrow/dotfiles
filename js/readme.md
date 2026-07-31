@@ -64,6 +64,6 @@ npm doctor
 ```bash
 :MasonInstall typescript-language-server
 :MasonInstall eslint-lsp
-:MasonInstall eslintd
+:MasonInstall eslint_d
 :MasonInstall biome
 ```

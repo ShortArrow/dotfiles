@@ -12,7 +12,7 @@ tags: ["docs"]
 ```bash
 # remove previous files
 rm -rf ~/.bash_myplug
-rm -rf /usr/lobal/bin/.bash_myplug
+rm -rf /usr/local/bin/.bash_myplug
 # make symbolic links
 ln -s $HOME/Documents/GitHub/dotfiles/bash/bash_myplug.sh ~/.bash_myplug
 ln -s $HOME/Documents/GitHub/dotfiles/bash/bash_myplug.sh /usr/local/bin/.bash_myplug
@@ -51,7 +51,7 @@ sudo -E bash ./setup.sh
 ```bash
 :MasonInstall bash-language-server
 :MasonInstall shellcheck
-:MasonInstall shellfmt
+:MasonInstall shfmt
 ```
 
 ## sudo 

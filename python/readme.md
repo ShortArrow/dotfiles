@@ -36,7 +36,7 @@ uv tool install neovim
 ## Install LSP
 
 ```bash
-:MasonInstall python-language-server
+:MasonInstall python-lsp-server
 :MasonInstall pyright
 ```
 
