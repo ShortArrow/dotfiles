@@ -7,6 +7,9 @@ bash = "space"
 zsh = "space"
 nu = "space"
 
+[keybind.self_insert]
+pwsh = "shift-space"
+
 [keybind.paste_intercept]
 nu = "ctrl-v"
 
@@ -105,3 +108,7 @@ when_command_exists = ["dotfm"]
 key = "dfdr"
 expand = "dotfm doctor"
 when_command_exists = ["dotfm"]
+
+[[abbr]]
+key = "exp"
+expand = "explorer"
