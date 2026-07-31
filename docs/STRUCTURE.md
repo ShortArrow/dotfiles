@@ -172,6 +172,28 @@ Three consequences for maintenance:
    `script-shell=pwsh` so npm lifecycle scripts never hit the limit at
    all. PowerShell has no equivalent cap.
 
+Three limits are easy to confuse:
+
+| Limit | Value | Applies to |
+|-------|-------|------------|
+| `setx` truncation | ~1024 chars | Anything shelling out to `setx PATH` |
+| Registry value | ~32767 chars | The stored PATH, user or machine alike |
+| `cmd.exe` expansion | 8191 chars | `%PATH%` expanded inside cmd |
+
+`ApplyPath.ps1` writes the registry through `Set-ItemProperty` for the
+first reason. An installer that calls `setx PATH` on a long PATH silently
+truncates it to the first kilobyte — that has happened here, and the
+recovery is to re-apply from `PATH.txt`. The machine PATH is not a
+relief valve either: both scopes share the same registry ceiling.
+
+winget is the usual source of growth. Portable packages append
+`%LocalAppData%\Microsoft\WinGet\Packages\<package>\…` and this cannot be
+turned off, so keep only `…\WinGet\Links` — the shims land there — and
+drop the versioned package directories. winget also re-appends an entry
+in expanded form when the declared one uses `%LocalAppData%`, since it
+compares the raw registry string; re-running `ApplyPath.ps1` clears the
+duplicate.
+
 ## Adding a new tool
 
 1. Create the tool directory and put the config files inside.
