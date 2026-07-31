@@ -70,6 +70,7 @@ zig = "latest"
 "github:ShortArrow/dotfm" = "latest"
 "github:AlexsJones/llmfit" = "latest"
 "github:gitsocial-org/gitsocial" = "latest"
+"github:microsoft/apm" = "latest"
 
 [tool_alias]
 python3 = "python"
