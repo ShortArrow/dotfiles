@@ -16,9 +16,6 @@
           "PackageIdentifier": "AntibodySoftware.WizTree"
         },
         {
-          "PackageIdentifier": "ArduinoSA.CLI"
-        },
-        {
           "PackageIdentifier": "ArduinoSA.IDE.stable"
         },
         {
