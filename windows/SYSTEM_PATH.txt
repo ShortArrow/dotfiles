@@ -3,14 +3,10 @@
 %SystemRoot%\System32\OpenSSH
 %SystemRoot%\System32\Wbem
 %SystemRoot%\System32\WindowsPowerShell\v1.0
-%SystemDrive%\Strawberry\c\bin
-%SystemDrive%\Strawberry\perl\bin
-%SystemDrive%\Strawberry\perl\site\bin
 %SystemDrive%\intelFPGA_lite\24.1std\quartus\bin64
 %SystemDrive%\intelFPGA_lite\24.1std\quartus\sopc_builder\bin
 %SystemDrive%\intelFPGA_lite\24.1std\questa_fe\win64
 %SystemDrive%\intelFPGA_lite\24.1std\questa_fse\win64
-%ProgramFiles%\Alacritty
 %ProgramFiles%\Amazon Corretto\jdk24.0.2_12\bin
 %ProgramFiles%\Android\Android Studio\jbr\bin
 %ProgramFiles%\Arduino CLI
@@ -23,10 +19,7 @@
 %ProgramFiles%\IVI Foundation\VISA\Win64\Bin
 %ProgramFiles%\LLVM\bin
 %ProgramFiles%\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64
-%ProgramFiles%\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64
 %ProgramFiles%\Microsoft Visual Studio\2022\Professional\VC\vcpkg
-%ProgramFiles%\Microsoft Visual Studio\2022\Community\VC\vcpkg
-%ProgramFiles%\Microsoft Visual Studio\2022\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin
 %ProgramFiles%\Microsoft Visual Studio\2022\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin
 %ProgramFiles%\Neovim\bin
 %ProgramFiles%\PowerShell\7
@@ -45,7 +38,6 @@
 %ProgramFiles(x86)%\GnuWin32\bin
 %ProgramFiles(x86)%\Gpg4win\..\GnuPG\bin
 %ProgramFiles(x86)%\IVI Foundation\VISA\WinNT\Bin
-%ProgramFiles(x86)%\Nmap
 %ProgramFiles(x86)%\Renesas\Hew
 %ProgramFiles(x86)%\Renesas\Hew\Tools\Renesas\Sh\9_4_3\bin
 %ProgramFiles(x86)%\Windows Kits\10\Windows Performance Toolkit

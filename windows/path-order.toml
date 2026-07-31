@@ -10,14 +10,7 @@
 [[rule]]
 name = "mise shims override system tools"
 before = "mise\\shims"
-after = ["Strawberry\\c\\bin", "Program Files\\Go\\bin"]
-
-[[rule]]
-name = "user cargo bin precedes Strawberry's gcc/perl"
-# When both Strawberry Perl and rust-installed binaries are on PATH,
-# the user's local cargo binaries should win.
-before = ".cargo\\bin"
-after = ["Strawberry"]
+after = ["Program Files\\Go\\bin"]
 
 [[rule]]
 name = "user cargo bin precedes winget Links shims"
