@@ -48,6 +48,18 @@ function Test-ItemPropertyValue()
   Show-CheckResult  -TargetName "$TargetPath\$TargetName" -ExpectedValue $ExpectedValue -ActualValue $ActualValue
 }
 
+function Test-Service()
+{
+  param (
+    [string]$ServiceName
+  )
+  $service = Get-Service -Name $ServiceName -ErrorAction SilentlyContinue
+  $IsRunning = $null -ne $service -and $service.Status -eq "Running"
+  Show-Result -IsOK $IsRunning
+  Write-Host "$ServiceName" -NoNewline
+  Write-Host ", $($null -ne $service ? $service.Status : "#N/A")" -ForegroundColor DarkGray
+}
+
 function Test-Command()
 {
   param (
@@ -208,6 +220,7 @@ $Commands = @(
   # Tool
   "mise",
   "tshark",
+  "etl2pcapng",
   "ffmpeg",
   "imagick",
   "nmap",
@@ -223,6 +236,15 @@ foreach ($Command in $Commands)
 {
   Test-Command -CommandName $Command
 }
+
+# Packet capture backends.
+# Npcap is absent from the winget repository, so `winget import` cannot restore
+# it — it only arrives as a bundled component of the Wireshark installer, which
+# a silent install may skip. Wireshark and tshark still launch without it and
+# fail only once a capture starts, so check the driver itself.
+Write-Host ""
+Write-Host "Checking packet capture drivers..." -ForegroundColor Cyan
+Test-Service -ServiceName "npcap"
 
 # PATH order rules (declared in path-order.toml)
 Write-Host ""

@@ -130,6 +130,9 @@
           "PackageIdentifier": "Microsoft.DotNet.SDK.8"
         },
         {
+          "PackageIdentifier": "Microsoft.etl2pcapng"
+        },
+        {
           "PackageIdentifier": "Microsoft.PowerShell"
         },
         {
