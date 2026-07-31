@@ -1,0 +1,16 @@
+; npm reads this as ~/.npmrc.
+
+; Run lifecycle scripts through PowerShell instead of cmd.exe.
+;
+; cmd.exe expands an environment variable to at most 8191 characters. A mise
+; shim prepends the install directory of every managed tool, which puts PATH
+; over that limit on this host, and past it cmd resolves nothing from PATH — a
+; run-script fails with "'tsc' is not recognized" for a binary that is plainly
+; installed. PowerShell has no equivalent limit, so routing scripts through it
+; takes npm out of that failure mode entirely.
+;
+; Windows only: pwsh is not guaranteed to exist elsewhere, so dotfm links this
+; file on Windows alone.
+script-shell=pwsh
+
+allow-scripts=@github/keytar
