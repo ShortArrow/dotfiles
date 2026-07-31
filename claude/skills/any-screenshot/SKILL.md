@@ -17,6 +17,7 @@ allowed-tools: Bash, Read
 | Avalonia アプリのウィンドウ | ヘッドレスレンダリング | アプリを起動せず描画。***REMOVED*** の `***REMOVED***` が実例 |
 | Win32 / WPF / WinForms の特定ウィンドウ | FlaUI | UI Automation で要素を掴んでから撮る |
 | TUI アプリ | **撮らない** | `tui-debug` を使う |
+| 任意のプロセスのウィンドウ（PID 指定） | PrintWindow | `scripts/Save-WindowScreenshot.ps1` |
 | 画面全体（対話セッション内） | GDI キャプチャ | `scripts/Save-Screenshot.ps1` |
 | 画面全体（SSH / RDP 越し） | スケジュールタスク経由 | `scripts/Invoke-ScreenshotViaTask.ps1` |
 
@@ -39,6 +40,26 @@ allowed-tools: Bash, Read
 ```
 
 全モニタを囲む矩形（virtual screen）を 1 枚に収める。どちらのスクリプトも保存先パスを stdout に出すので、そのまま `Read` に渡せる。
+
+## PID を指定してウィンドウを撮る
+
+```pwsh
+./scripts/Save-WindowScreenshot.ps1 -ProcessId 11268 -List
+./scripts/Save-WindowScreenshot.ps1 -ProcessId 11268 -TitleMatch 'dotfiles' -Path C:/temp/w.png
+```
+
+`PrintWindow` にウィンドウ自身を描画させるので、**他のウィンドウに隠れていても撮れる**。画面座標を切り取る方式と違い、前面に出す操作が要らない。GPU 合成されたウィンドウが `BitBlt` で黒くなる問題も起きない。
+
+1 プロセスが複数ウィンドウを持つ場合（wezterm など）は全て列挙する。`-List` で確認し、`-TitleMatch` で絞る。複数該当すればファイル名に連番が付く。
+
+**中身が無くなる 2 状態を検出して既定で拒否する。**
+
+| 状態 | 理由 |
+|---|---|
+| 最小化 | 描画すべきサーフェスが無い |
+| DWM cloak | シェルが隠している。サスペンド中の UWP、タイリング WM が非表示ワークスペースに置いたウィンドウ |
+
+cloak は特に厄介で、ウィンドウは生きていて列挙にも出るのに撮ると単色になる。実測でも cloak されたウィンドウを強制撮影すると distinct color が 1 だった。`-IncludeEmpty` で意図的に上書きできる。
 
 ## GUI アプリは画面全体を撮らない
 
