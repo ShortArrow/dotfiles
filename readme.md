@@ -71,6 +71,12 @@ docker compose exec nvim /bin/bash -c nvim
 
 Each top-level directory contains the actual config files plus optional `setup.{ps1,sh}` and `doctor.ps1`. The full mapping (which file goes where on which OS) lives in [`dotfm.toml`](dotfm.toml).
 
+## Installing the tools
+
+`dotfm` links configuration; it does not install anything. That is split in two: **mise** (`mise/src/config.toml`) owns CLI tools and language runtimes, **winget** (`winget/*.txt`) owns GUI applications and everything mise has no backend for. A tool belongs to exactly one layer. See [Package installation layers](docs/STRUCTURE.md#package-installation-layers).
+
+On Windows the PATH itself is declared, in `windows/PATH.txt` and `windows/SYSTEM_PATH.txt`, and applied with `windows/ApplyPath.ps1`. It has a budget — see [The PATH budget](docs/STRUCTURE.md#the-path-budget) before adding tools. `windows/doctor.ps1` reports the current state.
+
 ## Branch strategy
 
 `main` only. Topic branches are optional; merge back to `main`.

@@ -7,35 +7,37 @@ tags: ["docs"]
 
 ## Version Management
 
-Use [volta](https://volta.sh/).
+[mise](https://mise.jdx.dev/) owns the runtimes. They are declared in
+[`mise/src/config.toml`](../mise/src/config.toml), so a machine gets them
+from `mise install` rather than a per-language installer.
 
-```bash
-curl https://get.volta.sh | bash
+```toml
+node = "latest"
+pnpm = "latest"
+bun  = "latest"
 ```
 
-### node
+`npm` and `yarn` ship with node. Use `corepack` when a project needs a
+pinned package-manager version.
 
-```bash
-volta install node@20
+## npm client config
+
+`js/npmrc` is symlinked to `~/.npmrc` on Windows and sets:
+
+```ini
+script-shell=pwsh
 ```
 
-### yarn
+npm runs lifecycle scripts through `cmd.exe` by default, and cmd expands an
+environment variable to at most 8191 characters. A mise shim prepends the
+install directory of every managed tool, which can push PATH past that
+limit — and past it cmd resolves nothing from PATH, so a run-script fails
+with `'tsc' is not recognized` for a binary that is plainly installed.
+PowerShell has no equivalent limit.
 
-```bash
-volta install node@20
-```
-
-### npm
-
-```bash
-volta install npm
-```
-
-### pnpm
-
-```bash
-volta install pnpm
-```
+The link is Windows-only: `pwsh` is not guaranteed to exist elsewhere, and
+the limit being worked around is a cmd.exe property. `windows/doctor.ps1`
+reports how much headroom the PATH still has.
 
 ## In Docker
 

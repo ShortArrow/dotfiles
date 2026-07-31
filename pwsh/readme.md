@@ -37,8 +37,17 @@ read [script-scope-and-dot-sourcing](https://docs.microsoft.com/en-us/powershell
 
 ## sudo
 
+Windows 11 ships `sudo.exe` in `System32`. Enable it in
+**Settings > System > For developers**, or from an elevated prompt:
+
 ```powershell
-go install github.com/mattn/sudo@latest
+sudo config --enable normal
+sudo config              # report the current mode
 ```
 
-[mattn/sudo](https://github.com/mattn/sudo)
+The three modes differ in how the elevated process is attached:
+`forceNewWindow` opens a separate console, `disableInput` runs inline but
+refuses stdin, and `normal` runs inline with input. This machine is in
+`disableInput`.
+
+[sudo for Windows](https://learn.microsoft.com/en-us/windows/sudo/)

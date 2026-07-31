@@ -30,7 +30,12 @@ dotfiles/
 │   ├── setup.ps1              # (optional) Windows bootstrap launcher
 │   └── setup.sh               # (optional) Unix bootstrap launcher
 └── windows/                   # Windows-only utility scripts
-    └── doctor.ps1             # Health checks (PATH order, cmd presence, ...)
+    ├── PATH.txt               # Declared user PATH, one entry per line
+    ├── SYSTEM_PATH.txt        # Declared machine PATH (needs admin to apply)
+    ├── ApplyPath.ps1          # Writes those files into the registry
+    ├── path-order.toml        # Ordering rules between PATH entries
+    ├── Test-PathOrder.ps1     # Evaluates path-order.toml
+    └── doctor.ps1             # Health checks (commands, PATH order, budget)
 ```
 
 ## Decision matrix: symlink / copy / post_apply / script
@@ -134,6 +139,35 @@ Rules:
 
 Both manifests are `winget import` format, so `winget export` output can
 be diffed against them directly.
+
+## The PATH budget
+
+`PATH.txt` and `SYSTEM_PATH.txt` are the declared PATH; `ApplyPath.ps1`
+writes them into the registry. Windows composes the process PATH as
+machine-then-user, so a machine entry always shadows a user one — which
+is why a tool installed under `Program Files` beats the mise shim for the
+same command.
+
+Adding tools is bounded. `cmd.exe` expands an environment variable to at
+most 8191 characters, and a mise shim prepends the install directory of
+every managed tool, so what matters is not the length of the persistent
+PATH but how much room it leaves for that injection. Past the limit cmd
+resolves nothing from PATH and reports `'x' is not recognized` for a
+binary that is plainly installed. `doctor.ps1` measures the PATH as a
+shim sees it and reports the headroom.
+
+Three consequences for maintenance:
+
+1. **Each mise tool costs roughly 100 characters** of injected PATH.
+   Migrating a tool from winget to mise removes one persistent entry but
+   adds a larger injected one, so migration slightly *increases* the
+   total. It is done for version currency, not for budget.
+2. **Removing a fully shadowed entry is the one free win.** If every
+   executable in a directory is already provided by a mise shim, deleting
+   the entry shortens the persistent PATH and changes nothing else.
+3. **Prefer taking cmd out of the path.** `js/npmrc` sets
+   `script-shell=pwsh` so npm lifecycle scripts never hit the limit at
+   all. PowerShell has no equivalent cap.
 
 ## Adding a new tool
 

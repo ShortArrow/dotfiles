@@ -26,8 +26,11 @@ sudo pacman -S python
 
 ## Install neovim package
 
+`pip` has no global-install flag; `uv` (also declared in mise) installs the
+package into an isolated environment and exposes its entry points.
+
 ```bash
-pip install -g neovim
+uv tool install neovim
 ```
 
 ## Install LSP
