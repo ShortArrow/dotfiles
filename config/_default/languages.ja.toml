@@ -1,9 +1,9 @@
 # config/_default/languages.ja.toml
 
 contentDir = 'content/ja'
-languageName = "Japanese"
+label = "Japanese"
 title = "Dotfiles"
-languageCode = "ja"
+locale = "ja"
 
 [author]
 name = "ShortArrow"

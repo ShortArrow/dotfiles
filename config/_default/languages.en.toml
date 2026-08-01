@@ -1,9 +1,9 @@
 # config/_default/languages.en.toml
 
 contentDir = 'content/en'
-languageName = "English"
+label = "English"
 title = "Dotfiles"
-languageCode = "en"
+locale = "en"
 
 [author]
 name = "ShortArrow"
