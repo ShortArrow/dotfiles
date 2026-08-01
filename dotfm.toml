@@ -89,9 +89,14 @@ dst.linux   = "$XDG_CONFIG_HOME/zed"
 [tools.glazewm]
 description = "GlazeWM tiling window manager (Windows only)"
 platforms = ["windows"]
+# config.yaml is generated, not linked: GlazeWM reads a single file with no
+# include directive, and the machine-specific ignore list is untracked. The
+# merge script is linked so the reload keybinding can reach it by a stable path.
 [[tools.glazewm.links]]
-src = "glazewm/config.yaml"
-dst.windows = "$USERPROFILE/.glzr/glazewm/config.yaml"
+src = "glazewm/Merge-GlazewmConfig.ps1"
+dst.windows = "$USERPROFILE/.glzr/glazewm/Merge-GlazewmConfig.ps1"
+[tools.glazewm.script]
+windows = "glazewm/Merge-GlazewmConfig.ps1"
 [tools.glazewm.doctor]
 windows = "glazewm/doctor.ps1"
 

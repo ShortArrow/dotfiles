@@ -118,18 +118,10 @@ window_rules:
       # Ignores VM
       - window_process: { equals: 'WindowsSandboxRemoteSession' }
 
-      # Ignores warnedge
-      - window_process: { equals: 'dotnet' }
-      - window_process: { equals: 'warnedge'}
-      - window_process: { equals: '***REMOVED***' }
-      - window_process: { equals: '***REMOVED***' }
-      - window_process: { equals: 'server-gui' }
-      - window_process: { equals: '***REMOVED***' }
-      - window_process: { equals: '***REMOVED***' }
-      - window_process: { equals: '***REMOVED***' }
-      - window_process: { equals: 'hanuke-gui' }
-      - window_process: { equals: '***REMOVED***' }
-      - window_process: { equals: 'menreiki-desktop' }
+      # Machine-specific ignores are spliced in here from ignore-local.txt,
+      # which is untracked. Merge-GlazewmConfig.ps1 does the splicing; this
+      # file on its own is the config everyone shares.
+      # LOCAL-IGNORES
 
       # Ignores picture-in-picture windows for browsers.
       - window_title: { regex: '[Pp]icture.in.[Pp]icture' }
@@ -296,8 +288,10 @@ keybindings:
   - commands: ['wm-exit']
     bindings: ['alt+shift+e']
 
-  # Re-evaluate configuration file.
-  - commands: ['wm-reload-config']
+  # Rebuild the config from its parts, then re-evaluate it. The merge script
+  # issues the reload itself once it has written the file — shell-exec returns
+  # as soon as the process starts, so reloading from here would race the write.
+  - commands: ['shell-exec pwsh -NoProfile -WindowStyle Hidden -File %USERPROFILE%/.glzr/glazewm/Merge-GlazewmConfig.ps1']
     bindings: ['alt+shift+r']
 
   # Redraw all windows.

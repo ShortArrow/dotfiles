@@ -31,3 +31,9 @@ pathlint/snapshots/
 # PATH snapshots with raw user paths
 windows/*.bk.txt
 
+
+# GlazeWM's machine-specific ignore list. GlazeWM reads one file with no
+# include directive, so Merge-GlazewmConfig.ps1 splices this into the tracked
+# config at apply time. Keeping it out means the published config does not
+# enumerate the applications on any one machine.
+glazewm/ignore-local.txt
