@@ -1,11 +1,11 @@
 # config/_default/languages.en.toml
 
 contentDir = 'content/en'
-label = "English"
+languageName = "English"
 title = "Dotfiles"
-locale = "en"
+languageCode = "en"
 
-[author]
+[params.author]
 name = "ShortArrow"
 image = "img/twitter_icon_light_back.png"
 headline = "my dotfiles"

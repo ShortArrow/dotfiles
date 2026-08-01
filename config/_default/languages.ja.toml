@@ -1,11 +1,11 @@
 # config/_default/languages.ja.toml
 
 contentDir = 'content/ja'
-label = "Japanese"
+languageName = "Japanese"
 title = "Dotfiles"
-locale = "ja"
+languageCode = "ja"
 
-[author]
+[params.author]
 name = "ShortArrow"
 image = "img/twitter_icon_light_back.png"
 headline = "my dotfiles"

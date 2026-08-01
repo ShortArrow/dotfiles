@@ -1,4 +1,16 @@
 github.com/jpanther/congo/v2 v2.4.2 h1:c+WSf/9Mr+a/bR4w3YteHwnsS5eTWgkU0QC2Mqx9pjc=
 github.com/jpanther/congo/v2 v2.4.2/go.mod h1:1S7DRoO1ZYS4YUdFd1LjTkdyjQwsjFWd8TqSfz3Jd+M=
+github.com/jpanther/congo/v2 v2.6.0 h1:0AS0YKxEdqiAxzE4dUm9aSzVTOGIZW5GzD5syOWmsKw=
+github.com/jpanther/congo/v2 v2.6.0/go.mod h1:1S7DRoO1ZYS4YUdFd1LjTkdyjQwsjFWd8TqSfz3Jd+M=
+github.com/jpanther/congo/v2 v2.8.0 h1:/XkKK/ywD2SgSwjeYxwx7lLXIM7tt9wS5MvUaAnv9u0=
+github.com/jpanther/congo/v2 v2.8.0/go.mod h1:1S7DRoO1ZYS4YUdFd1LjTkdyjQwsjFWd8TqSfz3Jd+M=
+github.com/jpanther/congo/v2 v2.10.0 h1:+bYBVIqjyjq/lTk9H3mK3SPV4G84IE+KkJNNseVGrSw=
+github.com/jpanther/congo/v2 v2.10.0/go.mod h1:1S7DRoO1ZYS4YUdFd1LjTkdyjQwsjFWd8TqSfz3Jd+M=
+github.com/jpanther/congo/v2 v2.11.0 h1:whwuUIn20egAPfMR3HaFu7sW7/rz096bz26sgpsUAwk=
+github.com/jpanther/congo/v2 v2.11.0/go.mod h1:1S7DRoO1ZYS4YUdFd1LjTkdyjQwsjFWd8TqSfz3Jd+M=
+github.com/jpanther/congo/v2 v2.12.0 h1:7mShY2Ex15q5dqtv+JSQDRCvXv2F801urE6TehRYFf8=
+github.com/jpanther/congo/v2 v2.12.0/go.mod h1:1S7DRoO1ZYS4YUdFd1LjTkdyjQwsjFWd8TqSfz3Jd+M=
+github.com/jpanther/congo/v2 v2.13.0 h1:kI73uW3e9aiPuN9so6lzZg+iEW8UVTmIPCNZvJ1cijI=
+github.com/jpanther/congo/v2 v2.13.0/go.mod h1:1S7DRoO1ZYS4YUdFd1LjTkdyjQwsjFWd8TqSfz3Jd+M=
 github.com/jpanther/congo/v2 v2.14.0 h1:qzd7vjZpSPJkyX27Yl3KT87jvYs2aghIHCHXPSmJtXo=
 github.com/jpanther/congo/v2 v2.14.0/go.mod h1:1S7DRoO1ZYS4YUdFd1LjTkdyjQwsjFWd8TqSfz3Jd+M=

@@ -31,8 +31,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: markdown-link-check
     env:
-      # Tracks whatever Cloudflare's build image ships, since that is what
-      # publishes the site. Pinning here would only hide a break until deploy.
+      # Must match Cloudflare's build image, which publishes the site, and
+      # mise.toml, which builds it locally. congo v2.13 works on 0.147 and
+      # breaks on 0.164; v2.14 is the reverse. A different version here would
+      # pass while the deploy fails.
       HUGO_VERSION: 0.147.7
     steps:
       - name: Install Hugo CLI
