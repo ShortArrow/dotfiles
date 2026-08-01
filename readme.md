@@ -67,7 +67,7 @@ docker compose exec nvim /bin/bash -c nvim
 | Git stack | git, lazygit, neogit, delta |
 | Tool manager | mise (`mise/src/config.toml`) — node, python, go, java, rust-cli, aqua |
 | File / nav | yazi, fzf, zoxide, lsd, fd, ripgrep |
-| Misc | claude (skills + statusline), runex, ssh, keyd |
+| Misc | claude (CLAUDE.md + statusline), runex, ssh, keyd |
 
 Each top-level directory contains the actual config files plus optional `setup.{ps1,sh}` and `doctor.ps1`. The full mapping (which file goes where on which OS) lives in [`dotfm.toml`](dotfm.toml).
 
