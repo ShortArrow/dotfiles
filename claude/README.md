@@ -31,12 +31,9 @@ cadence.
 claude plugin marketplace add anthropics/skills
 ```
 
-- [anthropics/skills](https://github.com/anthropics/skills)
-- [openai/skills](https://github.com/openai/skills)
-- [github/awesome-copilot](https://github.com/github/awesome-copilot/tree/main/skills)
-- [microsoftDocs/skills](https://github.com/MicrosoftDocs/Agent-Skills/tree/main/skills)
-- [cloudflare/skills](https://github.com/cloudflare/skills)
-- [android/skills](https://github.com/android/skills)
+The list of collections worth knowing about is kept with the skills, in
+[ShortArrow/skills](https://github.com/ShortArrow/skills#other-marketplaces),
+so there is one copy of it.
 
 ## Settings
 
