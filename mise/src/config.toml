@@ -40,6 +40,8 @@ run = "echo 'OPEN SESAME!'"
 "aqua:gohugoio/hugo/hugo-extended" = "latest"
 "aqua:helix-editor/helix" = "latest"
 "aqua:jqlang/jq" = "latest"
+# Upstream ships macOS and Linux only; issue #3 tracks Windows support.
+"aqua:PaulJuliusMartinez/jless" = { version = "latest", os = ["linux", "macos"] }
 "aqua:lsd-rs/lsd" = "latest"
 "aqua:microsoft/edit" = "latest"
 "aqua:sharkdp/fd" = "latest"
