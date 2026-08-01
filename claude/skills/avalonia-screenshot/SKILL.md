@@ -67,8 +67,15 @@ window.GetLogicalDescendants().OfType<NativeVideoView>()
 
 タブは `GetVisualDescendants().OfType<TabControl>()` で掴み、ヘッダー文字列で照合して `SelectedIndex` を設定する。
 
-## 参照実装
+## 組み込み方
 
-`V:\***REMOVED***\src\screenshot`。14 ウィンドウ × モードで撮り分ける構成で、上記すべてが動く形で入っている。呼び出し側のスキルは同リポジトリの `***REMOVED***`。
+撮影専用のコンソールプロジェクトを 1 つ足し、アプリの View と ViewModel を参照させる。ウィンドウ生成をラムダで列挙しておけば、`--only <名前>` で対象を絞れる。
 
-新規プロジェクトに持ち込む場合、`ScreenshotRunner.cs` の `CaptureAsync` と `WindowExtensions.WaitForLayoutAsync` が骨格。ウィンドウ列挙と ViewModel の対応はアプリ固有なので書き換える。
+```
+src/screenshot/
+├── Program.cs           Avalonia の初期化と引数解析
+├── ScreenshotRunner.cs  上記の描画・待機・保存
+└── ScreenshotTarget.cs  ウィンドウ名 → 生成ラムダ の対応表
+```
+
+出力先はリポジトリ内の `docs/screenshots/` にすると、レビューで差分が見える。

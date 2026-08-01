@@ -94,11 +94,24 @@ foreach (var element in window.FindAllDescendants())
 
 `ControlType` / `AutomationId` / `Name` はいずれも読み取りで例外を投げ得るので、個別に try で包む。
 
-## 参照実装
+## 組み込み方
 
-- `V:\***REMOVED***\tests\UI.Tests` — `AppFixture.cs`（起動・同定・前面化）、`***REMOVED***.cs`（キャプチャとピクセル判定）
-- `V:\***REMOVED***\tests\UI.Tests` — 同系統の構成
-- `V:\***REMOVED***\docs\tests\ui-tests.md`
+UI テストプロジェクトに、アプリのライフサイクルを持つフィクスチャを 1 つ置く。
+
+```csharp
+public sealed class AppFixture : IDisposable
+{
+    public UIA3Automation Automation { get; }
+    public Application App { get; private set; }
+    public Window MainWindow { get; private set; }
+    // 起動 → Attach → MainWindow を AutomationId で待つ
+    // 前面化ヘルパ、要素取得ヘルパ、正常終了つき再起動 をここに集約する
+}
+```
+
+テスト間でアプリを 1 個に保つのが要点。単一インスタンス mutex を持つアプリでは 2 個起動できず、起動し直すテスト（設定の保存・復元など）は「正常終了 → 再起動」をフィクスチャ側の操作として用意する必要がある。
+
+実行ファイルの場所は環境変数で上書きできるようにしておくと、Sandbox や CI で配置が変わっても通る。
 
 ## Avalonia なら先に検討すること
 

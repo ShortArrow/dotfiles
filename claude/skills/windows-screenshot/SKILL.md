@@ -60,7 +60,7 @@ cloak が最も紛らわしい。ウィンドウは列挙に出て正しいサ�
 
 ## 出典
 
-`scripts/` は [ShortArrow/Get-ScreenShot](https://github.com/ShortArrow/Get-ScreenShot)（private）由来。取り込み時の変更:
+`scripts/` は作者の非公開リポジトリ `Get-ScreenShot` 由来。取り込み時の変更:
 
 - 保存先を `-Path` で受け、確定パスを stdout に返す。呼び出し側がファイルを読めないと自動化にならない
 - 固定 3 秒待ちをファイル出現のポーリング（既定 30 秒）に置換。3 秒後の `Unregister-ScheduledTask` が撮影中のタスクを消し得た
