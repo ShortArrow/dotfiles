@@ -246,6 +246,9 @@ Write-Host ""
 Write-Host "Checking packet capture drivers..." -ForegroundColor Cyan
 Test-Service -ServiceName "npcap"
 
+# Supply-chain guards on the tool installers, and provenance of npm tools.
+. "$PSScriptRoot/Test-SupplyChain.ps1"
+
 # PATH order rules (declared in path-order.toml)
 Write-Host ""
 . "$PSScriptRoot/Test-PathOrder.ps1"
