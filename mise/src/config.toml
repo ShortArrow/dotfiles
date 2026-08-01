@@ -1,13 +1,5 @@
 # ~/.config/mise/config.toml
 
-[settings]
-# The default npm installer (aube) refuses any package under 1000 weekly
-# downloads as a supply-chain guard, which blocks `npm:critique` at 198.
-# Plain npm has no such gate. The trade-off is that the guard no longer
-# covers any npm tool declared here, so check a package's provenance before
-# adding it. Drop this line to restore the guard.
-npm.package_manager = "npm"
-
 [tasks.cargo-build]
 description = "Build the Rust project using Cargo"
 run = "cargo build --release"
@@ -32,7 +24,6 @@ run = "echo 'OPEN SESAME!'"
 "npm:zenn-cli" = "latest"
 "aqua:github/copilot-cli" = "latest"
 "npm:@google/gemini-cli" = "latest"
-"npm:critique" = "latest"
 "aqua:BurntSushi/ripgrep" = "latest"
 "aqua:ClementTsang/bottom" = "latest"
 "aqua:cli/cli" = "latest"
