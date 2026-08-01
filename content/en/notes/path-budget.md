@@ -12,8 +12,8 @@ and every command reports
 'x' is not recognized as an internal or external command
 ```
 
-which reads as *not installed* rather than *cannot be found*. The binary
-is on disk. The lookup never happened.
+which reads as *not installed*. The binary is on disk. The lookup never
+happened.
 
 ## Why cmd matters on a machine that uses PowerShell
 
@@ -58,9 +58,8 @@ nothing.
 checks both the order and the remaining budget on every run, so the
 number above is not something anyone has to remember to measure.
 
-## The uncomfortable part
+## How much room is left
 
-185 characters is roughly two more tool directories. The budget is not
-comfortable; it is merely positive. Adding several more mise-managed
-tools will cross the line, and the failure will arrive as a package
+185 characters is roughly two more tool directories. Adding several more
+mise-managed tools crosses the line, and the failure arrives as a package
 script that cannot find `node`.
