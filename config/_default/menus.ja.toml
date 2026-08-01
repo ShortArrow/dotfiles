@@ -11,6 +11,11 @@ url = "/ja/docs/"
 weight = 10
 
 [[main]]
+name = "Notes"
+url = "/ja/notes/"
+weight = 20
+
+[[main]]
 name = "Intro"
 url = "/intro/"
 weight = 10
