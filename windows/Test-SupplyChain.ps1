@@ -20,10 +20,16 @@ $miseConfig = Join-Path $env:USERPROFILE '.config/mise/config.toml'
 Write-Host ""
 Write-Host "Checking supply-chain guards..." -ForegroundColor Cyan
 
+function Show-SupplyChainResult([bool]$IsOK, [string]$Message)
+{
+  Write-Host "- [" -NoNewline
+  Write-Host $($IsOK ? "OK" : "NG") -ForegroundColor $($IsOK ? "Green" : "Red") -NoNewline
+  Write-Host "]: $Message"
+}
+
 if (-not (Test-Path -LiteralPath $miseConfig))
 {
-  Show-Result -IsOK $false
-  Write-Host "mise config not found at $miseConfig" -ForegroundColor DarkGray
+  Show-SupplyChainResult $false "mise config not found at $miseConfig"
   return
 }
 
@@ -36,13 +42,12 @@ $weakeners = @(
 )
 
 $found = @($weakeners | Where-Object { $configText -match $_.Pattern })
-Show-Result -IsOK ($found.Count -eq 0)
 if ($found.Count -eq 0)
 {
-  Write-Host "no guard is disabled in mise config" -ForegroundColor DarkGray
+  Show-SupplyChainResult $true "no guard is disabled in mise config"
 } else
 {
-  Write-Host "$($found.Count) guard(s) disabled" -ForegroundColor Yellow
+  Show-SupplyChainResult $false "$($found.Count) guard(s) disabled"
   $found | ForEach-Object { Write-Host "    $($_.Says)" -ForegroundColor Yellow }
 }
 
