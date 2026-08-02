@@ -331,11 +331,37 @@ if (Test-CommandExist('go')) {
   if (-not $hasGoBin) { $env:Path = "$env:Path;$goBin" }
 }
 
-# mise: resolved via %LocalAppData%\mise\shims on the persistent PATH (windows/PATH.txt).
+# mise: hot tools resolve via the symlink farm (%LocalAppData%\mise\bin), the rest
+# via shims — both on the persistent PATH (windows/PATH.txt), farm first.
 # `mise activate` is intentionally not used — it prepends ~20 per-tool install dirs and
 # pushes the process PATH past cmd.exe's 8191-char limit, breaking npm run-scripts.
 # node-gyp must resolve python without going through a mise shim: a shimmed `python`
 # runs `mise x`, which blocks on the lock held by a parent `mise install`/`mise up`.
+
+# The farm goes stale when `mise up` moves a versioned install directory: the
+# link's target vanishes and the command fails with "cannot find the file",
+# because a broken link still wins PATH resolution over the shim behind it.
+# The scan is filesystem-only (no spawns); repair costs one spawn per stale
+# tool, so it runs detached rather than blocking the prompt.
+$farmDir = Join-Path $env:LOCALAPPDATA 'mise\bin'
+if (Test-Path -LiteralPath $farmDir) {
+  $stranded = @(Get-ChildItem -LiteralPath $farmDir -File |
+    Where-Object { $_.LinkType -and -not (Test-Path -LiteralPath (@($_.Target)[0])) })
+  if ($stranded.Count -gt 0) {
+    # This file is loaded through the Documents\PowerShell\myplug symlink, so
+    # $PSScriptRoot points at the link, not the repository. Follow it first;
+    # a relative hop from the link's side lands in Documents\windows.
+    $selfDir = Get-Item -LiteralPath $PSScriptRoot
+    while ($selfDir.LinkType -and $selfDir.Target) { $selfDir = Get-Item -LiteralPath (@($selfDir.Target)[0]) }
+    $syncScript = [IO.Path]::GetFullPath((Join-Path $selfDir.FullName '..\..\windows\Sync-MiseBinFarm.ps1'))
+    if (Test-Path -LiteralPath $syncScript) {
+      Write-Host "mise farm: $($stranded.Count) stranded link(s) — repairing in background 🔧" -ForegroundColor Yellow
+      Start-Process pwsh -WindowStyle Hidden -ArgumentList '-NoProfile', '-File', $syncScript
+    } else {
+      Write-Warning "mise farm: $($stranded.Count) stranded link(s); Sync-MiseBinFarm.ps1 not found at $syncScript"
+    }
+  }
+}
 if (Test-CommandExist('mise') -and -not $env:NODE_GYP_FORCE_PYTHON) {
   # Cache the resolved python path; the stamp exe IS the path, so a python version
   # change (new install dir) invalidates it without spawning mise on every start.
