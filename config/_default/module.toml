@@ -2,3 +2,91 @@
 
 [[imports]]
 path = "github.com/jpanther/congo/v2"
+
+# Tool documentation lives next to the tool it documents, and the site pulls it
+# in from there. Symlinks under content/ used to do this and do not work: Hugo
+# skips them on Linux, so the pages were never generated and /docs/ came out
+# empty, while a Windows checkout writes them as text files whose contents are
+# the target path — which Hugo renders as a one-word page titled
+# ../../../bash/readme.md. Neither failure appears in the build output.
+#
+# A mount has no such ambiguity. Adding a tool page means adding a mount and
+# giving that readme front matter with a title.
+#
+# Declaring any mount replaces the default one, and mounts also override the
+# per-language contentDir — so each language has to be mounted explicitly here
+# or its pages stop resolving. Every mount carries lang for the same reason.
+[[mounts]]
+source = "content/en"
+target = "content"
+lang = "en"
+
+[[mounts]]
+source = "content/ja"
+target = "content"
+lang = "ja"
+
+[[mounts]]
+source = "bash/readme.md"
+target = "content/docs/bash.md"
+lang = "en"
+
+[[mounts]]
+source = "deno/readme.md"
+target = "content/docs/deno.md"
+lang = "en"
+
+[[mounts]]
+source = "js/readme.md"
+target = "content/docs/js.md"
+lang = "en"
+
+[[mounts]]
+source = "lua/readme.md"
+target = "content/docs/lua.md"
+lang = "en"
+
+[[mounts]]
+source = "nvim/readme.md"
+target = "content/docs/nvim.md"
+lang = "en"
+
+[[mounts]]
+source = "nvim/src/tests/readme.md"
+target = "content/docs/nvim-test.md"
+lang = "en"
+
+[[mounts]]
+source = "php/readme.md"
+target = "content/docs/php.md"
+lang = "en"
+
+[[mounts]]
+source = "python/readme.md"
+target = "content/docs/python.md"
+lang = "en"
+
+[[mounts]]
+source = "rust/readme.md"
+target = "content/docs/rust.md"
+lang = "en"
+
+[[mounts]]
+source = "tmux/readme.md"
+target = "content/docs/tmux.md"
+lang = "en"
+
+[[mounts]]
+source = "yaml/readme.md"
+target = "content/docs/yaml.md"
+lang = "en"
+
+[[mounts]]
+source = "markdown/readme.md"
+target = "content/docs/markdown.md"
+lang = "en"
+
+[[mounts]]
+source = "nvim-rescue/readme.md"
+target = "content/docs/nvim-rescue.md"
+lang = "en"

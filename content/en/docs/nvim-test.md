@@ -1,1 +1,0 @@
-../../../nvim/src/tests/readme.md

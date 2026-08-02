@@ -1,7 +1,9 @@
 ---
-url : "/markdown/"
+title: "Markdown"
+description: "markdown language settings"
+summary: "markdown language settings"
+tags: ["docs"]
 ---
-# my markdown settings
 
 ## LSP
 
