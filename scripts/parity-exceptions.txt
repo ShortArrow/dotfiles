@@ -14,3 +14,10 @@
 # Removed a half-width space between Japanese characters. The English text has
 # no such construct, so there is nothing to mirror.
 content/ja/notes/generated-config.md 62f478a38a5d29e70e6d1a499442eb39a11ee16e
+
+# Rewritten to drop metaphors carried over from the English draft — 値段, 居座る,
+# 腐る, 枝, 太らせる. The facts did not change, and the English is where those
+# figures belong, so there is no counterpart edit to make.
+content/ja/notes/shim-cost.md 4a1d17bbb346c885321cce4ae8ce639e99759cb7
+content/ja/notes/lost-windows.md 4a1d17bbb346c885321cce4ae8ce639e99759cb7
+content/ja/notes/usb-suspend.md 4a1d17bbb346c885321cce4ae8ce639e99759cb7
