@@ -69,7 +69,10 @@ jobs:
           # Staleness is judged from the commit that last touched each file,
           # so the full history has to be present.
           fetch-depth: 0
-      - run: ./scripts/check-content-parity.sh
+      # Invoked through bash, as nvim-tests.yml does. The repository is
+      # authored on Windows, where the executable bit does not exist, so no
+      # .sh here carries one.
+      - run: bash scripts/check-content-parity.sh
 
   markdown-link-check:
     runs-on: ubuntu-latest
