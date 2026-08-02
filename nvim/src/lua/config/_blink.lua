@@ -2,9 +2,12 @@ local M = {}
 
 -- Completion setup for blink.cmp, replacing the previous nvim-cmp stack.
 --
--- LSP capabilities are wired separately in _mason_lspconfig.lua via
--- require("blink.cmp").get_lsp_capabilities(), so this module only
--- configures the completion UI, keymaps, and sources.
+-- This module configures the completion UI, keymaps and sources only.
+-- LSP capabilities are not wired from here: _mason_lspconfig.lua advertises
+-- the plugin-independent essentials, and blink merges its own into
+-- vim.lsp.config('*') once it loads. Requiring blink to ask it for
+-- capabilities would put its ~1s load on the first BufReadPre, which is the
+-- whole reason it is lazy on InsertEnter.
 --
 -- Native blink sources (lsp/path/snippets/buffer) and Copilot
 -- (blink-copilot) are provided directly. Legacy cmp sources
