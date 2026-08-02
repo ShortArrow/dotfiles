@@ -65,7 +65,27 @@ faulting module も違い、近くにセッションイベントが無い。別�
 対応する出力が無い（`zebar monitors` は 3.3.1 では何も返さない。`start.sh` は
 この出力を前提にしているので、現在は 1 つもバーを開かない旧形式の残骸）。
 
-zebar のバージョンは 3.3.1。上流への報告はまだしていない。
+### バージョンは最新（2026-08-03 時点）
+
+| | 導入済み | 最新リリース |
+|---|---|---|
+| zebar | 3.3.1 | 3.3.1（2026-03-16） |
+| GlazeWM | 3.10.1 | 3.10.1（2026-03-21） |
+
+ずれは無い。**上げても直らない。** 両方の `main` にも、リリース後にこの件へ効く
+コミットは入っていない（zebar は 2026-03-31 の MediaSession 機能追加が最後、
+GlazeWM は 2026-04-08 のテスト整備が最後）。
+
+近い既存 issue はどれも別物。
+
+- zebar #273「2 monitors works fine, 3 does not」は 3.3.1 で修正済み。症状は
+  「3 画面でウィジェットが出ない」で、クラッシュではない。
+- zebar #206「blanks when unplugging monitors」、#145「bar contents don't load
+  after switching dual-monitor setup」— どちらも画面構成の変更まわりだが、
+  落ちる報告ではない。
+- GlazeWM #1233「Re-adding a disconnected monitor requires a restart」
+
+クラッシュとして報告されているものは見当たらない。上流への報告はまだしていない。
 
 再現手順を確かめるコマンド:
 
