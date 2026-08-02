@@ -38,6 +38,11 @@ Any `window_rules` entry that relocates windows to a workspace you are not
 looking at feeds this: whatever gets moved there is cloaked, and survives a
 restart stranded.
 
+A deliberate restart is the rare trigger. In practice it is a GlazeWM crash, a
+monitor being plugged in or unplugged, or presentation mode being switched on
+or off — the last two change the display layout, after which GlazeWM works out
+the monitors and workspaces again from what the shell reports.
+
 List what is stranded:
 
 ```powershell

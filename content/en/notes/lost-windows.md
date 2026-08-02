@@ -1,6 +1,6 @@
 ---
 title: "Windows that are visible and drawn nowhere"
-description: "GlazeWM hides an inactive workspace by cloaking its windows through DWM. Restart it and the cloak outlives the manager, leaving a window that reports itself visible, on screen, and belonging to no workspace."
+description: "GlazeWM hides an inactive workspace by cloaking its windows through DWM. A crash, a monitor plugged in, or presentation mode toggled leaves the cloak without the manager — a window that reports itself visible, on screen, and belonging to no workspace."
 summary: "Finding windows a window manager lost, and why recovering one is a per-application problem."
 ---
 
@@ -17,11 +17,33 @@ Restart GlazeWM and it enumerates what the shell reports. Cloaked windows
 are reported, and they arrive with no indication that anyone was managing
 them a moment ago. The manager is gone and the cloak is not.
 
+## Nobody restarts it on purpose
+
+A deliberate restart is the rare case. What actually produces stranded
+windows here:
+
+- GlazeWM crashes and comes back.
+- A monitor is plugged in or unplugged.
+- Presentation mode is switched on or off.
+
+The last two are one event underneath. The display layout changes, GlazeWM
+works out afresh which monitors and workspaces exist, and it builds that
+from what the shell reports — where a cloak is a current state and not a
+history of who set it.
+
+Anything that sends a window to a workspace you are not looking at feeds
+this, because such a window is cloaked from the moment it lands. A
+`window_rules` entry that files an application away on startup is the
+usual source.
+
 ## Only the owner can uncloak
 
-Nothing outside the owning process clears that flag. There is no call an
-outside script can make, which means there is no general recovery — the
-path back exists only where the application offers one.
+`DwmSetWindowAttribute(DWMWA_CLOAK, 0)` from another process returns
+`E_ACCESSDENIED`. It is not a privilege problem — GlazeWM itself runs
+unelevated as the same user, and reaches the cloak through undocumented
+shell COM whose vtable layout moves between Windows builds. So there is no
+general recovery, and the path back exists only where the application
+offers one.
 
 wezterm does. It keeps a control socket per GUI process at
 `~/.local/share/wezterm/gui-sock-<pid>`, and pointing
