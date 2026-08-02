@@ -246,6 +246,31 @@ Write-Host ""
 Write-Host "Checking packet capture drivers..." -ForegroundColor Cyan
 Test-Service -ServiceName "npcap"
 
+# USB power management. windows/usb/fix-usb.ps1 turns both of these off to
+# stop a 2.4 GHz receiver being suspended mid-use; a cumulative update that
+# replaces the USB driver stack puts the Windows defaults back, and nothing
+# else notices. Reporting, not enforcing — the fix needs elevation.
+Write-Host ""
+Write-Host "Checking USB power management..." -ForegroundColor Cyan
+$UsbSubgroup = "2a737441-1930-4402-8d77-b2bebba308a3"
+$UsbSelectiveSuspend = "48e6b7a6-50f5-4782-a5d4-53bb8f07e226"
+$SuspendIndices = @(
+  powercfg /query SCHEME_CURRENT $UsbSubgroup $UsbSelectiveSuspend 2>$null |
+    Select-String -Pattern '0x([0-9a-f]{8})\s*$' |
+    ForEach-Object { [int]$_.Matches[0].Groups[1].Value }
+)
+$SuspendOff = $SuspendIndices.Count -gt 0 -and -not ($SuspendIndices | Where-Object { $_ -ne 0 })
+Show-Result -IsOK $SuspendOff
+Write-Host "selective suspend AC/DC" -NoNewline
+Write-Host ", $(($SuspendIndices | ForEach-Object { $_ }) -join '/')$(if (-not $SuspendOff) { ' — Windows default; run windows/usb/fix-usb.ps1' })" -ForegroundColor $(if ($SuspendOff) { "DarkGray" } else { "Yellow" })
+
+$PowerFlags = @(Get-CimInstance MSPower_DeviceEnable -Namespace root/wmi -ErrorAction SilentlyContinue |
+    Where-Object { $_.InstanceName -match 'USB' })
+$MayPowerOff = @($PowerFlags | Where-Object { $_.Enable })
+Show-Result -IsOK ($PowerFlags.Count -gt 0 -and $MayPowerOff.Count -eq 0)
+Write-Host "devices allowed to power off" -NoNewline
+Write-Host ", $($MayPowerOff.Count) of $($PowerFlags.Count) USB devices" -ForegroundColor $(if ($MayPowerOff.Count -eq 0) { "DarkGray" } else { "Yellow" })
+
 # Supply-chain guards on the tool installers, and provenance of npm tools.
 . "$PSScriptRoot/Test-SupplyChain.ps1"
 

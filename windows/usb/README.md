@@ -40,6 +40,18 @@ sudo pwsh -NoProfile -ExecutionPolicy Bypass -File V:\dotfiles\windows\usb\fix-u
 sudo pwsh -NoProfile -ExecutionPolicy Bypass -File V:\dotfiles\windows\usb\restore-usb.ps1
 ```
 
+## 効果は累積更新で失われる
+
+USB ドライバスタックを差し替える累積更新が入ると、`fix-usb.ps1` の変更は
+Windows 既定に戻る。2026-08-02 時点の実測で、セレクティブサスペンドは AC/DC
+とも `1`、USB デバイス 13 台すべてが電源オフを許可された状態だった。ドライバ
+ファイルの日付は 2026-07-15 で、7 月の累積更新に対応する。
+
+電源プランを切り替えただけならセレクティブサスペンドの値しか動かない。13 台
+すべてのデバイス側フラグが既定に戻っているので、スタックが入れ直されたと読める。
+
+`windows/doctor.ps1` がこの 2 つの値を報告する。NG が出たら再適用する。
+
 ## 補足
 
 - `fix-usb.ps1` は `Enable=$true` のデバイスのみ、`restore-usb.ps1` は
