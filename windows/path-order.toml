@@ -8,6 +8,14 @@
 # composite process PATH ($env:PATH = Machine ";" User in Windows).
 
 [[rule]]
+name = "mise bin farm precedes shims"
+# The farm holds symlinks to the real executables, launched in one process.
+# A shim resolving first would reintroduce the two extra spawns the farm
+# exists to avoid — and the console middleman that breaks pagers and TUIs.
+before = "mise\\bin"
+after = ["mise\\shims"]
+
+[[rule]]
 name = "mise shims override system tools"
 before = "mise\\shims"
 after = ["Program Files\\Go\\bin"]

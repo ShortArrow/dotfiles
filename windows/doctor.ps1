@@ -249,6 +249,31 @@ Test-Service -ServiceName "npcap"
 # Supply-chain guards on the tool installers, and provenance of npm tools.
 . "$PSScriptRoot/Test-SupplyChain.ps1"
 
+# The mise bin farm: symlinks to real tool executables. An upgrade moves the
+# versioned install directory and strands the link, so staleness is the
+# failure mode to watch for. Sync-MiseBinFarm.ps1 rebuilds it.
+Write-Host ""
+Write-Host "Checking mise bin farm..." -ForegroundColor Cyan
+$farmDir = Join-Path $env:LOCALAPPDATA 'mise\bin'
+if (Test-Path -LiteralPath $farmDir)
+{
+  $farmLinks = Get-ChildItem -LiteralPath $farmDir -File
+  $stranded = @($farmLinks | Where-Object { $_.LinkType -and -not (Test-Path -LiteralPath (@($_.Target)[0])) })
+  Show-Result -IsOK ($stranded.Count -eq 0)
+  if ($stranded.Count -eq 0)
+  {
+    Write-Host "$($farmLinks.Count) links, none stranded" -ForegroundColor DarkGray
+  } else
+  {
+    Write-Host "$($stranded.Count) stranded link(s) — run windows/Sync-MiseBinFarm.ps1" -ForegroundColor Yellow
+    $stranded | Select-Object -First 5 | ForEach-Object { Write-Host "    $($_.Name)" -ForegroundColor Yellow }
+  }
+} else
+{
+  Show-Result -IsOK $false
+  Write-Host "farm missing at $farmDir — run windows/Sync-MiseBinFarm.ps1" -ForegroundColor Yellow
+}
+
 # PATH order rules (declared in path-order.toml)
 Write-Host ""
 . "$PSScriptRoot/Test-PathOrder.ps1"

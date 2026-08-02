@@ -1,5 +1,6 @@
 %ANDROID_HOME%\cmdline-tools\latest\bin
 %LocalAppData%\Keybase
+%LocalAppData%\mise\bin
 %LocalAppData%\mise\shims
 %UserProfile%\.cargo\bin
 %LocalAppData%\Microsoft\WinGet\Links
