@@ -29,6 +29,27 @@ fail=0
 note() { printf '%s\n' "$1"; }
 bad() { printf 'NG  %s\n' "$1"; fail=1; }
 
+# Staleness is read from commits, so an edit that is not committed yet is
+# invisible here. Run this on a dirty tree and both sides still report the
+# commit that touched them last — which is usually the same one, so a
+# one-sided edit sitting in the working tree passes. That is how a Japanese-
+# only change reached CI green locally and failed on the runner.
+#
+# The honest answer on a dirty tree is "cannot tell yet", not OK. CI checks
+# out clean and never reaches this.
+uncommitted=$(
+  for section in "${SECTIONS[@]}"; do
+    for lang in "${LANGS[@]}"; do
+      git status --porcelain -- "content/${lang}/${section}" 2>/dev/null
+    done
+  done
+)
+if [ -n "$uncommitted" ]; then
+  printf '%s\n' "$uncommitted" | sed 's/^/    /'
+  bad "the paths above are not committed; commit them and run this again"
+  exit "$fail"
+fi
+
 # Empty for a file git has never recorded, which `|| echo 0` does not catch
 # because git itself succeeded. An unset value reaches [ as a syntax error and
 # the comparison is skipped, so the check passes without having run.

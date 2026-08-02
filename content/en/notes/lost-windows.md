@@ -69,9 +69,9 @@ managing this window" describes the broken case and two healthy ones:
 | Unmanaged but drawn | 0 | — | an `ignore` rule in `config.yaml` |
 | Suspended UWP | > 0 | yes | the shell's doing, not GlazeWM's |
 
-The ignore rules produce unmanaged windows deliberately, and the shell
-cloaks UWP windows when it suspends them. Reporting either as stranded
-would bury the one case that matters under a dozen that do not.
+On [the machine](/machine/) the `ignore` rules cover eleven processes, and
+UWP windows are being suspended all the time. Reporting all three the same
+way buries the one case that matters under a dozen that do not.
 
 `IsImmersiveProcess` separates the first row from the third, and
 `glazewm query windows` supplies the handles that are managed right now,
