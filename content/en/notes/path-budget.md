@@ -33,7 +33,7 @@ this reason alone.
 directory of every managed tool when it runs something, and that
 expansion is charged to the same 8191.
 
-Measured on this machine, 2026-08-02:
+Measured on [the machine](/machine/), 2026-08-02:
 
 | | |
 |---|---|

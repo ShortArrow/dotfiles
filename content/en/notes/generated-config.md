@@ -5,7 +5,7 @@ summary: "Splitting a config that cannot be split, and the two failures the spli
 ---
 
 The GlazeWM `window_rules` ignore list names every application that
-should stay unmanaged. On this machine that is eleven processes, several
+should stay unmanaged. On [the machine](/machine/) that is eleven processes, several
 of which map straight to repositories of the same name — so the list said
 which projects exist as much as which windows to skip. In a public
 repository that is more than it needs to say.

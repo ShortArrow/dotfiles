@@ -1,7 +1,7 @@
 ---
 title: "Launching mise tools without the shims"
 description: "A mise shim is three process creations, and a console process that stays between the terminal and the tool for the whole run. Here that turned a 15 ms tool into 127 ms and left bat unable to hand the prompt back."
-summary: "Why mise-managed tools are launched through symlinks on this machine, and which ones cannot be."
+summary: "Why mise-managed tools are launched through symlinks here, and which ones cannot be."
 ---
 
 `bat` printed the file and the prompt never came back. `zi` changed
@@ -15,8 +15,8 @@ The binaries were not at fault. Launched directly, both behaved.
 which works out which bat this directory should get, and starts that one.
 Three process creations answer one command.
 
-Every creation is inspected on this machine, whose antivirus is centrally
-managed. Fifteen runs of `bat --version`:
+Every creation is inspected, because [the machine](/machine/) runs
+centrally managed endpoint protection. Fifteen runs of `bat --version`:
 
 | launched through | |
 |---|---|
