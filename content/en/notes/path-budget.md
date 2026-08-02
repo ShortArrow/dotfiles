@@ -33,18 +33,22 @@ this reason alone.
 directory of every managed tool when it runs something, and that
 expansion is charged to the same 8191.
 
-Measured on this machine:
+Measured on this machine, 2026-08-02:
 
 | | |
 |---|---|
-| Persistent `PATH` | 2,858 chars across 58 entries |
-| Under a mise shim | **8,006** |
-| Added by mise | +5,148 |
-| Remaining | **185** |
+| Persistent `PATH` | 2,932 chars across 60 entries |
+| Under a mise shim | **7,297** |
+| Added by mise | +4,365 |
+| Remaining | **894** |
 
-The persistent path is a fifth of the total. mise is the rest, and it
+The persistent path is two fifths of the total. mise is the rest, and it
 grows with each tool added — which makes the persistent side the only
 part worth defending, because it is the only part that is hand-written.
+
+The date is on the table because the second row moves with the tool list,
+not with anything in this repository. `windows/doctor.ps1` prints the
+current figures.
 
 ## What that buys
 
