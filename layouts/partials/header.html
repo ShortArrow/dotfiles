@@ -1,0 +1,45 @@
+{{ $page := . }}
+<header class="site-header">
+  <div class="container">
+    <a class="site-title" href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a>
+
+    <nav class="site-nav" aria-label="{{ i18n "primaryNavigation" }}">
+      {{/* Menu entries already carry a language-qualified URL, from `url` or
+           from `pageRef`, so they are used verbatim. Only the home entry
+           matches exactly; every other one owns its subtree. */}}
+      {{ $home := site.Home.RelPermalink }}
+      {{ range site.Menus.main }}
+        {{ $current := cond (eq .URL $home) (eq $page.RelPermalink .URL) (hasPrefix $page.RelPermalink .URL) }}
+        <a href="{{ .URL }}"{{ if $current }} aria-current="page"{{ end }}>{{ .Name }}</a>
+      {{ end }}
+    </nav>
+
+    <div class="header-tools">
+      {{ if gt (len site.Home.AllTranslations) 1 }}
+        <div class="lang-switch">
+          {{ range site.Home.AllTranslations }}
+            {{ $lang := .Language }}
+            {{ $href := .RelPermalink }}
+            {{/* Land on the same page where it has a translation, on that
+                 language's home where it does not. */}}
+            {{ range $page.AllTranslations }}
+              {{ if eq .Language.Lang $lang.Lang }}{{ $href = .RelPermalink }}{{ end }}
+            {{ end }}
+            <a href="{{ $href }}" hreflang="{{ $lang.Lang }}" title="{{ $lang.Params.displayName }}"
+              {{- if eq $lang.Lang $page.Language.Lang }} aria-current="true"{{ end }}>{{ upper $lang.Lang }}</a>
+          {{ end }}
+        </div>
+      {{ end }}
+
+      <button class="theme-toggle" type="button" aria-label="{{ i18n "toggleAppearance" }}">
+        <svg class="icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+        </svg>
+        <svg class="icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,20 @@
+{{/* Takes a page collection. Each card is title plus one line of what the page
+     is for, so a section index stays scannable however long its pages are. */}}
+{{ $pages := . }}
+{{ if $pages }}
+  <ul class="card-grid">
+    {{ range $pages }}
+      <li class="card">
+        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        {{ with .Description | default .Params.summary }}
+          <p>{{ . | plainify }}</p>
+        {{ end }}
+        {{ if and .IsPage .Params.showReadingTime }}
+          <p class="card-meta"><span>{{ .ReadingTime }} {{ i18n "readingTime" }}</span></p>
+        {{ end }}
+      </li>
+    {{ end }}
+  </ul>
+{{ else }}
+  <p class="empty-note">{{ i18n "emptySection" }}</p>
+{{ end }}

@@ -1,8 +1,11 @@
-## This is Dotfiles of me!
+---
+title: "Dotfiles"
+description: "この開発環境が何でできていて、なぜそうなっているか。"
+---
 
-{{< button href="/ja" target="_self" >}}
-ja-jp
-{{< /button >}}
-{{< button href="/" target="_self" >}}
-en-us
-{{< /button >}}
+普段使っているマシンの設定です。手前に Windows、その奥に WSL の Arch。すべて
+このリポジトリのチェックアウトからシンボリックリンクで配置しているので、コピーが
+ずれるということが起きません。エディタが読むファイルは git にあるファイルそのものです。
+
+ツールのページには何が入っているかを書いています。厄介な部分がなぜその形なのかは
+ノートのほうです。

@@ -1,25 +1,22 @@
-# config/_default/menus.toml
+# config/_default/menus.ja.toml
+#
+# pageRef は言語ごとに解決される。privacypolicy は英語版しかないため URL 直書き。
 
 [[main]]
-name = "Top"
-pageRef = "/ja"
-weight = -200
+name = "ホーム"
+pageRef = "/"
+weight = 10
 
 [[main]]
 name = "Docs"
-url = "/ja/docs/"
-weight = 10
-
-[[main]]
-name = "Notes"
-url = "/ja/notes/"
+pageRef = "/docs"
 weight = 20
 
 [[main]]
-name = "Intro"
-url = "/intro/"
-weight = 10
+name = "Notes"
+pageRef = "/notes"
+weight = 30
 
 [[footer]]
-name = "p.p."
-url = "/ja/privacypolicy"
+name = "Privacy"
+url = "/privacypolicy/"

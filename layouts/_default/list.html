@@ -1,0 +1,23 @@
+{{ define "main" }}
+  <div class="container">
+    {{ partial "breadcrumbs.html" . }}
+
+    <div class="page-header">
+      <h1>{{ .Title }}</h1>
+      {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+    </div>
+
+    {{ with .Content }}
+      <div class="prose">{{ partial "content.html" $ }}</div>
+      <hr />
+    {{ end }}
+
+    {{ $pages := .Pages }}
+    {{ if eq (.Params.sortBy | default "title") "date" }}
+      {{ $pages = $pages.ByDate.Reverse }}
+    {{ else }}
+      {{ $pages = $pages.ByTitle }}
+    {{ end }}
+    {{ partial "card-grid.html" $pages }}
+  </div>
+{{ end }}

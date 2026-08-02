@@ -1,0 +1,28 @@
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; {{ now.Year }} {{ site.Params.author.name | default site.Title }}</p>
+    <nav aria-label="{{ i18n "footerNavigation" }}">
+      {{ range site.Menus.footer }}<a href="{{ .URL }}">{{ .Name }}</a>{{ end }}
+      {{ range site.Params.author.links }}<a href="{{ .url }}" rel="me noopener">{{ .label }}</a>{{ end }}
+    </nav>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var button = document.querySelector(".theme-toggle");
+    if (!button) return;
+    button.addEventListener("click", function () {
+      var chosen = root.getAttribute("data-theme");
+      var isDark = chosen
+        ? chosen === "dark"
+        : window.matchMedia("(prefers-color-scheme: dark)").matches;
+      var next = isDark ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try {
+        localStorage.setItem("appearance", next);
+      } catch (e) {}
+    });
+  })();
+</script>

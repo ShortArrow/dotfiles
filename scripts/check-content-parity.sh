@@ -11,14 +11,16 @@
 # Staleness is judged by the commit that last touched each file, not by
 # mtime, which a checkout does not preserve.
 #
-# Sections are opted in rather than enforced everywhere: content/*/docs
-# symlinks English tool readmes and has no Japanese counterpart by design.
-# Add a section here once both languages actually exist.
+# Sections are opted in rather than enforced everywhere: the docs section is
+# the tool readmes, mounted from beside the configuration they document, and
+# those are English in both languages by design. Add a section here once both
+# languages actually have their own pages.
 
 set -euo pipefail
 
 SECTIONS=("notes")
 LANGS=("en" "ja")
+EXCEPTIONS="scripts/parity-exceptions.txt"
 ROOT="$(git rev-parse --show-toplevel)"
 cd "$ROOT"
 
@@ -34,6 +36,23 @@ last_commit_epoch() {
   local recorded
   recorded=$(git log -1 --format=%ct -- "$1" 2>/dev/null || true)
   printf '%s' "${recorded:-0}"
+}
+
+last_commit_sha() {
+  git log -1 --format=%h -- "$1" 2>/dev/null || true
+}
+
+# Some edits belong to one language and have no counterpart: a Japanese
+# spacing fix, an English article. Timestamps cannot tell those from a
+# translation left behind, so they are declared instead — path and the commit
+# that is allowed to stand alone, in scripts/parity-exceptions.txt.
+declared_alone() {
+  local path=$1 sha=$2
+  [ -n "$sha" ] || return 1
+  [ -f "$EXCEPTIONS" ] || return 1
+  grep -vE '^[[:space:]]*(#|$)' "$EXCEPTIONS" |
+    awk '{ print $1, $2 }' |
+    grep -qxF "$path $sha"
 }
 
 for section in "${SECTIONS[@]}"; do
@@ -67,9 +86,11 @@ for section in "${SECTIONS[@]}"; do
       a=$(last_commit_epoch "$path")
       b=$(last_commit_epoch "$counterpart")
       if [ "$a" -gt "$b" ]; then
-        bad "${counterpart} is behind ${path}"
+        declared_alone "$path" "$(last_commit_sha "$path")" ||
+          bad "${counterpart} is behind ${path}"
       elif [ "$b" -gt "$a" ]; then
-        bad "${path} is behind ${counterpart}"
+        declared_alone "$counterpart" "$(last_commit_sha "$counterpart")" ||
+          bad "${path} is behind ${counterpart}"
       fi
     done
   done < <(find "$base" -name '*.md' -type f | sort)

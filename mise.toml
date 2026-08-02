@@ -5,9 +5,7 @@
 # settings in the Wrangler config, so the deployed version cannot be declared
 # from here — the most this can do is make local builds match it.
 #
-# It has to match. congo v2.13 builds on 0.147 and fails on 0.164
-# (.Site.Author), while v2.14 is the reverse (site.Locale): there is no theme
-# version that satisfies both, so building locally against a different Hugo
-# proves nothing about the deploy.
+# The templates in layouts/ build on 0.164 as well, and CI checks that, but a
+# local build has to be the version that actually deploys.
 [tools]
 "aqua:gohugoio/hugo/hugo-extended" = "0.147.7"

@@ -1,0 +1,17 @@
+{{ define "main" }}
+  <div class="container">
+    <div class="page-header">
+      <h1>{{ .Title }}</h1>
+      {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+    </div>
+
+    {{ with .Content }}
+      <div class="prose">{{ partial "content.html" $ }}</div>
+    {{ end }}
+
+    {{ with .Sections }}
+      <hr />
+      {{ partial "card-grid.html" (.ByWeight) }}
+    {{ end }}
+  </div>
+{{ end }}

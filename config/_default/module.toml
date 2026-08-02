@@ -1,8 +1,5 @@
 # config/_default/module.toml
 
-[[imports]]
-path = "github.com/jpanther/congo/v2"
-
 # Tool documentation lives next to the tool it documents, and the site pulls it
 # in from there. Symlinks under content/ used to do this and do not work: Hugo
 # skips them on Linux, so the pages were never generated and /docs/ came out
@@ -90,3 +87,72 @@ lang = "en"
 source = "nvim-rescue/readme.md"
 target = "content/docs/nvim-rescue.md"
 lang = "en"
+
+# The tool readmes are English only. Mounting them into the Japanese
+# section as well keeps /ja/docs/ navigable instead of empty; the Japanese
+# section index says the pages themselves are in English.
+
+[[mounts]]
+source = "bash/readme.md"
+target = "content/docs/bash.md"
+lang = "ja"
+
+[[mounts]]
+source = "deno/readme.md"
+target = "content/docs/deno.md"
+lang = "ja"
+
+[[mounts]]
+source = "js/readme.md"
+target = "content/docs/js.md"
+lang = "ja"
+
+[[mounts]]
+source = "lua/readme.md"
+target = "content/docs/lua.md"
+lang = "ja"
+
+[[mounts]]
+source = "nvim/readme.md"
+target = "content/docs/nvim.md"
+lang = "ja"
+
+[[mounts]]
+source = "nvim/src/tests/readme.md"
+target = "content/docs/nvim-test.md"
+lang = "ja"
+
+[[mounts]]
+source = "php/readme.md"
+target = "content/docs/php.md"
+lang = "ja"
+
+[[mounts]]
+source = "python/readme.md"
+target = "content/docs/python.md"
+lang = "ja"
+
+[[mounts]]
+source = "rust/readme.md"
+target = "content/docs/rust.md"
+lang = "ja"
+
+[[mounts]]
+source = "tmux/readme.md"
+target = "content/docs/tmux.md"
+lang = "ja"
+
+[[mounts]]
+source = "yaml/readme.md"
+target = "content/docs/yaml.md"
+lang = "ja"
+
+[[mounts]]
+source = "markdown/readme.md"
+target = "content/docs/markdown.md"
+lang = "ja"
+
+[[mounts]]
+source = "nvim-rescue/readme.md"
+target = "content/docs/nvim-rescue.md"
+lang = "ja"

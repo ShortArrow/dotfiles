@@ -1,0 +1,14 @@
+skipToContent = "本文へ"
+primaryNavigation = "メインナビゲーション"
+footerNavigation = "フッターナビゲーション"
+toggleAppearance = "ライト・ダークを切り替える"
+tableOfContents = "目次"
+emptySection = "まだ何もありません。"
+notFoundTitle = "ページが見つかりません"
+notFoundBody = "このアドレスに対応するページはありません。索引に目的のものがあるかもしれません。"
+notFoundLink = "トップへ"
+updated = "更新"
+readingTime = "分で読めます"
+
+[wordCount]
+other = "{{ .Count }} 文字"

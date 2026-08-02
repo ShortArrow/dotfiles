@@ -1,0 +1,6 @@
+{{/* Wide tables scroll inside their own box rather than widening the page.
+     Goldmark has no render hook for tables, so the wrapper is added here. */}}
+{{ .Content
+  | replaceRE `<table>` `<div class="table-wrap"><table>`
+  | replaceRE `</table>` `</table></div>`
+  | safeHTML }}

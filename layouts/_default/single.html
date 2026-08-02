@@ -1,0 +1,26 @@
+{{ define "main" }}
+  {{/* Identifiers, not Headings: Headings is the nesting tree and counts one
+       root, so it cannot tell a page with four sections from a page with one. */}}
+  {{ $showToc := and (default true .Params.showTableOfContents) (gt (len .Fragments.Identifiers) 1) }}
+  <div class="container">
+    {{ partial "breadcrumbs.html" . }}
+
+    <div class="page-header">
+      <h1>{{ .Title }}</h1>
+      {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+    </div>
+
+    <div class="article-layout{{ if $showToc }} has-toc{{ end }}">
+      <article class="prose">
+        {{ partial "content.html" . }}
+      </article>
+
+      {{ if $showToc }}
+        <aside class="toc">
+          <p class="toc-title">{{ i18n "tableOfContents" }}</p>
+          {{ .TableOfContents }}
+        </aside>
+      {{ end }}
+    </div>
+  </div>
+{{ end }}

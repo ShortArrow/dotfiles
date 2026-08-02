@@ -1,6 +1,6 @@
 # dotfiles
 
-[![Deploy Hugo site to Pages](https://github.com/ShortArrow/dotfiles/actions/workflows/hugo.yml/badge.svg)](https://github.com/ShortArrow/dotfiles/actions/workflows/hugo.yml)
+[![Site](https://github.com/ShortArrow/dotfiles/actions/workflows/hugo.yml/badge.svg)](https://github.com/ShortArrow/dotfiles/actions/workflows/hugo.yml)
 
 Cross-platform dotfiles of [@ShortArrow](https://github.com/ShortArrow). Same end state on Windows / Linux / macOS via a single source of truth (`dotfm.toml`).
 
@@ -12,6 +12,8 @@ Two parallel layers produce the same symlink tree — pick whichever is bootstra
 2. **`<tool>/setup.ps1` / `<tool>/setup.sh`** — bootstrap launchers used when `dotfm` isn't available yet (fresh boxes, no Rust). They consume the same `dotfm.toml` through `lib/_lib.{ps1,sh}`.
 
 Running both is a no-op the second time. See [`docs/STRUCTURE.md`](docs/STRUCTURE.md) for the full design (decision matrix for `symlink` / `copy` / `post_apply` / `script`, security rules, how to add a tool).
+
+Each tool's readme is also a page on [dotfiles.shortarrow.jp](https://dotfiles.shortarrow.jp), mounted from where it sits. See [`docs/SITE.md`](docs/SITE.md).
 
 ## Quick start
 

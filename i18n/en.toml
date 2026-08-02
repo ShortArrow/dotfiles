@@ -1,0 +1,15 @@
+skipToContent = "Skip to content"
+primaryNavigation = "Primary"
+footerNavigation = "Footer"
+toggleAppearance = "Switch between light and dark"
+tableOfContents = "On this page"
+emptySection = "Nothing here yet."
+notFoundTitle = "Page not found"
+notFoundBody = "That address does not resolve to a page. The index may have what you were looking for."
+notFoundLink = "Go to the front page"
+updated = "Updated"
+readingTime = "min read"
+
+[wordCount]
+one = "{{ .Count }} word"
+other = "{{ .Count }} words"

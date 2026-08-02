@@ -1,25 +1,22 @@
-# config/_default/menus.toml
+# config/_default/menus.en.toml
+#
+# Entries carry a language-qualified URL; the header uses them verbatim.
 
 [[main]]
-name = "Top"
-url = "/"
-weight = -200
+name = "Home"
+pageRef = "/"
+weight = 10
 
 [[main]]
 name = "Docs"
-url = "/docs/"
-weight = 10
-
-[[main]]
-name = "Notes"
-url = "/notes/"
+pageRef = "/docs"
 weight = 20
 
 [[main]]
-name = "Intro"
-url = "/intro/"
-weight = 10
+name = "Notes"
+pageRef = "/notes"
+weight = 30
 
 [[footer]]
-name = "p.p."
-url = "/privacypolicy"
+name = "Privacy"
+pageRef = "/privacypolicy"

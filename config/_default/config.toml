@@ -1,8 +1,16 @@
 # config/_default/config.toml
 
-baseURL = "/"
+baseURL = "https://dotfiles.shortarrow.jp/"
 languageCode = "en"
 
-DefaultContentLanguage = "en"
-defaultContetLanguageInSubdir = true
+# English is served from the root and Japanese from /ja/. Setting
+# defaultContentLanguageInSubdir would move every English URL under /en/, so it
+# stays off.
+defaultContentLanguage = "en"
 hasCJKLanguage = true
+
+enableRobotsTXT = true
+
+# The site has no use for tags or categories. An empty table stops Hugo
+# generating term pages for the leftover `tags` in the tool readmes.
+[taxonomies]
