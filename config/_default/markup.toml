@@ -1,11 +1,22 @@
-# -- Markup --
-# These settings are required for the theme to function.
+# config/_default/markup.toml
 
 [goldmark]
+
 [goldmark.renderer]
+  # The tool readmes contain raw HTML.
   unsafe = true
 
+# A line break inside a paragraph becomes a space, which is right for English
+# and wrong for Japanese: it puts a half-width space between two kana wherever
+# the source happened to wrap. This drops it when both sides are East Asian.
+# hasCJKLanguage does not do this — it only affects word counts.
+[goldmark.extensions.CJK]
+  enable = true
+  eastAsianLineBreaks = true
+
 [highlight]
+  # Class names, coloured by assets/css/syntax.css, so one build serves both
+  # appearances. Inline styles could only carry one.
   noClasses = false
 
 [tableOfContents]
