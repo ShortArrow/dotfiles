@@ -12,7 +12,6 @@ run = "echo 'OPEN SESAME!'"
 "aqua:anthropics/claude-code" = { version = "latest", os = ["linux", "macos"] }
 "aqua:jesseduffield/lazydocker" = "latest"
 "aqua:jesseduffield/lazygit" = "latest"
-"aqua:openai/codex" = "latest"
 "aqua:sharkdp/bat" = "latest"
 "aqua:sharkdp/numbat" = "latest"
 "aqua:tree-sitter/tree-sitter" = "latest"
