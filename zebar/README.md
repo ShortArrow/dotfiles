@@ -11,6 +11,47 @@ GlazeWM 用タスクバー [Zebar](https://github.com/glzr-io/zebar) の設定�
 
 起動は `pack: overline-zebar` / `widget: main`（`~/.glzr/zebar/settings.json` の `startupConfigs`）。
 
+## 既知の不具合: セッション再接続で落ちる
+
+RDP でログインした状態のまま実機のコンソールでログインすると、zebar が落ちる。
+バーが消え、`startup_commands` は GlazeWM の起動時にしか走らないので、手で
+起動し直すまで戻らない。
+
+イベントログでの裏付け。Application ログに記録された zebar のクラッシュ 5 件の
+うち 4 件が同じ形をしている。
+
+| 日時 | Faulting module | Exception | 直前の再接続 |
+|---|---|---|---|
+| 2026-08-03 08:02:03 | `ucrtbase.dll` | `0xc0000005` | 同 08:02:03 |
+| 2026-07-20 07:23:08 | `ucrtbase.dll` | `0xc0000005` | 07:23:09 |
+| 2026-07-17 21:10:02 | `ucrtbase.dll` | `0xc0000005` | 21:09:58 |
+| 2026-06-26 19:35:40 | `ucrtbase.dll` | `0xc0000005` | 19:35:39 |
+| 2026-07-17 13:10:13 | `zebar.exe` | `0xc0000409` | 該当なし |
+
+4 件はすべて `Microsoft-Windows-TerminalServices-LocalSessionManager/Operational`
+の ID 25「Session reconnection succeeded」から 1〜4 秒以内。直近の 1 件は
+`Source Network Address: ローカル`、つまりコンソールへの再接続だった。5 件目は
+Exception も faulting module も違い、近くにセッションイベントが無い。別件。
+
+確認できているのはこの一致まで。原因は未確定だが、再接続をまたぐと表示側の
+構成が入れ替わる（RDP の仮想ディスプレイ 1 枚 → 物理モニター 3 枚）ことと、
+`start.sh` がモニター 1 枚につき 1 ウィジェットを開く作りであることは事実として
+噛み合う。
+
+zebar のバージョンは 3.3.1。上流への報告はまだしていない。
+
+再現手順を確かめるコマンド:
+
+```pwsh
+# クラッシュ一覧
+Get-WinEvent -FilterHashtable @{LogName='Application'; ProviderName='Application Error'; Id=1000} -MaxEvents 2000 |
+  Where-Object { $_.Message -match 'zebar\.exe' } |
+  Select-Object TimeCreated, @{n='Mod';e={ if ($_.Message -match 'Faulting module name: ([^,]+)') { $Matches[1] } }}
+
+# 同時刻のセッション操作
+Get-WinEvent -FilterHashtable @{LogName='Microsoft-Windows-TerminalServices-LocalSessionManager/Operational'; Id=24,25}
+```
+
 ## overline-zebar fork のブランチ運用
 
 upstream（`mushfikurr/overline-zebar`）への追従と自分の改造を分離するため、fork は次の3系統で運用する。
