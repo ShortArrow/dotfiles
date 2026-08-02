@@ -38,21 +38,29 @@ last_commit_epoch() {
   printf '%s' "${recorded:-0}"
 }
 
+# Full, because how far git abbreviates depends on the size of the repository
+# and so differs between a checkout and a CI runner. Comparing abbreviations
+# made the exceptions file match locally and miss in CI.
 last_commit_sha() {
-  git log -1 --format=%h -- "$1" 2>/dev/null || true
+  git log -1 --format=%H -- "$1" 2>/dev/null || true
 }
 
 # Some edits belong to one language and have no counterpart: a Japanese
 # spacing fix, an English article. Timestamps cannot tell those from a
 # translation left behind, so they are declared instead — path and the commit
-# that is allowed to stand alone, in scripts/parity-exceptions.txt.
+# that is allowed to stand alone, in scripts/parity-exceptions.txt. Declared
+# revisions are resolved through git, so any length is accepted there.
 declared_alone() {
-  local path=$1 sha=$2
+  local path=$1 sha=$2 declared_path declared_rev resolved
   [ -n "$sha" ] || return 1
   [ -f "$EXCEPTIONS" ] || return 1
-  grep -vE '^[[:space:]]*(#|$)' "$EXCEPTIONS" |
-    awk '{ print $1, $2 }' |
-    grep -qxF "$path $sha"
+  while read -r declared_path declared_rev _; do
+    case "$declared_path" in '' | '#'*) continue ;; esac
+    [ "$declared_path" = "$path" ] || continue
+    resolved=$(git rev-parse --verify --quiet "${declared_rev}^{commit}" || true)
+    [ "$resolved" = "$sha" ] && return 0
+  done <"$EXCEPTIONS"
+  return 1
 }
 
 for section in "${SECTIONS[@]}"; do

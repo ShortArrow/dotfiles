@@ -1,13 +1,16 @@
 # Edits that belong to one language and have no counterpart in the other.
 #
-# Format: <path> <short sha>
+# Format: <path> <revision>
 # The pair stops being compared while that commit is the newest one touching
 # the path. A later edit to the same file needs its own line, or a matching
 # edit on the other side.
+#
+# Any revision git can resolve works. Full hashes are written here because an
+# abbreviation is only as unique as the repository it was taken from.
 #
 # Keep the reason next to the entry. An entry with no reason is a silenced
 # check.
 
 # Removed a half-width space between Japanese characters. The English text has
 # no such construct, so there is nothing to mirror.
-content/ja/notes/generated-config.md 62f478a3
+content/ja/notes/generated-config.md 62f478a38a5d29e70e6d1a499442eb39a11ee16e
