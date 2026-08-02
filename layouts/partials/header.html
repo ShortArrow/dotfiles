@@ -1,7 +1,9 @@
 {{ $page := . }}
 <header class="site-header">
   <div class="container">
-    <a class="site-title" href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a>
+    <a class="site-title" href="{{ site.Home.RelPermalink }}">
+      {{ partial "site-icon.html" 26 }}<span>{{ site.Title }}</span>
+    </a>
 
     <nav class="site-nav" aria-label="{{ i18n "primaryNavigation" }}">
       {{/* Menu entries already carry a language-qualified URL, from `url` or

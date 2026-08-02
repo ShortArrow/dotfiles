@@ -1,8 +1,11 @@
 {{ define "main" }}
   <div class="container">
-    <div class="page-header">
-      <h1>{{ .Title }}</h1>
-      {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+    <div class="page-header home-header">
+      <div class="home-icon">{{ partial "site-icon.html" 88 }}</div>
+      <div>
+        <h1>{{ .Title }}</h1>
+        {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+      </div>
     </div>
 
     {{ with .Content }}

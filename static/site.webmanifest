@@ -1,8 +1,8 @@
 {
   "name": "Dotfiles of ShortArrow",
   "short_name": "Dotfiles",
-  "description": "Dev Env",
-  "start_URL": "/",
+  "description": "How this development environment is put together, and why.",
+  "start_url": "/",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -15,7 +15,7 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "green",
-  "background_color": "black",
+  "theme_color": "#4f6f52",
+  "background_color": "#16181a",
   "display": "standalone"
 }

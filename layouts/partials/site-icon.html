@@ -1,0 +1,12 @@
+{{/* Takes the rendered size in CSS pixels. The source is 400px square, so it
+     is resized once per size and served at twice the box for a dense screen.
+     Output stays PNG: WebP encoding exists only in Hugo extended, and what
+     Cloudflare's build image ships is not something this repository can
+     assert. At these sizes the saving would not be worth a failed deploy. */}}
+{{ $size := . }}
+{{ with resources.Get "img/twitter_icon_light_back.png" }}
+  {{ $small := (.Resize (printf "%dx png" $size)).RelPermalink }}
+  {{ $large := (.Resize (printf "%dx png" (mul $size 2))).RelPermalink }}
+  <img src="{{ $small }}" srcset="{{ $small }} 1x, {{ $large }} 2x"
+    width="{{ $size }}" height="{{ $size }}" alt="" loading="eager" decoding="async" />
+{{ end }}

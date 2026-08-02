@@ -18,11 +18,18 @@
 <meta property="og:locale" content="{{ .Language.Lang }}" />
 <meta name="twitter:card" content="summary" />
 
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+{{/* favicon.ico is what a browser fetches on its own when no link says
+     otherwise, and it is the only one of these that carries several sizes in
+     one file. Naming it explicitly means it is also used from a subpath. */}}
+<link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-<link rel="manifest" href="/site.webmanifest" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#4f6f52" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="msapplication-config" content="/browserconfig.xml" />
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfaf8" />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#16181a" />
 
 {{ with resources.Get "css/main.css" }}
   {{ $css := . | minify | fingerprint }}
