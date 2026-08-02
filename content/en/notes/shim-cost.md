@@ -1,6 +1,6 @@
 ---
-title: "What a shim costs"
-description: "A mise shim is three process creations, and a console process that stays in the middle for the whole run. Here that turned a 15 ms tool into 127 ms and left bat unable to hand the prompt back."
+title: "Launching mise tools without the shims"
+description: "A mise shim is three process creations, and a console process that stays between the terminal and the tool for the whole run. Here that turned a 15 ms tool into 127 ms and left bat unable to hand the prompt back."
 summary: "Why mise-managed tools are launched through symlinks on this machine, and which ones cannot be."
 ---
 

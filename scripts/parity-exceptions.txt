@@ -18,6 +18,7 @@ content/ja/notes/generated-config.md 62f478a38a5d29e70e6d1a499442eb39a11ee16e
 # Rewritten to drop metaphors carried over from the English draft — 値段, 居座る,
 # 腐る, 枝, 太らせる. The facts did not change, and the English is where those
 # figures belong, so there is no counterpart edit to make.
-content/ja/notes/shim-cost.md a7ca44bc221cac67de2a402a9e00631a842aab69
-content/ja/notes/lost-windows.md a7ca44bc221cac67de2a402a9e00631a842aab69
+#
+# shim-cost and lost-windows have since had their titles changed on both sides,
+# which puts them back in step; only this one is still one-sided.
 content/ja/notes/usb-suspend.md a7ca44bc221cac67de2a402a9e00631a842aab69

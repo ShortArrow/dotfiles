@@ -1,5 +1,5 @@
 ---
-title: "Windows that are visible and drawn nowhere"
+title: "Finding windows that are visible and drawn nowhere"
 description: "GlazeWM hides an inactive workspace by cloaking its windows through DWM. A crash, a monitor plugged in, or presentation mode toggled leaves the cloak without the manager — a window that reports itself visible, on screen, and belonging to no workspace."
 summary: "Finding windows a window manager lost, and why recovering one is a per-application problem."
 ---
