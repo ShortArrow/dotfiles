@@ -22,3 +22,9 @@ content/ja/notes/generated-config.md 62f478a38a5d29e70e6d1a499442eb39a11ee16e
 # shim-cost and lost-windows have since had their titles changed on both sides,
 # which puts them back in step; only this one is still one-sided.
 content/ja/notes/usb-suspend.md a7ca44bc221cac67de2a402a9e00631a842aab69
+
+# The English side catching up. 4448b201 gave the Japanese lost-windows the
+# eleven-ignore-rules figure and a link to /machine/; the English had no
+# "on this machine" to replace, so it was missed and added here. The pair is
+# level in content, only the commits are one behind the other.
+content/en/notes/lost-windows.md 7f466b582dbff3d1141a54843055ed39e0f344bf
