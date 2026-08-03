@@ -15,6 +15,7 @@
 %LocalAppData%\Programs\Microsoft VS Code Insiders\bin
 %LocalAppData%\Programs\Microsoft VS Code\bin
 %LocalAppData%\Programs\Ollama
+%LocalAppData%\Programs\OpenAI\Codex\bin
 %LocalAppData%\Programs\Zed\bin
 %LocalAppData%\Programs\nu\bin
 %UserProfile%\.dotnet\tools
