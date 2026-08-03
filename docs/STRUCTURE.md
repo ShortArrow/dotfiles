@@ -118,30 +118,50 @@ themselves. Installation is split by what each manager can reach.
 
 | Layer | Owns | Declared in |
 |-------|------|-------------|
-| **mise** | CLI tools and language runtimes — anything with a usable aqua / cargo / go / npm / github backend | `mise/src/config.toml` |
-| **winget** | GUI applications, OS integration, compilers and SDKs — what mise has no backend for | `winget/public_usecase.txt`, `winget/private_usecase.txt` |
+| **mise** | CLI tools and language runtimes | `mise/src/config.toml` |
+| **winget** | Windows applications, as a list to reinstall from | `winget/public_usecase.txt`, `winget/private_usecase.txt` |
+
+The two are not symmetric, and only one of them describes the machine.
+
+**mise is authoritative.** `mise install` makes the machine match
+`config.toml`, and a tool that is not listed is not installed. Removing a
+line removes the tool.
+
+**The winget files are a shopping list.** `winget import` installs what the
+file names and never removes anything else, so the file can only ever
+assert a subset. A package installed by hand stays installed and stays
+absent from the list, and no amount of importing changes that. Measured on
+2026-08-03: 157 packages installed against 101 declared.
+
+So the list answers one question — what to install on a fresh Windows box —
+and does not answer what is on this one. Nothing checks it, because the
+only direction a check could enforce is the one `winget import` already
+handles.
 
 Rules:
 
-1. **A tool belongs to exactly one layer.** Check `mise registry` first; if
-   a backend resolves, mise owns the tool.
-2. **winget keeps only what mise cannot install** — packages missing from
-   the mise registry (ImageMagick), GUI applications whose name collides
-   with an unrelated CLI (the Claude desktop app against the `claude` CLI,
-   NI Package Manager against `npm:@antfu/ni`), and Windows installers with
-   no upstream archive to fetch (Git for Windows).
-3. **`mise` itself and PowerShell cannot move.** PowerShell is the shell
+1. **Prefer mise when it has a backend.** One fewer thing installed by
+   Windows, one fewer persistent `PATH` entry. This is a preference, not an
+   invariant: several tools are currently installed both ways, and nothing
+   objects.
+2. **`mise` itself and PowerShell cannot move.** PowerShell is the shell
    that activates mise, so routing either through a mise shim is circular.
-4. **`public_usecase.txt` is the work and development environment;
+3. **`public_usecase.txt` is the work and development environment;
    `private_usecase.txt` is hobby and personal apps.** The two sets are
    disjoint, so a private machine imports both:
-   `winget/init.ps1 -IncludePrivate`.
-5. **Runtime dependencies and OS-bundled apps are not declared.**
-   VCRedist, WindowsAppRuntime, UI.Xaml, VCLibs, Edge and OneDrive arrive
-   with their dependents.
+   `winget/init.ps1 -IncludePrivate`. This split is load-bearing — a work
+   machine runs `init.ps1` without the switch and gets none of the second
+   file.
+4. **Runtime dependencies and OS-bundled apps are not listed.** VCRedist,
+   WindowsAppRuntime, UI.Xaml, VCLibs, Edge and OneDrive arrive with their
+   dependents, so listing them would install nothing that was not coming
+   anyway.
+5. **Some packages cannot be listed at all.** Three installed packages
+   resolve to no winget source, so `winget import` will never restore them.
+   A fresh machine needs those installed by hand whatever the list says.
 
-Both manifests are `winget import` format, so `winget export` output can
-be diffed against them directly.
+Both files are `winget import` format, so `winget export` output can be
+diffed against them when curating.
 
 ## The PATH budget
 

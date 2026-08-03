@@ -75,7 +75,7 @@ Each top-level directory contains the actual config files plus optional `setup.{
 
 ## Installing the tools
 
-`dotfm` links configuration; it does not install anything. That is split in two: **mise** (`mise/src/config.toml`) owns CLI tools and language runtimes, **winget** (`winget/*.txt`) owns GUI applications and everything mise has no backend for. A tool belongs to exactly one layer. See [Package installation layers](docs/STRUCTURE.md#package-installation-layers).
+`dotfm` links configuration; it does not install anything. Installation is split in two, and the halves are not symmetric. **mise** (`mise/src/config.toml`) is authoritative: the machine matches the file. **winget** (`winget/*.txt`) is a list to reinstall from on a fresh Windows box, and describes nothing about this one — `winget import` adds and never removes. See [Package installation layers](docs/STRUCTURE.md#package-installation-layers).
 
 On Windows the PATH itself is declared, in `windows/PATH.txt` and `windows/SYSTEM_PATH.txt`, and applied with `windows/ApplyPath.ps1`. It has a budget — see [The PATH budget](docs/STRUCTURE.md#the-path-budget) before adding tools. `windows/doctor.ps1` reports the current state.
 
