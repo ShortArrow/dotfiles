@@ -3,10 +3,12 @@
 %SystemRoot%\System32\OpenSSH
 %SystemRoot%\System32\Wbem
 %SystemRoot%\System32\WindowsPowerShell\v1.0
+%SystemDrive%\Strawberry\perl\bin
 %SystemDrive%\intelFPGA_lite\24.1std\quartus\bin64
 %SystemDrive%\intelFPGA_lite\24.1std\quartus\sopc_builder\bin
 %SystemDrive%\intelFPGA_lite\24.1std\questa_fe\win64
 %SystemDrive%\intelFPGA_lite\24.1std\questa_fse\win64
+%ProgramFiles%\Alacritty
 %ProgramFiles%\Amazon Corretto\jdk24.0.2_12\bin
 %ProgramFiles%\Docker\Docker\resources\bin
 %ProgramFiles%\Emacs\emacs-30.2\bin
@@ -28,6 +30,7 @@
 %ProgramFiles%\usbipd-win
 %ProgramFiles(x86)%\Arm GNU Toolchain arm-none-eabi\14.2 rel1\bin
 %ProgramFiles(x86)%\Gpg4win\..\GnuPG\bin
+%ProgramFiles(x86)%\IVI Foundation\IVI\Bin
 %ProgramFiles(x86)%\IVI Foundation\VISA\WinNT\Bin
 %ProgramFiles(x86)%\Renesas\Hew
 %ProgramFiles(x86)%\Renesas\Hew\Tools\Renesas\Sh\9_4_3\bin
