@@ -29,10 +29,8 @@ that per hop. On a machine without it, the shim timings in
 fraction of what is written there, and the reason for the whole
 arrangement would be much weaker.
 
-**`V:` is a trusted Dev Drive.** ReFS plus the trust flag is what keeps the
-antivirus filter off file writes in the working tree. Without the trust
-flag the same volume takes about 500 ms per write while Defender scans
-synchronously, which is slow enough to make a build feel broken.
+**`V:` is a trusted Dev Drive.** Without the trust flag the same volume
+measured about 500 ms per write — slow enough to make a build feel broken.
 
 Numbers that do not depend on either — `PATH` lengths, the count of shims,
 the number of processes a shim starts — hold anywhere the same tools are
