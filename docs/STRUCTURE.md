@@ -131,7 +131,7 @@ line removes the tool.
 file names and never removes anything else, so the file can only ever
 assert a subset. A package installed by hand stays installed and stays
 absent from the list, and no amount of importing changes that. Measured on
-2026-08-03: 157 packages installed against 101 declared.
+2026-08-03: 157 packages installed against 103 declared.
 
 So the list answers one question — what to install on a fresh Windows box —
 and does not answer what is on this one. Nothing checks it, because the

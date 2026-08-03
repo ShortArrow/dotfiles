@@ -46,7 +46,13 @@
           "PackageIdentifier": "dorssel.usbipd-win"
         },
         {
+          "PackageIdentifier": "GIMP.GIMP"
+        },
+        {
           "PackageIdentifier": "Git.Git"
+        },
+        {
+          "PackageIdentifier": "GitHub.Copilot"
         },
         {
           "PackageIdentifier": "glzr-io.glazewm"
