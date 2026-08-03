@@ -165,7 +165,6 @@ Test-ItemPropertyValue -TargetPath $CodePagePath -TargetName "MACCP" -ExpectedVa
 # Check Command
 $Commands = @(
   # Node.js
-  "volta",
   "node",
   "npm",
   "pnpm",
