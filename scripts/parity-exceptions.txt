@@ -13,7 +13,7 @@
 
 # Removed a half-width space between Japanese characters. The English text has
 # no such construct, so there is nothing to mirror.
-content/ja/notes/generated-config.md 62f478a38a5d29e70e6d1a499442eb39a11ee16e
+content/ja/notes/generated-config.md 0e619e148144a8765136f958dca9e694ea08ddfe
 
 # Rewritten to drop metaphors carried over from the English draft — 値段, 居座る,
 # 腐る, 枝, 太らせる. The facts did not change, and the English is where those
@@ -21,10 +21,10 @@ content/ja/notes/generated-config.md 62f478a38a5d29e70e6d1a499442eb39a11ee16e
 #
 # shim-cost and lost-windows have since had their titles changed on both sides,
 # which puts them back in step; only this one is still one-sided.
-content/ja/notes/usb-suspend.md a7ca44bc221cac67de2a402a9e00631a842aab69
+content/ja/notes/usb-suspend.md b97fc89a1b86115a78400efccaa673311e8d51fa
 
-# The English side catching up. 4448b201 gave the Japanese lost-windows the
+# The English side catching up. 535e1bbe gave the Japanese lost-windows the
 # eleven-ignore-rules figure and a link to /machine/; the English had no
 # "on this machine" to replace, so it was missed and added here. The pair is
 # level in content, only the commits are one behind the other.
-content/en/notes/lost-windows.md 7f466b582dbff3d1141a54843055ed39e0f344bf
+content/en/notes/lost-windows.md 5f4e2326552d46eb8015d98c56f1fcdab2d98cd3
