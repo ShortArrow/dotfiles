@@ -38,6 +38,16 @@ so there is one copy of it.
 ## Settings
 
 `settings.json` is not linked — it accumulates per-machine permission
-entries. [`settings.sample.json`](settings.sample.json) records the parts
-worth carrying to a new machine, and [`env.sample`](env.sample) does the
-same for the environment.
+entries. [`settings.sample.json`](settings.sample.json) holds the keys worth
+carrying to every machine, and `setup.ps1` merges them in: a key the sample
+declares wins, a key it says nothing about is left alone, and `permissions`
+is never touched. The file is backed up before it is rewritten, and an apply
+that would change nothing says `noop`.
+
+[`env.sample`](env.sample) does the same for the environment, but is copied
+by hand — it carries a secret.
+
+The sample declares that commits leave no attribution trailer, both by
+setting `attribution` and by a `PreToolUse` hook that refuses a `git commit`
+carrying one. The setting alone was not enough: `attribution.sessionUrl`
+only governs commits made from web and Remote Control sessions.
