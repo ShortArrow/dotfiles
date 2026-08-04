@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# Refuse a commit message carrying an attribution trailer or a session link.
+#
+# This runs wherever the message comes from — -m, -F, an editor, --amend, a
+# template — because git hands the finished message to this hook as a file.
+# The PreToolUse guard in claude/ sees only a command line, so it misses -F
+# and anything assembled at run time; this is the one that holds.
+#
+# core.hooksPath makes this global, which replaces .git/hooks for every
+# repository on the machine. A repository that has its own commit-msg keeps
+# working: it is called at the end, with the same argument.
+set -u
+
+hook_dir=$(cd -P "$(dirname "$0")" && pwd)
+# shellcheck source=attribution.sh
+. "$hook_dir/attribution.sh"
+
+message_file=$1
+
+if has_attribution <"$message_file"; then
+  printf '%s\n' "commit-msg: attribution in the commit message" >&2
+  show_attribution "$message_file" >&2
+  printf '%s\n' "This repository does not carry attribution trailers or session links." >&2
+  printf '%s\n' "Remove the line and commit again." >&2
+  exit 1
+fi
+
+# git rev-parse --git-path resolves through core.hooksPath, which is this
+# directory, so the repository's own hook is addressed through --git-dir.
+own_hook="$(git rev-parse --git-dir)/hooks/commit-msg"
+if [ -x "$own_hook" ]; then
+  exec "$own_hook" "$@"
+fi

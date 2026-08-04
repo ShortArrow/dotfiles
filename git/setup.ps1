@@ -17,3 +17,11 @@ foreach ($p in $pairs) {
   & git config --global $p.key $p.value
   Write-DotfileOk "$($p.key) = $($p.value)"
 }
+
+# Global, so the guard covers every repository on the machine rather than the
+# one it happens to be installed in. This replaces .git/hooks; the hooks call
+# a repository's own version at the end, so nothing is lost by it.
+# Forward slashes: git reads the value as a path and does not unescape it.
+$hooksDir = (Resolve-Path "$PSScriptRoot/hooks").Path -replace '\\', '/'
+& git config --global core.hooksPath $hooksDir
+Write-DotfileOk "core.hooksPath = $hooksDir"

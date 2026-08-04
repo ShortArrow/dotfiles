@@ -14,3 +14,10 @@ git config --global core.pager             delta                     ; dotfile_o
 git config --global interactive.diffFilter 'delta --color-only'      ; dotfile_ok "interactive.diffFilter = 'delta --color-only'"
 git config --global delta.navigate         true                      ; dotfile_ok 'delta.navigate = true'
 git config --global merge.conflictStyle    zdiff3                    ; dotfile_ok 'merge.conflictStyle = zdiff3'
+
+# Global, so the guard covers every repository on the machine rather than the
+# one it happens to be installed in. This replaces .git/hooks; the hooks call
+# a repository's own version at the end, so nothing is lost by it.
+hooks_dir="$(cd -P "$script_dir/hooks" && pwd)"
+chmod +x "$hooks_dir/commit-msg" "$hooks_dir/pre-push"
+git config --global core.hooksPath "$hooks_dir"           ; dotfile_ok "core.hooksPath = $hooks_dir"

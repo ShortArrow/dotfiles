@@ -132,7 +132,13 @@ dst.linux   = "$XDG_CONFIG_HOME/Code - Insiders/User"
 # ---- Category B: symlink + post-apply side effects ----
 
 [tools.git]
-description = "Git global config (+ set init.defaultBranch)"
+description = "Git global config (+ set init.defaultBranch, install the hooks)"
+# core.hooksPath needs the absolute path of this checkout, which no declarative
+# run = [...] can produce, so the setup scripts own that one line.
+[tools.git.script]
+windows = "git/setup.ps1"
+linux = "git/setup.sh"
+macos = "git/setup.sh"
 [[tools.git.post_apply]]
 run = ["git", "config", "--global", "init.defaultBranch", "main"]
 [[tools.git.post_apply]]

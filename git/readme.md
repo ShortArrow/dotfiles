@@ -1,5 +1,32 @@
 # Git
 
+## Hooks
+
+`setup.{ps1,sh}` points `core.hooksPath` at [`hooks/`](hooks/), globally, so
+the guard covers every repository on the machine instead of the one it was
+installed into.
+
+| Hook | Refuses |
+|---|---|
+| `commit-msg` | a message carrying an attribution trailer or a session link |
+| `pre-push` | commits already carrying one — pulled from elsewhere, or written before the hook existed |
+
+`commit-msg` sees the finished message as a file, so `-m`, `-F`, `--amend`
+and the editor all reach it. The `PreToolUse` guard in
+[`../claude/`](../claude/) sees only a command line and therefore cannot see
+`-F` or a message assembled at run time; that one refuses the common case
+early, this one is the guarantee. Dependabot's lowercase `Co-authored-by:`
+passes both — it credits a real author.
+
+A global `core.hooksPath` replaces `.git/hooks` everywhere, so both hooks
+call the repository's own version at the end if it has one, with the same
+arguments and the same stdin.
+
+`bash hooks/hooks.test.sh` exercises both, including a commit whose message
+arrived through `-F`, and checks that the two guards return the same verdict
+on the same messages. Neither hook survives `--no-verify`; nothing hooks can
+do about that.
+
 ## Set default branch name
 
 ```bash
