@@ -57,3 +57,15 @@ The hooks match on the body, not on the subcommand, so `gh pr list` and
 `gh api` pass untouched while `issue`, `release` and `gist` are covered
 without naming each one. A commit or a pull request title may still say
 "claude" — only the trailer forms and the session URL are refused.
+
+Both shells are covered, because this same file turns the PowerShell tool
+on with `CLAUDE_CODE_USE_POWERSHELL_TOOL`. A guard on `Bash` alone leaves
+`git commit` reachable through the other tool, which is the failure that
+looks installed and is not.
+
+The `PowerShell` entry carries no `if` and decides the command shape in
+the script instead. `if` takes a permission rule, and a rule naming a tool
+that does not accept one would fail by never firing — silently, which is
+the one outcome a guard may not have. Keeping the gate in the script makes
+it testable: pipe a `tool_input` at it and read the verdict. `git log
+--grep='Claude-Session'` has to pass, and does.

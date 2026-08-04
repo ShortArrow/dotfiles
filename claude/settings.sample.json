@@ -26,6 +26,16 @@
             "statusMessage": "Checking the body for attribution"
           }
         ]
+      },
+      {
+        "matcher": "PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cmd=$(jq -r '.tool_input.command // \"\"'); case $cmd in *\"git commit\"*|*\"gh \"*) ;; *) exit 0;; esac; case $cmd in *Claude-Session:*|*\"Co-Authored-By: Claude\"*|*\"Generated with Claude Code\"*|*claude.ai/code/session_*) jq -nc '{hookSpecificOutput:{hookEventName:\"PreToolUse\",permissionDecision:\"deny\",permissionDecisionReason:\"Attribution trailer or session link detected. This repository does not carry them in commits, pull requests, issues or releases. Remove the line and retry.\"}}';; *) exit 0;; esac",
+            "statusMessage": "Checking for attribution"
+          }
+        ]
       }
     ]
   }
