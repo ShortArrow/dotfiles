@@ -63,9 +63,17 @@ on with `CLAUDE_CODE_USE_POWERSHELL_TOOL`. A guard on `Bash` alone leaves
 `git commit` reachable through the other tool, which is the failure that
 looks installed and is not.
 
-The `PowerShell` entry carries no `if` and decides the command shape in
-the script instead. `if` takes a permission rule, and a rule naming a tool
-that does not accept one would fail by never firing — silently, which is
-the one outcome a guard may not have. Keeping the gate in the script makes
-it testable: pipe a `tool_input` at it and read the verdict. `git log
---grep='Claude-Session'` has to pass, and does.
+Neither entry carries an `if`; both call
+[`check-attribution.sh`](check-attribution.sh), which decides the command
+shape itself. `if` takes a permission rule, and a rule naming a tool that
+does not accept one would fail by never firing — silently, which is the one
+outcome a guard may not have.
+
+Keeping the gate in a script is also what makes it testable. Run
+[`check-attribution.test.sh`](check-attribution.test.sh): it pipes a
+`tool_input` at the script and reads the verdict, over the trailer forms,
+the bare session URL, a clean commit, dependabot's lowercase
+`Co-authored-by:`, and the searches — `git log --grep`, `grep` — that carry
+the pattern as a search term and have to keep working. That last case is not
+hypothetical: the pattern was grepped for in this repository while the guard
+was being written.

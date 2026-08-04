@@ -164,9 +164,9 @@ dst.windows = "$USERPROFILE/Documents/PowerShell/myplug"
 
 
 [tools.claude]
-description = "Claude Code settings (notify.ps1, CLAUDE.md, statusline.sh)"
+description = "Claude Code settings (notify.ps1, CLAUDE.md, statusline.sh, check-attribution.sh)"
 [[tools.claude.links]]
-src = { dir = "claude", include = ["notify.ps1", "CLAUDE.md", "statusline.sh"] }
+src = { dir = "claude", include = ["notify.ps1", "CLAUDE.md", "statusline.sh", "check-attribution.sh"] }
 dst.windows = "$USERPROFILE/.claude"
 dst.linux   = "$HOME/.claude"
 
