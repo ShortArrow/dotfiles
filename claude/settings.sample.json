@@ -16,8 +16,14 @@
           {
             "type": "command",
             "if": "Bash(git commit*)",
-            "command": "cmd=$(jq -r '.tool_input.command // \"\"'); case $cmd in *Claude-Session:*|*\"Co-Authored-By: Claude\"*|*\"Generated with Claude Code\"*) jq -nc '{hookSpecificOutput:{hookEventName:\"PreToolUse\",permissionDecision:\"deny\",permissionDecisionReason:\"Attribution trailer detected in the commit message. This repository does not carry them. Remove the trailer line and retry.\"}}';; *) exit 0;; esac",
-            "statusMessage": "Checking commit message for attribution trailers"
+            "command": "cmd=$(jq -r '.tool_input.command // \"\"'); case $cmd in *Claude-Session:*|*\"Co-Authored-By: Claude\"*|*\"Generated with Claude Code\"*|*claude.ai/code/session_*) jq -nc '{hookSpecificOutput:{hookEventName:\"PreToolUse\",permissionDecision:\"deny\",permissionDecisionReason:\"Attribution trailer or session link detected in the commit message. This repository does not carry them. Remove the line and retry.\"}}';; *) exit 0;; esac",
+            "statusMessage": "Checking commit message for attribution"
+          },
+          {
+            "type": "command",
+            "if": "Bash(gh*)",
+            "command": "cmd=$(jq -r '.tool_input.command // \"\"'); case $cmd in *Claude-Session:*|*\"Co-Authored-By: Claude\"*|*\"Generated with Claude Code\"*|*claude.ai/code/session_*) jq -nc '{hookSpecificOutput:{hookEventName:\"PreToolUse\",permissionDecision:\"deny\",permissionDecisionReason:\"Attribution or a session link detected in the body. Pull requests, issues and releases in this repository do not carry them. Remove the line and retry.\"}}';; *) exit 0;; esac",
+            "statusMessage": "Checking the body for attribution"
           }
         ]
       }

@@ -47,7 +47,13 @@ that would change nothing says `noop`.
 [`env.sample`](env.sample) does the same for the environment, but is copied
 by hand — it carries a secret.
 
-The sample declares that commits leave no attribution trailer, both by
-setting `attribution` and by a `PreToolUse` hook that refuses a `git commit`
-carrying one. The setting alone was not enough: `attribution.sessionUrl`
+The sample declares that nothing this repository publishes carries an
+attribution trailer or a session link, both by setting `attribution` and by
+`PreToolUse` hooks that refuse a `git commit` or a `gh` command whose body
+contains one. The setting alone was not enough: `attribution.sessionUrl`
 only governs commits made from web and Remote Control sessions.
+
+The hooks match on the body, not on the subcommand, so `gh pr list` and
+`gh api` pass untouched while `issue`, `release` and `gist` are covered
+without naming each one. A commit or a pull request title may still say
+"claude" — only the trailer forms and the session URL are refused.
