@@ -33,22 +33,18 @@ this reason alone.
 directory of every managed tool when it runs something, and that
 expansion is charged to the same 8191.
 
-Measured on [the machine](/machine/), 2026-08-02:
+Measured on [the machine](/machine/), 2026-08-04:
 
 | | |
 |---|---|
 | Persistent `PATH` | 2,932 chars across 60 entries |
-| Under a mise shim | **7,297** |
-| Added by mise | +4,365 |
-| Remaining | **894** |
+| Under a mise shim | **7,392** |
+| Added by mise | +4,460 |
+| Remaining | **799** |
 
 The persistent path is two fifths of the total. mise is the rest, and it
 grows with each tool added — which makes the persistent side the only
 part worth defending, because it is the only part that is hand-written.
-
-The date is on the table because the second row moves with the tool list,
-not with anything in this repository. `windows/doctor.ps1` prints the
-current figures.
 
 ## What that buys
 
@@ -59,11 +55,9 @@ tool that has since moved under mise. Those cost length and resolve
 nothing.
 
 `path-order.toml` declares the order rules, and `windows/doctor.ps1`
-checks both the order and the remaining budget on every run, so the
-number above is not something anyone has to remember to measure.
+checks both the order and the remaining budget on every run.
 
 ## How much room is left
 
-185 characters is roughly two more tool directories. Adding several more
-mise-managed tools crosses the line, and the failure arrives as a package
-script that cannot find `node`.
+799 characters is roughly eight more tool directories. The failure arrives
+as a package script that cannot find `node`.

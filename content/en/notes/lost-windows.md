@@ -78,10 +78,3 @@ way buries the one case that matters under a dozen that do not.
 which is what the whole set is subtracted from. Everything else comes from
 `EnumWindows` filtered down to titled top-level windows that are neither
 minimised nor tool windows.
-
-## Listing is the default
-
-Running the script with no switch lists. Recovery needs `-Rescue`, and
-narrowing to one process or handle is available for when the list is long.
-A tool that moves panes between windows on its own initiative would be
-worse than the problem.

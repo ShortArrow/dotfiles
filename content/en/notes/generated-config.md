@@ -63,8 +63,7 @@ Nothing would be spliced, so refusing to write a config that silently
 drops the local ignores.
 ```
 
-That check earned itself immediately. The script is symlinked next to the
-generated config so the keybinding can reach it by a stable path, and
+The script is symlinked next to the generated config so the keybinding can reach it by a stable path, and
 `$PSScriptRoot` resolves to the link's own directory — which is where the
 *output* lives. Reading the base from there would have fed the generated
 file back into itself. The error appeared on the first run through the

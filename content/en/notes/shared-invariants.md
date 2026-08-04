@@ -36,8 +36,8 @@ M.lsp_log_size = function()
 end
 ```
 
-Two readers need these: the person at the machine, and CI. Written twice,
-one of the two copies gets fixed and the other quietly stops agreeing.
+The same checks are wanted in two places: interactively, and in CI.
+Written twice, one copy gets fixed and the other quietly stops agreeing.
 
 ## `:checkhealth my` reports what is true now
 
@@ -86,5 +86,5 @@ Each probe ends in `cq!` or `qa!`. `cq!` is the non-zero one.
 - **Hand Neovim a native path.** Neovim on Windows cannot open an
   MSYS-style `/d/...` path, so each file goes through `cygpath -m` first.
 
-Both ubuntu and windows run them, last green on 2026-07-16. The workflow
-only fires when `nvim/**` changes.
+The workflow runs them on ubuntu and windows, and only when `nvim/**`
+changes.

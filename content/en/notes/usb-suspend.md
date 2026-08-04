@@ -77,10 +77,3 @@ and there was no plan for how long a good stretch had to be.
 **Two symptoms were assumed to share a cause.** The audio trouble is what
 made a common driver stack attractive. Whether it had anything to do with
 the mouse was never established, and it still has not been.
-
-## The scripts
-
-`windows/usb/fix-usb.ps1` and `restore-usb.ps1` are still here. They turn
-USB selective suspend and the per-device power-off flag off and back on,
-which is a real thing to want for a device that genuinely gets suspended
-under the hand. They did not fix this.
