@@ -28,3 +28,13 @@ content/ja/notes/usb-suspend.md a05d7ee99182d26ebd9ebdc243e445ff91a801ca
 # "on this machine" to replace, so it was missed and added here. The pair is
 # level in content, only the commits are one behind the other.
 content/en/notes/lost-windows.md 594ace7bec256f2f45510c042434f2457e24cc9c
+
+# Japanese-only repairs to three notes drafted in English first. 握手 is what
+# two people do with their hands — the protocol sense of "handshake" does not
+# exist in Japanese — and 断崖 is an English figure for a discontinuity rather
+# than a Japanese one. The third is a run of eight sentences sharing one ます
+# ending, which is a property of Japanese and has no English counterpart. The
+# English says what it should already.
+content/ja/notes/irreversible-approval.md a2f144d418c28357d5817b3b2427822fb6b8846b
+content/ja/notes/vram-cliff.md a2f144d418c28357d5817b3b2427822fb6b8846b
+content/ja/notes/guard-placement.md a2f144d418c28357d5817b3b2427822fb6b8846b
