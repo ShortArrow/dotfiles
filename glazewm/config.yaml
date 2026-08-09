@@ -117,6 +117,8 @@ window_rules:
 
       # Ignores VM
       - window_process: { equals: 'WindowsSandboxRemoteSession' }
+      # Hyper-V VM Connection window (Windows Sandbox, dev environments, etc.)
+      - window_process: { equals: 'vmconnect' }
 
       # Machine-specific ignores are spliced in here from ignore-local.txt,
       # which is untracked. Merge-GlazewmConfig.ps1 does the splicing; this
