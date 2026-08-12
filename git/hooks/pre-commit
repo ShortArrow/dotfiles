@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+# Say why signing is refused before git's own fatal does it cryptically.
+#
+# On this machine commits are signed with SSH keys served by the Bitwarden
+# agent, and the key is declared per repository — deliberately, like
+# user.email. To anyone who has not read that decision, the resulting
+# "fatal: user.signingkey ... needs to be configured" reads as a broken
+# GPG setup, and helpful hands (human or coding agent) "repair" it by
+# restoring GPG signing. Explain the state where the confusion starts.
+#
+# A repository's own pre-commit is called at the end.
+set -u
+
+if [ "$(git config --get commit.gpgsign)" = "true" ] &&
+   [ "$(git config --get gpg.format)" = "ssh" ] &&
+   [ -z "$(git config --get user.signingkey)" ]; then
+  cat >&2 <<'MSG'
+pre-commit: no signing identity declared for this repository.
+
+This is the designed state, not damage: on this machine signing keys are
+declared per repository (SSH keys served by the Bitwarden agent). Do NOT
+"repair" this by switching the config back to GPG. Declare the identity:
+
+    Set-GitSigningKey       (pwsh: fzf over the agent's keys)
+    gsk                     (runex abbreviation of the same one-liner)
+    git config user.signingkey "key::$(ssh-add -L | fzf)"
+MSG
+  exit 1
+fi
+
+# The other failure that impersonates a broken config: the agent pipe has no
+# server because the Bitwarden app is not running. Exit code 2 from ssh-add
+# means "no agent" (1 is an agent with no identities, which unlock fixes).
+# The Windows binary is addressed explicitly — the MSYS ssh-add that hooks
+# would otherwise find cannot reach the named pipe at all.
+agent_probe='C:/Windows/System32/OpenSSH/ssh-add.exe'
+agent_rc=0
+if [ "$(git config --get commit.gpgsign)" = "true" ] &&
+   [ "$(git config --get gpg.format)" = "ssh" ] &&
+   [ -x "$agent_probe" ]; then
+  "$agent_probe" -l >/dev/null 2>&1 || agent_rc=$?
+fi
+if [ "$agent_rc" -eq 2 ]; then
+  cat >&2 <<'MSG'
+pre-commit: no SSH agent is serving \\.\pipe\openssh-ssh-agent.
+
+The signing config is fine — the Bitwarden app is simply not running
+(it serves that pipe). Do NOT switch the config back to GPG. Start
+Bitwarden, unlock the vault, and commit again. windows/doctor.ps1
+checks this state.
+MSG
+  exit 1
+fi
+
+own_hook="$(git rev-parse --git-dir)/hooks/pre-commit"
+if [ -x "$own_hook" ]; then
+  exec "$own_hook" "$@"
+fi
