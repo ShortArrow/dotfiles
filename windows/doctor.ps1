@@ -229,7 +229,9 @@ $Commands = @(
   "qemu"
   "ssh"
   "7z",
-  "git"
+  "git",
+  # Secrets
+  "bw"
 )
 foreach ($Command in $Commands)
 {
@@ -244,6 +246,25 @@ foreach ($Command in $Commands)
 Write-Host ""
 Write-Host "Checking packet capture drivers..." -ForegroundColor Cyan
 Test-Service -ServiceName "npcap"
+
+# SSH agent: Bitwarden serves \\.\pipe\openssh-ssh-agent, the same pipe the
+# OpenSSH ssh-agent service claims at boot. Only one of them can hold it, so
+# the service must stay Stopped/Disabled — re-enabling it silently steals the
+# pipe back and every key served from the vault disappears from ssh-add -l.
+# (Adopted 2026-08-12; restore with Set-Service ssh-agent -StartupType
+# Automatic if Bitwarden is ever dropped.)
+Write-Host ""
+Write-Host "Checking SSH agent ownership..." -ForegroundColor Cyan
+$sshAgentService = Get-Service -Name ssh-agent -ErrorAction SilentlyContinue
+$serviceYields = $null -eq $sshAgentService -or
+  ($sshAgentService.Status -ne 'Running' -and $sshAgentService.StartType -eq 'Disabled')
+Show-Result -IsOK $serviceYields
+Write-Host "ssh-agent service" -NoNewline
+Write-Host ", $($null -ne $sshAgentService ? "$($sshAgentService.Status)/$($sshAgentService.StartType)" : '#N/A') (expected Stopped/Disabled)" -ForegroundColor DarkGray
+$pipeServed = Test-Path '\\.\pipe\openssh-ssh-agent'
+Show-Result -IsOK $pipeServed
+Write-Host "agent pipe" -NoNewline
+Write-Host ", $($pipeServed ? 'served' : 'nobody serving — start Bitwarden and enable its SSH agent')" -ForegroundColor DarkGray
 
 # Supply-chain guards on the tool installers, and provenance of npm tools.
 . "$PSScriptRoot/Test-SupplyChain.ps1"

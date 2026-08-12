@@ -22,6 +22,12 @@
           "PackageIdentifier": "Arm.GnuArmEmbeddedToolchain"
         },
         {
+          "PackageIdentifier": "Bitwarden.Bitwarden"
+        },
+        {
+          "PackageIdentifier": "Bitwarden.CLI"
+        },
+        {
           "PackageIdentifier": "chrisant996.Clink"
         },
         {
