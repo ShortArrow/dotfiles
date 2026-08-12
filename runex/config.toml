@@ -83,6 +83,14 @@ key = "zed"
 expand = "zeditor"
 when_command_exists = ["zeditor"]
 
+# Declare this repository's signing identity: fzf over the keys the SSH
+# agent serves (on Windows: the Bitwarden vault). $(...) form, so pwsh,
+# bash and zsh only — nushell would need a different spelling.
+[[abbr]]
+key = "gsk"
+expand = "git config user.signingkey \"key::$(ssh-add -L | fzf --prompt 'signing key> ')\""
+when_command_exists = ["fzf"]
+
 # dotfm shortcuts. `df` is intentionally not shadowed (POSIX disk-free).
 [[abbr]]
 key = "dfa"

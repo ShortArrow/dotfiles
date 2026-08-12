@@ -641,6 +641,9 @@ $DebugPreference = 'Continue'
 # Initialize only essential environment variables
 Reload-EnvironmentVariables
 
+# Repository signing-key declaration (fzf over the agent's keys).
+. "$PSScriptRoot/Set-GitSigningKey.ps1"
+
 # runex abbreviation engine.
 # Resolve the real exe (mise which) so the cache is keyed on the actual binary and
 # the shim's triple-spawn (cmd -> mise -> runex) is paid only on a cache miss.
