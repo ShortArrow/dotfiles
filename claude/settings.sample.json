@@ -1,6 +1,7 @@
 {
   "env": {
-    "CLAUDE_CODE_USE_POWERSHELL_TOOL": "1"
+    "CLAUDE_CODE_USE_POWERSHELL_TOOL": "1",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "opus"
   },
   "attribution": {
     "commit": "",
