@@ -22,6 +22,6 @@
 # than a Japanese one. The third is a run of eight sentences sharing one ます
 # ending, which is a property of Japanese and has no English counterpart. The
 # English says what it should already.
-content/ja/notes/irreversible-approval.md a2f144d418c28357d5817b3b2427822fb6b8846b
-content/ja/notes/vram-cliff.md a2f144d418c28357d5817b3b2427822fb6b8846b
-content/ja/notes/guard-placement.md a2f144d418c28357d5817b3b2427822fb6b8846b
+content/ja/notes/irreversible-approval.md 13a2ef3da38762c6abfe0db0a29225728c2110fa
+content/ja/notes/vram-cliff.md 13a2ef3da38762c6abfe0db0a29225728c2110fa
+content/ja/notes/guard-placement.md 13a2ef3da38762c6abfe0db0a29225728c2110fa
