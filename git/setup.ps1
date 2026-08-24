@@ -37,8 +37,14 @@ Write-DotfileOk "core.hooksPath = $hooksDir"
 # declared one refuses to commit, which is the point: signing with the wrong
 # identity should be impossible, not merely unlikely.
 Write-DotfileInfo 'git: signing via the Bitwarden SSH agent (Windows-only)'
+# Each of the three has its own switch and none implies the others, so a tag or
+# a merge commit goes out unsigned while every ordinary commit is signed. That
+# gap is invisible in `git log`: `git tag -v` on an unsigned tag prints the
+# tagger and stops, which reads like success.
 $signing = @(
   @{ key = 'commit.gpgsign';  value = 'true' }
+  @{ key = 'merge.gpgsign';   value = 'true' }
+  @{ key = 'tag.gpgSign';     value = 'true' }
   @{ key = 'gpg.format';      value = 'ssh' }
   @{ key = 'gpg.ssh.program'; value = 'C:/Windows/System32/OpenSSH/ssh-keygen.exe' }
 )
