@@ -65,6 +65,8 @@ zig = "latest"
 "github:gitsocial-org/gitsocial" = "latest"
 "github:gnomeria/usbtree" = "latest"
 "github:microsoft/apm" = "latest"
+"github:chawyehsu/nano-for-windows" = "latest"
+"github:micro-editor/micro" = "latest"
 
 [tool_alias]
 python3 = "python"

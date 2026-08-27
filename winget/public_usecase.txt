@@ -37,6 +37,9 @@
           "PackageIdentifier": "CrystalDewWorld.CrystalDiskInfo"
         },
         {
+          "PackageIdentifier": "CudaText.CudaText"
+        },
+        {
           "PackageIdentifier": "DBeaver.DBeaver.Community"
         },
         {
@@ -227,6 +230,9 @@
         },
         {
           "PackageIdentifier": "uvncbvba.UltraVNC"
+        },
+        {
+          "PackageIdentifier": "Vercel.Hyper"
         },
         {
           "PackageIdentifier": "vim.vim"
