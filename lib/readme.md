@@ -45,11 +45,11 @@ Test-WindowsSymlinkCapable          # true if Dev Mode or Admin
 Expand-DotfileVars '$APPDATA/Code/User'
 # -> C:\Users\who\AppData\Roaming/Code/User
 
-New-DotfileSymlink -Source 'V:/dotfiles/runex/config.toml' `
+New-DotfileSymlink -Source 'V:/github.com/ShortArrow/dotfiles/runex/config.toml' `
                    -Destination "$env:USERPROFILE/.config/runex/config.toml"
 # -> 'created' | 'replaced' | 'noop'
 
-Read-DotfileRegistry -Path V:/dotfiles/dotfm.toml
+Read-DotfileRegistry -Path V:/github.com/ShortArrow/dotfiles/dotfm.toml
 # -> hashtable: name -> @{ platforms; links }
 
 Set-DotfileLinks -ToolName 'alacritty'
@@ -74,7 +74,7 @@ expand_dotfile_vars '$XDG_CONFIG_HOME/runex/config.toml'
 new_dotfile_symlink "$src" "$dst"
 # echoes 'created' | 'replaced' | 'noop'
 
-read_dotfile_registry V:/dotfiles/dotfm.toml runex linux
+read_dotfile_registry V:/github.com/ShortArrow/dotfiles/dotfm.toml runex linux
 # emits TSV: <kind> <path-or-dir> <include-csv> <dst>
 
 set_dotfile_links alacritty

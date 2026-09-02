@@ -34,10 +34,10 @@ USB/HID ドライバスタックが同時刻に差し替わっていたことが
 
 ```pwsh
 # 適用（省電力を無効化する）
-sudo pwsh -NoProfile -ExecutionPolicy Bypass -File V:\dotfiles\windows\usb\fix-usb.ps1
+sudo pwsh -NoProfile -ExecutionPolicy Bypass -File V:\github.com\ShortArrow\dotfiles\windows\usb\fix-usb.ps1
 
 # 元に戻す（Windows 既定へ）
-sudo pwsh -NoProfile -ExecutionPolicy Bypass -File V:\dotfiles\windows\usb\restore-usb.ps1
+sudo pwsh -NoProfile -ExecutionPolicy Bypass -File V:\github.com\ShortArrow\dotfiles\windows\usb\restore-usb.ps1
 ```
 
 ## 補足

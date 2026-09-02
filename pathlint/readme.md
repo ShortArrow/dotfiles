@@ -13,7 +13,7 @@ include user-profile paths) to track in dotfiles. Capture into a
 gitignored or out-of-repo location when needed:
 
 ```pwsh
-cd V:\dotfiles\pathlint
+cd V:\github.com\ShortArrow\dotfiles\pathlint
 pathlint lint   --json | Out-File -Encoding utf8 "$HOME\pathlint-lint-$(Get-Date -Format yyyy-MM-dd).json"
 pathlint doctor --json | Out-File -Encoding utf8 "$HOME\pathlint-doctor-$(Get-Date -Format yyyy-MM-dd).json"
 ```

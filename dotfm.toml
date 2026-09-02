@@ -1,4 +1,4 @@
-# dotfm registry for V:/dotfiles
+# dotfm registry for V:/github.com/ShortArrow/dotfiles
 #
 # This file declares every tool that dotfm knows how to link on this dotfiles repo.
 # Per-machine tool selection lives in ~/.config/dotfm/config.toml.
