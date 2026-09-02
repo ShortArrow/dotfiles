@@ -45,7 +45,10 @@ function Assert-ClaudeSessionFormatVersion {
 }
 
 function ConvertTo-ProjectDirName([string]$Path) {
-    return $Path.Replace(':', '-').Replace('\', '-')
+    # Claude Code sanitizes every non-alphanumeric character, not only ':'
+    # and '\': '_' and '.' also become '-' (V:\nasm_self_destruction ->
+    # V--nasm-self-destruction, S3.kPGy -> S3-kPGy). Case is preserved.
+    return $Path -replace '[^A-Za-z0-9]', '-'
 }
 
 function ConvertTo-JsonCwdLiteral([string]$Path) {
