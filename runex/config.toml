@@ -120,3 +120,11 @@ when_command_exists = ["dotfm"]
 [[abbr]]
 key = "exp"
 expand = "explorer"
+
+[[abbr]]
+key = "wzsp"
+expand = "wezterm cli spawn"
+
+[[abbr]]
+key = "ghqm"
+expand = "ghq list -p | fzf | % { cd $_ }"
