@@ -9,6 +9,7 @@
     "sessionUrl": false
   },
   "includeCoAuthoredBy": false,
+  "skillListingBudgetFraction": 0.03,
   "hooks": {
     "PreToolUse": [
       {
