@@ -27,6 +27,11 @@ check deny  'Start-Process zebar'
 check deny  'start glazewm'
 check deny  'Invoke-Item C:\tools\Bitwarden.exe'
 
+check deny  'Start-Process code'
+check deny  'start code .'
+check deny  'Start-Process -FilePath code -ArgumentList .'
+check deny  'Invoke-Item "C:\Users\who\AppData\Local\Programs\Microsoft VS Code\Code.exe"'
+
 # Not launches: CLI subcommands, queries, kills, the sanctioned detached path.
 check allow 'glazewm.exe command wm-exit'
 check allow 'Get-Process Bitwarden -ErrorAction SilentlyContinue'
@@ -34,6 +39,11 @@ check allow 'taskkill /im zebar.exe'
 check allow 'schtasks /run /tn "GlazeWM_Task"'
 check allow 'git commit -m "feat(zebar): float the window"'
 check allow 'systemctl restart zebar-sync.service'
+check allow 'code .'
+check allow 'Start-Process notepad C:\code\readme.txt'
+check allow 'Start-Process decode.exe'
+check allow 'git grep "start code"'
+check allow 'taskkill /im Code.exe'
 
 # Global signing-config writes: the "repair" this machine must refuse.
 check deny  'git config --global gpg.format openpgp'

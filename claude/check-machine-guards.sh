@@ -41,6 +41,16 @@ if printf '%s' "$command_line" | grep -Eiq "(start-process|invoke-item)[^;|&]*$a
   deny 'GUI apps must not be launched from a session: the process inherits the console handles and its logs flood the chat. Ask the user to start it (tray, Start menu), or use schtasks /run for a detached launch.'
 fi
 
+# VS Code is launch-verb-only too, but "code" is a substring of too many
+# innocent commands (decode, C:\code\, "exit code") for the apps list, so it
+# anchors to the token right after the launch verb — allowing -Parameters, a
+# quote, and a drive path ending in code / Code.exe. The bare `code .` CLI
+# stays open: it detaches on its own.
+vscode='(start-process|invoke-item|(^|[;&|] *)start)( +-[a-z]+)* +"?([a-z]:[^;|&"]*[\\/])?code(-insiders)?(\.cmd|\.exe)?"?( |$)'
+if printf '%s' "$command_line" | grep -Eiq "$vscode"; then
+  deny 'VS Code must not be launched through a launch verb from a session: the process inherits the console handles and corrupts the TUI. Use the bare `code <path>` CLI, which detaches, or ask the user to open it.'
+fi
+
 if printf '%s' "$command_line" | grep -Eiq 'git +config' &&
    printf '%s' "$command_line" | grep -q -- '--global' &&
    printf '%s' "$command_line" | grep -Eiq '(gpg\.|commit\.gpgsign|user\.signingkey)' &&
