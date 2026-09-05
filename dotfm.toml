@@ -158,6 +158,15 @@ platforms = ["windows"]
 windows = "git/signing.ps1"
 
 
+# Mutually exclusive with git-signing: both own gpg.format, last applied wins.
+[tools.git-signing-gpg]
+description = "Sign with GPG (OpenPGP) instead of the Bitwarden SSH agent"
+[tools.git-signing-gpg.script]
+windows = "git/signing-gpg.ps1"
+linux = "git/signing-gpg.sh"
+macos = "git/signing-gpg.sh"
+
+
 [tools.nvim]
 description = "Neovim configuration directory"
 [[tools.nvim.links]]
