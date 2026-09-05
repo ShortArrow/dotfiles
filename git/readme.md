@@ -33,35 +33,19 @@ do about that.
 git config --global init.defaultBranch main
 ```
 
-## GPG cofig
+## Signing
 
-Windows
+[`signing.ps1`](signing.ps1) — the dotfm tool `git-signing`, Windows-only —
+wires commit, merge and tag signing to SSH keys held in the Bitwarden vault,
+reached through the Windows OpenSSH agent pipe. It sets no global
+`user.signingkey`: each repository declares its own identity, so a
+repository that has not declared one refuses to commit instead of signing
+with the wrong key. The allowed-signers list stays machine-local at
+`~/.config/git/allowed_signers`, outside this public checkout.
 
-```powershell
-git config --global gpg.program "C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe"
-git config --global commit.gpgsign true
-git config user.signingkey 7B66415DC7B803DD
-#git config --global gpg.program "gpg.exe --pinentry-mode loopback"
-```
-
-WSL2
-
-```bash
-GPG_TTY=$(tty)
-export GPG_TTY
-sudo ln -s /mnt/c/Program\ Files\ \(x86\)/GnuPG/bin/gpg.exe /usr/local/bin/gpg
-sudo ln -s gpg /usr/local/bin/gpg2
-```
-
-In the `~/.gnupg/gpg-agent.conf`<- maybe not need.
-
-```bash
-pinentry-program "/mnt/c/Program Files (x86)/Gpg4win/bin/pinentry.exe"
-```
-
-```powershell
-pinentry-program "C:\\Program Files (x86)\\GnuPG\\bin\\pinentry-basic.exe"
-```
+It is separate from `setup.{ps1,sh}` so a machine without the vault still
+gets the general config and the hooks. GPG remains installed only to
+decrypt and verify pre-2026 GPG signatures.
 
 ## Github Docs
 

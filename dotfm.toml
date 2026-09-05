@@ -151,6 +151,13 @@ run = ["git", "config", "--global", "delta.navigate", "true"]
 run = ["git", "config", "--global", "merge.conflictStyle", "zdiff3"]
 
 
+[tools.git-signing]
+description = "Sign with vault-held SSH keys via the Bitwarden agent"
+platforms = ["windows"]
+[tools.git-signing.script]
+windows = "git/signing.ps1"
+
+
 [tools.nvim]
 description = "Neovim configuration directory"
 [[tools.nvim.links]]
