@@ -125,6 +125,27 @@ for section in "${SECTIONS[@]}"; do
   done < <(find "$base" -name '*.md' -type f | sort)
 done
 
+# An exception expires by itself: it names the commit that may stand alone, so
+# the next commit to touch that file leaves it matching nothing. Expired
+# entries then sit in the file doing nothing, and reading the file cannot tell
+# them from live ones. Report them, so the list stays as short as the number of
+# edits actually being excused.
+if [ -f "$EXCEPTIONS" ]; then
+  note "== exceptions =="
+  while read -r declared_path declared_rev _; do
+    case "$declared_path" in '' | '#'*) continue ;; esac
+    resolved=$(git rev-parse --verify --quiet "${declared_rev}^{commit}" || true)
+    current=$(last_commit_sha "$declared_path")
+    if [ -z "$resolved" ]; then
+      bad "${declared_path}: ${declared_rev} does not resolve — rewritten history, repoint or delete it"
+    elif [ "$resolved" = "$current" ]; then
+      note "live     ${declared_path}"
+    else
+      note "expired  ${declared_path} — a later commit touched it; delete this line"
+    fi
+  done <"$EXCEPTIONS"
+fi
+
 if [ "$fail" -eq 0 ]; then
   note "OK  every opted-in section is in step across ${LANGS[*]}"
 fi

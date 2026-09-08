@@ -13,6 +13,6 @@ repository does about it now. They are here because the answer lives in
 several files at once — a config, a script, a CI job — and none of those
 files is the right place to explain it.
 
-The timings and counts come from one machine, described in
-[The machine](/machine/), so you can tell which of them would hold on
-yours.
+The numbers are measured. Most of them come from [The machine](/machine/),
+so you can tell which would hold on yours; where a note measured somewhere
+else, it says what it measured on.

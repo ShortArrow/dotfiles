@@ -8,23 +8,20 @@
 # Any revision git can resolve works. Full hashes are written here because an
 # abbreviation is only as unique as the repository it was taken from.
 #
-# Keep the reason next to the entry. An entry with no reason is a silenced
-# check.
-
-# Removed a half-width space between Japanese characters. The English text has
-# no such construct, so there is nothing to mirror.
-content/ja/notes/generated-config.md 8fd23a79e1bba7e08191b402c0c12bb73f7c66b3
-
-# Rewritten to drop metaphors carried over from the English draft — 値段, 居座る,
-# 腐る, 枝, 太らせる. The facts did not change, and the English is where those
-# figures belong, so there is no counterpart edit to make.
+# The exception covers everything that commit did to that file, so keep such a
+# commit narrow. A one-sided prose repair carrying a fact that should have been
+# mirrored is excused along with it.
 #
-# shim-cost and lost-windows have since had their titles changed on both sides,
-# which puts them back in step; only this one is still one-sided.
-content/ja/notes/usb-suspend.md a05d7ee99182d26ebd9ebdc243e445ff91a801ca
+# Keep the reason next to the entry. An entry with no reason is a silenced
+# check. check-content-parity.sh reports which lines are still live, so an
+# expired one is meant to be deleted rather than left as sediment.
 
-# The English side catching up. 535e1bbe gave the Japanese lost-windows the
-# eleven-ignore-rules figure and a link to /machine/; the English had no
-# "on this machine" to replace, so it was missed and added here. The pair is
-# level in content, only the commits are one behind the other.
-content/en/notes/lost-windows.md 594ace7bec256f2f45510c042434f2457e24cc9c
+# Japanese-only repairs to three notes drafted in English first. 握手 is what
+# two people do with their hands — the protocol sense of "handshake" does not
+# exist in Japanese — and 断崖 is an English figure for a discontinuity rather
+# than a Japanese one. The third is a run of eight sentences sharing one ます
+# ending, which is a property of Japanese and has no English counterpart. The
+# English says what it should already.
+content/ja/notes/irreversible-approval.md 13a2ef3da38762c6abfe0db0a29225728c2110fa
+content/ja/notes/vram-cliff.md 13a2ef3da38762c6abfe0db0a29225728c2110fa
+content/ja/notes/guard-placement.md 13a2ef3da38762c6abfe0db0a29225728c2110fa
