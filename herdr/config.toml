@@ -1,0 +1,14 @@
+onboarding = false
+
+[ui]
+#host_cursor = "native"
+
+[ui.toast]
+delivery = "system"
+
+[theme]
+name = "tokyo-night"
+auto_switch = false
+
+[terminal]
+default_shell = "pwsh"

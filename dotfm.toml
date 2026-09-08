@@ -297,3 +297,10 @@ description = "Windows environment health checks (no symlinks)"
 platforms = ["windows"]
 [tools.windows.doctor]
 windows = "windows/doctor.ps1"
+
+[tools.herdr]
+description = "herdr terminal client"
+platforms = ["windows"]
+[[tools.herdr.links]]
+src = "herdr/config.toml"
+dst.windows = "$APPDATA/herdr/config.toml"
