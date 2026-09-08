@@ -75,3 +75,9 @@ python3 = "python"
 
 [tool_alias.python.versions]
 python3 = "python"
+
+# The bin farm (windows/Sync-MiseBinFarm.ps1) links to versioned install
+# directories, so every upgrade strands its links until the farm is rebuilt.
+# Rebuild it after each install; on other platforms there is no farm.
+[hooks]
+postinstall = { run = "true", run_windows = '"C:/Program Files/PowerShell/7/pwsh.exe" -NoProfile -File "V:/github.com/ShortArrow/dotfiles/windows/Sync-MiseBinFarm.ps1"' }
