@@ -1,5 +1,8 @@
-# Skip profile for non-interactive sessions (e.g. pwsh -c)
-if (-not [Environment]::UserInteractive -or [Console]::IsInputRedirected) { return }
+# Skip profile for non-interactive sessions (e.g. pwsh -c). An SSH session
+# reports UserInteractive=False — it has no interactive window station — yet
+# it is a person's shell: SSH_CONNECTION marks it interactive here.
+$isInteractiveShell = ([Environment]::UserInteractive -or [bool]$env:SSH_CONNECTION) -and -not [Console]::IsInputRedirected
+if (-not $isInteractiveShell) { return }
 
 # Profile load time measurement
 $profileLoadStart = Get-Date
@@ -136,6 +139,7 @@ function Reload-EnvironmentVariables {
     if ($seen.Add($p.TrimEnd('\'))) { $p }
   }
   $newPath = ($deduped -join ';')
+  if ($symlinksBlocked) { $newPath = Remove-MiseFarmFromPath -Path $newPath -FarmDir $farmDir }
 
   $envVars = @{
     Path   = @{
@@ -197,7 +201,7 @@ New-Alias -Name reload -Value Read-Profile -Force
 
 # PSReadLine requires a console host with virtual terminal support. Skip setup in
 # non-interactive / redirected sessions to avoid initialization errors.
-if ((Get-Module PSReadLine -ListAvailable) -and [Environment]::UserInteractive -and -not [Console]::IsInputRedirected) {
+if ((Get-Module PSReadLine -ListAvailable) -and $isInteractiveShell) {
   Import-Module PSReadLine -ErrorAction SilentlyContinue
   try {
     Set-PSReadLineOption -PredictionSource History -PredictionViewStyle ListView
@@ -331,6 +335,26 @@ if (Test-CommandExist('go')) {
   if (-not $hasGoBin) { $env:Path = "$env:Path;$goBin" }
 }
 
+# Over SSH the farm is unusable: sshd runs under the Redirection Trust
+# mitigation, child processes inherit it, and a symlink owned by a
+# non-elevated user is refused ("untrusted mount point") — which is every
+# farm link. The shims behind the farm are real executables, so the farm
+# leaves PATH — inside Reload-EnvironmentVariables, which composes it — and the
+# shims take resolution.
+. "$PSScriptRoot/Remove-MiseFarmFromPath.ps1"
+$farmDir = Join-Path $env:LOCALAPPDATA 'mise\bin'
+$symlinksBlocked = [bool]$env:SSH_CONNECTION
+# mise itself is reached through a WinGet Links symlink, so the shims cannot
+# execute it under the mitigation either. Reading a link's target is allowed;
+# the real mise directory goes first on PATH so `mise` resolves to the file.
+if ($symlinksBlocked) {
+  $miseCmd = Get-Command mise -ErrorAction SilentlyContinue
+  if ($miseCmd) {
+    $miseItem = Get-Item -LiteralPath $miseCmd.Source -Force
+    if ($miseItem.LinkType) { $env:PATH = (Split-Path (@($miseItem.Target)[0])) + ';' + $env:PATH }
+  }
+}
+
 # mise: hot tools resolve via the symlink farm (%LocalAppData%\mise\bin), the rest
 # via shims — both on the persistent PATH (windows/PATH.txt), farm first.
 # `mise activate` is intentionally not used — it prepends ~20 per-tool install dirs and
@@ -343,8 +367,7 @@ if (Test-CommandExist('go')) {
 # because a broken link still wins PATH resolution over the shim behind it.
 # The scan is filesystem-only (no spawns); repair costs one spawn per stale
 # tool, so it runs detached rather than blocking the prompt.
-$farmDir = Join-Path $env:LOCALAPPDATA 'mise\bin'
-if (Test-Path -LiteralPath $farmDir) {
+if (-not $symlinksBlocked -and (Test-Path -LiteralPath $farmDir)) {
   $stranded = @(Get-ChildItem -LiteralPath $farmDir -File |
     Where-Object { $_.LinkType -and -not (Test-Path -LiteralPath (@($_.Target)[0])) })
   if ($stranded.Count -gt 0) {

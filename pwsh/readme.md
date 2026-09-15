@@ -30,8 +30,13 @@ Get-ExecutionPolicy -List
 ## add to profile
 
 ```powershell
-. $PROFILE/myplug/pwsh_myplug.ps1
+. V:\github.com\ShortArrow\dotfiles\pwsh\src\pwsh_myplug.ps1
 ```
+
+Dot-source the checkout path, not the `Documents\PowerShell\myplug` link
+that dotfm creates: a shell reached over SSH runs under the Redirection
+Trust mitigation inherited from sshd, which refuses to follow a symlink
+owned by a non-elevated user, and the profile would fail on its first line.
 
 read [script-scope-and-dot-sourcing](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_scripts#script-scope-and-dot-sourcing)
 
