@@ -151,6 +151,13 @@ run = ["git", "config", "--global", "delta.navigate", "true"]
 run = ["git", "config", "--global", "merge.conflictStyle", "zdiff3"]
 
 
+[tools.ghq]
+description = "ghq root for the github.com/<owner>/<repo> checkout layout"
+platforms = ["windows"]
+[tools.ghq.script]
+windows = "git/setup-ghq.ps1"
+
+
 [tools.git-signing]
 description = "Sign with vault-held SSH keys via the Bitwarden agent"
 platforms = ["windows"]

@@ -47,6 +47,13 @@ It is separate from `setup.{ps1,sh}` so a machine without the vault still
 gets the general config and the hooks. GPG remains installed only to
 decrypt and verify pre-2026 GPG signatures.
 
+## ghq
+
+[`setup-ghq.ps1`](setup-ghq.ps1) — the dotfm tool `ghq`, Windows-only — sets
+`ghq.root` (default `V:\`) and creates the root if it is missing, so `ghq get`
+clones into `V:\github.com\<owner>\<repo>`, the layout every checkout on this
+machine follows. Pass `-Root` to point it elsewhere.
+
 ## Github Docs
 
 [Signing commit](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits)
