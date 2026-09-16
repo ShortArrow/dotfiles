@@ -75,4 +75,65 @@ M.goto_definition = function()
   end
 end
 
+local GITHUB_URL_HEAD = "https?://github%.com/"
+
+--- Rewrite every bare or <autolinked> GitHub repository URL on one line as
+--- [owner/repo](url). A URL already inside a markdown link is left alone,
+--- and so is a URL that names an owner without a repository.
+--- @param line string
+--- @return string
+M.linkify_line = function(line)
+  local out, pos = {}, 1
+  while true do
+    local s, e = line:find(GITHUB_URL_HEAD, pos)
+    if not s then break end
+    local ue = e
+    while ue < #line and not line:sub(ue + 1, ue + 1):match("[%s<>%]%)\"']") do
+      ue = ue + 1
+    end
+    while ue > e and line:sub(ue, ue):match("[.,;:!?]") do
+      ue = ue - 1
+    end
+    local url = line:sub(s, ue)
+    local owner, repo = url:match("^https?://github%.com/([%w%-%._]+)/([%w%-%._]+)")
+    local before = line:sub(1, s - 1)
+    local inside_link = before:sub(-1) == "[" or before:sub(-2) == "]("
+    local autolink = before:sub(-1) == "<" and line:sub(ue + 1, ue + 1) == ">"
+    if owner and repo and not inside_link then
+      local rs, re = s, ue
+      if autolink then rs, re = s - 1, ue + 1 end
+      table.insert(out, line:sub(pos, rs - 1))
+      table.insert(out, ("[%s/%s](%s)"):format(owner, repo, url))
+      pos = re + 1
+    else
+      table.insert(out, line:sub(pos, ue))
+      pos = ue + 1
+    end
+  end
+  table.insert(out, line:sub(pos))
+  return table.concat(out)
+end
+
+--- Apply linkify_line to a line range of the current buffer, whole buffer
+--- when no range is given. Lines are 1-based and inclusive.
+--- @param first integer|nil
+--- @param last integer|nil
+M.linkify_github_urls = function(first, last)
+  first = first or 1
+  last = last or vim.api.nvim_buf_line_count(0)
+  local lines = vim.api.nvim_buf_get_lines(0, first - 1, last, false)
+  local changed = 0
+  for i, l in ipairs(lines) do
+    local n = M.linkify_line(l)
+    if n ~= l then
+      lines[i] = n
+      changed = changed + 1
+    end
+  end
+  if changed > 0 then
+    vim.api.nvim_buf_set_lines(0, first - 1, last, false, lines)
+  end
+  vim.notify(("GitHub URLs linkified on %d line(s)"):format(changed))
+end
+
 return M

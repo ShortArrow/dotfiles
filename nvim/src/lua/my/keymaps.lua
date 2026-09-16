@@ -63,6 +63,17 @@ M.maps = {
       function() require("my.lang.markdown").goto_definition() end,
       desc = "Markdown goto link/definition",
     },
+    {
+      "<Leader>lu",
+      function() require("my.lang.markdown").linkify_github_urls() end,
+      desc = "Markdown: GitHub URLs -> [owner/repo](url), whole buffer",
+    },
+    {
+      mode = "v",
+      "<Leader>lu",
+      ":<C-u>lua require('my.lang.markdown').linkify_github_urls(vim.fn.line(\"'<\"), vim.fn.line(\"'>\"))<CR>",
+      desc = "Markdown: GitHub URLs -> [owner/repo](url), selection",
+    },
   },
   rust_tools = {
     {
