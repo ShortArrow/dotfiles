@@ -2,52 +2,46 @@
 
 [![Site](https://github.com/ShortArrow/dotfiles/actions/workflows/hugo.yml/badge.svg)](https://github.com/ShortArrow/dotfiles/actions/workflows/hugo.yml)
 
-Cross-platform dotfiles of [@ShortArrow](https://github.com/ShortArrow). Same end state on Windows / Linux / macOS via a single source of truth (`dotfm.toml`).
+Configuration for the machines of [@ShortArrow](https://github.com/ShortArrow),
+applied the same way on Windows, Linux and macOS. [`dotfm.toml`](dotfm.toml)
+declares every tool: where its files sit in this repository and where each
+operating system expects them.
 
-## How it works
+## Setting up a machine
 
-Two parallel layers produce the same symlink tree — pick whichever is bootstrappable on the host:
+[`dotfm`](https://github.com/ShortArrow/dotfm) reads `dotfm.toml` and links the
+tools enabled on this machine. The selection is per machine, kept in
+`~/.config/dotfm/config.toml`, so a work laptop and a home desktop share one
+registry and enable different rows of it.
 
-1. **[`dotfm`](https://github.com/ShortArrow/dotfm)** — small Rust binary, reads `dotfm.toml` and applies the link rules. Recommended for everyday use.
-2. **`<tool>/setup.ps1` / `<tool>/setup.sh`** — bootstrap launchers used when `dotfm` isn't available yet (fresh boxes, no Rust). They consume the same `dotfm.toml` through `lib/_lib.{ps1,sh}`.
-
-Running both is a no-op the second time. See [`docs/STRUCTURE.md`](docs/STRUCTURE.md) for the full design (decision matrix for `symlink` / `copy` / `post_apply` / `script`, security rules, how to add a tool).
-
-Each tool's readme is also a page on [dotfiles.shortarrow.jp](https://dotfiles.shortarrow.jp), mounted from where it sits. See [`docs/SITE.md`](docs/SITE.md).
-
-## Quick start
-
-The everyday flow is `dotfm apply`. The `<tool>/setup.{ps1,sh}` launchers exist as **per-tool** fallbacks for hosts where `dotfm` isn't installed yet — each one only touches its own tool.
-
-### With dotfm (recommended)
-
-```bash
-# Install dotfm (https://github.com/ShortArrow/dotfm), then:
-git clone https://github.com/ShortArrow/dotfiles.git ~/dotfiles
-cd ~/dotfiles
-dotfm apply       # apply every tool listed in dotfm.toml
-dotfm status      # verify the symlinks are in place
+```sh
+ghq get ShortArrow/dotfiles     # or git clone, anywhere
+cd <checkout>
+dotfm init                      # records this checkout as the root
+dotfm add git pwsh starship     # enable what this machine needs
+dotfm apply                     # links, then each tool's post-apply steps
+dotfm status                    # every link, and whether it is in place
 ```
 
-Windows is the same — clone, `cd`, `dotfm apply` from PowerShell.
+`dotfm list` prints every tool with its purpose; `dotfm doctor` runs the
+health checks tools declare.
 
-### Without dotfm (per-tool bootstrap)
+Where `dotfm` is not installed yet, each tool carries `setup.ps1` / `setup.sh`.
+They read the same `dotfm.toml` through `lib/_lib.{ps1,sh}` and link only their
+own tool, so a fresh machine can bootstrap `git` and `pwsh` before it has Rust:
 
-When you can't install Rust yet, run only the tools you need. Each script is idempotent.
-
-```bash
-./bash/setup.sh
+```sh
 ./git/setup.sh
-./tmux/setup.sh
-# ...
+./pwsh/setup.ps1
 ```
 
-```pwsh
-.\pwsh\setup.ps1
-.\git\setup.ps1
-.\glazewm\setup.ps1
-# ...
-```
+A launcher run after `dotfm apply`, or the other way round, changes nothing:
+both recognise a link that is already correct.
+
+How a tool is declared, the rules its scripts follow and how to add one are
+in [`docs/STRUCTURE.md`](docs/STRUCTURE.md). Each tool's readme is also a page
+on [dotfiles.shortarrow.jp](https://dotfiles.shortarrow.jp), mounted from where
+it sits; [`docs/SITE.md`](docs/SITE.md) describes the build.
 
 ### Docker quick test
 
