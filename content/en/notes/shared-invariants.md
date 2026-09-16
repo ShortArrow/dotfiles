@@ -1,29 +1,33 @@
 ---
-title: "Invariants written once, run two ways"
-description: "Neovim can freeze while the configuration is correct, because what is wrong is the state of the machine rather than anything in the repository. The assertions live in one module and are called from both :checkhealth and the headless CI probes."
-summary: "Why `:checkhealth my` and headless CI share one set of checks, and why proving an absence means waiting for it."
+title: "One set of health checks for :checkhealth and for CI"
+description: "Neovim can freeze even when the configuration is correct, because the problem is in the state of the machine: an extra language server, a huge log file, a plugin loaded too early. The checks that catch these live in one module and are run both from :checkhealth and from headless CI probes. This note explains that arrangement and why checking that something is absent means waiting for it."
+summary: "Why `:checkhealth my` and the headless CI probes share one set of checks, and why proving an absence takes a wait."
 ---
 
-Neovim freezes and the configuration is fine. The fault is outside the
-repository.
+Neovim sometimes freezes on this machine while the configuration in the
+repository is correct. The cause in each case has been the state of the
+machine around the configuration:
 
-- mason has three C# language servers installed: omnisharp, omnisharp-mono
+- mason had three C# language servers installed: omnisharp, omnisharp-mono
   and csharp-language-server. All three attach to a `.cs` buffer, so the
-  solution loads three times and the UI thread stays blocked until the
-  first highlight. The configuration asks for one. The other two are
-  simply present.
-- `lsp.log` is several megabytes. Some server is flooding WARN, and every
-  line of it is written synchronously while you edit.
-- blink.cmp loaded before InsertEnter. Requiring it costs about a second
-  on [the machine](/machine/), and that second is now on every file open.
+  solution is loaded three times and the UI thread stays blocked until the
+  first syntax highlight appears. The configuration asks for one server;
+  the other two were simply installed as well.
+- `lsp.log` had grown to several megabytes. Some server was logging WARN
+  lines continuously, and each line is written synchronously while you
+  edit.
+- blink.cmp was being loaded before `InsertEnter`. Requiring it takes about
+  a second on [this machine](/machine/), and that second was being paid on
+  every file open.
 
-None of these show up in a linter. What is in the repository is right, and
-what is around it has drifted.
+A linter cannot find any of these, because the files in the repository are
+fine. What has changed is the environment they run in.
 
-## The assertions live in one module
+## The checks live in one module
 
-`nvim/src/lua/my/checks/init.lua` holds all of them. Each function returns
-a list of `{ ok, msg }` and touches neither the display nor the exit code.
+`nvim/src/lua/my/checks/init.lua` contains every check. Each function
+returns a list of `{ ok, msg }` results and does nothing else: it does not
+print, and it does not set an exit code.
 
 ```lua
 M.lsp_log_size = function()
@@ -36,55 +40,64 @@ M.lsp_log_size = function()
 end
 ```
 
-The same checks are wanted in two places: interactively, and in CI.
-Written twice, one copy gets fixed and the other quietly stops agreeing.
+The same checks are needed in two places, interactively in the editor and
+in CI. If they were written twice, one copy would get fixed and the other
+would keep reporting the old answer.
 
-## `:checkhealth my` reports what is true now
+## `:checkhealth my` reports the current state
 
-`lua/my/health.lua` pushes each result into `vim.health.ok` or `.error`.
+`lua/my/health.lua` runs each check and passes the results to
+`vim.health.ok` or `vim.health.error`.
 
-The LSP attachment check is the exception, because it needs an open buffer
-to say anything. So it walks the loaded buffers and looks only at the
-filetypes with a declared expectation, and says so when none qualify.
+The check for attached LSP clients works differently from the others,
+because it needs an open buffer to have anything to report. It goes through
+the loaded buffers, considers only the filetypes that have an expectation
+declared, and says so when no buffer qualifies.
 
 ```lua
 M.expected_lsp_clients = { cs = { "omnisharp" }, lua = { "lua_ls" } }
 M.lsp_client_noise = { copilot = true, ["null-ls"] = true, ["GitHub Copilot"] = true }
 ```
 
-The noise list is there because clients that belong to no language attach
-to the same buffer. Without it, having copilot running is enough to fail
-the comparison.
+The noise list exists because clients that are not tied to a language, such
+as copilot, attach to the same buffers. Without the list, having copilot
+running would be enough to make the comparison fail.
 
-## CI has to create the state first
+## CI has to create the state before checking it
 
-Headless, there are no open buffers. `nvim/tests/cs_single_lsp.lua` opens a
-fixture `.cs` file and waits up to 120 seconds for omnisharp to attach.
+In a headless Neovim there are no open buffers, so the CI probe has to
+produce the situation itself. `nvim/tests/cs_single_lsp.lua` opens a fixture
+`.cs` file and waits up to 120 seconds for omnisharp to attach.
 
-Then it waits five seconds more.
+Then it waits five more seconds:
 
 ```lua
 vim.wait(5000) -- let any unexpected second server show itself
 ```
 
-"No second server attached" cannot be observed at an instant. The second
-one may simply not have arrived. An absence has to be waited for.
+The claim being checked is that no second server attaches. That cannot be
+confirmed at a single moment, because a second server might just not have
+started yet. The only way to check that something is absent is to wait long
+enough for it to have appeared.
 
-The probe skips when omnisharp is not installed. The workflow runs
-`MasonInstall omnisharp` explicitly, so the skip cannot quietly swallow the
-check on CI.
+The probe skips itself when omnisharp is not installed. To make sure that
+skip never hides the check in CI, the workflow runs `MasonInstall omnisharp`
+explicitly before the probes.
 
-## Exit codes, and getting them to run
+## Exit codes and the runner
 
-Each probe ends in `cq!` or `qa!`. `cq!` is the non-zero one.
+Each probe ends with either `cq!` or `qa!`; `cq!` is the one that exits
+non-zero.
 
-`nvim/tests/run.sh` walks `nvim/tests/*.lua`. Two things catch it out:
+`nvim/tests/run.sh` runs every file in `nvim/tests/*.lua`. Two details are
+needed for it to work on Windows:
 
-- **Check for GNU `timeout` before using it.** Windows ships a different
-  program under the same name in `System32`. The probe is whether
-  `timeout 1 true` succeeds.
-- **Hand Neovim a native path.** Neovim on Windows cannot open an
-  MSYS-style `/d/...` path, so each file goes through `cygpath -m` first.
+- It checks for GNU `timeout` before using it. Windows has an unrelated
+  program with the same name in `System32`, so the runner tests whether
+  `timeout 1 true` succeeds before relying on it.
+- It passes Neovim a native path. Neovim on Windows cannot open an
+  MSYS-style path such as `/d/...`, so each test file is converted with
+  `cygpath -m` first.
 
-The workflow runs them on ubuntu and windows, and only when `nvim/**`
-changes.
+The workflow runs the probes on ubuntu and on windows, and only when
+something under `nvim/**` has changed.

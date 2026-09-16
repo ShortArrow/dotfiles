@@ -1,48 +1,54 @@
 ---
-title: "One register, five providers"
-description: "Where a yank to `+` ends up is decided by an external command, and which command depends on WSL, Windows, Wayland or X11. The same tool also has to be asked for opposite line-ending conversions in each direction."
-summary: "How the clipboard provider is chosen from the environment, and why Wayland gets two attempts."
+title: "How Neovim chooses its clipboard command"
+description: "Neovim hands clipboard access to an external command, and the right command differs between WSL, Windows, Wayland and X11. This note explains how the configuration picks one, why win32yank needs opposite line-ending flags for copy and paste, and why the Wayland case falls through to X11."
+summary: "How the clipboard provider is chosen from the environment, and why the Wayland check is allowed to fail over to X11."
 ---
 
-Neovim does not decide where `"+y` goes. The external commands in
-`vim.g.clipboard` do, and `nvim/src/lua/my/clipboard.lua` picks them from
-the environment.
+Neovim does not access the system clipboard itself. When you yank into the
+`+` register, it runs the external commands listed in `vim.g.clipboard`, and
+`nvim/src/lua/my/clipboard.lua` decides which commands those are by looking
+at the environment.
 
-## The order
+## The order of checks
+
+The configuration tries the environments in this order and uses the first
+one that matches:
 
 ```
 WSL          → win32yank
 Windows      → win32yank
 Wayland      → wl-copy / wl-paste
-X11          → xclip, or xsel
+X11          → xclip, or xsel if xclip is missing
 ```
 
-WSL uses win32yank because the clipboard that matters there is Windows'.
-Putting the text in the Linux clipboard leaves it where nothing is going to
-paste from: the browser and the editor it is headed for are on the Windows
-side.
+Under WSL it uses win32yank, a Windows program, rather than a Linux
+clipboard tool. The text is usually going to be pasted into a browser or an
+editor running on the Windows side, so it has to go into the Windows
+clipboard; the Linux clipboard would hold it where nothing reads it.
 
-win32yank is looked for in three places — the scoop shim, the chocolatey
-bin, then `PATH`. The scoop path needs a username, which comes from
-`WIN_USER` or `USERNAME`.
+win32yank is looked for in three places, in order: the scoop shim
+directory, the chocolatey bin directory, and finally `PATH`. The scoop path
+contains the Windows user name, which the configuration takes from
+`WIN_USER` if it is set and from `USERNAME` otherwise.
 
-## Opposite conversions from the same tool
+## Copy and paste need opposite conversions
 
-win32yank is invoked differently in each direction.
+win32yank is called with different flags in each direction:
 
 ```lua
 copy  = { exe, "-i", "--crlf" }
 paste = { exe, "-o", "--lf" }
 ```
 
-The Windows clipboard holds CRLF and a Neovim buffer holds LF. Convert
-going in, convert coming out. Do it on one side only and either the pasted
-lines carry a trailing `^M` or the line breaks vanish in whatever Windows
-application receives them.
+The Windows clipboard stores line breaks as CRLF and a Neovim buffer stores
+them as LF, so the text is converted to CRLF on the way in and back to LF on
+the way out. If only one direction were converted, pasted lines in Neovim
+would end in `^M`, or line breaks would disappear when the text is pasted
+into a Windows application.
 
-## Wayland gets two attempts
+## The Wayland check can fall through
 
-Matching Wayland is not the end of it.
+Matching the Wayland environment does not settle the choice:
 
 ```lua
 if os.getenv("WAYLAND_DISPLAY") or session == "wayland" then
@@ -51,21 +57,25 @@ if os.getenv("WAYLAND_DISPLAY") or session == "wayland" then
 end
 ```
 
-With `wl-copy` absent, `vim.g.clipboard` is still empty and the X11 branch
-runs next. `xclip` works under XWayland in a Wayland session, so stopping
-at the first match would decline something that works.
+`set_wl_clipboard` only fills in `vim.g.clipboard` when `wl-copy` is
+installed. If it is not, the variable stays empty and the X11 branch runs
+next. That is intentional: in a Wayland session, `xclip` still works through
+XWayland, so stopping at the first environment match would leave a working
+option unused.
 
-`wl-copy` is called with `--foreground`. It has to keep running to serve
-the selection, and by default it detaches itself into the background;
-`--foreground` keeps it the child process Neovim started, so its lifetime
-stays under Neovim's control.
+`wl-copy` is started with `--foreground`. It has to keep running to serve
+the copied text to other applications, and by default it detaches itself
+from the process that started it. With `--foreground` it stays a child
+process of Neovim, so it exits when Neovim does instead of lingering.
 
-On X11, `+` maps to CLIPBOARD and `*` to PRIMARY. X11 has both, and PRIMARY
-is the one a mouse selection lands in.
+On X11 the configuration maps the `+` register to the CLIPBOARD selection
+and the `*` register to PRIMARY. X11 has both; PRIMARY is the one that
+receives text selected with the mouse.
 
-## Not launching it every time
+## Not starting a process for every paste
 
-Every provider carries `cache_enabled = 1`. Neovim remembers the last thing
-it yanked and stops starting an external process for each paste. On
-[a machine that inspects every process creation](/machine/) that one line
-is the difference you feel.
+Every provider sets `cache_enabled = 1`. With that, Neovim keeps the last
+text it yanked and pastes it from memory instead of starting the external
+command each time. On [this machine](/machine/), where every new process is
+scanned before it runs, that setting is the difference between a paste that
+is instant and one with a visible delay.

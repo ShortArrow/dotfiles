@@ -1,28 +1,31 @@
 ---
-title: "不変条件は 1 か所、走らせ方は 2 通り"
-description: "設定は正しいのに Neovim が固まる、という壊れ方がある。原因がリポジトリではなくマシンの状態にあるので、lint では出ない。検査本体を 1 モジュールに置いて、:checkhealth と headless CI の両方から呼んでいる。"
-summary: "`:checkhealth my` と headless CI が同じ検査本体を使う理由と、不在を確かめるのに待たなければならない理由。"
+title: ":checkhealth と CI で同じ検査を使う"
+description: "設定が正しくても Neovim が固まることがあります。原因が余分な言語サーバー、巨大なログファイル、早すぎるプラグインの読み込みといった、マシン側の状態にあるからです。これらを見つける検査は 1 つのモジュールにまとめ、:checkhealth からも headless の CI からも同じものを実行しています。その構成と、「無いこと」を確かめるには待つしかない理由を書きます。"
+summary: "`:checkhealth my` と headless CI が同じ検査を使う理由と、不在を確かめるのに待ち時間が要る理由。"
 ---
 
-設定ファイルは正しいのに Neovim が固まる、という壊れ方があります。原因が
-リポジトリの外にあるからです。
+このマシンでは、リポジトリの設定が正しいのに Neovim が固まることがあります。
+どの場合も、原因は設定の外側にあるマシンの状態でした:
 
-- mason に C# の言語サーバーが 3 つ入っている。omnisharp、omnisharp-mono、
-  csharp-language-server。どれも `.cs` バッファに attach するので、ソリュー
-  ションの読み込みが 3 回走り、最初のハイライトが出るまで UI スレッドが止まり
-  ます。設定が要求しているのは 1 つだけ。余分に入っているだけです。
-- `lsp.log` が数 MB ある。どこかのサーバーが WARN を吐き続けていて、その 1 行
-  ずつが編集中に同期で書かれます。
-- blink.cmp が InsertEnter より前にロードされている。require に約 1 秒かかる
-  ので（[このマシン](/ja/machine/)での話です）、ファイルを開くたびにそのぶん
-  待たされます。
+- mason に C# の言語サーバーが 3 つ入っていた。omnisharp、omnisharp-mono、
+  csharp-language-server です。3 つとも `.cs` のバッファに attach するので、
+  ソリューションの読み込みが 3 回走り、最初のシンタックスハイライトが出るまで
+  UI スレッドが止まります。設定が要求しているサーバーは 1 つで、残りの 2 つは
+  インストールされていただけです。
+- `lsp.log` が数 MB に育っていた。どこかのサーバーが WARN の行を出し続けて
+  いて、その 1 行ずつが編集中に同期的に書き込まれます。
+- blink.cmp が `InsertEnter` より前に読み込まれていた。require には
+  [このマシン](/ja/machine/)で 1 秒ほどかかり、その 1 秒をファイルを開くたびに
+  払っていました。
 
-どれも lint には出ません。リポジトリの中身は正しくて、外の状態がずれています。
+どれも lint では見つかりません。リポジトリのファイルは正しく、変わったのは
+それが動く環境の側だからです。
 
-## 検査本体は 1 か所
+## 検査は 1 つのモジュールに置く
 
-`nvim/src/lua/my/checks/init.lua` が全部持っています。各関数は
-`{ ok, msg }` のリストを返すだけで、表示にも終了コードにも触りません。
+`nvim/src/lua/my/checks/init.lua` にすべての検査があります。各関数は
+`{ ok, msg }` のリストを返すだけで、それ以外のことはしません。画面に出力
+せず、終了コードも設定しません。
 
 ```lua
 M.lsp_log_size = function()
@@ -35,54 +38,62 @@ M.lsp_log_size = function()
 end
 ```
 
-同じ検査を、対話的にも CI でも走らせます。2 回書くと、片方だけ直したときに
-差が開きます。
+同じ検査が、エディタの中での対話的な確認と CI の 2 か所で必要です。2 回書くと、
+片方だけ直して、もう片方が古い答えを返し続けることになります。
 
-## `:checkhealth my` は今そうなっているかを見る
+## `:checkhealth my` は今の状態を報告する
 
-`lua/my/health.lua` は結果を `vim.health.ok` と `.error` に流すだけです。
+`lua/my/health.lua` は各検査を実行し、結果を `vim.health.ok` か
+`vim.health.error` に渡します。
 
-LSP の attach 検査だけ事情が違います。バッファが開いていないと判定できないので、
-開いているバッファを走査して、期待を宣言してある filetype のものだけ見ます。
-該当が無ければ info を出して終わり。
+attach している LSP クライアントの検査だけは作りが違います。報告するには
+開いているバッファが必要だからです。この検査は読み込まれているバッファを
+順に見て、期待値を宣言してある filetype のものだけを対象にし、該当する
+バッファがなければその旨を出します。
 
 ```lua
 M.expected_lsp_clients = { cs = { "omnisharp" }, lua = { "lua_ls" } }
 M.lsp_client_noise = { copilot = true, ["null-ls"] = true, ["GitHub Copilot"] = true }
 ```
 
-noise 側が要るのは、言語に紐づかないクライアントも同じバッファに attach する
-からです。これを除かないと、copilot が居るだけで期待と一致しなくなります。
+noise の一覧があるのは、copilot のように言語に紐づかないクライアントも同じ
+バッファに attach するからです。この一覧がないと、copilot が動いているだけで
+比較が失敗します。
 
-## CI は状態を作ってから見る
+## CI は状態を作ってから検査する
 
-headless 側には開いているバッファがありません。`nvim/tests/cs_single_lsp.lua`
-は fixture の `.cs` を開き、omnisharp が attach するまで最大 120 秒待ちます。
+headless の Neovim には開いているバッファがないので、CI のプローブは状況を
+自分で作ります。`nvim/tests/cs_single_lsp.lua` は fixture の `.cs` ファイルを
+開き、omnisharp が attach するまで最大 120 秒待ちます。
 
-そのあと、**もう 5 秒待ちます**。
+そのあと、さらに 5 秒待ちます:
 
 ```lua
 vim.wait(5000) -- let any unexpected second server show itself
 ```
 
-「2 つ目が attach していない」は、その瞬間に見ても確認できません。まだ来て
-いないだけかもしれないからです。不在を確かめるには待つ以外にありません。
+確かめたいのは「2 つ目のサーバーが attach しない」ことです。これはある瞬間を
+見ただけでは確認できません。2 つ目がまだ起動していないだけかもしれないから
+です。何かが無いことを確かめるには、それが現れるのに十分な時間を待つしか
+ありません。
 
-omnisharp が入っていない環境では SKIP して終わります。ワークフローは
-`MasonInstall omnisharp` を明示的に走らせるので、CI で黙って飛ぶことはあり
-ません。
+omnisharp が入っていない環境では、このプローブは自分をスキップします。CI で
+このスキップが検査を隠してしまわないように、ワークフローはプローブの前に
+`MasonInstall omnisharp` を明示的に実行しています。
 
-## 終了コードと、走らせる側
+## 終了コードと実行側
 
-各プローブは最後に `cq!` か `qa!` を呼びます。`cq!` が非ゼロ終了です。
+各プローブは最後に `cq!` か `qa!` を呼びます。非ゼロで終了するのは `cq!` です。
 
-`nvim/tests/run.sh` が `nvim/tests/*.lua` を順に回します。ここに引っかかり
-どころが 2 つ。
+`nvim/tests/run.sh` が `nvim/tests/*.lua` を順に実行します。Windows で動かす
+ために 2 つの配慮があります:
 
-- **GNU の `timeout` があるかを調べてから使う。** Windows の
-  `System32\timeout.exe` は同名の別物です。`timeout 1 true` が通るかどうかで
+- GNU の `timeout` があるかを確かめてから使います。Windows の `System32` には
+  同じ名前の無関係なプログラムがあるので、`timeout 1 true` が成功するかで
   判定しています。
-- **パスを native 形式に直す。** Windows の nvim は MSYS 形式の `/d/...` を
-  開けないので、`cygpath -m` を通してから渡します。
+- Neovim にはネイティブ形式のパスを渡します。Windows の Neovim は `/d/...` の
+  ような MSYS 形式のパスを開けないので、各テストファイルを `cygpath -m` で
+  変換してから渡します。
 
-ワークフローは ubuntu と windows で走り、`nvim/**` が変わったときだけ動きます。
+ワークフローは ubuntu と windows でプローブを実行し、動くのは `nvim/**` に
+変更があったときだけです。

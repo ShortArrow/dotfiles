@@ -1,80 +1,84 @@
 ---
-title: "Finding windows that are visible and drawn nowhere"
-description: "GlazeWM hides an inactive workspace by cloaking its windows through DWM. A crash, a monitor plugged in, or presentation mode toggled leaves the cloak without the manager — a window that reports itself visible, on screen, and belonging to no workspace."
-summary: "Finding windows a window manager lost, and why recovering one is a per-application problem."
+title: "Finding windows that GlazeWM stopped managing"
+description: "GlazeWM hides the windows of an inactive workspace by cloaking them through DWM. When GlazeWM restarts after a crash, a monitor change or presentation mode, the cloak stays and the manager is gone: the window reports itself visible and on screen, but nothing draws it. This note explains how such windows are found, why only the owning process can uncloak one, and how the rescue works for wezterm."
+summary: "How windows that lost their window manager are found, and why getting one back depends on the application."
 ---
 
-A window disappears. Alt-Tab does not bring it back, the taskbar entry is
-gone, and the process is still running.
+The symptom is a window that has vanished. It is not in Alt-Tab, it has no
+taskbar entry, and its process is still running.
 
-GlazeWM does not move the windows of an inactive workspace off screen. It
-cloaks them, through DWM. A cloaked window is excluded from composition
-while everything else about it stays true: it is visible, it has an
-on-screen rectangle, it is not minimised. Raising its z-order does
-nothing, because z-order is not what is hiding it.
+GlazeWM does not hide the windows of an inactive workspace by moving them
+off screen. It cloaks them through DWM. A cloaked window is left out of
+desktop composition, but every other property stays as it was: the window
+reports itself as visible, it has a rectangle on screen, and it is not
+minimised. Bringing it to the top of the z-order does not help, because
+z-order is not what hides it.
 
-Restart GlazeWM and it enumerates what the shell reports. Cloaked windows
-are reported, and they arrive with no indication that anyone was managing
-them a moment ago. The manager is gone and the cloak is not.
+When GlazeWM starts, it enumerates the windows the shell reports. Cloaked
+windows are in that list, but nothing in the list says that GlazeWM was
+managing them a moment ago. So after a restart the manager is gone and the
+cloak remains.
 
-## Nobody restarts it on purpose
+## What causes it
 
-A deliberate restart is the rare case. What actually produces stranded
-windows here:
+Restarting GlazeWM deliberately is rare. On this machine, stranded windows
+come from three events:
 
-- GlazeWM crashes and comes back.
+- GlazeWM crashes and starts again.
 - A monitor is plugged in or unplugged.
 - Presentation mode is switched on or off.
 
-The last two are one event underneath. The display layout changes, GlazeWM
-works out afresh which monitors and workspaces exist, and it builds that
-from what the shell reports — where a cloak is a current state and not a
-history of who set it.
+The last two are the same event underneath. When the display layout
+changes, GlazeWM rebuilds its idea of which monitors and workspaces exist,
+and it builds it from what the shell reports. In that report a cloak is
+just a current state; there is no record of who applied it.
 
-Anything that sends a window to a workspace you are not looking at feeds
-this, because such a window is cloaked from the moment it lands. A
-`window_rules` entry that files an application away on startup is the
-usual source.
+Any setting that sends a window to a workspace other than the one being
+viewed adds to the number of windows affected, because such a window is
+cloaked as soon as it arrives there. The usual source is a `window_rules`
+entry that places an application on a particular workspace at startup.
 
-## Only the owner can uncloak
+## Only the owning process can remove the cloak
 
-`DwmSetWindowAttribute(DWMWA_CLOAK, 0)` from another process returns
-`E_ACCESSDENIED`. It is not a privilege problem — GlazeWM itself runs
-unelevated as the same user, and reaches the cloak through undocumented
-shell COM whose vtable layout moves between Windows builds. So there is no
-general recovery, and the path back exists only where the application
-offers one.
+Calling `DwmSetWindowAttribute(DWMWA_CLOAK, 0)` on a window from another
+process returns `E_ACCESSDENIED`. Elevation does not change that: GlazeWM
+itself runs unelevated as the same user, and it manipulates the cloak
+through undocumented shell COM interfaces whose vtable layout changes
+between Windows builds. So there is no general way to uncloak a window from
+outside. A window can be recovered only if its application offers a way in.
 
-wezterm does. It keeps a control socket per GUI process at
-`~/.local/share/wezterm/gui-sock-<pid>`, and pointing
-`WEZTERM_UNIX_SOCKET` at it makes `wezterm cli` talk to that process
-rather than whichever one it would have picked. Asking it to move a pane
-to a new window makes wezterm create the window, and a window created now
-carries no cloak.
+wezterm offers one. Each wezterm GUI process keeps a control socket at
+`~/.local/share/wezterm/gui-sock-<pid>`. Setting `WEZTERM_UNIX_SOCKET` to
+that path makes `wezterm cli` talk to that specific process. Telling it to
+move a pane into a new window makes wezterm create the window itself, and a
+window created now has no cloak on it.
 
-So `glazewm/rescue-window.ps1` gathers every pane the process owns —
-including panes that were already in an uncloaked window — and moves them
-all into the new one. For anything else it prints what it knows: restart
-the application, or restart `explorer.exe` to reset shell cloaks across
+`glazewm/rescue-window.ps1` uses that. It collects every pane the process
+owns, including panes that were already in a window that was drawn
+normally, and moves all of them into the new window. For any other
+application, the script prints what it knows and stops: restart the
+application, or restart `explorer.exe`, which resets the shell's cloaks on
 every window at once.
 
-## Unmanaged is three different things
+## Three different meanings of "unmanaged"
 
-The hard part is the listing rather than the recovery. "GlazeWM is not
-managing this window" describes the broken case and two healthy ones:
+The harder part is listing the affected windows rather than recovering
+them. The condition "GlazeWM is not managing this window" matches the
+broken case and two healthy ones:
 
 | | cloak | immersive | |
 |---|---|---|---|
-| Stranded | > 0 | no | lost its manager, drawn nowhere |
-| Unmanaged but drawn | 0 | — | an `ignore` rule in `config.yaml` |
-| Suspended UWP | > 0 | yes | the shell's doing, not GlazeWM's |
+| Stranded | > 0 | no | lost its manager; drawn nowhere |
+| Unmanaged but drawn | 0 | — | matches an `ignore` rule in `config.yaml` |
+| Suspended UWP app | > 0 | yes | cloaked by the shell, not by GlazeWM |
 
-On [the machine](/machine/) the `ignore` rules cover eleven processes, and
-UWP windows are being suspended all the time. Reporting all three the same
-way buries the one case that matters under a dozen that do not.
+On [this machine](/machine/) the `ignore` rules cover eleven processes, and
+UWP applications are suspended and cloaked by the shell all the time. If the
+listing reported all three cases the same way, the one window that needs
+attention would be buried among a dozen that do not.
 
-`IsImmersiveProcess` separates the first row from the third, and
-`glazewm query windows` supplies the handles that are managed right now,
-which is what the whole set is subtracted from. Everything else comes from
-`EnumWindows` filtered down to titled top-level windows that are neither
-minimised nor tool windows.
+`IsImmersiveProcess` separates the first row from the third. The set of
+windows GlazeWM currently manages comes from `glazewm query windows`, and
+those handles are subtracted from the full list. The full list comes from
+`EnumWindows`, reduced to top-level windows that have a title and are
+neither minimised nor tool windows.

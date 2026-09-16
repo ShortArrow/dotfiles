@@ -1,77 +1,101 @@
 ---
-title: "Launching mise tools without the shims"
-description: "A mise shim is three process creations, and a console process that stays between the terminal and the tool for the whole run. Here that turned a 15 ms tool into 127 ms and left bat unable to hand the prompt back."
-summary: "Why mise-managed tools are launched through symlinks here, and which ones cannot be."
+title: "Why mise tools are launched through symlinks instead of shims"
+description: "A mise shim starts three processes for one command and stays between the terminal and the tool until the tool exits. On this machine that made a 15 ms tool take 127 ms and broke bat and zi. A directory of symlinks to the real executables avoids both problems."
+summary: "Why mise-managed tools are launched through symlinks here, and which 60 tools still use their shims."
 ---
 
-`bat` printed the file and the prompt never came back. `zi` changed
-directory and printed nothing. Ctrl-C returned the shell both times.
+Two mise-managed tools stopped working normally on this machine. `bat`
+printed the file, but the prompt did not come back afterwards. `zi`, the
+interactive mode of zoxide, changed the directory but printed nothing and
+also did not return the prompt. In both cases Ctrl-C brought the shell back.
+Running the same executables directly, without going through mise, worked
+fine, so the problem was in how the tools were launched.
 
-The binaries were not at fault. Launched directly, both behaved.
+## What a shim does
 
-## A shim is three processes
+`mise\shims\bat.exe` is not bat itself. It is a small program that starts
+mise, asks mise which version of bat applies to the current directory, and
+then starts that bat. One command therefore creates three processes: the
+shim, mise, and the tool.
 
-`mise\shims\bat.exe` is not bat. It is a small program that starts mise,
-which works out which bat this directory should get, and starts that one.
-Three process creations answer one command.
+That matters here because [this machine](/machine/) runs centrally managed
+endpoint protection, and every new process is scanned before it runs. I ran
+`bat --version` fifteen times through each path:
 
-Every creation is inspected, because [the machine](/machine/) runs
-centrally managed endpoint protection. Fifteen runs of `bat --version`:
-
-| launched through | |
+| launched through | time over 15 runs |
 |---|---|
 | the shim | 127 ms (115–144) |
 | a symlink to the executable | 15 ms (11–28) |
 
-Fifteen milliseconds is the tool. The rest is the arrangement around it.
+bat itself takes about 15 ms to start. The remaining 112 ms is the scanning
+of the two extra processes.
 
-## It also stays in the middle
+## Why the prompt did not come back
 
-Latency does not explain a prompt that never returns. A shim does not hand
-over and exit. It remains for the whole run as a console process between
-the terminal and the tool, and both of the commands that broke are
-conversations with the console: `bat` hands paging to `less`, and `zi`
-writes a directory for the shell to read back. Each of those crossed an
-extra process that was never built to relay it.
+Slowness alone would not explain a prompt that never returns. The second
+problem is that the shim does not exit after starting the tool. It stays
+running until the tool finishes, so for the whole run there is an extra
+console process between the terminal and the tool.
+
+The two tools that broke are the two that talk to the terminal directly.
+`bat` pipes its output into `less` for paging, and `zi` prints the chosen
+directory to standard output so that the shell function around it can `cd`
+there. Both assume that the other end of their standard streams is the
+terminal. With the shim in between, that assumption fails, and each of them
+waits for something that never arrives.
 
 ## Why not `mise activate`
 
-`mise activate` moves the resolution into the shell. A hook runs at every
-prompt and rewrites `PATH` to the tools the current directory should see.
-Nothing relays anything, and no shim is in the way.
+mise's own answer to this is `mise activate`, which does the version
+resolution in the shell instead of in a shim. A hook runs before every
+prompt and rewrites `PATH` so that the tools for the current directory come
+first. Nothing sits between the terminal and the tool.
 
-That hook is `mise hook-env`, which is itself one more process creation —
-130 ms here, at every prompt, whether or not the next command is a mise
-tool at all. It also expands `PATH` to 7,265 characters against a limit of
-8,191, and the [PATH budget](/notes/path-budget/) has other plans for the
-remainder.
+The hook, `mise hook-env`, is itself a process, so it gets the same scan:
+about 130 ms at every prompt, even when the next command has nothing to do
+with mise. It also makes `PATH` long. With activation on, `PATH` reached
+7,265 characters, and cmd.exe stops resolving commands once `PATH` is longer
+than 8,191. The remaining room is needed for other things, which is covered
+in [the PATH budget](/notes/path-budget/).
 
-## The farm
+## The symlink directory
 
-`%LocalAppData%\mise\bin` holds one symlink per tool, pointing at the real
-executable. One process, one 43-character `PATH` entry, no hook.
+What I use instead is a directory, `%LocalAppData%\mise\bin`, containing one
+symlink per tool that points at the tool's real executable. Launching a tool
+through it creates one process, it adds a single 43-character entry to
+`PATH`, and no hook runs at the prompt.
 
-`windows/Sync-MiseBinFarm.ps1` builds it from the shim directory. Of 204
-shims it links 144 and skips the rest:
+`windows/Sync-MiseBinFarm.ps1` builds the directory by going through the
+shims directory and asking mise where each shim resolves to. Of the 204
+shims, it links 144 and skips 60:
 
-- 44 by name. Python and pip find the standard library relative to their
-  own executable, so through a symlink they would look inside the farm and
-  find nothing. The rust family is already reachable from `~/.cargo/bin`.
-- 10 whose target is not a PE file. A link named `npm.exe` pointing at a
-  `.cmd` is something the loader refuses; the eight extensionless targets
-  are the same problem without an extension to give it away.
-- 6 that mise no longer resolves.
+- 44 are skipped by name. Python and pip locate the standard library
+  relative to their own executable, so if they were started through a
+  symlink they would look for it inside the symlink directory and not find
+  it. The rust tools are skipped because `~/.cargo/bin` is already on
+  `PATH`.
+- 10 are skipped because the target is not a Windows executable. The shim
+  named `npm.exe`, for example, resolves to a `.cmd` file, and the loader
+  refuses to run a `.exe` symlink that points at a script. Eight of the ten
+  have no extension at all, which fails for the same reason.
+- 6 are skipped because mise no longer resolves them to anything.
 
-Those sixty keep their shims and keep working.
+Those 60 tools keep using their shims. They are slower, but they work.
 
-## The link goes stale
+## Keeping the links valid
 
-A symlink names one path, and an upgrade moves the install directory out
-from under it. So the farm is the one part of this that needs maintenance,
-and three things carry it:
+A symlink points at one fixed path, and `mise up` changes that path when it
+installs a new version: node moves from `tools\node\22.14.0` to `22.15.0`,
+and the link to the old directory stops working. So the symlink directory is
+the one part of this setup that needs maintenance, and four things take care
+of it:
 
-- The PowerShell profile runs the sync at shell start.
-- `windows/doctor.ps1` counts links whose target no longer exists.
-- `windows/path-order.toml` asserts that the farm resolves before the
-  shims, so a tool with no link falls through to the slow path rather than
-  failing.
+- mise's postinstall hook runs the sync script after every install.
+- The PowerShell profile runs the sync script in the background when it
+  starts and finds a link whose target is gone.
+- `windows/doctor.ps1` reports how many links currently point at a missing
+  target.
+- `windows/path-order.toml` requires the symlink directory to come before
+  the shims directory in `PATH`. A tool without a link falls back to its
+  shim, so an upgrade can make a tool slow again but never makes it
+  disappear.

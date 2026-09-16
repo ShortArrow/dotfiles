@@ -1,63 +1,68 @@
 ---
-title: "The PATH budget"
-description: "Windows has 8191 characters for PATH, mise spends most of them, and running out breaks commands that are installed and on disk."
-summary: "Why the persistent PATH is kept short, and how much room is actually left."
+title: "How much room is left in PATH on Windows"
+description: "cmd.exe can expand an environment variable to at most 8,191 characters. On this machine mise adds about 4,500 characters to PATH whenever it runs a tool, so the persistent PATH has to stay short. This note gives the measured numbers and explains why running out looks like a missing command."
+summary: "Why the persistent PATH is kept short, and how much room the measurement says is left."
 ---
 
-`cmd.exe` expands an environment variable to at most **8191 characters**.
-Past that it does not truncate loudly — it resolves nothing from `PATH`,
-and every command reports
+`cmd.exe` expands an environment variable to at most 8,191 characters.
+When `PATH` is longer than that, cmd does not truncate it and warn. It
+stops finding anything through `PATH` at all, and every command fails with
 
 ```
 'x' is not recognized as an internal or external command
 ```
 
-which reads as *not installed*. The binary is on disk. The lookup never
-happened.
+That message is the same one you get for a program that is not installed,
+which is misleading here: the executable is on disk, and cmd never looked
+for it.
 
 ## Why cmd matters on a machine that uses PowerShell
 
-Nothing here runs `cmd` interactively, and it is still in the path of
-ordinary work:
+I never open `cmd` interactively, but it still runs during ordinary work:
 
-- npm and pnpm run-scripts execute through it
-- Node's `child_process` defaults to it
-- so does anything those two call in turn
+- npm and pnpm run their package scripts through `cmd`.
+- Node's `child_process` uses `cmd` by default.
+- Anything started by those two inherits the same behaviour.
 
-A build that works in the terminal can fail inside a package script for
-this reason alone.
+So a build that works when run from the terminal can fail inside a package
+script for no reason other than the length of `PATH`.
 
 ## Where the characters go
 
-`PATH` at rest is not the number that matters. mise prepends the bin
-directory of every managed tool when it runs something, and that
-expansion is charged to the same 8191.
+The persistent `PATH`, the one stored in the registry, is not the number
+that matters. When mise runs a tool, it first prepends the bin directory of
+every tool it manages, and that expanded `PATH` is what has to fit in
+8,191 characters.
 
-Measured on [the machine](/machine/), 2026-08-04:
+Measured on [this machine](/machine/) on 2026-08-04:
 
 | | |
 |---|---|
-| Persistent `PATH` | 2,932 chars across 60 entries |
-| Under a mise shim | **7,392** |
-| Added by mise | +4,460 |
-| Remaining | **799** |
+| Persistent `PATH` | 2,932 characters, 60 entries |
+| `PATH` as seen under a mise shim | 7,392 characters |
+| Added by mise | 4,460 characters |
+| Remaining before the limit | 799 characters |
 
-The persistent path is two fifths of the total. mise is the rest, and it
-grows with each tool added — which makes the persistent side the only
-part worth defending, because it is the only part that is hand-written.
+The persistent part is about two fifths of the total, and mise accounts for
+the rest. The mise part grows every time a tool is added. The persistent
+part is the only part that is written by hand, so it is the only part I can
+keep short.
 
-## What that buys
+## What is worth removing
 
-Every entry removed from the persistent `PATH` is a character of headroom
-returned. The ones worth removing are the ones that were never reachable:
-a directory that a shim earlier in the order already answers for, or a
-tool that has since moved under mise. Those cost length and resolve
-nothing.
+Every entry removed from the persistent `PATH` gives its length back as
+headroom. The entries worth removing are the ones that are never actually
+used: a directory whose commands are all provided by a mise shim that comes
+earlier in `PATH`, or a tool that has since been moved under mise and still
+has its old directory listed. Those entries take up length and never
+resolve anything.
 
-`path-order.toml` declares the order rules, and `windows/doctor.ps1`
-checks both the order and the remaining budget on every run.
+`windows/path-order.toml` declares which entries must come before which,
+and `windows/doctor.ps1` checks both that order and the remaining budget
+every time it runs.
 
-## How much room is left
+## How much room that is
 
-799 characters is roughly eight more tool directories. The failure arrives
-as a package script that cannot find `node`.
+799 characters is enough for roughly eight more tool directories. When the
+budget runs out, the first sign will be a package script that cannot find
+`node`.
