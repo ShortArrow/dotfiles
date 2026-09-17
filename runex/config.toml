@@ -136,3 +136,7 @@ expand = "(Get-Command {}).Source"
 [[abbr]]
 key = "gwmr"
 expand = "glazewm command wm-exit && sudo glazewm"
+
+[[abbr]]
+key = "gpgs"
+expand = "git config user.signingkey \"key::$(ssh-add -L | fzf --prompt 'signing key> ')\""
