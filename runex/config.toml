@@ -128,3 +128,11 @@ expand = "wezterm cli spawn"
 [[abbr]]
 key = "ghqm"
 expand = "ghq list -p | fzf | % { cd $_ }"
+
+[[abbr]]
+key = "gcms"
+expand = "(Get-Command {}).Source"
+
+[[abbr]]
+key = "gwmr"
+expand = "glazewm command wm-exit && sudo glazewm"
