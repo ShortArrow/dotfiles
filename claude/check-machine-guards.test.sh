@@ -54,6 +54,7 @@ check deny  'git config --global gpg.program "C:\Program Files\GnuPG\bin\gpg.exe
 # Reads and per-repo declarations stay open.
 check allow 'git config --global --get gpg.format'
 check allow 'git config --global --list'
+check allow 'git config user.signingkey 7B66415DC7B803DD'
 check allow 'git config user.signingkey "key::ssh-ed25519 AAA x"'
 check allow 'git config --global core.pager delta'
 

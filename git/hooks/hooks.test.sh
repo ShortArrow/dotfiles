@@ -141,6 +141,32 @@ else
   echo "  skip  claude/check-attribution.sh not found"
 fi
 
+echo "pre-commit refuses an undeclared signing key and passes a declared one"
+tmp=$(mktemp -d)
+(
+  cd "$tmp" || exit 1
+  git init -q .
+  git config user.email t@example.invalid
+  git config user.name test
+  git config core.hooksPath "$PWD/.git/hooks"
+  v() { # -> reject | accept
+    if bash "$hook_dir/pre-commit" >/dev/null 2>&1; then echo accept; else echo reject; fi
+  }
+  git config commit.gpgsign false
+  echo "  $(v)|signing off"
+  git config commit.gpgsign true
+  echo "  $(v)|signing on, no key declared"
+  git config user.signingkey 7B66415DC7B803DD
+  echo "  $(v)|signing on, key declared"
+) >"$tmp/out" 2>/dev/null
+while IFS='|' read -r verdict label; do
+  [ -n "${label:-}" ] || continue
+  case $label in
+    "signing on, no key declared") check reject "$label" "$(echo "$verdict" | tr -d ' ')" ;;
+    *) check accept "$label" "$(echo "$verdict" | tr -d ' ')" ;;
+  esac
+done <"$tmp/out"
+
 echo
 printf 'pass=%d fail=%d\n' "$pass" "$fail"
 [ "$fail" -eq 0 ]

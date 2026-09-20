@@ -83,13 +83,13 @@ key = "zed"
 expand = "zeditor"
 when_command_exists = ["zeditor"]
 
-# Declare this repository's signing identity: fzf over the keys the SSH
-# agent serves (on Windows: the Bitwarden vault). $(...) form, so pwsh,
-# bash and zsh only — nushell would need a different spelling.
+# Declare this repository's signing identity: fzf over the secret keys in
+# the GPG keyring. $(...) form, so pwsh, bash and zsh only — nushell would
+# need a different spelling.
 [[abbr]]
 key = "gsk"
-expand = "git config user.signingkey \"key::$(ssh-add -L | fzf --prompt 'signing key> ')\""
-when_command_exists = ["fzf"]
+expand = "git config user.signingkey \"$(gpg --list-secret-keys --with-colons --keyid-format long | awk -F: '/^sec/{k=$5} /^uid/&&k{print k\"  \"$10; k=\"\"}' | fzf --prompt 'signing key> ' | cut -d' ' -f1)\""
+when_command_exists = ["gpg", "fzf"]
 
 # dotfm shortcuts. `df` is intentionally not shadowed (POSIX disk-free).
 [[abbr]]
@@ -137,6 +137,3 @@ expand = "(Get-Command {}).Source"
 key = "gwmr"
 expand = "glazewm command wm-exit && sudo glazewm"
 
-[[abbr]]
-key = "gpgs"
-expand = "git config user.signingkey \"key::$(ssh-add -L | fzf --prompt 'signing key> ')\""

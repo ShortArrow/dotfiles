@@ -14,9 +14,9 @@
 # invocation slips through, which is the price of not matching commit
 # messages that merely mention an app.
 #
-# Guard 2 — global signing-config writes. Signing on this machine is SSH
-# via the Bitwarden agent, declared per repository; the global gpg.* and
-# signing keys are owned by git/setup.ps1. An agent that meets the
+# Guard 2 — global signing-config writes. Signing on this machine is GPG
+# with the key declared per repository; the global gpg.* and signing
+# switches are owned by git/signing-gpg.ps1. An agent that meets the
 # undeclared-key refusal and reaches for `git config --global` is
 # "repairing" a design decision. Reads (--get, --list) stay open, and so
 # do per-repository declarations.
@@ -55,7 +55,7 @@ if printf '%s' "$command_line" | grep -Eiq 'git +config' &&
    printf '%s' "$command_line" | grep -q -- '--global' &&
    printf '%s' "$command_line" | grep -Eiq '(gpg\.|commit\.gpgsign|user\.signingkey)' &&
    ! printf '%s' "$command_line" | grep -Eq -- '--(get|list)'; then
-  deny 'Global signing config is owned by git/setup.ps1 (SSH signing via the Bitwarden agent, keys declared per repository — see the pre-commit hook message). Do not rewrite it. Declare a per-repo key with Set-GitSigningKey, or ask the user.'
+  deny 'Global signing config is owned by git/signing-gpg.ps1 (GPG, key declared per repository — see the pre-commit hook message). Do not rewrite it. Declare a per-repo key with Set-GitSigningKey, or ask the user.'
 fi
 
 exit 0
