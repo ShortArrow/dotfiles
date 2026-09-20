@@ -1,17 +1,14 @@
 #!pwsh
 . "$PSScriptRoot/../lib/_lib.ps1"
 
-# Owned by [tools.git-signing-gpg] in dotfm.toml: the GPG alternative to
-# signing.ps1. The two set the same keys — gpg.format above all — so they are
-# mutually exclusive by construction: whichever is applied last owns signing
-# on this machine. Pick this one where the Bitwarden vault is absent or the
-# target requires OpenPGP (pacman repository signing, keyservers).
+# Owned by [tools.git-signing-gpg] in dotfm.toml, apart from [tools.git]:
+# key wiring and general git config change for different reasons.
 # Idempotent: git config --global is set every run; same value -> no-op.
 
-# gpg.format is set explicitly because signing.ps1 may have left 'ssh' here.
-# No global user.signingkey, for the same reason as the SSH side: the
-# identity is declared per repository, and an undeclared repository refuses
-# to commit instead of signing with the wrong key.
+# gpg.format is set explicitly so a machine that once signed over SSH comes
+# back to OpenPGP. No global user.signingkey: the keyring holds more than
+# one identity, so the key is declared per repository, and an undeclared
+# repository refuses to commit instead of signing with the wrong one.
 Write-DotfileInfo 'git: signing via GPG (OpenPGP)'
 $signing = @(
   @{ key = 'commit.gpgsign'; value = 'true' }

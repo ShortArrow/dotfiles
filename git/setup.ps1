@@ -26,5 +26,5 @@ $hooksDir = (Resolve-Path "$PSScriptRoot/hooks").Path -replace '\\', '/'
 & git config --global core.hooksPath $hooksDir
 Write-DotfileOk "core.hooksPath = $hooksDir"
 
-# Key wiring lives in signing.ps1, owned by [tools.git-signing]: a machine
-# without the Bitwarden vault still wants everything above.
+# Key wiring lives in signing-gpg.ps1, owned by [tools.git-signing-gpg]: a
+# machine without GPG still wants everything above.

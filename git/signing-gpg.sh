@@ -4,10 +4,10 @@ script_dir="$(cd -P "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=../lib/_lib.sh
 source "$script_dir/../lib/_lib.sh"
 
-# Owned by [tools.git-signing-gpg] in dotfm.toml: the GPG alternative to the
-# Windows-only Bitwarden SSH signing. Sets the same keys — gpg.format above
-# all — so whichever signing tool is applied last owns signing here.
-# gpg comes from PATH; no gpg.program needed on Linux and macOS.
+# Owned by [tools.git-signing-gpg] in dotfm.toml, apart from [tools.git]:
+# key wiring and general git config change for different reasons.
+# gpg.format is set explicitly so a machine that once signed over SSH comes
+# back to OpenPGP. gpg comes from PATH; no gpg.program needed here.
 # No global user.signingkey: the identity is declared per repository, and an
 # undeclared repository refuses to commit instead of signing wrongly.
 # Idempotent: git config --global is set every run.

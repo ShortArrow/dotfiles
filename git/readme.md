@@ -35,17 +35,16 @@ git config --global init.defaultBranch main
 
 ## Signing
 
-[`signing.ps1`](signing.ps1) — the dotfm tool `git-signing`, Windows-only —
-wires commit, merge and tag signing to SSH keys held in the Bitwarden vault,
-reached through the Windows OpenSSH agent pipe. It sets no global
-`user.signingkey`: each repository declares its own identity, so a
-repository that has not declared one refuses to commit instead of signing
-with the wrong key. The allowed-signers list stays machine-local at
-`~/.config/git/allowed_signers`, outside this public checkout.
+[`signing-gpg.ps1`](signing-gpg.ps1) and [`signing-gpg.sh`](signing-gpg.sh)
+— the dotfm tool `git-signing-gpg` — wire commit, merge and tag signing to
+GPG. They set no global `user.signingkey`: the keyring holds more than one
+identity, so each repository declares its own with `Set-GitSigningKey`
+(pwsh) or the `gsk` abbreviation, and a repository that has not declared
+one refuses to commit instead of signing with the wrong key. The
+pre-commit hook says so before git's own fatal does.
 
-It is separate from `setup.{ps1,sh}` so a machine without the vault still
-gets the general config and the hooks. GPG remains installed only to
-decrypt and verify pre-2026 GPG signatures.
+It is separate from `setup.{ps1,sh}` so a machine without GPG still gets
+the general config and the hooks.
 
 ## ghq
 
