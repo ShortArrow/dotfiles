@@ -185,9 +185,9 @@ dst.windows = "$USERPROFILE/Documents/PowerShell/myplug"
 
 
 [tools.claude]
-description = "Claude Code settings (notify.ps1, CLAUDE.md, statusline.sh, check-attribution.sh)"
+description = "Claude Code settings (notify.ps1, CLAUDE.md, statusline.sh, check-attribution.sh, check-gpg-cache.sh)"
 [[tools.claude.links]]
-src = { dir = "claude", include = ["notify.ps1", "CLAUDE.md", "statusline.sh", "check-attribution.sh", "check-machine-guards.sh"] }
+src = { dir = "claude", include = ["notify.ps1", "CLAUDE.md", "statusline.sh", "check-attribution.sh", "check-machine-guards.sh", "check-gpg-cache.sh"] }
 dst.windows = "$USERPROFILE/.claude"
 dst.linux   = "$HOME/.claude"
 
@@ -303,3 +303,10 @@ platforms = ["windows"]
 [[tools.herdr.links]]
 src = "herdr/config.toml"
 dst.windows = "$APPDATA/herdr/config.toml"
+
+[tools.gwq]
+description = "gwq worktree manager: worktrees beside the ghq clones on V:"
+[[tools.gwq.links]]
+src = "gwq/config.toml"
+dst.windows = "$USERPROFILE/.config/gwq/config.toml"
+dst.linux   = "$XDG_CONFIG_HOME/gwq/config.toml"
