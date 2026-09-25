@@ -305,8 +305,8 @@ src = "herdr/config.toml"
 dst.windows = "$APPDATA/herdr/config.toml"
 
 [tools.gwq]
-description = "gwq worktree manager: worktrees beside the ghq clones on V:"
-[[tools.gwq.links]]
-src = "gwq/config.toml"
-dst.windows = "$USERPROFILE/.config/gwq/config.toml"
-dst.linux   = "$XDG_CONFIG_HOME/gwq/config.toml"
+description = "gwq worktree base directory, derived from the ghq root"
+[tools.gwq.script]
+windows = "gwq/setup.ps1"
+linux = "gwq/setup.sh"
+macos = "gwq/setup.sh"
