@@ -69,6 +69,40 @@ shape itself. `if` takes a permission rule, and a rule naming a tool that
 does not accept one would fail by never firing — silently, which is the one
 outcome a guard may not have.
 
+## The signing key expires
+
+`gpg-agent.conf` caches the passphrase for eight hours, so once a day a
+signed commit from a session fails with `gpg failed to sign the data`:
+a tool call has no way to open pinentry. Left to prose, the session
+tried the commit, read the failure, and asked the user to unlock the key
+and report back. [`check-gpg-cache.sh`](check-gpg-cache.sh) asks the
+agent first. `gpg-connect-agent 'keyinfo --list'` prints a cached flag
+per keygrip, so the hook knows before the commit runs, and its deny
+reason carries the one command that fixes it, to be typed in the prompt:
+
+```
+! echo test | "$(git config --get gpg.program)" --clearsign > /dev/null
+```
+
+The `!` runs it in the session, where pinentry can open, and the agent
+caches the passphrase for the next eight hours. Two details are in the
+command for a reason. `gpg.program` names the GnuPG that git calls;
+in Git Bash on Windows both `gpg` and `gpg.exe` resolve to MSYS's
+`/usr/bin/gpg`, which has its own home and its own agent, so an unlock
+typed that way caches nothing git can use. And `> /dev/null` rather than
+`> nul`: in Git Bash `nul` is a file, and the command would leave one in
+the repository.
+
+The hook takes the key from the repository's `user.signingkey` and the
+agent from the directory of `gpg.program`, treats the primary key and
+any signing-capable subkey as the set that has to be cached, and stays
+silent for reads, pushes, `--no-gpg-sign`, repositories that do not
+sign, and directories outside a repository. It runs on both shells, for
+the same reason as the attribution guard.
+[`check-gpg-cache.test.sh`](check-gpg-cache.test.sh) fakes the agent
+with a script that reports the cache from an environment variable, so it
+runs without a key and without touching the real agent.
+
 Keeping the gate in a script is also what makes it testable. Run
 [`check-attribution.test.sh`](check-attribution.test.sh): it pipes a
 `tool_input` at the script and reads the verdict, over the trailer forms,
