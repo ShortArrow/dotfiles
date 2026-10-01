@@ -131,6 +131,12 @@ high one into a confirmation. That is all it may do.
   `JEV_BASE_URL`, so a machine that cannot reach the model sends nothing
   and waits for nothing. The `env` block of the sample is not the place:
   the merge replaces it whole.
+- **It asks the person, not the agent.** A judge that stops the agent and
+  makes it redo work changes an open-ended loop in ways no log explains;
+  a confirmation leaves the agent's plan alone and puts one question in
+  front of the user. Whether that question earns its place is decided by
+  the log: a command the model rates high that Claude Code's own
+  permission prompt already stops gains nothing from a second prompt.
 - **Recording first.** The default mode only appends to
   `~/.claude/jev-log.jsonl`. Ask mode needs a cutoff as well, and there
   is no default one: a cutoff is read off this machine's own log, not
