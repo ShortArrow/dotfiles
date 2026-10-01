@@ -25,6 +25,13 @@
             "shell": "bash",
             "command": "bash ~/.claude/check-gpg-cache.sh",
             "statusMessage": "Checking the signing key is unlocked"
+          },
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "bash ~/.claude/judge-command.sh",
+            "timeout": 3,
+            "statusMessage": "Asking the decision model"
           }
         ]
       },
@@ -42,6 +49,13 @@
             "shell": "bash",
             "command": "bash ~/.claude/check-gpg-cache.sh",
             "statusMessage": "Checking the signing key is unlocked"
+          },
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "bash ~/.claude/judge-command.sh",
+            "timeout": 3,
+            "statusMessage": "Asking the decision model"
           }
         ]
       }

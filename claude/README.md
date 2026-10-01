@@ -111,3 +111,47 @@ the bare session URL, a clean commit, dependabot's lowercase
 the pattern as a search term and have to keep working. That last case is not
 hypothetical: the pattern was grepped for in this repository while the guard
 was being written.
+
+## A second opinion on shell commands
+
+[`judge-command.sh`](judge-command.sh) sends each shell command to a
+Jev-compatible decision model (`POST <base>/v1/systemone`, the request
+shape [jev-lint](https://github.com/mizchi/jev-lint/blob/main/src/jev.ts)
+uses) with two yes/no questions: is it hard to undo, and does it reach
+outside this machine. It records both probabilities, and it can turn a
+high one into a confirmation. That is all it may do.
+
+- **Only `ask`, never `allow` or `deny`.** A probability says how
+  concentrated the model's answer is, not whether the answer is right.
+  Commands that must never run are refused by deterministic hooks, which
+  the model sits beside and never replaces.
+- **Off unless the machine opts in.** The endpoint is one machine's
+  arrangement, and the sample travels to every machine. The hook reads
+  `~/.claude/jev.env` (or the environment) and does nothing without
+  `JEV_BASE_URL`, so a machine that cannot reach the model sends nothing
+  and waits for nothing. The `env` block of the sample is not the place:
+  the merge replaces it whole.
+- **Recording first.** The default mode only appends to
+  `~/.claude/jev-log.jsonl`. Ask mode needs a cutoff as well, and there
+  is no default one: a cutoff is read off this machine's own log, not
+  borrowed from someone else's examples.
+- **Fails open.** A timeout (1.5 s for the request, 3 s for the hook), an
+  unreachable host, or a reply that is not the API's all end in silence.
+
+A machine with a model served by Ollama, for example:
+
+```
+JEV_BASE_URL=http://<host>:11434
+JEV_MODEL=tev1:4b
+JEV_KEEP_ALIVE=-1
+# JEV_MODE=ask
+# JEV_ASK_AT=<from the log>
+```
+
+`JEV_KEEP_ALIVE` keeps the model loaded, since a reload costs seconds
+where an answer costs tenths. A hosted endpoint takes `JEV_API_KEY`
+instead. What the model cannot judge is what the command text does not
+show: a script or a container that posts somewhere looks harmless. The
+model reads the words, and the deterministic hooks stay the floor.
+[`judge-command.test.sh`](judge-command.test.sh) puts a fake `curl` on
+`PATH`, so it runs without a model.
