@@ -13,6 +13,7 @@
 %ProgramFiles%\Docker\Docker\resources\bin
 %ProgramFiles%\Emacs\emacs-30.2\bin
 %ProgramFiles%\Git\cmd
+%ProgramFiles%\Gpg4win\..\GnuPG\bin
 %ProgramFiles%\IVI Foundation\VISA\Win64\Bin
 %ProgramFiles%\LLVM\bin
 %ProgramFiles%\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64
@@ -28,8 +29,6 @@
 %ProgramFiles%\glzr.io\GlazeWM\cli
 %ProgramFiles%\glzr.io\Zebar
 %ProgramFiles%\usbipd-win
-%ProgramFiles(x86)%\Arm GNU Toolchain arm-none-eabi\14.2 rel1\bin
-%ProgramFiles(x86)%\Gpg4win\..\GnuPG\bin
 %ProgramFiles(x86)%\IVI Foundation\IVI\Bin
 %ProgramFiles(x86)%\IVI Foundation\VISA\WinNT\Bin
 %ProgramFiles(x86)%\Renesas\Hew

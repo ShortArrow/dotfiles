@@ -19,7 +19,9 @@
 %LocalAppData%\Programs\Zed\bin
 %LocalAppData%\Programs\nu\bin
 %UserProfile%\.dotnet\tools
+%UserProfile%\.herdr\packages\standalone\current
 %UserProfile%\.local\bin
 %UserProfile%\.rustup\toolchains\esp\xtensa-esp-elf\bin
 %UserProfile%\.rustup\toolchains\esp\xtensa-esp32-elf-clang\esp-clang\bin
 %UserProfile%\go\bin
+%ProgramFiles(x86)%\Arm GNU Toolchain arm-none-eabi\14.2 rel1\bin
