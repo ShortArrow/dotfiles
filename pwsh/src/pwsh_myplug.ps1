@@ -365,18 +365,20 @@ if ($symlinksBlocked) {
 # The farm goes stale when `mise up` moves a versioned install directory: the
 # link's target vanishes and the command fails with "cannot find the file",
 # because a broken link still wins PATH resolution over the shim behind it.
+# This file is loaded through the Documents\PowerShell\myplug symlink, so
+# $PSScriptRoot points at the link, not the repository. Follow it first;
+# a relative hop from the link's side lands in Documents\windows.
+$selfDir = Get-Item -LiteralPath $PSScriptRoot
+while ($selfDir.LinkType -and $selfDir.Target) { $selfDir = Get-Item -LiteralPath (@($selfDir.Target)[0]) }
+$windowsDir = [IO.Path]::GetFullPath((Join-Path $selfDir.FullName '..\..\windows'))
+
 # The scan is filesystem-only (no spawns); repair costs one spawn per stale
 # tool, so it runs detached rather than blocking the prompt.
 if (-not $symlinksBlocked -and (Test-Path -LiteralPath $farmDir)) {
   $stranded = @(Get-ChildItem -LiteralPath $farmDir -File |
     Where-Object { $_.LinkType -and -not (Test-Path -LiteralPath (@($_.Target)[0])) })
   if ($stranded.Count -gt 0) {
-    # This file is loaded through the Documents\PowerShell\myplug symlink, so
-    # $PSScriptRoot points at the link, not the repository. Follow it first;
-    # a relative hop from the link's side lands in Documents\windows.
-    $selfDir = Get-Item -LiteralPath $PSScriptRoot
-    while ($selfDir.LinkType -and $selfDir.Target) { $selfDir = Get-Item -LiteralPath (@($selfDir.Target)[0]) }
-    $syncScript = [IO.Path]::GetFullPath((Join-Path $selfDir.FullName '..\..\windows\Sync-MiseBinFarm.ps1'))
+    $syncScript = Join-Path $windowsDir 'Sync-MiseBinFarm.ps1'
     if (Test-Path -LiteralPath $syncScript) {
       Write-Host "mise farm: $($stranded.Count) stranded link(s) — repairing in background 🔧" -ForegroundColor Yellow
       Start-Process pwsh -WindowStyle Hidden -ArgumentList '-NoProfile', '-File', $syncScript
