@@ -58,7 +58,7 @@ python = "latest"
 rust = "latest"
 zig = "latest"
 "github:elm/compiler" = "latest"
-"github:k1LoW/mo" = "latest"
+"github:k1LoW/mo" = "1.6.8"
 "github:ShortArrow/runex" = "latest"
 "github:ShortArrow/dotfm" = "latest"
 "github:AlexsJones/llmfit" = "latest"
@@ -67,6 +67,7 @@ zig = "latest"
 "github:microsoft/apm" = "latest"
 "github:chawyehsu/nano-for-windows" = "latest"
 "github:micro-editor/micro" = "latest"
+"github:xpack-dev-tools/openocd-xpack" = "latest"
 
 [tool_alias]
 python3 = "python"
@@ -79,5 +80,7 @@ python3 = "python"
 # The bin farm (windows/Sync-MiseBinFarm.ps1) links to versioned install
 # directories, so every upgrade strands its links until the farm is rebuilt.
 # Rebuild it after each install; on other platforms there is no farm.
+# Hooks run under cmd.exe, which drops an over-long PATH, so pwsh is named by
+# absolute path: the MSI install if present, else the Store install's alias.
 [hooks]
-postinstall = { run = "true", run_windows = '"C:/Program Files/PowerShell/7/pwsh.exe" -NoProfile -File "V:/github.com/ShortArrow/dotfiles/windows/Sync-MiseBinFarm.ps1"' }
+postinstall = { run = "true", run_windows = 'if exist "C:\Program Files\PowerShell\7\pwsh.exe" ("C:\Program Files\PowerShell\7\pwsh.exe" -NoProfile -File "V:/github.com/ShortArrow/dotfiles/windows/Sync-MiseBinFarm.ps1") else ("%LOCALAPPDATA%\Microsoft\WindowsApps\pwsh.exe" -NoProfile -File "V:/github.com/ShortArrow/dotfiles/windows/Sync-MiseBinFarm.ps1")' }
