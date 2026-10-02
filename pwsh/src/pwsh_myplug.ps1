@@ -387,6 +387,22 @@ if (-not $symlinksBlocked -and (Test-Path -LiteralPath $farmDir)) {
     }
   }
 }
+
+# An installer run without elevation can rewrite the user PATH, and some
+# replace it with their single entry. Checked against windows/PATH.txt on
+# every start (a registry read and a set lookup, ~4 ms, no spawns); only
+# missing entries warn, since an undeclared one is often deliberate.
+# The machine PATH is left to windows/doctor.ps1: on a machine where
+# SYSTEM_PATH.txt was never applied it differs permanently.
+. "$PSScriptRoot/Compare-DeclaredPath.ps1"
+$declaredPathFile = Join-Path $windowsDir 'PATH.txt'
+if (Test-Path -LiteralPath $declaredPathFile) {
+  $userPathRaw = (Get-Item 'HKCU:\Environment').GetValue('Path', '', 'DoNotExpandEnvironmentNames')
+  $pathDrift = Compare-DeclaredPath -Declared (Get-Content -LiteralPath $declaredPathFile) -Actual $userPathRaw
+  if ($pathDrift.Missing.Count -gt 0) {
+    Write-Host "user PATH: $($pathDrift.Missing.Count) declared entr$($pathDrift.Missing.Count -eq 1 ? 'y' : 'ies') missing — an installer may have rewritten it; run windows/doctor.ps1 ⚠️" -ForegroundColor Yellow
+  }
+}
 if (Test-CommandExist('mise') -and -not $env:NODE_GYP_FORCE_PYTHON) {
   # Cache the resolved python path; the stamp exe IS the path, so a python version
   # change (new install dir) invalidates it without spawning mise on every start.

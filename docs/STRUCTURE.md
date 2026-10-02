@@ -153,6 +153,16 @@ machine-then-user, so a machine entry always shadows a user one — which
 is why a tool installed under `Program Files` beats the mise shim for the
 same command.
 
+Installers write the registry PATH without reading the declaration, and
+some replace the user PATH with their single entry. `doctor.ps1` compares
+both scopes with their declaration: a declared entry that is missing is NG,
+an undeclared one is listed to be added to the declaration or removed. The
+pwsh profile runs the same comparison for the user PATH on every start and
+warns on a missing entry, so a clobbered PATH shows in the next shell
+rather than in the next failed command. The machine PATH is left to
+`doctor.ps1`, because on a machine where `SYSTEM_PATH.txt` was never applied
+it differs permanently. `ApplyPath.ps1` restores either scope.
+
 Adding tools is bounded. `cmd.exe` expands an environment variable to at
 most 8191 characters, and a mise shim prepends the install directory of
 every managed tool, so what matters is not the length of the persistent

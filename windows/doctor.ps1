@@ -153,6 +153,26 @@ Write-Host "System Environment Variables:" -ForegroundColor Cyan
 $SystemEnvPathes = (Get-ItemPropertyValue -Path $SystemEnvPath -Name Path) -split ';'
 Show-HilightedList -List $SystemEnvPathes -Pattern $HilightPattern
 
+# Declared PATH drift. Installers rewrite the registry PATH on their own, some
+# replacing it outright; a missing declared entry is NG, an undeclared one is
+# listed for a decision: add it to the declaration, or remove it.
+. "$PSScriptRoot/../pwsh/src/Compare-DeclaredPath.ps1"
+Write-Host ""
+Write-Host "Checking PATH against its declaration..." -ForegroundColor Cyan
+foreach ($scope in @(
+    @{ Name = 'User'; File = "$PSScriptRoot/PATH.txt"; Key = $UserEnvPath }
+    @{ Name = 'Machine'; File = "$PSScriptRoot/SYSTEM_PATH.txt"; Key = $SystemEnvPath }
+  ))
+{
+  $raw = (Get-Item $scope.Key).GetValue('Path', '', 'DoNotExpandEnvironmentNames')
+  $drift = Compare-DeclaredPath -Declared (Get-Content -LiteralPath $scope.File) -Actual $raw
+  Show-Result -IsOK ($drift.Missing.Count -eq 0)
+  Write-Host "$($scope.Name) PATH" -NoNewline
+  Write-Host ", $($drift.Missing.Count) missing, $($drift.Undeclared.Count) undeclared ($(Split-Path -Leaf $scope.File))" -ForegroundColor DarkGray
+  $drift.Missing | ForEach-Object { Write-Host "    - $_" -ForegroundColor Yellow }
+  $drift.Undeclared | ForEach-Object { Write-Host "    + $_" -ForegroundColor DarkGray }
+}
+
 # Check diff
 Write-Host "Checking Windows Environment Variables..." -ForegroundColor Cyan
 $FileSystemPath = "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem"
