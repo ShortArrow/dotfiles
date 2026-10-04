@@ -29,6 +29,8 @@ cadence.
 
 ```
 claude plugin marketplace add anthropics/skills
+claude plugin marketplace add nanaism/yomiyasu
+claude plugin install yomiyasu@yomiyasu
 ```
 
 The list of collections worth knowing about is kept with the skills, in
