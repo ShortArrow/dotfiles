@@ -147,3 +147,49 @@ Describe 'Merge-JsonSettings' {
         }
     }
 }
+
+Describe 'Convert-SettingsLinkToFile' {
+    BeforeEach {
+        $dir = Join-Path $TestDrive ([guid]::NewGuid())
+        New-Item -ItemType Directory -Path $dir | Out-Null
+        $target = Join-Path $dir 'repo-settings.json'
+        $settings = Join-Path $dir 'settings.json'
+    }
+
+    It 'リンクを、リンク先と同じ内容の普通のファイルに置き換え、リンク先は残す' {
+        Set-Content -LiteralPath $target -Value '{"a":1}' -NoNewline
+        New-Item -ItemType SymbolicLink -Path $settings -Target $target | Out-Null
+
+        Convert-SettingsLinkToFile -Path $settings -FallbackContent '{"fallback":true}' | Should -Be 'converted'
+
+        (Get-Item -LiteralPath $settings).LinkType | Should -BeNullOrEmpty
+        Get-Content -LiteralPath $settings -Raw | Should -Be '{"a":1}'
+        Get-Content -LiteralPath $target -Raw | Should -Be '{"a":1}'
+    }
+
+    It 'リンク先が無いときは FallbackContent で普通のファイルを作る' {
+        Set-Content -LiteralPath $target -Value '{}' -NoNewline
+        New-Item -ItemType SymbolicLink -Path $settings -Target $target | Out-Null
+        Remove-Item -LiteralPath $target
+
+        Convert-SettingsLinkToFile -Path $settings -FallbackContent '{"fallback":true}' | Should -Be 'converted'
+
+        (Get-Item -LiteralPath $settings).LinkType | Should -BeNullOrEmpty
+        Get-Content -LiteralPath $settings -Raw | Should -Be '{"fallback":true}'
+        Test-Path -LiteralPath $target | Should -BeFalse
+    }
+
+    It '普通のファイルには触れない' {
+        Set-Content -LiteralPath $settings -Value '{"mine":1}' -NoNewline
+
+        Convert-SettingsLinkToFile -Path $settings -FallbackContent '{"fallback":true}' | Should -Be 'noop'
+
+        Get-Content -LiteralPath $settings -Raw | Should -Be '{"mine":1}'
+    }
+
+    It 'ファイルが無ければ何も作らない' {
+        Convert-SettingsLinkToFile -Path $settings -FallbackContent '{"fallback":true}' | Should -Be 'noop'
+
+        Test-Path -LiteralPath $settings | Should -BeFalse
+    }
+}

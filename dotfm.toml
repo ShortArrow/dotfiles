@@ -114,11 +114,17 @@ dst.linux = "$XDG_CONFIG_HOME/lazygit/config.yml"
 
 
 [tools.code]
-description = "VS Code user settings"
+description = "VS Code user settings (keybindings linked; settings.json merged on Windows)"
 [[tools.code.links]]
-src = { dir = "code", include = ["settings.json", "keybindings.json"] }
+src = { dir = "code", include = ["keybindings.json"] }
 dst.windows = "$APPDATA/Code/User"
 dst.linux   = "$XDG_CONFIG_HOME/Code/User"
+# The merge is PowerShell only, so Linux still links the sample.
+[[tools.code.links]]
+src = "code/settings.sample.json"
+dst.linux = "$XDG_CONFIG_HOME/Code/User/settings.json"
+[tools.code.script]
+windows = "code/setup.ps1"
 
 
 [tools.codeinsiders]

@@ -158,6 +158,44 @@ function Merge-JsonSettings
   return $merged
 }
 
+function Convert-SettingsLinkToFile
+{
+  <#
+  .SYNOPSIS
+  Replace a settings symlink with a regular file holding the same content.
+
+  .DESCRIPTION
+  For a tool that moves from linking its settings file to merging into it.
+  Merged into through the link, the repository's file would receive the
+  machine's state. The link's target is left in place. A link whose target
+  no longer exists — the repository stopped carrying the linked file — is
+  replaced by FallbackContent. A regular file and a missing path are left
+  alone.
+
+  .OUTPUTS
+  'converted' or 'noop'.
+  #>
+  param(
+    [Parameter(Mandatory)][string]$Path,
+    [Parameter(Mandatory)][AllowEmptyString()][string]$FallbackContent
+  )
+
+  $item = Get-Item -LiteralPath $Path -Force -ErrorAction SilentlyContinue
+  if ($null -eq $item -or -not $item.LinkType) { return 'noop' }
+
+  $target = @($item.Target)[0]
+  if (-not [IO.Path]::IsPathRooted($target)) { $target = Join-Path (Split-Path -Parent $Path) $target }
+  $content = if (Test-Path -LiteralPath $target -PathType Leaf) {
+    Get-Content -LiteralPath $target -Raw
+  } else {
+    $FallbackContent
+  }
+
+  Remove-Item -LiteralPath $Path -Force
+  Set-Content -LiteralPath $Path -Value $content -NoNewline -Encoding UTF8
+  return 'converted'
+}
+
 function Update-JsonSettingsFile
 {
   <#
