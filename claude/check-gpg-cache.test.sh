@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 # Exercise check-gpg-cache.sh against the tool_input shapes the hook sees.
 #
-# The agent state is faked: a temporary directory holds a `gpg` that prints
-# colon output for one key with a signing subkey, and a `gpg-connect-agent`
-# that reports the keygrips cached or not according to $FAKE_CACHED. A
-# temporary repository points gpg.program at the fake, so the test needs no
-# real key and leaves the real agent alone.
+# The agent state is faked: a temporary directory holds a `gpg` that signs
+# only while $FAKE_UNLOCKED is set, as a real gpg run with --pinentry-mode
+# error succeeds only when the agent can sign without asking. It knows the
+# key 0000000000000001 alone and logs every argument list, so the test can
+# see which key the trial signature named. A temporary repository points
+# gpg.program at the fake, so the test needs no real key and leaves the real
+# agent alone.
 set -u
 
 script="$(dirname "$0")/check-gpg-cache.sh"
@@ -14,36 +16,38 @@ trap 'rm -rf "$work"' EXIT
 
 fake="$work/bin"
 mkdir -p "$fake"
+export FAKE_GPG_LOG="$work/gpg.log"
 cat > "$fake/gpg" <<'EOF'
 #!/usr/bin/env bash
-# -K with colons: primary [SC] with keygrip AAAA, encryption subkey [E] with
-# keygrip BBBB, signing subkey [S] with keygrip CCCC.
-cat <<'OUT'
-sec:u:255:22:0000000000000001:1728691200:::u:::scESC:::+:::ed25519:::0:
-fpr:::::::::0000000000000000000000000000000000000001:
-grp:::::::::AAAA:
-ssb:u:255:18:0000000000000002:1728691200::::::e:::+:::cv25519::
-grp:::::::::BBBB:
-ssb:u:255:22:0000000000000003:1728691200::::::s:::+:::ed25519::
-grp:::::::::CCCC:
-OUT
+printf '%s\n' "$*" >> "$FAKE_GPG_LOG"
+known=0
+case " $* " in *" 0000000000000001 "*) known=1 ;; esac
+case " $* " in
+  *" --clearsign "*)
+    cat > /dev/null
+    if [ "$known" -eq 1 ] && [ -n "${FAKE_UNLOCKED:-}" ]; then
+      echo "-----BEGIN PGP SIGNED MESSAGE-----"; exit 0
+    fi
+    echo "gpg: signing failed: No pinentry" >&2; exit 2 ;;
+  *" -K "*)
+    [ "$known" -eq 1 ] && { echo "sec:u:255:22:0000000000000001:::::::scESC:"; exit 0; }
+    echo "gpg: error reading key: No secret key" >&2; exit 2 ;;
+esac
+exit 2
 EOF
-cat > "$fake/gpg-connect-agent" <<'EOF'
-#!/usr/bin/env bash
-c=${FAKE_CACHED:-}
-flag() { case " $c " in *" $1 "*) echo 1 ;; *) echo - ;; esac; }
-echo "S KEYINFO AAAA D - - $(flag AAAA) P - - -"
-echo "S KEYINFO BBBB D - - $(flag BBBB) P - - -"
-echo "S KEYINFO CCCC D - - $(flag CCCC) P - - -"
-echo OK
-EOF
-chmod +x "$fake/gpg" "$fake/gpg-connect-agent"
+chmod +x "$fake/gpg"
 
 repo="$work/repo"
 git init -q "$repo"
 git -C "$repo" config commit.gpgsign true
 git -C "$repo" config user.signingkey 0000000000000001
 git -C "$repo" config gpg.program "$fake/gpg"
+
+unknown="$work/unknown"
+git init -q "$unknown"
+git -C "$unknown" config commit.gpgsign true
+git -C "$unknown" config user.signingkey 00000000000000FF
+git -C "$unknown" config gpg.program "$fake/gpg"
 
 unsigned="$work/unsigned"
 git init -q "$unsigned"
@@ -71,34 +75,44 @@ check() { # <expected> <label> <command> <cwd>
   fi
 }
 
-echo "denies a signed operation while nothing is cached"
-FAKE_CACHED="" check deny "commit" 'git commit -m "feat: x"' "$repo"
-FAKE_CACHED="" check deny "merge" 'git merge topic' "$repo"
-FAKE_CACHED="" check deny "tag" 'git tag -a v1 -m v1' "$repo"
-FAKE_CACHED="" check deny "chained" 'git add -A && git commit -m x' "$repo"
-FAKE_CACHED="BBBB" check deny "only the encryption subkey cached" 'git commit -m x' "$repo"
+echo "denies a signed operation while the key cannot sign without pinentry"
+FAKE_UNLOCKED="" check deny "commit" 'git commit -m "feat: x"' "$repo"
+FAKE_UNLOCKED="" check deny "merge" 'git merge topic' "$repo"
+FAKE_UNLOCKED="" check deny "tag" 'git tag -a v1 -m v1' "$repo"
+FAKE_UNLOCKED="" check deny "chained" 'git add -A && git commit -m x' "$repo"
 
-echo "allows once a signing key is cached"
-FAKE_CACHED="AAAA" check allow "primary cached" 'git commit -m x' "$repo"
-FAKE_CACHED="CCCC" check allow "signing subkey cached" 'git commit -m x' "$repo"
+echo "allows once the key signs without pinentry"
+FAKE_UNLOCKED=1 check allow "commit" 'git commit -m x' "$repo"
+
+echo "the trial signature names the signing key and never prompts"
+: > "$FAKE_GPG_LOG"
+FAKE_UNLOCKED=1 verdict 'git commit -m x' "$repo" > /dev/null
+trial=$(grep -- '--clearsign' "$FAKE_GPG_LOG" || true)
+if printf '%s' "$trial" | grep -q -- '--local-user 0000000000000001' &&
+   printf '%s' "$trial" | grep -q -- '--pinentry-mode error'; then
+  pass=$((pass + 1)); echo "  ok   trial: $trial"
+else
+  fail=$((fail + 1)); echo "  FAIL trial: ${trial:-<none>}"
+fi
 
 echo "allows what does not sign"
-FAKE_CACHED="" check allow "push" 'git push origin main' "$repo"
-FAKE_CACHED="" check allow "log" 'git log --oneline -3' "$repo"
-FAKE_CACHED="" check allow "status" 'git status' "$repo"
-FAKE_CACHED="" check allow "no-gpg-sign" 'git commit --no-gpg-sign -m x' "$repo"
-FAKE_CACHED="" check allow "gpgsign=false" 'git -c commit.gpgsign=false commit -m x' "$repo"
-FAKE_CACHED="" check allow "unsigned repo" 'git commit -m x' "$unsigned"
-FAKE_CACHED="" check allow "outside a repo" 'git commit -m x' "$work"
-FAKE_CACHED="" check allow "mentions commit" 'echo "git commit later"' "$repo"
+FAKE_UNLOCKED="" check allow "push" 'git push origin main' "$repo"
+FAKE_UNLOCKED="" check allow "log" 'git log --oneline -3' "$repo"
+FAKE_UNLOCKED="" check allow "status" 'git status' "$repo"
+FAKE_UNLOCKED="" check allow "no-gpg-sign" 'git commit --no-gpg-sign -m x' "$repo"
+FAKE_UNLOCKED="" check allow "gpgsign=false" 'git -c commit.gpgsign=false commit -m x' "$repo"
+FAKE_UNLOCKED="" check allow "unsigned repo" 'git commit -m x' "$unsigned"
+FAKE_UNLOCKED="" check allow "outside a repo" 'git commit -m x' "$work"
+FAKE_UNLOCKED="" check allow "mentions commit" 'echo "git commit later"' "$repo"
+FAKE_UNLOCKED="" check allow "key not in the keyring" 'git commit -m x' "$unknown"
 
 echo "handles malformed input"
-FAKE_CACHED="" check allow "no command field" "" "$repo"
+FAKE_UNLOCKED="" check allow "no command field" "" "$repo"
 
-echo "the deny reason carries the unlock command"
-out=$(jq -nc --arg c 'git commit -m x' --arg d "$repo" '{tool_input:{command:$c},cwd:$d}' | FAKE_CACHED="" bash "$script")
-if printf '%s' "$out" | grep -q -- '--clearsign > /dev/null' && printf '%s' "$out" | grep -q 'gpg.program'; then
-  pass=$((pass + 1)); echo "  ok   reason names gpg.program and --clearsign"
+echo "the deny reason carries the unlock command for the signing key"
+out=$(jq -nc --arg c 'git commit -m x' --arg d "$repo" '{tool_input:{command:$c},cwd:$d}' | FAKE_UNLOCKED="" bash "$script")
+if printf '%s' "$out" | grep -q -- '-u 0000000000000001 --clearsign > /dev/null' && printf '%s' "$out" | grep -q 'gpg.program'; then
+  pass=$((pass + 1)); echo "  ok   reason names gpg.program, the key and --clearsign"
 else
   fail=$((fail + 1)); echo "  FAIL reason: $out"
 fi
