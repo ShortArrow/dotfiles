@@ -90,5 +90,9 @@
     "Lua.runtime.version": "Lua 5.1",
     "workbench.editorAssociations": {
         "*.md": "vscode.markdown.preview.editor"
-    }
+    },
+    "LineNumberDeco.enableSequentialDigits": true,
+    "editor.unicodeHighlight.invisibleCharacters": false,
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "chat.mcp.gallery.enabled": true
 }
