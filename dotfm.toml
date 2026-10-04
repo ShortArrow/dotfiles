@@ -289,6 +289,14 @@ dst.windows = "$LOCALAPPDATA/nvim-rescue"
 dst.linux   = "$XDG_CONFIG_HOME/nvim-rescue"
 
 
+
+[tools.windows-terminal]
+description = "Windows Terminal profile defaults, merged into settings.json (generated profiles stay local)"
+platforms = ["windows"]
+[tools.windows-terminal.script]
+windows = "winterm/setup.ps1"
+
+
 # ---- Doctor-only meta tools (no symlinks, just checks) ----
 
 [tools.windows]

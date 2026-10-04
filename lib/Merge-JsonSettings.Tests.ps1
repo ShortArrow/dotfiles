@@ -58,6 +58,26 @@ Describe 'Merge-JsonSettings' {
         }
     }
 
+    Context 'Windows Terminal の形' {
+        It 'profiles.defaults を持ち込み、UUID 付きの profiles.list と defaultProfile は残す' {
+            $current = @{
+                defaultProfile = '{574e775e-4f2a-5b96-ac1e-a2962a402336}'
+                profiles       = @{
+                    defaults = @{}
+                    list     = @(@{ guid = '{574e775e-4f2a-5b96-ac1e-a2962a402336}'; name = 'PowerShell' })
+                }
+            }
+            $sample = @{ profiles = @{ defaults = @{ font = @{ face = 'JetBrainsMonoNL Nerd Font' } } } }
+
+            $merged = Merge-JsonSettings -Current $current -Sample $sample
+
+            $merged.profiles.defaults.font.face | Should -Be 'JetBrainsMonoNL Nerd Font'
+            $merged.profiles.list | Should -HaveCount 1
+            $merged.profiles.list[0].name | Should -Be 'PowerShell'
+            $merged.defaultProfile | Should -Be '{574e775e-4f2a-5b96-ac1e-a2962a402336}'
+        }
+    }
+
     Context '配列を持つキー' {
         It 'hooks は sample の定義でまるごと置き換える' {
             $current = @{ hooks = @{ PreToolUse = @(@{ matcher = 'Bash'; hooks = @(@{ type = 'command'; command = 'old' }) }) } }
