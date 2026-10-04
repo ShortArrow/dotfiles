@@ -1,14 +1,14 @@
 BeforeAll {
-    . $PSScriptRoot/Merge-ClaudeSettings.ps1
+    . $PSScriptRoot/Merge-JsonSettings.ps1
 }
 
-Describe 'Merge-ClaudeSettings' {
+Describe 'Merge-JsonSettings' {
     Context '共有キーを持ち込む' {
         It 'settings 側に無いキーを sample から追加する' {
             $current = @{}
             $sample = @{ attribution = @{ commit = ''; sessionUrl = $false } }
 
-            $merged = Merge-ClaudeSettings -Current $current -Sample $sample
+            $merged = Merge-JsonSettings -Current $current -Sample $sample
 
             $merged.attribution.commit | Should -Be ''
             $merged.attribution.sessionUrl | Should -BeFalse
@@ -18,7 +18,7 @@ Describe 'Merge-ClaudeSettings' {
             $current = @{ attribution = @{ sessionUrl = $true } }
             $sample = @{ attribution = @{ sessionUrl = $false } }
 
-            $merged = Merge-ClaudeSettings -Current $current -Sample $sample
+            $merged = Merge-JsonSettings -Current $current -Sample $sample
 
             $merged.attribution.sessionUrl | Should -BeFalse
         }
@@ -27,7 +27,7 @@ Describe 'Merge-ClaudeSettings' {
             $current = @{ attribution = @{ pr = 'keep me' } }
             $sample = @{ attribution = @{ commit = '' } }
 
-            $merged = Merge-ClaudeSettings -Current $current -Sample $sample
+            $merged = Merge-JsonSettings -Current $current -Sample $sample
 
             $merged.attribution.pr | Should -Be 'keep me'
             $merged.attribution.commit | Should -Be ''
@@ -42,17 +42,17 @@ Describe 'Merge-ClaudeSettings' {
             }
             $sample = @{ attribution = @{ commit = '' } }
 
-            $merged = Merge-ClaudeSettings -Current $current -Sample $sample
+            $merged = Merge-JsonSettings -Current $current -Sample $sample
 
             $merged.permissions.allow | Should -HaveCount 2
             $merged.model | Should -Be 'opus'
         }
 
-        It 'permissions は sample が持っていても上書きしない' {
+        It '保護キーは sample が持っていても上書きしない' {
             $current = @{ permissions = @{ allow = @('Bash(git:*)') } }
             $sample = @{ permissions = @{ allow = @('Bash(rm:*)') } }
 
-            $merged = Merge-ClaudeSettings -Current $current -Sample $sample
+            $merged = Merge-JsonSettings -Current $current -Sample $sample -ProtectedKeys @('permissions')
 
             $merged.permissions.allow | Should -Be @('Bash(git:*)')
         }
@@ -63,7 +63,7 @@ Describe 'Merge-ClaudeSettings' {
             $current = @{ hooks = @{ PreToolUse = @(@{ matcher = 'Bash'; hooks = @(@{ type = 'command'; command = 'old' }) }) } }
             $sample = @{ hooks = @{ PreToolUse = @(@{ matcher = 'Bash'; hooks = @(@{ type = 'command'; command = 'new' }) }) } }
 
-            $merged = Merge-ClaudeSettings -Current $current -Sample $sample
+            $merged = Merge-JsonSettings -Current $current -Sample $sample
 
             $merged.hooks.PreToolUse[0].hooks[0].command | Should -Be 'new'
         }
@@ -72,7 +72,7 @@ Describe 'Merge-ClaudeSettings' {
             $current = @{ model = 'opus' }
             $sample = @{ hooks = @{ PreToolUse = @(@{ matcher = 'Bash' }) } }
 
-            $merged = Merge-ClaudeSettings -Current $current -Sample $sample
+            $merged = Merge-JsonSettings -Current $current -Sample $sample
 
             $merged.hooks.PreToolUse[0].matcher | Should -Be 'Bash'
             $merged.model | Should -Be 'opus'
@@ -108,8 +108,8 @@ Describe 'Merge-ClaudeSettings' {
             $current = @{ permissions = @{ allow = @('Bash(git:*)') }; model = 'opus' }
             $sample = @{ attribution = @{ sessionUrl = $false } }
 
-            $once = Merge-ClaudeSettings -Current $current -Sample $sample
-            $twice = Merge-ClaudeSettings -Current $once -Sample $sample
+            $once = Merge-JsonSettings -Current $current -Sample $sample
+            $twice = Merge-JsonSettings -Current $once -Sample $sample
 
             ConvertTo-CanonicalJson -InputObject $once |
                 Should -Be (ConvertTo-CanonicalJson -InputObject $twice)
@@ -121,7 +121,7 @@ Describe 'Merge-ClaudeSettings' {
             $current = @{ attribution = @{ sessionUrl = $true } }
             $sample = @{ attribution = @{ sessionUrl = $false } }
 
-            Merge-ClaudeSettings -Current $current -Sample $sample | Out-Null
+            Merge-JsonSettings -Current $current -Sample $sample | Out-Null
 
             $current.attribution.sessionUrl | Should -BeTrue
         }

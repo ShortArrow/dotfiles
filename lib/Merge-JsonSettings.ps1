@@ -2,28 +2,30 @@
 
 <#
 .SYNOPSIS
-Overlay the shared Claude Code settings onto a machine's settings.json.
+Overlay a repository's sample JSON onto a machine's settings file.
 
 .DESCRIPTION
-settings.json is not a symlink: it accumulates permission entries that belong
-to one machine and nowhere else. Only the keys this repository declares travel,
-and they travel by being merged in rather than by replacing the file.
+For applications whose settings file mixes what this repository shares with
+what one machine accumulates on its own — Claude Code's permission entries,
+Windows Terminal's generated profiles — the file is not a symlink. Only the
+keys the sample declares travel, and they travel by being merged in rather
+than by replacing the file.
 
 A key the sample declares wins — that is what makes the sample the source of
-truth for attribution and hooks. A key it says nothing about is left alone, so
-`permissions` and any local `model` survive the merge. `permissions` is refused
-outright even when the sample carries one, because a shared allowlist would
-hand every machine the rules of whichever machine wrote it last.
+truth. A key it says nothing about is left alone. A protected key is refused
+even when the sample carries one, for a key whose shared value would hand
+every machine the state of whichever machine wrote it last.
 
-The merge is one level deep. Nested values (a hooks event, an attribution
-field) replace wholesale rather than merging element by element: a hook the
-repository has retired should disappear on the next apply, and a half-merged
-hook array would be neither the old behaviour nor the new one.
+The merge reaches one level below the top. Where both sides hold an object
+under a key, each child key the sample declares replaces its counterpart and
+the rest are kept, so a sample can own `profiles.defaults` without touching
+`profiles.list`. Below that, values replace wholesale rather than merging
+element by element: a hook the repository has retired should disappear on the
+next apply, and a half-merged array would be neither the old behaviour nor the
+new one.
 #>
 
 Set-StrictMode -Version Latest
-
-$script:ProtectedKeys = @('permissions')
 
 function ConvertTo-HashtableDeep
 {
@@ -116,11 +118,12 @@ function ConvertTo-SortedKeys
   return $InputObject
 }
 
-function Merge-ClaudeSettings
+function Merge-JsonSettings
 {
   param(
     [Parameter(Mandatory)][AllowNull()]$Current,
-    [Parameter(Mandatory)][AllowNull()]$Sample
+    [Parameter(Mandatory)][AllowNull()]$Sample,
+    [string[]]$ProtectedKeys = @()
   )
 
   $merged = ConvertTo-HashtableDeep -InputObject $Current
@@ -131,7 +134,7 @@ function Merge-ClaudeSettings
 
   foreach ($key in $incoming.Keys)
   {
-    if ($script:ProtectedKeys -contains $key) { continue }
+    if ($ProtectedKeys -contains $key) { continue }
 
     $value = $incoming[$key]
     $existing = if ($merged.ContainsKey($key)) { $merged[$key] } else { $null }
@@ -153,4 +156,57 @@ function Merge-ClaudeSettings
   }
 
   return $merged
+}
+
+function Update-JsonSettingsFile
+{
+  <#
+  .SYNOPSIS
+  Merge a sample JSON file into a settings file, writing only when it changes.
+
+  .DESCRIPTION
+  A settings file that the merge leaves structurally equal is not rewritten,
+  so re-running a setup is a no-op. Before a rewrite the previous file is
+  copied to <path>.bak.<timestamp>; the backup is never deleted. A missing
+  settings file and its directory are created. The caller must have
+  dot-sourced lib/_lib.ps1 for the Write-Dotfile* messages.
+
+  .OUTPUTS
+  'noop' or 'merged'.
+  #>
+  param(
+    [Parameter(Mandatory)][string]$SettingsPath,
+    [Parameter(Mandatory)][string]$SamplePath,
+    [string[]]$ProtectedKeys = @()
+  )
+
+  $sample = Get-Content -LiteralPath $SamplePath -Raw | ConvertFrom-Json
+  $current = if (Test-Path -LiteralPath $SettingsPath) {
+    Get-Content -LiteralPath $SettingsPath -Raw | ConvertFrom-Json
+  } else {
+    $null
+  }
+
+  $merged = Merge-JsonSettings -Current $current -Sample $sample -ProtectedKeys $ProtectedKeys
+
+  $unchanged = ($null -ne $current) -and
+               ((ConvertTo-CanonicalJson -InputObject $current) -eq
+                (ConvertTo-CanonicalJson -InputObject $merged))
+  if ($unchanged) {
+    Write-DotfileOk "noop  $SettingsPath"
+    return 'noop'
+  }
+
+  if (Test-Path -LiteralPath $SettingsPath) {
+    $bak = "$SettingsPath.bak.$(Get-Date -Format yyyyMMddHHmmss)"
+    Copy-Item -LiteralPath $SettingsPath -Destination $bak
+    Write-DotfileWarn "backup $SettingsPath -> $bak"
+  }
+  $parent = Split-Path -Parent $SettingsPath
+  if (-not (Test-Path -LiteralPath $parent)) {
+    New-Item -ItemType Directory -Path $parent -Force | Out-Null
+  }
+  Set-Content -LiteralPath $SettingsPath -Value ($merged | ConvertTo-Json -Depth 20) -Encoding UTF8
+  Write-DotfileOk "merged $SettingsPath"
+  return 'merged'
 }

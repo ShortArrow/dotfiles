@@ -17,6 +17,12 @@ is safe (the second one becomes a no-op).
 |------|-----|-----------|
 | `_lib.ps1` | PowerShell 5.1+ | `<tool>/setup.ps1` |
 | `_lib.sh`  | Bash 4+         | `<tool>/setup.sh`  |
+| `Merge-JsonSettings.ps1` | PowerShell 7 | `setup.ps1` of a tool whose settings file is merged, not linked |
+
+`Merge-JsonSettings.ps1` is for an application that writes machine-local
+state into the same file as the shared settings. `Update-JsonSettingsFile`
+merges the tool's sample into that file and leaves every key the sample
+does not declare alone; see its docstring for the merge rules.
 
 Both implement the same minimal TOML subset for `dotfm.toml`:
 
