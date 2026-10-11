@@ -35,6 +35,8 @@ dotfiles/
 │   ├── doctor.ps1             commands, PATH order and PATH headroom
 │   ├── Resize-VirtualDrive.ps1  grows the Dev Drive VHDX
 │   └── ics.ps1                Internet Connection Sharing, interactively
+├── ubuntu/                    applied by hand, not through dotfm
+│   └── ics.sh                 the same sharing on an Ubuntu host, by systemd-networkd
 └── config/ content/ layouts/ assets/ i18n/ static/   the site — docs/SITE.md
 ```
 
