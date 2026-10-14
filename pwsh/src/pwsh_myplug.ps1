@@ -403,6 +403,20 @@ if (Test-Path -LiteralPath $declaredPathFile) {
     Write-Host "user PATH: $($pathDrift.Missing.Count) declared entr$($pathDrift.Missing.Count -eq 1 ? 'y' : 'ies') missing — an installer may have rewritten it; run windows/doctor.ps1 ⚠️" -ForegroundColor Yellow
   }
 }
+
+# Kana lock left on turns letters into half-width kana wherever the IME is off,
+# so a GPG passphrase typed into pinentry fails without showing why. A 101-key
+# keyboard has no key to clear it. Over SSH the key state is not the desk's.
+. "$PSScriptRoot/KanaLock.ps1"
+if (-not $env:SSH_CONNECTION) {
+  try {
+    if (Get-KanaLockState) {
+      Write-Host "kana lock is on — letters type as half-width kana where the IME is off; run Disable-KanaLock ⚠️" -ForegroundColor Yellow
+    }
+  } catch {
+    Write-Warning "kana lock check failed: $($_.Exception.Message)"
+  }
+}
 if (Test-CommandExist('mise') -and -not $env:NODE_GYP_FORCE_PYTHON) {
   # Cache the resolved python path; the stamp exe IS the path, so a python version
   # change (new install dir) invalidates it without spawning mise on every start.
