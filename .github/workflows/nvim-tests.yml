@@ -37,9 +37,9 @@ jobs:
         shell: bash
         run: nvim --headless "+Lazy! sync" +qa
 
-      - name: Install omnisharp via mason
+      - name: Install the servers the probes inspect via mason
         shell: bash
-        run: nvim --headless "+lua require('lazy').load({plugins={'mason.nvim'}})" "+MasonInstall omnisharp" "+qa!"
+        run: nvim --headless "+lua require('lazy').load({plugins={'mason.nvim'}})" "+MasonInstall omnisharp kakehashi" "+qa!"
 
       - name: Run tests
         shell: bash
