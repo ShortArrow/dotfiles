@@ -299,8 +299,10 @@ M.setup = function()
       end
 
       opts.init_options = {
-        autoInstall = true,
-        languages = { markdown = { bridge = bridge } },
+        languages = {
+          _ = { autoInstall = true },
+          markdown = { bridge = bridge },
+        },
         languageServers = language_servers,
       }
     end
