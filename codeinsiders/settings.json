@@ -36,8 +36,8 @@
         "editor.wordBasedSuggestions": "off"
     },
     "C_Cpp.intelliSenseEngine": "disabled",
-    "LineNumberDeco.activeForeground": "#219ddd",
-    "LineNumberDeco.centerColorOfRainbow": "#9090C0",
+    "LineNumberDeco.activeForeground": "#7aa7ff",
+    "LineNumberDeco.centerColorOfRainbow": "#71758e",
     "LineNumberDeco.enableRainbow": false,
     "LineNumberDeco.enableRepeatingDigits": true,
     "arduino.useArduinoCli": true,
@@ -85,9 +85,15 @@
     "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font Mono', Consolas, 'Courier New', monospace",
     "window.commandCenter": false,
     "window.menuBarVisibility": "toggle",
-    "workbench.colorTheme": "Tango+",
     "workbench.editor.showTabs": "single",
     "workbench.layoutControl.enabled": false,
     "workbench.navigationControl.enabled": false,
-    "Lua.runtime.version": "Lua 5.1"
+    "Lua.runtime.version": "Lua 5.1",
+    "LineNumberDeco.enableSequentialDigits": true,
+    "LineNumberDeco.enableRelativeLine": true,
+    "LineNumberDeco.foreground": "#292929",
+    "LineNumberDeco.foregroundColorOfRepeatingDigits": "#159393",
+    "editor.lineNumbers": "on",
+    "LineNumberDeco.enableMultiplesOfFive": true,
+    "LineNumberDeco.foregroundColorOfMultiplesOfFive": "#d72d2d"
 }

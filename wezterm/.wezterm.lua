@@ -13,6 +13,10 @@ else
   config.default_prog = { 'bash' }
 end
 
+-- Bitwarden serves \\.\pipe\openssh-ssh-agent for commit signing;
+-- wezterm's own agent would shadow it via SSH_AUTH_SOCK
+config.mux_enable_ssh_agent = false
+
 config.font = wezterm.font_with_fallback {
   'JetBrainsMonoNL Nerd Font',
   'Cica',
