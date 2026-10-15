@@ -22,13 +22,18 @@
 %ProgramFiles%\PowerShell\7
 %ProgramFiles%\SqlCmd
 %ProgramFiles%\Tailscale
+%ProgramFiles%\USBip
 %ProgramFiles%\Vim\vim92
+%ProgramFiles%\WSL
 %ProgramFiles%\WezTerm
 %ProgramFiles%\Wireshark
+%ProgramFiles%\Yubico\YubiKey Manager CLI
 %ProgramFiles%\dotnet
+%ProgramFiles%\doxygen\bin
 %ProgramFiles%\glzr.io\GlazeWM\cli
 %ProgramFiles%\glzr.io\Zebar
 %ProgramFiles%\usbipd-win
+%ProgramFiles(x86)%\Arm GNU Toolchain arm-none-eabi\14.2 rel1\bin
 %ProgramFiles(x86)%\IVI Foundation\IVI\Bin
 %ProgramFiles(x86)%\IVI Foundation\VISA\WinNT\Bin
 %ProgramFiles(x86)%\Renesas\Hew
