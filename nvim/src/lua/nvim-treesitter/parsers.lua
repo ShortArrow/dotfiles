@@ -1,15 +1,42 @@
-local config_dir = vim.fn.stdpath("config")
-local runtime = vim.api.nvim_get_runtime_file("lua/nvim-treesitter/parsers.lua", true)
+-- Shadows nvim-treesitter.parsers to add has_parser, which vim-illuminate
+-- calls from the master-branch API. Plugins require this module before
+-- nvim-treesitter is on the runtimepath, so the plugin's entries are
+-- fetched on first lookup instead of at require time.
+local config_dir = vim.fs.normalize(vim.fn.stdpath("config")):lower() .. "/"
+
+-- stdpath("data") ("nvim-data") shares a string prefix with the config dir
+-- ("nvim"), so compare whole path segments.
+local function in_config_dir(path)
+  return vim.startswith(vim.fs.normalize(path):lower(), config_dir)
+end
+
+local function find_upstream()
+  for _, path in ipairs(vim.api.nvim_get_runtime_file("lua/nvim-treesitter/parsers.lua", true)) do
+    if not in_config_dir(path) then
+      local ok, mod = pcall(dofile, path)
+      return ok and type(mod) == "table" and mod or nil
+    end
+  end
+end
 
 local parsers = {}
-for _, path in ipairs(runtime) do
-  if not path:find(config_dir, 1, true) then
-    local ok, mod = pcall(dofile, path)
-    if ok and type(mod) == "table" then
-      parsers = mod
-    end
-    break
+
+local function adopt_upstream()
+  local upstream = find_upstream()
+  if not upstream then return false end
+  for k, v in pairs(upstream) do
+    if rawget(parsers, k) == nil then rawset(parsers, k, v) end
   end
+  setmetatable(parsers, nil)
+  return true
+end
+
+if not adopt_upstream() then
+  setmetatable(parsers, {
+    __index = function(t, k)
+      if adopt_upstream() then return rawget(t, k) end
+    end,
+  })
 end
 
 parsers.has_parser = function(lang)

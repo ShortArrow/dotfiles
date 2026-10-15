@@ -1,9 +1,15 @@
-local config_dir = vim.fn.stdpath("config")
+local config_dir = vim.fs.normalize(vim.fn.stdpath("config")):lower() .. "/"
+
+-- stdpath("data") ("nvim-data") shares a string prefix with the config dir
+-- ("nvim"), so compare whole path segments.
+local function in_config_dir(path)
+  return vim.startswith(vim.fs.normalize(path):lower(), config_dir)
+end
 local runtime = vim.api.nvim_get_runtime_file("lua/nvim-treesitter/query.lua", true)
 
 local query = {}
 for _, path in ipairs(runtime) do
-  if not path:find(config_dir, 1, true) then
+  if not in_config_dir(path) then
     local ok, mod = pcall(dofile, path)
     if ok and type(mod) == "table" then
       query = mod
