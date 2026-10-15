@@ -116,7 +116,8 @@ upstream（`mushfikurr/overline-zebar`）への追従と自分の改造を分離
 |---|---|---|
 | `main` | upstream 追従専用。自分のコミットは載せない。 | `upstream/main` をそのままミラー |
 | `fix/<機能名>` | upstream へ PR を出す機能別ブランチ。1機能1ブランチで切り出し、PR カードを個別に立てる。 | `upstream/main` から分岐 |
-| `custom` | 自分が日常使う統合ブランチ。各 `fix/*` をマージして自分仕様の総体にする。dotfiles の submodule はこれを追跡。 | `upstream/main` から分岐し `fix/*` をマージ |
+| `feat/<機能名>` | PR を出さない fork 専用の機能ブランチ（例: `feat/cpu-temperature`、`feat/claude-usage`）。互いに独立させ、`custom` でだけ合流させる。 | `upstream/main` から分岐 |
+| `custom` | 自分が日常使う統合ブランチ。各 `fix/*`・`feat/*` をマージして自分仕様の総体にする。dotfiles の submodule はこれを追跡。 | `upstream/main` から分岐し `fix/*`・`feat/*` をマージ |
 
 理由: submodule の `main` に直接改造を積むと、upstream の取り込み（fetch & merge/rebase）が衝突だらけになり追従が破綻する。`main` を純粋なミラーに保つことで `git fetch upstream && git rebase upstream/main`（各 `fix/*` 上で）がクリーンに回る。
 
@@ -153,6 +154,18 @@ cd ../..
 git add zebar/overline-zebar
 git commit -m "update: bump overline-zebar (...)"
 ```
+
+### 開発中の worktree をホストで試す
+
+`Switch-ZebarPack.ps1` は `~/.glzr/zebar/overline-zebar` のリンクだけを張り替えて Zebar を再起動する。dotfiles には何もコミットせずに worktree のビルドを読ませられる。`-Target` を省くと submodule に戻る。
+
+```pwsh
+# worktree 側は CI=1 でビルドする（付けないと postbuild が zebar.exe を再起動する）
+sudo pwsh -NoProfile -File zebar/Switch-ZebarPack.ps1 -Target 'V:\github.com\ShortArrow\overline-zebar.worktrees\<branch>'
+sudo pwsh -NoProfile -File zebar/Switch-ZebarPack.ps1   # submodule に戻す
+```
+
+実行結果は `$env:TEMP/Switch-ZebarPack.log` に残る。テストは `Invoke-Pester zebar/Switch-ZebarPack.Tests.ps1`。
 
 ### upstream 追従
 
