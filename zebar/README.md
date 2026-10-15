@@ -9,6 +9,8 @@ GlazeWM 用タスクバー [Zebar](https://github.com/glzr-io/zebar) の設定�
 
 `dotfm.toml` の `[[tools.zebar.links]]` で `~/.glzr/zebar/` 配下へシンボリックリンクされる。Zebar が読むのは各 widget の `dist/`（`.gitignore` 対象）なので、改造後は `pnpm install && pnpm build` が必要。
 
+submodule を更新してビルドしたら Zebar を再起動する（`zebar/Switch-ZebarPack.ps1` を引数なしで実行）。開くたびに読み込まれる system-stats や設定 widget は新しいビルドになるが、常駐している `main`（上部バー）は再起動まで古いビルドのまま動き続けるので、新機能が上部バーにだけ出ない状態になる。
+
 起動は `pack: overline-zebar` / `widget: main`（`~/.glzr/zebar/settings.json` の `startupConfigs`）。
 
 ## 既知の不具合: セッション再接続で落ちる
