@@ -10,21 +10,3 @@
 #
 # Keep the reason next to the entry. An entry with no reason is a silenced
 # check.
-
-# Removed a half-width space between Japanese characters. The English text has
-# no such construct, so there is nothing to mirror.
-content/ja/notes/generated-config.md 8fd23a79e1bba7e08191b402c0c12bb73f7c66b3
-
-# Rewritten to drop metaphors carried over from the English draft — 値段, 居座る,
-# 腐る, 枝, 太らせる. The facts did not change, and the English is where those
-# figures belong, so there is no counterpart edit to make.
-#
-# shim-cost and lost-windows have since had their titles changed on both sides,
-# which puts them back in step; only this one is still one-sided.
-content/ja/notes/usb-suspend.md a05d7ee99182d26ebd9ebdc243e445ff91a801ca
-
-# The English side catching up. 535e1bbe gave the Japanese lost-windows the
-# eleven-ignore-rules figure and a link to /machine/; the English had no
-# "on this machine" to replace, so it was missed and added here. The pair is
-# level in content, only the commits are one behind the other.
-content/en/notes/lost-windows.md 594ace7bec256f2f45510c042434f2457e24cc9c

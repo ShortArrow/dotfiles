@@ -2,8 +2,9 @@
 #
 # Fail when a translated page is missing or has fallen behind its source.
 #
-# Hugo mirrors content under content/<lang>/, so a page exists in each
-# language at the same relative path. Two things go wrong with that, and
+# A page's language is in its file name, content/<section>/<name>.<lang>.md,
+# so its counterpart is the same path with the other suffix. Two things go
+# wrong with that, and
 # neither shows up in a build: a page is added in one language only, and a
 # page is edited in one language while its counterpart keeps the old text.
 # The second is the quiet one — the site still renders, just wrong.
@@ -39,9 +40,7 @@ bad() { printf 'NG  %s\n' "$1"; fail=1; }
 # out clean and never reaches this.
 uncommitted=$(
   for section in "${SECTIONS[@]}"; do
-    for lang in "${LANGS[@]}"; do
-      git status --porcelain -- "content/${lang}/${section}" 2>/dev/null
-    done
+    git status --porcelain -- "content/${section}" 2>/dev/null
   done
 )
 if [ -n "$uncommitted" ]; then
@@ -87,30 +86,29 @@ declared_alone() {
 for section in "${SECTIONS[@]}"; do
   note "== ${section} =="
 
+  dir="content/${section}"
+  [ -d "$dir" ] || continue
+
   # Every page must exist in every language.
   for lang in "${LANGS[@]}"; do
-    dir="content/${lang}/${section}"
-    [ -d "$dir" ] || continue
     while IFS= read -r path; do
-      rel="${path#content/${lang}/}"
+      stem="${path%.${lang}.md}"
       for other in "${LANGS[@]}"; do
         [ "$other" = "$lang" ] && continue
-        counterpart="content/${other}/${rel}"
+        counterpart="${stem}.${other}.md"
         if [ ! -e "$counterpart" ]; then
           bad "${counterpart} is missing (${path} exists)"
         fi
       done
-    done < <(find "$dir" -name '*.md' -type f | sort)
+    done < <(find "$dir" -name "*.${lang}.md" -type f | sort)
   done
 
   # A page edited on one side and not the other is out of date, whichever
   # side is older. Reported once per pair, from the newer side.
-  base="content/${LANGS[0]}/${section}"
-  [ -d "$base" ] || continue
   while IFS= read -r path; do
-    rel="${path#content/${LANGS[0]}/}"
+    stem="${path%.${LANGS[0]}.md}"
     for other in "${LANGS[@]:1}"; do
-      counterpart="content/${other}/${rel}"
+      counterpart="${stem}.${other}.md"
       [ -e "$counterpart" ] || continue
       a=$(last_commit_epoch "$path")
       b=$(last_commit_epoch "$counterpart")
@@ -122,7 +120,7 @@ for section in "${SECTIONS[@]}"; do
           bad "${path} is behind ${counterpart}"
       fi
     done
-  done < <(find "$base" -name '*.md' -type f | sort)
+  done < <(find "$dir" -name "*.${LANGS[0]}.md" -type f | sort)
 done
 
 if [ "$fail" -eq 0 ]; then

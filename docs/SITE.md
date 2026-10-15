@@ -14,7 +14,7 @@ config/_default/       Hugo configuration, split by concern
   module.toml            content mounts (see below)
   markup.toml            Goldmark and Chroma
   params.toml            the few params the templates read
-content/{en,ja}/       pages written for the site
+content/               pages written for the site, <name>.<lang>.md
 layouts/               the templates; there is no theme
   _default/              baseof, list, single, and the heading render hook
   partials/              head, header, footer, breadcrumbs, card grid
@@ -40,7 +40,8 @@ with no build step and no dependency. `hugo` alone builds the site.
 
 ## Two kinds of page source
 
-Pages written for the site live under `content/en/` and `content/ja/`.
+Pages written for the site live under `content/`, one file per language:
+`notes/path-budget.en.md` and `notes/path-budget.ja.md` are the same page.
 
 Tool documentation does not. Each tool's readme lives beside the configuration
 it documents, and `module.toml` mounts it into `content/docs/`. There is one
@@ -48,10 +49,11 @@ copy, and it is the one a checkout carries.
 
 Mounts have two rules that are easy to get wrong and produce no build error:
 
-- **Declaring any mount replaces the default one**, and mounts override each
-  language's `contentDir`. So `content/en` and `content/ja` are mounted
-  explicitly; remove those two entries and every page disappears.
-- **Every mount needs `lang`**, or its pages resolve in no language.
+- **Declaring any mount replaces the default one.** So `content/` itself is
+  mounted explicitly; remove that entry and every written page disappears.
+- **A mounted page's language is the suffix of its target**, as for a
+  written page: `content/docs/bash.ja.md`. A mount's `lang` is not used,
+  because no spelling of it builds on both 0.147 and 0.168 — see Versions.
 
 Symlinks under `content/` do not work. Hugo skips them on Linux, and a Windows
 checkout writes them as text files whose contents are the target path — which
@@ -82,10 +84,13 @@ scopes the dark rules to the same two selectors.
 | CI | 0.147.7 and latest | The pinned build is the gate. The latest build is warning of what a Cloudflare image upgrade will bring. |
 
 The latest build passes with deprecation warnings, and they stay until
-Cloudflare moves: `mounts.lang` is replaced by `sites.matrix` in 0.153, and
-`languageName` / `languageCode` by `label` / `locale` in 0.158. None of the
-replacements exists in 0.147, so there is no spelling that satisfies both.
-Silencing them would also silence the warning this build exists to give.
+Cloudflare moves: `languageName` / `languageCode` are replaced by `label` /
+`locale` in 0.158, and neither replacement exists in 0.147. Silencing them
+would also silence the warning this build exists to give.
+
+`mounts.lang` went the same way and was removed in 0.168, which turned the
+warning into a failed build. Languages are told by file name instead, which
+both versions read, so the configuration has no `lang` left to remove.
 
 ## Checks
 
@@ -93,4 +98,6 @@ Silencing them would also silence the warning this build exists to give.
   only still builds and still renders, and says something different depending
   on which language the reader picked. Edits that genuinely belong to one
   language are declared in `scripts/parity-exceptions.txt`.
+  `scripts/check-content-parity.test.sh` exercises it in throwaway
+  repositories.
 - The markdown link check runs over `content/`.

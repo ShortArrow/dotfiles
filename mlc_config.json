@@ -3,8 +3,12 @@
   ],
   "replacementPatterns": [
     {
-      "pattern": "^/(.*)",
-      "replacement": "file:///github/workspace/content/en/$1.md"
+      "pattern": "^/ja/(.*?)/?$",
+      "replacement": "file:///github/workspace/content/$1.ja.md"
+    },
+    {
+      "pattern": "^/(?!ja/)(.*?)/?$",
+      "replacement": "file:///github/workspace/content/$1.en.md"
     }
   ],
   "httpHeaders": [

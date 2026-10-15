@@ -2,16 +2,15 @@
 
 ## Add Docs
 
-```bash
-cd ./content/ja
-ln -s ../../bash ./bash
-```
-
-or
+A page is one file per language, side by side:
 
 ```bash
-hugo new ./content/ja/newmd.md
+hugo new content/notes/newmd.en.md
+hugo new content/notes/newmd.ja.md
 ```
+
+A tool's readme is not copied or linked into `content/`; it is mounted. See
+[docs/SITE.md](docs/SITE.md).
 
 ## Important Infomation Source
 

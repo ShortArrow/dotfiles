@@ -10,83 +10,65 @@
 # A mount has no such ambiguity. Adding a tool page means adding a mount and
 # giving that readme front matter with a title.
 #
-# Declaring any mount replaces the default one, and mounts also override the
-# per-language contentDir — so each language has to be mounted explicitly here
-# or its pages stop resolving. Every mount carries lang for the same reason.
+# Declaring any mount replaces the default one, so content/ itself is mounted
+# first or every written page disappears. A page's language is the suffix in
+# its target file name, never a mount's lang: Hugo 0.168 rejects lang, and
+# 0.147, which deploys, has nothing to replace it with.
 [[mounts]]
-source = "content/en"
+source = "content"
 target = "content"
-lang = "en"
-
-[[mounts]]
-source = "content/ja"
-target = "content"
-lang = "ja"
 
 [[mounts]]
 source = "bash/readme.md"
-target = "content/docs/bash.md"
-lang = "en"
+target = "content/docs/bash.en.md"
 
 [[mounts]]
 source = "deno/readme.md"
-target = "content/docs/deno.md"
-lang = "en"
+target = "content/docs/deno.en.md"
 
 [[mounts]]
 source = "js/readme.md"
-target = "content/docs/js.md"
-lang = "en"
+target = "content/docs/js.en.md"
 
 [[mounts]]
 source = "lua/readme.md"
-target = "content/docs/lua.md"
-lang = "en"
+target = "content/docs/lua.en.md"
 
 [[mounts]]
 source = "nvim/readme.md"
-target = "content/docs/nvim.md"
-lang = "en"
+target = "content/docs/nvim.en.md"
 
 [[mounts]]
 source = "nvim/src/tests/readme.md"
-target = "content/docs/nvim-test.md"
-lang = "en"
+target = "content/docs/nvim-test.en.md"
 
 [[mounts]]
 source = "php/readme.md"
-target = "content/docs/php.md"
-lang = "en"
+target = "content/docs/php.en.md"
 
 [[mounts]]
 source = "python/readme.md"
-target = "content/docs/python.md"
-lang = "en"
+target = "content/docs/python.en.md"
 
 [[mounts]]
 source = "rust/readme.md"
-target = "content/docs/rust.md"
-lang = "en"
+target = "content/docs/rust.en.md"
 
 [[mounts]]
 source = "tmux/readme.md"
-target = "content/docs/tmux.md"
-lang = "en"
+target = "content/docs/tmux.en.md"
 
 [[mounts]]
 source = "yaml/readme.md"
-target = "content/docs/yaml.md"
-lang = "en"
+target = "content/docs/yaml.en.md"
 
 [[mounts]]
 source = "markdown/readme.md"
-target = "content/docs/markdown.md"
-lang = "en"
+target = "content/docs/markdown.en.md"
 
 [[mounts]]
 source = "nvim-rescue/readme.md"
-target = "content/docs/nvim-rescue.md"
-lang = "en"
+target = "content/docs/nvim-rescue.en.md"
 
 # The tool readmes are English only. Mounting them into the Japanese
 # section as well keeps /ja/docs/ navigable instead of empty; the Japanese
@@ -94,65 +76,52 @@ lang = "en"
 
 [[mounts]]
 source = "bash/readme.md"
-target = "content/docs/bash.md"
-lang = "ja"
+target = "content/docs/bash.ja.md"
 
 [[mounts]]
 source = "deno/readme.md"
-target = "content/docs/deno.md"
-lang = "ja"
+target = "content/docs/deno.ja.md"
 
 [[mounts]]
 source = "js/readme.md"
-target = "content/docs/js.md"
-lang = "ja"
+target = "content/docs/js.ja.md"
 
 [[mounts]]
 source = "lua/readme.md"
-target = "content/docs/lua.md"
-lang = "ja"
+target = "content/docs/lua.ja.md"
 
 [[mounts]]
 source = "nvim/readme.md"
-target = "content/docs/nvim.md"
-lang = "ja"
+target = "content/docs/nvim.ja.md"
 
 [[mounts]]
 source = "nvim/src/tests/readme.md"
-target = "content/docs/nvim-test.md"
-lang = "ja"
+target = "content/docs/nvim-test.ja.md"
 
 [[mounts]]
 source = "php/readme.md"
-target = "content/docs/php.md"
-lang = "ja"
+target = "content/docs/php.ja.md"
 
 [[mounts]]
 source = "python/readme.md"
-target = "content/docs/python.md"
-lang = "ja"
+target = "content/docs/python.ja.md"
 
 [[mounts]]
 source = "rust/readme.md"
-target = "content/docs/rust.md"
-lang = "ja"
+target = "content/docs/rust.ja.md"
 
 [[mounts]]
 source = "tmux/readme.md"
-target = "content/docs/tmux.md"
-lang = "ja"
+target = "content/docs/tmux.ja.md"
 
 [[mounts]]
 source = "yaml/readme.md"
-target = "content/docs/yaml.md"
-lang = "ja"
+target = "content/docs/yaml.ja.md"
 
 [[mounts]]
 source = "markdown/readme.md"
-target = "content/docs/markdown.md"
-lang = "ja"
+target = "content/docs/markdown.ja.md"
 
 [[mounts]]
 source = "nvim-rescue/readme.md"
-target = "content/docs/nvim-rescue.md"
-lang = "ja"
+target = "content/docs/nvim-rescue.ja.md"

@@ -1,7 +1,7 @@
 # config/_default/languages.en.toml
 #
-# No contentDir: module.toml mounts content/en for this language, and a mount
-# overrides contentDir anyway.
+# No contentDir: a page's language is the suffix in its file name,
+# <name>.en.md, so both languages share content/.
 
 languageName = "English"
 languageCode = "en"

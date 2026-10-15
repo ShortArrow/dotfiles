@@ -1,6 +1,6 @@
 # config/_default/languages.ja.toml
 #
-# contentDir については languages.en.toml と同じ。module.toml のマウントが担う。
+# contentDir については languages.en.toml と同じ。言語はファイル名の <name>.ja.md で決まる。
 
 languageName = "日本語"
 languageCode = "ja"
