@@ -21,6 +21,11 @@
   and strands the link. Run this after `mise install`/`mise up`; the doctor
   reports stranded links.
 
+  A tool whose entry point is a batch file — an npm package's .cmd,
+  gradle's .bat — gets a one-line .cmd wrapper instead of a link (see
+  MiseBinFarm.ps1): through its shim mise would run it under a PATH holding
+  every install directory, past what cmd.exe accepts.
+
   Interpreters that locate their standard library relative to the exe are
   excluded — through a symlink they would look in the farm and find
   nothing. The rust family is excluded because ~/.cargo/bin is already on
@@ -31,6 +36,7 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+. "$PSScriptRoot/MiseBinFarm.ps1"
 
 $exclude = @('python*', 'pip*', 'cargo*', 'rustc*', 'rustup', 'rust-*', 'rustfmt', 'clippy*', 'rls', 'rustdoc')
 
@@ -51,33 +57,36 @@ foreach ($shim in Get-ChildItem -LiteralPath $shims -Filter '*.exe')
   $target = & mise which $name 2>$null
   if (-not $target -or -not (Test-Path -LiteralPath $target)) { continue }
 
-  # The link carries the shim's .exe name. A target that is not itself a PE
-  # (npm.cmd, a bare script) would produce an npm.exe that the loader
-  # rejects — those tools stay on their shims.
-  if ([IO.Path]::GetExtension($target) -ne '.exe') { continue }
-
-  $wanted[$shim.Name] = $target
+  $entry = Resolve-FarmEntry -Name $name -Target $target
+  if ($entry) { $wanted[$entry.File] = $entry }
 }
 
 $created = 0; $updated = 0; $pruned = 0
-foreach ($entry in $wanted.GetEnumerator())
+foreach ($entry in $wanted.Values)
 {
-  $link = Join-Path $Farm $entry.Key
-  $existing = Get-Item -LiteralPath $link -ErrorAction SilentlyContinue
-  if ($existing -and @($existing.Target)[0] -eq $entry.Value) { continue }
-  if ($existing) { Remove-Item -LiteralPath $link -Force; $updated++ } else { $created++ }
-  New-Item -ItemType SymbolicLink -Path $link -Target $entry.Value | Out-Null
+  $path = Join-Path $Farm $entry.File
+  $existing = Get-Item -LiteralPath $path -ErrorAction SilentlyContinue
+  if ($existing -and (Get-FarmEntryTarget $existing) -eq $entry.Target) { continue }
+  if ($existing) { Remove-Item -LiteralPath $path -Force; $updated++ } else { $created++ }
+  if ($entry.Kind -eq 'Link')
+  {
+    New-Item -ItemType SymbolicLink -Path $path -Target $entry.Target | Out-Null
+  } else
+  {
+    Set-Content -LiteralPath $path -Value (New-FarmWrapperText -Target $entry.Target) -Encoding ascii
+  }
 }
 
-foreach ($link in Get-ChildItem -LiteralPath $Farm -File)
+foreach ($item in Get-ChildItem -LiteralPath $Farm -File)
 {
-  $stale = -not $wanted.ContainsKey($link.Name)
-  $broken = $link.LinkType -and -not (Test-Path -LiteralPath (@($link.Target)[0]))
+  $target = Get-FarmEntryTarget $item
+  $stale = -not $wanted.ContainsKey($item.Name)
+  $broken = $target -and -not (Test-Path -LiteralPath $target)
   if ($stale -or $broken)
   {
-    Remove-Item -LiteralPath $link.FullName -Force
+    Remove-Item -LiteralPath $item.FullName -Force
     $pruned++
   }
 }
 
-Write-Host ("farm: {0} links ({1} created, {2} updated, {3} pruned)" -f $wanted.Count, $created, $updated, $pruned)
+Write-Host ("farm: {0} entries ({1} created, {2} updated, {3} pruned)" -f $wanted.Count, $created, $updated, $pruned)

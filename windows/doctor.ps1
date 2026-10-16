@@ -270,7 +270,8 @@ Test-Service -ServiceName "npcap"
 # Supply-chain guards on the tool installers, and provenance of npm tools.
 . "$PSScriptRoot/Test-SupplyChain.ps1"
 
-# The mise bin farm: symlinks to real tool executables. An upgrade moves the
+# The mise bin farm: symlinks to real tool executables, and .cmd wrappers
+# for tools whose entry point is a batch file. An upgrade moves the
 # versioned install directory and strands the link, so staleness is the
 # failure mode to watch for. Sync-MiseBinFarm.ps1 rebuilds it.
 Write-Host ""
@@ -278,15 +279,16 @@ Write-Host "Checking mise bin farm..." -ForegroundColor Cyan
 $farmDir = Join-Path $env:LOCALAPPDATA 'mise\bin'
 if (Test-Path -LiteralPath $farmDir)
 {
-  $farmLinks = Get-ChildItem -LiteralPath $farmDir -File
-  $stranded = @($farmLinks | Where-Object { $_.LinkType -and -not (Test-Path -LiteralPath (@($_.Target)[0])) })
+  $farmEntries = Get-ChildItem -LiteralPath $farmDir -File
+  . "$PSScriptRoot/MiseBinFarm.ps1"
+  $stranded = @($farmEntries | Where-Object { $t = Get-FarmEntryTarget $_; $t -and -not (Test-Path -LiteralPath $t) })
   Show-Result -IsOK ($stranded.Count -eq 0)
   if ($stranded.Count -eq 0)
   {
-    Write-Host "$($farmLinks.Count) links, none stranded" -ForegroundColor DarkGray
+    Write-Host "$($farmEntries.Count) entries, none stranded" -ForegroundColor DarkGray
   } else
   {
-    Write-Host "$($stranded.Count) stranded link(s) — run windows/Sync-MiseBinFarm.ps1" -ForegroundColor Yellow
+    Write-Host "$($stranded.Count) stranded — run windows/Sync-MiseBinFarm.ps1" -ForegroundColor Yellow
     $stranded | Select-Object -First 5 | ForEach-Object { Write-Host "    $($_.Name)" -ForegroundColor Yellow }
   }
 } else
