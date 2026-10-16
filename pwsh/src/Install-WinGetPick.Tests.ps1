@@ -45,6 +45,17 @@ Describe 'Show-WinGetPreview' {
         $script:fetched | Should -Be @('Git.Git')
     }
 
+    It 'Id に使えない文字を含む Id は取得せず空を返す' -TestCases @(
+        @{ Id = 'Evil&calc.Pkg' }
+        @{ Id = '..\..\outside' }
+        @{ Id = 'A.%PATH%' }
+        @{ Id = 'A."quote' }
+    ) {
+        Show-WinGetPreview -Id $Id -CacheDir $cache -DelayMs 0 -Fetch $fetch |
+            Should -BeNullOrEmpty
+        $script:fetched | Should -BeNullOrEmpty
+    }
+
     It '取得が何も書かなければ空を返し、キャッシュも作らない' {
         $empty = { param($Id, $Path) }
         Show-WinGetPreview -Id 'Gone.Pkg' -CacheDir $cache -DelayMs 0 -Fetch $empty |

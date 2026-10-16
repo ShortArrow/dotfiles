@@ -25,6 +25,20 @@ function ConvertFrom-WinGetPickLine {
     ($PickedLine -split "`t")[0].Trim()
 }
 
+function Test-WinGetPackageId {
+    <#
+    .SYNOPSIS
+      True when Id is dot-separated runs of word characters, '+' and '-'.
+
+    .DESCRIPTION
+      An Id is spliced into a cmd command line and a cache file name, so
+      anything else — quotes, '&', '%', path separators, '..' — is refused
+      rather than escaped. Every Id winget's own sources serve fits.
+    #>
+    param([Parameter(Mandatory)][AllowEmptyString()][string]$Id)
+    $Id -match '^[\w+-]+(\.[\w+-]+)*$'
+}
+
 function Show-WinGetPreview {
     <#
     .SYNOPSIS
@@ -37,7 +51,8 @@ function Show-WinGetPreview {
       detached, writing straight to the cache file: a fetch whose preview
       was killed still finishes and fills the cache, and holds no handle to
       fzf's preview pipe. Fetch receives the Id and the cache file path and
-      may leave the file absent when there is nothing to show.
+      may leave the file absent when there is nothing to show. An Id that
+      fails Test-WinGetPackageId shows nothing.
     #>
     param(
         [Parameter(Mandatory)][string]$Id,
@@ -49,6 +64,7 @@ function Show-WinGetPreview {
             Start-Process cmd -ArgumentList '/c', $command -WindowStyle Hidden -Wait
         }
     )
+    if (-not (Test-WinGetPackageId $Id)) { return }
     $path = Join-Path $CacheDir "$Id.txt"
     if (-not (Test-Path -LiteralPath $path)) {
         Start-Sleep -Milliseconds $DelayMs
