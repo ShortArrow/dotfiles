@@ -93,6 +93,13 @@ key = "gsk"
 expand = { default = "git config user.signingkey \"$(gpg --list-secret-keys --with-colons --keyid-format long | awk -F: '/^sec/{k=$5} /^uid/&&k{print k\"  \"$10; k=\"\"}' | fzf --prompt 'signing key> ' | cut -d' ' -f1)\"", pwsh = "Set-GitSigningKey" }
 when_command_exists = { default = ["gpg", "fzf", "awk"], pwsh = ["gpg", "fzf"] }
 
+# Search winget and install the pick: the profile's Install-WinGetPick,
+# gated on the tools it runs because runex sees only PATH.
+[[abbr]]
+key = "wgi"
+expand = { pwsh = "Install-WinGetPick" }
+when_command_exists = { pwsh = ["winget", "fzf"] }
+
 # dotfm shortcuts. `df` is intentionally not shadowed (POSIX disk-free).
 [[abbr]]
 key = "dfa"
