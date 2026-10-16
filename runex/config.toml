@@ -84,12 +84,14 @@ expand = "zeditor"
 when_command_exists = ["zeditor"]
 
 # Declare this repository's signing identity: fzf over the secret keys in
-# the GPG keyring. $(...) form, so pwsh, bash and zsh only — nushell would
-# need a different spelling.
+# the GPG keyring. pwsh calls the profile's Set-GitSigningKey, gated on the
+# tools it runs because runex sees only PATH. The default is the same pick
+# in POSIX tools, in $(...) form, so bash and zsh only — nushell would need
+# a different spelling.
 [[abbr]]
 key = "gsk"
-expand = "git config user.signingkey \"$(gpg --list-secret-keys --with-colons --keyid-format long | awk -F: '/^sec/{k=$5} /^uid/&&k{print k\"  \"$10; k=\"\"}' | fzf --prompt 'signing key> ' | cut -d' ' -f1)\""
-when_command_exists = ["gpg", "fzf"]
+expand = { default = "git config user.signingkey \"$(gpg --list-secret-keys --with-colons --keyid-format long | awk -F: '/^sec/{k=$5} /^uid/&&k{print k\"  \"$10; k=\"\"}' | fzf --prompt 'signing key> ' | cut -d' ' -f1)\"", pwsh = "Set-GitSigningKey" }
+when_command_exists = { default = ["gpg", "fzf", "awk"], pwsh = ["gpg", "fzf"] }
 
 # dotfm shortcuts. `df` is intentionally not shadowed (POSIX disk-free).
 [[abbr]]
