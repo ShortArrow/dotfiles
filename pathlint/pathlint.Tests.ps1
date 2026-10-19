@@ -19,7 +19,6 @@ BeforeAll {
         windowsApps = 'la\Microsoft\WindowsApps'
         goMsi       = 'pf\Go\bin'
         pwsh7       = 'pf\PowerShell\7'
-        gitUsr      = 'pf\Git\usr\bin'
     }
 
     function Get-CheckKind {
@@ -69,13 +68,5 @@ Describe 'pathlint.toml' -Skip:(-not $script:pathlint) {
 
     It 'pwsh が PowerShell 7 以外から解決されたら落ちる' {
         Get-CheckKind -Order windowsApps, pwsh7 -Command pwsh | Should -BeLike 'ng_*'
-    }
-
-    It 'bash は Git の usr/bin から解決されれば通る' {
-        Get-CheckKind -Order gitUsr, windowsApps -Command bash | Should -Be 'ok'
-    }
-
-    It 'bash が WindowsApps から解決されたら落ちる' {
-        Get-CheckKind -Order windowsApps, gitUsr -Command bash | Should -BeLike 'ng_*'
     }
 }

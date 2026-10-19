@@ -17,10 +17,6 @@ windows = "$ProgramFiles/Go/bin"
 description = "PowerShell 7"
 windows = "$ProgramFiles/PowerShell/7"
 
-[source.git_usr]
-description = "Git for Windows' POSIX tools"
-windows = "$ProgramFiles/Git/usr/bin"
-
 # A farm tool resolving through its shim pays two extra process spawns and
 # a console middleman that breaks pagers and TUIs.
 [[expect]]
@@ -89,12 +85,6 @@ os = ["windows"]
 [[expect]]
 command = "pwsh"
 prefer = ["pwsh7"]
-os = ["windows"]
-
-# bash from Git, not the WSL launcher stub.
-[[expect]]
-command = "bash"
-prefer = ["git_usr"]
 os = ["windows"]
 
 # A tool developed here and also installed as a package: the local
