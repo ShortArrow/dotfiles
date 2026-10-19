@@ -610,7 +610,6 @@ Function gig {
     [string[]]$list
   )
   $params = ($list | ForEach-Object { [uri]::EscapeDataString($_) }) -join ","
-  $DebugPreference = 'SilentlyContinue'
   Invoke-RestMethod -Uri "https://www.toptal.com/developers/gitignore/api/$params"
 }
 
@@ -690,7 +689,10 @@ if ([Environment]::GetEnvironmentVariable('YAZI_FILE_ONE', 'User') -ne $yaziFile
 }
 $env:YAZI_FILE_ONE = $yaziFileOne
 
-# Enable debug output
+# Show the profile's own Write-Debug timings while it loads. Restored at the
+# end: left on, every cmdlet in the session — and every script run from it —
+# prints its debug stream, Invoke-RestMethod dumping whole response bodies.
+$__debugPreference = $DebugPreference
 $DebugPreference = 'Continue'
 
 # Initialize only essential environment variables
@@ -723,3 +725,5 @@ Remove-Variable __seenPath -ErrorAction SilentlyContinue
 
 $profileLoadDuration = (Get-Date) - $profileLoadStart
 Write-Debug ("Profile loaded in {0:N0} ms" -f $profileLoadDuration.TotalMilliseconds)
+$DebugPreference = $__debugPreference
+Remove-Variable __debugPreference -ErrorAction SilentlyContinue
