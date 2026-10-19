@@ -57,9 +57,9 @@ earlier in `PATH`, or a tool that has since been moved under mise and still
 has its old directory listed. Those entries take up length and never
 resolve anything.
 
-`windows/path-order.toml` declares which entries must come before which,
-and `windows/doctor.ps1` checks both that order and the remaining budget
-every time it runs.
+`pathlint/pathlint.toml` declares which directory each command must
+resolve from, and `windows/doctor.ps1` checks both that and the remaining
+budget every time it runs.
 
 ## How much room that is
 

@@ -297,9 +297,19 @@ if (Test-Path -LiteralPath $farmDir)
   Write-Host "farm missing at $farmDir — run windows/Sync-MiseBinFarm.ps1" -ForegroundColor Yellow
 }
 
-# PATH order rules (declared in path-order.toml)
+# Where each command resolves from (declared in pathlint/pathlint.toml).
 Write-Host ""
-. "$PSScriptRoot/Test-PathOrder.ps1"
+Write-Host "Checking command resolution..." -ForegroundColor Cyan
+if (Test-CommandExist "pathlint")
+{
+  pathlint --config "$PSScriptRoot/../pathlint/pathlint.toml" --quiet check
+  Show-Result -IsOK ($LASTEXITCODE -eq 0)
+  Write-Host "pathlint check" -NoNewline
+  Write-Host ", pathlint/pathlint.toml" -ForegroundColor DarkGray
+} else
+{
+  Write-Host "- [skip]: pathlint not installed" -ForegroundColor DarkGray
+}
 
 # PATH length budget.
 # cmd.exe expands an environment variable to at most 8191 characters. npm/pnpm

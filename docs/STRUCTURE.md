@@ -28,11 +28,9 @@ dotfiles/
 │   ├── SYSTEM_PATH.txt        declared machine PATH; admin to apply
 │   ├── ApplyPath.ps1          writes the two files into the registry
 │   ├── DiffPath.ps1           registry PATH against the declared file
-│   ├── path-order.toml        ordering rules between PATH entries
-│   ├── Test-PathOrder.ps1     checks the process PATH against those rules
 │   ├── Test-SupplyChain.ps1   guards on the tool installers
 │   ├── Sync-MiseBinFarm.ps1   rebuilds the symlink farm after a mise install
-│   ├── doctor.ps1             commands, PATH order and PATH headroom
+│   ├── doctor.ps1             commands, where they resolve from, PATH headroom
 │   ├── Resize-VirtualDrive.ps1  grows the Dev Drive VHDX
 │   └── ics.ps1                Internet Connection Sharing, interactively
 ├── ubuntu/                    applied by hand, not through dotfm

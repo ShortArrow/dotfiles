@@ -1,13 +1,106 @@
-# pathlint dogfood — Round 1 (minimal-first, doctor-only)
+# Where each command must resolve from on this host.
 #
-# This file is intentionally empty (no [[expect]], no [source] overrides).
-# Round 1 captures `pathlint doctor` findings on this host without R1
-# (resolve-order) noise. R1 / R2 / R4 / sort --apply / shell startup hooks
-# are all out of scope here.
-#
-# The companion `windows/path-order.toml` + `windows/Test-PathOrder.ps1`
-# stay untouched and serve as the baseline this experiment is compared
-# against. See `pathlint/readme.md` for invocation and the non-goals.
-#
-# Started: 2026-06-03. Host: Windows 11 pwsh (102 PATH entries).
-# pathlint version at first snapshot: 0.0.33.
+# Checked by `pathlint check` from windows/doctor.ps1, against the process
+# PATH of the shell running it. A rule names the outcome — the directory the
+# winning binary lives in — so an entry that only moved in PATH without
+# changing what wins passes. pathlint.Tests.ps1 shows each rule failing.
+
+[source.mise_farm]
+description = "symlinks to mise tools' real executables (windows/Sync-MiseBinFarm.ps1)"
+windows = "$LocalAppData/mise/bin"
+
+[source.go_msi]
+description = "Go from the official MSI, superseded by mise"
+windows = "$ProgramFiles/Go/bin"
+
+[source.pwsh7]
+description = "PowerShell 7"
+windows = "$ProgramFiles/PowerShell/7"
+
+[source.git_usr]
+description = "Git for Windows' POSIX tools"
+windows = "$ProgramFiles/Git/usr/bin"
+
+# A farm tool resolving through its shim pays two extra process spawns and
+# a console middleman that breaks pagers and TUIs.
+[[expect]]
+command = "node"
+prefer = ["mise_farm"]
+avoid = ["mise_shims"]
+os = ["windows"]
+
+[[expect]]
+command = "pnpm"
+prefer = ["mise_farm"]
+avoid = ["mise_shims"]
+os = ["windows"]
+
+[[expect]]
+command = "uv"
+prefer = ["mise_farm"]
+avoid = ["mise_shims"]
+os = ["windows"]
+
+[[expect]]
+command = "rg"
+prefer = ["mise_farm"]
+avoid = ["mise_shims"]
+os = ["windows"]
+
+[[expect]]
+command = "fzf"
+prefer = ["mise_farm"]
+avoid = ["mise_shims"]
+os = ["windows"]
+
+[[expect]]
+command = "fd"
+prefer = ["mise_farm"]
+avoid = ["mise_shims"]
+os = ["windows"]
+
+[[expect]]
+command = "lazygit"
+prefer = ["mise_farm"]
+avoid = ["mise_shims"]
+os = ["windows"]
+
+# mise owns Go; the MSI install left on disk must not win.
+[[expect]]
+command = "go"
+prefer = ["mise_farm"]
+avoid = ["mise_shims", "go_msi"]
+os = ["windows"]
+
+# python is kept out of the farm (it looks for its stdlib beside itself),
+# so its shim is the right answer; the Store stub is not.
+[[expect]]
+command = "python"
+prefer = ["mise"]
+avoid = ["windows_apps"]
+os = ["windows"]
+
+[[expect]]
+command = "python3"
+prefer = ["mise"]
+avoid = ["windows_apps"]
+os = ["windows"]
+
+[[expect]]
+command = "pwsh"
+prefer = ["pwsh7"]
+os = ["windows"]
+
+# bash from Git, not the WSL launcher stub.
+[[expect]]
+command = "bash"
+prefer = ["git_usr"]
+os = ["windows"]
+
+# A tool developed here and also installed as a package: the local
+# `cargo install` build wins over the released one. No command is in both
+# places today, so this orders `pathlint sort` without a check behind it.
+[[relation]]
+kind = "prefer_order_over"
+earlier = "cargo"
+later = "winget"

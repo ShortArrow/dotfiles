@@ -95,7 +95,7 @@ of it:
   starts and finds a link whose target is gone.
 - `windows/doctor.ps1` reports how many links currently point at a missing
   target.
-- `windows/path-order.toml` requires the symlink directory to come before
-  the shims directory in `PATH`. A tool without a link falls back to its
-  shim, so an upgrade can make a tool slow again but never makes it
+- `pathlint/pathlint.toml` requires the linked tools to resolve from the
+  symlink directory, not from the shims. A tool without a link falls back
+  to its shim, so an upgrade can make a tool slow again but never makes it
   disappear.
