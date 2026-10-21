@@ -14,6 +14,10 @@
   Run without -Target to go back to the submodule. Creating a symbolic link
   needs Developer Mode or an elevated shell.
 
+  Zebar is started through explorer.exe so it neither inherits this console,
+  where it would keep printing its log and die with Ctrl+C, nor this shell's
+  elevation under sudo.
+
   The run is logged to Switch-ZebarPack.log under $env:TEMP, so the outcome
   can be read even when it was started through sudo in another window.
 
@@ -68,7 +72,7 @@ try {
   "before: $($result.Before)"
   "after:  $($result.After)"
 
-  Start-Process $executable
+  Start-Process explorer.exe -ArgumentList "`"$executable`""
 } finally {
   Stop-Transcript | Out-Null
 }
