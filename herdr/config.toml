@@ -3,6 +3,11 @@ onboarding = false
 [ui]
 #host_cursor = "native"
 
+# The default agent rows with the machine label hidden on this machine's own
+# panes: remote machines are told apart by their (icon) labels instead.
+[ui.sidebar.agents]
+rows = [["state_icon", { token = "machine", rules = [{ equals = "Local", hide = true }] }, "workspace", "tab"], ["agent"]]
+
 [ui.toast]
 delivery = "off"
 
