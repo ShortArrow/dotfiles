@@ -48,7 +48,7 @@ passphrase field, receives letters as half-width kana: `test` arrives as
 no kana key to clear it by hand.
 
 The profile warns on start when kana lock is on. `Disable-KanaLock` turns it
-off, and `Get-KanaLockState` reports it. The user32 calls are compiled once
+off, and `Get-KanaLock` reports it. The user32 calls are compiled once
 into `~/.cache/pwsh-native`.
 
 ## sudo

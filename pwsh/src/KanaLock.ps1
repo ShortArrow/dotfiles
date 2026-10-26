@@ -35,7 +35,7 @@ function Import-KanaLockNative {
     $null = [Reflection.Assembly]::LoadFile($dll)
 }
 
-function Get-KanaLockState {
+function Get-KanaLock {
     <# .SYNOPSIS True when kana lock is on. #>
     param([string]$CacheDir = (Join-Path $HOME '.cache/pwsh-native'))
     Import-KanaLockNative -CacheDir $CacheDir
@@ -45,7 +45,7 @@ function Get-KanaLockState {
 function Disable-KanaLock {
     <# .SYNOPSIS Turns kana lock off by sending one kana key press; does nothing when it is already off. #>
     param([string]$CacheDir = (Join-Path $HOME '.cache/pwsh-native'))
-    if (-not (Get-KanaLockState -CacheDir $CacheDir)) { return }
+    if (-not (Get-KanaLock -CacheDir $CacheDir)) { return }
     $keyUp = 2
     [DotfilesKana.User32]::keybd_event($script:VkKana, 0, 0, [UIntPtr]::Zero)
     [DotfilesKana.User32]::keybd_event($script:VkKana, 0, $keyUp, [UIntPtr]::Zero)

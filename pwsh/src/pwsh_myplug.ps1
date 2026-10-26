@@ -410,7 +410,7 @@ if (Test-Path -LiteralPath $declaredPathFile) {
 . "$PSScriptRoot/KanaLock.ps1"
 if (-not $env:SSH_CONNECTION) {
   try {
-    if (Get-KanaLockState) {
+    if (Get-KanaLock) {
       Write-Host "kana lock is on — letters type as half-width kana where the IME is off; run Disable-KanaLock ⚠️" -ForegroundColor Yellow
     }
   } catch {

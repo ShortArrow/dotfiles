@@ -20,14 +20,14 @@ Describe 'Test-KeyToggled' {
     }
 }
 
-Describe 'Get-KanaLockState' {
+Describe 'Get-KanaLock' {
     # Each run is a fresh process: a loaded assembly cannot be unloaded, so a
     # second load in this session would not exercise the cache.
     BeforeAll {
         $script:probe = {
             param($source, $cacheDir)
             . $source
-            Get-KanaLockState -CacheDir $cacheDir
+            Get-KanaLock -CacheDir $cacheDir
         }
         $script:source = Join-Path $PSScriptRoot 'KanaLock.ps1'
         $script:invoke = {
