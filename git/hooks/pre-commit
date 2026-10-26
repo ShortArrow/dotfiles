@@ -28,6 +28,27 @@ MSG
   exit 1
 fi
 
+# Kana lock left on turns the passphrase typed into pinentry into half-width
+# kana, and gpg refuses it without saying why. Signing comes after this hook,
+# so clear it here, through the KanaLock module. pwsh costs about half a
+# second to start, so it is started only where it can matter: Windows, a
+# signed commit, the module installed, and the desk's keyboard rather than an
+# SSH session's.
+kana_lock_module_installed() {
+  [ -d "$(cygpath -O)/PowerShell/Modules/KanaLock" ] ||
+    [ -d "$(cygpath -F 38)/PowerShell/Modules/KanaLock" ]
+}
+case ${OSTYPE:-} in
+  msys* | cygwin*)
+    if [ "$(git config --get commit.gpgsign)" = "true" ] &&
+       [ -z "${SSH_CONNECTION:-}" ] &&
+       kana_lock_module_installed; then
+      pwsh -NoProfile -NonInteractive -Command \
+        'if (Get-KanaLock) { Disable-KanaLock; [Console]::Error.WriteLine("pre-commit: kana lock was on; turned it off") }'
+    fi
+    ;;
+esac
+
 own_hook="$(git rev-parse --git-dir)/hooks/pre-commit"
 if [ -x "$own_hook" ]; then
   exec "$own_hook" "$@"
