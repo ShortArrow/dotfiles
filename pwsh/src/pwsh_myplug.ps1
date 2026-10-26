@@ -407,7 +407,6 @@ if (Test-Path -LiteralPath $declaredPathFile) {
 # Kana lock left on turns letters into half-width kana wherever the IME is off,
 # so a GPG passphrase typed into pinentry fails without showing why. A 101-key
 # keyboard has no key to clear it. Over SSH the key state is not the desk's.
-. "$PSScriptRoot/KanaLock.ps1"
 if (-not $env:SSH_CONNECTION) {
   try {
     if (Get-KanaLock) {
