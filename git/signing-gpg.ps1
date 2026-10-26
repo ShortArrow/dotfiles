@@ -31,3 +31,10 @@ foreach ($p in $signing) {
   & git config --global $p.key $p.value
   Write-DotfileOk "$($p.key) = $($p.value)"
 }
+
+# `git unlock` caches the repository's key in gpg-agent ahead of a run of
+# signed commits. The alias needs this checkout's absolute path, like
+# core.hooksPath; forward slashes because git's sh reads it.
+$unlock = (Resolve-Path "$PSScriptRoot/unlock.sh").Path -replace '\\', '/'
+& git config --global alias.unlock "!bash '$unlock'"
+Write-DotfileOk "alias.unlock = $unlock"
