@@ -5,10 +5,13 @@
 # The key is the repository's user.signingkey and the program gpg.program, so
 # neither has to be typed, and Git Bash's own gpg on PATH is not the one used.
 #
-# When signing fails, say whether kana lock is on: it turns the passphrase
-# typed into pinentry into half-width kana, and gpg's own message does not
-# say so. pwsh is started only on that failure path.
+# A kana lock left on is cleared first, as pre-commit does, since the
+# passphrase typed into pinentry would otherwise arrive as half-width kana.
 set -u
+
+script_dir=$(cd -P "$(dirname "$0")" && pwd)
+# shellcheck source=hooks/kana_lock.sh
+. "$script_dir/hooks/kana_lock.sh"
 
 if ! key=$(git config user.signingkey); then
   printf '%s\n' "unlock: no user.signingkey for this repository" >&2
@@ -16,19 +19,8 @@ if ! key=$(git config user.signingkey); then
 fi
 gpg=$(git config gpg.program || printf gpg)
 
-if printf unlock | "$gpg" --local-user "$key" --clearsign >/dev/null; then
-  exit 0
+clear_kana_lock unlock
+if ! printf unlock | "$gpg" --local-user "$key" --clearsign >/dev/null; then
+  printf '%s\n' "unlock: gpg could not sign with $key" >&2
+  exit 1
 fi
-
-printf '%s\n' "unlock: gpg could not sign with $key" >&2
-case ${OSTYPE:-} in
-  msys* | cygwin*)
-    kana=$(pwsh -NoProfile -NonInteractive -Command \
-      'if ((Get-Command Get-KanaLock -ErrorAction Ignore) -and (Get-KanaLock)) { "on" }' 2>/dev/null)
-    if [ "$kana" = on ]; then
-      printf '%s\n' "unlock: kana lock is on, so the passphrase reached pinentry as half-width kana." >&2
-      printf '%s\n' "        Run Disable-KanaLock and try again." >&2
-    fi
-    ;;
-esac
-exit 1
