@@ -35,8 +35,7 @@ function Test-DesktopServer([int]$SessionId) {
 
 function Invoke-StopTask {
     & schtasks.exe /run /tn $StopTask | Out-Null
-    $deadline = (Get-Date).AddSeconds(30)
-    do { Start-Sleep -Seconds 1 } while ((Get-ScheduledTask -TaskName $StopTask).State -eq 'Running' -and (Get-Date) -lt $deadline)
+    Start-Sleep -Seconds 2
 }
 
 $session = (Get-Process -Id $PID).SessionId
