@@ -7,7 +7,7 @@
 .DESCRIPTION
   Runs unelevated from the logon task that Register-HerdrDesktopServer.ps1
   registers. While no server runs in this session, it has the elevated stop
-  task end the session 0 server that an SSH reconnect started, then starts
+  task end the session 0 herdr that an SSH reconnect started, then starts
   one here. A saved machine can reconnect in the gap and start another under
   sshd — then this server fails to bind and the loop goes round again.
 
