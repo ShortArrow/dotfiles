@@ -33,6 +33,24 @@ Describe 'Select-HerdrServer' {
     }
 }
 
+Describe 'Test-HerdrServerRunning' {
+    It 'status の JSON が running なら $true' {
+        Test-HerdrServerRunning -StatusJson '{"status":"running","running":true,"version":"0.9.3"}' | Should -BeTrue
+    }
+
+    It 'サーバーがいなければ $false' {
+        Test-HerdrServerRunning -StatusJson '{"status":"not running","running":false}' | Should -BeFalse
+    }
+
+    It '接続を拒まれたときのような JSON でない出力は $false' {
+        Test-HerdrServerRunning -StatusJson 'Access is denied. (os error 5)' | Should -BeFalse
+    }
+
+    It '出力が空なら $false' {
+        Test-HerdrServerRunning -StatusJson '' | Should -BeFalse
+    }
+}
+
 Describe 'Get-HerdrTakeoverStep' {
     It 'デスクトップ側のサーバーが動いていれば Done' {
         Get-HerdrTakeoverStep -DesktopServerRunning $true -Attempt 1 -MaxAttempts 5 | Should -Be 'Done'

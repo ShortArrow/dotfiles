@@ -32,6 +32,21 @@ function Select-HerdrServer {
     }
 }
 
+function Test-HerdrServerRunning {
+    <#
+    .SYNOPSIS
+      Whether `herdr status server --json` reports a server answering this caller.
+
+    .DESCRIPTION
+      A server process can exist without serving — one started at logon has
+      been seen to never bind — so the takeover asks the socket, not the
+      process list. An elevated server refuses an unelevated caller, which
+      prints an error instead of JSON: not running, for this caller.
+    #>
+    param([AllowEmptyString()][string]$StatusJson)
+    try { [bool]($StatusJson | ConvertFrom-Json -ErrorAction Stop).running } catch { $false }
+}
+
 function Get-HerdrTakeoverStep {
     <#
     .SYNOPSIS
