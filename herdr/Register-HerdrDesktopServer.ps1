@@ -17,6 +17,8 @@
   task definition, which only an administrator can change: a script or PATH
   lookup there would let any unelevated process run code elevated by editing
   the file and starting the task. Registering it needs an elevated shell.
+  Both run at priority 4, Normal: the scheduler's default 7 is BelowNormal,
+  and the server and every pane under it inherit the class.
   Remove with `schtasks /delete /tn <name> /f`.
 #>
 
@@ -28,6 +30,7 @@ $settings = New-ScheduledTaskSettingsSet `
     -AllowStartIfOnBatteries `
     -DontStopIfGoingOnBatteries `
     -MultipleInstances IgnoreNew `
+    -Priority 4 `
     -ExecutionTimeLimit (New-TimeSpan -Minutes 10)
 
 $stop = New-ScheduledTaskAction -Execute "$env:SystemRoot\System32\taskkill.exe" `
