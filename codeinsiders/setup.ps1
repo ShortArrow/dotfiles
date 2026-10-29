@@ -11,7 +11,7 @@ Set-DotfileLinks -ToolName 'codeinsiders'
 # in the machine's own file.
 $settingsPath = Join-Path $env:APPDATA 'Code - Insiders/User/settings.json'
 $repoRoot = Split-Path -Parent $PSScriptRoot
-$lastLinked = git -C $repoRoot log -1 --format=%H -- codeinsiders/settings.json 2>$null
+$lastLinked = git -C $repoRoot log -1 --no-show-signature --format=%H -- codeinsiders/settings.json 2>$null
 $seed = if ($lastLinked) { (git -C $repoRoot show "${lastLinked}^:codeinsiders/settings.json" 2>$null) -join "`n" }
 if (-not $seed) { $seed = '{}' }
 

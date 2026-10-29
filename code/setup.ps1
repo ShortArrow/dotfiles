@@ -13,7 +13,7 @@ Set-DotfileLinks -ToolName 'code'
 # seeds the conversion and the machine keeps the keys the sample left out.
 $settingsPath = Join-Path $env:APPDATA 'Code/User/settings.json'
 $repoRoot = Split-Path -Parent $PSScriptRoot
-$lastLinked = git -C $repoRoot log -1 --format=%H -- code/settings.json 2>$null
+$lastLinked = git -C $repoRoot log -1 --no-show-signature --format=%H -- code/settings.json 2>$null
 $seed = if ($lastLinked) { (git -C $repoRoot show "${lastLinked}^:code/settings.json" 2>$null) -join "`n" }
 if (-not $seed) { $seed = '{}' }
 
