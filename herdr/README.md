@@ -38,9 +38,11 @@ Remove with `schtasks /delete /tn <task> /f`.
 ## Priority
 
 Both tasks run at priority 4, Normal. The scheduler's default is 7,
-BelowNormal, and the server inherits the task's class, as does every pane
-under it. At BelowNormal a build at Normal priority starves herdr, and the
-UI freezes until the build ends.
+BelowNormal. A process started without a priority class inherits its
+parent's only when that is Idle or BelowNormal, and starts at Normal
+otherwise, so at 7 the server and every pane under it ran at BelowNormal.
+There a build at Normal priority starves herdr, and the UI freezes until the
+build ends.
 
 The class is read when the task starts, so registering again changes the
 next logon, not the server already running. To raise that one now:
