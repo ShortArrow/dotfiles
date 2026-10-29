@@ -7,8 +7,9 @@ dotfm tool `herdr`.
 
 A saved machine reconnects over SSH as soon as this one boots, often before
 anyone logs on, and the reconnect starts the herdr server under sshd: in
-session 0, elevated. That server cannot read symlinks, refuses the desktop
-client with Access denied, and has no GUI. At logon,
+session 0, elevated. That server cannot follow a symlink created unelevated
+(Redirection Trust, os error 448), refuses the desktop client with Access
+denied, and has no GUI. At logon,
 [`Start-HerdrDesktopServer.ps1`](Start-HerdrDesktopServer.ps1) ends it and
 starts the server again in the desktop session, unelevated, until one answers
 `herdr status server`.
@@ -21,6 +22,10 @@ why the elevated one holds no script.
 |---|---|---|
 | `herdr-desktop-server` | at logon: `Start-HerdrDesktopServer.ps1` | no |
 | `herdr-stop-ssh-server` | on demand: `taskkill` of every `herdr.exe` in session 0 | yes |
+
+Every `herdr.exe` in session 0 includes the SSH bridges of machines
+connected to this one, so their connections drop at logon and reconnect by
+themselves.
 
 The tasks call the scripts in this checkout, so a `git pull` changes what
 they run without registering again. A change to the registration itself —
