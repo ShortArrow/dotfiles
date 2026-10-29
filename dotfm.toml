@@ -128,11 +128,17 @@ windows = "code/setup.ps1"
 
 
 [tools.codeinsiders]
-description = "VS Code Insiders user settings"
+description = "VS Code Insiders user settings (keybindings linked; settings.json merged on Windows)"
 [[tools.codeinsiders.links]]
-src = { dir = "codeinsiders", include = ["settings.json", "keybindings.json"] }
+src = { dir = "codeinsiders", include = ["keybindings.json"] }
 dst.windows = "$APPDATA/Code - Insiders/User"
 dst.linux   = "$XDG_CONFIG_HOME/Code - Insiders/User"
+# The merge is PowerShell only, so Linux still links the sample.
+[[tools.codeinsiders.links]]
+src = "codeinsiders/settings.sample.json"
+dst.linux = "$XDG_CONFIG_HOME/Code - Insiders/User/settings.json"
+[tools.codeinsiders.script]
+windows = "codeinsiders/setup.ps1"
 
 
 # ---- Category B: symlink + post-apply side effects ----

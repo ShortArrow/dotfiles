@@ -92,8 +92,6 @@
     "LineNumberDeco.enableSequentialDigits": true,
     "LineNumberDeco.enableRelativeLine": true,
     "LineNumberDeco.foreground": "#292929",
-    "LineNumberDeco.foregroundColorOfRepeatingDigits": "#159393",
     "editor.lineNumbers": "on",
-    "LineNumberDeco.enableMultiplesOfFive": true,
-    "LineNumberDeco.foregroundColorOfMultiplesOfFive": "#d72d2d"
+    "LineNumberDeco.enableMultiplesOfFive": true
 }
