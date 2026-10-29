@@ -150,3 +150,8 @@ expand = "glazewm command wm-exit && sudo glazewm"
 [[abbr]]
 key = "com"
 expand = "Get-PnpDevice -PresentOnly -Class Ports | Select-Object FriendlyName, Status, InstanceId | Format-Table -AutoSize"
+
+[[abbr]]
+key = "up{number}"
+expand = "cd {number}"
+number = "../"
