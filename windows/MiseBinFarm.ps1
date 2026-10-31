@@ -14,6 +14,28 @@
 
 $script:FarmWrapperPattern = '^@"(?<target>[^"]+)" %\*$'
 
+function Find-FarmTarget {
+    <#
+    .SYNOPSIS
+      The tool's executable in the first bin path that holds one, as `mise which` picks it.
+
+    .DESCRIPTION
+      Within one bin path an .exe comes first, then the extensionless script
+      npm installs, then .cmd and .bat. $null when no bin path holds the tool.
+    #>
+    param(
+        [Parameter(Mandatory)][string]$Name,
+        [Parameter(Mandatory)][string[]]$BinPath
+    )
+    foreach ($dir in $BinPath) {
+        foreach ($file in "$Name.exe", $Name, "$Name.cmd", "$Name.bat") {
+            $path = Join-Path $dir $file
+            if (Test-Path -LiteralPath $path -PathType Leaf) { return $path }
+        }
+    }
+    $null
+}
+
 function Resolve-FarmEntry {
     <#
     .SYNOPSIS

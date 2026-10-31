@@ -30,6 +30,10 @@
   excluded — through a symlink they would look in the farm and find
   nothing. The rust family is excluded because ~/.cargo/bin is already on
   the persistent PATH.
+
+  ~/.cargo/bin, which mise lists as rust's bin path, is searched last: a
+  `cargo install` left there would otherwise shadow the mise-managed tool
+  of the same name, while a tool only cargo installed is still linked.
 #>
 param(
   [string]$Farm = (Join-Path $env:LOCALAPPDATA 'mise\bin')
@@ -39,6 +43,9 @@ $ErrorActionPreference = 'Stop'
 . "$PSScriptRoot/MiseBinFarm.ps1"
 
 $exclude = @('python*', 'pip*', 'cargo*', 'rustc*', 'rustup', 'rust-*', 'rustfmt', 'clippy*', 'rls', 'rustdoc')
+
+$cargoBin = Join-Path ($env:CARGO_HOME ?? (Join-Path $HOME '.cargo')) 'bin'
+$binPaths = @(& mise bin-paths 2>$null | Sort-Object -Stable { $_ -eq $cargoBin })
 
 $shims = Join-Path $env:LOCALAPPDATA 'mise\shims'
 if (-not (Test-Path -LiteralPath $shims))
@@ -54,8 +61,8 @@ foreach ($shim in Get-ChildItem -LiteralPath $shims -Filter '*.exe')
   $name = $shim.BaseName
   if ($exclude | Where-Object { $name -like $_ }) { continue }
 
-  $target = & mise which $name 2>$null
-  if (-not $target -or -not (Test-Path -LiteralPath $target)) { continue }
+  $target = Find-FarmTarget -Name $name -BinPath $binPaths
+  if (-not $target) { continue }
 
   $entry = Resolve-FarmEntry -Name $name -Target $target
   if ($entry) { $wanted[$entry.File] = $entry }

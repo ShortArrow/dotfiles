@@ -50,6 +50,33 @@ Describe 'Resolve-FarmEntry' {
     }
 }
 
+Describe 'Find-FarmTarget' {
+    BeforeEach {
+        $first = Join-Path $TestDrive ([guid]::NewGuid())
+        $second = Join-Path $TestDrive ([guid]::NewGuid())
+        New-Item -ItemType Directory -Path $first, $second | Out-Null
+    }
+
+    It '先に並ぶ bin パスにある実体を返す' {
+        New-Item -ItemType File -Path (Join-Path $first 'runex.exe'), (Join-Path $second 'runex.exe') | Out-Null
+        Find-FarmTarget -Name 'runex' -BinPath $first, $second | Should -Be (Join-Path $first 'runex.exe')
+    }
+
+    It '前の bin パスに無ければ後ろから探す' {
+        New-Item -ItemType File -Path (Join-Path $second 'runex.exe') | Out-Null
+        Find-FarmTarget -Name 'runex' -BinPath $first, $second | Should -Be (Join-Path $second 'runex.exe')
+    }
+
+    It '拡張子なしの npm スクリプトも実体として返す' {
+        New-Item -ItemType File -Path (Join-Path $first 'gemini'), (Join-Path $first 'gemini.cmd') | Out-Null
+        Find-FarmTarget -Name 'gemini' -BinPath $first | Should -Be (Join-Path $first 'gemini')
+    }
+
+    It 'どの bin パスにも無ければ $null' {
+        Find-FarmTarget -Name 'none' -BinPath $first, (Join-Path $TestDrive 'missing') | Should -BeNullOrEmpty
+    }
+}
+
 Describe 'New-FarmWrapperText と Get-FarmEntryTarget' {
     It 'ラッパーは実体を引数ごと呼ぶ 1 行で、その実体を読み戻せる' {
         $target = 'C:\mise\installs\npm-x\1.0.0\node_modules\.bin\x.cmd'
