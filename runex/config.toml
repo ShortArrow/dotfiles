@@ -155,3 +155,7 @@ expand = "Get-PnpDevice -PresentOnly -Class Ports | Select-Object FriendlyName, 
 key = "up{number}"
 expand = "cd {number}"
 number = "../"
+
+[[abbr]]
+key = "repourl"
+expand = "gh repo list --limit 1000 --json nameWithOwner,homepageUrl --jq '.[] | select(.homepageUrl | contains(\"{}\")) | .nameWithOwner'"
