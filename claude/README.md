@@ -122,9 +122,8 @@ was being written.
 ## A second opinion on shell commands
 
 [`judge-command.sh`](judge-command.sh) sends each shell command to a
-Jev-compatible decision model (`POST <base>/v1/systemone`, the request
-shape [jev-lint](https://github.com/mizchi/jev-lint/blob/main/src/jev.ts)
-uses) with two yes/no questions: is it hard to undo, and does it reach
+SystemOne model served by a local Ollama (`POST <base>/v1/systemone`)
+with two yes/no questions: is it hard to undo, and does it reach
 outside this machine. It records both probabilities, and it can turn a
 high one into a confirmation. That is all it may do.
 
@@ -134,8 +133,8 @@ high one into a confirmation. That is all it may do.
   the model sits beside and never replaces.
 - **Off unless the machine opts in.** The endpoint is one machine's
   arrangement, and the sample travels to every machine. The hook reads
-  `~/.claude/jev.env` (or the environment) and does nothing without
-  `JEV_BASE_URL`, so a machine that cannot reach the model sends nothing
+  `~/.claude/systemone.env` (or the environment) and does nothing without
+  `SYSTEMONE_BASE_URL` and `SYSTEMONE_MODEL`, so a machine that cannot reach the model sends nothing
   and waits for nothing. The `env` block of the sample is not the place:
   the merge replaces it whole.
 - **It asks the person, not the agent.** A judge that stops the agent and
@@ -145,25 +144,25 @@ high one into a confirmation. That is all it may do.
   the log: a command the model rates high that Claude Code's own
   permission prompt already stops gains nothing from a second prompt.
 - **Recording first.** The default mode only appends to
-  `~/.claude/jev-log.jsonl`. Ask mode needs a cutoff as well, and there
+  `~/.claude/systemone-log.jsonl`. Ask mode needs a cutoff as well, and there
   is no default one: a cutoff is read off this machine's own log, not
   borrowed from someone else's examples.
 - **Fails open.** A timeout (1.5 s for the request, 3 s for the hook), an
   unreachable host, or a reply that is not the API's all end in silence.
 
-A machine with a model served by Ollama, for example:
+A machine that serves the model with Ollama, for example:
 
 ```
-JEV_BASE_URL=http://<host>:11434
-JEV_MODEL=tev1:4b
-JEV_KEEP_ALIVE=-1
-# JEV_MODE=ask
-# JEV_ASK_AT=<from the log>
+SYSTEMONE_BASE_URL=http://<host>:11434
+SYSTEMONE_MODEL=tev1:4b
+SYSTEMONE_KEEP_ALIVE=-1
+# SYSTEMONE_MODE=ask
+# SYSTEMONE_ASK_AT=<from the log>
 ```
 
-`JEV_KEEP_ALIVE` keeps the model loaded, since a reload costs seconds
-where an answer costs tenths. A hosted endpoint takes `JEV_API_KEY`
-instead. What the model cannot judge is what the command text does not
+`SYSTEMONE_KEEP_ALIVE` keeps the model loaded, since a reload costs seconds
+where an answer costs tenths. The hook sends no credential: the endpoint
+is an Ollama on a machine of this user's, not a hosted service. What the model cannot judge is what the command text does not
 show: a script or a container that posts somewhere looks harmless. The
 model reads the words, and the deterministic hooks stay the floor.
 [`judge-command.test.sh`](judge-command.test.sh) puts a fake `curl` on

@@ -4,7 +4,7 @@
 # A fake `curl` on PATH stands in for the endpoint: it records the request
 # body it was handed and prints the reply named by $FAKE_REPLY, or fails like
 # an unreachable host when $FAKE_REPLY is "down". The settings file is a
-# temporary one, so the test never reads the machine's own jev.env.
+# temporary one, so the test never reads the machine's own systemone.env.
 set -u
 
 script="$(dirname "$0")/judge-command.sh"
@@ -16,6 +16,8 @@ mkdir -p "$fake"
 cat > "$fake/curl" <<'FAKE'
 #!/usr/bin/env bash
 for a in "$@"; do case $a in @*) cp "${a#@}" "$FAKE_DIR/request.json" ;; esac; done
+printf '%s
+' "$@" > "$FAKE_DIR/args"
 case ${FAKE_REPLY:-} in
   down) exit 7 ;;
   garbage) echo '<html>proxy</html>' ;;
@@ -32,9 +34,9 @@ fail=0
 # run <settings lines> -- <command>: prints the hook's stdout.
 run() {
   local settings=$1 command=$2
-  printf '%s\n' "$settings" > "$work/jev.env"
+  printf '%s\n' "$settings" > "$work/systemone.env"
   jq -nc --arg c "$command" '{tool_name: "Bash", tool_input: {command: $c}}' |
-    JEV_ENV_FILE="$work/jev.env" JEV_LOG="$work/log.jsonl" bash "$script"
+    SYSTEMONE_ENV_FILE="$work/systemone.env" SYSTEMONE_LOG="$work/log.jsonl" bash "$script"
 }
 
 expect() {
@@ -51,12 +53,27 @@ verdict() {
   if [ -z "$1" ]; then echo silent; else printf '%s' "$1" | jq -r '.hookSpecificOutput.permissionDecision'; fi
 }
 
-base='JEV_BASE_URL=http://judge.invalid:11434'
+base=$'SYSTEMONE_BASE_URL=http://judge.invalid:11434
+SYSTEMONE_MODEL=tev1:4b'
 
 # No endpoint configured: this machine does not take part, nothing is sent.
 rm -f "$work/request.json"
 expect 'unconfigured is silent' silent "$(verdict "$(run '' 'git push --force origin main')")"
 expect 'unconfigured sends nothing' absent "$([ -e "$work/request.json" ] && echo sent || echo absent)"
+
+# An endpoint without a model: there is no default model, nothing is sent.
+rm -f "$work/request.json"
+expect 'no model is silent' silent "$(verdict "$(run 'SYSTEMONE_BASE_URL=http://judge.invalid:11434' 'git push --force origin main')")"
+expect 'no model sends nothing' absent "$([ -e "$work/request.json" ] && echo sent || echo absent)"
+
+# The endpoint is a local Ollama: the request names the configured model and carries no credential.
+rm -f "$work/args"
+run "$base"$'
+JEV_API_KEY=secret
+SYSTEMONE_API_KEY=secret' 'git status' > /dev/null
+expect 'request names the configured model' 'tev1:4b' "$(jq -r '.model' "$work/request.json")"
+expect 'request carries no authorization' absent "$(grep -qi '^authorization' "$work/args" && echo sent || echo absent)"
+expect 'request goes to the systemone path' yes "$(grep -qx 'http://judge.invalid:11434/v1/systemone' "$work/args" && echo yes || echo no)"
 
 # Log mode, the default: every verdict is recorded, none is acted on.
 rm -f "$work/log.jsonl"
@@ -69,9 +86,9 @@ expect 'request asks both questions as noul' 'noul noul' "$(jq -r '[.questions.i
 
 # Ask mode without a threshold stays in log mode: no cutoff is assumed.
 expect 'ask without threshold is silent' silent \
-  "$(verdict "$(FAKE_IRREVERSIBLE=0.99 run "$base"$'\nJEV_MODE=ask' 'git push --force origin main')")"
+  "$(verdict "$(FAKE_IRREVERSIBLE=0.99 run "$base"$'\nSYSTEMONE_MODE=ask' 'git push --force origin main')")"
 
-ask="$base"$'\nJEV_MODE=ask\nJEV_ASK_AT=0.9'
+ask="$base"$'\nSYSTEMONE_MODE=ask\nSYSTEMONE_ASK_AT=0.9'
 expect 'irreversible above cutoff asks' ask "$(verdict "$(FAKE_IRREVERSIBLE=0.95 run "$ask" 'git reset --hard')")"
 expect 'outward above cutoff asks' ask "$(verdict "$(FAKE_OUTWARD=0.95 run "$ask" 'gh pr merge 12')")"
 expect 'below cutoff is silent' silent "$(verdict "$(FAKE_IRREVERSIBLE=0.5 FAKE_OUTWARD=0.5 run "$ask" 'git status')")"
