@@ -22,6 +22,12 @@
           },
           {
             "type": "command",
+            "command": "bash ~/.claude/check-machine-guards.sh",
+            "shell": "bash",
+            "statusMessage": "Checking machine guards"
+          },
+          {
+            "type": "command",
             "shell": "bash",
             "command": "bash ~/.claude/check-gpg-cache.sh",
             "statusMessage": "Checking the signing key is unlocked"
@@ -43,6 +49,12 @@
             "shell": "bash",
             "command": "bash ~/.claude/check-attribution.sh",
             "statusMessage": "Checking for attribution"
+          },
+          {
+            "type": "command",
+            "command": "bash ~/.claude/check-machine-guards.sh",
+            "shell": "bash",
+            "statusMessage": "Checking machine guards"
           },
           {
             "type": "command",

@@ -14,8 +14,9 @@ if (-not (Test-Path -LiteralPath $envPath)) {
 # settings.json stays machine-local because it carries this machine's
 # permission rules, so the shared keys are merged in rather than linked.
 # A shared allowlist would hand every machine the rules of whichever machine
-# wrote it last, so `permissions` never travels.
+# wrote it last, so `permissions` never travels. `autoMode` stays too: its
+# environment names the repositories and organisations this machine works on.
 Update-JsonSettingsFile `
   -SettingsPath (Join-Path $env:USERPROFILE '.claude/settings.json') `
   -SamplePath (Join-Path $PSScriptRoot 'settings.sample.json') `
-  -ProtectedKeys @('permissions') | Out-Null
+  -ProtectedKeys @('permissions', 'autoMode') | Out-Null
