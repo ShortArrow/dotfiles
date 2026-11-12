@@ -50,7 +50,7 @@ if [ "$found" -ne 0 ]; then
   exit 1
 fi
 
-own_hook="$(git rev-parse --git-dir)/hooks/pre-push"
+own_hook="$(git rev-parse --git-common-dir)/hooks/pre-push"
 if [ -x "$own_hook" ]; then
   printf '%s\n' "$refs" | exec "$own_hook" "$@"
 fi

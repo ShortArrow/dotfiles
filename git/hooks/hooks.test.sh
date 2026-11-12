@@ -167,6 +167,37 @@ while IFS='|' read -r verdict label; do
   esac
 done <"$tmp/out"
 
+echo "each hook calls the repository's own, from a linked worktree too"
+tmp=$(mktemp -d)
+(
+  cd "$tmp" || exit 1
+  git init -q main
+  cd main || exit 1
+  git config user.email t@example.invalid
+  git config user.name test
+  git config commit.gpgsign false
+  git commit -q --allow-empty -m "clean one"
+  git worktree add -q ../linked
+  printf 'clean message\n' >"$tmp/msg"
+  for name in pre-push pre-commit commit-msg; do
+    # The repository's own hook refuses, so a verdict of reject shows it was called.
+    printf '#!/bin/sh\nexit 1\n' >".git/hooks/$name"
+    chmod +x ".git/hooks/$name"
+  done
+  v() { # <dir> <hook> -> reject | accept
+    if (cd "$1" && printf '' | bash "$hook_dir/$2" "$tmp/msg" >/dev/null 2>&1); then echo accept; else echo reject; fi
+  }
+  for name in pre-push pre-commit commit-msg; do
+    echo "  $(v "$tmp/main" "$name")|$name, main clone"
+    echo "  $(v "$tmp/linked" "$name")|$name, linked worktree"
+  done
+) >"$tmp/out" 2>/dev/null
+while IFS='|' read -r verdict label; do
+  [ -n "${label:-}" ] || continue
+  check reject "$label" "$(echo "$verdict" | tr -d ' ')"
+done <"$tmp/out"
+rm -rf "$tmp"
+
 echo
 printf 'pass=%d fail=%d\n' "$pass" "$fail"
 [ "$fail" -eq 0 ]

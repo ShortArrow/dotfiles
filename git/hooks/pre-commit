@@ -36,7 +36,7 @@ if [ "$(git config --get commit.gpgsign)" = "true" ]; then
   clear_kana_lock pre-commit
 fi
 
-own_hook="$(git rev-parse --git-dir)/hooks/pre-commit"
+own_hook="$(git rev-parse --git-common-dir)/hooks/pre-commit"
 if [ -x "$own_hook" ]; then
   exec "$own_hook" "$@"
 fi

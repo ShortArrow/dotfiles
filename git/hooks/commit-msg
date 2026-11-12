@@ -26,8 +26,9 @@ if has_attribution <"$message_file"; then
 fi
 
 # git rev-parse --git-path resolves through core.hooksPath, which is this
-# directory, so the repository's own hook is addressed through --git-dir.
-own_hook="$(git rev-parse --git-dir)/hooks/commit-msg"
+# directory, so the repository's own hook is addressed through --git-common-dir,
+# where git keeps the hooks every worktree shares.
+own_hook="$(git rev-parse --git-common-dir)/hooks/commit-msg"
 if [ -x "$own_hook" ]; then
   exec "$own_hook" "$@"
 fi
