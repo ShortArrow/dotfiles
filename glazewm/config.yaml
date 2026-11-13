@@ -1,7 +1,8 @@
 general:
   # Commands to run when the WM has started (e.g. to run a script or launch
-  # another application). Here we are running a batch script to start Zebar.
-  startup_commands: ['shell-exec zebar']
+  # another application). Zebar is started through a script that keeps its
+  # stderr, so a panic leaves its message behind.
+  startup_commands: ['shell-exec --hide-window pwsh -NoProfile -File %USERPROFILE%/.glzr/zebar/Start-Zebar.ps1']
   shutdown_commands: ['shell-exec taskkill /IM zebar.exe /F']
 
   # Whether to automatically focus windows underneath the cursor.

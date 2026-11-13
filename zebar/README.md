@@ -13,6 +13,8 @@ submodule を更新してビルドしたら Zebar を再起動する（`zebar/Sw
 
 起動は `pack: overline-zebar` / `widget: main`（`~/.glzr/zebar/settings.json` の `startupConfigs`）。
 
+GlazeWM は起動時に `Start-Zebar.ps1` で Zebar を立ち上げる。リリース版の Zebar は panic のメッセージを標準エラーに出すだけで、そのままでは残らないので、`RUST_BACKTRACE=1` を付けて標準エラーを `~/.glzr/zebar/stderr.log` に書く。前回の分は `stderr.prev.log` に残る。`Switch-ZebarPack.ps1` からの起動は explorer.exe 経由なのでこの記録を通らない。テストは `Invoke-Pester zebar/Start-Zebar.Tests.ps1`。
+
 ## 既知の不具合: セッション再接続で落ちる
 
 RDP でログインした状態のまま実機のコンソールでログインすると、zebar が落ちる。

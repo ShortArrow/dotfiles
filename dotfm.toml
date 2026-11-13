@@ -216,7 +216,7 @@ dst.windows = "$USERPROFILE/.claude"
 description = "Zebar taskbar (Windows only)"
 platforms = ["windows"]
 [[tools.zebar.links]]
-src = { dir = "zebar", include = ["config.yaml", "script.js", "start.bat", "start.sh", "overline-zebar"] }
+src = { dir = "zebar", include = ["config.yaml", "script.js", "start.bat", "start.sh", "overline-zebar", "Start-Zebar.ps1"] }
 dst.windows = "$USERPROFILE/.glzr/zebar"
 
 
