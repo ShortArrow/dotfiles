@@ -14,9 +14,9 @@
   The previous run's log is kept as stderr.prev.log, so a restart after a
   freeze does not overwrite the evidence.
 
-  glazewm runs this through shell-exec at startup, and Switch-ZebarPack runs
-  it through explorer.exe. Zebar inherits the elevation of whoever starts
-  this script.
+  glazewm runs this through shell-exec at startup. Switch-ZebarPack starts
+  zebar.exe directly through explorer.exe, so a Zebar it starts keeps no
+  stderr log. Zebar inherits the elevation of whoever starts this script.
 
 .PARAMETER Executable
   zebar.exe to start. Defaults to the installed one.
