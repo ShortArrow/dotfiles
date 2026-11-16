@@ -18,8 +18,8 @@ a live session keeps appending to the old .jsonl and would split the history.
 Verified against the on-disk layout of Claude Code 2.x (SupportedMajor guard).
 
 .EXAMPLE
-pwsh migrate-project.ps1 V:\ V:\marubot          # dry-run
-pwsh migrate-project.ps1 -Apply V:\ V:\marubot   # apply
+pwsh migrate-project.ps1 V:\myproject V:\work\myproject          # dry-run
+pwsh migrate-project.ps1 -Apply V:\myproject V:\work\myproject   # apply
 #>
 [CmdletBinding()]
 param(
@@ -46,8 +46,8 @@ function Assert-ClaudeSessionFormatVersion {
 
 function ConvertTo-ProjectDirName([string]$Path) {
     # Claude Code sanitizes every non-alphanumeric character, not only ':'
-    # and '\': '_' and '.' also become '-' (V:\nasm_self_destruction ->
-    # V--nasm-self-destruction, S3.kPGy -> S3-kPGy). Case is preserved.
+    # and '\': '_' and '.' also become '-' (V:\my_project.v2 ->
+    # V--my-project-v2, S3.kPGy -> S3-kPGy). Case is preserved.
     return $Path -replace '[^A-Za-z0-9]', '-'
 }
 
