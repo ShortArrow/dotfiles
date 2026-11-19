@@ -81,6 +81,11 @@ shape itself. `if` takes a permission rule, and a rule naming a tool that
 does not accept one would fail by never firing — silently, which is the one
 outcome a guard may not have.
 
+A hook array the sample declares replaces the live one whole, so a hook
+added to `settings.json` by hand disappears at the next apply. A hook that
+runs a machine's own private tools is added in that machine's private
+settings.
+
 ## The signing key expires
 
 `gpg-agent.conf` caches the passphrase for eight hours, so once a day a
