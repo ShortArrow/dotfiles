@@ -6,8 +6,5 @@
 # 40-character sha per line, then the reason; an abbreviated sha or a line
 # with no reason is ignored. Once the commit is pushed the entry is spent and
 # can be deleted.
-ee66c695b0343bbeab1a043c0be85d86e4d62dc4  pwsh profile function added; its docstring is the description Get-Help shows, and no README lists the profile's functions
-5a997d7606d8b6ba6b69e3b94f899b8393a1265d  .luarc.json library path corrected to where the plugin is installed; no document describes the path
-8ab4531cd867b57d9d024828b81b7786022b3be7  test corpus only: addresses replaced by documentation addresses, no behaviour changed
-8aa30c0ff8123400f88ff185a53ac69e0bc2047e  test corpus only: host names and addresses replaced by reserved ones, no behaviour changed
-92cf17a04b3bf9c98a79f23b353b4def0e7a7844  test corpus only: a real host name replaced by a reserved one, no behaviour changed
+c8e149eaf71fecb431a910fa661abcac63094961  Start-Zebar.ps1's docstring was brought in line with zebar/README.md, which already said Switch-ZebarPack bypasses it
+5c187a034e82a02fd471f51ff44676ef0e72dce7  migrate-project.ps1's usage examples changed folder names only; claude/README.md describes no example

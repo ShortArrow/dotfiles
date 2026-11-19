@@ -67,6 +67,8 @@ docker compose exec nvim /bin/bash -c nvim
 
 Each top-level directory contains the actual config files plus optional `setup.{ps1,sh}` and `doctor.ps1`. The full mapping (which file goes where on which OS) lives in [`dotfm.toml`](dotfm.toml).
 
+`hooks/` is the exception: it holds no tool's configuration, only [`docs-follow-exceptions.txt`](hooks/docs-follow-exceptions.txt), which the docs-follow hook of the engineering-skills plugin reads. That hook refuses a push while an outgoing commit changes a script or configuration file with no README or `docs/` page in the same commit. Each line names one commit by its full sha and says why no document had to follow it; a rewritten commit gets a new sha, so its line has to be updated with it.
+
 ## Installing the tools
 
 `dotfm` links configuration; it does not install anything. Installation is split in two, and the halves are not symmetric. **mise** (`mise/src/config.toml`) is authoritative: the machine matches the file. **winget** (`winget/*.txt`) is a list to reinstall from on a fresh Windows box, and describes nothing about this one — `winget import` adds and never removes. See [Package installation layers](docs/STRUCTURE.md#package-installation-layers).
