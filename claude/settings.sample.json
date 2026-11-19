@@ -41,6 +41,13 @@
           {
             "type": "command",
             "shell": "bash",
+            "command": "\"$(command -v python || command -v python3)\" ~/.claude/check-gh-body.py",
+            "timeout": 10,
+            "statusMessage": "Checking a Japanese body went through yomiyasu"
+          },
+          {
+            "type": "command",
+            "shell": "bash",
             "command": "bash ~/.claude/judge-command.sh",
             "timeout": 3,
             "statusMessage": "Asking the decision model"
@@ -73,6 +80,13 @@
             "shell": "bash",
             "command": "perl ~/.claude/check-gpg-clearsign.pl",
             "statusMessage": "Checking for a gpg --clearsign the user should run as git unlock"
+          },
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "\"$(command -v python || command -v python3)\" ~/.claude/check-gh-body.py",
+            "timeout": 10,
+            "statusMessage": "Checking a Japanese body went through yomiyasu"
           },
           {
             "type": "command",

@@ -254,3 +254,18 @@ show: a script or a container that posts somewhere looks harmless. The
 model reads the words, and the deterministic hooks stay the floor.
 [`judge-command.test.sh`](judge-command.test.sh) puts a fake `curl` on
 `PATH`, so it runs without a model.
+
+## Japanese bodies go through yomiyasu
+
+[`check-gh-body.py`](check-gh-body.py) runs before `gh pr` and `gh issue`
+`create`, `edit` and `comment`. A body that is at least 5% kana and kanji has
+to come from `--body-file`, and the file has to pass yomiyasu's
+`yomiyasu_check.py verify --final -`, run in the session's directory against
+the yomiyasu that `installed_plugins.json` names. verify only reads the run
+record, so the check costs no attempt. An inline Japanese `--body` is refused
+with the fix; an English body is left alone. When yomiyasu, Python or an
+answer is missing, the command goes through, as the other guards do. The
+reason names the rule that fired and the fix in one line.
+
+`python claude/check-gh-body.test.py` needs nothing installed: it replaces
+verify with a stub.
