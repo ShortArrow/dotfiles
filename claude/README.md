@@ -269,3 +269,14 @@ reason names the rule that fired and the fix in one line.
 
 `python claude/check-gh-body.test.py` needs nothing installed: it replaces
 verify with a stub.
+
+## Replies the user reads
+
+[`check-reply.py`](check-reply.py) is a `Stop` hook. It sends a reply back
+once when it says 次のコマンド, 次の 1 行 or 次を打って and shows no code, and
+when `language` in `settings.json` is Japanese and a reply of 200 characters
+or more, code left out, is under 5% kana and kanji. The reason names the rule
+that fired and the fix in one line.
+
+`python claude/check-reply.test.py` passes the language in, so it reads no
+settings file.

@@ -97,6 +97,19 @@
           }
         ]
       }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "\"$(command -v python || command -v python3)\" ~/.claude/check-reply.py",
+            "timeout": 5,
+            "statusMessage": "Checking the reply shows its command and is in Japanese"
+          }
+        ]
+      }
     ]
   }
 }
