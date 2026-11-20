@@ -165,8 +165,8 @@ does not carry it, because the sample travels to every machine.
 
 | Level | Decision | Commands |
 |---|---|---|
-| ERROR | deny | `schtasks /create`, `/change`, `/delete`; `Register-ScheduledTask`; `powershell` or `pwsh` with `-EncodedCommand` (`-enc`, `-ec`, `-e`); `sc create`, `New-Service`; `wmic process call create`, `Invoke-CimMethod` or `Invoke-WmiMethod` on `Win32_Process` `Create` |
-| WARN | ask | `-ExecutionPolicy Bypass`, `Set-ExecutionPolicy Bypass`; `Invoke-Command`, `Enter-PSSession`, `New-PSSession`; `psexec`; `Start-Process -Verb RunAs`; a write to `CurrentVersion\Run` or `RunOnce`; a write to `Start Menu\Programs\Startup` |
+| ERROR | deny | `-ExecutionPolicy Bypass`, `Set-ExecutionPolicy Bypass`, on this machine or on an `ssh` line; `schtasks /create`, `/change`, `/delete`; `Register-ScheduledTask`; `powershell` or `pwsh` with `-EncodedCommand` (`-enc`, `-ec`, `-e`); `sc create`, `New-Service`; `wmic process call create`, `Invoke-CimMethod` or `Invoke-WmiMethod` on `Win32_Process` `Create` |
+| WARN | ask | `Invoke-Command`, `Enter-PSSession`, `New-PSSession`; `psexec`; `Start-Process -Verb RunAs`; a write to `CurrentVersion\Run` or `RunOnce`; a write to `Start Menu\Programs\Startup` |
 | INFO | log, allow | a command run over `ssh` that names `powershell`, `schtasks`, `wmic` or `sc create` |
 
 Every hit, at every level, appends one line to
@@ -182,14 +182,16 @@ nothing. A here-document body counts as commands only when it feeds a
 shell. Reads stay open: `schtasks /query`, `reg query` on the Run key, a
 listing of the Startup folder.
 
-A segment led by `ssh` runs on another machine, so it is only logged here;
-what it may do there is that host's policy and the plugin's ssh task
-check above. The hook reads the command line and nothing else: the body of a
+A segment led by `ssh` runs on another machine, so it is only logged here,
+except `-ExecutionPolicy Bypass`, which is refused on the `ssh` line too;
+the rest of what it may do there is that host's policy and the plugin's
+ssh task check above. The hook reads the command line and nothing else: the body of a
 script sent with `scp`, or of any `.ps1` started with `-File`, is not seen.
 
 A script sent with `scp` carries no `Zone.Identifier`, so it runs under
-`RemoteSigned` and never needs `Bypass`. Start it in the form its host's
-policy calls for:
+`RemoteSigned` and never needs `Bypass`; the refusal says so, and says to
+read `Get-ExecutionPolicy -List` on the host first. Start it in the form
+its host's policy calls for:
 
 - A host whose `LocalMachine` policy is `RemoteSigned` takes the script as
   is: `ssh <host> powershell -NoProfile -File <script>`. Tried 2026-11-20

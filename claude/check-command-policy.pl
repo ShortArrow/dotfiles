@@ -15,12 +15,14 @@
 # mentions a word matches nothing. A here-document body counts as commands
 # only when it feeds a shell; fed to anything else it is text.
 #
-# A segment led by ssh runs on another machine. It is never refused or
-# confirmed here, only logged; what it may run is the remote host's policy
-# and the ssh task check in the engineering-skills plugin's. Only the command line is read: the body of
+# A segment led by ssh runs on another machine. It is only logged here,
+# except -ExecutionPolicy Bypass, which is refused on the ssh line as well;
+# the rest of what it may run is the remote host's policy and the ssh task
+# check in the engineering-skills plugin's. Only the command line is read: the body of
 # a script sent with scp, or of any .ps1 started with -File, is not seen.
 use strict;
 use warnings;
+use utf8;
 use JSON::PP;
 use POSIX qw(strftime);
 use File::Basename qw(dirname);
@@ -31,7 +33,7 @@ my %message = (
   'encoded command' => 'powershell/pwsh -EncodedCommand is forbidden on this machine: an encoded script cannot be read before it runs. Pass the script as plain text with -Command, or save it as a .ps1 and run it with -File.',
   'service' => 'Creating a Windows service is forbidden on this machine (sc create, New-Service). Ask the user to do it.',
   'wmi process' => 'Starting a process through WMI is forbidden on this machine (wmic process call create, Invoke-CimMethod or Invoke-WmiMethod on Win32_Process Create). Run the command directly.',
-  'execution policy bypass' => 'Confirm: -ExecutionPolicy Bypass turns the script policy off. A script sent with scp carries no Zone.Identifier and runs under RemoteSigned: powershell -NoProfile -ExecutionPolicy RemoteSigned -File <script>.',
+  'execution policy bypass' => '`-ExecutionPolicy Bypass` はこのマシンでは禁止。scp で送ったスクリプトは RemoteSigned で動く。送り先で `Get-ExecutionPolicy -List` を確かめ、LocalMachine が RemoteSigned なら何も付けずに `-File` で、すべて Undefined なら `-ExecutionPolicy RemoteSigned` を付けて起動する。',
   'remoting' => 'Confirm: PowerShell remoting runs commands on another computer (Invoke-Command, Enter-PSSession, New-PSSession).',
   'psexec' => 'Confirm: PsExec runs a command on another computer or as SYSTEM.',
   'runas' => 'Confirm: Start-Process -Verb RunAs starts an elevated process.',
@@ -168,6 +170,7 @@ sub judge {
   my $hit = sub { push @hits, [@_] };
 
   if ($name eq 'ssh') {
+    push @hits, bypass($1, " $2") if $s =~ /\b(powershell|pwsh|set-executionpolicy)(?:\.exe)?\b(.*)/s;
     $hit->('INFO', 'ssh.*powershell') if $s =~ /\b(?:powershell|pwsh)\b/;
     $hit->('INFO', 'ssh.*schtasks') if $s =~ /\bschtasks\b/;
     $hit->('INFO', 'ssh.*wmic') if $s =~ /\bwmic\b/;
@@ -200,11 +203,7 @@ sub judge {
     if $name =~ /^(?:invoke-cimmethod|invoke-wmimethod)$/
     && $s =~ /\bwin32_process\b/ && $s =~ /\bcreate\b/;
 
-  $hit->('WARN', 'execution policy bypass')
-    if $name =~ /^(?:powershell|pwsh)$/
-    && $s =~ /\s-(?:executionpolicy|ep|ex|exec\w*)\s+['"]?bypass\b/;
-  $hit->('WARN', 'execution policy bypass')
-    if $name eq 'set-executionpolicy' && $s =~ /\bbypass\b/;
+  push @hits, bypass($name, $s);
   $hit->('WARN', 'remoting') if $remoting{$name};
   $hit->('WARN', 'psexec') if $name =~ /^psexec(?:64)?$/;
 
@@ -220,6 +219,18 @@ sub judge {
     || $s =~ /\>\s*['"]?[^'"]*?$startup/;
 
   return @hits;
+}
+
+# The ERROR hit for a command that turns the script policy off, or nothing.
+# $name is the lowercased command, $s the lowercased line from it on.
+sub bypass {
+  my ($name, $s) = @_;
+  return ['ERROR', 'execution policy bypass']
+    if $name =~ /^(?:powershell|pwsh)$/
+    && $s =~ /\s-(?:executionpolicy|ep|ex|exec\w*)\s+['"]?bypass\b/;
+  return ['ERROR', 'execution policy bypass']
+    if $name eq 'set-executionpolicy' && $s =~ /\bbypass\b/;
+  return;
 }
 
 sub write_log {

@@ -65,10 +65,22 @@ check deny  'wmic /node:pc1 process call create "cmd /c x"'
 check deny  'Invoke-CimMethod -ClassName Win32_Process -MethodName Create -Arguments @{CommandLine="notepad"}'
 check deny  'Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList notepad'
 
-# WARN: the script policy turned off.
-check ask   'powershell -ExecutionPolicy Bypass -File x.ps1'
-check ask   'pwsh -ep bypass -File x.ps1'
-check ask   'Set-ExecutionPolicy Bypass -Scope Process'
+# ERROR: the script policy turned off.
+check deny  'powershell -ExecutionPolicy Bypass -File x.ps1'
+check deny  'pwsh -ep bypass -File x.ps1'
+check deny  'Set-ExecutionPolicy Bypass -Scope Process'
+check deny  'ssh host.example.invalid powershell -ExecutionPolicy Bypass -File x.ps1'
+check allow 'powershell -NoProfile -ExecutionPolicy RemoteSigned -File x.ps1'
+
+# The Bypass reason says how to start a script sent with scp instead, in readable Japanese.
+reason=$(jq -nc '{tool_input: {command: "pwsh -ep bypass -File x.ps1"}}' | perl "$guard" |
+  jq -r '.hookSpecificOutput.permissionDecisionReason')
+case "$reason" in
+  *'このマシンでは禁止'*'Get-ExecutionPolicy -List'*'LocalMachine が RemoteSigned なら何も付けずに `-File`'*'すべて Undefined なら `-ExecutionPolicy RemoteSigned`'*)
+    pass=$((pass + 1)) ;;
+  *) fail=$((fail + 1)); printf 'FAIL (bypass reason): %s
+' "$reason" >&2 ;;
+esac
 
 # WARN: remoting, PsExec, elevation.
 check ask   'Invoke-Command -ComputerName pc1 -ScriptBlock { hostname }'
