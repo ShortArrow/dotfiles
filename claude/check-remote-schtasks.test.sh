@@ -21,12 +21,14 @@ check() {
   fi
 }
 
-# The task command typed on the ssh command line, in the shapes an agent uses.
+# A task registered, changed or deleted on the ssh command line, in the shapes an agent uses.
 check deny  "ssh tempPC 'schtasks /create /tn Rollback /tr C:\\tmp\\rollback.cmd /sc once /st 12:00 /ru SYSTEM'"
 check deny  'ssh tempPC schtasks /create /tn X /tr notepad /sc onlogon'
 check deny  'ssh -o HostName=192.168.123.140 -o HostKeyAlias=192.168.29.140 tempPC "schtasks.exe /delete /tn X /f"'
-check deny  "ssh tempPC 'C:\\Windows\\System32\\schtasks.exe /run /tn X'"
-check deny  'ssh tempPC schtasks /query /tn X'
+check deny  "ssh tempPC 'C:\\Windows\\System32\\schtasks.exe /change /tn X /disable'"
+check deny  'ssh tempPC SCHTASKS /Create /TN X /TR notepad /SC ONLOGON'
+check deny  'ssh tempPC pwsh -c "Set-ScheduledTask -TaskName X -Trigger $t"'
+check deny  'ssh tempPC pwsh -c "Unregister-ScheduledTask -TaskName X -Confirm:$false"'
 check deny  'ssh tempPC pwsh -NoProfile -Command "Register-ScheduledTask -TaskName X -Action $a -Trigger $t"'
 check deny  "ssh.exe tempPC 'powershell -c \"register-scheduledtask -TaskName X -Xml (Get-Content x.xml -Raw)\"'"
 check deny  '& ssh tempPC "Register-ScheduledTask -TaskName X -InputObject $task"'
@@ -37,11 +39,15 @@ Register-ScheduledTask -TaskName X -Action \$a
 EOF"
 check deny  '"C:\Windows\System32\OpenSSH\ssh.exe" tempPC schtasks /create /tn X /tr notepad /sc onstart'
 
-# The sanctioned way: the registration travels as a script, ssh only starts it.
+# The sanctioned way, and the task commands that register nothing: query, run, end.
 check allow 'scp register-task.ps1 tempPC:C:/tmp/ && ssh tempPC pwsh -NoProfile -File C:/tmp/register-task.ps1'
 check allow 'ssh tempPC pwsh -NoProfile -File C:/tmp/register-schtasks.ps1'
 check allow 'ssh tempPC pwsh -NoProfile -File C:/tmp/Register-ScheduledTask.ps1'
 check allow 'ssh tempPC Get-ScheduledTask'
+check allow 'ssh tempPC schtasks /query /tn X /v /fo list'
+check allow "ssh tempPC 'C:\Windows\System32\schtasks.exe /run /tn X'"
+check allow 'ssh tempPC pwsh -c "Start-ScheduledTask -TaskName X"'
+check allow 'ssh tempPC schtasks /end /tn X'
 
 # No ssh in command position: local task commands, searches, prose.
 check allow 'schtasks /create /tn X /tr notepad /sc onlogon'

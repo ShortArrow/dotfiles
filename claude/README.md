@@ -124,9 +124,11 @@ was being written.
 A scheduled task on a remote Windows host is registered by a script: the
 registration is written into a `.ps1`, sent with `scp`, and ssh runs one
 line, the one that starts it. [`check-remote-schtasks.sh`](check-remote-schtasks.sh)
-refuses a shell command that runs `ssh` and, from there on, names
-`schtasks` or `Register-ScheduledTask`, and its reason carries that one
-line. `ssh` counts only in command position, so a commit message or a
+refuses a shell command that runs `ssh` and, from there on, registers,
+changes or deletes a task — `schtasks /create`, `/change` or `/delete`, or
+`Register-`, `Set-` or `Unregister-ScheduledTask` — and its reason carries
+that one line. Reading and starting a task over ssh (`schtasks /query`,
+`/run`) stay open. `ssh` counts only in command position, so a commit message or a
 `grep` that mentions it passes, and so do `ssh-keygen` and `sshd`; the task
 command counts only as a whole word, so `ssh <host> pwsh -File
 C:/tmp/register-schtasks.ps1` passes. It runs on both shells, for the same

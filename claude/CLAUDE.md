@@ -45,4 +45,4 @@
   - 全コアを使う必要があるときは、先にユーザーに確認する。
   - CIやクラウドのような無人の実行環境では、並列数と優先度を下げずに実行する。
 - 第11原則： ssh 先でスケジュールタスクを作るときは、登録の処理もスクリプトに書いて scp で送り、ssh ではそのスクリプトを起動する 1 行だけを実行する。
-  - ssh のコマンド行に schtasks や Register-ScheduledTask を書かない。
+  - ssh のコマンド行で、タスクの登録・変更・削除（schtasks の /create・/change・/delete、Register-・Set-・Unregister-ScheduledTask）をしない。
