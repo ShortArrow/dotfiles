@@ -22,32 +22,32 @@ check() {
 }
 
 # A task registered, changed or deleted on the ssh command line, in the shapes an agent uses.
-check deny  "ssh tempPC 'schtasks /create /tn Rollback /tr C:\\tmp\\rollback.cmd /sc once /st 12:00 /ru SYSTEM'"
-check deny  'ssh tempPC schtasks /create /tn X /tr notepad /sc onlogon'
-check deny  'ssh -o HostName=192.168.123.140 -o HostKeyAlias=192.168.29.140 tempPC "schtasks.exe /delete /tn X /f"'
-check deny  "ssh tempPC 'C:\\Windows\\System32\\schtasks.exe /change /tn X /disable'"
-check deny  'ssh tempPC SCHTASKS /Create /TN X /TR notepad /SC ONLOGON'
-check deny  'ssh tempPC pwsh -c "Set-ScheduledTask -TaskName X -Trigger $t"'
-check deny  'ssh tempPC pwsh -c "Unregister-ScheduledTask -TaskName X -Confirm:$false"'
-check deny  'ssh tempPC pwsh -NoProfile -Command "Register-ScheduledTask -TaskName X -Action $a -Trigger $t"'
-check deny  "ssh.exe tempPC 'powershell -c \"register-scheduledtask -TaskName X -Xml (Get-Content x.xml -Raw)\"'"
-check deny  '& ssh tempPC "Register-ScheduledTask -TaskName X -InputObject $task"'
-check deny  'scp a.txt tempPC:C:/tmp/ && ssh tempPC schtasks /create /tn X /tr notepad /sc onstart'
-check deny  "ssh tempPC pwsh -NoProfile -Command - <<'EOF'
+check deny  "ssh host 'schtasks /create /tn Rollback /tr C:\\tmp\\rollback.cmd /sc once /st 12:00 /ru SYSTEM'"
+check deny  'ssh host schtasks /create /tn X /tr notepad /sc onlogon'
+check deny  'ssh -o HostName=192.0.2.5 -o HostKeyAlias=192.0.2.4 host "schtasks.exe /delete /tn X /f"'
+check deny  "ssh host 'C:\\Windows\\System32\\schtasks.exe /change /tn X /disable'"
+check deny  'ssh host SCHTASKS /Create /TN X /TR notepad /SC ONLOGON'
+check deny  'ssh host pwsh -c "Set-ScheduledTask -TaskName X -Trigger $t"'
+check deny  'ssh host pwsh -c "Unregister-ScheduledTask -TaskName X -Confirm:$false"'
+check deny  'ssh host pwsh -NoProfile -Command "Register-ScheduledTask -TaskName X -Action $a -Trigger $t"'
+check deny  "ssh.exe host 'powershell -c \"register-scheduledtask -TaskName X -Xml (Get-Content x.xml -Raw)\"'"
+check deny  '& ssh host "Register-ScheduledTask -TaskName X -InputObject $task"'
+check deny  'scp a.txt host:C:/tmp/ && ssh host schtasks /create /tn X /tr notepad /sc onstart'
+check deny  "ssh host pwsh -NoProfile -Command - <<'EOF'
 \$a = New-ScheduledTaskAction -Execute pwsh
 Register-ScheduledTask -TaskName X -Action \$a
 EOF"
-check deny  '"C:\Windows\System32\OpenSSH\ssh.exe" tempPC schtasks /create /tn X /tr notepad /sc onstart'
+check deny  '"C:\Windows\System32\OpenSSH\ssh.exe" host schtasks /create /tn X /tr notepad /sc onstart'
 
 # The sanctioned way, and the task commands that register nothing: query, run, end.
-check allow 'scp register-task.ps1 tempPC:C:/tmp/ && ssh tempPC pwsh -NoProfile -File C:/tmp/register-task.ps1'
-check allow 'ssh tempPC pwsh -NoProfile -File C:/tmp/register-schtasks.ps1'
-check allow 'ssh tempPC pwsh -NoProfile -File C:/tmp/Register-ScheduledTask.ps1'
-check allow 'ssh tempPC Get-ScheduledTask'
-check allow 'ssh tempPC schtasks /query /tn X /v /fo list'
-check allow "ssh tempPC 'C:\Windows\System32\schtasks.exe /run /tn X'"
-check allow 'ssh tempPC pwsh -c "Start-ScheduledTask -TaskName X"'
-check allow 'ssh tempPC schtasks /end /tn X'
+check allow 'scp register-task.ps1 host:C:/tmp/ && ssh host pwsh -NoProfile -File C:/tmp/register-task.ps1'
+check allow 'ssh host pwsh -NoProfile -File C:/tmp/register-schtasks.ps1'
+check allow 'ssh host pwsh -NoProfile -File C:/tmp/Register-ScheduledTask.ps1'
+check allow 'ssh host Get-ScheduledTask'
+check allow 'ssh host schtasks /query /tn X /v /fo list'
+check allow "ssh host 'C:\Windows\System32\schtasks.exe /run /tn X'"
+check allow 'ssh host pwsh -c "Start-ScheduledTask -TaskName X"'
+check allow 'ssh host schtasks /end /tn X'
 
 # No ssh in command position: local task commands, searches, prose.
 check allow 'schtasks /create /tn X /tr notepad /sc onlogon'
