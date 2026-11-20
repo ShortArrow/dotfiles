@@ -35,6 +35,12 @@
           {
             "type": "command",
             "shell": "bash",
+            "command": "perl ~/.claude/check-gpg-clearsign.pl",
+            "statusMessage": "Checking for a gpg --clearsign the user should run as git unlock"
+          },
+          {
+            "type": "command",
+            "shell": "bash",
             "command": "bash ~/.claude/check-remote-schtasks.sh",
             "statusMessage": "Checking for task registration over ssh"
           },
@@ -67,6 +73,12 @@
             "shell": "bash",
             "command": "bash ~/.claude/check-gpg-cache.sh",
             "statusMessage": "Checking the signing key is unlocked"
+          },
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "perl ~/.claude/check-gpg-clearsign.pl",
+            "statusMessage": "Checking for a gpg --clearsign the user should run as git unlock"
           },
           {
             "type": "command",

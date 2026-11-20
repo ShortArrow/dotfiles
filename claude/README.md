@@ -119,6 +119,22 @@ the pattern as a search term and have to keep working. That last case is not
 hypothetical: the pattern was grepped for in this repository while the guard
 was being written.
 
+## The passphrase is the user's to type
+
+The signing passphrase is cached by the user typing `! git unlock`
+([`git/unlock.sh`](../git/unlock.sh)), which takes the key and gpg from the
+repository's own config. [`check-gpg-clearsign.pl`](check-gpg-clearsign.pl)
+refuses a shell command that runs gpg with `--clearsign` or `--clear-sign`
+— `gpg`, `gpg2`, `gpg.exe` by name or path, the `gpg.program` that
+`git config` prints, or a variable named `gpg` — and its reason says the
+user enters the passphrase with `! git unlock`, and the agent does not
+type it. `git unlock` itself passes: its script uses `--clearsign`, but
+the line the agent runs does not. The line is split into segments outside
+quotes and each is judged by its leading command, so a commit message, a
+`grep` pattern or an `echo` that mentions `--clearsign` passes. It runs on
+both shells, and [`check-gpg-clearsign.test.sh`](check-gpg-clearsign.test.sh)
+holds the shapes it refuses and lets through, and the reason's wording.
+
 ## Scheduled tasks on an ssh host
 
 A scheduled task on a remote Windows host is registered by a script: the
