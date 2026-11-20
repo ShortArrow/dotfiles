@@ -92,23 +92,24 @@ first: it signs a throwaway text with the repository's key and
 `--pinentry-mode error`, which fails rather than prompts, so the hook
 knows before the commit runs. The agent's per-keygrip cached flag is not
 read; GnuPG 2.5 was seen signing without a prompt while the flag reported
-the signing keygrip uncached. The deny reason carries the one command
-that fixes it, to be typed in the prompt:
+the signing keygrip uncached. The deny reason sends the user to one
+command, typed in the prompt:
 
 ```
-! echo test | "$(git config --get gpg.program)" -u <user.signingkey> --clearsign > /dev/null
+! git unlock
 ```
 
 The `!` runs it in the session, where pinentry can open, and the agent
-caches the passphrase for the next eight hours. Three details are in the
-command for a reason. `-u` names the key: without it gpg unlocks its
-default key, which need not be the one the repository signs with.
-`gpg.program` names the GnuPG that git calls;
-in Git Bash on Windows both `gpg` and `gpg.exe` resolve to MSYS's
-`/usr/bin/gpg`, which has its own home and its own agent, so an unlock
-typed that way caches nothing git can use. And `> /dev/null` rather than
-`> nul`: in Git Bash `nul` is a file, and the command would leave one in
-the repository.
+caches the passphrase for the next eight hours. `git unlock` is an alias
+for [`git/unlock.sh`](../git/unlock.sh), which a machine without the alias
+can run directly. It takes the key from the repository's
+`user.signingkey` and gpg from `gpg.program`, so it unlocks the key the
+repository signs with, in the agent git uses; in Git Bash on Windows a
+bare `gpg` or `gpg.exe` is MSYS's `/usr/bin/gpg`, with its own home and
+agent, and an unlock typed with it caches nothing git can use. The reason
+names no gpg line for the user to type, and
+[`check-gpg-clearsign.pl`](check-gpg-clearsign.pl) refuses the agent
+running one.
 
 The hook takes the key from the repository's `user.signingkey` and gpg
 from `gpg.program`, and stays silent for reads, pushes, `--no-gpg-sign`,

@@ -15,13 +15,11 @@
 # cached flag (`keyinfo --list`) is not consulted: GnuPG 2.5 was seen to sign
 # without prompting while the flag reported the signing keygrip uncached.
 #
-# The gpg that git uses is the one in gpg.program, not the first `gpg` on
-# PATH: in Git Bash on Windows both `gpg` and `gpg.exe` resolve to MSYS's
-# /usr/bin/gpg, whose home and agent are different from the GnuPG that git
-# calls, so an unlock typed as `gpg.exe --clearsign` caches nothing git can
-# use. The unlock command below therefore names gpg.program, and names the
-# key: without -u, gpg unlocks its default key, which need not be the one
-# this repository signs with.
+# The fix is the user typing `! git unlock` (git/unlock.sh), which takes the
+# key from user.signingkey and gpg from gpg.program, so it unlocks the key
+# and the agent that git itself uses. The reason names no gpg line: a line
+# handed to the user is one the user can mistype, and check-gpg-clearsign.pl
+# refuses the agent running one.
 set -u
 
 input="$(cat)"
@@ -57,4 +55,4 @@ gpg=$(git config --get gpg.program)
 
 echo test | "$gpg" --batch --pinentry-mode error --local-user "$key" --clearsign >/dev/null 2>&1 && exit 0
 
-deny "The GPG passphrase for signing key $key is not cached in gpg-agent, so this signed operation would fail: a tool call cannot open pinentry. Ask the user to run this in the prompt (the leading ! runs it in the session, where pinentry can open, and the agent then caches the passphrase): ! echo test | \"\$(git config --get gpg.program)\" -u $key --clearsign > /dev/null   — then retry this command unchanged. Do not disable signing, and do not use gpg.exe or gpg from PATH: in Git Bash those are MSYS's copy, with a different agent from the one git uses."
+deny "The GPG passphrase for signing key $key is not cached in gpg-agent, so this signed operation would fail: a tool call cannot open pinentry. Ask the user to run ! git unlock in the prompt (the leading ! runs it in the session, where pinentry can open; if the git unlock alias is missing, it is git/unlock.sh in the dotfiles repository), then retry this command unchanged. Do not run gpg yourself, do not hand the user a gpg line to type, and do not disable signing."

@@ -109,10 +109,12 @@ FAKE_UNLOCKED="" check allow "key not in the keyring" 'git commit -m x' "$unknow
 echo "handles malformed input"
 FAKE_UNLOCKED="" check allow "no command field" "" "$repo"
 
-echo "the deny reason carries the unlock command for the signing key"
+echo "the deny reason sends the user to ! git unlock, and names no gpg line to type"
 out=$(jq -nc --arg c 'git commit -m x' --arg d "$repo" '{tool_input:{command:$c},cwd:$d}' | FAKE_UNLOCKED="" bash "$script")
-if printf '%s' "$out" | grep -q -- '-u 0000000000000001 --clearsign > /dev/null' && printf '%s' "$out" | grep -q 'gpg.program'; then
-  pass=$((pass + 1)); echo "  ok   reason names gpg.program, the key and --clearsign"
+if printf '%s' "$out" | grep -q -- '! git unlock' &&
+   printf '%s' "$out" | grep -q -- 'git/unlock.sh' &&
+   ! printf '%s' "$out" | grep -q -- '--clearsign'; then
+  pass=$((pass + 1)); echo "  ok   reason names ! git unlock and git/unlock.sh, and no --clearsign"
 else
   fail=$((fail + 1)); echo "  FAIL reason: $out"
 fi
