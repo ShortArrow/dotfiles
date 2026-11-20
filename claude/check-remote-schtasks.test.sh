@@ -24,7 +24,7 @@ check() {
 # A task registered, changed or deleted on the ssh command line, in the shapes an agent uses.
 check deny  "ssh host.example.invalid 'schtasks /create /tn Rollback /tr C:\\tmp\\rollback.cmd /sc once /st 12:00 /ru SYSTEM'"
 check deny  'ssh host.example.invalid schtasks /create /tn X /tr notepad /sc onlogon'
-check deny  'ssh -o HostName=192.0.2.10 -o HostKeyAlias=192.0.2.11 host.example.invalid "schtasks.exe /delete /tn X /f"'
+check deny  'ssh -o HostName=192.0.2.5 -o HostKeyAlias=192.0.2.4 host.example.invalid "schtasks.exe /delete /tn X /f"'
 check deny  "ssh host.example.invalid 'C:\\Windows\\System32\\schtasks.exe /change /tn X /disable'"
 check deny  'ssh host.example.invalid SCHTASKS /Create /TN X /TR notepad /SC ONLOGON'
 check deny  'ssh host.example.invalid pwsh -c "Set-ScheduledTask -TaskName X -Trigger $t"'
