@@ -119,6 +119,21 @@ the pattern as a search term and have to keep working. That last case is not
 hypothetical: the pattern was grepped for in this repository while the guard
 was being written.
 
+## Scheduled tasks on an ssh host
+
+A scheduled task on a remote Windows host is registered by a script: the
+registration is written into a `.ps1`, sent with `scp`, and ssh runs one
+line, the one that starts it. [`check-remote-schtasks.sh`](check-remote-schtasks.sh)
+refuses a shell command that runs `ssh` and, from there on, names
+`schtasks` or `Register-ScheduledTask`, and its reason carries that one
+line. `ssh` counts only in command position, so a commit message or a
+`grep` that mentions it passes, and so do `ssh-keygen` and `sshd`; the task
+command counts only as a whole word, so `ssh <host> pwsh -File
+C:/tmp/register-schtasks.ps1` passes. It runs on both shells, for the same
+reason as the attribution guard, and
+[`check-remote-schtasks.test.sh`](check-remote-schtasks.test.sh) holds the
+shapes it refuses and lets through.
+
 ## A second opinion on shell commands
 
 [`judge-command.sh`](judge-command.sh) sends each shell command to a
