@@ -87,12 +87,12 @@ check ask   'Copy-Item x.lnk "$env:APPDATA\Microsoft\Windows\Start Menu\Programs
 check ask   'New-Item -ItemType SymbolicLink -Path "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\x.lnk" -Target C:\x.exe'
 
 # INFO: a command run over ssh is logged and let through.
-check log   'ssh host powershell -NoProfile -ExecutionPolicy RemoteSigned -File check.ps1'
-check log   'scp t.ps1 host: && ssh host pwsh -NoProfile -File t.ps1'
-check log   'ssh host schtasks /query /tn X'
-check log   'ssh host wmic os get caption'
-check log   "ssh host 'sc create X binPath= C:\\x.exe'"
-check log   'ssh host powershell -EncodedCommand SQBFAFgA'
+check log   'ssh host.example.invalid powershell -NoProfile -ExecutionPolicy RemoteSigned -File check.ps1'
+check log   'scp t.ps1 host.example.invalid: && ssh host.example.invalid pwsh -NoProfile -File t.ps1'
+check log   'ssh host.example.invalid schtasks /query /tn X'
+check log   'ssh host.example.invalid wmic os get caption'
+check log   "ssh host.example.invalid 'sc create X binPath= C:\\x.exe'"
+check log   'ssh host.example.invalid powershell -EncodedCommand SQBFAFgA'
 
 # Reads, and the words only mentioned: quotes, commit messages, searches, echo.
 check allow 'schtasks /query /tn X /v /fo list'
@@ -117,7 +117,7 @@ check allow 'Select-String -Pattern "Enter-PSSession" -Path *.ps1'
 check allow 'Get-Service sshd; ssh-keygen -l -f key.pub'
 
 # A logged command with Japanese in it is written as UTF-8, with nothing on stderr.
-err=$(jq -nc '{tool_input: {command: "ssh host powershell -Command \"echo 日本語\""}}' |
+err=$(jq -nc '{tool_input: {command: "ssh host.example.invalid powershell -Command \"echo 日本語\""}}' |
   perl "$guard" 2>&1 >/dev/null)
 if [ -z "$err" ] && tail -n 1 "$log" | grep -q '日本語'; then
   pass=$((pass + 1))
