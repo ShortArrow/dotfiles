@@ -136,6 +136,54 @@ reason as the attribution guard, and
 [`check-remote-schtasks.test.sh`](check-remote-schtasks.test.sh) holds the
 shapes it refuses and lets through.
 
+## Commands refused, confirmed or logged where the policy guard is enabled
+
+[`check-command-policy.pl`](check-command-policy.pl) runs only on the
+machines that enable it. It reaches a machine through its own dotfm tool,
+`claude-command-policy`, enabled per machine, and it is registered by hand
+in that machine's `settings.json` for both shells; `settings.sample.json`
+does not carry it, because the sample travels to every machine.
+
+| Level | Decision | Commands |
+|---|---|---|
+| ERROR | deny | `schtasks /create`, `/change`, `/delete`; `Register-ScheduledTask`; `powershell` or `pwsh` with `-EncodedCommand` (`-enc`, `-ec`, `-e`); `sc create`, `New-Service`; `wmic process call create`, `Invoke-CimMethod` or `Invoke-WmiMethod` on `Win32_Process` `Create` |
+| WARN | ask | `-ExecutionPolicy Bypass`, `Set-ExecutionPolicy Bypass`; `Invoke-Command`, `Enter-PSSession`, `New-PSSession`; `psexec`; `Start-Process -Verb RunAs`; a write to `CurrentVersion\Run` or `RunOnce`; a write to `Start Menu\Programs\Startup` |
+| INFO | log, allow | a command run over `ssh` that names `powershell`, `schtasks`, `wmic` or `sc create` |
+
+Every hit, at every level, appends one line to
+`~/.claude/logs/command-policy.log` (time, level, labels, command), or to
+`$CLAUDE_COMMAND_POLICY_LOG` when that is set.
+
+A rule fires on the command a segment runs. The line is split at `;`,
+`&`, `|`, parentheses, braces and newlines that stand outside quotes, and
+each segment is judged by its leading command, looking through `$x =`,
+`&`, `sudo`, `cmd /c` and `Start-Process`. A quoted string, a commit
+message, a `grep` pattern or an `echo` that only mentions a word matches
+nothing. A here-document body counts as commands only when it feeds a
+shell. Reads stay open: `schtasks /query`, `reg query` on the Run key, a
+listing of the Startup folder.
+
+A segment led by `ssh` runs on another machine, so it is only logged here;
+what it may do there is that host's policy and the scheduled-task guard
+above. The hook reads the command line and nothing else: the body of a
+script sent with `scp`, or of any `.ps1` started with `-File`, is not seen.
+
+A script sent with `scp` carries no `Zone.Identifier`, so it runs under
+`RemoteSigned` and never needs `Bypass`. Start it in the form its host's
+policy calls for:
+
+- A host whose `LocalMachine` policy is `RemoteSigned` takes the script as
+  is: `ssh <host> powershell -NoProfile -File <script>`. Not yet tried on
+  such a host.
+- A host whose every scope is `Undefined` falls back to Windows' default,
+  `Restricted`, so the policy is named on the line:
+  `ssh <host> powershell -NoProfile -ExecutionPolicy RemoteSigned -File
+  <script>`. Tried 2026-11-20 on Windows PowerShell 5.1: the script ran,
+  and the file arrived with no `Zone.Identifier` stream.
+
+[`check-command-policy.test.sh`](check-command-policy.test.sh) holds one
+corpus per level and the mentions that must pass.
+
 ## A second opinion on shell commands
 
 [`judge-command.sh`](judge-command.sh) sends each shell command to a

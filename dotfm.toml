@@ -204,6 +204,14 @@ dst.windows = "$USERPROFILE/.claude"
 dst.linux   = "$HOME/.claude"
 
 
+[tools.claude-command-policy]
+description = "Claude Code command policy guard (check-command-policy.pl); enabled per machine"
+platforms = ["windows"]
+[[tools.claude-command-policy.links]]
+src = { dir = "claude", include = ["check-command-policy.pl"] }
+dst.windows = "$USERPROFILE/.claude"
+
+
 [tools.zebar]
 description = "Zebar taskbar (Windows only)"
 platforms = ["windows"]
