@@ -37,6 +37,16 @@ The list of collections worth knowing about is kept with the skills, in
 [ShortArrow/skills](https://github.com/ShortArrow/skills#other-marketplaces),
 so there is one copy of it.
 
+## Where a hook lives
+
+A hook that turns a skill's rule into a check, and holds for anyone who
+uses that skill, lives in
+[ShortArrow/skills](https://github.com/ShortArrow/skills) and ships in the
+same plugin as the skill. A hook that rests on one person's arrangements —
+a command of their own, a particular machine or path, an employer's rules —
+lives here, and so does every registration in `settings.json`. No hook is
+kept in both places.
+
 ## Settings
 
 `settings.json` is not linked — it accumulates per-machine permission
