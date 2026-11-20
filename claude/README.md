@@ -199,8 +199,9 @@ A script sent with `scp` carries no `Zone.Identifier`, so it runs under
 policy calls for:
 
 - A host whose `LocalMachine` policy is `RemoteSigned` takes the script as
-  is: `ssh <host> powershell -NoProfile -File <script>`. Not yet tried on
-  such a host.
+  is: `ssh <host> powershell -NoProfile -File <script>`. Tried 2026-11-20
+  on Windows PowerShell 5.1: the script ran with no policy on the line, and
+  the file arrived with no `Zone.Identifier` stream.
 - A host whose every scope is `Undefined` falls back to Windows' default,
   `Restricted`, so the policy is named on the line:
   `ssh <host> powershell -NoProfile -ExecutionPolicy RemoteSigned -File
