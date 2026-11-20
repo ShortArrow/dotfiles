@@ -17,7 +17,7 @@
 #
 # A segment led by ssh runs on another machine. It is never refused or
 # confirmed here, only logged; what it may run is the remote host's policy
-# and check-remote-schtasks.sh's. Only the command line is read: the body of
+# and the ssh task check in the engineering-skills plugin's. Only the command line is read: the body of
 # a script sent with scp, or of any .ps1 started with -File, is not seen.
 use strict;
 use warnings;

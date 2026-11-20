@@ -41,12 +41,6 @@
           {
             "type": "command",
             "shell": "bash",
-            "command": "bash ~/.claude/check-remote-schtasks.sh",
-            "statusMessage": "Checking for task registration over ssh"
-          },
-          {
-            "type": "command",
-            "shell": "bash",
             "command": "bash ~/.claude/judge-command.sh",
             "timeout": 3,
             "statusMessage": "Asking the decision model"
@@ -79,12 +73,6 @@
             "shell": "bash",
             "command": "perl ~/.claude/check-gpg-clearsign.pl",
             "statusMessage": "Checking for a gpg --clearsign the user should run as git unlock"
-          },
-          {
-            "type": "command",
-            "shell": "bash",
-            "command": "bash ~/.claude/check-remote-schtasks.sh",
-            "statusMessage": "Checking for task registration over ssh"
           },
           {
             "type": "command",

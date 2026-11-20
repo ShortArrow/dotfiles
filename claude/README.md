@@ -148,20 +148,12 @@ holds the shapes it refuses and lets through, and the reason's wording.
 
 ## Scheduled tasks on an ssh host
 
-A scheduled task on a remote Windows host is registered by a script: the
-registration is written into a `.ps1`, sent with `scp`, and ssh runs one
-line, the one that starts it. [`check-remote-schtasks.sh`](check-remote-schtasks.sh)
-refuses a shell command that runs `ssh` and, from there on, registers,
-changes or deletes a task — `schtasks /create`, `/change` or `/delete`, or
-`Register-`, `Set-` or `Unregister-ScheduledTask` — and its reason carries
-that one line. Reading and starting a task over ssh (`schtasks /query`,
-`/run`) stay open. `ssh` counts only in command position, so a commit message or a
-`grep` that mentions it passes, and so do `ssh-keygen` and `sshd`; the task
-command counts only as a whole word, so `ssh <host> pwsh -File
-C:/tmp/register-schtasks.ps1` passes. It runs on both shells, for the same
-reason as the attribution guard, and
-[`check-remote-schtasks.test.sh`](check-remote-schtasks.test.sh) holds the
-shapes it refuses and lets through.
+A scheduled task on a remote Windows host is registered by a script sent
+with `scp`, and ssh runs only the line that starts it. The check that
+refuses a task command on the ssh line is `check-ssh-task-registration.sh`,
+which ships with the `engineering-skills` plugin of
+[ShortArrow/skills](https://github.com/ShortArrow/skills), so it is not
+kept here.
 
 ## Commands refused, confirmed or logged where the policy guard is enabled
 
@@ -191,8 +183,8 @@ shell. Reads stay open: `schtasks /query`, `reg query` on the Run key, a
 listing of the Startup folder.
 
 A segment led by `ssh` runs on another machine, so it is only logged here;
-what it may do there is that host's policy and the scheduled-task guard
-above. The hook reads the command line and nothing else: the body of a
+what it may do there is that host's policy and the plugin's ssh task
+check above. The hook reads the command line and nothing else: the body of a
 script sent with `scp`, or of any `.ps1` started with `-File`, is not seen.
 
 A script sent with `scp` carries no `Zone.Identifier`, so it runs under
