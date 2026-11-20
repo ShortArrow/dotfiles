@@ -19,10 +19,11 @@
   stderr log. Zebar inherits the elevation of whoever starts this script.
 
 .PARAMETER Executable
-  zebar.exe to start. Defaults to the installed one.
+  zebar.exe to start. Defaults to the build in %LOCALAPPDATA%\zebar-tao-fix,
+  which carries both the RDP audio fix and the tao WM_PAINT fix.
 #>
 param(
-  [string]$Executable = (Join-Path $env:ProgramFiles 'glzr.io/Zebar/zebar.exe')
+  [string]$Executable = (Join-Path $env:LOCALAPPDATA 'zebar-tao-fix/zebar.exe')
 )
 
 function Move-ZebarStderrLog {
