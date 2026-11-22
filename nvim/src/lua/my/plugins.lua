@@ -493,7 +493,7 @@ M.ordinalnvim = {
   {
     "folke/lazydev.nvim",
     ft = "lua", -- only load on lua files
-    -- Only load when the first opened lua file lives under the nvim config.
+    -- Only load when the first opened lua file lives under the Neovim config directory (stdpath("config")).
     -- lazydev forcibly overrides lua_ls's root_dir, so the most reliable way
     -- to honor an external project's .luarc.json is to skip loading the
     -- plugin entirely for those sessions.

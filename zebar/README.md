@@ -120,7 +120,7 @@ upstream（`mushfikurr/overline-zebar`）への追従と自分の改造を分離
 |---|---|---|
 | `main` | upstream 追従専用。自分のコミットは載せない。 | `upstream/main` をそのままミラー |
 | `fix/<機能名>` | upstream へ PR を出す機能別ブランチ。1機能1ブランチで切り出し、PR カードを個別に立てる。 | `upstream/main` から分岐 |
-| `feat/<機能名>` | PR を出さない fork 専用の機能ブランチ（例: `feat/cpu-temperature`、`feat/claude-usage`）。互いに独立させ、`custom` でだけ合流させる。 | `upstream/main` から分岐 |
+| `feat/<機能名>` | PR を出さない fork 専用の機能ブランチ（例: `feat/example-a`、`feat/example-b`）。互いに独立させ、`custom` でだけ合流させる。 | `upstream/main` から分岐 |
 | `custom` | 自分が日常使う統合ブランチ。各 `fix/*`・`feat/*` をマージして自分仕様の総体にする。dotfiles の submodule はこれを追跡。 | `upstream/main` から分岐し `fix/*`・`feat/*` をマージ |
 
 理由: submodule の `main` に直接改造を積むと、upstream の取り込み（fetch & merge/rebase）が衝突だらけになり追従が破綻する。`main` を純粋なミラーに保つことで `git fetch upstream && git rebase upstream/main`（各 `fix/*` 上で）がクリーンに回る。

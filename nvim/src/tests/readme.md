@@ -4,7 +4,7 @@ description: "nvim test"
 summary: "neovim test setting"
 tags: ["docs"]
 ---
-# test guide of nvim config
+# test guide of this Neovim config
 
 ## how to run tests
 
